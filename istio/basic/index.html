@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+	入門 :: テックまとめ
+</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2021-02-10T18:02:19 JST">
+<meta name="description" content="備忘録用メモサイト">
+
+
+
+<title>入門 :: テックまとめ</title>
+
+<link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+
+<script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel="stylesheet">
+
+
+
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/layout.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.main.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.menu.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/notice.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/tabs.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/panel.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/columns.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/children.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/attachments.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/alert.css'>
+<link rel="stylesheet" type="text/css" href='/css/docport.css'>
+
+<script src='/js/docport.js'></script>
+<script type="text/javascript">
+      var baseurl = "https:\/\/tanakakns.github.io\/";
+</script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-42388425-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    
+  </head>
+
+  <body data-url="/istio/basic/"
+
+  class="hidetoc hidenextpage ">
+
+<style type="text/css">
+  #debug{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    line-height: 3.5rem;
+    margin-bottom: .35rem;
+    padding: 0 2rem;
+    position: fixed;
+    left: 0;      right: 0;     top: 0;
+   
+    top:0px;
+    
+    min-height: 150px;
+
+    background-color: white;
+    border: 3px solid red;
+    z-index: 10000 ;
+    word-wrap: all;
+    overflow: auto;
+  }
+</style>
+ 
+
+
+    
+    
+    <header style="">
+        <div>
+    
+    <div class="burger ">
+        <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">&#9776;</a>
+    </div>
+    
+
+    <div>
+
+		
+	
+			
+		
+	    	<a class='baselink' href='https://tanakakns.github.io/'>テックまとめ</a>
+	  	
+	</div>
+
+</div>
+    </header>
+    
+
+    <article>
+      
+      <aside class="">
+        
+
+		
+	
+			
+		
+	    	
+	  	
+	<div id="close_menu">
+  <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">
+      <i class="fa fa-lg fa-times"></i>
+  </a>
+</div>
+
+<ul class="menu">
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/terraform/">Terraform</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/istio/" class="dd-item parent haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <i class="fas fa-chevron-down ddexp"></i>
+        
+      
+          <a href="/istio/">Istio</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/concept/">概念整理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/basic/" class="dd-item parent active
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+
+
+</ul>
+
+		
+	
+			
+		
+	    	
+	  	
+	
+      </aside>
+      
+
+      <section class="page ">
+      
+	
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/istio/">
+        Istio
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        入門
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>入門</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
+
+
+
+
+
+
+	<div class="content">
+	    <p><a href="https://istio.io/">Istio</a> についてまとめる。</p>
+<ul>
+<li>概要</li>
+<li>ローカル環境構築 ※古い</li>
+<li>k8s環境構築 ※古い</li>
+</ul>
+<h1 ref="概要" >概要</h1><a class="anchor" id="概要"></a>
+<p>非常に大規模なハイブリッド・マルチクラウドにおいて、DevOpsチームのオペレータはマイクロサービスを展開・管理する。<br>
+Istio は <strong>サービスメッシュ</strong> によりオペレータにかかる負荷を軽減し、マイクロサービス間接続・保護・制御・監視をサポートする統一された方法を提供する。</p>
+<p><!-- raw HTML omitted --></p>
+<p><a href="https://www.1915keke.com/entry/2018/10/06/042621">参考</a></p>
+<ul>
+<li><strong>Control Plane</strong> / <code>istiod</code> として 1 バイナリにまとめられている
+<ul>
+<li><code>Mixer</code> : Envoy を通して各サービスのデータを収集し、その情報を元にアクセスコントロールやサービスメッシュに渡る制御を行う。</li>
+<li><code>Pilot</code> : サービスディスカバリと高度なトラフィックマネジメント(A/Bテスト、カナリアデプロイなど)を提供する。</li>
+<li><code>Galley</code> : Control Planeを代表してユーザー認証されたIstio APIを提供する。</li>
+<li><code>Citadel</code>: サービス間とエンドユーザー認証を行う。</li>
+</ul>
+</li>
+<li><strong>Data Plane</strong>
+<ul>
+<li><code>Proxy</code> : Envoy を使って レイヤー4/7 のイン・アウト両方のサービスメッシュを提供し、 Pod に Sidecarとしてインジェクションされる。</li>
+</ul>
+</li>
+</ul>
+<h2 ref="サービスメッシュ" >サービスメッシュ</h2><a class="anchor" id="サービスメッシュ"></a>
+<p>サービスメッシュはマイクロサービス間のネットワークとそれらに相互作業し、複雑さの理解と管理をサポートする。<br>
+その機能には、サービスディスカバリ・負荷分散・障害回復・メトリクス・監視が含まれ、さらに、A/Bテスト・カナリアリリース・レート制御・アクセス制御・エンドツーエンド認証など複雑な運用機能も有する。<br>
+Istio はマイクロサービスにサイドカープロキシを構成することで、すべてのネットワーク通信をインターセプトすることによりこの機能を提供する。</p>
+<ul>
+<li>HTTP、gRPC、WebSocket、およびTCPトラフィックの自動負荷分散</li>
+<li>豊富なルーティングルール、再試行、フェイルオーバー、およびフォールトインジェクションによるトラフィック動作のきめ細かい制御</li>
+<li>アクセス制御、レート制限、およびクォータをサポートするプラグ可能なポリシーレイヤーと構成 API</li>
+<li>クラスターの入力と出力を含む、クラスター内のすべてのトラフィックの自動メトリック、ログ、およびトレース</li>
+<li>強力なIDベースの認証と承認により、クラスター内のサービス間通信を保護</li>
+</ul>
+<h2 ref="istio-のコア機能" >Istio のコア機能</h2><a class="anchor" id="istio-のコア機能"></a>
+<ul>
+<li><a href="https://istio.io/latest/docs/concepts/traffic-management/">トラフィック管理</a>
+<ul>
+<li>サーキットブレーカー・タイムアウト・リトライなどのサービスレベルの属性設定の簡素化</li>
+<li>A/Bテスト・カナリアリリース・パーセンテージベースのトラフィック分割を使用した段階的なリリースなどの多様なリリース方法の提供</li>
+</ul>
+</li>
+<li><a href="https://istio.io/latest/docs/concepts/security/">セキュリティ</a>
+<ul>
+<li>マイクロサービス間通信の認証・認可・暗号化の管理</li>
+<li>アプリケーションに変更無く、さまざまなプロトコル・ランタイムにわたって一貫したポリシー適用</li>
+</ul>
+</li>
+<li><a href="https://istio.io/latest/docs/concepts/observability/">可観測性</a>
+<ul>
+<li>トラフィックのトレース・監視およびログ機能による問題の迅速かつ効果的な検出</li>
+<li>カスタムダッシュボードによるサービスのパフォーマンスを可視化</li>
+</ul>
+</li>
+</ul>
+<h1 ref="ローカル環境構築" >ローカル環境構築</h1><a class="anchor" id="ローカル環境構築"></a>
+<p>Homebrew で構築できるものは以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew install awscli
+$ brew install terraform
+$ brew install kubernetes-cli
+$ brew install kubernetes-helm
+$ brew install helmfile
+$ helm plugin install https://github.com/databus23/helm-diff --version master
+</code></pre></div><p>Istio のコマンドライン資材の設定は以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd
+$ curl -L https://git.io/getLatestIstio | ISTIO_VERSION<span style="color:#f92672">=</span>1.3.1 sh -
+$ cd istio-1.3.1
+$ export PATH<span style="color:#f92672">=</span>$PWD/bin:$PATH
+$ istioctl verify-install
+</code></pre></div><h1 ref="k8s-環境構築" >k8s 環境構築</h1><a class="anchor" id="k8s-環境構築"></a>
+<p>k8s クラスタは構築されている前提。</p>
+<h2 ref="tiller-構築" >Tiller 構築</h2><a class="anchor" id="tiller-構築"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f ~/istio-1.3.1/install/kubernetes/helm/helm-service-account.yaml <span style="color:#75715e"># tiller の Service Account 作成</span>
+$ helm init --history-max <span style="color:#ae81ff">200</span> --service-account tiller                             <span style="color:#75715e"># tiller の作成</span>
+$ kubectl get all --all-namespaces -o wide | grep tiller | wc -l                   <span style="color:#75715e"># tiller の構築を確認</span>
+       <span style="color:#ae81ff">4</span>
+</code></pre></div><h2 ref="istio-init" >istio-init</h2><a class="anchor" id="istio-init"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ helm install ~/istio-1.3.1/install/kubernetes/helm/istio-init --name istio-init --namespace istio-system
+$ kubectl get crds | grep <span style="color:#e6db74">&#39;istio.io&#39;</span> | wc -l
+      <span style="color:#ae81ff">23</span>
+$ helm ls --all                              <span style="color:#75715e"># 確認２</span>
+NAME      	REVISION	UPDATED                 	STATUS  	CHART           	APP VERSION	NAMESPACE
+istio-init	<span style="color:#ae81ff">1</span>       	Thu Oct  <span style="color:#ae81ff">3</span> 21:02:53 2019	DEPLOYED	istio-init-1.3.1	1.3.1      	istio-system
+</code></pre></div><h2 ref="istio-の構築デモ版" >Istio の構築（デモ版）</h2><a class="anchor" id="istio-の構築デモ版"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ helm install ~/istio-1.3.1/install/kubernetes/helm/istio --name istio --namespace istio-system <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>      --values ~/istio-1.3.1/install/kubernetes/helm/istio/values-istio-demo.yaml <span style="color:#75715e"># Istio 構築</span>
+$ helm install ~/istio-1.3.1/install/kubernetes/helm/istio --name istio --namespace istio-system <span style="color:#75715e"># Istio 構築</span>
+$ kubectl label namespace default istio-injection<span style="color:#f92672">=</span>enabled                         <span style="color:#75715e"># サイドカーを自動でつける設定</span>
+$ kubectl get namespace -L istio-injection                                        <span style="color:#75715e"># 確認</span>
+$ kubectl apply -f &lt;your-application&gt;.yaml                                        <span style="color:#75715e"># アプリのデプロイ</span>
+</code></pre></div><p>上記では default namespace に <code>istio-injection=enabled</code> ラベルを付与して自動でサイドカー（ envoy ）インジェクションするように設定している。<br>
+サイドカーインジェクションを有効にしたいネームスペースには <code>istio-injection=enabled</code> ラベルを付与すべし。<br>
+なお、自動でサイドカーインジェクションされるための条件は <a href="https://istio.io/docs/ops/setup/injection-concepts/">ここ</a> 。</p>
+<p>以降、helm で構築された Istio 以外の主要コンポーネントについて確認していく。<br>
+なお、管理画面へのアクセスは <code>port-forward</code> を利用する。<br>
+セキュリティが気になる人は <a href="https://github.com/int128/kauthproxy">kauthproxy</a> のようなものを利用してもいいかもしれない。</p>
+<h3 ref="prometheus" >Prometheus</h3><a class="anchor" id="prometheus"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl -n istio-system get pod -l app<span style="color:#f92672">=</span>prometheus                          <span style="color:#75715e"># Pod 名を確認</span>
+NAME                          READY   STATUS    RESTARTS   AGE
+prometheus-776fdf7479-zhqbc   1/1     Running   <span style="color:#ae81ff">0</span>          7m15s
+$ kubectl -n istio-system get svc -l app<span style="color:#f92672">=</span>prometheus                          <span style="color:#75715e"># ポートを確認</span>
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>    AGE
+prometheus   ClusterIP   172.20.55.63   &lt;none&gt;        9090/TCP   12m
+$ kubectl -n istio-system port-forward prometheus-776fdf7479-zhqbc 9090:9090 <span style="color:#75715e"># port forward</span>
+$ curl http://localhost:9090                                                 <span style="color:#75715e"># ブラウザでアクセス</span>
+</code></pre></div><p>一撃だと <code>$ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}') 9090:9090</code> 。</p>
+<h3 ref="grafana" >Grafana</h3><a class="anchor" id="grafana"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl -n istio-system port-forward <span style="color:#66d9ef">$(</span>kubectl -n istio-system get pod -l app<span style="color:#f92672">=</span>grafana -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.items[0].metadata.name}&#39;</span><span style="color:#66d9ef">)</span> 3000:3000 <span style="color:#75715e"># port forward</span>
+$ curl http://localhost:3000/dashboard/db/istio-mesh-dashboard
+</code></pre></div><h3 ref="kiali" >Kiali</h3><a class="anchor" id="kiali"></a>
+<p>まずはユーザ/パスワードを作成して secret を適用する。<br>
+（<code>createDemoSecret: true</code> に設定した場合、 ID/Pass は admin/admin ）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ KIALI_USERNAME<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>read -p <span style="color:#e6db74">&#39;Kiali Username: &#39;</span> uval <span style="color:#f92672">&amp;&amp;</span> echo -n $uval | base64<span style="color:#66d9ef">)</span>
+Kiali Username: <span style="color:#75715e"># ユーザ名を入力する</span>
+$ KIALI_PASSPHRASE<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>read -p <span style="color:#e6db74">&#39;Kiali Passphrase: &#39;</span> pval <span style="color:#f92672">&amp;&amp;</span> echo -n $pval | base64<span style="color:#66d9ef">)</span>
+Kiali Passphrase: <span style="color:#75715e"># パスワードを入力する</span>
+$ cat <span style="color:#e6db74">&lt;&lt;EOF | kubectl apply -f -
+</span><span style="color:#e6db74">apiVersion: v1
+</span><span style="color:#e6db74">kind: Secret
+</span><span style="color:#e6db74">metadata:
+</span><span style="color:#e6db74">  name: kiali
+</span><span style="color:#e6db74">  namespace: istio-system
+</span><span style="color:#e6db74">  labels:
+</span><span style="color:#e6db74">    app: kiali
+</span><span style="color:#e6db74">type: Opaque
+</span><span style="color:#e6db74">data:
+</span><span style="color:#e6db74">  username: $KIALI_USERNAME
+</span><span style="color:#e6db74">  passphrase: $KIALI_PASSPHRASE
+</span><span style="color:#e6db74">EOF</span>
+</code></pre></div><p>以下でアクセスして、上記で作成したユーザ/パスワードを利用する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl -n istio-system port-forward <span style="color:#66d9ef">$(</span>kubectl -n istio-system get pod -l app<span style="color:#f92672">=</span>kiali -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.items[0].metadata.name}&#39;</span><span style="color:#66d9ef">)</span> 20001:20001 <span style="color:#75715e"># port forward</span>
+$ curl http://localhost:20001/kiali/console
+</code></pre></div><h3 ref="istio-ingress-gateway" >Istio Ingress Gateway</h3><a class="anchor" id="istio-ingress-gateway"></a>
+<p>従来、Kubernetes は外部からクラスタに入るトラフィックを処理するために <strong>Ingress Controller</strong> 使用していた。Istioを使用する場合、これはもはや当てはまない。<br>
+Istio は、使い慣れた Ingress リソースを新しい Gateway および VirtualServices リソースに置き換えた。<br>
+これらは連携して動作し、トラフィックをメッシュにルーティングする。<br>
+メッシュ内では、サービスはクラスタローカルサービス名で相互にアクセスできるため、ゲートウェイは必要ない。<br>
+以下のように動作する。</p>
+<p><!-- raw HTML omitted --></p>
+<ol>
+<li>クライアントは特定のポートにリクエストを発行する</li>
+<li>LoadBalancer がクラスタ内の woker node へトラフィックをフォワードする</li>
+</ol>
+<ul>
+<li>ここでの LoadBalancer は状況（ IP が必要 or Nor ）によって NodePort でもよい
+<ul>
+<li>例えば AWS の Autoscaling Group だと IP は意識しなくていいので NodePort でよい</li>
+</ul>
+</li>
+<li>Istio IngressGateway へトラフィックを流すためだけの役割で、手動もしくは自動で設定する</li>
+</ul>
+<ol start="3">
+<li>Istio IngressGateway の Service/Deployment(Pod) が LoadBalancer からのリクエストを受ける</li>
+</ol>
+<ul>
+<li>Istio IngressGateway は type を LoadBalancer/NodePort/ClusterIP から選択できるため、 NodePort として前段の LoadBalancer を省略することもできる</li>
+</ul>
+<ol start="4">
+<li>Istio IngressGateway の Pod が <strong>Gateway</strong> および <strong>VirtualService</strong> の設定に応じてリクエストを処理する</li>
+</ol>
+<ul>
+<li>Gateway では、ポート、プロトコル、および証明書の設定を行う</li>
+<li>VirtualService は、 アプリケーションの Service へリクエストをルーティングするための設定を行う</li>
+</ul>
+<p>Istio IngressGateway の他に <strong>Istio EgressGateway</strong> （外部への HTTP(S) 通信用）、 <strong>Istio IblGateway</strong> （クラスタ内 HTTP(S)/gRPC 通信用）が利用できる。<br>
+なお、 クラスタ外部サービス（ API や DB ）へのアクセスは <strong>ServiceEntry</strong> を設定しなければアクセスできない。（ <a href="https://tech.recruit-mp.co.jp/infrastructure/post-19184/">参考</a> ）</p>
+<h1 ref="解説" >解説</h1><a class="anchor" id="解説"></a>
+<p>Helm から構築する Istio は、 Istio では飽き足らず、様々な機能を構築することが可能。</p>
+<ul>
+<li>certmanager
+<ul>
+<li>TLSの証明書を自動で生成し管理するK8sのアドオン</li>
+</ul>
+</li>
+<li>galley
+<ul>
+<li>Istio のコンポーネント</li>
+</ul>
+</li>
+<li>gateways
+<ul>
+<li>Istio のコンポーネント</li>
+<li>Istio IngressGateway/IblGateway/EgressGateway</li>
+</ul>
+</li>
+<li>global
+<ul>
+<li>Istio の共通設定</li>
+</ul>
+</li>
+<li>grafana
+<ul>
+<li>可視化ツール、 Prometheus とともに</li>
+</ul>
+</li>
+<li>istio_cni
+<ul>
+<li>CNI (Container Network Interface) の設定</li>
+</ul>
+</li>
+<li>istiocoredns
+<ul>
+<li>Istio サービスの namespace で利用できるDNS の設定</li>
+<li>kube-dns (CoreDNS) のサブドメインとして可動させたりできる</li>
+</ul>
+</li>
+<li>kiali
+<ul>
+<li>リクエストのトレースを行う</li>
+</ul>
+</li>
+<li>mixer
+<ul>
+<li>Istio のコンポーネント</li>
+</ul>
+</li>
+<li>nodeagent
+<ul>
+<li>ノード単位のセキュリティ機能・設定を提供するエージェント</li>
+</ul>
+</li>
+<li>pilot
+<ul>
+<li>Istio のコンポーネント</li>
+</ul>
+</li>
+<li>prometheus
+<ul>
+<li>メトリクス監視ツール</li>
+</ul>
+</li>
+<li>security
+<ul>
+<li>セキュリティの設定</li>
+</ul>
+</li>
+<li>sidecarInjectorWebhook
+<ul>
+<li><a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/">Admission Controllers</a> という kube-api コールの際のインターセプト機能を利用</li>
+<li><a href="https://istio.io/docs/setup/additional-setup/sidecar-injection/#automatic-sidecar-injection">Automatic sidecar injection</a> を実現する</li>
+</ul>
+</li>
+<li>tracing
+<ul>
+<li>各 Service/Deployment でのリクエストのレイテンシを追跡する</li>
+<li>Jeager</li>
+</ul>
+</li>
+</ul>
+<p>設定については <a href="https://istio.io/docs/reference/config/installation-options/">ここ</a> を参照。</p>
+<!-- raw HTML omitted -->
+<h2 ref="ちょっと設定見てみる" >ちょっと設定見てみる</h2><a class="anchor" id="ちょっと設定見てみる"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">.
+├── README.md
+├── helmfile.yaml
+└── istio-values.yaml
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:helmfile.yaml" data-lang="yaml:helmfile.yaml"><span style="color:#f92672">repositories</span>: <span style="color:#75715e"># 利用する helm リポジトリ</span>
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elastic</span>
+    <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://helm.elastic.co</span>
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kiwigrid</span>
+    <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://kiwigrid.github.io</span>
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">codecentric</span>
+    <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://codecentric.github.io/helm-charts</span>
+
+<span style="color:#f92672">releases</span>: <span style="color:#75715e"># 利用する helm chart 単位で name をつけて設定する</span>
+          <span style="color:#75715e"># values.yaml ファイルにて設定を外出しできるので環境毎に作成できる</span>
+  <span style="color:#75715e"># 前提として、istio-init が完了している必要がある</span>
+  <span style="color:#75715e"># https://github.com/istio/istio/tree/master/install/kubernetes/helm/istio</span>
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">istio</span>
+    <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">istio-system</span>
+    <span style="color:#f92672">chart</span>: <span style="color:#ae81ff">istio.io/istio</span>
+    <span style="color:#f92672">values</span>:
+    - <span style="color:#ae81ff">istio-values.yaml</span>
+</code></pre></div><p>以下 Istio の valies.yaml ファイルの例。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:istio-value.yaml" data-lang="yaml:istio-value.yaml"><span style="color:#f92672">gateways</span>:
+  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+  <span style="color:#f92672">istio-ingressgateway</span>:
+    <span style="color:#f92672">type</span>: <span style="color:#ae81ff">NodePort</span>
+
+<span style="color:#f92672">global</span>:
+  <span style="color:#f92672">proxy</span>:
+    <span style="color:#f92672">autoInject</span>: <span style="color:#ae81ff">disabled</span>
+
+<span style="color:#f92672">grafana</span>:
+  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+  <span style="color:#f92672">ingress</span>:
+    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">hosts</span>:
+      - <span style="color:#ae81ff">istio-grafana.sample.com</span>
+  <span style="color:#f92672">contextPath</span>: <span style="color:#ae81ff">/</span>
+  <span style="color:#f92672">security</span>:
+    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+
+<span style="color:#f92672">kiali</span>:
+  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+  <span style="color:#f92672">ingress</span>:
+    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">hosts</span>:
+      - <span style="color:#ae81ff">istio-kiali.sample.com</span>
+  <span style="color:#f92672">dashboard</span>:
+    <span style="color:#f92672">jaegerURL</span>: <span style="color:#ae81ff">https://istio-jaeger.sample.com</span>
+  <span style="color:#f92672">createDemoSecret</span>: <span style="color:#66d9ef">true</span>
+
+<span style="color:#f92672">tracing</span>:
+  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+  <span style="color:#f92672">ingress</span>:
+    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">hosts</span>:
+      - <span style="color:#ae81ff">istio-jaeger.sample.com</span>
+  <span style="color:#f92672">contextPath</span>: <span style="color:#ae81ff">/</span>
+  <span style="color:#f92672">jaeger</span>:
+    <span style="color:#f92672">persist</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">accessMode</span>: <span style="color:#ae81ff">ReadWriteOnce</span>
+</code></pre></div><h1 ref="参考" >参考</h1><a class="anchor" id="参考"></a>
+<ul>
+<li>Istio 公式
+<ul>
+<li><a href="https://istio.io/docs/setup/install/helm/">helm 利用</a></li>
+<li><a href="https://istio.io/docs/reference/config/installation-options/">Installation Options</a></li>
+</ul>
+</li>
+<li>全般理解
+<ul>
+<li><a href="https://thinkit.co.jp/article/14640?page=0%2C1">Istioの全貌</a></li>
+</ul>
+</li>
+<li>設定理解
+<ul>
+<li><a href="https://knowledge.sakura.ad.jp/20489/">マイクロサービスアーキテクチャ向けにサービスメッシュを提供する「Istio」の概要と環境構築、トラフィックルーティング設定</a></li>
+<li><a href="https://medium.com/google-cloud-jp/istio-1-0-%E3%82%92%E8%A9%A6%E3%81%97%E3%81%A6%E3%81%BF%E3%81%9F-d74f75eeb1b1">Istio 1.0 を試してみた！</a></li>
+</ul>
+</li>
+<li>Istio IngressGateway
+<ul>
+<li><a href="https://blog.jayway.com/2018/10/22/understanding-istio-ingress-gateway-in-kubernetes/">Understanding Istio Ingress Gateway in Kubernetes</a></li>
+<li><a href="https://qiita.com/J_Shell/items/296cd00569b0c7692be7">Istio IngressGateway周辺を理解する</a></li>
+<li><a href="https://employment.en-japan.com/engineerhub/entry/2019/05/21/103000">Istio導入のメリットとハマりどころを、実例に学ぶ〜マイクロサービス化の先にある課題を解決する</a></li>
+</ul>
+</li>
+<li>可視化
+<ul>
+<li><a href="https://tech.recruit-mp.co.jp/infrastructure/post-19190/">サービスメッシュを実現するIstioをEKS上で動かす - その4 データの可視化について</a></li>
+</ul>
+</li>
+</ul>
+		</div>
+
+
+
+
+
+
+	
+	
+
+      </section>
+
+      
+      
+    </article>
+    
+    
+    <footer>
+      
+
+		
+	
+			
+		
+	    	
+	  	
+	
+    </footer>
+    
+
+
+
+  </body>
+</html>
