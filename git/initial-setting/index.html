@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	Homebrew :: テックまとめ
+	初期設定 :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>Homebrew :: テックまとめ</title>
+<title>初期設定 :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/mac/homebrew/"
+  <body data-url="/git/initial-setting/"
 
   class="hidetoc hidenextpage ">
 
@@ -134,15 +134,14 @@ if (!doNotTrack) {
 
 <ul class="menu">
 
-    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/mac/">Mac開発環境</a>
@@ -165,7 +164,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item
         item_level_$level
         ">
 
@@ -197,14 +196,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/git/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/git/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/git/">Git</a>
@@ -212,7 +212,7 @@ if (!doNotTrack) {
         <ul>
               
 
-    <li data-nav-id="https://tanakakns.github.io/git/initial-setting/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/git/initial-setting/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -406,8 +406,8 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/mac/">
-        Mac開発環境
+      <a class="text-link" href="/git/">
+        Git
       </a>
     </li>
 	
@@ -415,7 +415,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        Homebrew
+        初期設定
       
     </li>
 
@@ -436,7 +436,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>Homebrew</h1>
+			<h1>初期設定</h1>
         
 
 		
@@ -456,87 +456,70 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p>Mac のパッケージマネージャである <a href="http://brew.sh/index_ja.html">Homebrew</a> について。</p>
+	    <p>Gitの認証周りの初期設定について。</p>
 <ol>
-<li>環境設定</li>
-<li>brew tap</li>
-<li>brew cask</li>
+<li>アカウント</li>
+<li>認証</li>
+<li>Github の認証</li>
 </ol>
-<h2 ref="1-環境設定" >1. 環境設定</h2><a class="anchor" id="1-環境設定"></a>
-<h3 ref="11-インストール" >1.1. インストール</h3><a class="anchor" id="11-インストール"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% /usr/bin/ruby -e <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span style="color:#66d9ef">)</span><span style="color:#e6db74">”
-</span><span style="color:#e6db74">==&gt; This script will install:
-</span><span style="color:#e6db74">/usr/local/bin/brew
-</span><span style="color:#e6db74">/usr/local/share/doc/homebrew
-</span><span style="color:#e6db74">/usr/local/share/man/man1/brew.1
-</span><span style="color:#e6db74">/usr/local/share/zsh/site-functions/_brew
-</span><span style="color:#e6db74">/usr/local/etc/bash_completion.d/brew
-</span><span style="color:#e6db74">/usr/local/Homebrew
-</span><span style="color:#e6db74">==&gt; The following new directories will be created:
-</span><span style="color:#e6db74">/usr/local/Cellar
-</span><span style="color:#e6db74">/usr/local/Homebrew
-</span><span style="color:#e6db74">/usr/local/Frameworks
-</span><span style="color:#e6db74">/usr/local/bin
-</span><span style="color:#e6db74">/usr/local/include
-</span><span style="color:#e6db74">/usr/local/lib
-</span><span style="color:#e6db74">/usr/local/opt
-</span><span style="color:#e6db74">/usr/local/sbin
-</span><span style="color:#e6db74">/usr/local/share/zsh
-</span><span style="color:#e6db74">/usr/local/share/zsh/site-functions
-</span></code></pre></div><p>上記を実行後、 <code>brew doctor</code> で問題がないことを確認。<br>
-もしWarningが出たらメッセージに従って対処する。<br>
-筆者の場合はXcodeをインストールしてCommand Line Toolsをアップデートしたら解決した。<br>
-変更があるかもしれないので<a href="http://brew.sh/index_ja.html">公式</a>を確認のこと。</p>
-<ul>
-<li><code>/usr/local/Cellar/</code>
-<ul>
-<li>Homebrewでインストールしたソフトウェアはここに配備される</li>
-</ul>
-</li>
-<li><code>/usr/local/bin/</code>
-<ul>
-<li>インストールしたソフトウェアのコマンドのシンボリックリンクはここに配備される</li>
-</ul>
-</li>
-</ul>
-<h3 ref="12-homebrew-のアップデート" >1.2. Homebrew のアップデート</h3><a class="anchor" id="12-homebrew-のアップデート"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew update
-</code></pre></div><h3 ref="13-ソフトウェアのインストール" >1.3. ソフトウェアのインストール</h3><a class="anchor" id="13-ソフトウェアのインストール"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew install &lt;software&gt;
-</code></pre></div><p>なお、かつて Homebrew の拡張であった <strong>Cask</strong> は本体に統合された。<br>
-明示的に Cask 管理のソフトウェアをインストールする場合は以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew install &lt;software&gt; --cask
-</code></pre></div><h3 ref="14ソフトウェアの更新" >1.4.ソフトウェアの更新</h3><a class="anchor" id="14ソフトウェアの更新"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew upgrade &lt;software&gt;
-</code></pre></div><p>ソフトウェアを指定しない場合は、インストールしたもの全てが更新される。</p>
-<h3 ref="15-キャッシュされている古いソフトウェアの削除" >1.5. キャッシュされている古いソフトウェアの削除</h3><a class="anchor" id="15-キャッシュされている古いソフトウェアの削除"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew cleanup
-</code></pre></div><h2 ref="2-brew-tap" >2. brew tap</h2><a class="anchor" id="2-brew-tap"></a>
-<p>brew tap は、公式以外の formula を追加することのできる Homebrew のサブコマンド。<br>
-Homebrewをインストールした際に標準で組み込まれている。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew tap &lt;userName&gt;/&lt;repository&gt;
-</code></pre></div><p>上記コマンドを実行すると、GitHub 公開リポジトリ (<a href="https://github.com/">https://github.com/</a><!-- raw HTML omitted -->/homebrew-<!-- raw HTML omitted -->) が参照され、/usr/local/Library/Taps以下にインストールされる。<br>
-<code>brew tap</code> コマンドでこれまでにインストールされたソフトウェアの一覧が見れる。<br>
-また、 <code>brew tap &lt;url&gt;</code> コマンドでGitHub以外のソフトウェアもインストール可能。</p>
-<h2 ref="3-brew-cask" >3. brew cask</h2><a class="anchor" id="3-brew-cask"></a>
-<p>brewやbrew tapでソフトウェアをインストールする際、目的のソフトウェアを動かすには依存するその他のソフトウェアをインストールする必要がある場合がある。<br>
-そんなときbrew caskを使用すると目的のソフトウェアをインストールするだけで依存するソフトウェアもインストールしてくれる。<br>
-さらにGoogle ChromeやAtomといったソフトのインストールも可能となる。</p>
-<ul>
-<li><code>/usr/local/Caskroom/</code>
-<ul>
-<li>Cask でインストールしたソフトウェアはここに配備される</li>
-</ul>
-</li>
-<li><code>/usr/local/bin/</code>
-<ul>
-<li>インストールしたソフトウェアのコマンドのシンボリックリンクはここに配備される</li>
-</ul>
-</li>
-</ul>
-<h3 ref="31-インストール" >3.1. インストール</h3><a class="anchor" id="31-インストール"></a>
-<p>Homebrew 本体に統合され、インストール不要になった。<br>
-<code>--cask</code> オプションで <code>brew cask</code> コマンドは代替可能。</p>
+<h2 ref="1-アカウント" >1. アカウント</h2><a class="anchor" id="1-アカウント"></a>
+<p>アカウント情報の設定を行う。<br>
+なお、複数アカウント存在する場合は、 <code>git config --local</code> での設定を忘れないこと。</p>
+<h3 ref="11-グローバル" >1.1. グローバル</h3><a class="anchor" id="11-グローバル"></a>
+<p>git コマンドに対するグローバルな設定。<br>
+なお、ローカル設定がある場合はそちらが優先される。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% git config --global user.name &lt;githubアカウント&gt;
+% git config --global user.email &lt;メアド&gt;
+% git config --global http.sslverify false
+
+<span style="color:#75715e"># 確認</span>
+% git config --global --list
+</code></pre></div><h3 ref="12-ローカル" >1.2. ローカル</h3><a class="anchor" id="12-ローカル"></a>
+<p><code>git clone</code> した単位で有効な設定。<br>
+設定されていない項目はグローバルもしくはデフォルトが有効になる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% git config --local user.name &lt;githubアカウント&gt;
+% git config --local user.email &lt;メアド&gt;
+% git config --local http.sslverify false
+
+<span style="color:#75715e"># 確認</span>
+% git config --local --list
+</code></pre></div><h2 ref="2-認証" >2. 認証</h2><a class="anchor" id="2-認証"></a>
+<p>git コマンドを打つ度に認証情報を聞かれるのは煩わしい。<br>
+ここでは認証情報の設定方法について記載する。<br>
+なお、 ssh ではなく https 前提とする。</p>
+<h3 ref="21-netrc" >2.1. .netrc</h3><a class="anchor" id="21-netrc"></a>
+<p>個人的には使わないけど一応書いておく。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% cat &gt;&gt; ~/.netrc <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">machine github.com
+</span><span style="color:#e6db74">login &lt;githubアカウント&gt;
+</span><span style="color:#e6db74">password &lt;パスワード&gt;
+</span><span style="color:#e6db74">EOF</span>
+% chmod <span style="color:#ae81ff">600</span> ~/.netrc
+</code></pre></div><h3 ref="22-osxkeychain" >2.2. osxkeychain</h3><a class="anchor" id="22-osxkeychain"></a>
+<p><code>credential helper</code> の <code>osxkeychain helper</code> を利用する方法。<br>
+<code>git credential-osxkeychain</code> が使えるかを確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% git credential-osxkeychain
+usage: git credential-osxkeychain &lt;get|store|erase&gt;
+</code></pre></div><p>上記のように表示されれば利用できる。<br>
+以下でヘルパーの設定を行う。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% git config --global credential.helper osxkeychain
+</code></pre></div><p>上記は <code>git clone</code> するときの <code>https://&lt;username&gt;@&lt;domain&gt;/~</code> 単位で認証情報を記憶してくれるため、 <code>git clone</code> する際は以下のようにアカウント情報を付与すること。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% https://&lt;username&gt;@&lt;domain&gt;/&lt;repository-username&gt;/&lt;repository-name&gt;.git
+</code></pre></div><p>Mac の場合、認証情報は「キーチェーンアクセス」に保存される。</p>
+<h2 ref="3-github-の認証" >3. Github の認証</h2><a class="anchor" id="3-github-の認証"></a>
+<p>Github は 2021 年 8 月 13 日より Basic 認証による Git アクセスが廃止となる。（ <a href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">参考</a> ）<br>
+そのため、個人アクセストークンの設定が必要となる。（ <a href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">参考</a> ）</p>
+<h3 ref="31-個人アクセストークン" >3.1. 個人アクセストークン</h3><a class="anchor" id="31-個人アクセストークン"></a>
+<ol>
+<li>Web で <a href="https://github.com">Github</a> にログインする</li>
+<li><a href="https://github.com/settings/tokens">設定画面</a>を開く</li>
+<li><code>Generate new token</code> をクリック</li>
+<li>noteにトークンのわかりやすい名前を記入</li>
+<li>権限を設定 （ <code>repo</code> だけ選択しとけばよい）</li>
+<li>[Generate token] をクリック</li>
+<li>トークンをコピー （ページを離れると参照不可になるので注意）</li>
+<li>パスワードの代わりに使用する</li>
+</ol>
 		</div>
 
 
