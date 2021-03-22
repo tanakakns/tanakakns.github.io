@@ -3,9 +3,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-	<meta name="generator" content="Hugo 0.82.0" />
     <title>
-	 :: テックまとめ
+	Homebrew :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -14,7 +13,7 @@
 
 
 
-<title> :: テックまとめ</title>
+<title>Homebrew :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -63,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/"
+  <body data-url="/mac/homebrew/"
 
   class="hidetoc hidenextpage ">
 
@@ -135,14 +134,15 @@ if (!doNotTrack) {
 
 <ul class="menu">
 
-    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/mac/">Mac開発環境</a>
@@ -180,7 +180,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -369,7 +369,7 @@ if (!doNotTrack) {
 
       <section class="page ">
       
-	 
+	
 		
     
     
@@ -377,9 +377,28 @@ if (!doNotTrack) {
       <ol class="ariane">
         
   
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/mac/">
+        Mac開発環境
+      </a>
+    </li>
+	
+  	
+  
     <li class="active">
       
-        
+        Homebrew
       
     </li>
 
@@ -391,8 +410,6 @@ if (!doNotTrack) {
     
 		
         
-        	
-        
 		
 		
 		
@@ -402,7 +419,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1></h1>
+			<h1>Homebrew</h1>
         
 
 		
@@ -422,9 +439,87 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <h1 ref="テックまとめ" >テックまとめ</h1><a class="anchor" id="テックまとめ"></a>
-<p>テックネタをまとめてく。</p>
-
+	    <p>Mac のパッケージマネージャである <a href="http://brew.sh/index_ja.html">Homebrew</a> について。</p>
+<ol>
+<li>環境設定</li>
+<li>brew tap</li>
+<li>brew cask</li>
+</ol>
+<h2 ref="1-環境設定" >1. 環境設定</h2><a class="anchor" id="1-環境設定"></a>
+<h3 ref="11-インストール" >1.1. インストール</h3><a class="anchor" id="11-インストール"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% /usr/bin/ruby -e <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span style="color:#66d9ef">)</span><span style="color:#e6db74">”
+</span><span style="color:#e6db74">==&gt; This script will install:
+</span><span style="color:#e6db74">/usr/local/bin/brew
+</span><span style="color:#e6db74">/usr/local/share/doc/homebrew
+</span><span style="color:#e6db74">/usr/local/share/man/man1/brew.1
+</span><span style="color:#e6db74">/usr/local/share/zsh/site-functions/_brew
+</span><span style="color:#e6db74">/usr/local/etc/bash_completion.d/brew
+</span><span style="color:#e6db74">/usr/local/Homebrew
+</span><span style="color:#e6db74">==&gt; The following new directories will be created:
+</span><span style="color:#e6db74">/usr/local/Cellar
+</span><span style="color:#e6db74">/usr/local/Homebrew
+</span><span style="color:#e6db74">/usr/local/Frameworks
+</span><span style="color:#e6db74">/usr/local/bin
+</span><span style="color:#e6db74">/usr/local/include
+</span><span style="color:#e6db74">/usr/local/lib
+</span><span style="color:#e6db74">/usr/local/opt
+</span><span style="color:#e6db74">/usr/local/sbin
+</span><span style="color:#e6db74">/usr/local/share/zsh
+</span><span style="color:#e6db74">/usr/local/share/zsh/site-functions
+</span></code></pre></div><p>上記を実行後、 <code>brew doctor</code> で問題がないことを確認。<br>
+もしWarningが出たらメッセージに従って対処する。<br>
+筆者の場合はXcodeをインストールしてCommand Line Toolsをアップデートしたら解決した。<br>
+変更があるかもしれないので<a href="http://brew.sh/index_ja.html">公式</a>を確認のこと。</p>
+<ul>
+<li><code>/usr/local/Cellar/</code>
+<ul>
+<li>Homebrewでインストールしたソフトウェアはここに配備される</li>
+</ul>
+</li>
+<li><code>/usr/local/bin/</code>
+<ul>
+<li>インストールしたソフトウェアのコマンドのシンボリックリンクはここに配備される</li>
+</ul>
+</li>
+</ul>
+<h3 ref="12-homebrew-のアップデート" >1.2. Homebrew のアップデート</h3><a class="anchor" id="12-homebrew-のアップデート"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew update
+</code></pre></div><h3 ref="13-ソフトウェアのインストール" >1.3. ソフトウェアのインストール</h3><a class="anchor" id="13-ソフトウェアのインストール"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew install &lt;software&gt;
+</code></pre></div><p>なお、かつて Homebrew の拡張であった <strong>Cask</strong> は本体に統合された。<br>
+明示的に Cask 管理のソフトウェアをインストールする場合は以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew install &lt;software&gt; --cask
+</code></pre></div><h3 ref="14ソフトウェアの更新" >1.4.ソフトウェアの更新</h3><a class="anchor" id="14ソフトウェアの更新"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew upgrade &lt;software&gt;
+</code></pre></div><p>ソフトウェアを指定しない場合は、インストールしたもの全てが更新される。</p>
+<h3 ref="15-キャッシュされている古いソフトウェアの削除" >1.5. キャッシュされている古いソフトウェアの削除</h3><a class="anchor" id="15-キャッシュされている古いソフトウェアの削除"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew cleanup
+</code></pre></div><h2 ref="2-brew-tap" >2. brew tap</h2><a class="anchor" id="2-brew-tap"></a>
+<p>brew tap は、公式以外の formula を追加することのできる Homebrew のサブコマンド。<br>
+Homebrewをインストールした際に標準で組み込まれている。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew tap &lt;userName&gt;/&lt;repository&gt;
+</code></pre></div><p>上記コマンドを実行すると、GitHub 公開リポジトリ (<a href="https://github.com/">https://github.com/</a><!-- raw HTML omitted -->/homebrew-<!-- raw HTML omitted -->) が参照され、/usr/local/Library/Taps以下にインストールされる。<br>
+<code>brew tap</code> コマンドでこれまでにインストールされたソフトウェアの一覧が見れる。<br>
+また、 <code>brew tap &lt;url&gt;</code> コマンドでGitHub以外のソフトウェアもインストール可能。</p>
+<h2 ref="3-brew-cask" >3. brew cask</h2><a class="anchor" id="3-brew-cask"></a>
+<p>brewやbrew tapでソフトウェアをインストールする際、目的のソフトウェアを動かすには依存するその他のソフトウェアをインストールする必要がある場合がある。<br>
+そんなときbrew caskを使用すると目的のソフトウェアをインストールするだけで依存するソフトウェアもインストールしてくれる。<br>
+さらにGoogle ChromeやAtomといったソフトのインストールも可能となる。</p>
+<ul>
+<li><code>/usr/local/Caskroom/</code>
+<ul>
+<li>Cask でインストールしたソフトウェアはここに配備される</li>
+</ul>
+</li>
+<li><code>/usr/local/bin/</code>
+<ul>
+<li>インストールしたソフトウェアのコマンドのシンボリックリンクはここに配備される</li>
+</ul>
+</li>
+</ul>
+<h3 ref="31-インストール" >3.1. インストール</h3><a class="anchor" id="31-インストール"></a>
+<p>Homebrew 本体に統合され、インストール不要になった。<br>
+<code>--cask</code> オプションで <code>brew cask</code> コマンドは代替可能。</p>
 		</div>
 
 

@@ -1,0 +1,602 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+	kubectl plugin と Krew :: テックまとめ
+</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2021-03-22T23:23:46 JST">
+<meta name="description" content="備忘録用メモサイト">
+
+
+
+<title>kubectl plugin と Krew :: テックまとめ</title>
+
+<link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+
+<script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel="stylesheet">
+
+
+
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/layout.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.main.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.menu.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/notice.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/tabs.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/panel.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/columns.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/children.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/attachments.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/alert.css'>
+<link rel="stylesheet" type="text/css" href='/css/docport.css'>
+
+<script src='/js/docport.js'></script>
+<script type="text/javascript">
+      var baseurl = "https:\/\/tanakakns.github.io\/";
+</script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-42388425-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+  </head>
+
+  <body data-url="/kubernetes/kubectl-plugin/"
+
+  class="hidetoc hidenextpage ">
+
+<style type="text/css">
+  #debug{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    line-height: 3.5rem;
+    margin-bottom: .35rem;
+    padding: 0 2rem;
+    position: fixed;
+    left: 0;      right: 0;     top: 0;
+   
+    top:0px;
+    
+    min-height: 150px;
+
+    background-color: white;
+    border: 3px solid red;
+    z-index: 10000 ;
+    word-wrap: all;
+    overflow: auto;
+  }
+</style>
+ 
+
+
+    
+    
+    <header style="">
+        <div>
+    
+    <div class="burger ">
+        <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">&#9776;</a>
+    </div>
+    
+
+    <div>
+
+		
+	
+			
+		
+	    	<a class='baselink' href='https://tanakakns.github.io/'>テックまとめ</a>
+	  	
+	</div>
+
+</div>
+    </header>
+    
+
+    <article>
+      
+      <aside class="">
+        
+
+		
+	
+			
+		
+	    	
+	  	
+	<div id="close_menu">
+  <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">
+      <i class="fa fa-lg fa-times"></i>
+  </a>
+</div>
+
+<ul class="menu">
+
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/mac/">Mac開発環境</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/os-settings/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/os-settings/">OSの設定</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/git/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/git/">Git</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/homebrew/">Homebrew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/asdf/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/asdf/">asdf</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/terraform/">Terraform</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item parent haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <i class="fas fa-chevron-down ddexp"></i>
+        
+      
+          <a href="/kubernetes/">Kubernetes</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/concept/">概念整理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/architecture/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/architecture/">アーキテクチャ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/kubectl-plugin/" class="dd-item parent active
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/kubectl-plugin/">kubectl plugin と Krew</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/istio/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/istio/">Istio</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/basic/">入門</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/concept/">概念整理</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+
+
+</ul>
+
+		
+	
+			
+		
+	    	
+	  	
+	
+      </aside>
+      
+
+      <section class="page ">
+      
+	
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/kubernetes/">
+        Kubernetes
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        kubectl plugin と Krew
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>kubectl plugin と Krew</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
+
+
+
+
+
+
+	<div class="content">
+	    <p>kubectlのプラグイン機構 と <strong>Krew</strong> についてまとめる。</p>
+<ol>
+<li>kubectl plugin</li>
+<li>Krew</li>
+</ol>
+<h2 ref="1-kubectl-plugin" >1. kubectl plugin</h2><a class="anchor" id="1-kubectl-plugin"></a>
+<p><strong>kubectl plugin</strong> は kubectl のプラグイン機構で、kubectl に任意のサブコマンドを追加する機能である。<br>
+このプラグイン機構は、 <code>PATH</code> の通ったディレクトリに配置された実行ファイルの名前が特定のプレフィックスで開始しているものを呼び出すというもので、kubectl plugin の場合はプレフィックスが <code>kubectl-</code> 。<br>
+例えば <code>kubectl-foo</code> という実行ファイルを作成し、 <code>PATH</code> の通ったディレクトリに配置すると、 <code>kubectl foo</code> コマンドとして実行できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% echo <span style="color:#e6db74">&#39;#!/bin/bash\n\necho &#34;foo&#34;&#39;</span> &gt; /usr/local/bin/kubectl-foo
+% chmod +x /usr/local/bin/kubectl-foo
+% /usr/local/bin/kubectl-foo
+foo
+% kubectl foo
+foo
+</code></pre></div><p><code>kubectl plugin list</code> コマンドで利用可能なプラグインの一覧を取得できる。</p>
+<p>公式：<a href="https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/">Extend kubectl with plugins</a></p>
+<h2 ref="2-krew" >2. Krew</h2><a class="anchor" id="2-krew"></a>
+<p><a href="https://github.com/kubernetes-sigs/krew">Krew</a> は、 kubectl plugin をパッケージマネージャ Homebrew 風に管理できるツール。</p>
+<h3 ref="21-インストール" >2.1. インストール</h3><a class="anchor" id="21-インストール"></a>
+<p><a href="https://krew.sigs.k8s.io/docs/user-guide/setup/install/">公式</a> を参照するのが望ましいが、ここでは実際にやった手順を残しておく。</p>
+<p><code>git</code> がインストールされていることを確認した後、以下を実行する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% <span style="color:#f92672">(</span>
+  set -x; cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>mktemp -d<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
+  OS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>uname | tr <span style="color:#e6db74">&#39;[:upper:]&#39;</span> <span style="color:#e6db74">&#39;[:lower:]&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
+  ARCH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>uname -m | sed -e <span style="color:#e6db74">&#39;s/x86_64/amd64/&#39;</span> -e <span style="color:#e6db74">&#39;s/\(arm\)\(64\)\?.*/\1\2/&#39;</span> -e <span style="color:#e6db74">&#39;s/aarch64$/arm64/&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
+  curl -fsSLO <span style="color:#e6db74">&#34;https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
+  tar zxvf krew.tar.gz <span style="color:#f92672">&amp;&amp;</span>
+  KREW<span style="color:#f92672">=</span>./krew-<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>OS<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">${</span>ARCH<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
+  <span style="color:#e6db74">&#34;</span>$KREW<span style="color:#e6db74">&#34;</span> install krew
+<span style="color:#f92672">)</span>
+
+（中略）
+
+<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> | Use this plugin:
+ |      kubectl krew
+ | Documentation:
+ |      https://krew.sigs.k8s.io/
+ | Caveats:
+ | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> |  | krew is now installed! To start using kubectl plugins, you need to add
+ |  | krew<span style="color:#960050;background-color:#1e0010">&#39;</span>s installation directory to your PATH:
+ |  | 
+ |  |   * macOS/Linux:
+ |  |     - Add the following to your ~/.bashrc or ~/.zshrc:
+ |  |         export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>KREW_ROOT<span style="color:#66d9ef">:-</span>$HOME/.krew<span style="color:#e6db74">}</span><span style="color:#e6db74">/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+ |  |     - Restart your shell.
+ |  | 
+ |  |   * Windows: Add %USERPROFILE%<span style="color:#ae81ff">\.</span>krew<span style="color:#ae81ff">\b</span>in to your PATH environment variable
+ |  | 
+ |  | To list krew commands and to get help, run:
+ |  |   $ kubectl krew
+ |  | For a full list of available plugins, run:
+ |  |   $ kubectl krew search
+ |  | 
+ |  | You can find documentation at
+ |  |   https://krew.sigs.k8s.io/docs/user-guide/quickstart/.
+ | /
+/
+</code></pre></div><p><code>$HOME/.krew/bin</code> ディレクトリを作成し、パスを通す。（もちろん、プロファイルに記載する）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>KREW_ROOT<span style="color:#66d9ef">:-</span>$HOME/.krew<span style="color:#e6db74">}</span><span style="color:#e6db74">/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+</code></pre></div><p><code>kubectl krew</code> コマンドを実行し、 Usage が表示されてば完了。<br>
+また、 Krew 自身も kubectl plugin なので、 <code>kubectl plugin list</code> で表示される。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl plugin list
+The following compatible plugins are available:
+
+/Users/pepese/.krew/bin/kubectl-krew
+</code></pre></div><p>アンインストールしたい場合は、 <code>rm -rf -- ~/.krew</code> 実行と、環境変数を設定したプロファイルを削除すればいい。</p>
+<h3 ref="22-クイックスタート" >2.2. クイックスタート</h3><a class="anchor" id="22-クイックスタート"></a>
+<p>先に同じく <a href="https://krew.sigs.k8s.io/docs/user-guide/quickstart/">公式</a> を参照するのが、望ましいがここでは実際にやった手順を残しておく。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"><span style="color:#75715e"># プラグインリストの更新</span>
+% kubectl krew update
+
+<span style="color:#75715e"># プラグインの検索</span>
+% kubectl krew search
+（いっぱい出る）
+
+<span style="color:#75715e"># プラグイン検索（キーワード指定）</span>
+% kubectl krew search ctx
+NAME           DESCRIPTION                                      INSTALLED
+access-matrix  Show an RBAC access matrix <span style="color:#66d9ef">for</span> server resources  no
+allctx         Run commands on contexts in your kubeconfig      no
+ctx            Switch between contexts in your kubeconfig       no
+
+<span style="color:#75715e"># プラグインのインストール</span>
+% kubectl krew install ctx
+Updated the local copy of plugin index.
+Installing plugin: ctx
+Installed plugin: ctx
+<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> | Use this plugin:
+ |      kubectl ctx
+ | Documentation:
+ |      https://github.com/ahmetb/kubectx
+ | Caveats:
+ | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> |  | If fzf is installed on your machine, you can interactively choose
+ |  | between the entries using the arrow keys, or by fuzzy searching
+ |  | as you type.
+ |  | See https://github.com/ahmetb/kubectx <span style="color:#66d9ef">for</span> customization and details.
+ | /
+/
+WARNING: You installed plugin <span style="color:#e6db74">&#34;ctx&#34;</span> from the krew-index plugin repository.
+   These plugins are not audited <span style="color:#66d9ef">for</span> security by the Krew maintainers.
+   Run them at your own risk.
+
+<span style="color:#75715e"># プラグインの実行</span>
+% kubectl ctx
+
+<span style="color:#75715e"># プラグインの更新</span>
+% kubectl krew upgrade
+Updated the local copy of plugin index.
+Upgrading plugin: ctx
+Skipping plugin ctx, it is already on the newest version
+Upgrading plugin: krew
+Skipping plugin krew, it is already on the newest version
+
+<span style="color:#75715e"># プラグインのアンインストール</span>
+% kubectl krew uninstall ctx
+</code></pre></div><h2 ref="参考" >参考</h2><a class="anchor" id="参考"></a>
+<ul>
+<li><a href="https://krew.sigs.k8s.io/docs/">公式ドキュメント</a></li>
+<li><a href="https://qiita.com/superbrothers/items/b4a0aab0575ca6d65739">kubectl のプラグイン機能 kubectl plugin を使おう！</a></li>
+<li><a href="https://techblog.yahoo.co.jp/entry/2020081830014718/">kubectlのプラグイン機構とおすすめプラグインのご紹介</a></li>
+<li><a href="https://qiita.com/superbrothers/items/f2fb422b70ab6f61e531">Krew のカスタムプラグインインデックスで kubectl プラグインを配布しよう</a></li>
+</ul>
+		</div>
+
+
+
+
+
+
+	
+	
+
+      </section>
+
+      
+      
+    </article>
+    
+    
+    <footer>
+      
+
+		
+	
+			
+		
+	    	
+	  	
+	
+    </footer>
+    
+
+
+
+  </body>
+</html>

@@ -1,0 +1,719 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+	アーキテクチャ :: テックまとめ
+</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2021-03-22T23:23:46 JST">
+<meta name="description" content="備忘録用メモサイト">
+
+
+
+<title>アーキテクチャ :: テックまとめ</title>
+
+<link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+
+<script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel="stylesheet">
+
+
+
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/layout.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.main.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.menu.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/notice.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/tabs.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/panel.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/columns.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/children.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/attachments.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/alert.css'>
+<link rel="stylesheet" type="text/css" href='/css/docport.css'>
+
+<script src='/js/docport.js'></script>
+<script type="text/javascript">
+      var baseurl = "https:\/\/tanakakns.github.io\/";
+</script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-42388425-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+  </head>
+
+  <body data-url="/kubernetes/architecture/"
+
+  class="hidetoc hidenextpage ">
+
+<style type="text/css">
+  #debug{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    line-height: 3.5rem;
+    margin-bottom: .35rem;
+    padding: 0 2rem;
+    position: fixed;
+    left: 0;      right: 0;     top: 0;
+   
+    top:0px;
+    
+    min-height: 150px;
+
+    background-color: white;
+    border: 3px solid red;
+    z-index: 10000 ;
+    word-wrap: all;
+    overflow: auto;
+  }
+</style>
+ 
+
+
+    
+    
+    <header style="">
+        <div>
+    
+    <div class="burger ">
+        <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">&#9776;</a>
+    </div>
+    
+
+    <div>
+
+		
+	
+			
+		
+	    	<a class='baselink' href='https://tanakakns.github.io/'>テックまとめ</a>
+	  	
+	</div>
+
+</div>
+    </header>
+    
+
+    <article>
+      
+      <aside class="">
+        
+
+		
+	
+			
+		
+	    	
+	  	
+	<div id="close_menu">
+  <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">
+      <i class="fa fa-lg fa-times"></i>
+  </a>
+</div>
+
+<ul class="menu">
+
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/mac/">Mac開発環境</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/os-settings/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/os-settings/">OSの設定</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/git/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/git/">Git</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/homebrew/">Homebrew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/asdf/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/asdf/">asdf</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/terraform/">Terraform</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item parent haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <i class="fas fa-chevron-down ddexp"></i>
+        
+      
+          <a href="/kubernetes/">Kubernetes</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/concept/">概念整理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/architecture/" class="dd-item parent active
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/architecture/">アーキテクチャ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/kubectl-plugin/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/kubectl-plugin/">kubectl plugin と Krew</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/istio/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/istio/">Istio</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/basic/">入門</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/concept/">概念整理</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+
+
+</ul>
+
+		
+	
+			
+		
+	    	
+	  	
+	
+      </aside>
+      
+
+      <section class="page ">
+      
+	
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/kubernetes/">
+        Kubernetes
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        アーキテクチャ
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>アーキテクチャ</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
+
+
+
+
+
+
+	<div class="content">
+	    <p><strong>Kubernetes</strong> （ <strong>k8s</strong> ）のアーキテクチャについて整理する。</p>
+<ul>
+<li>サーバ構成</li>
+<li>コンポーネント</li>
+</ul>
+<p><a href="https://kubernetes.io/ja/docs/home/">公式</a></p>
+<h2 ref="サーバ構成" >サーバ構成</h2><a class="anchor" id="サーバ構成"></a>
+<p>k8s ではホストマシン（物理サーバ、もしくは仮想マシン、インスタンス）の種別として <strong>Control Plane</strong> と <strong>Worker Nodes</strong> がある。<br>
+それぞれで実行されるコンポーネントは以下の通り。各コンポーネントはそれぞれ各サーバ上で独立したプロセスとして常駐する。</p>
+<ul>
+<li><strong>Control Plane</strong> ： 管理サーバ。クライアントツール（ <strong>kubectl</strong> ）から Control Plane を経由して Worker Nodes をコントロールする。
+<ul>
+<li><code>kube-apiserver</code></li>
+<li><code>etcd</code></li>
+<li><code>kube-scheduler</code></li>
+<li><code>kube-controller-manager</code></li>
+<li><code>cloud-controller-manager</code></li>
+</ul>
+</li>
+<li><strong>Worker Nodes</strong> ： Control Plane から管理されるワーカーサーバ。複数台で構成されるクラスタ構成をとり、コンテナがマウントされる。
+<ul>
+<li><code>kubelet</code></li>
+<li><code>kube-proxy</code></li>
+<li><code>kube-dns</code> ・CoreDNS</li>
+</ul>
+</li>
+</ul>
+<h3 ref="その他コンポーネントクライアントツール" >その他コンポーネント・クライアントツール</h3><a class="anchor" id="その他コンポーネントクライアントツール"></a>
+<ul>
+<li>その他のコンポーネント
+<ul>
+<li><code>hyperkube</code>
+<ul>
+<li>k8s 関連のバイナリを1つにまとめたall-in-oneバイナリ</li>
+</ul>
+</li>
+<li>cAdvisor
+<ul>
+<li>各 Node 上にあるコンテナのCPU、メモリ、ファイル、ネットワーク使用量といった、リソースの使用量と性能の指標を監視・収集するエージェント</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>クライアントツール
+<ul>
+<li>kubectl
+<ul>
+<li>k8s クラスタを管理するコマンド</li>
+</ul>
+</li>
+<li>kubeadm
+<ul>
+<li>物理もしくは仮想サーバに対して Kubernetes 環境を構築するツール</li>
+</ul>
+</li>
+<li>kubefed
+<ul>
+<li>Federation を管理するコマンド</li>
+<li>Federationは複数のリージョンやクラウドに配置されているKubernetesのクラスタを一括で管理できるようにする機能</li>
+</ul>
+</li>
+<li>Minikube
+<ul>
+<li>1 台のローカル端末で シングル Node の Kubernetes Cluster をお試しできるツール</li>
+</ul>
+</li>
+<li>Dashboard
+<ul>
+<li>k8s クラスタの可視化を行う Web ベースのツール</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 ref="コンポーネント" >コンポーネント</h2><a class="anchor" id="コンポーネント"></a>
+<p>ここでは先ほど紹介した Control Plane/Worker Nodes に配備されている主要コンポーネントについて記載する。</p>
+<h3 ref="kube-apiserver--control-plane" >kube-apiserver / Control Plane</h3><a class="anchor" id="kube-apiserver--control-plane"></a>
+<p>Kubernetes API を外部に提供するコンポーネント。<br>
+REST API を提供しているが、通常はクライアントツール <code>kubectl</code> でコントロールする。<code>kubectl</code> から設定情報を受け付けて、 クラスタが保持すべき状態として情報を <code>etcd</code> へ保存する。<br>
+<code>kube-apiserver</code> 以外のコンポーネントは直接 <code>etcd</code> を参照せず、 <code>kube-apiserver</code> を通してリソースにアクセスする。<br>
+なお、 <code>kube-apiserver</code> は水平スケールによりトラフィックを分散させることが可能。<br>
+コンテナが作成されるまでのフロー例は以下のようになる。</p>
+<ol>
+<li><code>kubectl</code> で Deployment API を呼ぶ</li>
+<li>Deployment Controller が検知し、 ReplicaSet API を呼ぶ</li>
+<li>ReplicaSet Controller が検知し、 Pod API を呼ぶ</li>
+<li>Scheduler が検知し、配置先 Node を決定し、 Pod API を呼ぶ</li>
+<li>Kubelet が検知し、 Pod を作成
+<ul>
+<li>各 Controller 、 Scheduler 、 Kubelet は常にそれぞれが Reconcilation Loop を回している</li>
+</ul>
+</li>
+</ol>
+<h3 ref="etcd--control-plane" >etcd / Control Plane</h3><a class="anchor" id="etcd--control-plane"></a>
+<p>k8s クラスタの全ての情報が保存される分散 KVS 。<br>
+<code>etcd</code> へアクセスするコンポーネントは <code>kube-apiserver</code> のみで、他のコンポーネントは <code>kube-apiserver</code> を介してアクセスする。<br>
+分散合意アルゴリズム Raft の特性上、奇数台で冗長構成にする必要がある。<br>
+<code>etcdctl shapshot</code> コマンドなどで定期的にバックアップしておく。</p>
+<h3 ref="kube-scheduler--control-plane" >kube-scheduler / Control Plane</h3><a class="anchor" id="kube-scheduler--control-plane"></a>
+<p><code>kube-scheduler</code> の仕事は、新規に <code>etcd</code> に登録された Pod に対して最適な Worker Node を選択して割り当てること。<br>
+<code>go routine</code> の無限ループ（間隔 0s ）で以下の処理を繰り返す。</p>
+<ol>
+<li><code>kube-apiserver</code> 経由で <code>etcd</code> にアクセスし、Worker Nodes へ未割り当ての Pod 情報を 1 つ取得する</li>
+<li>Pod の設定情報から最適な Woker Node を選択する</li>
+<li>選択した Worker Node の情報を<code>kube-apiserver</code> 経由で <code>etcd</code> にアクセスし、保存する</li>
+</ol>
+<p>Worker Node の選択は、 <code>predicates</code> と呼ばれる条件にによるフィルタと、 <code>priorities</code> という優先度付けによって行われる。</p>
+<ul>
+<li><code>predicates</code>
+<ul>
+<li>Worker Node をフィルタする条件。</li>
+<li>例えば nodeSelector による Worker Node の選択や request に対するリソースの空き状況によるフィルタがある。</li>
+</ul>
+</li>
+<li><code>priorities</code>
+<ul>
+<li>Worker Node の優先度付け。</li>
+<li>例えば Pod を出来る限り Worker Nodes、ゾーンを分散させるような優先度付けがある。</li>
+</ul>
+</li>
+</ul>
+<p>参考：https://qiita.com/tkusumi/items/58fdadbe4053812cb44e</p>
+<h3 ref="kube-controller-manager--control-plane" >kube-controller-manager / Control Plane</h3><a class="anchor" id="kube-controller-manager--control-plane"></a>
+<p><code>etcd</code> の情報とクラスタの現在の状態を比較し、 <code>etcd</code> の状態へ更新する（ <code>kube-apiserver</code> 経由）。
+Controller は自作可能であるが、デフォルトで以下のような Controller がある。</p>
+<ul>
+<li>Node Controller
+<ul>
+<li>Worker Node 停止の検出と通知を担当する</li>
+</ul>
+</li>
+<li>Deployment Controller</li>
+<li>Replication Controller
+<ul>
+<li>Pod の数を制御する</li>
+<li>Replication Controller はリソース名自体に&quot;Controller&quot;とつくため、コントローラーは&quot;RepplicationManager&quot;という名前</li>
+</ul>
+</li>
+<li>Endpoints Controller
+<ul>
+<li>Service と Pod の紐付けをを行、エンドポイントオブジェクトを設定する</li>
+</ul>
+</li>
+<li>Service Account &amp; Token Controllers
+<ul>
+<li>namespace のデフォルトアカウント、API アクセストークンを作成する</li>
+</ul>
+</li>
+</ul>
+<p>なお、 Controller は複数プロセス存在するが、バイナリとしては 1 つにまとめられる。
+また、各 Controller は <code>go routine</code> で起動し、 <code>kube-apiserver</code> 経由で <code>etcd</code> へアクセスし、登録情報と現在のクラスタの状態を比較し続ける。<br>
+<code>kube-controller-manager</code> は状態の差分を検出、 <code>etcd</code> へ登録するが、実際のクラスタへの反映作業は <code>kubelet</code> が行う。</p>
+<h3 ref="cloud-controller-manager--control-plane" >cloud-controller-manager / Control Plane</h3><a class="anchor" id="cloud-controller-manager--control-plane"></a>
+<p>クラウド特有の制御ロジックを組み込むコンポーネント。<br>
+<code>kube-controller-manager</code> 同様、内部に以下のような Controller を持つ。</p>
+<ul>
+<li>Node Controller
+<ul>
+<li>Node が反応を停止した際、クラウドプロバイダー経由で Node 停止を検出する</li>
+</ul>
+</li>
+<li>Routing Controller
+<ul>
+<li>クラウドインフラのルーティングを設定する</li>
+</ul>
+</li>
+<li>Service Controller
+<ul>
+<li>クラウドプロバイダーのロードバランサの作成・更新・削除を行う</li>
+</ul>
+</li>
+</ul>
+<h3 ref="kubelet--worker-nodes" >kubelet / Worker Nodes</h3><a class="anchor" id="kubelet--worker-nodes"></a>
+<p>クラスタ内のそれぞれの Worker Node で稼働するエージェントで、実際にコンテナを起動・停止する。PodSpecs の設定に基づいて、 Pod 内のコンテナの稼働を管理する。<br>
+<code>kube-scheduler</code> によって Pod が起動される Worker Node が決定した事を検知して処理を行う。<br>
+また、 ConfigMap や Secret の設定更新は <code>kubelet</code> の Sync Loop （ <code>--node-status-update-frequency duration</code> というオプションがあり、デフォルト 10s ）のタイミングで反映される。<br>
+<code>kubelet</code> は複数のコンテナランタイムを扱うことができ、以下のようなものがある。</p>
+<ul>
+<li>高位コンテナランタイム / <strong>CRIランタイム</strong>： <code>kubelet</code> から利用されるランタイム
+<ul>
+<li>docker-shim (Docker)
+<ul>
+<li>なお、 docker-shim は CRIラインタイムではなく、 Docker Engine の ラッパー（ OCI から Docker API への変換）である（<a href="https://blog.inductor.me/entry/2020/12/03/061329">参考１</a>、<a href="https://thinkit.co.jp/article/18024">参考２</a>）</li>
+<li>kubelet -&gt; docker-shim -&gt; Docker Engine -&gt; OCIランタイム</li>
+</ul>
+</li>
+<li><a href="https://containerd.io/">containerd</a> （ Docker Engine 内部でも利用されている）
+<ul>
+<li>kubelet -&gt; containerd -&gt; OCIラインタイム ： containerd は CRI に準拠しており、 Docker Engine はしていない。なので docker-shim が必要になる。</li>
+</ul>
+</li>
+<li><a href="https://cri-o.io/">cri-o</a></li>
+<li>Frakti</li>
+<li>rktlet (rkt)</li>
+<li>参考：<a href="https://kubernetes.io/ja/docs/setup/production-environment/container-runtimes/">Worker Node へのCRIランタイム設定方法</a></li>
+</ul>
+</li>
+<li>定位コンテナランタイム / <strong>OCIランタイム</strong>： 高位コンテナランライムから利用されるランタイム
+<ul>
+<li>runc
+<ul>
+<li>namespaces、cgroups、pivot_root、Linuxのセキュリティ機能などを利用して実装されている（詳しくは<a href="https://medium.com/nttlabs/runc-overview-263b83164c98">ここ</a>）</li>
+</ul>
+</li>
+<li>runv</li>
+<li>runsc (gVisor)</li>
+<li>kata-runtaime ( Kata Containers )</li>
+</ul>
+</li>
+</ul>
+<p>上記のような複数のコンテナランタイムを利用できる背景には、 CRI ( <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md">Container Runtime Interface</a> ) や OCI ( <a href="https://opencontainers.org/">Open Container Initiative</a>) や CNI ( <a href="https://github.com/containernetworking/cni">Container Network Interface</a> ) などの標準化が進んでいることが挙げられる。</p>
+<h3 ref="kube-proxy--worker-nodes" >kube-proxy / Worker Nodes</h3><a class="anchor" id="kube-proxy--worker-nodes"></a>
+<p>k8s クラスタの各 Worker Node で動作するネットワークプロキシで、トラフィックのルーティングを担当する。<br>
+<code>kube-apiserver</code> をポーリングして設定変更を検知する。<br>
+ホスト上のネットワークルールを維持し、接続転送を実行することによって、Kubernetesサービスの抽象化を可能にしている。<br>
+転送方式には以下の 3 つがあり、 <code>--proxy-mode</code> で指定できる。</p>
+<ul>
+<li>userspace mode
+<ul>
+<li>受信したトラフィックを userspace 上のプロセスが処理する</li>
+</ul>
+</li>
+<li>iptables mode
+<ul>
+<li>カーネルの iptable の nat table を設定して IP 変更やロードバランス（ClusterIP）の設定を行う</li>
+</ul>
+</li>
+<li>ipvs mode</li>
+</ul>
+<p>また、  Worker Node に跨った Pod 間での通信を可能にするため <strong>オーバーレイネットワーク</strong> を構築する必要がある。<br>
+<code>kube-proxy</code> は以下のような <a href="https://github.com/containernetworking/cni">CNI</a> Plugin と連携してオーバーレイネットワークを構築する。（詳しくは<a href="https://ntoofu.github.io/blog/post/container-network-interface/">ここ</a>）</p>
+<ul>
+<li>Flannel</li>
+<li>Open vSwitch</li>
+<li>Project Calico</li>
+<li>Cilium</li>
+<li>Contiv (Cisco が開発？)</li>
+<li>Romana</li>
+<li>Weave Net</li>
+</ul>
+<h3 ref="kube-dnscoredns--worker-nodes" >kube-dns・CoreDNS / Worker Nodes</h3><a class="anchor" id="kube-dnscoredns--worker-nodes"></a>
+<p>k8s クラスタの名前解決/<strong>サービスディスカバリ</strong>を担当するクラスタ内の DNS サーバ。<br>
+<code>kube-apiserver</code> をポーリングして設定変更を検知する。<br>
+<code>kube-dns</code> の後継として <a href="https://kubernetes.io/ja/docs/tasks/administer-cluster/coredns/">CoreDNS</a> がある。</p>
+		</div>
+
+
+
+
+
+
+	
+	
+
+      </section>
+
+      
+      
+    </article>
+    
+    
+    <footer>
+      
+
+		
+	
+			
+		
+	    	
+	  	
+	
+    </footer>
+    
+
+
+
+  </body>
+</html>
