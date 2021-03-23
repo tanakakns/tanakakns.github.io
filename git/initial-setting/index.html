@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-03-23T01:18:26 JST">
+<meta name="revised" content="2021-03-23T10:40:08 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -487,15 +487,10 @@ if (!doNotTrack) {
 <p>git コマンドを打つ度に認証情報を聞かれるのは煩わしい。<br>
 ここでは認証情報の設定方法について記載する。<br>
 なお、 ssh ではなく https 前提とする。</p>
-<h3 ref="21-netrc" >2.1. .netrc</h3><a class="anchor" id="21-netrc"></a>
-<p>個人的には使わないけど一応書いておく。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% cat &gt;&gt; ~/.netrc <span style="color:#e6db74">&lt;&lt;EOF
-</span><span style="color:#e6db74">machine github.com
-</span><span style="color:#e6db74">login &lt;githubアカウント&gt;
-</span><span style="color:#e6db74">password &lt;パスワード&gt;
-</span><span style="color:#e6db74">EOF</span>
-% chmod <span style="color:#ae81ff">600</span> ~/.netrc
-</code></pre></div><h3 ref="22-osxkeychain" >2.2. osxkeychain</h3><a class="anchor" id="22-osxkeychain"></a>
+<p>2.1. osxkeychain（Macの場合）<br>
+2.2. Git-Credential-Manager-for-Windows（Windowsの場合）<br>
+2.3. .netrc（Linuxの場合）</p>
+<h3 ref="21-osxkeychain" >2.1. osxkeychain</h3><a class="anchor" id="21-osxkeychain"></a>
 <p><code>credential helper</code> の <code>osxkeychain helper</code> を利用する方法。<br>
 <code>git credential-osxkeychain</code> が使えるかを確認する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% git credential-osxkeychain
@@ -505,8 +500,20 @@ usage: git credential-osxkeychain &lt;get|store|erase&gt;
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% git config --global credential.helper osxkeychain
 </code></pre></div><p>上記は <code>git clone</code> するときの <code>https://&lt;username&gt;@&lt;domain&gt;/~</code> 単位で認証情報を記憶してくれるため、 <code>git clone</code> する際は以下のようにアカウント情報を付与すること。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% https://&lt;username&gt;@&lt;domain&gt;/&lt;repository-username&gt;/&lt;repository-name&gt;.git
-</code></pre></div><p>Mac の場合、認証情報は「キーチェーンアクセス」に保存される。</p>
-<h2 ref="3-github-の認証" >3. Github の認証</h2><a class="anchor" id="3-github-の認証"></a>
+</code></pre></div><p>Mac では認証情報は「キーチェーンアクセス」に保存される。</p>
+<h3 ref="22-git-credential-manager-for-windows" >2.2. Git-Credential-Manager-for-Windows</h3><a class="anchor" id="22-git-credential-manager-for-windows"></a>
+<p>Windows の場合は <code>Git-Credential-Manager-for-Windows</code> を利用する。</p>
+<pre><code class="language-dos" data-lang="dos">choco install git-credential-manager-for-windows
+</code></pre><p>初回パスワード入力時に Internet Explorer などと同じ場所にアクセストークンが保存され、以後はパスワード入力が不要になる。</p>
+<h3 ref="23-netrc" >2.3. .netrc</h3><a class="anchor" id="23-netrc"></a>
+<p>パスワードを素で記述するためいい方法ではないが、一応書いておく。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% cat &gt;&gt; ~/.netrc <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">machine github.com
+</span><span style="color:#e6db74">login &lt;githubアカウント&gt;
+</span><span style="color:#e6db74">password &lt;パスワード&gt;
+</span><span style="color:#e6db74">EOF</span>
+% chmod <span style="color:#ae81ff">600</span> ~/.netrc
+</code></pre></div><h2 ref="3-github-の認証" >3. Github の認証</h2><a class="anchor" id="3-github-の認証"></a>
 <p>Github は 2021 年 8 月 13 日より Basic 認証による Git アクセスが廃止となる。（ <a href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">参考</a> ）<br>
 そのため、個人アクセストークンの設定が必要となる。（ <a href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">参考</a> ）</p>
 <h3 ref="31-個人アクセストークン" >3.1. 個人アクセストークン</h3><a class="anchor" id="31-個人アクセストークン"></a>
