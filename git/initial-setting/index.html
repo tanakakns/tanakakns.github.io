@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-03-23T10:40:08 JST">
+<meta name="revised" content="2021-03-23T12:53:25 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -492,7 +492,7 @@ if (!doNotTrack) {
 2.3. .netrc（Linuxの場合）</p>
 <h3 ref="21-osxkeychain" >2.1. osxkeychain</h3><a class="anchor" id="21-osxkeychain"></a>
 <p><code>credential helper</code> の <code>osxkeychain helper</code> を利用する方法。<br>
-<code>git credential-osxkeychain</code> が使えるかを確認する。</p>
+<code>git credential-osxkeychain</code> コマンドで使えるかを確認できる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% git credential-osxkeychain
 usage: git credential-osxkeychain &lt;get|store|erase&gt;
 </code></pre></div><p>上記のように表示されれば利用できる。<br>
@@ -503,10 +503,17 @@ usage: git credential-osxkeychain &lt;get|store|erase&gt;
 </code></pre></div><p>Mac では認証情報は「キーチェーンアクセス」に保存される。</p>
 <h3 ref="22-git-credential-manager-for-windows" >2.2. Git-Credential-Manager-for-Windows</h3><a class="anchor" id="22-git-credential-manager-for-windows"></a>
 <p>Windows の場合は <code>Git-Credential-Manager-for-Windows</code> を利用する。</p>
-<pre><code class="language-dos" data-lang="dos">choco install git-credential-manager-for-windows
-</code></pre><p>初回パスワード入力時に Internet Explorer などと同じ場所にアクセストークンが保存され、以後はパスワード入力が不要になる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">&gt; choco install git-credential-manager-for-windows
+</code></pre></div><p>また、自動で設定できるという噂もあるが、以下の設定を確認・実施する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"># 確認
+&gt; git config --global --list
+# credential.helper=manager っていうのがあればよい、なければ以下実施
+
+# 設定
+&gt; git config --global credential.helper manager
+</code></pre></div><p>初回パスワード入力時に Internet Explorer などと同じ場所にアクセストークンが保存され、以後はパスワード入力が不要になる。</p>
 <h3 ref="23-netrc" >2.3. .netrc</h3><a class="anchor" id="23-netrc"></a>
-<p>パスワードを素で記述するためいい方法ではないが、一応書いておく。</p>
+<p>パスワードを素で記述するためアレだが、一応書いておく。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% cat &gt;&gt; ~/.netrc <span style="color:#e6db74">&lt;&lt;EOF
 </span><span style="color:#e6db74">machine github.com
 </span><span style="color:#e6db74">login &lt;githubアカウント&gt;
