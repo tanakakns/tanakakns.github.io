@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-03-25T17:32:33 JST">
+<meta name="revised" content="2021-03-25T17:39:42 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -813,7 +813,7 @@ Hello, 世界
 	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>
 	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%v %v %v %q\n&#34;</span>, <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">s</span>) <span style="color:#75715e">// 0 0 false &#34;&#34;
 </span><span style="color:#75715e"></span>}
-</code></pre></div><h2 ref="34-型変換" >3.4. 型変換</h2><a class="anchor" id="34-型変換"></a>
+</code></pre></div><h3 ref="34-型変換" >3.4. 型変換</h3><a class="anchor" id="34-型変換"></a>
 <p>従来の <strong>キャスト</strong> とほぼ同じ。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#66d9ef">int</span> = <span style="color:#ae81ff">42</span>
 <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">float64</span> = float64(<span style="color:#a6e22e">i</span>)
@@ -1267,7 +1267,7 @@ main 関数自体も goroutine で実行されており、 <code>go</code> キ�
 	<span style="color:#75715e">// 上記の goroutine が実行される前にメイン goroutine が終了するためスリープ
 </span><span style="color:#75715e"></span>	<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
 }
-</code></pre></div><h2 ref="122-チャネル-channel-" >12.2. チャネル（ channel ）</h2><a class="anchor" id="122-チャネル-channel-"></a>
+</code></pre></div><h3 ref="122-チャネル-channel-" >12.2. チャネル（ channel ）</h3><a class="anchor" id="122-チャネル-channel-"></a>
 <p>！！！<a href="https://hori-ryota.com/blog/golang-channel-pattern/">Go の channel 処理パターン集</a>！！！</p>
 <p>Go では <strong>チャネル</strong> （ <strong>channel</strong> ）を用いて goroutine 間のデータの送受信およびブロックを実現する。<br>
 チャネルは <code>make</code> で作成（ <code>c := make(chan int)</code> ）し、送受信するデータの型を指定する。<br>
