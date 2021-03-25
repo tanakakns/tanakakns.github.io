@@ -11,6 +11,9 @@
     <loc>https://tanakakns.github.io/git/initial-setting/</loc>
     <lastmod>2021-02-09T22:14:00+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/go/initial-setting/</loc>
+    <lastmod>2021-02-09T22:14:00+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/kubernetes/concept/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
@@ -21,6 +24,9 @@
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/mac/homebrew/</loc>
+    <lastmod>2021-02-09T22:14:00+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/go/grammar/</loc>
     <lastmod>2021-02-09T22:14:00+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/architecture/</loc>
@@ -35,11 +41,14 @@
     <loc>https://tanakakns.github.io/mac/asdf/</loc>
     <lastmod>2021-02-09T22:14:00+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/terraform/</loc>
+    <loc>https://tanakakns.github.io/go/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/kubectl-plugin/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/terraform/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
