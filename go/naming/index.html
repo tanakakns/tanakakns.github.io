@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>
+	命名規則 :: テックまとめ
+</title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2021-03-26T14:42:48 JST">
@@ -11,7 +13,7 @@
 
 
 
-<title>Kubernetes :: テックまとめ</title>
+<title>命名規則 :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -60,9 +62,9 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/tags/kubernetes/"
+  <body data-url="/go/naming/"
 
-  class="">
+  class="hidetoc hidenextpage ">
 
 <style type="text/css">
   #debug{
@@ -99,7 +101,9 @@ if (!doNotTrack) {
     </div>
     
 
-    <div>	
+    <div>
+
+		
 	
 			
 		
@@ -114,7 +118,9 @@ if (!doNotTrack) {
     <article>
       
       <aside class="">
-        	
+        
+
+		
 	
 			
 		
@@ -222,14 +228,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/go/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/go/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/go/">Go言語</a>
@@ -267,7 +274,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/go/naming/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/go/naming/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -427,7 +434,9 @@ if (!doNotTrack) {
 
 
 
-</ul>	
+</ul>
+
+		
 	
 			
 		
@@ -439,73 +448,239 @@ if (!doNotTrack) {
 
       <section class="page ">
       
-
-
-
-<div class="extra-pagination inner">
-<nav class="pagination" role="navigation">
 	
-	<span class="page-number"> 1  1</span>
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
 	
-</nav>
+  
+    <li class="">
+      <a class="text-link" href="/go/">
+        Go言語
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        命名規則
+      
+    </li>
 
-</div>
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>命名規則</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
 
 
-   <article class="post Istio">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/istio/basic/">入門</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p><p><a href="https://istio.io/">Istio</a> についてまとめる。</p>
+
+
+
+
+	<div class="content">
+	    <p>Go の命名規則をまとめる。</p>
+<ol>
+<li>パッケージ名、ディレクトリ名</li>
+<li>ファイル名</li>
+<li>関数、type、構造体</li>
+<li>レシーバ名</li>
+<li>変数・引数名</li>
+<li>error変数名</li>
+<li>インターフェース名</li>
+</ol>
+<h2 ref="1-パッケージ名ディレクトリ名" >1. パッケージ名、ディレクトリ名</h2><a class="anchor" id="1-パッケージ名ディレクトリ名"></a>
 <ul>
-<li>概要</li>
-<li>ローカル環境構築 ※古い</li>
-<li>k8s環境構築 ※古い</li>
-</ul> <a class="read-more" href="/istio/basic/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
+<li>完結に、全て小文字かつ 1 単語で
+<ul>
+<li>例外としては <code>_test</code> サフィックス</li>
+</ul>
+</li>
+<li>utility パッケージにしない
+<ul>
+<li>base、util、common、lib、misc など</li>
+</ul>
+</li>
+<li>パッケージ名を繰り返さない
+<ul>
+<li><code>repository.UserRepository</code> とか NG</li>
+<li><code>list.NewList</code> でなく <code>list.New</code></li>
+</ul>
+</li>
+<li>どうしても難しい場合、ディレクトリ名はケバブケースは可
+<ul>
+<li><code>xxx-xxx</code></li>
+</ul>
+</li>
+</ul>
+<h2 ref="2-ファイル名" >2. ファイル名</h2><a class="anchor" id="2-ファイル名"></a>
+<ul>
+<li>スネークケースで
+<ul>
+<li><code>xxx_xxx</code></li>
+</ul>
+</li>
+</ul>
+<h2 ref="3-関数type構造体" >3. 関数、type、構造体</h2><a class="anchor" id="3-関数type構造体"></a>
+<ul>
+<li>キャメルケースで
+<ul>
+<li>公開する場合はアッパーキャメルケース <code>XxxYyy</code></li>
+<li>公開しない場合はローワーキャメルケース <code>xxxYyy</code></li>
+</ul>
+</li>
+<li>Getter/Setter
+<ul>
+<li>Go では所謂 Getter には <code>Get</code> プレフィックスを付けない
+<ul>
+<li>例えば <code>User</code> を返したいなら、メソッド名は <code>GetUser</code> ではなく <code>User</code></li>
+</ul>
+</li>
+<li>Setter の場合は SetUser のように <code>Set</code> を付ける
+<ul>
+<li>(Go で Setter を作るケースはあまり無いけど)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 ref="4-レシーバ名" >4. レシーバ名</h2><a class="anchor" id="4-レシーバ名"></a>
+<p>Go には class は無いが、 <strong>型に対してメソッドを定義</strong> できる。<br>
+構造体だけにメソッド定義できるのではなく、型に対して定義できることに注意。<br>
+Go ではメソッドを定義する型を <strong>レシーバ</strong> と呼ぶ。</p>
+<ul>
+<li>英語 1 文字か 2 文字でなるべく短く命名
+<ul>
+<li>型が <code>Client</code> であれば <code>c</code> 、 <code>cl</code> 等</li>
+</ul>
+</li>
+<li>レシーバ名は必ず統一
+<ul>
+<li>場所によって <code>c</code> が使われていたり <code>cl</code> が使われていたりは NG</li>
+</ul>
+</li>
+<li>修飾語を利用しない
+<ul>
+<li>例えば <code>httpClient</code> ならレシーバ名は <code>c</code> 、 <code>DBCreator</code> なら <code>c</code></li>
+</ul>
+</li>
+<li>map 等の存在チェックを行う場合は <code>ok</code>
+<ul>
+<li><code>id, ok := users[userID]</code></li>
+</ul>
+</li>
+<li>命名は基本的にキャメルケースだが、元々略語として浸透している単語は一貫した大文字と小文字を使用
+<ul>
+<li><code>url</code> ではなく <code>URL</code> とか、<code>http</code> ではなく <code>HTTP</code> を使うとか</li>
+<li><code>ACL</code>、<code>API</code>、<code>ASCII</code>、<code>CPU</code>、<code>CSS</code>、<code>DNS</code>、<code>EOF</code>、<code>GUID</code>、<code>HTML</code>、<code>HTTP</code>、<code>HTTPS</code>、<code>ID</code>、<code>IP</code>、<code>JSON</code>、<code>LHS</code>、<code>QPS</code>、<code>RAM</code>、<code>RHS</code>、<code>RPC</code>、<code>SLA</code>、<code>SMTP</code>、<code>SQL</code>、<code>SSH</code>、<code>TCP</code>、<code>TLS</code>、<code>TTL</code>、<code>UDP</code>、<code>UI</code>、<code>UID</code>、<code>UUID</code>、<code>URI</code>、<code>URL</code>、<code>UTF8</code>、<code>VM</code>、<code>XML</code>、<code>XMPP</code>、<code>XSRF</code>、<code>XSS</code></li>
+</ul>
+</li>
+</ul>
+<h2 ref="5-変数引数名" >5. 変数・引数名</h2><a class="anchor" id="5-変数引数名"></a>
+<ul>
+<li>基本的にレシーバ名と同じ</li>
+<li>ただし、スコープに応じて使い分ける
+<ul>
+<li><code>Config</code> の変数なら、<code>c</code> 、 <code>conf</code> 、 <code>cfg</code> などで使い分ける</li>
+</ul>
+</li>
+</ul>
+<h2 ref="6-error変数名" >6. error変数名</h2><a class="anchor" id="6-error変数名"></a>
+<ul>
+<li>基本的に <code>err</code></li>
+<li>公開する際など複数定義が必要な場合は <code>Err</code> プレフィックスを付けて宣言</li>
+</ul>
+<h2 ref="7-インターフェース名" >7. インターフェース名</h2><a class="anchor" id="7-インターフェース名"></a>
+<ul>
+<li>メソッドが 1 つの場合
+<ul>
+<li>原則として「メソッド名 + <code>er/or</code>」
+<ul>
+<li>例えば <code>Write</code> メソッドを持つインターフェースであれば <code>Writer</code></li>
+</ul>
+</li>
+<li>目的語がある場合は「目的語 + 動詞 + <code>er/or</code>」
+<ul>
+<li>例えば <code>PrintObject</code> メソッドを持つインターフェースであれば <code>ObjectPrinter</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>メソッドが 2 つ以上の場合
+<ul>
+<li>原則として慣習がある場合それに従い、慣習が無い場合いい感じの名前を考える
+<ul>
+<li><code>io</code> パッケージの <code>ReadCloser</code> のように、メソッドを連ねて前述の <code>er</code> を付けるパターン</li>
+<li><code>Codec</code> のように、特別なメソッドの組み合わせのときに使われるパターン
+<ul>
+<li><code>Codec</code> は <code>EncodeDecoder</code> だったり他の命名にすることも</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+		</div>
 
-        
-          
-            
-                <a class="label label-default" href="https://tanakakns.github.io/tags/kubernetes/">Kubernetes</a>
-            
-                <a class="label label-default" href="https://tanakakns.github.io/tags/istio/">Istio</a>
-            
-        
-
-    </footer>
-</article>
 
 
-<div style="margin-bottom:2rem"></div>
 
-<nav class="pagination" role="navigation">
+
+
 	
-	<span class="page-number"> 1  1</span>
 	
-</nav>
-
-
-
 
       </section>
 
       
-      
-      <section class="right-menu ">
-      
-      
-      </section>
       
     </article>
     
     
     <footer>
-      	
+      
+
+		
 	
 			
 		

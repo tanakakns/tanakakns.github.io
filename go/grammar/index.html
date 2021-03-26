@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-03-25T17:39:42 JST">
+<meta name="revised" content="2021-03-26T14:42:48 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -272,6 +272,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/naming/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/naming/">命名規則</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -527,10 +542,10 @@ if (!doNotTrack) {
 <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
 	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello, 世界&#34;</span>)
 }
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% go run hello.go
+</code></pre></div><p><a href="https://ideone.com/vPpbZ5">ideone.com</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% go run hello.go
 Hello, 世界
 </code></pre></div><p>なお、<a href="https://play.golang.org/">The Go Playground</a> というサービスを使うと Web でお試し実行できる。<br>
-<a href="http://interprism.hatenablog.com/entry/2014/03/04/132551">他</a> にもいろいろあるみたい。<br>
 以降は、<a href="https://go-tour-jp.appspot.com/list">A Tour of Go</a> を読みつつも、<strong>自分向けに</strong> 補足したり省略したりしてまとめたもの。</p>
 <h2 ref="1-パッケージ" >1. パッケージ</h2><a class="anchor" id="1-パッケージ"></a>
 <h3 ref="11-インポート" >1.1. インポート</h3><a class="anchor" id="11-インポート"></a>
@@ -541,7 +556,7 @@ Hello, 世界
 )
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
 <span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;math&#34;</span>
-</code></pre></div><p>インポートしたら <code>fmt.Println</code> とかインポート名で使用できる。<br>
+</code></pre></div><p>インポートしたら <code>fmt.Println</code> のようなインポート名、 <code>rand.Intn(100)</code> のような一番後ろのパッケージ名で使用できる。<br>
 また、インポート名を変更もできる。（ <code>f.Println</code> ）</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">import</span> (
 	<span style="color:#a6e22e">f</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -551,7 +566,7 @@ Hello, 世界
     <span style="color:#e6db74">&#34;github.com/spf13/cobra&#34;</span>
 )
 </code></pre></div><h3 ref="12-パッケージ外からの参照" >1.2. パッケージ外からの参照</h3><a class="anchor" id="12-パッケージ外からの参照"></a>
-<p>Go では、最初の文字が <strong>大文字で始まる名前</strong> は、外部のパッケージから参照できる公開された名前( <strong>exported name</strong> )。<br>
+<p>Go では、最初の文字が <strong>大文字で始まる名前</strong> の変数・関数は、外部のパッケージから参照できる公開された名前( <strong>exported name</strong> )。<br>
 例えば、 <code>Pi</code> は <code>math</code> パッケージでエクスポートされている。<br>
 <code>pi</code> （小文字）ではないことに注意。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
@@ -630,7 +645,7 @@ Hello, 世界
 <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">adder</span>() <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
 	<span style="color:#a6e22e">sum</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
 	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
-		<span style="color:#a6e22e">sum</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">x</span>   
+		<span style="color:#a6e22e">sum</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">x</span>
 		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sum</span>
 	}
 }
@@ -656,8 +671,8 @@ Hello, 世界
 <span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
 
 <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;world&#34;</span>)
-
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;world&#34;</span>) <span style="color:#75715e">// main 関数の終わりまで実行が遅延される
+</span><span style="color:#75715e"></span>
 	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;hello&#34;</span>)
 }
 <span style="color:#75715e">// hello
@@ -759,8 +774,8 @@ Hello, 世界
 <ul>
 <li><code>bool</code></li>
 <li><code>string</code></li>
-<li><code>int</code> <code>int8</code> <code>int16</code> <code>int32</code> <code>int64</code></li>
-<li><code>uint</code> <code>uint8</code> <code>uint16</code> <code>uint32</code> <code>uint64</code> <code>uintptr</code></li>
+<li><code>int</code> 、 <code>int8</code> 、 <code>int16</code> 、 <code>int32</code> 、 <code>int64</code></li>
+<li><code>uint</code> 、 <code>uint8</code> 、 <code>uint16</code> 、 <code>uint32</code> 、 <code>uint64</code> 、 <code>uintptr</code></li>
 <li><code>byte</code>
 <ul>
 <li><code>uint8</code> の別名</li>
@@ -773,8 +788,8 @@ Hello, 世界
 <li>rune とは古代文字を表す言葉( runes )、 Go では文字そのものを表すためにruneという言葉を使う</li>
 </ul>
 </li>
-<li><code>float32</code> <code>float64</code></li>
-<li><code>complex64</code> <code>complex128</code></li>
+<li><code>float32</code> 、 <code>float64</code></li>
+<li><code>complex64</code> 、 <code>complex128</code></li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
@@ -794,7 +809,78 @@ Hello, 世界
 	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Type: %T Value: %v\n&#34;</span>, <span style="color:#a6e22e">MaxInt</span>, <span style="color:#a6e22e">MaxInt</span>)
 	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Type: %T Value: %v\n&#34;</span>, <span style="color:#a6e22e">z</span>, <span style="color:#a6e22e">z</span>)
 }
-</code></pre></div><h3 ref="33-ゼロ値" >3.3. ゼロ値</h3><a class="anchor" id="33-ゼロ値"></a>
+</code></pre></div><p><code>int</code> や <code>uint</code> は OS や CPU などの実装系に依存して、 <code>int32</code> になったり <code>int64</code> になったりする。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">型</th>
+<th style="text-align:left">サイズ(bit)</th>
+<th style="text-align:left">符号</th>
+<th style="text-align:left">最小値</th>
+<th style="text-align:left">最大値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">int8</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left">あり</td>
+<td style="text-align:left">-128</td>
+<td style="text-align:left">127</td>
+</tr>
+<tr>
+<td style="text-align:left">int16</td>
+<td style="text-align:left">16</td>
+<td style="text-align:left">あり</td>
+<td style="text-align:left">-32768</td>
+<td style="text-align:left">32767</td>
+</tr>
+<tr>
+<td style="text-align:left">int32</td>
+<td style="text-align:left">32</td>
+<td style="text-align:left">あり</td>
+<td style="text-align:left">-2147483648</td>
+<td style="text-align:left">2147483647</td>
+</tr>
+<tr>
+<td style="text-align:left">int64</td>
+<td style="text-align:left">64</td>
+<td style="text-align:left">あり</td>
+<td style="text-align:left">-9223372036854775808</td>
+<td style="text-align:left">9223372036854775807</td>
+</tr>
+<tr>
+<td style="text-align:left">uint8(byte)</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left">なし</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">255</td>
+</tr>
+<tr>
+<td style="text-align:left">uint16</td>
+<td style="text-align:left">16</td>
+<td style="text-align:left">なし</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">65535</td>
+</tr>
+<tr>
+<td style="text-align:left">uint32</td>
+<td style="text-align:left">32</td>
+<td style="text-align:left">なし</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">4294967295</td>
+</tr>
+<tr>
+<td style="text-align:left">uint64</td>
+<td style="text-align:left">64</td>
+<td style="text-align:left">なし</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">18446744073709551615</td>
+</tr>
+</tbody>
+</table>
+<p>また、 Go の小数は浮動小数点数の <code>float32</code> 、 <code>float64</code> 、 <code>math.BitFloat</code> が用意されてりるが、 <code>float</code> や固定小数点数は存在しない。</p>
+<h3 ref="33-ゼロ値" >3.3. ゼロ値</h3><a class="anchor" id="33-ゼロ値"></a>
 <p>変数に初期値を与えずに宣言すると、ゼロ値( <strong>zero value</strong> )が与えられる。<br>
 ゼロ値は型によって以下のように与えられる。</p>
 <ul>
@@ -1137,9 +1223,35 @@ Hello, 世界
 </ul>
 <h2 ref="11-型" >11. 型</h2><a class="anchor" id="11-型"></a>
 <h3 ref="111-型定義" >11.1. 型定義</h3><a class="anchor" id="111-型定義"></a>
-<p><code>type</code> で作成する。<br>
-構造体やインターフェースも型定義しているのと同じ。</p>
-<h3 ref="112-メソッド" >11.2. メソッド</h3><a class="anchor" id="112-メソッド"></a>
+<p><code>type</code> で作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">識別子</span> <span style="color:#a6e22e">型</span>
+</code></pre></div><p>「識別子」は，ここで宣言する型の名前、「型」は，型名または型リテラル。（ ex. <code>type Hex int</code> ）<br>
+構造体やインターフェースも型定義しているのと同じ。<br>
+型リテラルは以下のような型をリテラルで書いたもの。（リテラル ＝ ソースコードの中に直接書きこんである文字とか数字とかのこと）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// 配列型
+</span><span style="color:#75715e"></span>[<span style="color:#ae81ff">10</span>]<span style="color:#66d9ef">int</span>
+
+<span style="color:#75715e">// 構造体型
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> {}
+
+<span style="color:#75715e">// ポインタ型
+</span><span style="color:#75715e"></span><span style="color:#f92672">*</span><span style="color:#66d9ef">int</span>
+
+<span style="color:#75715e">// 関数型
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span>
+
+<span style="color:#75715e">// インタフェース型
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> {}
+
+<span style="color:#75715e">// スライス型
+</span><span style="color:#75715e"></span>[]<span style="color:#66d9ef">int</span>
+
+<span style="color:#75715e">// マップ型
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">int</span>
+
+<span style="color:#75715e">// チャネル型
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>
+</code></pre></div><h3 ref="112-メソッド" >11.2. メソッド</h3><a class="anchor" id="112-メソッド"></a>
 <p>Go には <strong>class</strong> は無いが、<strong>型に対してメソッドを定義</strong> できる。<br>
 構造体だけにメソッド定義できるのではなく、型に対して定義できることに注意。<br>
 Go ではメソッドを定義する型を <strong>レシーバ</strong> と呼び、 <strong>値レシーバ</strong> と <strong>ポインタレシーバ</strong> がある。<br>
