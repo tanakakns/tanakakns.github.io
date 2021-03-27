@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-03-27T18:16:42 JST">
+<meta name="revised" content="2021-03-27T19:57:11 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -574,26 +574,12 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p><code>.zshenv</code> （ bash の場合は <code>.bash_profile</code> ）に以下を追記。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">export GOPATH<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>go env GOPATH<span style="color:#e6db74">`</span>
-export PATH<span style="color:#f92672">=</span>$PATH:$GOPATH/bin
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">export GOROOT<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>go env GOROOT<span style="color:#e6db74">`</span>
+export GOPATH<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>go env GOPATH<span style="color:#e6db74">`</span>
+export PATH<span style="color:#f92672">=</span>$GOPATH/bin:$PATH
+<span style="color:#75715e"># export PATH=$GOROOT/bin:$GOPATH/bin:$PATH</span>
 export GO111MODULE<span style="color:#f92672">=</span>on
-</code></pre></div><blockquote>
-<p>教科書敵には以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"></code></pre></div></blockquote>
-<p>export GOROOT=<code>go env GOROOT</code> # 個人的にはこれは不要
-export GOPATH=<code>go env GOPATH</code>
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin</p>
-<pre><code>
-[anyenv](https://github.com/anyenv/anyenv) および [goenv](https://github.com/syndbg/goenv) を利用する場合の `.zshenv` は以下。
-
-```zsh
-export GOENV_DISABLE_GOPATH=1 # これがポイント？
-export PATH=&quot;$HOME/.anyenv/bin:$PATH&quot;
-
-export GOPATH=`go env GOPATH`
-export PATH=$PATH:$GOPATH/bin
-export GO111MODULE=on
-</code></pre><p>反映。</p>
+</code></pre></div><p>反映。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% exec $SHELL -l
 </code></pre></div><p>また、 <code>$GOPATH</code> 以下のディレクトリ構造は以下のようになる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">$GOPATH
@@ -619,7 +605,7 @@ export GO111MODULE=on
     ├─GitHubアカウント名
     │  └─GitHubレポジトリ名/
     │    └─LICENSEとか<span style="color:#e6db74">`</span>*.go<span style="color:#e6db74">`</span>とかREADMEとか
-    └─&lt;あなたのGitHubユーザ名&gt;
+    └─&lt;あなたのGitHubユーザ名&gt; <span style="color:#75715e"># Go Modules OFF の場合</span>
       └─GitHubレポジトリ名/ <span style="color:#75715e"># プロジェクトディレクトリ（複数）</span>
         ├─go.mod
         ├─go.sum
