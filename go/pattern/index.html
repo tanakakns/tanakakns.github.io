@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-03-26T21:44:24 JST">
+<meta name="revised" content="2021-03-27T18:16:42 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -614,7 +614,13 @@ Contextを利用するほとんどの関数で一番最初の引数に指定し�
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span>
 }
 <span style="color:#75715e">// use x
-</span></code></pre></div><h3 ref="18-import" >1.8. import</h3><a class="anchor" id="18-import"></a>
+</span></code></pre></div><p>ただし、エラーのみを返却する関数を実行する場合は「 <code>err</code> 変数の受け取りを複数回繰り返していると <code>:=</code> だけで書けないという状況」に落ちいってしまうため、以下の記載を許容する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+    <span style="color:#75715e">// error handling
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span>
+}
+</code></pre></div><h3 ref="18-import" >1.8. import</h3><a class="anchor" id="18-import"></a>
 <p>名前の衝突を避ける以外の目的でインポートの名前を変更しない。<br>
 衝突を避ける場合には、プロジェクト固有の名前にする。</p>
 <h3 ref="19-レシーバのタイプ" >1.9. レシーバのタイプ</h3><a class="anchor" id="19-レシーバのタイプ"></a>

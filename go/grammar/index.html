@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-03-26T21:44:24 JST">
+<meta name="revised" content="2021-03-27T18:16:42 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -535,18 +535,19 @@ if (!doNotTrack) {
 	<div class="content">
 	    <p>基本文法についてメモる。</p>
 <ol>
-<li>パッケージ</li>
-<li>関数</li>
-<li>変数</li>
-<li>ループ</li>
-<li>条件分岐</li>
-<li>配列とスライス</li>
-<li>map</li>
-<li>ポインタ</li>
-<li>構造体</li>
-<li>インターフェース</li>
-<li>型</li>
-<li>並列処理</li>
+<li><a href="#1-%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8">パッケージ</a></li>
+<li><a href="#2-%E9%96%A2%E6%95%B0">関数</a></li>
+<li><a href="#3-%E5%A4%89%E6%95%B0">変数</a></li>
+<li><a href="#4-%E3%83%AB%E3%83%BC%E3%83%97">ループ</a></li>
+<li><a href="#5-%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B2%90">条件分岐</a></li>
+<li><a href="#6-%E9%85%8D%E5%88%97%E3%81%A8%E3%82%B9%E3%83%A9%E3%82%A4%E3%82%B9">配列とスライス</a></li>
+<li><a href="#7-map">map</a></li>
+<li><a href="#8-%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF">ポインタ</a></li>
+<li><a href="#9-%E6%A7%8B%E9%80%A0%E4%BD%93">構造体</a></li>
+<li><a href="#10-%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9">インターフェース</a></li>
+<li><a href="#11-%E5%9E%8B">型</a></li>
+<li><a href="#12-%E4%B8%A6%E5%88%97%E5%87%A6%E7%90%86">並列処理</a></li>
+<li><a href="#13-%E5%9F%8B%E3%82%81%E8%BE%BC%E3%81%BF">埋め込み</a></li>
 </ol>
 <p><a href="https://go-tour-jp.appspot.com/list">A Tour of Go</a>を一通りやるといい。<br>
 とりあえず、こんにちは世界。</p>
@@ -1243,30 +1244,51 @@ Hello, 世界
 </code></pre></div><p>「識別子」は，ここで宣言する型の名前、「型」は，型名または型リテラル。（ ex. <code>type Hex int</code> ）<br>
 構造体やインターフェースも型定義しているのと同じ。<br>
 型リテラルは以下のような型をリテラルで書いたもの。（リテラル ＝ ソースコードの中に直接書きこんである文字とか数字とかのこと）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// 配列型
-</span><span style="color:#75715e"></span>[<span style="color:#ae81ff">10</span>]<span style="color:#66d9ef">int</span>
-
-<span style="color:#75715e">// 構造体型
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> {}
-
-<span style="color:#75715e">// ポインタ型
-</span><span style="color:#75715e"></span><span style="color:#f92672">*</span><span style="color:#66d9ef">int</span>
-
-<span style="color:#75715e">// 関数型
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span>
-
-<span style="color:#75715e">// インタフェース型
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> {}
-
-<span style="color:#75715e">// スライス型
-</span><span style="color:#75715e"></span>[]<span style="color:#66d9ef">int</span>
-
-<span style="color:#75715e">// マップ型
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">int</span>
-
-<span style="color:#75715e">// チャネル型
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">bool</span>
-</code></pre></div><h3 ref="112-メソッド" >11.2. メソッド</h3><a class="anchor" id="112-メソッド"></a>
+<table>
+<thead>
+<tr>
+<th>型リテラル</th>
+<th>型 Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[]int</td>
+<td>スライス型 SliceType</td>
+</tr>
+<tr>
+<td>[10]int</td>
+<td>配列型 ArrayType</td>
+</tr>
+<tr>
+<td>*int</td>
+<td>ポインタ型 PointerType</td>
+</tr>
+<tr>
+<td>map[Key]Value</td>
+<td>マップ型 MapType</td>
+</tr>
+<tr>
+<td>interface {SomeMethod()}<!-- raw HTML omitted -->interface {}</td>
+<td>インターフェース型 InterfaceType</td>
+</tr>
+<tr>
+<td>struct {ID int}</td>
+<td>構造体型 StructType</td>
+</tr>
+<tr>
+<td>func(s string) int</td>
+<td>関数型 FunctionType</td>
+</tr>
+<tr>
+<td>chan int</td>
+<td>チャネル型 ChannelType</td>
+</tr>
+</tbody>
+</table>
+<p>なお、型リテラルは「定義された型（defined type）」ではないので、コンバート・キャスト（ <code>t := T(x)</code> ）することはできない。<br>
+基本型や <code>type</code> で定義した型は「定義された型（defined type）」なので、コンバート・キャストすることができる。</p>
+<h3 ref="112-メソッド" >11.2. メソッド</h3><a class="anchor" id="112-メソッド"></a>
 <p>Go には <strong>class</strong> は無いが、<strong>型に対してメソッドを定義</strong> できる。<br>
 構造体だけにメソッド定義できるのではなく、型に対して定義できることに注意。<br>
 Go ではメソッドを定義する型を <strong>レシーバ</strong> と呼び、 <strong>値レシーバ</strong> と <strong>ポインタレシーバ</strong> がある。<br>
@@ -1555,6 +1577,172 @@ main 関数自体も goroutine で実行されており、 <code>go</code> キ�
 	<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
 }
 </code></pre></div><p>上記はロック機構によりきちんと 10 単位でカウントアップ・表示されている。</p>
+<h2 ref="13-埋め込み" >13. 埋め込み</h2><a class="anchor" id="13-埋め込み"></a>
+<p>構造体・インターフェースは以下の関係の通り、埋め込み(embedding)が可能。</p>
+<ol>
+<li>インターフェースに　インターフェースを　<strong>埋め込み可能</strong></li>
+<li>インターフェースに　構造体を　　　　　　埋め込み不可能</li>
+<li>構造体に　　　　　　インターフェースを　<strong>埋め込み可能</strong></li>
+<li>構造体に　　　　　　構造体を　　　　　　<strong>埋め込み可能</strong></li>
+</ol>
+<p>インターフェースにはシグネチャ（メソッドの定義）を与えるものなので、インターフェースに具体的な構造体を埋め込むことはできない。<br>
+インターフェースにインターフェースを埋め込むサンプルコードは以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+    <span style="color:#e6db74">&#34;fmt&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Flyer</span> <span style="color:#66d9ef">interface</span> {
+    <span style="color:#a6e22e">Fly</span>() <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Runner</span> <span style="color:#66d9ef">interface</span> {
+    <span style="color:#a6e22e">Run</span>() <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#75715e">// 1. インターフェースにインターフェースを埋め込む
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FlyingRunner</span> <span style="color:#66d9ef">interface</span> {
+    <span style="color:#a6e22e">Flyer</span>
+    <span style="color:#a6e22e">Runner</span>
+}
+
+<span style="color:#75715e">// 3. 構造体にインターフェースを埋め込む
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ToriJin</span> <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// 鳥人
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">FlyingRunner</span>
+}
+
+<span style="color:#75715e">// 4. 構造体に構造体を埋め込む
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ShinJinrui</span> <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// 新人類
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">*</span><span style="color:#a6e22e">ToriJin</span>
+}
+
+<span style="color:#75715e">// FlyingRunnerインターフェースを実装する型
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RealToriJin</span> <span style="color:#66d9ef">struct</span>{}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">RealToriJin</span>) <span style="color:#a6e22e">Fly</span>() <span style="color:#66d9ef">string</span> { <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Fly!&#34;</span> }
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">RealToriJin</span>) <span style="color:#a6e22e">Run</span>() <span style="color:#66d9ef">string</span> { <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Run!&#34;</span> }
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">aRealToriJin</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">RealToriJin</span>{}
+    <span style="color:#75715e">// 3. 構造体 ToriJin にインターフェース FlyingRunner を
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 実装している RealToriJin の変数を埋め込む
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">aToriJin</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ToriJin</span>{
+        <span style="color:#a6e22e">FlyingRunner</span>: <span style="color:#a6e22e">aRealToriJin</span>,
+    }
+    <span style="color:#75715e">// 4. 構造体 ShinJinrui に構造体 Torijin の変数を埋め込む
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">aShinJinrui</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ShinJinrui</span>{
+        <span style="color:#a6e22e">ToriJin</span>: <span style="color:#a6e22e">aToriJin</span>,
+    }
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">aShinJinrui</span>.<span style="color:#a6e22e">Fly</span>()) <span style="color:#75715e">// Fly!
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">aShinJinrui</span>.<span style="color:#a6e22e">Run</span>()) <span style="color:#75715e">// Run!
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 ref="埋め込みのメリット" >埋め込みのメリット</h3><a class="anchor" id="埋め込みのメリット"></a>
+<p>埋め込みを行うことによって、わざわざ自身の型でメソッドを実装しなくても <em>借り物</em> のメソッドを使うことができる。（DRY）<br>
+以下のサンプルは、<code>ShinJinrui2</code> という構造体が <code>*grasshopper</code> 型の <code>HighJump</code> メソッドをそのまま借りることで <code>HighJumpRunner</code> インターフェースを実装できていることを示している。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HighJumpRunner</span> <span style="color:#66d9ef">interface</span> {
+    <span style="color:#a6e22e">HighJump</span>() <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">Run</span>() <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#75715e">// grasshopper はバッタのこと
+</span><span style="color:#75715e">// 高く飛ぶ能力がある
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">grasshopper</span> <span style="color:#66d9ef">struct</span>{}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">g</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">grasshopper</span>) <span style="color:#a6e22e">HighJump</span>() <span style="color:#66d9ef">string</span> {
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;High Jump!&#34;</span>
+}
+
+<span style="color:#75715e">// ShinJinrui2 は*grasshopperの能力を
+</span><span style="color:#75715e">// 構造体埋め込み(③)により&#34;そのまま&#34;借りる
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ShinJinrui2</span> <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// 新人類2
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">*</span><span style="color:#a6e22e">grasshopper</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">aGrassHopper</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">grasshopper</span>{}
+    <span style="color:#a6e22e">aShinJinrui2</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ShinJinrui2</span>{
+        <span style="color:#a6e22e">grasshopper</span>: <span style="color:#a6e22e">aGrassHopper</span>,
+    }
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">interface</span>{}(<span style="color:#a6e22e">aShinJinrui2</span>).(<span style="color:#a6e22e">HighJumpRunner</span>); <span style="color:#a6e22e">ok</span> {
+		<span style="color:#75715e">// *grasshopper に Run() が実装されていないので出力されない
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;ShinJinrui2はHighJumpRunnerインターフェースを実装しています。&#34;</span>)
+    }
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">aShinJinrui2</span>.<span style="color:#a6e22e">HighJump</span>()) <span style="color:#75715e">// High Jump!
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>以下のように埋め込まない(そのまま借りない)場合、型 <code>ShinJinrui2</code> のメソッドとして <code>HighJump</code> を定義し、その中で <code>*grasshopper</code> のものを呼ぶ実装を作る必要がある。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ShinJinrui2</span> <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// 新人類2
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ghopper</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">grasshopper</span>
+}
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">sj</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">ShinJinrui2</span>) <span style="color:#a6e22e">HighJump</span>() <span style="color:#66d9ef">string</span> {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sj</span>.<span style="color:#a6e22e">grasshopper</span>.<span style="color:#a6e22e">HighJump</span>()
+}
+</code></pre></div><h3 ref="埋め込みはサブクラス化継承とは異なる" >埋め込みはサブクラス化・継承とは異なる</h3><a class="anchor" id="埋め込みはサブクラス化継承とは異なる"></a>
+<p>埋め込みはあくまでも <em>借りているだけ</em> で埋め込み元のオブジェクトのメソッドとして実行される。<br>
+これは埋め込み先の構造体が埋め込み元のメソッドを実行しても埋め込み先オブジェクトには影響を与えないことを意味している。<br>
+<em>埋め込み</em> であって <em>継承</em> ではないということ。（そして Go 言語には継承がない。)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+    <span style="color:#e6db74">&#34;fmt&#34;</span>
+)
+
+<span style="color:#75715e">// Status は健康状態を意味する
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Status</span> <span style="color:#66d9ef">int</span>
+
+<span style="color:#66d9ef">const</span> (
+    <span style="color:#75715e">// Good is 良好 status
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Good</span> <span style="color:#a6e22e">Status</span> = <span style="color:#66d9ef">iota</span>
+    <span style="color:#75715e">// Tired is 疲れている status
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Tired</span>
+)
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">Status</span>) <span style="color:#a6e22e">String</span>() <span style="color:#66d9ef">string</span> {
+    <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">s</span> {
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Good</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Good!&#34;</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Tired</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Tired...&#34;</span>
+    <span style="color:#66d9ef">default</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+    }
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">poorGrasshopper</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">status</span> <span style="color:#a6e22e">Status</span> <span style="color:#75715e">// poorGrasshopperには健康状態がある
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">g</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">poorGrasshopper</span>) <span style="color:#a6e22e">HighJump</span>() {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;High Jump!&#34;</span>)
+    <span style="color:#a6e22e">g</span>.<span style="color:#a6e22e">status</span> = <span style="color:#a6e22e">Tired</span> <span style="color:#75715e">// 飛ぶと疲れてしまう
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ShinJinrui3</span> <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// 新人類3
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">status</span>           <span style="color:#a6e22e">Status</span> <span style="color:#75715e">// ShinJinrui3も健康状態がある
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">*</span><span style="color:#a6e22e">poorGrasshopper</span>        <span style="color:#75715e">// 構造体の埋め込み(4.)
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">aPoorGrasshopper</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">poorGrasshopper</span>{
+        <span style="color:#a6e22e">status</span>: <span style="color:#a6e22e">Good</span>,
+    }
+    <span style="color:#a6e22e">aShinJinrui3</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ShinJinrui3</span>{
+        <span style="color:#a6e22e">status</span>:          <span style="color:#a6e22e">Good</span>,
+        <span style="color:#a6e22e">poorGrasshopper</span>: <span style="color:#a6e22e">aPoorGrasshopper</span>,
+    }
+    <span style="color:#a6e22e">aShinJinrui3</span>.<span style="color:#a6e22e">HighJump</span>()
+    <span style="color:#75715e">// poorGrasshopperの方はステータスが変わるが
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// メソッドを借りているだけの Shinjirui3 のステータスは影響されない
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;aPoorGrasshopper is&#34;</span>, <span style="color:#a6e22e">aPoorGrasshopper</span>.<span style="color:#a6e22e">status</span>) <span style="color:#75715e">// Tired
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;aShinJinrui3 is&#34;</span>, <span style="color:#a6e22e">aShinJinrui3</span>.<span style="color:#a6e22e">status</span>)         <span style="color:#75715e">// Good
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 ref="埋め込み元と埋め込み先のメソッド名重複時の挙動" >埋め込み元と埋め込み先のメソッド名重複時の挙動</h3><a class="anchor" id="埋め込み元と埋め込み先のメソッド名重複時の挙動"></a>
+<p>埋め込み元と埋め込み先に同じ名前のメソッド・フィールド名が存在するとき、コンパイルエラーにはならず埋め込み先のメソッド・フィールドが優先されて呼ばれる。</p>
 <h2 ref="参考" >参考</h2><a class="anchor" id="参考"></a>
 <ul>
 <li><a href="https://go-tour-jp.appspot.com/concurrency/11">Where to Go from here&hellip;</a>
