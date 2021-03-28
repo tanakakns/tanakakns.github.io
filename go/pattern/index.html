@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-03-27T19:57:11 JST">
+<meta name="revised" content="2021-03-28T12:54:56 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -570,10 +570,22 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
+<p>VS Code などのエディタ・IDE を利用する場合は保存時などに勝手に実行されるものが多いが、以下のコマンドの実行は意識しておいたほうがいい。</p>
 <ul>
-<li><code>go get -u github.com/kisielk/errcheck</code>
+<li><code>go fmt</code> （ = <code>gofmt -w -l</code> ）
 <ul>
-<li><code>errcheck ./...</code></li>
+<li>VS Code ではコード保存時に勝手に実行してくれる</li>
+</ul>
+</li>
+<li><code>go vet ./...</code></li>
+<li><code>golint ./...</code>
+<ul>
+<li>これは VS Code が教えてくれたりもするが、コマンド叩くと一覧表示されるのでコマンドを併用してもいい</li>
+</ul>
+</li>
+<li><code>errcheck ./...</code>
+<ul>
+<li><code>go get -u github.com/kisielk/errcheck</code></li>
 </ul>
 </li>
 </ul>

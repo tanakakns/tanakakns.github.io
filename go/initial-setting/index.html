@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-03-27T19:57:11 JST">
+<meta name="revised" content="2021-03-28T12:54:56 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -535,14 +535,13 @@ if (!doNotTrack) {
 	<div class="content">
 	    <p>Go言語の初期設定周りについて。</p>
 <ol>
-<li>環境変数</li>
-<li>Go Modules</li>
-<li>プロジェクトの作成</li>
-<li>VS Code の設定</li>
-<li>docker によるマルチステージビルド</li>
-<li>デバッグ環境作成</li>
+<li><a href="#1-%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0">環境変数</a></li>
+<li><a href="#2-go-modules">Go Modules</a></li>
+<li><a href="#3-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90">プロジェクトの作成</a></li>
+<li><a href="#4-vs-code">VS Code</a></li>
+<li><a href="#5-docker-%E3%81%AB%E3%82%88%E3%82%8B%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B8%E3%83%93%E3%83%AB%E3%83%89">docker によるマルチステージビルド</a></li>
 </ol>
-<h2 ref="1-環境変数の設定" >1. 環境変数の設定</h2><a class="anchor" id="1-環境変数の設定"></a>
+<h2 ref="1-環境変数" >1. 環境変数</h2><a class="anchor" id="1-環境変数"></a>
 <p><a href="https://golang.org/doc/install/source#environment">https://golang.org/doc/install/source#environment</a></p>
 <ul>
 <li><code>GOROOT</code>
@@ -662,13 +661,14 @@ export GO111MODULE<span style="color:#f92672">=</span>on
 go: creating new go.mod: module github.com/&lt;あなたのGithubアカウント名&gt;/&lt;golangプロジェクト&gt;
 % ls
 go.mod
-% touch app.go             <span style="color:#75715e"># 依存ライブラリ含め好きなコード書く</span>
+% touch main.go             <span style="color:#75715e"># 依存ライブラリ含め好きなコード書く</span>
 % go mod tidy              <span style="color:#75715e"># 依存ライブラリの解決</span>
-% go run app.go            <span style="color:#75715e"># ビルド+実行</span>
-% go build app.go          <span style="color:#75715e"># ビルド</span>
-% ./app
+% go run main.go            <span style="color:#75715e"># ビルド+実行</span>
+% go build main.go          <span style="color:#75715e"># ビルド</span>
+% ./main
 </code></pre></div><p>基本的にはどこのディレクトリで開発しようとも <strong>module-aware mode</strong> で開発することになると思う。</p>
-<h2 ref="4-vs-code-の設定" >4. VS Code の設定</h2><a class="anchor" id="4-vs-code-の設定"></a>
+<h2 ref="4-vs-code" >4. VS Code</h2><a class="anchor" id="4-vs-code"></a>
+<h3 ref="41-拡張機能" >4.1. 拡張機能</h3><a class="anchor" id="41-拡張機能"></a>
 <p>VS Code には Go の各種ツールと連携する拡張機能があり、 VS Code 内ターミナルから以下のようにコマンドラインツールを導入することにより自動で拡張機能インストールの案内をしてくれる。<br>
 Go の拡張機能をインストールしてから、VSCode でコマンドパレット(Cmd+Shift+P)を開いて <code>GO: Install/Update tools</code> で検索した後、全チェックしてインストールしてもいいし、以下で 1 つずつ入れてもいい。</p>
 <ul>
@@ -736,9 +736,35 @@ Go の拡張機能をインストールしてから、VSCode でコマンドパ�
 <li><code>go get -u -v github.com/cweill/gotests/...</code></li>
 </ul>
 </li>
+<li>gomodifytags
+<ul>
+<li>Go Struct Tags の自動生成</li>
+<li><code>go get github.com/fatih/gomodifytags</code></li>
 </ul>
-<h2 ref="41-editorconfig" >4.1. .editorconfig</h2><a class="anchor" id="41-editorconfig"></a>
-<pre><code>root = true
+</li>
+</ul>
+<p>以下の静的解析についてはコマンドを実行する必要がある。</p>
+<ul>
+<li><code>go fmt</code> （ = <code>gofmt -w -l</code> ）
+<ul>
+<li>VS Code ではコード保存時に勝手に実行してくれる</li>
+</ul>
+</li>
+<li><code>go vet ./...</code></li>
+<li><code>golint ./...</code>
+<ul>
+<li>これは VS Code が教えてくれたりもするが、コマンド叩くと一覧表示されるのでコマンドを併用してもいい</li>
+</ul>
+</li>
+<li><code>errcheck ./...</code>
+<ul>
+<li><code>go get -u github.com/kisielk/errcheck</code></li>
+</ul>
+</li>
+</ul>
+<h3 ref="42-editorconfig" >4.2. .editorconfig</h3><a class="anchor" id="42-editorconfig"></a>
+<p>VS Code に <code>EditorConfig for VS Code</code> をインストールして、プロジェクトルートに以下の <code>.editorconfig</code> を配置する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">root = true
 
 [*]
 end_of_line = lf
@@ -752,22 +778,8 @@ indent_size = 2
 indent_style = tab
 indent_size = 4
 trim_trailing_whitespace = true
-</code></pre><h2 ref="5-docker-によるマルチステージビルド" >5. docker によるマルチステージビルド</h2><a class="anchor" id="5-docker-によるマルチステージビルド"></a>
-<pre><code>FROM golang:1.13.3-alpine3.10 as build
-WORKDIR /build
-COPY go.mod .
-COPY go.sum .
-RUN go mod download
-COPY . .
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go
-
-FROM alpine:3.10
-RUN apk add --no-cache tzdata
-ENV TZ Asia/Tokyo
-COPY --from=build /build/main /usr/local/bin/main
-EXPOSE 8080
-ENTRYPOINT [&quot;/usr/local/bin/main&quot;]
-</code></pre><h2 ref="6-デバッグ環境作成" >6. デバッグ環境作成</h2><a class="anchor" id="6-デバッグ環境作成"></a>
+</code></pre></div><p>Go のインデントは <strong>ハードタブ</strong> が推奨される。</p>
+<h3 ref="43-デバッグ実行" >4.3. デバッグ実行</h3><a class="anchor" id="43-デバッグ実行"></a>
 <p>デバッガとして <strong>Delve</strong> を導入する。</p>
 <ul>
 <li>デバッガツール delve のインストール
@@ -819,6 +831,22 @@ ENTRYPOINT [&quot;/usr/local/bin/main&quot;]
 <code>syscall.Write()</code> などでシステムコールされているのがわかる。（ Win だと別コード）<br>
 今回はデバッガのステップインでコードを掘っていったが、カーソルがあたっている位置の関数で <code>Go to Definition</code> （ <code>F12</code> ）しても関数の定義に飛ぶ。<br>
 また、カーソルがあたっている位置の関数や変数で <code>Find All Reference</code> （ <code>Shift+F12</code> ） すれば、使われている位置がリストされる。</p>
+<h2 ref="5-docker-によるマルチステージビルド" >5. docker によるマルチステージビルド</h2><a class="anchor" id="5-docker-によるマルチステージビルド"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> golang:1.13.3-alpine3.10 as build</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /build</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> go.mod .<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> go.sum .<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> go mod download<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> . .<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> CGO_ENABLED<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> GOOS<span style="color:#f92672">=</span>linux GOARCH<span style="color:#f92672">=</span>amd64 go build main.go<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> alpine:3.10</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apk add --no-cache tzdata<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> TZ Asia/Tokyo<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>build /build/main /usr/local/bin/main<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8080</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;/usr/local/bin/main&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div>
 		</div>
 
 
