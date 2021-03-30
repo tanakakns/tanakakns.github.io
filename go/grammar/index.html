@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-03-28T12:54:56 JST">
+<meta name="revised" content="2021-03-30T22:36:54 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -335,6 +335,21 @@ if (!doNotTrack) {
       
     </li>
         </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/docker/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+        
+      
+          <a href="/docker/">Docker</a>
+      
     </li>
     
 
@@ -925,7 +940,74 @@ Hello, 世界
 <p>定数は、 <code>const</code> キーワードを使って変数と同じように宣言。<br>
 定数は、文字(character)、文字列(string)、boolean、数値(numeric)のみで使える。<br>
 なお、定数は <code>:=</code> を使って宣言できない。</p>
-<h2 ref="4-ループ" >4. ループ</h2><a class="anchor" id="4-ループ"></a>
+<h3 ref="36-スコープとブロック" >3.6. スコープとブロック</h3><a class="anchor" id="36-スコープとブロック"></a>
+<p>Go の <strong>スコープ</strong> は「 <em>変数の宣言以降、宣言したブロックの終端まで</em> 」。<br>
+そして、 <strong>ブロック</strong> で最もわかりやすいのは、記号 <code>{</code> &hellip; <code>}</code> でくくられたステートメント群のこと。そして、これを <strong>明示的ブロック</strong> と言う。<br>
+この明示的ブロックは唐突に記載することもできる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	{ <span style="color:#75715e">// 唐突に明示的ブロック、でも動く
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;Hello, World!&#34;</span>
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">s</span>)
+	}
+	<span style="color:#75715e">// fmt.Println(s) // &lt;-スコープ外のためコンパイルエラー
+</span><span style="color:#75715e"></span>}
+<span style="color:#75715e">// 標準出力
+</span><span style="color:#75715e">// Hello, World!
+</span></code></pre></div><p>明示的ブロックに対して <strong>暗黙のブロック</strong> というものもあり、それは以下の 5 つ。</p>
+<ol>
+<li>ユニバースブロック: 全てのGoのソースコードの外側を包んでいる仮想的なブロック</li>
+<li>パッケージブロック: 1パッケージ内の全ソースコードを包含するブロック</li>
+<li>ファイルブロック: 1ファイル内の全ソースコードを包含するブロック</li>
+<li><code>if</code>, <code>for</code>, <code>switch</code> ブロック: <code>if</code>, <code>for</code>, <code>switch</code> 文それ自体がブロックとなる</li>
+<li><code>switch</code>, <code>select</code> における節ブロック: <code>case</code> 節や <code>default</code> 節自体がブロックとなる</li>
+</ol>
+<p>なお、暗黙のブロックは、記号 <code>{</code> &hellip; <code>}</code> に関係なくスコープを形成する。<br>
+例えば以下は、「 <code>if</code> から <code>}</code> まで」が暗黙のブロックで、「 <code>{</code> から <code>}</code> まで」が明示的ブロックとなる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// if から } までが1個のブロック
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">x</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> {
+    <span style="color:#75715e">// { から } まで はさらにもう1個のブロック
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>
+    println(<span style="color:#a6e22e">x</span>) <span style="color:#75715e">// =&gt; 0
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p><code>swtich</code> 文中の <code>case</code> 節や <code>default</code> 節は暗黙プロックの <strong>節ブロック</strong> で、 <code>{</code> &hellip; <code>}</code> を書いてなくてもブロックを構成する。<br>
+以下は、 <code>case</code> 節と <code>default</code> 節は別々のブロックなので、識別子 <code>x</code> をそれぞれ独自に宣言することができる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">	<span style="color:#66d9ef">switch</span> <span style="color:#e6db74">&#34;foo&#34;</span> {
+	<span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;a&#34;</span>:
+		<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span> = <span style="color:#ae81ff">1</span>
+		println(<span style="color:#a6e22e">x</span>)
+	<span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;b&#34;</span>:
+		<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span> = <span style="color:#ae81ff">2.0</span>
+		println(<span style="color:#a6e22e">x</span>)
+	<span style="color:#66d9ef">default</span>:
+		<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#66d9ef">string</span> = <span style="color:#e6db74">&#34;3&#34;</span>
+		println(<span style="color:#a6e22e">x</span>)
+	}
+</code></pre></div><p>なお、同名の識別子の場合は最も直近の狭いスコープが優先される。<br>
+例えば以下はファイルブロックと <code>main</code> 関数ブロックにそれぞれ識別子 <code>global</code> があるが、 <code>main</code> 関数 2 行目に <code>:=</code> が利用されているため新たに識別子 <code>global</code> を宣言していることになりファイルブロックの <code>global</code> とは異なる。<br>
+その結果、ファイルスコープの <code>global</code> ではなく、 <code>main</code> 関数ブロックの <code>global</code> の値が標準出力される。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">global</span> <span style="color:#66d9ef">string</span> <span style="color:#75715e">// スコープはファイルブロック
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>(){
+    <span style="color:#a6e22e">global</span> = <span style="color:#e6db74">&#34;initial state&#34;</span>
+    <span style="color:#a6e22e">global</span> ,<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">double</span>() <span style="color:#75715e">// global のスコープは main 関数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span>{}
+    <span style="color:#a6e22e">mistake</span>()
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">global</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">double</span>()(<span style="color:#66d9ef">string</span>,<span style="color:#66d9ef">error</span>){
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;double&#34;</span>,<span style="color:#66d9ef">nil</span>
+}
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">mistake</span>(){
+    <span style="color:#a6e22e">global</span> = <span style="color:#e6db74">&#34;mistake&#34;</span> <span style="color:#75715e">// ファイルブロックスコープの global
+</span><span style="color:#75715e"></span>}
+<span style="color:#75715e">// 標準出力
+</span><span style="color:#75715e">// double
+</span></code></pre></div><h2 ref="4-ループ" >4. ループ</h2><a class="anchor" id="4-ループ"></a>
 <h3 ref="41-繰り返し-for" >4.1. 繰り返し for</h3><a class="anchor" id="41-繰り返し-for"></a>
 <p>所謂 <code>for</code> ループ。Go に <code>while</code> はない。<br>
 他言語とは異なり、 for ステートメントの3つの部分を括る括弧 <code>( )</code> はない。なお、中括弧 <code>{ }</code> は必要。</p>
