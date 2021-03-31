@@ -4,16 +4,16 @@
 <html>
   <head>
     <title>
-	asdf :: テックまとめ
+	入門 :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-03-31T20:18:44 JST">
+<meta name="revised" content="2021-03-31T20:18:43 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
 
-<title>asdf :: テックまとめ</title>
+<title>入門 :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/mac/asdf/"
+  <body data-url="/docker/basic/"
 
   class="hidetoc hidenextpage ">
 
@@ -134,15 +134,14 @@ if (!doNotTrack) {
 
 <ul class="menu">
 
-    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/mac/">Mac開発環境</a>
@@ -180,7 +179,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/mac/asdf/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/mac/asdf/" class="dd-item
         item_level_$level
         ">
 
@@ -338,14 +337,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/docker/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/docker/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/docker/">Docker</a>
@@ -353,7 +353,7 @@ if (!doNotTrack) {
         <ul>
               
 
-    <li data-nav-id="https://tanakakns.github.io/docker/basic/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/docker/basic/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -515,8 +515,8 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/mac/">
-        Mac開発環境
+      <a class="text-link" href="/docker/">
+        Docker
       </a>
     </li>
 	
@@ -524,7 +524,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        asdf
+        入門
       
     </li>
 
@@ -545,7 +545,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>asdf</h1>
+			<h1>入門</h1>
         
 
 		
@@ -565,96 +565,135 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p><a href="https://asdf-vm.com/#/">asdf</a>は、プログラミング言語やコマンドラインツールのバージョン管理をツール。（2020/12/09時点ではanyenvより対応が多い）</p>
+	    <p><a href="https://www.docker.com/">Docker</a> に入門する。</p>
 <ol>
-<li>インストール・アップデート・アンインストール</li>
-<li>使い方</li>
+<li><a href="#1-%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A">環境設定</a></li>
 </ol>
-<h2 ref="1-インストールアップデートアンインストール" >1. インストール・アップデート・アンインストール</h2><a class="anchor" id="1-インストールアップデートアンインストール"></a>
-<p>基本は<a href="https://asdf-vm.com/#/core-manage-asdf">公式</a>を見て欲しいが、ここでは本ブログ作成日におけるMac環境へのインストールについて記載する。</p>
+<h2 ref="1-環境設定" >1. 環境設定</h2><a class="anchor" id="1-環境設定"></a>
 <h3 ref="11-インストール" >1.1. インストール</h3><a class="anchor" id="11-インストール"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew install coreutils curl git
-% brew install asdf
-% echo -e <span style="color:#e6db74">&#34;\n. </span><span style="color:#66d9ef">$(</span>brew --prefix asdf<span style="color:#66d9ef">)</span><span style="color:#e6db74">/asdf.sh&#34;</span> &gt;&gt; ~/.zshenv
-</code></pre></div><h3 ref="12-アップデート" >1.2. アップデート</h3><a class="anchor" id="12-アップデート"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew upgrade asdf
-</code></pre></div><h3 ref="13-アンインストール" >1.3. アンインストール</h3><a class="anchor" id="13-アンインストール"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% rm -rf <span style="color:#e6db74">${</span>ASDF_DATA_DIR<span style="color:#66d9ef">:-</span>$HOME/.asdf<span style="color:#e6db74">}</span> ~/.tool-versions
-</code></pre></div><p>プロファイルに設定した asdf へのパス削除を忘れずに。</p>
-<h2 ref="2-使い方" >2. 使い方</h2><a class="anchor" id="2-使い方"></a>
-<h3 ref="21-プラグインツールのインストール" >2.1. プラグイン・ツールのインストール</h3><a class="anchor" id="21-プラグインツールのインストール"></a>
-<ol>
-<li>使いたいプログラミング言語・ツールに対応したプラグインを探す
-<ul>
-<li><code>asdf plugin list all</code></li>
-</ul>
-</li>
-<li>使いたいプログラミング言語・ツールに対応したプラグインを追加する
-<ul>
-<li><code>asdf plugin add &lt;name&gt;</code></li>
-<li><code>asdf plugin add &lt;name&gt; &lt;git-url&gt;</code> # asdf で管理されていないプラグインの場合</li>
-</ul>
-</li>
-<li>プラグインが追加されたか確認する
-<ul>
-<li><code>asdf plugin list</code></li>
-</ul>
-</li>
-<li>使いたいプログラミング言語・ツールのバージョンを探す
-<ul>
-<li><code>asdf list-all &lt;name&gt;</code></li>
-</ul>
-</li>
-<li>使いたいプログラミング言語・ツールのバージョンを指定してインストールする
-<ul>
-<li><code>asdf install &lt;name&gt; &lt;version&gt;</code></li>
-</ul>
-</li>
-<li>global/local/shell のいずれかでプログラミング言語・ツールのバージョンを設定する
-<ul>
-<li><code>asdf global &lt;name&gt; &lt;version&gt;</code></li>
-</ul>
-</li>
-<li>現在のバージョンを確認する
-<ul>
-<li><code>asdf current</code></li>
-<li><code>asdf current &lt;name&gt;</code></li>
-</ul>
-</li>
-</ol>
-<p>helm で一連の流れをやってみる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf plugin list all | grep helm
-helm                          https://github.com/Antiarchitect/asdf-helm.git
-helm-cr                       https://github.com/Antiarchitect/asdf-helm-cr.git
-helm-ct                       https://github.com/tablexi/asdf-helm-ct.git
-helm-docs                     https://github.com/sudermanjr/asdf-helm-docs.git
-helmfile                      https://github.com/feniix/asdf-helmfile.git
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew instal docker --cask
+</code></pre></div><p>アプリケーションとしてインストールされるので手動で起動してから以下で確認。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% docker version
+Client: Docker Engine - Community
+ Cloud integration: 1.0.7
+ Version:           20.10.2
+ API version:       1.41
+ Go version:        go1.13.15
+ Git commit:        2291f61
+ Built:             Mon Dec <span style="color:#ae81ff">28</span> 16:12:42 <span style="color:#ae81ff">2020</span>
+ OS/Arch:           darwin/amd64
+ Context:           default
+ Experimental:      true
 
-% asdf plugin add helm
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.2
+  API version:      1.41 <span style="color:#f92672">(</span>minimum version 1.12<span style="color:#f92672">)</span>
+  Go version:       go1.13.15
+  Git commit:       8891c58
+  Built:            Mon Dec <span style="color:#ae81ff">28</span> 16:15:28 <span style="color:#ae81ff">2020</span>
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.4.3
+  GitCommit:        269548fa27e0089a8b8278fc4fc781d7f65a939b
+ runc:
+  Version:          1.0.0-rc92
+  GitCommit:        ff819c7e9184c13b7c2607fe6c30ae19403a7aff
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
 
-% asdf plugin list
-helm
+% docker-compose version
+docker-compose version 1.27.4, build <span style="color:#ae81ff">40524192</span>
+docker-py version: 4.3.1
+CPython version: 3.7.7
+OpenSSL version: OpenSSL 1.1.1g  <span style="color:#ae81ff">21</span> Apr <span style="color:#ae81ff">2020</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% docker help
 
-% asdf list-all helm
-3.4.1
+Usage:  docker <span style="color:#f92672">[</span>OPTIONS<span style="color:#f92672">]</span> COMMAND
 
-% asdf install helm 3.4.1
+A self-sufficient runtime <span style="color:#66d9ef">for</span> containers
 
-% asdf global helm 3.4.1
+Options:
+      --config string      Location of client config files <span style="color:#f92672">(</span>default <span style="color:#e6db74">&#34;/Users/tanakakns/.docker&#34;</span><span style="color:#f92672">)</span>
+  -c, --context string     Name of the context to use to connect to the daemon <span style="color:#f92672">(</span>overrides DOCKER_HOST env var and default context set with <span style="color:#e6db74">&#34;docker context use&#34;</span><span style="color:#f92672">)</span>
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> to connect to
+  -l, --log-level string   Set the logging level <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;debug&#34;</span>|<span style="color:#e6db74">&#34;info&#34;</span>|<span style="color:#e6db74">&#34;warn&#34;</span>|<span style="color:#e6db74">&#34;error&#34;</span>|<span style="color:#e6db74">&#34;fatal&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">(</span>default <span style="color:#e6db74">&#34;info&#34;</span><span style="color:#f92672">)</span>
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA <span style="color:#f92672">(</span>default <span style="color:#e6db74">&#34;/Users/tanakakns/.docker/ca.pem&#34;</span><span style="color:#f92672">)</span>
+      --tlscert string     Path to TLS certificate file <span style="color:#f92672">(</span>default <span style="color:#e6db74">&#34;/Users/tanakakns/.docker/cert.pem&#34;</span><span style="color:#f92672">)</span>
+      --tlskey string      Path to TLS key file <span style="color:#f92672">(</span>default <span style="color:#e6db74">&#34;/Users/tanakakns/.docker/key.pem&#34;</span><span style="color:#f92672">)</span>
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
 
-% asdf current helm
-helm            3.4.1           /Users/xxxx/.tool-versions
+Management Commands:
+  app*        Docker App <span style="color:#f92672">(</span>Docker Inc., v0.9.1-beta3<span style="color:#f92672">)</span>
+  builder     Manage builds
+  buildx*     Build with BuildKit <span style="color:#f92672">(</span>Docker Inc., v0.5.1-docker<span style="color:#f92672">)</span>
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  scan*       Docker Scan <span style="color:#f92672">(</span>Docker Inc., v0.5.0<span style="color:#f92672">)</span>
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
 
-% helm version
-version.BuildInfo<span style="color:#f92672">{</span>Version:<span style="color:#e6db74">&#34;v3.4.1&#34;</span>, GitCommit:<span style="color:#e6db74">&#34;c4e74854886b2efe3321e185578e6db9be0a6e29&#34;</span>, GitTreeState:<span style="color:#e6db74">&#34;clean&#34;</span>, GoVersion:<span style="color:#e6db74">&#34;go1.14.11&#34;</span><span style="color:#f92672">}</span>
-</code></pre></div><h3 ref="22-プラグインのアップデート" >2.2. プラグインのアップデート</h3><a class="anchor" id="22-プラグインのアップデート"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf plugin update --all
-</code></pre></div><h3 ref="23-ツールのアンインストール" >2.3. ツールのアンインストール</h3><a class="anchor" id="23-ツールのアンインストール"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf uninstall &lt;name&gt; &lt;version&gt;
-</code></pre></div><h3 ref="24-プラグインのアンインストール" >2.4. プラグインのアンインストール</h3><a class="anchor" id="24-プラグインのアンインストール"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf plugin remove &lt;name&gt;
-</code></pre></div><h3 ref="25-困ったときは" >2.5. 困ったときは</h3><a class="anchor" id="25-困ったときは"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf help
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container<span style="color:#e6db74">&#39;s changes
+</span><span style="color:#e6db74">  cp          Copy files/folders between a container and the local filesystem
+</span><span style="color:#e6db74">  create      Create a new container
+</span><span style="color:#e6db74">  diff        Inspect changes to files or directories on a container&#39;</span>s filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container<span style="color:#e6db74">&#39;s filesystem as a tar archive
+</span><span style="color:#e6db74">  history     Show the history of an image
+</span><span style="color:#e6db74">  images      List images
+</span><span style="color:#e6db74">  import      Import the contents from a tarball to create a filesystem image
+</span><span style="color:#e6db74">  info        Display system-wide information
+</span><span style="color:#e6db74">  inspect     Return low-level information on Docker objects
+</span><span style="color:#e6db74">  kill        Kill one or more running containers
+</span><span style="color:#e6db74">  load        Load an image from a tar archive or STDIN
+</span><span style="color:#e6db74">  login       Log in to a Docker registry
+</span><span style="color:#e6db74">  logout      Log out from a Docker registry
+</span><span style="color:#e6db74">  logs        Fetch the logs of a container
+</span><span style="color:#e6db74">  pause       Pause all processes within one or more containers
+</span><span style="color:#e6db74">  port        List port mappings or a specific mapping for the container
+</span><span style="color:#e6db74">  ps          List containers
+</span><span style="color:#e6db74">  pull        Pull an image or a repository from a registry
+</span><span style="color:#e6db74">  push        Push an image or a repository to a registry
+</span><span style="color:#e6db74">  rename      Rename a container
+</span><span style="color:#e6db74">  restart     Restart one or more containers
+</span><span style="color:#e6db74">  rm          Remove one or more containers
+</span><span style="color:#e6db74">  rmi         Remove one or more images
+</span><span style="color:#e6db74">  run         Run a command in a new container
+</span><span style="color:#e6db74">  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+</span><span style="color:#e6db74">  search      Search the Docker Hub for images
+</span><span style="color:#e6db74">  start       Start one or more stopped containers
+</span><span style="color:#e6db74">  stats       Display a live stream of container(s) resource usage statistics
+</span><span style="color:#e6db74">  stop        Stop one or more running containers
+</span><span style="color:#e6db74">  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+</span><span style="color:#e6db74">  top         Display the running processes of a container
+</span><span style="color:#e6db74">  unpause     Unpause all processes within one or more containers
+</span><span style="color:#e6db74">  update      Update configuration of one or more containers
+</span><span style="color:#e6db74">  version     Show the Docker version information
+</span><span style="color:#e6db74">  wait        Block until one or more containers stop, then print their exit codes
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">Run &#39;</span>docker COMMAND --help<span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#66d9ef">for</span> more information on a command.
+
+To get more help with docker, check out our guides at https://docs.docker.com/go/guides/
 </code></pre></div>
 		</div>
 
