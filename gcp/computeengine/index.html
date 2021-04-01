@@ -4,16 +4,16 @@
 <html>
   <head>
     <title>
-	OSの設定 :: テックまとめ
+	Compute Engine :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-02T00:15:55 JST">
+<meta name="revised" content="2021-04-02T00:15:54 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
 
-<title>OSの設定 :: テックまとめ</title>
+<title>Compute Engine :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/mac/os-settings/"
+  <body data-url="/gcp/computeengine/"
 
   class="hidetoc hidenextpage ">
 
@@ -134,15 +134,14 @@ if (!doNotTrack) {
 
 <ul class="menu">
 
-    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/mac/">Mac開発環境</a>
@@ -150,7 +149,7 @@ if (!doNotTrack) {
         <ul>
               
 
-    <li data-nav-id="https://tanakakns.github.io/mac/os-settings/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/mac/os-settings/" class="dd-item
         item_level_$level
         ">
 
@@ -321,14 +320,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -351,7 +351,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/computeengine/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/computeengine/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -577,8 +577,8 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/mac/">
-        Mac開発環境
+      <a class="text-link" href="/gcp/">
+        GCP
       </a>
     </li>
 	
@@ -586,7 +586,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        OSの設定
+        Compute Engine
       
     </li>
 
@@ -607,7 +607,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>OSの設定</h1>
+			<h1>Compute Engine</h1>
         
 
 		
@@ -627,46 +627,102 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p>好みの OS の設定についてメモる。</p>
-<h2 ref="dockの大きさを調整する" >Dockの大きさを調整する</h2><a class="anchor" id="dockの大きさを調整する"></a>
+	    <p><strong>Compute Engine</strong> は Google のインフラストラクチャ上に仮想マシンを構築するサービス。</p>
+<ol>
+<li><a href="#1-%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%A8%E3%82%BE%E3%83%BC%E3%83%B3">リージョンとゾーン</a></li>
+<li><a href="#2-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E4%BD%9C%E6%88%90">インスタンス作成</a></li>
+</ol>
+<p>（教材メモ：https://www.qwiklabs.com/focuses/3563?parent=catalog）</p>
+<h2 ref="1-リージョンとゾーン" >1. リージョンとゾーン</h2><a class="anchor" id="1-リージョンとゾーン"></a>
+<p>一部の Compute Engine リソースは、リージョン内またはゾーン内にのみ存在する。<br>
+<strong>リージョン</strong> とはリソースを実行できる特定の地理的な場所で、各リージョンには、1 つまたは複数の <strong>ゾーン</strong>がある。<br>
+たとえば、リージョン <code>us-central1</code> は米国中部を指し、ゾーン <code>us-central1-a</code>、<code>us-central1-b</code>、<code>us-central1-c</code>、<code>us-central1-f</code> が含まれる。<br>
+（ GCP のゾーンは、 AWS でいう AZ：アベイラビリティゾーン）</p>
+<p>ゾーン内で動作するリソースは <strong>ゾーンリソース</strong> と呼び、例えば、仮想マシンインスタンスと永続ディスクは 1 つのゾーン内で動作ゾーンリソース。
+永続ディスクを仮想マシン インスタンスに接続するには、両方のリソースを同じゾーン内に配置する必要があり、同様に、インスタンスに静的 IP アドレスを割り当てるには、インスタンスが静的 IP と同じリージョンに存在している必要がある。</p>
 <ul>
-<li>「りんごマーク」-&gt;「システム環境設定」-&gt;「Dock」
+<li><a href="https://cloud.google.com/compute/docs/regions-zones/">リージョンとゾーン</a></li>
+</ul>
+<h2 ref="2-インスタンス作成" >2. インスタンス作成</h2><a class="anchor" id="2-インスタンス作成"></a>
+<h3 ref="21-cloud-console-から新しいインスタンスを作成する" >2.1. Cloud Console から新しいインスタンスを作成する</h3><a class="anchor" id="21-cloud-console-から新しいインスタンスを作成する"></a>
+<p>Cloud Console のナビゲーションメニューで、「Compute Engine」-&gt; 「VM インスタンス」 の順にクリック。（最初に初期化する際は 1 分ほどかかる）<br>
+新しいインスタンスを作成するには、「作成」 をクリック。<br>
+インスタンス作成時は、例えば、以下のようなパラメータを設定する。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">項目</th>
+<th style="text-align:left">設定例</th>
+<th style="text-align:left">その他の情報</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">名前</td>
+<td style="text-align:left">gcelab</td>
+<td style="text-align:left">インスタンス名</td>
+</tr>
+<tr>
+<td style="text-align:left">リージョン</td>
+<td style="text-align:left">us-central1（アイオワ）</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">ゾーン</td>
+<td style="text-align:left">us-central1-c</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">シリーズ</td>
+<td style="text-align:left">N1</td>
+<td style="text-align:left">シリーズの名前</td>
+</tr>
+<tr>
+<td style="text-align:left">マシンタイプ</td>
+<td style="text-align:left">2 vCPU</td>
+<td style="text-align:left">n1-standard-2、2-CPU、7.5 GB RAM インスタンス</td>
+</tr>
+<tr>
+<td style="text-align:left">ブートディスク</td>
+<td style="text-align:left">新しい 10 GB の標準の永続ディスク OS イメージ: [Debian GNU/Linux 10 (buster)]</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">ファイアウォール</td>
+<td style="text-align:left">HTTP トラフィックを許可する</td>
+<td style="text-align:left">ポート 80 に HTTP トラフィックを許可するファイアウォールルール</td>
+</tr>
+</tbody>
+</table>
+<p><strong>マシンタイプ</strong> は、マイクロインスタンスタイプから 32 コア、208 GB RAM のインスタンスタイプまで、選択できるマシンタイプは複数ある。（<a href="https://cloud.google.com/compute/docs/machine-types">詳細</a>）<br>
+<strong>ブートディスク</strong> には OS が設定されており、Debian、Ubuntu、CoreOS から、Red Hat Enterprise Linux や Windows Server などのプレミアム イメージまで、選択できるイメージは複数ある。</p>
+<p>SSH を使用して仮想マシンに接続するには、該当するマシンの行で「SSH」をクリックする。</p>
+<h4 ref="211-nginx-ウェブサーバーをインストールする" >2.1.1. NGINX ウェブサーバーをインストールする</h4><a class="anchor" id="211-nginx-ウェブサーバーをインストールする"></a>
+<p>SSH ターミナルで、root アクセス権を取得。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo su -
+</code></pre></div><p>root ユーザーとして、OS を更新。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ apt-get update
+</code></pre></div><p>NGINX をインストール。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ apt-get install nginx -y
+</code></pre></div><p>NGINX が実行されていることを確認。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ps auwx | grep nginx
+</code></pre></div><p>ウェブページを表示するために、Cloud Console に戻って該当するマシンの行の 「外部 IP」（ External IP ） のリンクをクリックする。</p>
+<h3 ref="22-gcloud-で新しいインスタンスを作成する" >2.2. gcloud で新しいインスタンスを作成する</h3><a class="anchor" id="22-gcloud-で新しいインスタンスを作成する"></a>
+<p>Cloud Shell で、コマンドラインから gcloud を使用して新しい仮想マシン インスタンスを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create gcelab2 --machine-type n1-standard-2 --zone us-central1-c
+
+Created <span style="color:#f92672">[</span>...gcelab2<span style="color:#f92672">]</span>.
+NAME     ZONE           MACHINE_TYPE  ...    STATUS
+gcelab2  us-central1-c  n1-standard-2 ...    RUNNING
+</code></pre></div><p>上記のコマンドで作成されたインスタンスには以下のデフォルト値が設定される。</p>
 <ul>
-<li>ここで好きなように設定（サイズは最小、拡大をチェックして最大、がオススメ）</li>
+<li>最新の Debian 10（buster）イメージ</li>
+<li>マシンタイプは n1-standard-2</li>
+<li>インスタンスと同じ名前のルート永続ディスクが自動的にインスタンスに組み込まれる</li>
 </ul>
-</li>
-</ul>
-<h2 ref="トラックパッドの設定" >トラックパッドの設定</h2><a class="anchor" id="トラックパッドの設定"></a>
-<ul>
-<li>「りんごマーク」-&gt;「システム環境設定」-&gt;「トラックパッド」
-<ul>
-<li>ここで好きなように設定（「タップでクリック」を選択）</li>
-</ul>
-</li>
-</ul>
-<h2 ref="ドラッグドロップの設定" >ドラッグ＆ドロップの設定</h2><a class="anchor" id="ドラッグドロップの設定"></a>
-<ul>
-<li>「りんごマーク」-&gt;「システム環境設定」-&gt;「アクセシビリティ」-&gt;「マウスとトラックパッド」を選択</li>
-<li>「トラックパッドオプション」-&gt; 「ドラッグを有効にする」-&gt;「ドラッグロックあり」</li>
-</ul>
-<p>これで２タップ目でちょっと動かしたらファイル・ウィンドウをホールドでき、もう１タップしたリリースできる。</p>
-<h2 ref="デスクトップの整理" >デスクトップの整理</h2><a class="anchor" id="デスクトップの整理"></a>
-<ul>
-<li>デスクトップで右クリック（二本指クリック）-&gt;「表示順序」-&gt;「名前」を選択</li>
-</ul>
-<h2 ref="ライブ変換オフ" >ライブ変換オフ</h2><a class="anchor" id="ライブ変換オフ"></a>
-<p>タイピング中に勝手に変換される、あれ。</p>
-<ul>
-<li><a href="http://sbapp.net/appnews/osxelcapitan-33422">http://sbapp.net/appnews/osxelcapitan-33422</a></li>
-</ul>
-<h2 ref="finderで隠しファイルを表示" >Finderで隠しファイルを表示</h2><a class="anchor" id="finderで隠しファイルを表示"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ defaults write com.apple.finder AppleShowAllFiles TRUE
-$ killall Finder
-</code></pre></div><h2 ref="xcodeをインストール" >Xcodeをインストール</h2><a class="anchor" id="xcodeをインストール"></a>
-<p>何かと使うので設定必須。<br>
-App Store から Xcode をダウンロード・インストール。<br>
-また、以下で Xcode の Command Line Tools をインストール。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ xcode-select --install
+<p>Cloud Console のナビゲーションメニューで、「Compute Engine」 -&gt; 「VM インスタンス」の順にクリックし、インスタンスが作成されたか確認できる。<br>
+また、 <code>gcloud</code> 経由で、SSH を使用してインスタンスに接続することもできる。（パスフレーズは空白）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute ssh gcelab2 --zone us-central1-c
 </code></pre></div>
 		</div>
 

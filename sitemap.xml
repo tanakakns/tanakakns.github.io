@@ -23,6 +23,9 @@
     <loc>https://tanakakns.github.io/docker/basic/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/gcp/basic/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/istio/basic/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
@@ -41,6 +44,9 @@
     <loc>https://tanakakns.github.io/git/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/gcp/computeengine/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/mac/asdf/</loc>
     <lastmod>2021-02-09T22:14:00+09:00</lastmod>
   </url><url>
@@ -55,6 +61,12 @@
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/kubectl-plugin/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/gcp/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/terraform/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>

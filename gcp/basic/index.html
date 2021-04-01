@@ -1,0 +1,779 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+	入門 :: テックまとめ
+</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2021-04-02T00:15:54 JST">
+<meta name="description" content="備忘録用メモサイト">
+
+
+
+<title>入門 :: テックまとめ</title>
+
+<link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+
+<script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel="stylesheet">
+
+
+
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/layout.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.main.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.menu.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/notice.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/tabs.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/panel.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/columns.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/children.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/attachments.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/alert.css'>
+<link rel="stylesheet" type="text/css" href='/css/docport.css'>
+
+<script src='/js/docport.js'></script>
+<script type="text/javascript">
+      var baseurl = "https:\/\/tanakakns.github.io\/";
+</script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-42388425-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+  </head>
+
+  <body data-url="/gcp/basic/"
+
+  class="hidetoc hidenextpage ">
+
+<style type="text/css">
+  #debug{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    line-height: 3.5rem;
+    margin-bottom: .35rem;
+    padding: 0 2rem;
+    position: fixed;
+    left: 0;      right: 0;     top: 0;
+   
+    top:0px;
+    
+    min-height: 150px;
+
+    background-color: white;
+    border: 3px solid red;
+    z-index: 10000 ;
+    word-wrap: all;
+    overflow: auto;
+  }
+</style>
+ 
+
+
+    
+    
+    <header style="">
+        <div>
+    
+    <div class="burger ">
+        <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">&#9776;</a>
+    </div>
+    
+
+    <div>
+
+		
+	
+			
+		
+	    	<a class='baselink' href='https://tanakakns.github.io/'>テックまとめ</a>
+	  	
+	</div>
+
+</div>
+    </header>
+    
+
+    <article>
+      
+      <aside class="">
+        
+
+		
+	
+			
+		
+	    	
+	  	
+	<div id="close_menu">
+  <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">
+      <i class="fa fa-lg fa-times"></i>
+  </a>
+</div>
+
+<ul class="menu">
+
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/mac/">Mac開発環境</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/os-settings/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/os-settings/">OSの設定</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/homebrew/">Homebrew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/asdf/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/asdf/">asdf</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/git/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/git/">Git</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/git/initial-setting/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/git/initial-setting/">初期設定</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/go/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/go/">Go言語</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/initial-setting/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/initial-setting/">初期設定</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/grammar/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/grammar/">文法</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/naming/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/naming/">命名規則</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/pattern/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/pattern/">パターン</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/aws/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+        
+      
+          <a href="/aws/">AWS</a>
+      
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <i class="fas fa-chevron-down ddexp"></i>
+        
+      
+          <a href="/gcp/">GCP</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/basic/" class="dd-item parent active
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/basic/">入門</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computeengine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computeengine/">Compute Engine</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/terraform/">Terraform</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/docker/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/docker/">Docker</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/docker/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/docker/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/kubernetes/">Kubernetes</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/concept/">概念整理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/architecture/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/architecture/">アーキテクチャ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/kubectl-plugin/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/kubectl-plugin/">kubectl plugin と Krew</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/istio/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/istio/">Istio</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/basic/">入門</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/concept/">概念整理</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+
+
+</ul>
+
+		
+	
+			
+		
+	    	
+	  	
+	
+      </aside>
+      
+
+      <section class="page ">
+      
+	
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/">
+        GCP
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        入門
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>入門</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
+
+
+
+
+
+
+	<div class="content">
+	    <ol>
+<li><a href="#1-Qwiklabs">Qwiklabs</a></li>
+<li><a href="#2-cloud-console">Cloud Console</a></li>
+</ol>
+<h2 ref="1-qwiklabs" >1. Qwiklabs</h2><a class="anchor" id="1-qwiklabs"></a>
+<p><a href="https://www.qwiklabs.com/?locale=ja">Qwiklabs</a>は、 GCP と AWS のラボ環境を一時的に払い出してくれて、ハンズオンができるサービス。</p>
+<h3 ref="11-ラボ" >1.1. ラボ</h3><a class="anchor" id="11-ラボ"></a>
+<p>トピックと専門知識のレベルにかかわらず、Qwiklabs のラボのインターフェースはどれも同じで、以下のような機能・コンポーネントがある。</p>
+<ul>
+<li>ラボを開始（ボタン）
+<ul>
+<li>このボタンをクリックすると、実践演習に必要なすべてのサービスと認証情報が有効になった Google Cloud 環境が一時的に作成される</li>
+<li>この環境を使用して実践演習を行う</li>
+<li>また、このボタンを押すと、カウントダウンタイマーも起動する</li>
+</ul>
+</li>
+<li>クレジット
+<ul>
+<li>ラボの料金で、1 クレジットは通常 1 米ドルに相当</li>
+<li>入門レベルのラボには無料で受講できるものもある</li>
+<li>専門性が高いラボほど料金が高くなり、これは、タスクの処理内容が高度になり、必要な Google Cloud リソースが増えるため</li>
+</ul>
+</li>
+<li>時間
+<ul>
+<li>ラボは実行できる時間決まっており、 「ラボを開始」ボタンをクリックするとタイマーのカウントダウンが始まり、00:00:00 になると、一時的に作成された Google Cloud 環境とリソースが削除される</li>
+</ul>
+</li>
+<li>スコア
+<ul>
+<li>多くのラボにスコアが備わっている</li>
+<li>これは「アクティビティ トラッキング」と呼ばれる機能で、ラボに含まれる所定の手順を確実に完了するためのもの</li>
+<li>アクティビティ トラッキング機能が付いているラボに合格するには、すべての手順を順番に完了する必要があり、そのようにしてラボを完了した場合のみ、クレジットを受け取ることができる</li>
+</ul>
+</li>
+</ul>
+<h2 ref="2-cloud-console" >2. Cloud Console</h2><a class="anchor" id="2-cloud-console"></a>
+<p><a href="https://cloud.google.com/cloud-console/">Cloud Console</a>は、Google Cloud の開発ツールの中核であるウェブコンソール。<br>
+ログインするにはユーザー名とパスワードが必要で、後述の<a href="https://cloud.google.com/iam/">Cloud Identity and Access Management（Cloud IAM）</a>によりアクセス権限（ロール）管理される。</p>
+<h3 ref="21-プロジェクト" >2.1. プロジェクト</h3><a class="anchor" id="21-プロジェクト"></a>
+<p>Google Cloud のリソースはすべて、<a href="https://cloud.google.com/docs/overview/#projects">プロジェクト</a> に属しており、構築する対象をまとめて管理する 1 つの単位と考えることができる。<br>
+Cloud Console 上で選択できるプロジェクトは、グローバルで一意な <strong>プロジェクトID</strong> で管理される。<br>
+プロジェクトには ID の他にも、 <strong>プロジェクト名</strong> 、 <strong>プロジェクト番号</strong> があり、Google Cloud サービスを操作するときは、これらの識別子を頻繁に使用する。</p>
+<p>プロジェクトにはリソースとサービス（仮想マシンのプール、データベース セット、それらを接続するネットワークなど）が含まれる。さらに各種設定と権限も含まれており、これを使用して、セキュリティルールと誰がどのリソースにアクセスできるかが指定される。<br>
+大企業の、あるいは経験豊富な Google Cloud ユーザーの場合、Google Cloud のプロジェクトが数十から数千あるのは珍しくなく、組織によって Google Cloud の使用方法は異なるため、プロジェクトを使ってチーム別やプロダクト別などでクラウドコンピューティングサービスをまとめて管理する。<br>
+また、<a href="https://cloud.google.com/vpc/docs/shared-vpc?hl=ja">共有 VPC</a> または <a href="https://cloud.google.com/vpc/docs/vpc-peering?hl=ja">VPC ネットワークピアリング</a>を使用しない限り、あるプロジェクトが別のプロジェクトのリソースにアクセスすることはできない。<br>
+さらに、課金を有効にすると、各プロジェクトは 1 つの請求先アカウントに関連付けられる。</p>
+<h3 ref="22-google-cloud-サービス" >2.2. Google Cloud サービス</h3><a class="anchor" id="22-google-cloud-サービス"></a>
+<p>Cloud Console から Google Cloud が提供するサービスを利用することができ、以下のカテゴリで構成される。（<a href="https://cloud.google.com/docs/overview/cloud-platform-services#top_of_page">詳細</a>）</p>
+<ul>
+<li>コンピューティングとホスティング</li>
+<li>ストレージ</li>
+<li>データベース</li>
+<li>ネットワーキング</li>
+<li>ビッグデータ</li>
+<li>機械学習</li>
+</ul>
+<p><a href="https://cloud.google.com/products?hl=ja">プロダクトとサービスの一覧</a></p>
+<h3 ref="23-ロールと権限" >2.3. ロールと権限</h3><a class="anchor" id="23-ロールと権限"></a>
+<p>前述したように、Google Cloud には、クラウドコンピューティングサービスの他に、誰がどのリソースにアクセスできるかを定義する権限とロールのコレクションもある。<br>
+<a href="https://cloud.google.com/iam/">Cloud Identity and Access Management（Cloud IAM）</a> サービスを使って、このようなロールと権限を管理できる。</p>
+<p>Google Cloud には 3 つの <a href="https://cloud.google.com/iam/docs/understanding-roles/#primitive%5C_roles">基本ロール</a> がある。<br>
+基本ロールは <strong>プロジェクトレベル</strong> の権限を設定し、別途指定しない限り、すべての Google Cloud サービスへのアクセスと管理を制御する。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">ロール名</th>
+<th style="text-align:left">権限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">roles/viewer（閲覧者）</td>
+<td style="text-align:left">既存のリソースやデータを表示する（ただし変更は不可能）など、状態に影響しない読み取り専用アクションに必要な権限。</td>
+</tr>
+<tr>
+<td style="text-align:left">roles/editor（編集者）</td>
+<td style="text-align:left">すべての閲覧者権限と、状態を変更するアクション（既存のリソースの変更など）に必要な権限。</td>
+</tr>
+<tr>
+<td style="text-align:left">roles/owner（オーナー）</td>
+<td style="text-align:left">すべての編集者権限と、次のアクションを実行するために必要な権限: プロジェクトおよびプロジェクト内のすべてのリソースの権限とロールを管理する、プロジェクトの課金情報を設定する。</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="24-api-とサービス" >2.4. API とサービス</h3><a class="anchor" id="24-api-とサービス"></a>
+<p>Google Cloud API は、ビジネス管理から機械学習にまで及ぶさまざまな分野の API が 200 以上用意されており、サービスと同様に、すべて Google Cloud プロジェクト / アプリケーションと簡単に統合できる。<br>
+<a href="https://cloud.google.com/apis/design/">API 設計ガイド</a> で説明されているリソース指向の設計原則が適用されている。<br>
+なお、 Cloud API を利用する際は、各自で有効に設定する必要がある。（サイドメニュー「API とサービス」 -&gt; 「ライブラリ」から APIを検索して「有効にする」）</p>
+<ul>
+<li><a href="https://developers.google.com/apis-explorer/#p/">Google APIs Explorer</a></li>
+</ul>
+<h3 ref="25-cloud-shell" >2.5. Cloud Shell</h3><a class="anchor" id="25-cloud-shell"></a>
+<p><a href="https://cloud.google.com/shell/docs/features">Cloud Shell</a> はブラウザで機能するコマンド実行環境。<br>
+その実態は Debian ベースの仮想マシンで、さまざまな開発ツール（gcloud、git など）や、永続的な 5 GB のホーム ディレクトリが用意されている。<br>
+ターミナルにコマンドを入力して、Google Cloud プロジェクトのリソースやサービスを管理できる。<br>
+Cloud Shell を使用すると、Cloud Console を離れずにすべてのシェルコマンドを実行できる。<br>
+Google Cloud Console のタイトルバーで、「Cloud Shell をアクティブにする」 をクリックすることで利用できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud auth list
+
+Credentialed Accounts
+ACTIVE  ACCOUNT
+*       student-00-918550b6c355@qwiklabs.net
+To set the active account, run:
+    $ gcloud config set account <span style="color:#e6db74">`</span>ACCOUNT<span style="color:#e6db74">`</span>
+</code></pre></div><p>Cloud Shell には固有のコマンドラインツールがあらかじめ実装されおり、メインの Google Cloud ツールキットは <a href="https://cloud.google.com/sdk/gcloud/">gcloud</a> で、リソース管理やユーザー認証など、プラットフォーム上のさまざまなタスクに使用されます。<br>
+今実行したのは <code>gcloud</code> コマンドの <a href="https://cloud.google.com/sdk/gcloud/reference/auth/list">auth list</a> で、有効なアカウント名を一覧表示する。<br>
+Cloud Shell には、あらかじめインストールされてたツールキットのほかに、Unix の標準コマンドや、nano などのテキスト エディタも備わっている。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># プロジェクト ID 一覧</span>
+$ gcloud config list project
+<span style="color:#f92672">[</span>core<span style="color:#f92672">]</span>
+project <span style="color:#f92672">=</span> qwiklabs-gcp-44776a13dea667a6
+</code></pre></div><ul>
+<li><a href="https://cloud.google.com/sdk/gcloud">gcloud コマンドライン ツールの概要</a></li>
+<li><a href="https://cloud.google.com/sdk/gcloud/reference/?hl=ja">gcloud リファレンス</a></li>
+</ul>
+		</div>
+
+
+
+
+
+
+	
+	
+
+      </section>
+
+      
+      
+    </article>
+    
+    
+    <footer>
+      
+
+		
+	
+			
+		
+	    	
+	  	
+	
+    </footer>
+    
+
+
+
+  </body>
+</html>

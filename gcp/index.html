@@ -4,16 +4,16 @@
 <html>
   <head>
     <title>
-	OSの設定 :: テックまとめ
+	GCP :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-02T00:15:55 JST">
+<meta name="revised" content="2021-04-02T00:15:54 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
 
-<title>OSの設定 :: テックまとめ</title>
+<title>GCP :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/mac/os-settings/"
+  <body data-url="/gcp/"
 
   class="hidetoc hidenextpage ">
 
@@ -134,15 +134,14 @@ if (!doNotTrack) {
 
 <ul class="menu">
 
-    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/mac/">Mac開発環境</a>
@@ -150,7 +149,7 @@ if (!doNotTrack) {
         <ul>
               
 
-    <li data-nav-id="https://tanakakns.github.io/mac/os-settings/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/mac/os-settings/" class="dd-item
         item_level_$level
         ">
 
@@ -321,14 +320,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent active haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -566,9 +566,6 @@ if (!doNotTrack) {
         
   
   	
-		
-  
-  	
 	<li >
       <a class="text-link" href="https://tanakakns.github.io/">
         
@@ -576,17 +573,9 @@ if (!doNotTrack) {
     </li>
 	
   
-    <li class="">
-      <a class="text-link" href="/mac/">
-        Mac開発環境
-      </a>
-    </li>
-	
-  	
-  
     <li class="active">
       
-        OSの設定
+        GCP
       
     </li>
 
@@ -607,7 +596,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>OSの設定</h1>
+			<h1>GCP</h1>
         
 
 		
@@ -627,47 +616,25 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p>好みの OS の設定についてメモる。</p>
-<h2 ref="dockの大きさを調整する" >Dockの大きさを調整する</h2><a class="anchor" id="dockの大きさを調整する"></a>
-<ul>
-<li>「りんごマーク」-&gt;「システム環境設定」-&gt;「Dock」
-<ul>
-<li>ここで好きなように設定（サイズは最小、拡大をチェックして最大、がオススメ）</li>
+	    <ul class="children children-li">
+
+<span><li>
+		<a href="/gcp/basic/" >入門</a></li>
+<p><ol>
+<li><a href="#1-Qwiklabs">Qwiklabs</a></li>
+<li><a href="#2-cloud-console">Cloud Console</a></li>
+</ol></p>
+</span>
+
+<span><li>
+		<a href="/gcp/computeengine/" >Compute Engine</a></li>
+<p><p><strong>Compute Engine</strong> は Google のインフラストラクチャ上に仮想マシンを構築するサービス。</p>
+<ol>
+<li><a href="#1-%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%A8%E3%82%BE%E3%83%BC%E3%83%B3">リージョンとゾーン</a></li>
+<li><a href="#2-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E4%BD%9C%E6%88%90">インスタンス作成</a></li>
+</ol></p>
+</span>
 </ul>
-</li>
-</ul>
-<h2 ref="トラックパッドの設定" >トラックパッドの設定</h2><a class="anchor" id="トラックパッドの設定"></a>
-<ul>
-<li>「りんごマーク」-&gt;「システム環境設定」-&gt;「トラックパッド」
-<ul>
-<li>ここで好きなように設定（「タップでクリック」を選択）</li>
-</ul>
-</li>
-</ul>
-<h2 ref="ドラッグドロップの設定" >ドラッグ＆ドロップの設定</h2><a class="anchor" id="ドラッグドロップの設定"></a>
-<ul>
-<li>「りんごマーク」-&gt;「システム環境設定」-&gt;「アクセシビリティ」-&gt;「マウスとトラックパッド」を選択</li>
-<li>「トラックパッドオプション」-&gt; 「ドラッグを有効にする」-&gt;「ドラッグロックあり」</li>
-</ul>
-<p>これで２タップ目でちょっと動かしたらファイル・ウィンドウをホールドでき、もう１タップしたリリースできる。</p>
-<h2 ref="デスクトップの整理" >デスクトップの整理</h2><a class="anchor" id="デスクトップの整理"></a>
-<ul>
-<li>デスクトップで右クリック（二本指クリック）-&gt;「表示順序」-&gt;「名前」を選択</li>
-</ul>
-<h2 ref="ライブ変換オフ" >ライブ変換オフ</h2><a class="anchor" id="ライブ変換オフ"></a>
-<p>タイピング中に勝手に変換される、あれ。</p>
-<ul>
-<li><a href="http://sbapp.net/appnews/osxelcapitan-33422">http://sbapp.net/appnews/osxelcapitan-33422</a></li>
-</ul>
-<h2 ref="finderで隠しファイルを表示" >Finderで隠しファイルを表示</h2><a class="anchor" id="finderで隠しファイルを表示"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ defaults write com.apple.finder AppleShowAllFiles TRUE
-$ killall Finder
-</code></pre></div><h2 ref="xcodeをインストール" >Xcodeをインストール</h2><a class="anchor" id="xcodeをインストール"></a>
-<p>何かと使うので設定必須。<br>
-App Store から Xcode をダウンロード・インストール。<br>
-また、以下で Xcode の Command Line Tools をインストール。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ xcode-select --install
-</code></pre></div>
 		</div>
 
 
