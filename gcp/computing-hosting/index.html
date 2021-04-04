@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-04T13:35:02 JST">
+<meta name="revised" content="2021-04-04T21:12:36 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -736,6 +736,7 @@ if (!doNotTrack) {
 <li>Compute Engine</li>
 </ol>
 <h2 ref="1-compute-engine" >1. Compute Engine</h2><a class="anchor" id="1-compute-engine"></a>
+<p><a href="https://cloud.google.com/compute/docs/how-to?hl=ja">公式ガイド</a></p>
 <p><strong>Compute Engine</strong> は Google のインフラストラクチャ上に仮想マシンを構築するサービス。</p>
 <ol>
 <li><a href="#1-%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%A8%E3%82%BE%E3%83%BC%E3%83%B3">リージョンとゾーン</a></li>
@@ -753,6 +754,101 @@ if (!doNotTrack) {
 <li><a href="https://cloud.google.com/compute/docs/regions-zones/">リージョンとゾーン</a></li>
 </ul>
 <h3 ref="12-インスタンス作成" >1.2. インスタンス作成</h3><a class="anchor" id="12-インスタンス作成"></a>
+<h4 ref="121-ブートディスクイメージ" >1.2.1 ブートディスクイメージ</h4><a class="anchor" id="121-ブートディスクイメージ"></a>
+<p>OS のブートディスクイメージには大きく以下の 2 種類ある。</p>
+<ul>
+<li><strong>公開 OS イメージ</strong>
+<ul>
+<li>Google、オープンソース コミュニティ、サードパーティ ベンダーによって提供され、保守されるブートディスクイメージ</li>
+</ul>
+</li>
+<li><strong>カスタムイメージ</strong>
+<ul>
+<li>ユーザーが所有し、アクセスを制御するブートディスクイメージ</li>
+<li><a href="https://cloud.google.com/compute/docs/images/create-delete-deprecate-private-images?hl=ja">カスタム イメージの作成、削除、廃止</a></li>
+</ul>
+</li>
+</ul>
+<p>公開 OS イメージの情報は、以下のコマンドで取得可能。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute images list
+NAME                              PROJECT       FAMILY         DEPRECATED  STATUS
+centos-6-v20181011                centos-cloud  centos-6                   READY
+centos-7-v20181011                centos-cloud  centos-7                   READY
+coreos-alpha-1953-0-0-v20181106   coreos-cloud  coreos-alpha               READY
+coreos-beta-1939-1-0-v20181106    coreos-cloud  coreos-beta                READY
+coreos-stable-1911-3-0-v20181106  coreos-cloud  coreos-stable              READY
+<span style="color:#f92672">(</span>略<span style="color:#f92672">)</span>
+</code></pre></div><p>また、公開 OS イメージではなく、 自作の <strong>カスタムイメージ</strong></p>
+<h4 ref="122-インスタンス作成" >1.2.2. インスタンス作成</h4><a class="anchor" id="122-インスタンス作成"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute instances create <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    VM_NAME <span style="color:#ae81ff">\ </span>                                        <span style="color:#75715e"># VM_NAME：インスタンス名</span>
+    <span style="color:#f92672">[</span>--image IMAGE | --image-family IMAGE_FAMILY<span style="color:#f92672">]</span> <span style="color:#ae81ff">\ </span>  <span style="color:#75715e"># IMAGE（公開イメージの必須バージョン） or IMAGE_FAMILY（イメージファミリ名）</span>
+                                                      <span style="color:#75715e"># IMAGE_FAMILY を指定した場合、ファミリ内の非推奨でない最新の IMAGE が適用</span>
+    --image-project IMAGE_PROJECT                     <span style="color:#75715e"># イメージプロジェクト名</span>
+</code></pre></div><p>上記コマンドで作成したら、下記コマンドで確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute instances describe VM_NAME
+</code></pre></div><p>オプションで <code>--shielded-secure-boot</code> フラグを指定すると、以下の 3 つの <a href="https://cloud.google.com/security/shielded-cloud/shielded-vm?hl=ja">Shielded VM</a> 機能をすべて有効にしたインスタンスを作成する。</p>
+<ul>
+<li><a href="https://cloud.google.com/security/shielded-cloud/shielded-vm?hl=ja#vtpm">仮想トラステッド プラットフォーム モジュール（vTPM）</a></li>
+<li><a href="https://cloud.google.com/security/shielded-cloud/shielded-vm?hl=ja#integrity-monitoring">整合性モニタリング</a></li>
+<li><a href="https://cloud.google.com/security/shielded-cloud/shielded-vm?hl=ja#secure-boot">セキュアブート</a></li>
+</ul>
+<p>インスタンスを起動した後、<a href="https://cloud.google.com/compute/docs/instances/modifying-shielded-vm?hl=ja">Shielded VM のオプションを変更</a> するには、インスタンスを停止する必要がある。</p>
+<p>また、プロジェクト毎に <code>default</code> という名前のデフォルト VPC ネットワークが作成されており、ネットワークの詳細を指定せずに VM を作成すると、デフォルト VPC ネットワークと同じリージョンにあるサブネットにインスタンスが作成される。<br>
+以下のオプションを指定することで、対象のネットワークにインスタンスが作成される。</p>
+<ul>
+<li><code>SUBNET_NAME</code>: サブネットの名前。ネットワークは指定したサブネットから推測される。</li>
+<li><code>ZONE_NAME</code>: VM を作成するゾーン（ <code>europe-west1-b</code> など）。リージョンはこのゾーンから推測される。</li>
+</ul>
+<h3 ref="13-プリエンプティブルインスタンス作成" >1.3. プリエンプティブルインスタンス作成</h3><a class="anchor" id="13-プリエンプティブルインスタンス作成"></a>
+<h4 ref="131-プリエンプティブルインスタンス" >1.3.1. プリエンプティブルインスタンス</h4><a class="anchor" id="131-プリエンプティブルインスタンス"></a>
+<p><a href="https://cloud.google.com/compute/docs/instances/preemptible?hl=ja">プリエンプティブルインスタンス</a> は、通常より遥かに低価格である代わりに以下の制約をうけるインスタンス。</p>
+<ul>
+<li>システムイベントにより、いつでも停止する可能性がある</li>
+<li>24 時間実行した後、必ず停止</li>
+<li>有限の Compute Engine リソースなので、常に利用できるわけではない</li>
+<li>ライブ マイグレーションできない</li>
+<li>サービスレベル契約（ SLA ）の非対象（ <a href="https://cloud.google.com/compute/sla?hl=ja">Compute Engine SLA</a> ）</li>
+<li>Google Cloud の無料枠に適用されない</li>
+</ul>
+<h4 ref="132-プリエンプティブルインスタンス作成" >1.3.2. プリエンプティブルインスタンス作成</h4><a class="anchor" id="132-プリエンプティブルインスタンス作成"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute instances create <span style="color:#f92672">[</span>INSTANCE_NAME<span style="color:#f92672">]</span> --preemptible
+</code></pre></div><h3 ref="14-単一テナントノードにインスタンス作成" >1.4. 単一テナントノードにインスタンス作成</h3><a class="anchor" id="14-単一テナントノードにインスタンス作成"></a>
+<p><a href="https://cloud.google.com/compute/docs/nodes/provisioning-sole-tenant-vms?hl=ja">https://cloud.google.com/compute/docs/nodes/provisioning-sole-tenant-vms?hl=ja</a></p>
+<h4 ref="141-単一テナントノード-テンプレートを作成" >1.4.1. 単一テナントノード テンプレートを作成</h4><a class="anchor" id="141-単一テナントノード-テンプレートを作成"></a>
+<p><a href="https://cloud.google.com/compute/docs/nodes/sole-tenant-nodes?hl=ja">単一テナントノード</a> のテンプレートを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute sole-tenancy node-templates create TEMPLATE_NAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --node-type<span style="color:#f92672">=</span>NODE_TYPE <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">[</span>--node-affinity-labels<span style="color:#f92672">=</span>AFFINITY_LABELS <span style="color:#ae81ff">\]</span>
+  <span style="color:#f92672">[</span>--region<span style="color:#f92672">=</span>REGION <span style="color:#ae81ff">\]</span>
+  <span style="color:#f92672">[</span>--accelerator type<span style="color:#f92672">=</span>GPU_TYPE,count<span style="color:#f92672">=</span>GPU_COUNT <span style="color:#ae81ff">\]</span>
+  <span style="color:#f92672">[</span>--disk type<span style="color:#f92672">=</span>local-ssd,count<span style="color:#f92672">=</span>DISK_COUNT,size<span style="color:#f92672">=</span>DISK_SIZE<span style="color:#f92672">]</span>
+</code></pre></div><h4 ref="142-ノードグループの自動スケーリング" >1.4.2. ノードグループの自動スケーリング</h4><a class="anchor" id="142-ノードグループの自動スケーリング"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute sole-tenancy node-groups create group-name <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --node-template template-name <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --target-size size <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --maintenance-policy maintenance-policy <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --zone zone <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --autoscaler-mode mode <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --max-nodes max-nodes <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --min-nodes min-nodes
+</code></pre></div><h4 ref="メモ" >メモ</h4><a class="anchor" id="メモ"></a>
+<ul>
+<li>ノードテンプレート
+<ul>
+<li>ノードグループの各ノードのプロパティを定義するリージョン リソース</li>
+<li>ノード テンプレートからノードグループを作成すると、ノード テンプレートのプロパティがノードグループの各ノードに不変にコピーされる</li>
+</ul>
+</li>
+<li>ノードグループ</li>
+<li>ノードタイプ</li>
+<li>インスタンステンプレート
+<ul>
+<li><a href="https://cloud.google.com/compute/docs/instance-templates?hl=ja">https://cloud.google.com/compute/docs/instance-templates?hl=ja</a></li>
+</ul>
+</li>
+</ul>
+<p>↓↓↓以降整理中↓↓↓</p>
 <h4 ref="121-cloud-console-から新しいインスタンスを作成する" >1.2.1. Cloud Console から新しいインスタンスを作成する</h4><a class="anchor" id="121-cloud-console-から新しいインスタンスを作成する"></a>
 <p>Cloud Console のナビゲーションメニューで、「Compute Engine」-&gt; 「VM インスタンス」 の順にクリック。（最初に初期化する際は 1 分ほどかかる）<br>
 新しいインスタンスを作成するには、「作成」 をクリック。<br>
@@ -806,16 +902,6 @@ if (!doNotTrack) {
 <p><strong>マシンタイプ</strong> は、マイクロインスタンスタイプから 32 コア、208 GB RAM のインスタンスタイプまで、選択できるマシンタイプは複数ある。（<a href="https://cloud.google.com/compute/docs/machine-types">詳細</a>）<br>
 <strong>ブートディスク</strong> には OS が設定されており、Debian、Ubuntu、CoreOS から、Red Hat Enterprise Linux や Windows Server などのプレミアム イメージまで、選択できるイメージは複数ある。</p>
 <p>SSH を使用して仮想マシンに接続するには、該当するマシンの行で「SSH」をクリックする。</p>
-<p>次に、NGINX ウェブサーバーをインストールする<br>
-SSH ターミナルで、root アクセス権を取得。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo su -
-</code></pre></div><p>root ユーザーとして、OS を更新。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ apt-get update
-</code></pre></div><p>NGINX をインストール。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ apt-get install nginx -y
-</code></pre></div><p>NGINX が実行されていることを確認。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ps auwx | grep nginx
-</code></pre></div><p>ウェブページを表示するために、Cloud Console に戻って該当するマシンの行の 「外部 IP」（ External IP ） のリンクをクリックする。</p>
 <h4 ref="122-gcloud-で新しいインスタンスを作成する" >1.2.2. gcloud で新しいインスタンスを作成する</h4><a class="anchor" id="122-gcloud-で新しいインスタンスを作成する"></a>
 <p>Cloud Shell で、コマンドラインから gcloud を使用して新しい仮想マシン インスタンスを作成する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create gcelab2 --machine-type n1-standard-2 --zone us-central1-c
