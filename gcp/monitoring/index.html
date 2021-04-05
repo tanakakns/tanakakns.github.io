@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	データベース :: テックまとめ
+	監視 :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>データベース :: テックまとめ</title>
+<title>監視 :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/gcp/databases/"
+  <body data-url="/gcp/monitoring/"
 
   class="hidetoc hidenextpage ">
 
@@ -411,7 +411,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item
         item_level_$level
         ">
 
@@ -471,7 +471,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -706,7 +706,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        データベース
+        監視
       
     </li>
 
@@ -727,7 +727,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>データベース</h1>
+			<h1>監視</h1>
         
 
 		
@@ -747,42 +747,38 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <ul>
-<li><a href="https://cloud.google.com/products/databases">Google Cloud データベース</a>
+	    <h2 ref="stackdriverの種類" >Stackdriverの種類</h2><a class="anchor" id="stackdriverの種類"></a>
 <ul>
-<li>それぞれの違いなど</li>
+<li>Monitoring
+<ul>
+<li>アラート定義</li>
+<li>アップタイムチェック、稼働時間モニタリング</li>
+<li>AWSもまとめてみれる</li>
 </ul>
 </li>
-<li>リレーショナル
+<li>Logging
 <ul>
-<li><a href="https://cloud.google.com/sql/docs">Cloud SQL</a></li>
-<li><a href="https://cloud.google.com/spanner/docs">Cloud Spanner</a></li>
-<li><a href="https://cloud.google.com/bare-metal/docs">Bare Metal Solution</a></li>
+<li>ログに基づいた指標定義</li>
+<li>フィルターや検索でアプリケーションログを見る</li>
+<li>BigQuery、Google Cloud Storage、Pub/Subへのエクスポート</li>
+<li>エージェント導入できる</li>
 </ul>
 </li>
-<li>Key-Value
+<li>Trace
 <ul>
-<li><a href="https://cloud.google.com/bigtable/docs">Cloud Bigtable</a></li>
+<li>Google App Engine 用のレイテンシのサンプリング</li>
+<li>URL ごとの統計</li>
+<li>レイテンシの分布</li>
 </ul>
 </li>
-<li>ドキュメント
+<li>Debugger
 <ul>
-<li><a href="https://cloud.google.com/firestore/docs">Firestore</a>
-<ul>
-<li><a href="https://cloud.google.com/datastore/docs?hl=ja">Datastore モード</a></li>
+<li>本番環境でのコードのデバッグ（途中で止める）</li>
 </ul>
 </li>
-<li><a href="https://firebase.google.com/products/realtime-database/">Firebase Realtime Database</a></li>
-</ul>
-</li>
-<li>インメモリ
+<li>Error Reporting
 <ul>
-<li><a href="https://cloud.google.com/memorystore/docs">Memorystore</a></li>
-</ul>
-</li>
-<li>その他
-<ul>
-<li><a href="https://cloud.google.com/bigquery/docs?hl=ja">BigQuery</a></li>
+<li>エラーをレポート。通知</li>
 </ul>
 </li>
 </ul>

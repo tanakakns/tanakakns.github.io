@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-04T21:12:36 JST">
+<meta name="revised" content="2021-04-06T00:05:01 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -469,6 +469,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/monitoring/">監視</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -735,6 +750,13 @@ if (!doNotTrack) {
 	    <ol>
 <li>Compute Engine</li>
 </ol>
+<ul>
+<li><a href="https://cloud.google.com/products/compute">Google Cloud のコンピューティング プロダクト</a>
+<ul>
+<li>それぞれの違いなど</li>
+</ul>
+</li>
+</ul>
 <h2 ref="1-compute-engine" >1. Compute Engine</h2><a class="anchor" id="1-compute-engine"></a>
 <p><a href="https://cloud.google.com/compute/docs/how-to?hl=ja">公式ガイド</a></p>
 <p><strong>Compute Engine</strong> は Google のインフラストラクチャ上に仮想マシンを構築するサービス。</p>
@@ -832,6 +854,8 @@ coreos-stable-1911-3-0-v20181106  coreos-cloud  coreos-stable              READY
 </span><span style="color:#ae81ff"></span>  --autoscaler-mode mode <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --max-nodes max-nodes <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --min-nodes min-nodes
+</code></pre></div><h4 ref="15-インスタンスへの接続" >1.5. インスタンスへの接続</h4><a class="anchor" id="15-インスタンスへの接続"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute ssh --project<span style="color:#f92672">=</span>PROJECT_ID --zone<span style="color:#f92672">=</span>ZONE VM_NAME
 </code></pre></div><h4 ref="メモ" >メモ</h4><a class="anchor" id="メモ"></a>
 <ul>
 <li>ノードテンプレート

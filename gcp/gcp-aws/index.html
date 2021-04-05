@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-04T21:12:36 JST">
+<meta name="revised" content="2021-04-06T00:05:01 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -469,6 +469,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/monitoring/">監視</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -663,7 +678,133 @@ if (!doNotTrack) {
       <section class="page ">
       
 	
-	 
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/">
+        GCP
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        GCP と AWS の違い
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>GCP と AWS の違い</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
+
+
+
+
+
+
+	<div class="content">
+	    <ul>
+<li>IAM
+<ul>
+<li>Cloud IAMはGoogleアカウントに対してプロジェクト毎にロールを割り当てる。（AWSのように管理者が独自のIAMアカウントを作って管理するわけではない）</li>
+<li>階層になっているIAMだが、階層の下に対してポリシーを継承できるものの下でより強い権限にてポリシーを上書きすることができる</li>
+</ul>
+</li>
+<li>プロジェクトの概念
+<ul>
+<li>AWSでは契約ごとに払い出されるアカウント払い出されるが、GCPではプロジェクトという単位になっており、いくつでも自由に作れる</li>
+<li>プロジェクト単位で課金やIAMを分けられる。</li>
+</ul>
+</li>
+<li>ネットワーク
+<ul>
+<li>GCPではVPCを作ると初めからマルチリージョンで作られる / ゾーン(AZ相当)を跨ったサブネットが作れる</li>
+<li>外部IPアドレス（EIP相当）は、テンポラリーIPを昇格させることができる。また、グローバルに負荷分散できるIPも取得できる。</li>
+</ul>
+</li>
+<li>データベース
+<ul>
+<li>CloudSQL（RDS相当）にOracle、SQLServerはない（Bare Metal Solution にある）</li>
+</ul>
+</li>
+<li>API
+<ul>
+<li>各サービスを操作するAPIがあるのだが初期で有効になっているものはほとんどなく、ユーザが意図的に有効かしないとつかえない</li>
+</ul>
+</li>
+<li>ストレージ
+<ul>
+<li>AWSのGlacierはデータを読み出す際に数時間かかるが、GCPのクラウドストレージのオプションであるColdLineやNearLineは同じようなサービスでありながら、通常のストレージと同じ速度で読み出しができる</li>
+</ul>
+</li>
+<li>LoadBalancer
+<ul>
+<li>グローバル向けに HTTPロードバランサとSSLロードバランサとTCPロードバランサ、リージョン向けにネットワークロードバランサ（TCP/UDP/SSL) がある</li>
+<li>内部向けにはインターナルロードバランサがある（HTTP(S)/TCP/UDP）</li>
+<li>グローバル向けの方はリバースプロキシサーバで、リージョン向け/内部向けはロードバランサ</li>
+<li>GCPでグローバルIPを取得し、LBを前段におくとマルチリージョンでの負荷分散が行われる</li>
+</ul>
+</li>
+<li>監視
+<ul>
+<li>Stackdriver(CloudWatch相当)の有料のプレミアム階層では、AWSのリソースも同じダッシュボード上で監視ができる</li>
+<li>Stackdriverアカウントに複数のGCPアカウントやAWSアカウントを紐付けることができる。</li>
+<li>リソースを個々のインスタンスではなく、「Webサーバグループ」などとまとめて監視することもできる。</li>
+</ul>
+</li>
+</ul>
+		</div>
+
+
+
+
+
+
+	
 	
 
       </section>
