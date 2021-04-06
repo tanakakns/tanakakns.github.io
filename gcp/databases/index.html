@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-06T00:05:01 JST">
+<meta name="revised" content="2021-04-06T22:12:33 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -753,21 +753,21 @@ if (!doNotTrack) {
 <li>それぞれの違いなど</li>
 </ul>
 </li>
-<li>リレーショナル
+<li>リレーショナル（ SQL ）
 <ul>
-<li><a href="https://cloud.google.com/sql/docs">Cloud SQL</a></li>
-<li><a href="https://cloud.google.com/spanner/docs">Cloud Spanner</a></li>
+<li><a href="https://cloud.google.com/sql/docs">Cloud SQL</a> ：小規模、水平スケーラビリティ不要</li>
+<li><a href="https://cloud.google.com/spanner/docs">Cloud Spanner</a>　：大規模、水平スケーラビリティ、グローバル分散</li>
 <li><a href="https://cloud.google.com/bare-metal/docs">Bare Metal Solution</a></li>
 </ul>
 </li>
 <li>Key-Value
 <ul>
-<li><a href="https://cloud.google.com/bigtable/docs">Cloud Bigtable</a></li>
+<li><a href="https://cloud.google.com/bigtable/docs">Cloud Bigtable</a> （ HBase 互換 ）：大容量、低レイテンシ（レイテンシが許容されるなら BQ ）</li>
 </ul>
 </li>
 <li>ドキュメント
 <ul>
-<li><a href="https://cloud.google.com/firestore/docs">Firestore</a>
+<li><a href="https://cloud.google.com/firestore/docs">Firestore</a> （旧 Datastore ）：トランザクション可能、サーバレス、水平スケーラビリティ
 <ul>
 <li><a href="https://cloud.google.com/datastore/docs?hl=ja">Datastore モード</a></li>
 </ul>
@@ -777,12 +777,12 @@ if (!doNotTrack) {
 </li>
 <li>インメモリ
 <ul>
-<li><a href="https://cloud.google.com/memorystore/docs">Memorystore</a></li>
+<li><a href="https://cloud.google.com/memorystore/docs">Memorystore</a> ：キャッシュ、超低レイテンシ、非永続化</li>
 </ul>
 </li>
 <li>その他
 <ul>
-<li><a href="https://cloud.google.com/bigquery/docs?hl=ja">BigQuery</a></li>
+<li><a href="https://cloud.google.com/bigquery/docs?hl=ja">BigQuery</a> ：大規模なデータアナリティクス</li>
 </ul>
 </li>
 </ul>

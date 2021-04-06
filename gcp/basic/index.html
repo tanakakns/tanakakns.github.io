@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-06T00:05:01 JST">
+<meta name="revised" content="2021-04-06T22:12:33 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -748,53 +748,333 @@ if (!doNotTrack) {
 
 	<div class="content">
 	    <ol>
-<li><a href="#1-Qwiklabs">Qwiklabs</a></li>
-<li><a href="#2-cloud-console">Cloud Console</a></li>
+<li><a href="#1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
+<li><a href="#2-%E3%83%84%E3%83%BC%E3%83%AB">ツール</a></li>
+<li><a href="#3-%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E9%9A%8E%E5%B1%A4%E3%81%A8%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1">リソース階層とアクセス制御</a></li>
+<li><a href="#4-google-cloud-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9">Google Cloud サービス</a></li>
 </ol>
-<h2 ref="1-qwiklabs" >1. Qwiklabs</h2><a class="anchor" id="1-qwiklabs"></a>
-<p><a href="https://www.qwiklabs.com/?locale=ja">Qwiklabs</a>は、 GCP と AWS のラボ環境を一時的に払い出してくれて、ハンズオンができるサービス。</p>
-<h3 ref="11-ラボ" >1.1. ラボ</h3><a class="anchor" id="11-ラボ"></a>
-<p>トピックと専門知識のレベルにかかわらず、Qwiklabs のラボのインターフェースはどれも同じで、以下のような機能・コンポーネントがある。</p>
+<h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
 <ul>
-<li>ラボを開始（ボタン）
+<li><a href="https://cloud.google.com/compute/docs/regions-zones/">リージョンとゾーン</a>
 <ul>
-<li>このボタンをクリックすると、実践演習に必要なすべてのサービスと認証情報が有効になった Google Cloud 環境が一時的に作成される</li>
-<li>この環境を使用して実践演習を行う</li>
-<li>また、このボタンを押すと、カウントダウンタイマーも起動する</li>
-</ul>
-</li>
-<li>クレジット
+<li>一部の Compute Engine リソースは、リージョン内またはゾーン内にのみ存在する</li>
+<li><strong>リージョン</strong> とはリソースを実行できる特定の地理的な場所で、各リージョンには、1 つまたは複数の <strong>ゾーン</strong>がある
 <ul>
-<li>ラボの料金で、1 クレジットは通常 1 米ドルに相当</li>
-<li>入門レベルのラボには無料で受講できるものもある</li>
-<li>専門性が高いラボほど料金が高くなり、これは、タスクの処理内容が高度になり、必要な Google Cloud リソースが増えるため</li>
-</ul>
-</li>
-<li>時間
-<ul>
-<li>ラボは実行できる時間決まっており、 「ラボを開始」ボタンをクリックするとタイマーのカウントダウンが始まり、00:00:00 になると、一時的に作成された Google Cloud 環境とリソースが削除される</li>
-</ul>
-</li>
-<li>スコア
-<ul>
-<li>多くのラボにスコアが備わっている</li>
-<li>これは「アクティビティ トラッキング」と呼ばれる機能で、ラボに含まれる所定の手順を確実に完了するためのもの</li>
-<li>アクティビティ トラッキング機能が付いているラボに合格するには、すべての手順を順番に完了する必要があり、そのようにしてラボを完了した場合のみ、クレジットを受け取ることができる</li>
+<li>たとえば、リージョン <code>us-central1</code> は米国中部を指し、ゾーン <code>us-central1-a</code>、<code>us-central1-b</code>、<code>us-central1-c</code>、<code>us-central1-f</code> が含まれる</li>
+<li>GCP のゾーンは、 AWS でいう AZ：アベイラビリティゾーン</li>
 </ul>
 </li>
 </ul>
-<h2 ref="2-cloud-console" >2. Cloud Console</h2><a class="anchor" id="2-cloud-console"></a>
+</li>
+<li>リソース
+<ul>
+<li>リソースは大きく、 <strong>グローバルリソース</strong> 、 <strong>リージョンリソース</strong> 、 <strong>ゾーンリソース</strong> の 3 つのスコープに分類され、アクセス可能なリソースが決まる（ <a href="https://cloud.google.com/compute/docs/regions-zones/global-regional-zonal-resources?hl=ja">詳細</a> ）</li>
+<li>グローバルリソースには同じプロジェクトにある任意のリージョンまたはゾーンのリソースからアクセスできる</li>
+<li>リージョンリソースにアクセスできるのは、同じリージョン内のリソースだけ
+<ul>
+<li>インスタンスに静的 IP アドレスを割り当てるには、インスタンスが静的 IP と同じリージョンに存在している必要がある</li>
+</ul>
+</li>
+<li>ゾーンリソースにアクセスできるのは、同じゾーン内のリソースだけ
+<ul>
+<li>永続ディスクをインスタンスに接続するには、両リソースを同ゾーンに配置する必要がある</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>プロジェクト</strong>
+<ul>
+<li>リソースと課金を管理する単位
+<ul>
+<li>請求先アカウントをリンクすることで課金が有効</li>
+<li><a href="https://cloud.google.com/products/calculator?hl=ja">Pricing Calculator</a>（コスト見積のための Web UI）</li>
+</ul>
+</li>
+<li>すべての GCP リソースは 1 つのプロジェクトに関連付けられる</li>
+<li>各種設定と権限も含まれており、これを使用して、セキュリティルールとどのアカウントがどのリソースにアクセスできるかが指定される
+<ul>
+<li><a href="https://cloud.google.com/vpc/docs/shared-vpc?hl=ja">共有 VPC</a> または <a href="https://cloud.google.com/vpc/docs/vpc-peering?hl=ja">VPC ネットワークピアリング</a>を使用しない限り、あるプロジェクトが別のプロジェクトのリソースにアクセスすることはできない</li>
+</ul>
+</li>
+<li>複数のプロジェクトを束ねて管理するには <a href="https://cloud.google.com/resource-manager/docs/creating-managing-organization?hl=ja">組織</a> を使う</li>
+<li>プロジェクトは <strong>プロジェクト名</strong> （任意のプロジェクト表示名）、 <strong>プロジェクトID</strong> （カスタマイズ可能な識別子）、 <strong>プロジェクト番号</strong> （GCPから割り当てられる識別子）からなる</li>
+</ul>
+</li>
+</ul>
+<h2 ref="2-ツール" >2. ツール</h2><a class="anchor" id="2-ツール"></a>
+<h3 ref="21-cloud-console" >2.1. Cloud Console</h3><a class="anchor" id="21-cloud-console"></a>
 <p><a href="https://cloud.google.com/cloud-console/">Cloud Console</a>は、Google Cloud の開発ツールの中核であるウェブコンソール。<br>
 ログインするにはユーザー名とパスワードが必要で、後述の<a href="https://cloud.google.com/iam/">Cloud Identity and Access Management（Cloud IAM）</a>によりアクセス権限（ロール）管理される。</p>
-<h3 ref="21-プロジェクト" >2.1. プロジェクト</h3><a class="anchor" id="21-プロジェクト"></a>
-<p>Google Cloud のリソースはすべて、<a href="https://cloud.google.com/docs/overview/#projects">プロジェクト</a> に属しており、構築する対象をまとめて管理する 1 つの単位と考えることができる。<br>
-Cloud Console 上で選択できるプロジェクトは、グローバルで一意な <strong>プロジェクトID</strong> で管理される。<br>
-プロジェクトには ID の他にも、 <strong>プロジェクト名</strong> 、 <strong>プロジェクト番号</strong> があり、Google Cloud サービスを操作するときは、これらの識別子を頻繁に使用する。</p>
-<p>プロジェクトにはリソースとサービス（仮想マシンのプール、データベース セット、それらを接続するネットワークなど）が含まれる。さらに各種設定と権限も含まれており、これを使用して、セキュリティルールと誰がどのリソースにアクセスできるかが指定される。<br>
-大企業の、あるいは経験豊富な Google Cloud ユーザーの場合、Google Cloud のプロジェクトが数十から数千あるのは珍しくなく、組織によって Google Cloud の使用方法は異なるため、プロジェクトを使ってチーム別やプロダクト別などでクラウドコンピューティングサービスをまとめて管理する。<br>
-また、<a href="https://cloud.google.com/vpc/docs/shared-vpc?hl=ja">共有 VPC</a> または <a href="https://cloud.google.com/vpc/docs/vpc-peering?hl=ja">VPC ネットワークピアリング</a>を使用しない限り、あるプロジェクトが別のプロジェクトのリソースにアクセスすることはできない。<br>
-さらに、課金を有効にすると、各プロジェクトは 1 つの請求先アカウントに関連付けられる。</p>
-<h3 ref="22-google-cloud-サービス" >2.2. Google Cloud サービス</h3><a class="anchor" id="22-google-cloud-サービス"></a>
+<h3 ref="22-google-cloud-sdk" >2.2. Google Cloud SDK</h3><a class="anchor" id="22-google-cloud-sdk"></a>
+<p><a href="https://cloud.google.com/sdk/docs">Google Cloud SDK</a> は、GCP にホスティングされているリソースとアプリケーションの管理に使用できる一連のツール。<br>
+以下からなる。</p>
+<ul>
+<li>gcloud CLI： Google Cloud APIs の操作をコマンドラインで実施できる</li>
+<li>クライアントライブラリ：各プログラミング言語のクライアントライブラリ</li>
+<li>プロダクト固有のコマンドラインツール
+<ul>
+<li><code>gsutil</code> ： Cloud Storage</li>
+<li><code>bq</code> ： BigQuery</li>
+<li><code>kubectl</code> ： k8s</li>
+</ul>
+</li>
+</ul>
+<h4 ref="221-gcloud" >2.2.1. gcloud</h4><a class="anchor" id="221-gcloud"></a>
+<p>以下のように利用できる CLI ツール。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud GROUP COMMAND OPTIONS
+</code></pre></div><p>GROUP は多段になっており、  <code>gcloud compute images list</code> （ <code>compute image</code> が GROUP で <code>list</code> が COMMAND ）のように 2 コ以上続くこともある。<br>
+COMMAND は GROUP によって異なるが、共通的なものに以下がある。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">COMMAND</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">list</td>
+<td style="text-align:left">リソース一覧を表示</td>
+</tr>
+<tr>
+<td style="text-align:left">describe</td>
+<td style="text-align:left">指定したリソースの詳細を表示</td>
+</tr>
+<tr>
+<td style="text-align:left">create</td>
+<td style="text-align:left">指定したリソースを作成</td>
+</tr>
+<tr>
+<td style="text-align:left">update</td>
+<td style="text-align:left">指定したリソースを更新</td>
+</tr>
+<tr>
+<td style="text-align:left">delete</td>
+<td style="text-align:left">指定したリソースを削除</td>
+</tr>
+</tbody>
+</table>
+<p>たとえば、有効なアカウント名の一覧を取得するコマンドは以下。（ GROUP が 1 段の例）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud auth list
+
+Credentialed Accounts
+ACTIVE  ACCOUNT
+*       student-00-918550b6c355@qwiklabs.net
+To set the active account, run:
+    $ gcloud config set account <span style="color:#e6db74">`</span>ACCOUNT<span style="color:#e6db74">`</span>
+</code></pre></div><p>たとえば、プロジェクト ID の一覧を取得するコマンドは以下。（ GROUP が 2 段の例）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config list project
+
+<span style="color:#f92672">[</span>core<span style="color:#f92672">]</span>
+project <span style="color:#f92672">=</span> qwiklabs-gcp-44776a13dea667a6
+</code></pre></div><ul>
+<li><a href="https://cloud.google.com/sdk/gcloud">gcloud コマンドライン ツールの概要</a></li>
+<li><a href="https://cloud.google.com/sdk/gcloud/reference/?hl=ja">gcloud リファレンス</a></li>
+</ul>
+<h3 ref="23-cloud-shell" >2.3. Cloud Shell</h3><a class="anchor" id="23-cloud-shell"></a>
+<p><a href="https://cloud.google.com/shell/docs/features">Cloud Shell</a> はブラウザで機能するコマンド実行環境。<br>
+その実態は Debian ベースの仮想マシンで、さまざまな開発ツール（gcloud、git など）や、永続的な 5 GB のホーム ディレクトリが用意されている。<br>
+ターミナルにコマンドを入力して、Google Cloud プロジェクトのリソースやサービスを管理できる。<br>
+Cloud Shell を使用すると、Cloud Console を離れずに認証済みで最新のすべてのシェルコマンドを実行できる。<br>
+Google Cloud Console のタイトルバーで、「Cloud Shell をアクティブにする」 をクリックすることで利用できる。<br>
+Cloud Shell には固有のコマンドラインツールがあらかじめ実装されおり、メインの Google Cloud ツールキットは <a href="https://cloud.google.com/sdk/gcloud/">gcloud</a> で、リソース管理やユーザー認証など、プラットフォーム上のさまざまなタスクに使用される。<br>
+あらかじめインストールされてたツールキットのほかにも、Unix の標準コマンドや、nano などのテキスト エディタも備わっている。</p>
+<h3 ref="24-api-とサービス" >2.4. API とサービス</h3><a class="anchor" id="24-api-とサービス"></a>
+<p>Google Cloud API は、ビジネス管理から機械学習にまで及ぶさまざまな分野の API が 200 以上用意されており、サービスと同様に、すべて Google Cloud プロジェクト / アプリケーションと簡単に統合できる。<br>
+<a href="https://cloud.google.com/apis/design/">API 設計ガイド</a> で説明されているリソース指向の設計原則が適用されている。<br>
+なお、 Cloud API を利用する際は、各自で有効に設定する必要がある。（サイドメニュー「API とサービス」 -&gt; 「ライブラリ」から APIを検索して「有効にする」）</p>
+<ul>
+<li><a href="https://developers.google.com/apis-explorer/#p/">Google APIs Explorer</a></li>
+</ul>
+<h2 ref="3-リソース階層とアクセス制御" >3. リソース階層とアクセス制御</h2><a class="anchor" id="3-リソース階層とアクセス制御"></a>
+<h3 ref="31-cloud-identity-and-access-managementcloud-iam" >3.1. Cloud Identity and Access Management（Cloud IAM）</h3><a class="anchor" id="31-cloud-identity-and-access-managementcloud-iam"></a>
+<p><a href="https://cloud.google.com/iam/">Cloud Identity and Access Management（Cloud IAM）</a> は、「誰が」「どういう操作を」「何に対して」行う権限を持つかを管理するサービス。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">制御内容</th>
+<th style="text-align:left">具体例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">誰が</td>
+<td style="text-align:left">メンバー</td>
+</tr>
+<tr>
+<td style="text-align:left">どういう操作を</td>
+<td style="text-align:left">ロール</td>
+</tr>
+<tr>
+<td style="text-align:left">何に対して</td>
+<td style="text-align:left">リソース</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="32-メンバー" >3.2. メンバー</h3><a class="anchor" id="32-メンバー"></a>
+<p>リソースへのアクセスが許可される主体（「誰が」）には以下がある。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">主体</th>
+<th style="text-align:left">内容</th>
+<th style="text-align:left">具体例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Google アカウント</td>
+<td style="text-align:left">Google アカウントに関連づけられているメールアドレス</td>
+<td style="text-align:left"><code>@gmail.com</code> やその他ドメインのメールアドレス</td>
+</tr>
+<tr>
+<td style="text-align:left">Google グループ</td>
+<td style="text-align:left">Google アカウントとサービスアカウントの名前付きコレクション</td>
+<td style="text-align:left">グループ固有メールアドレス</td>
+</tr>
+<tr>
+<td style="text-align:left">サービスアカウント</td>
+<td style="text-align:left">個々のエンドユーザではなく、アプリケーションのアカウント</td>
+<td style="text-align:left"><code>[サービスアカウント]@[プロジェクトID].iam.gserviceaccount.com</code></td>
+</tr>
+<tr>
+<td style="text-align:left">G Suite ドメイン</td>
+<td style="text-align:left">組織のインターネットドメイン名</td>
+<td style="text-align:left"><code>example.com</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Identity ドメイン</td>
+<td style="text-align:left">組織のインターネットドメイン名（G Suite の機能にはアクセスできない）</td>
+<td style="text-align:left"><code>example.com</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>サービスアカウント
+<ul>
+<li>アプリケーションやサーバのための ID</li>
+<li>サービスアカウント事態もリソースで、人が「サービスアカウントとして実行」もできる</li>
+<li>サービスアカウントにうよって使われるキーは自動的に管理される</li>
+<li>ユーザがキーを作成・ダウンロードすることも可能</li>
+</ul>
+</li>
+</ul>
+<h3 ref="33-権限とロール" >3.3. 権限とロール</h3><a class="anchor" id="33-権限とロール"></a>
+<p>リソースに対する操作の権限は以下の命名規則で表現される。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">&lt;サービス名&gt;.&lt;リソース&gt;.&lt;動詞&gt;
+
+ex<span style="color:#f92672">)</span>
+compute.instance.delete
+compute.instance.start
+compute.instance.setMachineType
+</code></pre></div><h3 ref="34-ロールの種類" >3.4. ロールの種類</h3><a class="anchor" id="34-ロールの種類"></a>
+<p>ロールには以下の種類がある。（ <a href="https://cloud.google.com/iam/docs/understanding-roles/#primitive%5C_roles">詳細</a> ）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">ロール</th>
+<th style="text-align:left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">基本ロール</td>
+<td style="text-align:left"><strong>プロジェクト単位</strong> の権限セット。「オーナー」「編集者」「閲覧者」</td>
+</tr>
+<tr>
+<td style="text-align:left">事前定義ロール</td>
+<td style="text-align:left"><strong>1 サービス単位</strong> の権限セット。「&lt;サービス名&gt;オーナー」「&lt;サービス名&gt;編集者」「&lt;サービス名&gt;閲覧者」</td>
+</tr>
+<tr>
+<td style="text-align:left">カスタムロール</td>
+<td style="text-align:left">カスタムな権限セット。バケット一覧は取得できないが、特定のバケットには書き込める、とか。</td>
+</tr>
+</tbody>
+</table>
+<p>権限付与には <strong>最小権限の原則</strong> （より細かいロールで必要最低限の権限のみ付与する） を適用すること。<br>
+また、異なる権限を必要とする複数のサービスがある場合は、サービス毎に個別のサービスアカウントを作成し、各サービスアカウントに必要な権限のみ付与すること。<br>
+なお、基本ロールのそれぞれの権限は以下の通り。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">ロール名</th>
+<th style="text-align:left">権限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">閲覧者</td>
+<td style="text-align:left">既存のリソースやデータを表示する（ただし変更は不可能）など、状態に影響しない読み取り専用アクションに必要な権限。</td>
+</tr>
+<tr>
+<td style="text-align:left">編集者</td>
+<td style="text-align:left">すべての閲覧者権限と、状態を変更するアクション（既存のリソースの変更など）に必要な権限。</td>
+</tr>
+<tr>
+<td style="text-align:left">オーナー</td>
+<td style="text-align:left">すべての編集者権限と、次のアクションを実行するために必要な権限: プロジェクトおよびプロジェクト内のすべてのリソースの権限とロールを管理する、プロジェクトの課金情報を設定する。</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="35-リソース階層" >3.5. リソース階層</h3><a class="anchor" id="35-リソース階層"></a>
+<p>リソースは「 <strong>組織 &gt; フォルダ &gt; プロジェクト &gt; リソース</strong> 」のような階層構造になっている。</p>
+<ul>
+<li>組織
+<ul>
+<li>Google Cloud リソース階層のルートノード</li>
+<li>組織に適用されるポリシーは、組織のすべてのリソースの階層全体に適用される</li>
+<li>組織管理者はすべてのリソースを集中てきに管理する</li>
+</ul>
+</li>
+<li>フォルダ
+<ul>
+<li>プロジェクトをグループ化し、まとめて管理</li>
+<li>フォルダ内にはプロジェクトや他のフォルダを作成できる</li>
+<li>組織構造に合わせて使用できる</li>
+</ul>
+</li>
+<li>プロジェクト
+<ul>
+<li>ポリシーは基本的にプロジェクト以上の階層に割り当てる</li>
+<li>そして、上位に設定されたポリシーは下位に継承される</li>
+</ul>
+</li>
+<li>リソース
+<ul>
+<li>（省略）</li>
+</ul>
+</li>
+</ul>
+<h3 ref="36-アクセス制御のベストプラクティス" >3.6. アクセス制御のベストプラクティス</h3><a class="anchor" id="36-アクセス制御のベストプラクティス"></a>
+<ul>
+<li><strong>最小権限の原則</strong> （より細かいロールで必要最低限の権限のみ付与する）に従って Cloud IAM のロールを付与する</li>
+<li><strong>事前定義ロール</strong> を使用する（適切な事前定義ロールがない場合のみ <strong>カスタムロール</strong> を使用する）</li>
+<li>リソースレベルではなく、 <strong>組織またはプロジェクト</strong> レベルでポリシーを設定する</li>
+<li>個々のユーザではなく、 <strong>グループ</strong> にロールを付与する</li>
+<li>ラベルを使って、リソースのアノテーションをつけ、グループ化・フィルタリングを行う</li>
+<li>異なる権限を必要とする複数サービスがある場合は、サービス毎に個別のサービスアカウントを作成し、必要な権限のみ付与する</li>
+</ul>
+<h3 ref="37-監査ログ" >3.7. 監査ログ</h3><a class="anchor" id="37-監査ログ"></a>
+<ul>
+<li>管理アクティビティ監査ログ
+<ul>
+<li>リソース構成やメタデータ変更オペレーションが記録される</li>
+<li>デフォルトで有効で無効にできない</li>
+</ul>
+</li>
+<li>データアクセス監査ログ
+<ul>
+<li>リソース構成やメタデータ読み取り API 操作が記録される</li>
+<li>デフォルトは無効</li>
+</ul>
+</li>
+<li>システムイベント監査ログ
+<ul>
+<li>Google システムによって生成される管理アクション</li>
+</ul>
+</li>
+</ul>
+<h2 ref="4-google-cloud-サービス" >4. Google Cloud サービス</h2><a class="anchor" id="4-google-cloud-サービス"></a>
 <p>Cloud Console から Google Cloud が提供するサービスを利用することができ、以下のカテゴリで構成される。（<a href="https://cloud.google.com/docs/overview/cloud-platform-services#top_of_page">詳細</a>）</p>
 <ul>
 <li>コンピューティングとホスティング</li>
@@ -805,64 +1085,6 @@ Cloud Console 上で選択できるプロジェクトは、グローバルで一
 <li>機械学習</li>
 </ul>
 <p><a href="https://cloud.google.com/products?hl=ja">プロダクトとサービスの一覧</a></p>
-<h3 ref="23-ロールと権限" >2.3. ロールと権限</h3><a class="anchor" id="23-ロールと権限"></a>
-<p>前述したように、Google Cloud には、クラウドコンピューティングサービスの他に、誰がどのリソースにアクセスできるかを定義する権限とロールのコレクションもある。<br>
-<a href="https://cloud.google.com/iam/">Cloud Identity and Access Management（Cloud IAM）</a> サービスを使って、このようなロールと権限を管理できる。</p>
-<p>Google Cloud には 3 つの <a href="https://cloud.google.com/iam/docs/understanding-roles/#primitive%5C_roles">基本ロール</a> がある。<br>
-基本ロールは <strong>プロジェクトレベル</strong> の権限を設定し、別途指定しない限り、すべての Google Cloud サービスへのアクセスと管理を制御する。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">ロール名</th>
-<th style="text-align:left">権限</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">roles/viewer（閲覧者）</td>
-<td style="text-align:left">既存のリソースやデータを表示する（ただし変更は不可能）など、状態に影響しない読み取り専用アクションに必要な権限。</td>
-</tr>
-<tr>
-<td style="text-align:left">roles/editor（編集者）</td>
-<td style="text-align:left">すべての閲覧者権限と、状態を変更するアクション（既存のリソースの変更など）に必要な権限。</td>
-</tr>
-<tr>
-<td style="text-align:left">roles/owner（オーナー）</td>
-<td style="text-align:left">すべての編集者権限と、次のアクションを実行するために必要な権限: プロジェクトおよびプロジェクト内のすべてのリソースの権限とロールを管理する、プロジェクトの課金情報を設定する。</td>
-</tr>
-</tbody>
-</table>
-<h3 ref="24-api-とサービス" >2.4. API とサービス</h3><a class="anchor" id="24-api-とサービス"></a>
-<p>Google Cloud API は、ビジネス管理から機械学習にまで及ぶさまざまな分野の API が 200 以上用意されており、サービスと同様に、すべて Google Cloud プロジェクト / アプリケーションと簡単に統合できる。<br>
-<a href="https://cloud.google.com/apis/design/">API 設計ガイド</a> で説明されているリソース指向の設計原則が適用されている。<br>
-なお、 Cloud API を利用する際は、各自で有効に設定する必要がある。（サイドメニュー「API とサービス」 -&gt; 「ライブラリ」から APIを検索して「有効にする」）</p>
-<ul>
-<li><a href="https://developers.google.com/apis-explorer/#p/">Google APIs Explorer</a></li>
-</ul>
-<h3 ref="25-cloud-shell" >2.5. Cloud Shell</h3><a class="anchor" id="25-cloud-shell"></a>
-<p><a href="https://cloud.google.com/shell/docs/features">Cloud Shell</a> はブラウザで機能するコマンド実行環境。<br>
-その実態は Debian ベースの仮想マシンで、さまざまな開発ツール（gcloud、git など）や、永続的な 5 GB のホーム ディレクトリが用意されている。<br>
-ターミナルにコマンドを入力して、Google Cloud プロジェクトのリソースやサービスを管理できる。<br>
-Cloud Shell を使用すると、Cloud Console を離れずにすべてのシェルコマンドを実行できる。<br>
-Google Cloud Console のタイトルバーで、「Cloud Shell をアクティブにする」 をクリックすることで利用できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud auth list
-
-Credentialed Accounts
-ACTIVE  ACCOUNT
-*       student-00-918550b6c355@qwiklabs.net
-To set the active account, run:
-    $ gcloud config set account <span style="color:#e6db74">`</span>ACCOUNT<span style="color:#e6db74">`</span>
-</code></pre></div><p>Cloud Shell には固有のコマンドラインツールがあらかじめ実装されおり、メインの Google Cloud ツールキットは <a href="https://cloud.google.com/sdk/gcloud/">gcloud</a> で、リソース管理やユーザー認証など、プラットフォーム上のさまざまなタスクに使用されます。<br>
-今実行したのは <code>gcloud</code> コマンドの <a href="https://cloud.google.com/sdk/gcloud/reference/auth/list">auth list</a> で、有効なアカウント名を一覧表示する。<br>
-Cloud Shell には、あらかじめインストールされてたツールキットのほかに、Unix の標準コマンドや、nano などのテキスト エディタも備わっている。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># プロジェクト ID 一覧</span>
-$ gcloud config list project
-<span style="color:#f92672">[</span>core<span style="color:#f92672">]</span>
-project <span style="color:#f92672">=</span> qwiklabs-gcp-44776a13dea667a6
-</code></pre></div><ul>
-<li><a href="https://cloud.google.com/sdk/gcloud">gcloud コマンドライン ツールの概要</a></li>
-<li><a href="https://cloud.google.com/sdk/gcloud/reference/?hl=ja">gcloud リファレンス</a></li>
-</ul>
 		</div>
 
 

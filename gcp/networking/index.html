@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-06T00:05:01 JST">
+<meta name="revised" content="2021-04-06T22:12:33 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -748,7 +748,9 @@ if (!doNotTrack) {
 
 	<div class="content">
 	    <ol>
+<li>コンセプト</li>
 <li>VPC</li>
+<li>負荷分散</li>
 </ol>
 <ul>
 <li><a href="https://cloud.google.com/products/networking">Google Cloud ネットワーキング プロダクト</a></li>
@@ -758,13 +760,138 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 ref="1-vpc" >1. VPC</h2><a class="anchor" id="1-vpc"></a>
+<h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
+<ul>
+<li>VPC ネットワーク
+<ul>
+<li>グローバルリソース、特定のリージョンやゾーンに関連付けできない</li>
+<li>リージョンを跨げる、IP レンジは指定しない</li>
+<li>VPC 内であれば、異なるリージョンのサブネット同士でプライベート IP で通信可能</li>
+<li>異なる VPC に所属するサブネット同士はプライベート IP で通信できないため、インターネット経由/Cloud VPN/VPCピアリングなどを利用する</li>
+</ul>
+</li>
+<li>サブネット
+<ul>
+<li>リージョンリソース、サブネット毎に IP アドレスの範囲が定義される</li>
+<li>ゾーンを跨げる</li>
+</ul>
+</li>
+<li>ファイアウォールルール
+<ul>
+<li>VM インスタンスで発生するトラフィックをルールベースで許可・拒否</li>
+<li>上り（インスタンスに向かっていくトラフィック）・下り（インスタンスから出ていくトラフィック）それぞれで設定する</li>
+<li>タグやサービスアカウントを適用条件に加えることもできる</li>
+<li>以下の暗黙のルールがデフォルトで適用されている（ Cloud Console に表示されない）
+<ul>
+<li>暗黙の下り許可ルール：すべてのトラフィックを許可（アクション： <code>allow</code> 、宛先： <code>0.0.0.0/0</code> ）</li>
+<li>暗黙の上り許可ルール：すべてのトラフィックを許可（アクション： <code>deny</code> 、送信元： <code>0.0.0.0/0</code> ）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 ref="2-vpc" >2. VPC</h2><a class="anchor" id="2-vpc"></a>
 <p>Virtual Private Cloud（VPC）は、Compute Engine 仮想マシン（VM）インスタンス、Google Kubernetes Engine（GKE）クラスタ、<a href="https://cloud.google.com/appengine/docs/flexible">App Engine フレキシブル環境</a> にネットワーキング機能を提供する。</p>
-<h3 ref="11-vpc-ネットワーク" >1.1. VPC ネットワーク</h3><a class="anchor" id="11-vpc-ネットワーク"></a>
+<h3 ref="21-vpc-ネットワーク" >2.1. VPC ネットワーク</h3><a class="anchor" id="21-vpc-ネットワーク"></a>
 <ul>
 <li>VPC ネットワークは、データセンター内のリージョン仮想サブネットワーク（ <strong>サブネット</strong> ）のリストで構成されるグローバルリソースであり、すべてグローバルな広域ネットワークで接続される。</li>
 <li><strong>ルート</strong>、<strong>ファイアウォール</strong> ルールを含む VPC ネットワークは <strong>グローバルリソース</strong> 。特定のリージョンやゾーンには関連付けられていない。</li>
 <li>サブネットは <a href="https://cloud.google.com/compute/docs/regions-zones/global-regional-zonal-resources#regionalresources">リージョンリソース</a> 。サブネットごとに IP アドレスの範囲が定義される。（ VPC には範囲が定義されない）</li>
+</ul>
+<h3 ref="22-vpc-のオプション" >2.2. VPC のオプション</h3><a class="anchor" id="22-vpc-のオプション"></a>
+<p>VPC のオプション、相互接続には以下のサービスがある。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">共有 VPC</td>
+<td style="text-align:left">組織内の複数プロジェクトから共通の VPC として利用できる</td>
+</tr>
+<tr>
+<td style="text-align:left">VPC ピアリング</td>
+<td style="text-align:left">異なる VPC 間でピアリングを形成し、組織・プロジェクトが異なる VPC であっても互いのサブネット同士がプライベート IP で通信できる</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud VPN</td>
+<td style="text-align:left">IPSec 接続を使用して VPC 同士、またはオンプレミスと VPC を接続する</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Interconnect</td>
+<td style="text-align:left">オンプレミスと VPC を専用線接続し、低レイテンシかつ高可用の接続を実現</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="23-サブネット作成モード" >2.3. サブネット作成モード</h3><a class="anchor" id="23-サブネット作成モード"></a>
+<p>サブネット作成モードには、自動モードとカスタムモードの 2 種類ある。</p>
+<ul>
+<li>自動モード
+<ul>
+<li>すべてのリージョンに 1 つずつサブネットが自動的に作成</li>
+<li>事前定義された IP 範囲（ <code>10.128.0.0/9</code> ）が使用される</li>
+<li>GCP に新しくリージョンが追加されると、サブネットも自動的に追加される</li>
+<li>カスタムモードへ変更可能</li>
+</ul>
+</li>
+<li>カスタムモード
+<ul>
+<li>すべてユーザが作成する必要がある</li>
+<li>サブネットの IP 範囲は作成後に変更可能であるが、VPC 内の他のサブネットと範囲が重複しないようにする必要があり、且つ、縮小は不可能</li>
+</ul>
+</li>
+</ul>
+<h2 ref="3-負荷分散" >3. 負荷分散</h2><a class="anchor" id="3-負荷分散"></a>
+<p>Cloud Load Balancing　の負荷分散の種類には以下がある。</p>
+<p>|種類|内部/外部|リージョン/グローバル|プロキシ/パススルー|
+|内部 TCP/UDP |内部|リージョン限定|パススルー|
+|内部 HTTP(S) |内部|リージョン限定|プロキシ|
+| TCP/UDP ネットワーク|外部|リージョン限定|パススルー|
+| TCP プロキシ|外部|グローバル|プロキシ|
+| SSL プロキシ|外部|グローバル|プロキシ|
+| 外部 HTTP(S) |外部|グローバル|プロキシ|</p>
+<ul>
+<li>内部/外部
+<ul>
+<li>外部：インターネットからのトラフィック</li>
+<li>内部： VPC 内のトラフィック</li>
+</ul>
+</li>
+<li>リージョン/グローバル
+<ul>
+<li>グローバル
+<ul>
+<li>バックエンドが複数リージョンに分散</li>
+<li>単一のエニーキャスト IP アドレスを使用してアクセスを提供（ IPv6 もある）</li>
+<li>「外部」かつ「プロキシ」の負荷分散</li>
+</ul>
+</li>
+<li>リージョン
+<ul>
+<li>バックエンドが同一リージョン内</li>
+<li>IPv4 のみ</li>
+<li>「内部」または「パススルー」の負荷分散</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>プロキシ/パススルー
+<ul>
+<li>プロキシ（ NAT 型）
+<ul>
+<li>LB で一度接続終端する（送信元 IP が LB の内部 IP に変わる）ため、ファイアウォールルールは VPC ネットワーク内を許可する必要がある</li>
+</ul>
+</li>
+<li>パススルー（ DSR 型）
+<ul>
+<li>接続終端しないのでクライアントの IP がそのまま届くため、ファイアウォールルールは <code>0.0.0.0/0</code> からのトラフィックを許可する必要がある</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 		</div>
 

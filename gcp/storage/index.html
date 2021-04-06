@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-06T00:05:01 JST">
+<meta name="revised" content="2021-04-06T22:12:33 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -754,6 +754,39 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
+<h2 ref="1-google-cloud-storage" >1. Google Cloud Storage</h2><a class="anchor" id="1-google-cloud-storage"></a>
+<p>AWS でいう S3 。</p>
+<h3 ref="11-ロケーションタイプ" >1.1. ロケーションタイプ</h3><a class="anchor" id="11-ロケーションタイプ"></a>
+<ul>
+<li>マルチリージョン
+<ul>
+<li>選択した地域（ 3 箇所以上のリージョンを含む）に分散してデータを保存</li>
+</ul>
+</li>
+<li>デュアルリージョン
+<ul>
+<li>2 箇所のリージョンに分散してデータを保存</li>
+</ul>
+</li>
+<li>リージョン
+<ul>
+<li>単一リージョンにデータを保存</li>
+</ul>
+</li>
+</ul>
+<h3 ref="12-ストレージクラス" >1.2. ストレージクラス</h3><a class="anchor" id="12-ストレージクラス"></a>
+<p>|ストレージクラス|最小保存期間|ユースケース|
+|Standard|なし|頻繁にアクセスされ短時間だけ保存されるデータ|
+|Nearline|30日|月に 1 回程度したアクセスされないデータ|
+|Coldline|90日|四半期に 1 回程度したアクセスされないデータ|
+|Archive|365日|年に 1 回程度したアクセスされないデータ|</p>
+<h3 ref="13-ライフサイクル" >1.3. ライフサイクル</h3><a class="anchor" id="13-ライフサイクル"></a>
+<p>古いデータはアーカイブしたり削除したいといったニーズに対応する、オブジェクト管理に関する運用を効率化するための機構。<br>
+複数の条件と、その条件にマッチした際の操作（削除 or ストレージクラスの変更）を設定できる。</p>
+<h3 ref="14-バージョニング" >1.4. バージョニング</h3><a class="anchor" id="14-バージョニング"></a>
+<p>説明省略。</p>
+<h3 ref="15-gsutil" >1.5. <code>gsutil</code></h3><a class="anchor" id="15-gsutil"></a>
+<p><code>gsutil</code> コマンドを利用して管理できる。</p>
 		</div>
 
 
