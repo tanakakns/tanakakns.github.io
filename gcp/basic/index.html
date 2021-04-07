@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-06T22:12:33 JST">
+<meta name="revised" content="2021-04-08T00:15:57 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -751,6 +751,7 @@ if (!doNotTrack) {
 <li><a href="#1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
 <li><a href="#2-%E3%83%84%E3%83%BC%E3%83%AB">ツール</a></li>
 <li><a href="#3-%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E9%9A%8E%E5%B1%A4%E3%81%A8%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1">リソース階層とアクセス制御</a></li>
+<li>リソースの管理</li>
 <li><a href="#4-google-cloud-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9">Google Cloud サービス</a></li>
 </ol>
 <h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
@@ -879,6 +880,7 @@ Cloud Shell を使用すると、Cloud Console を離れずに認証済みで最
 Google Cloud Console のタイトルバーで、「Cloud Shell をアクティブにする」 をクリックすることで利用できる。<br>
 Cloud Shell には固有のコマンドラインツールがあらかじめ実装されおり、メインの Google Cloud ツールキットは <a href="https://cloud.google.com/sdk/gcloud/">gcloud</a> で、リソース管理やユーザー認証など、プラットフォーム上のさまざまなタスクに使用される。<br>
 あらかじめインストールされてたツールキットのほかにも、Unix の標準コマンドや、nano などのテキスト エディタも備わっている。</p>
+<p>なお、Cloud Shell ホームディレクトリ（ <code>$HOME</code> ）の内容は、複数のプロジェクトおよびすべての Cloud Shell セッション間で保持され、仮想マシンを終了して再起動した後でも消えずに残りる。</p>
 <h3 ref="24-api-とサービス" >2.4. API とサービス</h3><a class="anchor" id="24-api-とサービス"></a>
 <p>Google Cloud API は、ビジネス管理から機械学習にまで及ぶさまざまな分野の API が 200 以上用意されており、サービスと同様に、すべて Google Cloud プロジェクト / アプリケーションと簡単に統合できる。<br>
 <a href="https://cloud.google.com/apis/design/">API 設計ガイド</a> で説明されているリソース指向の設計原則が適用されている。<br>
@@ -1074,7 +1076,43 @@ compute.instance.setMachineType
 </ul>
 </li>
 </ul>
-<h2 ref="4-google-cloud-サービス" >4. Google Cloud サービス</h2><a class="anchor" id="4-google-cloud-サービス"></a>
+<h2 ref="4-リソースの管理" >4. リソースの管理</h2><a class="anchor" id="4-リソースの管理"></a>
+<p>ここまでで出たリソースを管理してみる。<br>
+基本 <code>gcloud</code> コマンドでの管理とする。</p>
+<h3 ref="41-プロジェクト" >4.1. プロジェクト</h3><a class="anchor" id="41-プロジェクト"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud projects COMMAND <span style="color:#f92672">[</span>GCLOUD_WIDE_FLAG ...<span style="color:#f92672">]</span>
+
+$ gcloud projects --help <span style="color:#75715e"># コマンドの help</span>
+</code></pre></div><p><code>gcloud projects</code> コマンドには「プロジェクトに対する CRUD」と「プロジェクトの IAMに関する操作」を実施できる。<br>
+<a href="https://www.qwiklabs.com/focuses/2794?parent=catalog">Qwiklabs と Google Cloud の概要</a> のラボ環境 Cloud Shell などを利用して実際に実行してみる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># プロジェクトの作成</span>
+$ gcloud projects create <span style="color:#f92672">[</span>PROJECT_ID<span style="color:#f92672">]</span>
+
+<span style="color:#75715e"># プロジェクトの一覧を取得 # プロジェクトが作成されていることを確認する</span>
+$ gcloud projects list
+PROJECT_ID                    NAME                          PROJECT_NUMBER
+qwiklabs-gcp-02-eac86d9938ef  qwiklabs-gcp-02-eac86d9938ef  <span style="color:#ae81ff">264608401336</span> <span style="color:#75715e"># これが作成したプロジェクトとする</span>
+
+<span style="color:#75715e"># プロジェクトの IAM ポリシーを取得 # 権限毎にユーザ・グループ・サービスアカウントが表示される</span>
+$ gcloud projects get-iam-policy qwiklabs-gcp-02-eac86d9938ef
+bindings:
+- members:
+  - serviceAccount:qwiklabs-gcp-02-eac86d9938ef@qwiklabs-gcp-02-eac86d9938ef.iam.gserviceaccount.com
+  - user:student-02-843d65d5d79e@qwiklabs.net <span style="color:#75715e"># 現在のユーザ</span>
+  role: roles/editor
+- members:
+  - serviceAccount:qwiklabs-gcp-02-eac86d9938ef@qwiklabs-gcp-02-eac86d9938ef.iam.gserviceaccount.com
+  role: roles/owner
+- members:
+  - serviceAccount:qwiklabs-gcp-02-eac86d9938ef@qwiklabs-gcp-02-eac86d9938ef.iam.gserviceaccount.com
+  - user:student-02-843d65d5d79e@qwiklabs.net <span style="color:#75715e"># 現在のユーザ</span>
+  role: roles/viewer
+etag: BwW_ToiGehg<span style="color:#f92672">=</span>
+version: <span style="color:#ae81ff">1</span>
+
+<span style="color:#75715e"># メンバーにプロジェクトの権限を付与する # なお、リソースはプロジェクトなのでロールは基本ロールの「&#39;roles/browser&#39;」「&#39;roles/editor&#39;」「&#39;roles/owner&#39;」のみ</span>
+gcloud projects add-iam-policy-binding <span style="color:#f92672">[</span>PROJECT_ID<span style="color:#f92672">]</span> --member<span style="color:#f92672">=</span>MEMBER --role<span style="color:#f92672">=</span>ROLE
+</code></pre></div><h2 ref="5-google-cloud-サービス" >5. Google Cloud サービス</h2><a class="anchor" id="5-google-cloud-サービス"></a>
 <p>Cloud Console から Google Cloud が提供するサービスを利用することができ、以下のカテゴリで構成される。（<a href="https://cloud.google.com/docs/overview/cloud-platform-services#top_of_page">詳細</a>）</p>
 <ul>
 <li>コンピューティングとホスティング</li>

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-06T22:12:33 JST">
+<meta name="revised" content="2021-04-08T00:15:57 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -748,8 +748,9 @@ if (!doNotTrack) {
 
 	<div class="content">
 	    <ol>
-<li>サービス一覧</li>
-<li>Compute Engine</li>
+<li><a href="#1-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E4%B8%80%E8%A6%A7">サービス一覧</a></li>
+<li><a href="#2-compute-engine">Compute Engine</a></li>
+<li><a href="#3-google-kubernetes-engine">Google Kubernetes Engine</a></li>
 </ol>
 <h2 ref="1-サービス一覧" >1. サービス一覧</h2><a class="anchor" id="1-サービス一覧"></a>
 <p><a href="https://cloud.google.com/products/compute">Google Cloud のコンピューティング プロダクト</a></p>
@@ -812,8 +813,10 @@ if (!doNotTrack) {
 <p><a href="https://cloud.google.com/compute/docs/how-to?hl=ja">公式ガイド</a></p>
 <p><strong>Compute Engine</strong> は Google のインフラストラクチャ上に仮想マシンを構築するサービス。</p>
 <ol>
-<li><a href="#1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
-<li><a href="#2-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E4%BD%9C%E6%88%90">インスタンス作成</a></li>
+<li><a href="#2-1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
+<li><a href="#2-2-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E4%BD%9C%E6%88%90">インスタンス作成</a></li>
+<li><a href="#2-3-%E5%8D%98%E4%B8%80%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%83%8E%E3%83%BC%E3%83%89%E3%81%AB%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E4%BD%9C%E6%88%90">単一テナントノードにインスタンス作成</a></li>
+<li><a href="#2-4-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A">インスタンスへの接続</a></li>
 </ol>
 <p>（教材メモ：https://www.qwiklabs.com/focuses/3563?parent=catalog）</p>
 <h3 ref="21-コンセプト" >2.1. コンセプト</h3><a class="anchor" id="21-コンセプト"></a>
@@ -996,10 +999,78 @@ if (!doNotTrack) {
 </code></pre></div><p><a href="https://cloud.google.com/compute/docs/instance-templates/create-instance-templates?hl=ja">その他のユースケース</a></p>
 <h3 ref="22-インスタンス作成" >2.2. インスタンス作成</h3><a class="anchor" id="22-インスタンス作成"></a>
 <h4 ref="221-デフォルト値の設定" >2.2.1. デフォルト値の設定</h4><a class="anchor" id="221-デフォルト値の設定"></a>
-<p><code>gcloud</code> コマンドのデフォルトリージョンの設定。</p>
+<p>まずは、デフォルト値を以下のコマンドで確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+$ gcloud compute project-info describe --project &lt;your_project_ID&gt;
+
+<span style="color:#75715e"># 具体例</span>
+$ gcloud compute project-info describe --project qwiklabs-gcp-00-97e14e7c9a36
+commonInstanceMetadata:
+  fingerprint: e-kQ-2nHXX0<span style="color:#f92672">=</span>
+  items:
+  - key: ssh-keys
+    value: student-00-76522ecf0729:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC499dU9Bd3DvUOav+TicjmG5p0S6ip2z4gCpjiKjiqxTeeAT233lGxBbZ0MHrBGoZRWkD9OSMJ2Bpt//DFUmXDKI57ueSF7w0DiiKZ
+/aMd3uVC2BNk8yUcCgK5PMXCs/tOvUHDgffXPoxYYJFiUeVqvBhfSKiF9GnARJegPDFB+ox7QGhW2vfPvUiOEl5fyu/qKBu5IG0lNnLC/24J6+ogF/Ri3nUjt8PtuBUKRjlJyky0LQ+c5gnqM2g2cRqgCB15T5DO8w3edOPyrre3qMT
+ZFNQjEqpx9NU3ABlLM/0LVPeksmXr/FgyT7nZDrkrvryd9YnkaN58gnndhwAsBz49
+      student-00-76522ecf0729@qwiklabs.net
+  - key: enable-oslogin
+    value: <span style="color:#e6db74">&#39;true&#39;</span>
+  - key: google-compute-default-zone   <span style="color:#75715e"># デフォルトのゾーン</span>
+    value: us-central1-a
+  - key: google-compute-default-region <span style="color:#75715e"># デフォルトのリージョン</span>
+    value: us-central1
+  kind: compute#metadata
+creationTimestamp: <span style="color:#e6db74">&#39;2021-04-05T00:24:25.019-07:00&#39;</span>
+defaultNetworkTier: PREMIUM
+defaultServiceAccount: 123007011495-compute@developer.gserviceaccount.com
+id: <span style="color:#e6db74">&#39;8530956731357267399&#39;</span>
+kind: compute#project
+name: qwiklabs-gcp-00-97e14e7c9a36
+quotas:
+- limit: 1000.0
+  metric: SNAPSHOTS
+（省略）
+- limit: 15.0
+  metric: INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES
+  usage: 0.0
+selfLink: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-97e14e7c9a36
+xpnProjectStatus: UNSPECIFIED_XPN_PROJECT_STATUS
+</code></pre></div><p>以下のコマンドのデフォルトリージョンの設定。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config set compute/region &lt;REGION&gt;
-</code></pre></div><p><code>gcloud</code> コマンドのデフォルトゾーンの設定。</p>
+</code></pre></div><p>以下のコマンドのデフォルトゾーンの設定。（なお、ゾーンにリージョン情報も含まれるため、ゾーンリソースの場合はこれだけでもいいかも）</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config set compute/zone &lt;ZONE&gt;
+</code></pre></div><p>また、コマンドでの設定ではなく以下の環境変数でも設定可能。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT_ID<span style="color:#f92672">=</span>&lt;your_project_ID&gt;
+$ export ZONE<span style="color:#f92672">=</span>&lt;your_zone&gt;
+</code></pre></div><p>また、現在使用している環境の構成は以下で取得。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config list
+
+<span style="color:#f92672">[</span>component_manager<span style="color:#f92672">]</span>
+disable_update_check <span style="color:#f92672">=</span> True
+<span style="color:#f92672">[</span>compute<span style="color:#f92672">]</span>
+gce_metadata_read_timeout_sec <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>
+<span style="color:#f92672">[</span>core<span style="color:#f92672">]</span>
+account <span style="color:#f92672">=</span> student-00-76522ecf0729@qwiklabs.net
+disable_usage_reporting <span style="color:#f92672">=</span> True
+project <span style="color:#f92672">=</span> qwiklabs-gcp-00-97e14e7c9a36
+<span style="color:#f92672">[</span>metrics<span style="color:#f92672">]</span>
+environment <span style="color:#f92672">=</span> devshell
+Your active configuration is: <span style="color:#f92672">[</span>cloudshell-5813<span style="color:#f92672">]</span>
+
+<span style="color:#75715e"># すべての構成を取得する場合</span>
+$ gcloud config list --all
+
+<span style="color:#f92672">[</span>accessibility<span style="color:#f92672">]</span>
+screen_reader <span style="color:#f92672">(</span>unset<span style="color:#f92672">)</span>
+<span style="color:#f92672">[</span>ai<span style="color:#f92672">]</span>
+region <span style="color:#f92672">(</span>unset<span style="color:#f92672">)</span>
+<span style="color:#f92672">[</span>ai_platform<span style="color:#f92672">]</span>
+region <span style="color:#f92672">(</span>unset<span style="color:#f92672">)</span>
+<span style="color:#f92672">[</span>app<span style="color:#f92672">]</span>
+cloud_build_timeout <span style="color:#f92672">(</span>unset<span style="color:#f92672">)</span>
+promote_by_default <span style="color:#f92672">(</span>unset<span style="color:#f92672">)</span>
+stop_previous_version <span style="color:#f92672">(</span>unset<span style="color:#f92672">)</span>
+（省略）
 </code></pre></div><h4 ref="222-ブート永続ディスク" >2.2.2. ブート永続ディスク</h4><a class="anchor" id="222-ブート永続ディスク"></a>
 <p>ブート永続ディスクは、OS イメージが格納されている小規模なディスクで大きく以下の 2 種類ある。</p>
 <ul>
@@ -1026,9 +1097,20 @@ coreos-stable-1911-3-0-v20181106  coreos-cloud  coreos-stable              READY
 <span style="color:#f92672">(</span>略<span style="color:#f92672">)</span>
 </code></pre></div><h4 ref="223-インスタンス作成" >2.2.3. インスタンス作成</h4><a class="anchor" id="223-インスタンス作成"></a>
 <p><a href="https://cloud.google.com/sdk/gcloud/reference/compute/instances/create?hl=ja">gcloud compute instances create</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute instances create INSTANCE_NAMES <span style="color:#f92672">[</span>INSTANCE_NAMES …<span style="color:#f92672">]</span> <span style="color:#ae81ff">\
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+$ gcloud compute instances create INSTANCE_NAMES <span style="color:#f92672">[</span>INSTANCE_NAMES …<span style="color:#f92672">]</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    <span style="color:#f92672">[</span>--image<span style="color:#f92672">=</span>IMAGE | --image-family<span style="color:#f92672">=</span>IMAGE_FAMILY<span style="color:#f92672">]</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --image-project<span style="color:#f92672">=</span>IMAGE_PROJECT
+
+<span style="color:#75715e"># 具体例</span>
+$ gcloud compute instances create gcelab2 --machine-type n1-standard-2 --zone us-central1-c
+
+Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-03-7b6d0cd2d87a/zones/us-central1-c/instances/gcelab2<span style="color:#f92672">]</span>.
+NAME     ZONE           MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP   STATUS
+gcelab2  us-central1-c  n1-standard-2               10.128.0.3   34.70.76.162  RUNNING
+<span style="color:#75715e"># default で以下が適用されている</span>
+<span style="color:#75715e"># - Debian 10 (buster)</span>
+<span style="color:#75715e"># - インスタンスと同じ名前のルート永続ディスクが自動的にインスタンスに組み込まれる</span>
 </code></pre></div><ul>
 <li><code>VM_NAME</code> ：インスタンス名</li>
 <li><code>IMAGE</code> （公開イメージの必須バージョン） or <code>IMAGE_FAMILY</code> （イメージファミリ名）
@@ -1083,8 +1165,75 @@ gcelab2  us-central1-c  n1-standard-2 ...    RUNNING
 </span><span style="color:#ae81ff"></span>  --autoscaler-mode mode <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --max-nodes max-nodes <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --min-nodes min-nodes
-</code></pre></div><h4 ref="24-インスタンスへの接続" >2.4. インスタンスへの接続</h4><a class="anchor" id="24-インスタンスへの接続"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute ssh --project<span style="color:#f92672">=</span>PROJECT_ID --zone<span style="color:#f92672">=</span>ZONE VM_NAME
+</code></pre></div><h3 ref="24-インスタンスへの接続" >2.4. インスタンスへの接続</h3><a class="anchor" id="24-インスタンスへの接続"></a>
+<p>Cloud Console にて「サイドメニュー」-&gt;「Compute Engine」-&gt;「 VM インスタンス」と選択し、該当インスタンスのレコードで「 SSH 」をクリックするとポップアップしてターミナルが立ち上がる。<br>
+もしくは、以下のコマンドを実行する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USEGE</span>
+$ gcloud compute ssh <span style="color:#f92672">[</span>インスタンス名<span style="color:#f92672">]</span> --project<span style="color:#f92672">=</span>PROJECT_ID --zone<span style="color:#f92672">=</span>ZONE VM_NAME
+
+<span style="color:#75715e"># 具体例（Pass Phrase は空でいい）</span>
+$ gcloud compute ssh gcelab2 --zone us-central1-c
+</code></pre></div><p>接続できたら、以下のコマンドの管理者権限になる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo su -
+</code></pre></div><p>ちなみに Linux は SSH 、 Windows は RDP で接続する。</p>
+<h2 ref="3-google-kubernetes-engine" >3. Google Kubernetes Engine</h2><a class="anchor" id="3-google-kubernetes-engine"></a>
+<ol>
+<li><a href="#3-1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
+<li><a href="#3-2-%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E4%BD%9C%E6%88%90">クラスタ作成</a></li>
+</ol>
+<h3 ref="31-コンセプト" >3.1. コンセプト</h3><a class="anchor" id="31-コンセプト"></a>
+<h3 ref="32-クラスタ作成" >3.2. クラスタ作成</h3><a class="anchor" id="32-クラスタ作成"></a>
+<p>デフォルトのコンピューティング ゾーンを設定する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config set compute/zone us-central1-a
+
+Updated property <span style="color:#f92672">[</span>compute/zone<span style="color:#f92672">]</span>.
+</code></pre></div><p>GKE クラスタを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+$ gcloud container clusters create <span style="color:#f92672">[</span>CLUSTER-NAME<span style="color:#f92672">]</span>
+
+<span style="color:#75715e"># 具体例</span>
+$ gcloud container clusters create my-cluster
+Creating cluster my-cluster in us-central1-a... Cluster is being health-checked <span style="color:#f92672">(</span>master is healthy<span style="color:#f92672">)</span>...done.
+Created <span style="color:#f92672">[</span>https://container.googleapis.com/v1/projects/qwiklabs-gcp-01-47d564cd39d1/zones/us-central1-a/clusters/my-cluster<span style="color:#f92672">]</span>.
+To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/us-central1-a/my-cluster?project<span style="color:#f92672">=</span>qwiklabs-gcp-01-47d564cd39d1
+kubeconfig entry generated <span style="color:#66d9ef">for</span> my-cluster.
+NAME        LOCATION       MASTER_VERSION   MASTER_IP      MACHINE_TYPE  NODE_VERSION     NUM_NODES  STATUS
+my-cluster  us-central1-a  1.18.16-gke.302  34.67.190.125  e2-medium     1.18.16-gke.302  <span style="color:#ae81ff">3</span>          RUNNING
+</code></pre></div><p>クラスタの認証情報を取得する。（ kubeconfig に設定が追加される）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+$ gcloud container clusters get-credentials <span style="color:#f92672">[</span>CLUSTER-NAME<span style="color:#f92672">]</span>
+
+<span style="color:#75715e"># 具体例</span>
+$ gcloud container clusters get-credentials my-cluster
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated <span style="color:#66d9ef">for</span> my-cluster.
+</code></pre></div><p>試しに作成したクラスタにコンテナをデプロイする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create deployment hello-server --image<span style="color:#f92672">=</span>gcr.io/google-samples/hello-app:1.0
+deployment.apps/hello-server created
+
+$ kubectl expose deployment hello-server --type<span style="color:#f92672">=</span>LoadBalancer --port <span style="color:#ae81ff">8080</span>
+service/hello-server exposed
+
+$ kubectl get service
+NAME           TYPE           CLUSTER-IP     EXTERNAL-IP     PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>          AGE
+hello-server   LoadBalancer   10.3.245.136   35.238.58.233   8080:30372/TCP   70s
+kubernetes     ClusterIP      10.3.240.1     &lt;none&gt;          443/TCP          10m
+
+$ curl http://35.238.58.233:8080
+Hello, world!
+Version: 1.0.0
+Hostname: hello-server-57684579f-kw54q
+</code></pre></div><p>クラスタを削除する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+$ gcloud container clusters delete <span style="color:#f92672">[</span>CLUSTER-NAME<span style="color:#f92672">]</span>
+
+<span style="color:#75715e"># 具体例</span>
+$ gcloud container clusters delete my-cluster
+The following clusters will be deleted.
+ - <span style="color:#f92672">[</span>my-cluster<span style="color:#f92672">]</span> in <span style="color:#f92672">[</span>us-central1-a<span style="color:#f92672">]</span>
+Do you want to <span style="color:#66d9ef">continue</span> <span style="color:#f92672">(</span>Y/n<span style="color:#f92672">)</span>?  Y
+Deleting cluster my-cluster...done.
+Deleted <span style="color:#f92672">[</span>https://container.googleapis.com/v1/projects/qwiklabs-gcp-01-47d564cd39d1/zones/us-central1-a/clusters/my-cluster<span style="color:#f92672">]</span>.
 </code></pre></div>
 		</div>
 
