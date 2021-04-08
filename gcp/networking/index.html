@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-08T00:15:57 JST">
+<meta name="revised" content="2021-04-08T23:55:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -844,7 +844,48 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 ref="3-cloud-load-balancing" >3. Cloud Load Balancing</h2><a class="anchor" id="3-cloud-load-balancing"></a>
+<h3 ref="24-ネットワークの作成" >2.4. ネットワークの作成</h3><a class="anchor" id="24-ネットワークの作成"></a>
+<p>Cloud Console では、ナビゲーション メニュー（mainmenu.png） &gt; [VPC ネットワーク] &gt; [VPC ネットワーク]から作成する。<br>
+コマンドでの VPC 作成は以下。（自動モードではなくカスタムモードを指定）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks create privatenet --subnet-mode<span style="color:#f92672">=</span>custom
+</code></pre></div><p>先に作成した VPC にサブネットを 2 つ追加する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks subnets create privatesubnet-us --network<span style="color:#f92672">=</span>privatenet --region<span style="color:#f92672">=</span>us-central1 --range<span style="color:#f92672">=</span>172.16.0.0/24
+
+$ gcloud compute networks subnets create privatesubnet-eu --network<span style="color:#f92672">=</span>privatenet --region<span style="color:#f92672">=</span>europe-west4 --range<span style="color:#f92672">=</span>172.20.0.0/20
+</code></pre></div><p>作成したら、以下のコマンドで VPC およびサブネットを確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks list
+NAME           SUBNET_MODE  BGP_ROUTING_MODE  IPV4_RANGE  GATEWAY_IPV4
+default        AUTO         REGIONAL
+managementnet  CUSTOM       REGIONAL
+mynetwork      AUTO         REGIONAL
+privatenet     CUSTOM       REGIONAL
+
+$ gcloud compute networks subnets list --sort-by<span style="color:#f92672">=</span>NETWORK
+NAME                 REGION                   NETWORK        RANGE
+（省略）
+privatesubnet-us     us-central1              privatenet     172.16.0.0/24
+privatesubnet-eu     europe-west4             privatenet     172.20.0.0/20
+</code></pre></div><p>ファイアウォールは、Cloud Console で、ナビゲーション メニュー（mainmenu.png） &gt; [VPC ネットワーク] &gt; [ファイアウォール] から作成する。<br>
+コマンドでは以下。（先ほど作成した VPC に追加）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules create privatenet-allow-icmp-ssh-rdp --direction<span style="color:#f92672">=</span>INGRESS --priority<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span> --network<span style="color:#f92672">=</span>privatenet --action<span style="color:#f92672">=</span>ALLOW --rules<span style="color:#f92672">=</span>icmp,tcp:22,tcp:3389 --source-ranges<span style="color:#f92672">=</span>0.0.0.0/0
+
+Creating firewall...⠹Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-ed0a2d7fdd5c/global/firewalls/privatenet-allow-icmp-ssh-rdp<span style="color:#f92672">]</span>.
+Creating firewall...done.
+NAME                           NETWORK     DIRECTION  PRIORITY  ALLOW                 DENY  DISABLED
+privatenet-allow-icmp-ssh-rdp  privatenet  INGRESS    <span style="color:#ae81ff">1000</span>      icmp,tcp:22,tcp:3389        False
+</code></pre></div><p>作成したファイアウォールは以下のコマンドで確認する。</p>
+<pre><code>$ gcloud compute firewall-rules list --sort-by=NETWORK
+NAME                              NETWORK        DIRECTION  PRIORITY  ALLOW                         DENY  DISABLED
+（省略）
+privatenet-allow-icmp-ssh-rdp     privatenet     INGRESS    1000      icmp,tcp:22,tcp:3389                False
+</code></pre><p>これまで作成した VPC、サブネット に VM インスタンスを作成するコマンドは以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create privatenet-us-vm --zone<span style="color:#f92672">=</span>us-central1-c --machine-type<span style="color:#f92672">=</span>n1-standard-1 --subnet<span style="color:#f92672">=</span>privatesubnet-us
+</code></pre></div><p>作成したら VM インスタンスの存在を確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances list --sort-by<span style="color:#f92672">=</span>ZONE
+NAME                 ZONE            MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
+（省略）
+privatenet-us-vm     us-central1-c   n1-standard-1               172.16.0.2   35.223.37.245   RUNNING
+</code></pre></div><h2 ref="3-cloud-load-balancing" >3. Cloud Load Balancing</h2><a class="anchor" id="3-cloud-load-balancing"></a>
 <h3 ref="31-種類" >3.1. 種類</h3><a class="anchor" id="31-種類"></a>
 <p>Cloud Load Balancing の負荷分散の種類には以下がある。</p>
 <table>
@@ -989,7 +1030,14 @@ if (!doNotTrack) {
 <p>HTTP(S) ロードバランサ の構成イメージは以下。</p>
 <p><!-- raw HTML omitted --></p>
 <h3 ref="32-作成" >3.2. 作成</h3><a class="anchor" id="32-作成"></a>
-<h4 ref="321-ネットワークロードバランサの作成" >3.2.1. ネットワークロードバランサの作成</h4><a class="anchor" id="321-ネットワークロードバランサの作成"></a>
+<h4 ref="321-ネットワークロードバランサのコンセプト" >3.2.1. ネットワークロードバランサのコンセプト</h4><a class="anchor" id="321-ネットワークロードバランサのコンセプト"></a>
+<ul>
+<li>ターゲットプール</li>
+<li>静的外部 IP アドレス</li>
+<li>レガシー HTTP ヘルスチェック リソース</li>
+<li>転送ルール</li>
+</ul>
+<h4 ref="322-ネットワークロードバランサの作成" >3.2.2. ネットワークロードバランサの作成</h4><a class="anchor" id="322-ネットワークロードバランサの作成"></a>
 <p>デフォルトのリージョンとゾーンを設定する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config set compute/zone us-central1-a
 $ gcloud config set compute/region us-central1
@@ -1110,9 +1158,31 @@ $ curl http://35.232.6.132
 <span style="color:#75715e"># 連続で負荷分散の様子を確認</span>
 $ <span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do</span> curl -m1 35.232.6.132; <span style="color:#66d9ef">done</span>
 <span style="color:#75715e"># www1/2/3 が不規則に出る</span>
-</code></pre></div><h4 ref="322-https-ロードバランサの作成" >3.2.2. HTTP(S) ロードバランサの作成</h4><a class="anchor" id="322-https-ロードバランサの作成"></a>
-<p><strong>ロードバランサテンプレート</strong>　を作成する。<br>
-（実態は、インスタンステンプレートじゃない？？？）</p>
+</code></pre></div><h4 ref="323-https-ロードバランサのコンセプト" >3.2.3. HTTP(S) ロードバランサのコンセプト</h4><a class="anchor" id="323-https-ロードバランサのコンセプト"></a>
+<ul>
+<li>インスタンステンプレート
+<ul>
+<li>VM インスタンス や マネージドインスタンスグループ（ MIG ）を作成するために使用できるリソース</li>
+<li>マシンタイプ、ブートディスク イメージまたはコンテナ イメージ、ラベル、その他のインスタンス プロパティを定義できる</li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/compute/docs/instance-groups?hl=ja">マネージドインスタンスグループ（ MIG ）</a>
+<ul>
+<li>単一のエンティティとして管理できる VM インスタンスのグループ</li>
+<li>自動スケーリング、自動修復、リージョン（マルチゾーン）デプロイメント、自動更新などの自動化 MIG サービスを活用できる</li>
+<li>負荷分散のためヘルスチェック ではなく、 マネージド インスタンス グループのヘルスチェック があり、自動修復の基準となる</li>
+<li><code>gcloud compute instance-groups managed create</code></li>
+</ul>
+</li>
+<li>グローバル静的外部 IP アドレス</li>
+<li>ヘルスチェエク</li>
+<li>バックエンドサービス</li>
+<li>URL マップ</li>
+<li>ターゲット HTTP プロキシ</li>
+<li>グローバル転送ルール</li>
+</ul>
+<h4 ref="324-https-ロードバランサの作成" >3.2.4. HTTP(S) ロードバランサの作成</h4><a class="anchor" id="324-https-ロードバランサの作成"></a>
+<p>負荷分散ターゲットの基となる インスタンステーンプレート　を作成する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instance-templates create lb-backend-template <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
@@ -1184,7 +1254,7 @@ http-basic-check  HTTP
 Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/backendServices/web-backend-service<span style="color:#f92672">]</span>.
 NAME                 BACKENDS  PROTOCOL
 web-backend-service            HTTP
-</code></pre></div><p>MIG をバックエンドとしてバックエンド サービスに追加。</p>
+</code></pre></div><p>MIG をバックエンドとしてバックエンドサービスに追加。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute backend-services add-backend web-backend-service <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>lb-backend-group <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --instance-group-zone<span style="color:#f92672">=</span>us-central1-a <span style="color:#ae81ff">\

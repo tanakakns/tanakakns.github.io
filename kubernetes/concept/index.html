@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-08T00:15:57 JST">
+<meta name="revised" content="2021-04-08T23:55:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -878,7 +878,8 @@ if (!doNotTrack) {
 </ul>
 </blockquote>
 <h4 ref="service" >Service</h4><a class="anchor" id="service"></a>
-<p>Service は以下の種類の L4 ロードバランサを提供する。</p>
+<p>Service は以下の種類の L4 ロードバランサを提供する。<br>
+実質、ClusterIP、NodePort、LoadBalancer の 3 種類。</p>
 <ul>
 <li>ClusterIP
 <ul>
@@ -909,6 +910,7 @@ if (!doNotTrack) {
 </li>
 <li>NodePort
 <ul>
+<li>クラスタ内の各ノードに外部からアクセス可能な IP を与える</li>
 <li>ExternalIP に類似したサービス</li>
 <li>違いは「ノードのIPアドレス:ポート」で通信を受信する点
 <ul>
@@ -925,6 +927,7 @@ if (!doNotTrack) {
 <li>k8s クラスタ外部（例えばロードバランサ）から疎通性のある仮想 IP を払い出せる</li>
 <li>ExternalIP や NodePort と異なり、ノードIP非依存である点で使い勝手がよい</li>
 <li>type は <code>LoadBalancer</code></li>
+<li>クラウド利用の場合、サービスからのトラフィックをクラスタ内のノードに転送するクラウドプロバイダが提供するロードバランサが実態</li>
 </ul>
 </li>
 <li>Headless（None）
@@ -944,6 +947,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
+<p>サービスのセレクタの設定が正しく Pod を捉えているかどうかは <code>kubectl get pods -l &quot;app=monolith,secure=enabled&quot;</code> などのコマンドで対象の Pod を取得できるか、で検査できる。</p>
 <h4 ref="ingress" >Ingress</h4><a class="anchor" id="ingress"></a>
 <p>Service とは異なり、 L7 ロードバランサを提供する。<br>
 <code>kind: Service</code> ではなく、 <code>kind: Ingress</code> で提供される。<br>

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-08T00:15:57 JST">
+<meta name="revised" content="2021-04-08T23:55:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -756,12 +756,16 @@ if (!doNotTrack) {
 </ol>
 <h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
 <ul>
-<li><a href="https://cloud.google.com/compute/docs/regions-zones/">リージョンとゾーン</a>
+<li><a href="https://cloud.google.com/compute/docs/regions-zones/">リージョンとゾーン</a> ※<a href="https://cloud.google.com/docs/geography-and-regions?hl=ja">地域とリージョン</a>
 <ul>
 <li>一部の Compute Engine リソースは、リージョン内またはゾーン内にのみ存在する</li>
 <li><strong>リージョン</strong> とはリソースを実行できる特定の地理的な場所で、各リージョンには、1 つまたは複数の <strong>ゾーン</strong>がある
 <ul>
 <li>たとえば、リージョン <code>us-central1</code> は米国中部を指し、ゾーン <code>us-central1-a</code>、<code>us-central1-b</code>、<code>us-central1-c</code>、<code>us-central1-f</code> が含まれる</li>
+</ul>
+</li>
+<li>ゾーンは、リージョン内の単一の障害ドメインとみなすことができる
+<ul>
 <li>GCP のゾーンは、 AWS でいう AZ：アベイラビリティゾーン</li>
 </ul>
 </li>
@@ -769,7 +773,7 @@ if (!doNotTrack) {
 </li>
 <li>リソース
 <ul>
-<li>リソースは大きく、 <strong>グローバルリソース</strong> 、 <strong>リージョンリソース</strong> 、 <strong>ゾーンリソース</strong> の 3 つのスコープに分類され、アクセス可能なリソースが決まる（ <a href="https://cloud.google.com/compute/docs/regions-zones/global-regional-zonal-resources?hl=ja">詳細</a> ）</li>
+<li>リソースは大きく、 <strong>グローバルリソース</strong> （マルチリージョンリソース）、 <strong>リージョンリソース</strong> 、 <strong>ゾーンリソース</strong> の 3 つのスコープに分類され、アクセス可能なリソースが決まる（ <a href="https://cloud.google.com/compute/docs/regions-zones/global-regional-zonal-resources?hl=ja">詳細</a> ）</li>
 <li>グローバルリソースには同じプロジェクトにある任意のリージョンまたはゾーンのリソースからアクセスできる</li>
 <li>リージョンリソースにアクセスできるのは、同じリージョン内のリソースだけ
 <ul>
@@ -913,6 +917,7 @@ Cloud Shell には固有のコマンドラインツールがあらかじめ実�
 </tr>
 </tbody>
 </table>
+<p>Cloud Console の 「サイドメニュー」-&gt;「 IAM と管理」-&gt;「 IAM 」から利用できる。</p>
 <h3 ref="32-メンバー" >3.2. メンバー</h3><a class="anchor" id="32-メンバー"></a>
 <p>リソースへのアクセスが許可される主体（「誰が」）には以下がある。</p>
 <table>
@@ -1005,16 +1010,20 @@ compute.instance.setMachineType
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">閲覧者</td>
-<td style="text-align:left">既存のリソースやデータを表示する（ただし変更は不可能）など、状態に影響しない読み取り専用アクションに必要な権限。</td>
+<td style="text-align:left">オーナー（ <code>roles/owner</code> ）</td>
+<td style="text-align:left">全リソースへの完全なアクセス権。プロジェクトの課金情報を設定する。</td>
 </tr>
 <tr>
-<td style="text-align:left">編集者</td>
-<td style="text-align:left">すべての閲覧者権限と、状態を変更するアクション（既存のリソースの変更など）に必要な権限。</td>
+<td style="text-align:left">編集者（ <code>roles/editor</code> ）</td>
+<td style="text-align:left">全リソースへの編集アクセス権。閲覧者権限と既存のリソースに対する変更の権限。</td>
 </tr>
 <tr>
-<td style="text-align:left">オーナー</td>
-<td style="text-align:left">すべての編集者権限と、次のアクションを実行するために必要な権限: プロジェクトおよびプロジェクト内のすべてのリソースの権限とロールを管理する、プロジェクトの課金情報を設定する。</td>
+<td style="text-align:left">閲覧者（ <code>roles/viewer</code> ）</td>
+<td style="text-align:left">全リソースへの読み取りアクセス権。状態に影響しない読み取り専用アクションに必要な権限。</td>
+</tr>
+<tr>
+<td style="text-align:left">参照者（ <code>roles/browser</code> ）</td>
+<td style="text-align:left">GCP リソースを参照するためのアクセス権。プロジェクトのリソースを表示する権限はない。</td>
 </tr>
 </tbody>
 </table>

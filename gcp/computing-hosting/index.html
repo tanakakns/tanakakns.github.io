@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-08T00:15:57 JST">
+<meta name="revised" content="2021-04-08T23:55:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -817,8 +817,9 @@ if (!doNotTrack) {
 <li><a href="#2-2-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E4%BD%9C%E6%88%90">インスタンス作成</a></li>
 <li><a href="#2-3-%E5%8D%98%E4%B8%80%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%83%8E%E3%83%BC%E3%83%89%E3%81%AB%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E4%BD%9C%E6%88%90">単一テナントノードにインスタンス作成</a></li>
 <li><a href="#2-4-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A">インスタンスへの接続</a></li>
+<li>Cloud Monitoring</li>
 </ol>
-<p>（教材メモ：https://www.qwiklabs.com/focuses/3563?parent=catalog）</p>
+<p>※ <a href="https://cloud.google.com/solutions/best-practices-compute-engine-region-selection?hl=ja">Compute Engine のリージョン選択に関するベスト プラクティス</a></p>
 <h3 ref="21-コンセプト" >2.1. コンセプト</h3><a class="anchor" id="21-コンセプト"></a>
 <ul>
 <li>VM インスタンス
@@ -1176,6 +1177,29 @@ $ gcloud compute ssh gcelab2 --zone us-central1-c
 </code></pre></div><p>接続できたら、以下のコマンドの管理者権限になる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo su -
 </code></pre></div><p>ちなみに Linux は SSH 、 Windows は RDP で接続する。</p>
+<h3 ref="25-cloud-monitoring" >2.5. Cloud Monitoring</h3><a class="anchor" id="25-cloud-monitoring"></a>
+<p>Cloud Monitoring では、クラウドで実行されるアプリケーションのパフォーマンスや稼働時間、全体的な動作状況を確認できる。<br>
+Google Cloud、Amazon Web Services、ホストされた稼働時間プローブ、アプリケーション インストゥルメンテーション、よく使われるさまざまなアプリケーション コンポーネント（Cassandra、Nginx、Apache ウェブサーバー、Elasticsearch など）から、指標、イベント、メタデータを収集する。<br>
+これらのデータを取り込んでダッシュボード、グラフ、アラートを介して分析情報を提供する。<br>
+Cloud Monitoring のアラート機能を Slack、PagerDuty、HipChat、Campfire などに組み込むこともできる。</p>
+<p>インスタンスから情報を収集する VM に <a href="https://cloud.google.com/monitoring/agent">Monitoring エージェント</a> と Logging エージェントをインストールすることで収集可能となる。<br>
+対象の VM インスタンスに SSH した後、以下のコマンドでインストールする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Monitoring エージェントのインストール</span>
+$ curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh
+$ sudo bash add-monitoring-agent-repo.sh
+$ sudo apt-get update
+$ sudo apt-get install stackdriver-agent
+
+<span style="color:#75715e"># Logging エージェント</span>
+$ curl -sSO https://dl.google.com/cloudagents/add-logging-agent-repo.sh
+$ sudo bash add-logging-agent-repo.sh
+$ sudo apt-get update
+$ sudo apt-get install google-fluentd
+</code></pre></div><p>また、Monitoring ワークスペースを作成する必要がある。</p>
+<p>Cloud Console で、ナビゲーション メニュー &gt; [モニタリング] をクリックすると、ワークスペースがプロビジョニングされる。<br>
+左側のメニューで [稼働時間チェック] をクリックし、[稼働時間チェックの作成] をクリック。<br>
+左側のメニューで [アラート]、[Create Policy] の順にクリック。<br>
+ナビゲーション メニュー &gt; [Logging] &gt; [ログビューア] 。</p>
 <h2 ref="3-google-kubernetes-engine" >3. Google Kubernetes Engine</h2><a class="anchor" id="3-google-kubernetes-engine"></a>
 <ol>
 <li><a href="#3-1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
@@ -1234,6 +1258,229 @@ The following clusters will be deleted.
 Do you want to <span style="color:#66d9ef">continue</span> <span style="color:#f92672">(</span>Y/n<span style="color:#f92672">)</span>?  Y
 Deleting cluster my-cluster...done.
 Deleted <span style="color:#f92672">[</span>https://container.googleapis.com/v1/projects/qwiklabs-gcp-01-47d564cd39d1/zones/us-central1-a/clusters/my-cluster<span style="color:#f92672">]</span>.
+</code></pre></div><h3 ref="33-デプロイ管理" >3.3. デプロイ管理</h3><a class="anchor" id="33-デプロイ管理"></a>
+<h4 ref="331-deployment-オブジェクトの詳細" >3.3.1. Deployment オブジェクトの詳細</h4><a class="anchor" id="331-deployment-オブジェクトの詳細"></a>
+<p><code>kubectl explain</code> コマンドを使用すると、Deployment などのオブジェクトに関する情報が取得できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment
+
+<span style="color:#75715e"># 全てのフィールドを確認する場合</span>
+$ kubectl explain deployment --recursive
+
+<span style="color:#75715e"># 特定のフィールドを確認する場合</span>
+$ kubectl explain deployment.metadata.name
+</code></pre></div><h4 ref="332-deployment-の作成" >3.3.2. Deployment の作成</h4><a class="anchor" id="332-deployment-の作成"></a>
+<p>Google 提供の資材を使って、Cloud Console の Cloud Shell 上で実施していく。<br>
+まずはクラスタを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># デフォルトのゾーンを設定</span>
+$ gcloud config set compute/zone us-central1-a
+
+<span style="color:#75715e"># サンプルコードを入手</span>
+$ gsutil -m cp -r gs://spls/gsp053/orchestrate-with-kubernetes .
+$ cd orchestrate-with-kubernetes/kubernetes
+
+<span style="color:#75715e"># 5 つの n1-standard-1 ノードを含むクラスタを作成</span>
+$ gcloud container clusters create bootcamp --num-nodes <span style="color:#ae81ff">5</span> --scopes <span style="color:#e6db74">&#34;https://www.googleapis.com/auth/projecthosting,storage-rw&#34;</span>
+
+NAME      LOCATION       MASTER_VERSION   MASTER_IP     MACHINE_TYPE  NODE_VERSION     NUM_NODES  STATUS
+bootcamp  us-central1-a  1.18.16-gke.302  35.238.203.7  e2-medium     1.18.16-gke.302  <span style="color:#ae81ff">5</span>          RUNNING
+</code></pre></div><p><code>deployments/auth.yaml</code> の <code>image</code> を以下のように変更する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">…</span>
+<span style="color:#f92672">containers</span>:
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">auth</span>
+  <span style="color:#f92672">image</span>: <span style="color:#ae81ff">kelseyhightower/auth:1.0.0</span>
+...
+</code></pre></div><p>Deployment でレプリカが 1 つ作成され、バージョン 1.0.0 の auth コンテナが使用される。<br>
+<code>kubectl create</code> を使用して Deployment オブジェクトを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/auth.yaml
+
+<span style="color:#75715e"># 確認</span>
+$ kubectl get deployments
+$ kubectl get replicasets
+$ kubectl get pods
+</code></pre></div><p>次に、auth デプロイ用のサービスを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f services/auth.yaml
+</code></pre></div><p>ここまでで <code>auth</code> を作成したが、 <code>hello</code> 、 <code>frontend</code> も作成していく。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># hello</span>
+$ kubectl create -f deployments/hello.yaml
+$ kubectl create -f services/hello.yaml
+
+<span style="color:#75715e"># frontend</span>
+$ kubectl create secret generic tls-certs --from-file tls/
+$ kubectl create configmap nginx-frontend-conf --from-file<span style="color:#f92672">=</span>nginx/frontend.conf
+$ kubectl create -f deployments/frontend.yaml
+$ kubectl create -f services/frontend.yaml
+</code></pre></div><p><code>frontend</code> の外部 IP を確認して <code>curl</code> で動確する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get services frontend
+NAME       TYPE           CLUSTER-IP       EXTERNAL-IP     PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>         AGE
+frontend   LoadBalancer   10.115.243.177   34.66.110.111   443:31848/TCP   46s
+
+$ curl -ks https://34.66.110.111
+<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;Hello&#34;</span><span style="color:#f92672">}</span>
+</code></pre></div><h4 ref="333-スケールアウトイン" >3.3.3. スケールアウト・イン</h4><a class="anchor" id="333-スケールアウトイン"></a>
+<p>Deployment をスケーリングするには、 <code>spec.replicas</code> フィールドを更新する。<br>
+<code>kubectl explain</code> コマンドで、このフィールドの説明を確認してみる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment.spec.replicas
+KIND:     Deployment
+VERSION:  apps/v1
+FIELD:    replicas &lt;integer&gt;
+DESCRIPTION:
+     Number of desired pods. This is a pointer to distinguish between explicit
+     zero and not specified. Defaults to 1.
+</code></pre></div><p><code>kubectl scale</code> コマンドでスケールアウト・インする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pod 数を 5 へスケールアウト</span>
+$ kubectl scale deployment hello --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
+
+<span style="color:#75715e"># 確認</span>
+$ kubectl get pods | grep hello- | wc -l
+<span style="color:#ae81ff">5</span>
+
+<span style="color:#75715e"># Pod 数を 3 へスケールイン</span>
+$ kubectl scale deployment hello --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+
+<span style="color:#75715e"># 確認</span>
+$ kubectl get pods | grep hello- | wc -l
+<span style="color:#ae81ff">3</span>
+</code></pre></div><h4 ref="333-ローリング-アップデート" >3.3.3. ローリング アップデート</h4><a class="anchor" id="333-ローリング-アップデート"></a>
+<p>ReplicaSet が新たに作成され、古い ReplicaSet のレプリカ数が減少するにつれて、新しい ReplicaSet のレプリカ数が徐々に増加する形で実行される。<br>
+Deployment を更新するには、次のコマンドを実行してマニフェストを編集する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl edit deployment hello
+<span style="color:#75715e"># image を「kelseyhightower/hello:1.0.0」から「kelseyhightower/hello:2.0.0」へ変更</span>
+</code></pre></div><p>新しい ReplicaSet の確認、および、ロールアウト履歴にも新しいエントリがあるか確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get replicaset
+NAME                  DESIRED   CURRENT   READY   AGE
+auth-7cffdb8677       <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>       14m
+frontend-7b4b97c4dc   <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>       12m
+hello-687bb4b8f4      <span style="color:#ae81ff">0</span>         <span style="color:#ae81ff">0</span>         <span style="color:#ae81ff">0</span>       13m
+hello-d99c798f        <span style="color:#ae81ff">3</span>         <span style="color:#ae81ff">3</span>         <span style="color:#ae81ff">3</span>       60s
+
+$ kubectl rollout history deployment/hello
+deployment.apps/hello
+REVISION  CHANGE-CAUSE
+<span style="color:#ae81ff">1</span>         &lt;none&gt;
+<span style="color:#ae81ff">2</span>         &lt;none&gt;
+</code></pre></div><p>ロールアウトの状況は以下のコマンドで確認できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl rollout status deployment/hello
+
+<span style="color:#75715e"># もしくは</span>
+
+$ kubectl get pods -o jsonpath --template<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{range .items[*]}{.metadata.name}{&#34;\t&#34;}{&#34;\t&#34;}{.spec.containers[0].image}{&#34;\n&#34;}{end}&#39;</span>
+</code></pre></div><p>ロールアウトの状況が芳しくない場合、以下のコマンドで停止・再開ができる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ロールアウト停止</span>
+$ kubectl rollout pause deployment/hello
+
+<span style="color:#75715e"># ロールアウト再開</span>
+$ kubectl rollout resume deployment/hello
+</code></pre></div><p>なお、なんらか問題が発生して、ロールバックが必要な場合は以下のコマンドで実施できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ロールバック</span>
+$ kubectl rollout undo deployment/hello
+
+<span style="color:#75715e"># ロールアウト履歴確認</span>
+$ kubectl rollout history deployment/hello
+deployment.apps/hello
+REVISION  CHANGE-CAUSE
+<span style="color:#ae81ff">2</span>         &lt;none&gt;
+<span style="color:#ae81ff">3</span>         &lt;none&gt;
+
+<span style="color:#75715e"># マニフェストを確認（2.0.0 -&gt; 1.0.0 にもどってる</span>
+$ kubectl edit deployment hello
+
+<span style="color:#75715e"># 全ての Pod がもどっているか確認</span>
+$ kubectl get pods -o jsonpath --template<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{range .items[*]}{.metadata.name}{&#34;\t&#34;}{&#34;\t&#34;}{.spec.containers[0].image}{&#34;\n&#34;}{end}&#39;</span>
+</code></pre></div><h4 ref="334-カナリア-デプロイ" >3.3.4. カナリア デプロイ</h4><a class="anchor" id="334-カナリア-デプロイ"></a>
+<p>カナリア デプロイでは、一部のユーザーに変更をリリースすることで、新しいリリースに伴うリスクを軽減する手法。<br>
+新しいバージョンの Deployment を作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/hello-canary.yaml
+
+<span style="color:#75715e"># 確認</span>
+$ kubectl get deployments
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+auth           1/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">1</span>           28m
+frontend       1/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">1</span>           26m
+hello          3/3     <span style="color:#ae81ff">3</span>            <span style="color:#ae81ff">3</span>           27m
+hello-canary   0/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">0</span>           8s  <span style="color:#75715e"># 新しい hello</span>
+</code></pre></div><p>この状態だと、単純に新しい別の Deployment を作成しただけに見えるが、 hello-canary の Label に <code>app:hello</code> が設定されており、これは hello service のセレクタになっているため、リクエストがルーティングされ、カナリアデプロイされた状態になっている。<br>
+以下のコマンドを何度が実行していると、レスポンスが異なっており、カナリアデプロイされていることがわかる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
+<span style="color:#75715e"># {&#34;version&#34;:&#34;1.0.0&#34;} or {&#34;version&#34;:&#34;2.0.0&#34;}</span>
+</code></pre></div><p>ユーザーをいずれかのデプロイに「固定」したい場合、 <strong>セッション アフィニティ</strong> を指定してサービスを作成することで実現できる。<br>
+以下の例では Client の IP でルーティングを固定している。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;hello&#34;</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">sessionAffinity</span>: <span style="color:#ae81ff">ClientIP</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#e6db74">&#34;hello&#34;</span>
+  <span style="color:#f92672">ports</span>:
+    - <span style="color:#f92672">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+      <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">80</span>
+</code></pre></div><h4 ref="335-blue--green-デプロイ" >3.3.5. Blue / Green デプロイ</h4><a class="anchor" id="335-blue--green-デプロイ"></a>
+<p>Kubernetes は、古い「Blue」バージョン用と新しい「Green」バージョン用に 2 つの異なるデプロイを作成することでこれを実現します。<br>
+このデプロイには、ルータとして機能するサービスを介してアクセスする。<br>
+新しい「Green」バージョンが稼働したら、サービスを更新してそのバージョンを使用するように切り替えることにより実現する。</p>
+<p>既存の hello サービスを、<code>app:hello</code> 、 <code>version: 1.0.0</code> のセレクタを持つように更新する。（元々は <code>app:hello</code> だけ）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-blue.yaml
+<span style="color:#75715e"># resource service/hello is missing という警告は無視</span>
+</code></pre></div><p>Green の Deployment をデプロイする。（元々の hello は Blue の扱いで image のバージョンは 1.0.0）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/hello-green.yaml
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hello-green</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">hello</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">hello</span>
+        <span style="color:#f92672">track</span>: <span style="color:#ae81ff">stable</span>
+        <span style="color:#f92672">version</span>: <span style="color:#ae81ff">2.0.0</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hello</span>
+          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">kelseyhightower/hello:2.0.0</span>
+          <span style="color:#f92672">ports</span>:
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">http</span>
+              <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">health</span>
+              <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">81</span>
+          <span style="color:#f92672">resources</span>:
+            <span style="color:#f92672">limits</span>:
+              <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">0.2</span>
+              <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">10Mi</span>
+          <span style="color:#f92672">livenessProbe</span>:
+            <span style="color:#f92672">httpGet</span>:
+              <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/healthz</span>
+              <span style="color:#f92672">port</span>: <span style="color:#ae81ff">81</span>
+              <span style="color:#f92672">scheme</span>: <span style="color:#ae81ff">HTTP</span>
+            <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">5</span>
+            <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">15</span>
+            <span style="color:#f92672">timeoutSeconds</span>: <span style="color:#ae81ff">5</span>
+          <span style="color:#f92672">readinessProbe</span>:
+            <span style="color:#f92672">httpGet</span>:
+              <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/readiness</span>
+              <span style="color:#f92672">port</span>: <span style="color:#ae81ff">81</span>
+              <span style="color:#f92672">scheme</span>: <span style="color:#ae81ff">HTTP</span>
+            <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">5</span>
+            <span style="color:#f92672">timeoutSeconds</span>: <span style="color:#ae81ff">1</span>
+</code></pre></div><p>現状は Blue （つまり 1.0.0）であることを確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
+<span style="color:#75715e"># 何度叩いても 1.0.0</span>
+</code></pre></div><p>次に新しいバージョン（つまり Green ）を指定するようにサービスを更新する。（ セレクタが <code>version: 2.0.0</code> になっている）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-green.yaml
+</code></pre></div><p><code>curl</code> で確認すると今度は <code>2.0.0</code> しか返ってこない。（つまり、 Blue -&gt; Green になった！）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
+</code></pre></div><p>ロールバックしたいときは再度 service を Blue に戻せばいい。（つまり、セレクタを <code>version: 1.0.0</code> にするだけ）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-blue.yaml
+
+<span style="color:#75715e"># 確認</span>
+$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
+<span style="color:#75715e"># 1.0.0 しか返ってこない</span>
 </code></pre></div>
 		</div>
 
