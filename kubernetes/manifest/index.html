@@ -1,0 +1,1301 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+	マニフェスト :: テックまとめ
+</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2021-04-24T00:08:31 JST">
+<meta name="description" content="備忘録用メモサイト">
+
+
+
+<title>マニフェスト :: テックまとめ</title>
+
+<link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+
+<script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel="stylesheet">
+
+
+
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/layout.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.main.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.menu.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/notice.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/tabs.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/panel.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/columns.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/children.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/attachments.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/alert.css'>
+<link rel="stylesheet" type="text/css" href='/css/docport.css'>
+
+<script src='/js/docport.js'></script>
+<script type="text/javascript">
+      var baseurl = "https:\/\/tanakakns.github.io\/";
+</script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-42388425-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+  </head>
+
+  <body data-url="/kubernetes/manifest/"
+
+  class="hidetoc hidenextpage ">
+
+<style type="text/css">
+  #debug{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    line-height: 3.5rem;
+    margin-bottom: .35rem;
+    padding: 0 2rem;
+    position: fixed;
+    left: 0;      right: 0;     top: 0;
+   
+    top:0px;
+    
+    min-height: 150px;
+
+    background-color: white;
+    border: 3px solid red;
+    z-index: 10000 ;
+    word-wrap: all;
+    overflow: auto;
+  }
+</style>
+ 
+
+
+    
+    
+    <header style="">
+        <div>
+    
+    <div class="burger ">
+        <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">&#9776;</a>
+    </div>
+    
+
+    <div>
+
+		
+	
+			
+		
+	    	<a class='baselink' href='https://tanakakns.github.io/'>テックまとめ</a>
+	  	
+	</div>
+
+</div>
+    </header>
+    
+
+    <article>
+      
+      <aside class="">
+        
+
+		
+	
+			
+		
+	    	
+	  	
+	<div id="close_menu">
+  <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">
+      <i class="fa fa-lg fa-times"></i>
+  </a>
+</div>
+
+<ul class="menu">
+
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/mac/">Mac開発環境</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/os-settings/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/os-settings/">OSの設定</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/homebrew/">Homebrew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/asdf/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/asdf/">asdf</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/git/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/git/">Git</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/git/initial-setting/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/git/initial-setting/">初期設定</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/go/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/go/">Go言語</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/initial-setting/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/initial-setting/">初期設定</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/grammar/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/grammar/">文法</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/naming/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/naming/">命名規則</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/pattern/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/pattern/">パターン</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/aws/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+        
+      
+          <a href="/aws/">AWS</a>
+      
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/gcp/">GCP</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/basic/">入門</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/gcp-aws/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/gcp-aws/">GCP と AWS の違い</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/cli/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/cli/">CLI</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/">コンピューティングとホスティング</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/compute-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/compute-engine/">Compute Engine</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/kubernetes-engine/">Google Kubernetes Engine</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/app-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/app-engine/">App Engine</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/storage/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/storage/">ストレージ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/">データベース</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/">ネットワーキング</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/big-data/">ビッグデータ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/machine-learning/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/machine-learning/">機械学習</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/monitoring/">監視</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/terraform/">Terraform</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/docker/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/docker/">Docker</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/docker/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/docker/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item parent haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <i class="fas fa-chevron-down ddexp"></i>
+        
+      
+          <a href="/kubernetes/">Kubernetes</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/concept/">概念整理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/architecture/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/architecture/">アーキテクチャ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/kubectl-plugin/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/kubectl-plugin/">kubectl plugin と Krew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/command/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/command/">コマンド</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/manifest/" class="dd-item parent active
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/manifest/">マニフェスト</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/istio/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/istio/">Istio</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/basic/">入門</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/concept/">概念整理</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+
+
+</ul>
+
+		
+	
+			
+		
+	    	
+	  	
+	
+      </aside>
+      
+
+      <section class="page ">
+      
+	
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/kubernetes/">
+        Kubernetes
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        マニフェスト
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>マニフェスト</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
+
+
+
+
+
+
+	<div class="content">
+	    <p>kubernetes では <code>kubectl</code> に様々コマンドがあるが、基本的には <code>kubectl create/delete/apply</code> コマンドと <strong>マニフェスト</strong> とよぶ YAML/JSON ファイルを使用することで、リソースの作成/削除/更新できる。</p>
+<ol>
+<li>マニフェストの雛形</li>
+<li>マニフェストの理解</li>
+<li>その他のリソース</li>
+</ol>
+<ul>
+<li><a href="https://kubernetes.io/ja/docs/reference/">Kubernetes リファレンス</a></li>
+<li><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/">マニフェスト リファリンス</a></li>
+</ul>
+<h2 ref="1-マニフェストの雛形" >1. マニフェストの雛形</h2><a class="anchor" id="1-マニフェストの雛形"></a>
+<p>ドライラン（ <code>kubectl run/create --dry-run=client</code> ）と yaml 表示（ <code>-o yaml</code> を）組み合わせるとマニフェストの雛形を標準出力できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl run sample --image nginx -o yaml --dry-run<span style="color:#f92672">=</span>client
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: sample
+  name: sample
+spec:
+  replicas: <span style="color:#ae81ff">1</span>
+  selector:
+    matchLabels:
+      run: sample
+  strategy: <span style="color:#f92672">{}</span>
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: sample
+    spec:
+      containers:
+      - image: nginx
+        name: sample
+        resources: <span style="color:#f92672">{}</span>
+status: <span style="color:#f92672">{}</span>
+</code></pre></div><h2 ref="2-マニフェストの理解" >2. マニフェストの理解</h2><a class="anchor" id="2-マニフェストの理解"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:sample-pod.yml" data-lang="yaml:sample-pod.yml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample-pod</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">containers</span>:
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
+      <span style="color:#f92672">imege</span>: <span style="color:#ae81ff">nginx:1.7.9</span>
+      <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+</code></pre></div><p>全てのマニフェストには以下の項目が含まれる。</p>
+<ul>
+<li>apiVersion
+<ul>
+<li>API のバージョン</li>
+</ul>
+</li>
+<li>kind
+<ul>
+<li>リソースの種類</li>
+</ul>
+</li>
+<li>metadata
+<ul>
+<li>リソースのメタデータ</li>
+</ul>
+</li>
+</ul>
+<p>Pod の場合は <code>spec</code> 以下に Pod の内容を定義する。</p>
+<pre><code>$ kubectl create -f sample-pod.yaml
+pod &quot;sample-pod&quot; created
+
+$ kubectl apply -f sample-pod.yaml
+pod &quot;sample-pod&quot; configured
+
+$ kubectl delete -f sample-pod.yaml
+pod &quot;sample-pod&quot; deleted
+</code></pre><p><code>kubectl apply</code> は <strong>マニフェストに変更がある場合のみ変更処理を行う</strong> 。<br>
+削除済みのマニフェストに対しても差分を検出するため、新規作成でも <code>apply</code> を使用するほうがよい。<br>
+また、マニフェストには複数のリソースを同時に記述することができ、 <strong><code>---</code></strong> で区切る。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:sample-pod.yml" data-lang="yaml:sample-pod.yml">---
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample-pod</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">containers</span>:
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
+      <span style="color:#f92672">imege</span>: <span style="color:#ae81ff">nginx:1.7.9</span>
+      <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+---
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#75715e"># LBの追加など</span>
+</code></pre></div><p>また、複数のマニフェストファイルを一気に適用したい場合は、ディレクトリにまとめ <code>-f</code> で指定して実行することができる。<br>
+その歳、ファイル名辞書順で実行されることに注意。</p>
+<h3 ref="21-label-と-annotation" >2.1. Label と Annotation</h3><a class="anchor" id="21-label-と-annotation"></a>
+<p>両者とも key-value 形式（ <code>key: value</code> ）でデータを保持する仕組みであるが、用途が異なる。</p>
+<h4 ref="211-label" >2.1.1. Label</h4><a class="anchor" id="211-label"></a>
+<ul>
+<li>各リソースの <code>metadata</code> で設定する</li>
+<li>あるリソースが 1 つ以上のリソースを管理する場合、 <code>selector</code> にて Label を指定することにより対象リソースを発見する
+<ul>
+<li>ReplicaSet が Pod を管理する場合</li>
+<li>Deployment が ReplicaSet を管理する場合</li>
+<li>Service が受けた通信の転送先 Pod を指定する場合、など</li>
+</ul>
+</li>
+</ul>
+<h4 ref="212-annotation" >2.1.2. Annotation</h4><a class="anchor" id="212-annotation"></a>
+<ul>
+<li>リソースオブジェクトに関する不特定の情報を保存する方法
+<ul>
+<li>オブジェクトの変更理由の記録</li>
+<li>特別なスケジューラへの、特別なスケジュールポリシーの伝達</li>
+<li>リソースを更新したツールと、それがどのように更新したかの情報の付加</li>
+<li>他のツールからの更新検知などのため</li>
+<li>Deployment オブジェクトによるロールアウトのための、ReplicaSet の追跡情報の保存、など</li>
+</ul>
+</li>
+</ul>
+<h3 ref="22-namespace" >2.2. namespace</h3><a class="anchor" id="22-namespace"></a>
+<p>namespace は k8s クラスタ上で論理的にシステムを分割する仕組み。<br>
+namespace リソース（ <code>kind: Namespace</code> ）を作成し、各リソースの <code>metadata</code> にラベル付け（ <code>namespace: test</code> ）して利用する。</p>
+<h3 ref="23-deployment" >2.3. Deployment</h3><a class="anchor" id="23-deployment"></a>
+<p>リソースには色々あるが、理解すべきリソースは少ない。そのうちの一つ。<br>
+（その他は、Service、DaemonSet、CronJobくらい？）</p>
+<pre><code>apiVersion: app/v1
+kind: Deployment
+metadata: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta
+  annotations:                # 任意のメタデータを保存および取得する。外部ツールなどによって設定・変更・保存される箇所でもある。
+    key: value
+  clusterName: string         # オブジェクトが所属するクラスタ名。異なるクラスターで同じ名前と名前空間を持つリソースを区別するために使用。使わない。
+  creationTimestamp:          # このオブジェクトが作成されたサーバ時間。変更できない。
+  deletionGracePeriodSeconds: # オブジェクトの正常終了までの時間。読み取り専用。
+  deletionTimestamp:          # オブジェクトが削除される時間。読み取り専用。
+  finalizers:                 # リストからエントリを削除する責任のあるコンポーネントの識別子。削除のみ可能。
+  generateName:               # name が設定されていない場合にのみオプションで設定される名前。
+  generation:                 # 状態の世代を表す。読み取り専用。
+  initializers:               # オブジェクトの作成時にシステムの不変条件を強制するコントローラー。DEPRECATED。
+  labels:                     # ReplicaSet、Service の selector で利用。
+    key: value
+  managedFields:              # 内部のワークフロー用でユーザは設定・理解の必要はない。
+  name:                       # namespace 内で一意なオブジェクトの名前。
+  namespace:                  # 名前空間名。空は default と同じ。 DNS_LABEL である必要があり、変更できない。
+  ownerReferences:            # このオブジェクトに依存するオブジェクトのリスト。コントローラにより管理される。
+  resourceVersion:            # オブジェクトがいつ変更されたかを判断するためにクライアントが使用できるこのオブジェクトの内部バージョン。読み取り専用。
+  selfLink:                   # このオブジェクトを表すURL。読み取り専用。
+  uid:                        # このオブジェクトの一意な ID 。システムにより管理される。
+spec: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#deploymentspec-v1-apps
+  minReadySeconds:         # コンテナがクラッシュすることなく、新しく作成されたポッドの準備が整うまでの最小秒数。デフォルト 0 。
+  paused: bool             # 展開が一時停止されていることを示す。
+  progressDeadlineSeconds: # 展開が失敗したと見なされるまで最大秒数。
+  replicas:                # Pod のリプリケーション数。
+  revisionHistoryLimit:    # ロールバックを許可するReplicaSetの世代数。デフォルト 10 。
+  selector: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#labelselector-v1-meta
+            # ReplicaSet が Pod を選択するための Label Selector 。
+    matchExpressions: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#labelselectorrequirement-v1-meta
+                      # Label Selector のリスト。 AND で評価される。
+    matchLabels:      # key-value 形式の Label Selector のリスト。 AND で評価される。matchExpressions の方が複雑な表現が可能。
+  strategy: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#deploymentstrategy-v1-apps
+            # 新しいポッドに置き換えるため展開戦略。現状は単純な再配置とローリングアップデートのみ。
+    rollingUpdate: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#rollingupdatedeployment-v1-apps
+      maxSurge:       # Pod のレプリケーション数を超えて作成できるコンテナの最大数。数か割合で表現。
+      maxUnavailable: # Pod のレプリケーション数を下回って利用できなくする最大数。数か割合で表現。
+    type: # Recreate か RollingUpdate 。デフォルト RollingUpdate 。
+  template: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#podtemplatespec-v1-core
+            # 作成する Pod の定義
+    metadata: # 先の metadata に同じ。
+    spec: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#podspec-v1-core
+      activeDeadlineSeconds: # Pod が非アクティブになってから強制終了されるまでの秒数。
+      affinity: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#affinity-v1-core
+                # Pod をスケジューリングする際の制約。
+      automountServiceAccountToken: # サービスアカウントトークンを自動的にマウントする必要があるかどうかを示す。
+      containers: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#container-v1-core
+                  # Pod に属するコンテナのリスト。
+        args:                     # ENTRYPOINT へ引数。
+        command:                  # ENTRYPOINT 配列。
+        env:                      # 環境変数のリスト。
+        envFrom:                  # 環境変数を設定するソースのリスト。
+        image:                    # Docker イメージ名。
+        imagePullPolicy:          # Docker イメージの pull ポリシー。 Always, Never, IfNotPresent のいずれか。
+        lifecycle:                # コンテナのライフサイクルイベントに応じて管理システムが実行するアクション。
+        livenessProbe:            # コンテナ死活の定期的な調査。
+        name:                     # コンテナ名。DNS_LABEL となる。
+        ports:                    # コンテナの公開ポートのリスト。
+        readinessProbe:           # コンテナサービスの準備状況の定期的な調査。
+        resources:                # コンテナが利用するコンピュートリソース。
+        securityContext:          # Pod を実行するセキュリティオプション。
+        stdin:                    # コンテナがコンテナーランタイムで標準入力にバッファーを割り当てるかどうか。デフォルト false は EOF になる。
+        stdinOnce:                # 単一の接続によって開かれた後に、コンテナランタイムがstdinチャネルを閉じるかどうか。デフォルト false 。
+        terminationMessagePath:   # オプション：コンテナの終了メッセージが書き込まれるファイルがコンテナのファイルシステムにマウントされるパス。
+        terminationMessagePolicy: # 終了メッセージの入力方法。
+        tty:                      # コンテナに TTY を割り当てるか否か。デフォルト false 。
+        volumeDevices:            # コンテナが使用するブロックデバイスのリスト。
+        volumeMounts:             # コンテナのファイルシステムにマウントするポッドボリューム。
+        workingDir:               # コンテナの作業ディレクトリ。
+      dnsConfig: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#poddnsconfig-v1-core
+        nameservers: # DNSネームサーバーのIPアドレスのリスト。
+        options:     # DNSリゾルバーオプションのリスト。
+        searches:    # ホスト名検索用のDNS検索ドメインのリスト。
+      dnsPolicy:   # Pod の DNS ポリシー。ClusterFirstWithHostNet, ClusterFirst（デフォルト）, Default, None 。
+      enableServiceLinks: # サービスに関する情報をDockerリンクの構文と一致する Pod の環境変数に注入するか否か。デフォルト true 。
+      hostAliases: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#hostalias-v1-core
+                   # Pod の hosts ファイルへの追加設定。
+      hostIPC:     # ホストの IPC 名前空間を使うか否か。デフォルト false 。
+      hostNetwork: # Pod に要求されたホストネットワーキング。ホストのネットワーク名前空間を使用。デフォルト false 。
+      hostPID:     # ホストの PID 名前空間を利用するか否か。デフォルト false 。
+      hostname:    # Pod のホスト名。指定しない場合システムが付与。
+      imagePullSecrets: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#localobjectreference-v1-core
+                        # Docker イメージを Pull する際のシークレット。
+      initContainers:    # Pod に属する初期化コンテナのリスト。コンテナが開始される前に順番に実行される。
+      nodeName:          # Pod を特定のノードへスケジューリングする。
+      nodeSelector:      # Pod を配置するノードのセレクタ。
+      overhead:          # 特定の RuntimeClass の Pod の実行に関連するリソースオーバーヘッドを表す。コントローラにより自動入力される。
+      preemptionPolicy:  # 優先度の低い Pod を先取りするポリシー。
+      priority:          # 優先度の値。値が大きいほど優先度が高い。
+      priorityClassName: # Pod の優先順位を示す。
+      readinessGates: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#podreadinessgate-v1-core
+                      # Pod の準備状況を評価する。
+      restartPolicy:    # Pod 内の全てのコンテナの再起動ポリシー。
+      runtimeClassName: # Pod 実行に使用する RuntimeClass オブジェクト。
+      schedulerName:    # Pod を管理するスケジューラ。
+      securityContext: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#podsecuritycontext-v1-core
+                       # Pod レベルのセキュリティ属性。
+      serviceAccount:                # Deprecated
+      serviceAccountName:            # Pod の実行に使用する ServiceAccount 名。
+      shareProcessNamespace:         # Pod 内の全てのコンテナ間で PID 空間を共有する。デフォルト false 。
+      subdomain:                     # サブドメインを指定する。&quot;&lt;hostname&gt;.&lt;subdomain&gt;.&lt;pod namespace&gt;.svc.&lt;cluster domain&gt;&quot; 。
+      terminationGracePeriodSeconds: # Pod が Graceful Stop するのに要する秒数。デフォルト 30 秒。
+      tolerations: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#toleration-v1-core
+                   # Pod を特定のノードに配置する際に利用。 nodeSelector の方が古い。
+      volumes: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#volume-v1-core
+               # マウントできるボリュームのリスト。
+</code></pre><p>上記、すごい量だが、必要最低限は。</p>
+<pre><code>apiVersion: app/v1
+kind: Deployment
+metadata:
+  annotations:
+    &lt;key&gt;: &lt;value&gt;
+  labels:                  # Deployment の Label
+    &lt;key&gt;: &lt;value&gt;
+  name: &lt;string&gt;           # Deployment 名
+  namespace: &lt;string&gt;      # Deployment の namespace
+spec:
+  replicas: &lt;integer&gt;      # ReplicaSet のレプリカ数。
+  selector:
+    matchLabels:
+      &lt;key1&gt;: &lt;value1&gt;     # ReplicaSet の対象セレクタ。以下の Pod 定義 の Label に一致させる。
+  template:                # Pod 定義
+    metadata:
+      labels:              # Pod の Label
+        &lt;key1&gt;: &lt;value1&gt;
+    spec:
+      containers:
+        image: &lt;string&gt;    # Pod に利用するコンテナイメージ
+        name: &lt;string&gt;     # Pod 名
+        ports:
+        resources: {}
+</code></pre><p>ケースによっては追加で以下を意識する必要がある。</p>
+<ul>
+<li>spec.strategy</li>
+<li>spec.template.spec.affinity : <a href="https://qiita.com/sheepland/items/ed12b3dc4a8f1df7c4ec">参考</a></li>
+</ul>
+<h3 ref="24-pod" >2.4. Pod</h3><a class="anchor" id="24-pod"></a>
+<pre><code>apiVersion: core/v1
+kind: Pod
+metadata: # 先の metadata に同じ。
+spec:     # 先の Deployment の spec.template.spec に同じ。
+status:   # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podstatus-v1-core
+</code></pre><h4 ref="241-pod-のライフサイクルhttpskubernetesiojadocsconceptsworkloadspodspod-lifecycle" >2.4.1. <a href="https://kubernetes.io/ja/docs/concepts/workloads/pods/pod-lifecycle/">Pod のライフサイクル</a></h4><a class="anchor" id="241-pod-のライフサイクルhttpskubernetesiojadocsconceptsworkloadspodspod-lifecycle"></a>
+<p><code>status.phase</code> は Pod のライフサイクルにおけるフェーズを表しており、 Pod の状態を確認する上で重要となる。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">値</th>
+<th style="text-align:left">概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Pending</td>
+<td style="text-align:left">PodがKubernetesシステムによって承認されが、コンテナの作成が完了していない状態。スケジュール・イメージダウンロード中などの状態。</td>
+</tr>
+<tr>
+<td style="text-align:left">Running</td>
+<td style="text-align:left">PodがNodeにバインドされ、少なくとも 1 つのコンテナが作成され、開始・実行・再起動中の状態。</td>
+</tr>
+<tr>
+<td style="text-align:left">Succeeded</td>
+<td style="text-align:left">JobなどのPod内のすべてのコンテナが正常に終了し、再起動も発生していない状態。</td>
+</tr>
+<tr>
+<td style="text-align:left">Failed</td>
+<td style="text-align:left">Pod内のすべてのコンテナが終了し、少なくとも1つのコンテナが異常終了した状態。コンテナはゼロ以外のステータスで終了したか、システムによって終了された状態。</td>
+</tr>
+<tr>
+<td style="text-align:left">Unknown</td>
+<td style="text-align:left">何らかの理由により、通常はPodのホストとの通信にエラーが発生したために、Podの状態を取得できなかった。</td>
+</tr>
+</tbody>
+</table>
+<p>上記のようなフェーズを決定するために、 Kubernetes では以下の 2 種類の <strong>ヘルスチェック</strong> がある。</p>
+<ul>
+<li>Liveness Probe
+<ul>
+<li>Pod が正常に動作しているかの確認</li>
+<li>失敗した場合、 Pod は再起動される</li>
+</ul>
+</li>
+<li>Readiness Probe
+<ul>
+<li>Pod がサービスインする準備が出来ているかの確認</li>
+<li>失敗した場合、 Pod にトラフィックが流れず、再起動されることもない（サービスインされるまで待つ）</li>
+</ul>
+</li>
+</ul>
+<p>上記の設定はデフォルトではされておらず、通常は Service/LoadBalancer から Node への ICMP による簡易的なチェックしか実施されていない。<br>
+そのため、 Pod の状態に応じたサービスの健全性を保つために上記の設定が必要になる。<br>
+Liveness/Readiness Probe の双方で以下の 3 種類のヘルスチェックを設定できる。<br>
+ヘルスチェックは kubelet からコンテナ毎に行われ、どれか 1 つのコンテナでも失敗した場合には Pod 全体が失敗とみなされる。</p>
+<ul>
+<li>exec
+<ul>
+<li>コマンドを実行し、終了コードが 0 でなければ失敗</li>
+<li>例</li>
+</ul>
+<pre><code>livenessProbe:
+  exec:
+    command: [&quot;ls&quot;, &quot;/usr/sbin/nginx&quot;]
+</code></pre></li>
+<li>httpGet
+<ul>
+<li>HTTP GET リクエストを実行し、 Status Code が 200 〜 300 でなければ失敗</li>
+<li>例</li>
+</ul>
+<pre><code>libenessProbe:
+  httpGet:
+    path: /health
+    port: 80
+    scheme: HTTP
+    host: web.example.com
+    httpHeaders:
+    - name: Authorization
+      value: Bearer TOKEN
+</code></pre></li>
+<li>tcpSocket
+<ul>
+<li>TCP セッションが確立できなければ失敗</li>
+<li>例</li>
+</ul>
+<pre><code>linenessProbe:
+  tcpSocket:
+    port: 80
+</code></pre></li>
+</ul>
+<h3 ref="25-service" >2.5. Service</h3><a class="anchor" id="25-service"></a>
+<pre><code>apiVersion: v1
+kind: Service
+metadata: # 先の metadata に同じ。
+spec: # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#servicespec-v1-core
+  clusterIP:
+  externalIPs:
+  externalName:
+  externalTrafficPolicy:
+  healthCheckNodePort:
+  loadBalancerIP:
+  loadBalancerSourceRanges:
+  ports:
+  publishNotReadyAddresses:
+  selector:
+  sessionAffinity:
+  sessionAffinityConfig:
+  type: # ExternalName 、 ClusterIP （デフォルト）、 NodePort 、および LoadBalancer 。
+</code></pre><p>色々設定があるが、 ClusterIP の場合は以下くらいでいい。</p>
+<pre><code>apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    &lt;key&gt;: &lt;value&gt;
+  labels:             # Service の Label
+    &lt;key&gt;: &lt;value&gt;
+  name: &lt;string&gt;      # Service 名
+  namespace: &lt;string&gt; # Service の namespace
+spec:
+  selector:
+    &lt;key&gt;: &lt;value&gt;    # 通信を流す Pod の Label をセレクタで指定
+  ports:
+  - protocol: TCP     # Service が受信するプロトコルとポートマッピング
+    port: 80          # Service が受信 Port
+    targetPort: 9376  # Pod の Port
+</code></pre><h2 ref="3-その他のリソース" >3. その他のリソース</h2><a class="anchor" id="3-その他のリソース"></a>
+<p>基本的なリソース以外に以下について記載する。</p>
+<ul>
+<li><a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">HPA（HorizontalPodAutoscaler）</a></li>
+<li><a href="https://kubernetes.io/docs/tasks/run-application/configure-pdb/">PBD（PodDisruptionBudget）</a></li>
+</ul>
+<h3 ref="31-hpahorizontalpodautoscaler" >3.1. HPA（HorizontalPodAutoscaler）</h3><a class="anchor" id="31-hpahorizontalpodautoscaler"></a>
+<p>HPA は pod の負荷に応じて自動的に pod の数を水平スケールさせるリソース。<br>
+Deployment, ReplicaSet, ReplicationController, StatefulSetはscaled resource objectと呼ばれ、これらがauto scalingの対象リソースとなる。</p>
+<pre><code class="language-apiVersion:" data-lang="apiVersion:">kind: HorizontalPodAutoscaler
+metadata:
+  name: php-hpa
+  namespace: default
+spec:
+  scaleTargetRef: # ここでautoscale対象となる`scaled resource object`を指定
+    apiVersion: apps/v1
+    kind: Deployment
+    name: php-deploy
+  minReplicas: 1 # 最小レプリカ数
+  maxReplicas: 5 # 最大レプリカ数
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 50 # CPU使用率が常に50%になるように指定
+</code></pre><p><a href="https://qiita.com/sheepland/items/37ea0b77df9a4b4c9d80">参考</a></p>
+<h3 ref="32-pbdpoddisruptionbudget" >3.2. PBD（PodDisruptionBudget）</h3><a class="anchor" id="32-pbdpoddisruptionbudget"></a>
+<ul>
+<li><code>kubectl drain</code> によって対象 Node から Pod を退去でき、以降も Pod がスケジューリングされないように出来る
+<ul>
+<li>Node のメンテナンス(reboot)などを行う必要がある場合に kubectl drainを行うと Node で動いている Pod について gracefully に terminate される。また、ReplicaSet を使っていれば別の Node で Pod が自動的に起動される。メンテナンス完了後、kubectl uncordonを行うことで再度 Pod がスケジューリングされる状態になる。</li>
+</ul>
+</li>
+<li>注意点として上記だけでは対象 Node 上で起動している Pod は一度に evicted され、一度に退去させられる可能性がある。例えば ReplicaSet 2 で drain 対象の Node に 2つの Pod が起動していた場合、両方の Pod に対して evicted され、一つも Pod が起動していない時間帯がある可能性が出来てしまう</li>
+<li>PodDisruptionBudget(PDB)を定義することで上記を防ぐことが出来る</li>
+</ul>
+<pre><code>apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: myapp
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+run: myapp
+</code></pre><p><a href="https://qiita.com/toshihirock/items/5adaece0206127121551">参考</a></p>
+<h2 ref="参考" >参考</h2><a class="anchor" id="参考"></a>
+<ul>
+<li><a href="https://qiita.com/tkusumi/items/4f63cea4c4d910b368c4">Kubernetes Tips: kubectl でマニフェストの雛形を作る</a></li>
+<li><a href="https://qiita.com/bgpat/items/173f33ae2a9e21b24487">Kubernetes流YAML職人になるために</a></li>
+</ul>
+		</div>
+
+
+
+
+
+
+	
+	
+
+      </section>
+
+      
+      
+    </article>
+    
+    
+    <footer>
+      
+
+		
+	
+			
+		
+	    	
+	  	
+	
+    </footer>
+    
+
+
+
+  </body>
+</html>

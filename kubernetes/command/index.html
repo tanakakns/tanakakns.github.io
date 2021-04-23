@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	GCP と AWS の違い :: テックまとめ
+	コマンド :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>GCP と AWS の違い :: テックまとめ</title>
+<title>コマンド :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/gcp/gcp-aws/"
+  <body data-url="/kubernetes/command/"
 
   class="hidetoc hidenextpage ">
 
@@ -320,15 +320,14 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -351,7 +350,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/gcp-aws/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/gcp/gcp-aws/" class="dd-item
         item_level_$level
         ">
 
@@ -599,14 +598,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/kubernetes/">Kubernetes</a>
@@ -659,7 +659,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/kubernetes/command/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/command/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -774,8 +774,8 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/gcp/">
-        GCP
+      <a class="text-link" href="/kubernetes/">
+        Kubernetes
       </a>
     </li>
 	
@@ -783,7 +783,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        GCP と AWS の違い
+        コマンド
       
     </li>
 
@@ -804,7 +804,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>GCP と AWS の違い</h1>
+			<h1>コマンド</h1>
         
 
 		
@@ -824,56 +824,168 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <ul>
-<li>IAM
+	    <p><code>kubectl</code> について。</p>
+<p><a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands">kubectl リファレンス</a>
+<a href="http://kubernetes.io/ja/docs/reference/kubectl/cheatsheet/">kubectlチートシート</a>
+<a href="https://cstoku.dev/posts/2018/k8sdojo-23/">Kubernetes道場 23日目 - kubectlを網羅する</a></p>
+<h2 ref="全体像" >全体像</h2><a class="anchor" id="全体像"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl --help
+kubectl controls the Kubernetes cluster manager.
+
+ Find more information at: https://kubernetes.io/docs/reference/kubectl/overview/
+
+Basic Commands <span style="color:#f92672">(</span>Beginner<span style="color:#f92672">)</span>:
+  create        ファイルまたは標準入力からリソースを作成する
+  expose        ReplicaSet、Service、Deployment、Pod に対して新しい Service を作成する
+  run           イメージをクラスタ上に起動する
+  set           オブジェクトに特定の features を設定する
+
+Basic Commands <span style="color:#f92672">(</span>Intermediate<span style="color:#f92672">)</span>:
+  explain       リソースの説明を表示する
+  get           1つまたは複数のリソースを表示する
+  edit          サーバ上のリソースを編集する
+  delete        ファイル名、標準入力、リソース、名前、セレクタをもとにリソースを削除する
+
+Deploy Commands:
+  rollout       リソースのロールアウトを管理する
+  scale         Deployment、 ReplicaSet のサイズを設定する
+  autoscale     Deployment、 ReplicaSet をオートスケールする
+
+Cluster Management Commands:
+  certificate   Modify certificate resources.
+  cluster-info  クラスターの情報を表示する
+  top           Display Resource <span style="color:#f92672">(</span>CPU/Memory/Storage<span style="color:#f92672">)</span> usage.
+  cordon        Mark node as unschedulable
+  uncordon      Mark node as schedulable
+  drain         Drain node in preparation <span style="color:#66d9ef">for</span> maintenance
+  taint         Update the taints on one or more nodes
+
+Troubleshooting and Debugging Commands:
+  describe      Show details of a specific resource or group of resources
+  logs          Print the logs <span style="color:#66d9ef">for</span> a container in a pod
+  attach        Attach to a running container
+  exec          Execute a command in a container
+  port-forward  Forward one or more local ports to a pod
+  proxy         Run a proxy to the Kubernetes API server
+  cp            Copy files and directories to and from containers.
+  auth          Inspect authorization
+  debug         Create debugging sessions <span style="color:#66d9ef">for</span> troubleshooting workloads and nodes
+
+Advanced Commands:
+  diff          Diff live version against would-be applied version
+  apply         ファイル名または標準入力でリソースにコンフィグを適用する
+  patch         Update field<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> of a resource
+  replace       Replace a resource by filename or stdin
+  wait          Experimental: Wait <span style="color:#66d9ef">for</span> a specific condition on one or many resources.
+  kustomize     Build a kustomization target from a directory or a remote url.
+
+Settings Commands:
+  label         リソースのラベルを更新する
+  annotate      リソースのアノテーションを更新する
+  completion    Output shell completion code <span style="color:#66d9ef">for</span> the specified shell <span style="color:#f92672">(</span>bash or zsh<span style="color:#f92672">)</span>
+
+Other Commands:
+  api-resources Print the supported API resources on the server
+  api-versions  Print the supported API versions on the server, in the form of <span style="color:#e6db74">&#34;group/version&#34;</span>
+  config        kubeconfigを変更する
+  plugin        Provides utilities <span style="color:#66d9ef">for</span> interacting with plugins.
+  version       Print the client and server version information
+
+Usage:
+  kubectl <span style="color:#f92672">[</span>flags<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>options<span style="color:#f92672">]</span>
+
+Use <span style="color:#e6db74">&#34;kubectl &lt;command&gt; --help&#34;</span> <span style="color:#66d9ef">for</span> more information about a given command.
+Use <span style="color:#e6db74">&#34;kubectl options&#34;</span> <span style="color:#66d9ef">for</span> a list of global command-line options <span style="color:#f92672">(</span>applies to all commands<span style="color:#f92672">)</span>.
+</code></pre></div><h2 ref="基本設定" >基本設定</h2><a class="anchor" id="基本設定"></a>
+<p><code>kubectl</code> コマンドの設定情報は <code>${HOME}/.kube/config</code> にある。<br>
+これを <code>kubeconfig</code> と呼ぶ。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">current-context current-contextを表示する
+delete-cluster  指定したコンテキストをkubeconfigから削除する
+delete-context  指定したコンテキストをkubeconfigから削除する
+delete-user     Delete the specified user from the kubeconfig
+get-clusters    kubeconfigで定義されたクラスターを表示する
+get-contexts    1つまたは複数のコンテキストを記述する
+get-users       Display users defined in the kubeconfig
+rename-context  Renames a context from the kubeconfig file.
+set             kubeconfigに個別の変数を設定する
+set-cluster     kubeconfigにクラスターエントリを設定する
+set-context     kubeconfigにコンテキストエントリを設定する
+set-credentials kubeconfigにユーザーエントリを設定する
+unset           kubeconfigから変数を個別に削除する
+use-context     kubeconfigにcurrent-contextを設定する
+view            マージされたkubeconfigの設定または指定されたkubeconfigを表示する
+</code></pre></div><p>kind 環境でやる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl config current-context
+kind-kind
+
+% kubectl cluster-info --context kind-kind
+Kubernetes control plane is running at https://127.0.0.1:50584
+KubeDNS is running at https://127.0.0.1:50584/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use <span style="color:#e6db74">&#39;kubectl cluster-info dump&#39;</span>.
+</code></pre></div><h3 ref="context" >context</h3><a class="anchor" id="context"></a>
+<p><code>kubecnfig</code> に含まれる設定は <code>contexts</code> <code>clusters</code> <code>users</code> の 3 種類で、 <code>contexts</code> に <code>cluster</code> （接続先クラスタ情報）と <code>users</code> （ credential 情報）が含まれる。</p>
+<p>基本設定でも特に <code>context</code> 設定については以下だけ覚えておく。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl config view            <span style="color:#75715e"># kubeconfig の表示</span>
+
+% kubectl config current-context <span style="color:#75715e"># 現在の context を取得</span>
+% kubectl config get-contexts    <span style="color:#75715e"># context の一覧を取得</span>
+% kubectl config set-context     <span style="color:#75715e"># context をエントリ</span>
+% kubectl config use-context     <span style="color:#75715e"># 現在の context に設定</span>
+</code></pre></div><p>なお、以降のコマンドで <code>-o yaml --dry-run=client</code> をつけるとマニフェストを確認できるので試してみるといい。</p>
+<h2 ref="kubectl-create" ><code>kubectl create</code></h2><a class="anchor" id="kubectl-create"></a>
+<p>Pod 以外の大体のリソースは <code>kubectl create</code> で作れる。<a href="https://kubernetes.io/docs/reference/kubectl/conventions/#generators">参考</a></p>
 <ul>
-<li>Cloud IAMはGoogleアカウントに対してプロジェクト毎にロールを割り当てる。（AWSのように管理者が独自のIAMアカウントを作って管理するわけではない）</li>
-<li>階層になっているIAMだが、階層の下に対してポリシーを継承できるものの下でより強い権限にてポリシーを上書きすることができる</li>
+<li>clusterrole: Create a ClusterRole.</li>
+<li>clusterrolebinding: Create a ClusterRoleBinding for a particular ClusterRole.</li>
+<li>configmap: Create a ConfigMap from a local file, directory or literal value.</li>
+<li>cronjob: Create a CronJob with the specified name.</li>
+<li>deployment: Create a Deployment with the specified name.</li>
+<li>job: Create a Job with the specified name.</li>
+<li>namespace: Create a Namespace with the specified name.</li>
+<li>poddisruptionbudget: Create a PodDisruptionBudget with the specified name.</li>
+<li>priorityclass: Create a PriorityClass with the specified name.</li>
+<li>quota: Create a Quota with the specified name.</li>
+<li>role: Create a Role with single rule.</li>
+<li>rolebinding: Create a RoleBinding for a particular Role or ClusterRole.</li>
+<li>secret: Create a Secret using specified subcommand.</li>
+<li>service: Create a Service using specified subcommand.</li>
+<li>serviceaccount: Create a ServiceAccount with the specified name.</li>
 </ul>
-</li>
-<li>プロジェクトの概念
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"><span style="color:#75715e"># Deployment</span>
+% kubectl create deployment nginx --image<span style="color:#f92672">=</span>nginx --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+
+<span style="color:#75715e"># Job</span>
+% kubectl create job busybox --image<span style="color:#f92672">=</span>busybox -- /bin/sh -c <span style="color:#e6db74">&#39;date; echo Hello&#39;</span>
+
+<span style="color:#75715e"># CronJob</span>
+% kubectl create cronjob busybox --image<span style="color:#f92672">=</span>busybox --schedule<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;*/10 * * * *&#34;</span>  -- /bin/sh -c <span style="color:#e6db74">&#39;date; echo Hello&#39;</span>
+
+<span style="color:#75715e"># ConfigMap</span>
+% kubectl create configmap my-config --from-literal<span style="color:#f92672">=</span>key1<span style="color:#f92672">=</span>config1 --from-literal<span style="color:#f92672">=</span>key2<span style="color:#f92672">=</span>config2
+
+<span style="color:#75715e"># Secret</span>
+% kubectl create secret generic my-secret --from-literal<span style="color:#f92672">=</span>key1<span style="color:#f92672">=</span>supersecret --from-literal<span style="color:#f92672">=</span>key2<span style="color:#f92672">=</span>topsecret
+</code></pre></div><p>なお、 Pod だけを作りたい場合は <code>kubectl run</code> を利用する。</p>
+<h2 ref="kubectl-run" ><code>kubectl run</code></h2><a class="anchor" id="kubectl-run"></a>
+<p><code>kubectl create</code> がだいたいなんでも作れたのに対し、 <code>kubectl run</code> は Pod のみの実行に特化。<br>
+オプションで Service をつけれたりもするが、基本は <code>kubectl create</code> でリソースを作成するのがよい。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"><span style="color:#75715e"># Pod</span>
+% kubectl run nginx --image<span style="color:#f92672">=</span>nginx
+
+<span style="color:#75715e"># PodとServiceを同時に作成</span>
+% kubectl run nginx --image<span style="color:#f92672">=</span>nginx --port<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span> --expose
+</code></pre></div><h2 ref="kubectl-apply" ><code>kubectl apply</code></h2><a class="anchor" id="kubectl-apply"></a>
+<p>マニフェストを適用するコマンド。<br>
+<code>kubectl create</code> でもマニフェスト適用できるが、 <code>kubectl apply</code> を利用すること。<br>
+理由は以下の通り。</p>
 <ul>
-<li>AWSでは契約ごとに払い出されるアカウント払い出されるが、GCPではプロジェクトという単位になっており、いくつでも自由に作れる</li>
-<li>プロジェクト単位で課金やIAMを分けられる。</li>
+<li><code>kubectl apply</code> は差分を適用するため、差分が無い場合は何もしない</li>
+<li><code>kubectl apply</code> は「前回適用したマニフェスト」「現在クラスタに登録されているリソースの状態」「今回適用するマニフェスト」の 3 種類から差分が算出される</li>
+<li><code>kubectl create</code> は「前回適用したマニフェスト」として保存されない</li>
 </ul>
-</li>
-<li>ネットワーク
-<ul>
-<li>GCPではVPCを作ると初めからマルチリージョンで作られる / ゾーン(AZ相当)を跨ったサブネットが作れる</li>
-<li>外部IPアドレス（EIP相当）は、テンポラリーIPを昇格させることができる。また、グローバルに負荷分散できるIPも取得できる。</li>
-</ul>
-</li>
-<li>データベース
-<ul>
-<li>CloudSQL（RDS相当）にOracle、SQLServerはない（Bare Metal Solution にある）</li>
-</ul>
-</li>
-<li>API
-<ul>
-<li>各サービスを操作するAPIがあるのだが初期で有効になっているものはほとんどなく、ユーザが意図的に有効かしないとつかえない</li>
-</ul>
-</li>
-<li>ストレージ
-<ul>
-<li>AWSのGlacierはデータを読み出す際に数時間かかるが、GCPのクラウドストレージのオプションであるColdLineやNearLineは同じようなサービスでありながら、通常のストレージと同じ速度で読み出しができる</li>
-</ul>
-</li>
-<li>LoadBalancer
-<ul>
-<li>グローバル向けに HTTPロードバランサとSSLロードバランサとTCPロードバランサ、リージョン向けにネットワークロードバランサ（TCP/UDP/SSL) がある</li>
-<li>内部向けにはインターナルロードバランサがある（HTTP(S)/TCP/UDP）</li>
-<li>グローバル向けの方はリバースプロキシサーバで、リージョン向け/内部向けはロードバランサ</li>
-<li>GCPでグローバルIPを取得し、LBを前段におくとマルチリージョンでの負荷分散が行われる</li>
-</ul>
-</li>
-<li>監視
-<ul>
-<li>Stackdriver(CloudWatch相当)の有料のプレミアム階層では、AWSのリソースも同じダッシュボード上で監視ができる</li>
-<li>Stackdriverアカウントに複数のGCPアカウントやAWSアカウントを紐付けることができる。</li>
-<li>リソースを個々のインスタンスではなく、「Webサーバグループ」などとまとめて監視することもできる。</li>
-</ul>
-</li>
-</ul>
+<h2 ref="kubectl-label" ><code>kubectl label</code></h2><a class="anchor" id="kubectl-label"></a>
+<p>リソースに対して label の追加・更新・削除を行う。</p>
 		</div>
 
 

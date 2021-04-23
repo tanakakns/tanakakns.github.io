@@ -1,0 +1,1490 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+	Google Kubernetes Engine :: テックまとめ
+</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2021-04-24T00:08:31 JST">
+<meta name="description" content="備忘録用メモサイト">
+
+
+
+<title>Google Kubernetes Engine :: テックまとめ</title>
+
+<link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+
+<script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel="stylesheet">
+
+
+
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/layout.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.main.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.menu.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/notice.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/tabs.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/panel.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/columns.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/children.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/attachments.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/alert.css'>
+<link rel="stylesheet" type="text/css" href='/css/docport.css'>
+
+<script src='/js/docport.js'></script>
+<script type="text/javascript">
+      var baseurl = "https:\/\/tanakakns.github.io\/";
+</script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-42388425-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+  </head>
+
+  <body data-url="/gcp/computing-hosting/kubernetes-engine/"
+
+  class="hidetoc hidenextpage ">
+
+<style type="text/css">
+  #debug{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    line-height: 3.5rem;
+    margin-bottom: .35rem;
+    padding: 0 2rem;
+    position: fixed;
+    left: 0;      right: 0;     top: 0;
+   
+    top:0px;
+    
+    min-height: 150px;
+
+    background-color: white;
+    border: 3px solid red;
+    z-index: 10000 ;
+    word-wrap: all;
+    overflow: auto;
+  }
+</style>
+ 
+
+
+    
+    
+    <header style="">
+        <div>
+    
+    <div class="burger ">
+        <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">&#9776;</a>
+    </div>
+    
+
+    <div>
+
+		
+	
+			
+		
+	    	<a class='baselink' href='https://tanakakns.github.io/'>テックまとめ</a>
+	  	
+	</div>
+
+</div>
+    </header>
+    
+
+    <article>
+      
+      <aside class="">
+        
+
+		
+	
+			
+		
+	    	
+	  	
+	<div id="close_menu">
+  <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">
+      <i class="fa fa-lg fa-times"></i>
+  </a>
+</div>
+
+<ul class="menu">
+
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/mac/">Mac開発環境</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/os-settings/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/os-settings/">OSの設定</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/homebrew/">Homebrew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/asdf/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/asdf/">asdf</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/git/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/git/">Git</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/git/initial-setting/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/git/initial-setting/">初期設定</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/go/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/go/">Go言語</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/initial-setting/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/initial-setting/">初期設定</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/grammar/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/grammar/">文法</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/naming/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/naming/">命名規則</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/pattern/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/pattern/">パターン</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/aws/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+        
+      
+          <a href="/aws/">AWS</a>
+      
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <i class="fas fa-chevron-down ddexp"></i>
+        
+      
+          <a href="/gcp/">GCP</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/basic/">入門</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/gcp-aws/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/gcp-aws/">GCP と AWS の違い</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/cli/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/cli/">CLI</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item parent haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/">コンピューティングとホスティング</a>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/compute-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/compute-engine/">Compute Engine</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/" class="dd-item parent active
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/kubernetes-engine/">Google Kubernetes Engine</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/app-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/app-engine/">App Engine</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/storage/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/storage/">ストレージ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/">データベース</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/">ネットワーキング</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/big-data/">ビッグデータ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/machine-learning/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/machine-learning/">機械学習</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/monitoring/">監視</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/terraform/">Terraform</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/docker/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/docker/">Docker</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/docker/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/docker/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/kubernetes/">Kubernetes</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/concept/">概念整理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/architecture/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/architecture/">アーキテクチャ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/kubectl-plugin/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/kubectl-plugin/">kubectl plugin と Krew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/command/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/command/">コマンド</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/manifest/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/manifest/">マニフェスト</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/istio/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/istio/">Istio</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/basic/">入門</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/concept/">概念整理</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+
+
+</ul>
+
+		
+	
+			
+		
+	    	
+	  	
+	
+      </aside>
+      
+
+      <section class="page ">
+      
+	
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/">
+        GCP
+      </a>
+    </li>
+	
+  	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/computing-hosting/">
+        コンピューティングとホスティング
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        Google Kubernetes Engine
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>Google Kubernetes Engine</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
+
+
+
+
+
+
+	<div class="content">
+	    <h2 ref="3-google-kubernetes-engine" >3. Google Kubernetes Engine</h2><a class="anchor" id="3-google-kubernetes-engine"></a>
+<ol>
+<li><a href="#3-1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
+<li><a href="#3-2-%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E4%BD%9C%E6%88%90">クラスタ作成</a></li>
+<li><a href="#3-3-%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E7%AE%A1%E7%90%86">デプロイ管理</a></li>
+<li>Spinnaker と Kubernetes Engine を使用した継続的デリバリー パイプライン</li>
+</ol>
+<h3 ref="31-コンセプト" >3.1. コンセプト</h3><a class="anchor" id="31-コンセプト"></a>
+<h3 ref="32-クラスタ作成" >3.2. クラスタ作成</h3><a class="anchor" id="32-クラスタ作成"></a>
+<p>デフォルトのコンピューティング ゾーンを設定する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config set compute/zone us-central1-a
+
+Updated property <span style="color:#f92672">[</span>compute/zone<span style="color:#f92672">]</span>.
+</code></pre></div><p>GKE クラスタを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+$ gcloud container clusters create <span style="color:#f92672">[</span>CLUSTER-NAME<span style="color:#f92672">]</span>
+
+<span style="color:#75715e"># 具体例</span>
+$ gcloud container clusters create my-cluster
+Creating cluster my-cluster in us-central1-a... Cluster is being health-checked <span style="color:#f92672">(</span>master is healthy<span style="color:#f92672">)</span>...done.
+Created <span style="color:#f92672">[</span>https://container.googleapis.com/v1/projects/qwiklabs-gcp-01-47d564cd39d1/zones/us-central1-a/clusters/my-cluster<span style="color:#f92672">]</span>.
+To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/us-central1-a/my-cluster?project<span style="color:#f92672">=</span>qwiklabs-gcp-01-47d564cd39d1
+kubeconfig entry generated <span style="color:#66d9ef">for</span> my-cluster.
+NAME        LOCATION       MASTER_VERSION   MASTER_IP      MACHINE_TYPE  NODE_VERSION     NUM_NODES  STATUS
+my-cluster  us-central1-a  1.18.16-gke.302  34.67.190.125  e2-medium     1.18.16-gke.302  <span style="color:#ae81ff">3</span>          RUNNING
+</code></pre></div><p>クラスタの認証情報を取得する。（ kubeconfig に設定が追加される）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+$ gcloud container clusters get-credentials <span style="color:#f92672">[</span>CLUSTER-NAME<span style="color:#f92672">]</span>
+
+<span style="color:#75715e"># 具体例</span>
+$ gcloud container clusters get-credentials my-cluster
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated <span style="color:#66d9ef">for</span> my-cluster.
+</code></pre></div><p>試しに作成したクラスタにコンテナをデプロイする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create deployment hello-server --image<span style="color:#f92672">=</span>gcr.io/google-samples/hello-app:1.0
+deployment.apps/hello-server created
+
+$ kubectl expose deployment hello-server --type<span style="color:#f92672">=</span>LoadBalancer --port <span style="color:#ae81ff">8080</span>
+service/hello-server exposed
+
+$ kubectl get service
+NAME           TYPE           CLUSTER-IP     EXTERNAL-IP     PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>          AGE
+hello-server   LoadBalancer   10.3.245.136   35.238.58.233   8080:30372/TCP   70s
+kubernetes     ClusterIP      10.3.240.1     &lt;none&gt;          443/TCP          10m
+
+$ curl http://35.238.58.233:8080
+Hello, world!
+Version: 1.0.0
+Hostname: hello-server-57684579f-kw54q
+</code></pre></div><p>クラスタを削除する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+$ gcloud container clusters delete <span style="color:#f92672">[</span>CLUSTER-NAME<span style="color:#f92672">]</span>
+
+<span style="color:#75715e"># 具体例</span>
+$ gcloud container clusters delete my-cluster
+The following clusters will be deleted.
+ - <span style="color:#f92672">[</span>my-cluster<span style="color:#f92672">]</span> in <span style="color:#f92672">[</span>us-central1-a<span style="color:#f92672">]</span>
+Do you want to <span style="color:#66d9ef">continue</span> <span style="color:#f92672">(</span>Y/n<span style="color:#f92672">)</span>?  Y
+Deleting cluster my-cluster...done.
+Deleted <span style="color:#f92672">[</span>https://container.googleapis.com/v1/projects/qwiklabs-gcp-01-47d564cd39d1/zones/us-central1-a/clusters/my-cluster<span style="color:#f92672">]</span>.
+</code></pre></div><h3 ref="33-デプロイ管理" >3.3. デプロイ管理</h3><a class="anchor" id="33-デプロイ管理"></a>
+<h4 ref="331-deployment-オブジェクトの詳細" >3.3.1. Deployment オブジェクトの詳細</h4><a class="anchor" id="331-deployment-オブジェクトの詳細"></a>
+<p><code>kubectl explain</code> コマンドを使用すると、Deployment などのオブジェクトに関する情報が取得できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment
+
+<span style="color:#75715e"># 全てのフィールドを確認する場合</span>
+$ kubectl explain deployment --recursive
+
+<span style="color:#75715e"># 特定のフィールドを確認する場合</span>
+$ kubectl explain deployment.metadata.name
+</code></pre></div><h4 ref="332-deployment-の作成" >3.3.2. Deployment の作成</h4><a class="anchor" id="332-deployment-の作成"></a>
+<p>Google 提供の資材を使って、Cloud Console の Cloud Shell 上で実施していく。<br>
+まずはクラスタを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># デフォルトのゾーンを設定</span>
+$ gcloud config set compute/zone us-central1-a
+
+<span style="color:#75715e"># サンプルコードを入手</span>
+$ gsutil -m cp -r gs://spls/gsp053/orchestrate-with-kubernetes .
+$ cd orchestrate-with-kubernetes/kubernetes
+
+<span style="color:#75715e"># 5 つの n1-standard-1 ノードを含むクラスタを作成</span>
+$ gcloud container clusters create bootcamp --num-nodes <span style="color:#ae81ff">5</span> --scopes <span style="color:#e6db74">&#34;https://www.googleapis.com/auth/projecthosting,storage-rw&#34;</span>
+
+NAME      LOCATION       MASTER_VERSION   MASTER_IP     MACHINE_TYPE  NODE_VERSION     NUM_NODES  STATUS
+bootcamp  us-central1-a  1.18.16-gke.302  35.238.203.7  e2-medium     1.18.16-gke.302  <span style="color:#ae81ff">5</span>          RUNNING
+</code></pre></div><p><code>deployments/auth.yaml</code> の <code>image</code> を以下のように変更する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">…</span>
+<span style="color:#f92672">containers</span>:
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">auth</span>
+  <span style="color:#f92672">image</span>: <span style="color:#ae81ff">kelseyhightower/auth:1.0.0</span>
+...
+</code></pre></div><p>Deployment でレプリカが 1 つ作成され、バージョン 1.0.0 の auth コンテナが使用される。<br>
+<code>kubectl create</code> を使用して Deployment オブジェクトを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/auth.yaml
+
+<span style="color:#75715e"># 確認</span>
+$ kubectl get deployments
+$ kubectl get replicasets
+$ kubectl get pods
+</code></pre></div><p>次に、auth デプロイ用のサービスを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f services/auth.yaml
+</code></pre></div><p>ここまでで <code>auth</code> を作成したが、 <code>hello</code> 、 <code>frontend</code> も作成していく。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># hello</span>
+$ kubectl create -f deployments/hello.yaml
+$ kubectl create -f services/hello.yaml
+
+<span style="color:#75715e"># frontend</span>
+$ kubectl create secret generic tls-certs --from-file tls/
+$ kubectl create configmap nginx-frontend-conf --from-file<span style="color:#f92672">=</span>nginx/frontend.conf
+$ kubectl create -f deployments/frontend.yaml
+$ kubectl create -f services/frontend.yaml
+</code></pre></div><p><code>frontend</code> の外部 IP を確認して <code>curl</code> で動確する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get services frontend
+NAME       TYPE           CLUSTER-IP       EXTERNAL-IP     PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>         AGE
+frontend   LoadBalancer   10.115.243.177   34.66.110.111   443:31848/TCP   46s
+
+$ curl -ks https://34.66.110.111
+<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;Hello&#34;</span><span style="color:#f92672">}</span>
+</code></pre></div><h4 ref="333-スケールアウトイン" >3.3.3. スケールアウト・イン</h4><a class="anchor" id="333-スケールアウトイン"></a>
+<p>Deployment をスケーリングするには、 <code>spec.replicas</code> フィールドを更新する。<br>
+<code>kubectl explain</code> コマンドで、このフィールドの説明を確認してみる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment.spec.replicas
+KIND:     Deployment
+VERSION:  apps/v1
+FIELD:    replicas &lt;integer&gt;
+DESCRIPTION:
+     Number of desired pods. This is a pointer to distinguish between explicit
+     zero and not specified. Defaults to 1.
+</code></pre></div><p><code>kubectl scale</code> コマンドでスケールアウト・インする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pod 数を 5 へスケールアウト</span>
+$ kubectl scale deployment hello --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
+
+<span style="color:#75715e"># 確認</span>
+$ kubectl get pods | grep hello- | wc -l
+<span style="color:#ae81ff">5</span>
+
+<span style="color:#75715e"># Pod 数を 3 へスケールイン</span>
+$ kubectl scale deployment hello --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+
+<span style="color:#75715e"># 確認</span>
+$ kubectl get pods | grep hello- | wc -l
+<span style="color:#ae81ff">3</span>
+</code></pre></div><h4 ref="333-ローリング-アップデート" >3.3.3. ローリング アップデート</h4><a class="anchor" id="333-ローリング-アップデート"></a>
+<p>ReplicaSet が新たに作成され、古い ReplicaSet のレプリカ数が減少するにつれて、新しい ReplicaSet のレプリカ数が徐々に増加する形で実行される。<br>
+Deployment を更新するには、次のコマンドを実行してマニフェストを編集する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl edit deployment hello
+<span style="color:#75715e"># image を「kelseyhightower/hello:1.0.0」から「kelseyhightower/hello:2.0.0」へ変更</span>
+</code></pre></div><p>新しい ReplicaSet の確認、および、ロールアウト履歴にも新しいエントリがあるか確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get replicaset
+NAME                  DESIRED   CURRENT   READY   AGE
+auth-7cffdb8677       <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>       14m
+frontend-7b4b97c4dc   <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>       12m
+hello-687bb4b8f4      <span style="color:#ae81ff">0</span>         <span style="color:#ae81ff">0</span>         <span style="color:#ae81ff">0</span>       13m
+hello-d99c798f        <span style="color:#ae81ff">3</span>         <span style="color:#ae81ff">3</span>         <span style="color:#ae81ff">3</span>       60s
+
+$ kubectl rollout history deployment/hello
+deployment.apps/hello
+REVISION  CHANGE-CAUSE
+<span style="color:#ae81ff">1</span>         &lt;none&gt;
+<span style="color:#ae81ff">2</span>         &lt;none&gt;
+</code></pre></div><p>ロールアウトの状況は以下のコマンドで確認できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl rollout status deployment/hello
+
+<span style="color:#75715e"># もしくは</span>
+
+$ kubectl get pods -o jsonpath --template<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{range .items[*]}{.metadata.name}{&#34;\t&#34;}{&#34;\t&#34;}{.spec.containers[0].image}{&#34;\n&#34;}{end}&#39;</span>
+</code></pre></div><p>ロールアウトの状況が芳しくない場合、以下のコマンドで停止・再開ができる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ロールアウト停止</span>
+$ kubectl rollout pause deployment/hello
+
+<span style="color:#75715e"># ロールアウト再開</span>
+$ kubectl rollout resume deployment/hello
+</code></pre></div><p>なお、なんらか問題が発生して、ロールバックが必要な場合は以下のコマンドで実施できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ロールバック</span>
+$ kubectl rollout undo deployment/hello
+
+<span style="color:#75715e"># ロールアウト履歴確認</span>
+$ kubectl rollout history deployment/hello
+deployment.apps/hello
+REVISION  CHANGE-CAUSE
+<span style="color:#ae81ff">2</span>         &lt;none&gt;
+<span style="color:#ae81ff">3</span>         &lt;none&gt;
+
+<span style="color:#75715e"># マニフェストを確認（2.0.0 -&gt; 1.0.0 にもどってる</span>
+$ kubectl edit deployment hello
+
+<span style="color:#75715e"># 全ての Pod がもどっているか確認</span>
+$ kubectl get pods -o jsonpath --template<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{range .items[*]}{.metadata.name}{&#34;\t&#34;}{&#34;\t&#34;}{.spec.containers[0].image}{&#34;\n&#34;}{end}&#39;</span>
+</code></pre></div><h4 ref="334-カナリア-デプロイ" >3.3.4. カナリア デプロイ</h4><a class="anchor" id="334-カナリア-デプロイ"></a>
+<p>カナリア デプロイでは、一部のユーザーに変更をリリースすることで、新しいリリースに伴うリスクを軽減する手法。<br>
+新しいバージョンの Deployment を作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/hello-canary.yaml
+
+<span style="color:#75715e"># 確認</span>
+$ kubectl get deployments
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+auth           1/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">1</span>           28m
+frontend       1/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">1</span>           26m
+hello          3/3     <span style="color:#ae81ff">3</span>            <span style="color:#ae81ff">3</span>           27m
+hello-canary   0/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">0</span>           8s  <span style="color:#75715e"># 新しい hello</span>
+</code></pre></div><p>この状態だと、単純に新しい別の Deployment を作成しただけに見えるが、 hello-canary の Label に <code>app:hello</code> が設定されており、これは hello service のセレクタになっているため、リクエストがルーティングされ、カナリアデプロイされた状態になっている。<br>
+以下のコマンドを何度が実行していると、レスポンスが異なっており、カナリアデプロイされていることがわかる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
+<span style="color:#75715e"># {&#34;version&#34;:&#34;1.0.0&#34;} or {&#34;version&#34;:&#34;2.0.0&#34;}</span>
+</code></pre></div><p>ユーザーをいずれかのデプロイに「固定」したい場合、 <strong>セッション アフィニティ</strong> を指定してサービスを作成することで実現できる。<br>
+以下の例では Client の IP でルーティングを固定している。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;hello&#34;</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">sessionAffinity</span>: <span style="color:#ae81ff">ClientIP</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#e6db74">&#34;hello&#34;</span>
+  <span style="color:#f92672">ports</span>:
+    - <span style="color:#f92672">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+      <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">80</span>
+</code></pre></div><h4 ref="335-blue--green-デプロイ" >3.3.5. Blue / Green デプロイ</h4><a class="anchor" id="335-blue--green-デプロイ"></a>
+<p>Kubernetes は、古い「Blue」バージョン用と新しい「Green」バージョン用に 2 つの異なるデプロイを作成することでこれを実現します。<br>
+このデプロイには、ルータとして機能するサービスを介してアクセスする。<br>
+新しい「Green」バージョンが稼働したら、サービスを更新してそのバージョンを使用するように切り替えることにより実現する。</p>
+<p>既存の hello サービスを、<code>app:hello</code> 、 <code>version: 1.0.0</code> のセレクタを持つように更新する。（元々は <code>app:hello</code> だけ）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-blue.yaml
+<span style="color:#75715e"># resource service/hello is missing という警告は無視</span>
+</code></pre></div><p>Green の Deployment をデプロイする。（元々の hello は Blue の扱いで image のバージョンは 1.0.0）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/hello-green.yaml
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hello-green</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">hello</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">hello</span>
+        <span style="color:#f92672">track</span>: <span style="color:#ae81ff">stable</span>
+        <span style="color:#f92672">version</span>: <span style="color:#ae81ff">2.0.0</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hello</span>
+          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">kelseyhightower/hello:2.0.0</span>
+          <span style="color:#f92672">ports</span>:
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">http</span>
+              <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">health</span>
+              <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">81</span>
+          <span style="color:#f92672">resources</span>:
+            <span style="color:#f92672">limits</span>:
+              <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">0.2</span>
+              <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">10Mi</span>
+          <span style="color:#f92672">livenessProbe</span>:
+            <span style="color:#f92672">httpGet</span>:
+              <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/healthz</span>
+              <span style="color:#f92672">port</span>: <span style="color:#ae81ff">81</span>
+              <span style="color:#f92672">scheme</span>: <span style="color:#ae81ff">HTTP</span>
+            <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">5</span>
+            <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">15</span>
+            <span style="color:#f92672">timeoutSeconds</span>: <span style="color:#ae81ff">5</span>
+          <span style="color:#f92672">readinessProbe</span>:
+            <span style="color:#f92672">httpGet</span>:
+              <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/readiness</span>
+              <span style="color:#f92672">port</span>: <span style="color:#ae81ff">81</span>
+              <span style="color:#f92672">scheme</span>: <span style="color:#ae81ff">HTTP</span>
+            <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">5</span>
+            <span style="color:#f92672">timeoutSeconds</span>: <span style="color:#ae81ff">1</span>
+</code></pre></div><p>現状は Blue （つまり 1.0.0）であることを確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
+<span style="color:#75715e"># 何度叩いても 1.0.0</span>
+</code></pre></div><p>次に新しいバージョン（つまり Green ）を指定するようにサービスを更新する。（ セレクタが <code>version: 2.0.0</code> になっている）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-green.yaml
+</code></pre></div><p><code>curl</code> で確認すると今度は <code>2.0.0</code> しか返ってこない。（つまり、 Blue -&gt; Green になった！）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
+</code></pre></div><p>ロールバックしたいときは再度 service を Blue に戻せばいい。（つまり、セレクタを <code>version: 1.0.0</code> にするだけ）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-blue.yaml
+
+<span style="color:#75715e"># 確認</span>
+$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
+<span style="color:#75715e"># 1.0.0 しか返ってこない</span>
+</code></pre></div><h3 ref="34-spinnaker-と-kubernetes-engine-を使用した継続的デリバリー-パイプライン" >3.4. Spinnaker と Kubernetes Engine を使用した継続的デリバリー パイプライン</h3><a class="anchor" id="34-spinnaker-と-kubernetes-engine-を使用した継続的デリバリー-パイプライン"></a>
+<p>まずは環境を設定する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ゾーンの設定</span>
+$ gcloud config set compute/zone us-central1-f
+
+<span style="color:#75715e"># プロジェクトを確認して環境変数へ</span>
+$ gcloud config list project
+<span style="color:#f92672">[</span>core<span style="color:#f92672">]</span>
+project <span style="color:#f92672">=</span> qwiklabs-gcp-04-4ceec88343aa
+$ export PROJECT<span style="color:#f92672">=</span>qwiklabs-gcp-04-4ceec88343aa
+
+<span style="color:#75715e"># クラスタ作成</span>
+$ gcloud container clusters create spinnaker-tutorial <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --machine-type<span style="color:#f92672">=</span>n1-standard-2
+</code></pre></div><p>Spinnaker 用のサービスアカウントを作成して Cloud Storage にデータを保存できるようにする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Spinnaker 用のサービスアカウントの作成</span>
+$ gcloud iam service-accounts create spinnaker-account <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --display-name spinnaker-account
+
+<span style="color:#75715e"># サービスアカウントのメールアドレスを環境変数に格納</span>
+$ export SA_EMAIL<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud iam service-accounts list <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;displayName:spinnaker-account&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(email)&#39;</span><span style="color:#66d9ef">)</span>
+<span style="color:#75715e"># 取得できるメールアドレスはこんな「spinnaker-account@qwiklabs-gcp-00-c0fdab7fa347.iam.gserviceaccount.com」感じ</span>
+
+<span style="color:#75715e"># サービスアカウントに Cloud Storage の権限を付与</span>
+$ gcloud projects add-iam-policy-binding $PROJECT <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --role roles/storage.admin <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --member serviceAccount:$SA_EMAIL
+
+<span style="color:#75715e"># サービスアカウントキーのダウンロード</span>
+$ gcloud iam service-accounts keys create spinnaker-sa.json <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>     --iam-account $SA_EMAIL
+</code></pre></div><p>Container Registry からの通知に使用する Cloud Pub/Sub トピックを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud pubsub topics create projects/$PROJECT/topics/gcr
+</code></pre></div><p>イメージの push についての通知を受け取れるように、Spinnaker から読み取ることができるサブスクリプションを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud pubsub subscriptions create gcr-triggers <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --topic projects/<span style="color:#e6db74">${</span>PROJECT<span style="color:#e6db74">}</span>/topics/gcr
+</code></pre></div><p>Spinnaker のサービス アカウントに、gcr-triggers サブスクリプションからの読み取り権限を付与する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export SA_EMAIL<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud iam service-accounts list <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;displayName:spinnaker-account&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(email)&#39;</span><span style="color:#66d9ef">)</span>
+
+$ gcloud beta pubsub subscriptions add-iam-policy-binding gcr-triggers <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --role roles/pubsub.subscriber --member serviceAccount:$SA_EMAIL
+</code></pre></div><p>Spinnaker をデプロイするために Helm を準備する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># helm バイナリ取得・展開</span>
+$ wget https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz
+$ tar zxfv helm-v3.1.1-linux-amd64.tar.gz
+$ cp linux-amd64/helm .
+
+<span style="color:#75715e"># Helm にクラスタの cluster-admin ロールを付与</span>
+$ kubectl create clusterrolebinding user-admin-binding <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --clusterrole<span style="color:#f92672">=</span>cluster-admin --user<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud config get-value account<span style="color:#66d9ef">)</span>
+
+<span style="color:#75715e"># Spinnaker に cluster-admin ロールを付与し、すべての名前空間にリソースをデプロイできるようにする</span>
+$ kubectl create clusterrolebinding --clusterrole<span style="color:#f92672">=</span>cluster-admin <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --serviceaccount<span style="color:#f92672">=</span>default:default spinnaker-admin
+
+<span style="color:#75715e"># Helm の使用可能なリポジトリに stable チャートのデプロイを追加（Spinnaker も含まれている）</span>
+$ ./helm repo add stable https://charts.helm.sh/stable
+$ ./helm repo update
+</code></pre></div><p>Spinnaker を作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 環境変数の準備</span>
+$ export PROJECT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud info <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(config.project)&#39;</span><span style="color:#66d9ef">)</span>
+$ export BUCKET<span style="color:#f92672">=</span>$PROJECT-spinnaker-config
+
+<span style="color:#75715e"># Cloud Storage バケットの作成</span>
+$ gsutil mb -c regional -l us-central1 gs://$BUCKET
+</code></pre></div><p><code>spinnaker-config.yaml</code> ファイルの作成。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export SA_JSON<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cat spinnaker-sa.json<span style="color:#66d9ef">)</span>
+$ export PROJECT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud info --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(config.project)&#39;</span><span style="color:#66d9ef">)</span>
+$ export BUCKET<span style="color:#f92672">=</span>$PROJECT-spinnaker-config
+$ cat &gt; spinnaker-config.yaml <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">gcs:
+</span><span style="color:#e6db74">  enabled: true
+</span><span style="color:#e6db74">  bucket: $BUCKET
+</span><span style="color:#e6db74">  project: $PROJECT
+</span><span style="color:#e6db74">  jsonKey: &#39;$SA_JSON&#39;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">dockerRegistries:
+</span><span style="color:#e6db74">- name: gcr
+</span><span style="color:#e6db74">  address: https://gcr.io
+</span><span style="color:#e6db74">  username: _json_key
+</span><span style="color:#e6db74">  password: &#39;$SA_JSON&#39;
+</span><span style="color:#e6db74">  email: 1234@5678.com
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"># デフォルトのストレージ バックエンドである minio を無効にします
+</span><span style="color:#e6db74">minio:
+</span><span style="color:#e6db74">  enabled: false
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"># GCP サービスを有効にするように Spinnaker を構成します
+</span><span style="color:#e6db74">halyard:
+</span><span style="color:#e6db74">  spinnakerVersion: 1.19.4
+</span><span style="color:#e6db74">  image:
+</span><span style="color:#e6db74">    repository: us-docker.pkg.dev/spinnaker-community/docker/halyard
+</span><span style="color:#e6db74">    tag: 1.32.0
+</span><span style="color:#e6db74">    pullSecrets: []
+</span><span style="color:#e6db74">  additionalScripts:
+</span><span style="color:#e6db74">    create: true
+</span><span style="color:#e6db74">    data:
+</span><span style="color:#e6db74">      enable_gcs_artifacts.sh: |-
+</span><span style="color:#e6db74">        \$HAL_COMMAND config artifact gcs account add gcs-$PROJECT --json-path /opt/gcs/key.json
+</span><span style="color:#e6db74">        \$HAL_COMMAND config artifact gcs enable
+</span><span style="color:#e6db74">      enable_pubsub_triggers.sh: |-
+</span><span style="color:#e6db74">        \$HAL_COMMAND config pubsub google enable
+</span><span style="color:#e6db74">        \$HAL_COMMAND config pubsub google subscription add gcr-triggers \
+</span><span style="color:#e6db74">          --subscription-name gcr-triggers \
+</span><span style="color:#e6db74">          --json-path /opt/gcs/key.json \
+</span><span style="color:#e6db74">          --project $PROJECT \
+</span><span style="color:#e6db74">          --message-format GCR
+</span><span style="color:#e6db74">EOF</span>
+</code></pre></div><p>Spinnaker チャートをデプロイする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./helm install -n default cd stable/spinnaker -f spinnaker-config.yaml <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>           --version 2.0.0-rc9 --timeout 10m0s --wait
+</code></pre></div><p>ポートフォワードして Spinnaker の管理画面を確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export DECK_POD<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>kubectl get pods --namespace default -l <span style="color:#e6db74">&#34;cluster=spin-deck&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.items[0].metadata.name}&#34;</span><span style="color:#66d9ef">)</span>
+$ kubectl port-forward --namespace default $DECK_POD 8080:9000 &gt;&gt; /dev/null &amp;
+</code></pre></div><p>Cloud Shell ウィンドウの最上部で [ウェブでプレビュー] をクリックし、[ポート 8080 でプレビュー] をクリックすると Spinnaker の管理画面が見れる。<br>
+次に Docker イメージを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サンプルアプリの取得・展開</span>
+$ gsutil -m cp -r gs://spls/gsp114/sample-app.tar .
+$ mkdir sample-app
+$ tar xvf sample-app.tar -C ./sample-app
+$ cd sample-app
+
+<span style="color:#75715e"># git リポジトリの作成</span>
+$ gcloud source repos create sample-app
+
+<span style="color:#75715e"># git 用アカウント情報設定・初回コミット・Push</span>
+$ git config --global user.email <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>gcloud config get-value core/account<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+$ git config --global user.name <span style="color:#e6db74">&#34;[USERNAME]&#34;</span>
+$ export PROJECT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud info --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(config.project)&#39;</span><span style="color:#66d9ef">)</span>
+$ git init
+$ git add .
+$ git commit -m <span style="color:#e6db74">&#34;Initial commit&#34;</span>
+$ git config credential.helper gcloud.sh
+$ git remote add origin https://source.developers.google.com/p/$PROJECT/r/sample-app
+$ git push origin master
+</code></pre></div><p>次にビルドトリガーを構成する。<br>
+Git タグが リポジトリに push されるたびに Docker イメージをビルドして push するように Container Builder を構成する。<br>
+Container Builder はソースコードを自動的にチェックアウトして、リポジトリ内の Dockerfile から Docker イメージをビルドし、そのイメージを Google Cloud Container Registry に push する。</p>
+<ul>
+<li>Cloud Platform Console で、ナビゲーション メニュー &gt; [Cloud Build] &gt; [トリガー] をクリック</li>
+<li>[トリガーを作成] をクリック</li>
+<li>次のトリガー設定を指定
+<ul>
+<li>名前: sample-app-tags</li>
+<li>イベント: 新しいタグを push する</li>
+<li>新しく作成した sample-app リポジトリを選択</li>
+<li>タグ: v1.*</li>
+<li>ビルド構成: Cloud Build 構成ファイル（yaml または json）</li>
+<li>Cloud Build 構成ファイルの場所: /cloudbuild.yaml</li>
+</ul>
+</li>
+</ul>
+<p>これ以降、文字 &ldquo;v&rdquo; が先頭に付いている Git タグをソースコード リポジトリに push すると、Container Builder が自動的にアプリケーションをビルドして、Docker イメージとして Container Registry に push する。</p>
+<p>Spinnaker で使用するために Kubernetes マニフェストを準備する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud info --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(config.project)&#39;</span><span style="color:#66d9ef">)</span>
+$ gsutil mb -l us-central1 gs://$PROJECT-kubernetes-manifests
+$ gsutil versioning set on gs://$PROJECT-kubernetes-manifests
+$ sed -i s/PROJECT/$PROJECT/g k8s/deployments/*
+$ git commit -a -m <span style="color:#e6db74">&#34;Set project ID&#34;</span>
+</code></pre></div><p>Git タグを作成してイメージをビルドしてみる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git tag v1.0.0
+$ git push --tags
+Enumerating objects: 14, <span style="color:#66d9ef">done</span>.
+Counting objects: 100% <span style="color:#f92672">(</span>14/14<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+Delta compression using up to <span style="color:#ae81ff">2</span> threads
+Compressing objects: 100% <span style="color:#f92672">(</span>8/8<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+Writing objects: 100% <span style="color:#f92672">(</span>8/8<span style="color:#f92672">)</span>, <span style="color:#ae81ff">778</span> bytes | 778.00 KiB/s, <span style="color:#66d9ef">done</span>.
+Total <span style="color:#ae81ff">8</span> <span style="color:#f92672">(</span>delta 5<span style="color:#f92672">)</span>, reused <span style="color:#ae81ff">0</span> <span style="color:#f92672">(</span>delta 0<span style="color:#f92672">)</span>
+remote: Resolving deltas: 100% <span style="color:#f92672">(</span>5/5<span style="color:#f92672">)</span>
+To https://source.developers.google.com/p/qwiklabs-gcp-00-c0fdab7fa347/r/sample-app
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         v1.0.0 -&gt; v1.0.0
+</code></pre></div><p>Spinnaker を管理する spin CLI をインストールする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -LO https://storage.googleapis.com/spinnaker-artifacts/spin/1.14.0/linux/amd64/spin
+$ chmod +x spin
+</code></pre></div><p>spin を使用して、Spinnaker 内に sample という名前のアプリを作成。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./spin application save --application-name sample <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>                        --owner-email <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>gcloud config get-value core/account<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>                        --cloud-providers kubernetes <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>                        --gate-endpoint http://localhost:8080/gate
+</code></pre></div><p>sample-app ソースコード ディレクトリから次のコマンドを実行します。これにより、サンプル パイプラインが Spinnaker インスタンスにアップロードされます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud info --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(config.project)&#39;</span><span style="color:#66d9ef">)</span>
+$ sed s/PROJECT/$PROJECT/g spinnaker/pipeline-deploy.json &gt; pipeline.json
+$ ./spin pipeline save --gate-endpoint http://localhost:8080/gate -f pipeline.json
+</code></pre></div><p>パイプラインの実行を手動でトリガーして確認する。</p>
+<ul>
+<li>Spinnaker UI で、画面の上部にある [Applications] -&gt; sampleをクリック。</li>
+<li>上部にある [パイプライン] をクリックして、アプリケーションのパイプラインのステータスを表示。</li>
+<li>パイプラインを初めてトリガーするために、[Start Manual Execution] をクリック -&gt; RUN 。</li>
+<li>[Execution Details] をクリックして、パイプラインの進行状況の詳細を表示。</li>
+<li>進行状況バーで、デプロイメント パイプラインのステータスとそのステップを確認できる。</li>
+<li>ステージをクリックして、その詳細を表示します。</li>
+<li>3～5 分後に統合テストフェーズが完了すると、パイプラインがデプロイメントの続行を手動で承認するよう求めてくる。</li>
+<li>黄色の「人物」アイコンにカーソルを合わせ、[Continue] をクリック。
+<ul>
+<li>ロールアウトが本番環境フロントエンドと本番環境バックエンドのデプロイメントに進みます。これは数分後に完了します。</li>
+</ul>
+</li>
+<li>Spinnaker UI の上部で [Infrastructure] &gt; [Load Balancers] をクリックして、アプリを表示。</li>
+<li>ロードバランサのリストを下にスクロールし、[service sample-frontend-production] の下の [Default] をクリックするとロードバランサの詳細がページの右側に表示される。</li>
+<li>右側の詳細ペインをスクロール ダウンし、Ingress IP のクリップボード ボタンをクリックしてアプリの IP アドレスをコピーする。</li>
+<li>コピーしたアドレスを新しいブラウザタブに貼り付けて、アプリケーションを表示
+<ul>
+<li>canary バージョンが表示される場合があるが、画面を更新すると production バージョンも表示される</li>
+</ul>
+</li>
+<li>アプリケーションをビルド、テスト、デプロイするためのパイプラインを手動でトリガーした。</li>
+</ul>
+<p>次に、コードの変更によるパイプラインのトリガーを行う。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># sample-app ディレクトリから次のコマンドを実行して、アプリの色をオレンジ色から青色に変更</span>
+$ sed -i <span style="color:#e6db74">&#39;s/orange/blue/g&#39;</span> cmd/gke-info/common-service.go
+
+<span style="color:#75715e"># 変更にタグを付け、ソースコード リポジトリに push</span>
+$ git commit -a -m <span style="color:#e6db74">&#34;Change color to blue&#34;</span>
+$ git tag v1.0.1
+$ git push --tags
+</code></pre></div><ul>
+<li>GCP Console で [Cloud Build] &gt; [履歴] を開き、新しいビルドが表示されるまで数分待つ。（必要であればページを更新）</li>
+<li>新しいビルドが完了するまで待ってから次のステップに進む。</li>
+<li>Spinnaker UI に戻り、[Pipelines] をクリックして、イメージのデプロイを開始するパイプラインの動作を監視する。
+<ul>
+<li>自動的にトリガーされたパイプラインは、表示されるまでに数分かかる。（必要であればページを更新）</li>
+</ul>
+</li>
+</ul>
+<p>次に、カナリア デプロイメントを観察する。</p>
+<ul>
+<li>デプロイが一時停止し、本番環境へのロールアウトを待機している間に、実行中のアプリケーションを表示しているウェブページに戻る。
+<ul>
+<li>アプリが表示されているタブを繰り返し更新。バックエンドのうちの 4 つがアプリの以前のバージョンを実行しており、カナリアを実行しているバックエンドは 1 つだけ。</li>
+<li>5 回更新するごとにアプリの新しい青色バージョンが表示されるはず。</li>
+</ul>
+</li>
+<li>パイプラインが完了すると、アプリは以下のようになる。（コードを変更したため、色は青色。また、[バージョン] フィールドには canary ）
+<ul>
+<li>Backend that serviced this request
+<ul>
+<li>Pod Name: sample-backend-canary-xxxx</li>
+<li>Node Name: gke-spinnaker-tutorial-default-pool-xxxx</li>
+<li>Version: Canary</li>
+<li>Zone: project/xxxx/zones/us-central1-f</li>
+<li>Project: qwiklabs-gcp-00-xxxx</li>
+<li>Node Internal IP: 10.128.0.4</li>
+<li>Node External IP: 146.148.80.155</li>
+</ul>
+</li>
+<li>Frontend that handled this request
+<ul>
+<li>Frontend IP:PORT: 10.40.2.14.48884</li>
+<li>Request to Backend: GET /metadata&hellip;.</li>
+<li>Error: None</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>必要に応じて前回の commit を元に戻し、この変更をロールバックできる。ロールバックすると新しいタグ　(v1.0.2）が追加され、v1.0.1 をデプロイするときに使用したのと同じパイプラインを通してタグが戻される。
+<ul>
+<li><code>git revert v1.0.1</code></li>
+<li>Ctrl + O、ENTER、CTRL + X を押す</li>
+<li><code>git tag v1.0.2</code></li>
+<li><code>git push --tags</code></li>
+</ul>
+</li>
+<li>ビルドとパイプラインが完了したら、ロールバックを確認する
+<ul>
+<li>[INFRASTRUCTURE] &gt; [LOAD BALANCERS] の順にクリックしてから、[service sample-frontend-production] の [DEFAULT] をクリックして Ingress IP アドレスをコピー。このアドレスを新しいタブに貼り付け。</li>
+<li>アプリがオレンジ色に戻り、production バージョン番号を確認できる。</li>
+</ul>
+</li>
+</ul>
+<h3 ref="35-cloud-monitoring-apm-によるサイトの信頼性のトラブルシューティング" >3.5. Cloud Monitoring APM によるサイトの信頼性のトラブルシューティング</h3><a class="anchor" id="35-cloud-monitoring-apm-によるサイトの信頼性のトラブルシューティング"></a>
+<p>Monitoring ワークスペースを作成して監視を行う。</p>
+<ul>
+<li>Cloud Console で、ナビゲーション メニュー &gt; [モニタリング] をクリック</li>
+<li>ワークスペースがプロビジョニングされるまで待つ</li>
+</ul>
+<p>次に、SLO と SLI を作成する。</p>
+<ul>
+<li>サービスレベル指標（SLI）
+<ul>
+<li>例）リクエストのレイテンシ（リクエストに対してレスポンスを返すのにかかる時間）、エラー率、システム スループット（一般的には 1 秒あたりのリクエスト数）、可用性（サービスが使用可能な時間の割合）、耐久性（データが長期間にわたって保持される可能性）</li>
+</ul>
+</li>
+<li>サービスレベル目標（SLO）</li>
+<li>サービスレベル契約（SLA）</li>
+</ul>
+<p>例えば、SLO、SLI は以下のようなものである。</p>
+<table>
+<thead>
+<tr>
+<th>SLI</th>
+<th>指標</th>
+<th>説明</th>
+<th>SLO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>リクエストのレイテンシ</td>
+<td>フロントエンドのレイテンシ</td>
+<td>ユーザーがページの読み込みを待機している時間。</td>
+<td>過去 60 分間で 99% のリクエストが 3 秒以内に処理されている</td>
+</tr>
+<tr>
+<td>エラー率</td>
+<td>フロントエンドのエラー率</td>
+<td>ユーザーが経験したエラー率。</td>
+<td>過去 60 分間のエラー数が 0</td>
+</tr>
+<tr>
+<td>エラー率</td>
+<td>チェックアウトのエラー率</td>
+<td>チェックアウト サービスを呼び出す他のサービスが経験したエラー率。</td>
+<td>過去 60 分間のエラー数が 0</td>
+</tr>
+<tr>
+<td>エラー率</td>
+<td>通貨サービスのエラー率</td>
+<td>通貨サービスを呼び出す他のサービスが経験したエラー率。</td>
+<td>過去 60 分間のエラー数が 0</td>
+</tr>
+<tr>
+<td>可用性</td>
+<td>フロントエンドの成功率</td>
+<td>サービスの可用性の判断基準として、成功したリクエストの割合。</td>
+<td>過去 60 分間で 99% のリクエストが成功している</td>
+</tr>
+</tbody>
+</table>
+<p>Cloud Platform Console の Cloud モニタリング（ナビゲーション メニュー &gt; [モニタリング]）で、左側のメニューにある [アラート]、[CREATE POLICY] の順にクリックし、SLO を監視するアラートを作成する。</p>
+		</div>
+
+
+
+
+
+
+	
+	
+
+      </section>
+
+      
+      
+    </article>
+    
+    
+    <footer>
+      
+
+		
+	
+			
+		
+	    	
+	  	
+	
+    </footer>
+    
+
+
+
+  </body>
+</html>

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-08T23:55:39 JST">
+<meta name="revised" content="2021-04-24T00:08:31 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -380,7 +380,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -389,9 +389,56 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/computing-hosting/">コンピューティングとホスティング</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/compute-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/compute-engine/">Compute Engine</a>
       
         
       
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/kubernetes-engine/">Google Kubernetes Engine</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/app-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/app-engine/">App Engine</a>
+      
+        
+      
+    </li>
+        </ul>
     </li>
               
 
@@ -606,6 +653,36 @@ if (!doNotTrack) {
       
       
           <a href="/kubernetes/kubectl-plugin/">kubectl plugin と Krew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/command/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/command/">コマンド</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/manifest/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/manifest/">マニフェスト</a>
       
         
       
@@ -878,7 +955,7 @@ if (!doNotTrack) {
 </ul>
 </blockquote>
 <h4 ref="service" >Service</h4><a class="anchor" id="service"></a>
-<p>Service は以下の種類の L4 ロードバランサを提供する。<br>
+<p>Service は以下の種類の <strong>L4</strong> ロードバランサを提供する。<br>
 実質、ClusterIP、NodePort、LoadBalancer の 3 種類。</p>
 <ul>
 <li>ClusterIP
@@ -890,7 +967,7 @@ if (!doNotTrack) {
 </li>
 <li>k8s クラスタ外から通信を受け付ける必要のない箇所のロードバランサ</li>
 <li>各 Pod は IP を持つが個々にアクセスしていては負荷分散できないのでそれを 1 つの IP に束ねる</li>
-<li>name がホスト名として機能し、 DNS により名前解決される
+<li>name がホスト名として機能し、 クラスタ内部 DNS により名前解決される
 <ul>
 <li><code>&lt;name&gt;.&lt;namespace&gt;.svc.cluster.local</code></li>
 <li><code>svc</code> は Service の略</li>
@@ -900,18 +977,18 @@ if (!doNotTrack) {
 <li>type は <code>ClusterIP</code></li>
 </ul>
 </li>
-<li>ExternalIP
+<li>ExternalIP（ ClusterIP の一種）
 <ul>
 <li>特定のノードの IP アドレスで受信した通信をコンテナに転送する Service</li>
 <li>k8s クラスタ外部からの通信を受け付ける</li>
-<li>type 自体は <code>ClusterIP</code> で、 <code>externalIPs</code> （ノードのIP）を指定する</li>
-<li>「ノードのIPアドレス」で通信を受信する（ポートの指定はない）</li>
+<li>type 自体は <code>ClusterIP</code> で、 <code>spec.externalIPs</code> （ノードのIP）を指定する</li>
+<li><code>spec.externalIPs</code> の IP は自分でノードの IP を調べて記載する必要があり、 <code>spec.ports[].port</code> の port で受け、該当セレクタの <code>spec.ports[].targetPort</code> へ流す</li>
 </ul>
 </li>
 <li>NodePort
 <ul>
 <li>クラスタ内の各ノードに外部からアクセス可能な IP を与える</li>
-<li>ExternalIP に類似したサービス</li>
+<li>ExternalIP に類似したサービスだが、ノードの IP を指定する必要がなく、全ノードが対応する</li>
 <li>違いは「ノードのIPアドレス:ポート」で通信を受信する点
 <ul>
 <li>厳密には「0.0.0.0:ポート」でバインドされ、k8s クラスタ内の全ノードの IP アドレスを意味する</li>
@@ -927,7 +1004,11 @@ if (!doNotTrack) {
 <li>k8s クラスタ外部（例えばロードバランサ）から疎通性のある仮想 IP を払い出せる</li>
 <li>ExternalIP や NodePort と異なり、ノードIP非依存である点で使い勝手がよい</li>
 <li>type は <code>LoadBalancer</code></li>
-<li>クラウド利用の場合、サービスからのトラフィックをクラスタ内のノードに転送するクラウドプロバイダが提供するロードバランサが実態</li>
+<li>クラウド利用の場合、サービスからのトラフィックをクラスタ内のノードに転送するクラウドプロバイダが提供するロードバランサが実態
+<ul>
+<li>そのため、基盤が LoadBalancer Service に対応している必要がある</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Headless（None）
@@ -949,15 +1030,34 @@ if (!doNotTrack) {
 </ul>
 <p>サービスのセレクタの設定が正しく Pod を捉えているかどうかは <code>kubectl get pods -l &quot;app=monolith,secure=enabled&quot;</code> などのコマンドで対象の Pod を取得できるか、で検査できる。</p>
 <h4 ref="ingress" >Ingress</h4><a class="anchor" id="ingress"></a>
-<p>Service とは異なり、 L7 ロードバランサを提供する。<br>
+<p>Service とは異なり、 <strong>L7</strong> ロードバランサを提供する。<br>
 <code>kind: Service</code> ではなく、 <code>kind: Ingress</code> で提供される。<br>
 大きく以下の種類がある。</p>
 <ul>
-<li>k8s クラスタ外の LB を利用した Ingress</li>
-<li>k8s クラスタ内に Ingress 用の Pod をデプロイする Ingress</li>
+<li>k8s クラスタ外の LB を利用した Ingress
+<ul>
+<li>ex. GKE Ingress Controller</li>
 </ul>
-<p>まだよくわかってない。</p>
-<h3 ref="configstorage-リソース" >Config＆Storage リソース</h3><a class="anchor" id="configstorage-リソース"></a>
+</li>
+<li>k8s クラスタ内に Ingress 用の Pod をデプロイする Ingress
+<ul>
+<li>ex. Nginx Ingress Controller</li>
+</ul>
+</li>
+</ul>
+<p>Ingress はその実態である GKE/Nginx Ingress Controller とその設定である Ingress Resource からなる。<br>
+Ingress は L7 とあるように、例えば gRPC のロードバランシングの際に必要となり、構成は以下のようになる。</p>
+<pre><code>例）
+  grpc client
+   ↓
+  AWS ELB(classic)
+   ↓
+  kubernetes(service)
+   ↓
+  nginx-ingress(on k8s) ...  -&gt; Ingress Resouce の設定を参照する
+  ↓                 ↓
+grpc server1    grpc server2
+</code></pre><h3 ref="configstorage-リソース" >Config＆Storage リソース</h3><a class="anchor" id="configstorage-リソース"></a>
 <p>コンテナに対して設定ファイル、パスワードなどの機密情報などをインジェクトしたり、永続化ボリュームを提供したりするためのリソース。<br>
 Kubernetesでは、個別のコンテナに対する設定の内容は環境変数やファイルが置かれた領域をマウントして渡すことが一般的</p>
 <ul>

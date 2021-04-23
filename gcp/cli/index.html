@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-08T23:55:39 JST">
+<meta name="revised" content="2021-04-24T00:08:31 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -381,7 +381,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -390,9 +390,56 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/computing-hosting/">コンピューティングとホスティング</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/compute-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/compute-engine/">Compute Engine</a>
       
         
       
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/kubernetes-engine/">Google Kubernetes Engine</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/app-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/app-engine/">App Engine</a>
+      
+        
+      
+    </li>
+        </ul>
     </li>
               
 
@@ -606,6 +653,36 @@ if (!doNotTrack) {
       
       
           <a href="/kubernetes/kubectl-plugin/">kubectl plugin と Krew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/command/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/command/">コマンド</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/manifest/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/manifest/">マニフェスト</a>
       
         
       
@@ -889,6 +966,23 @@ To install or remove components at your current SDK version <span style="color:#
   $ gcloud components remove COMPONENT_ID
 To update your SDK installation to the latest version <span style="color:#f92672">[</span>335.0.0<span style="color:#f92672">]</span>, run:
   $ gcloud components update
+</code></pre></div><p><a href="https://cloud.google.com/sdk/docs/components">コンポーネント</a> は、個別にインストール可能な SDK の構成要素で、マンドライン ツール（gcloud、bq、gsutil）、アルファ版 / ベータ版リリースレベルの gcloud CLI コマンドや、SDK の特定のツールとの依存関係を含むパッケージなどがある。<br>
+以下のようなコマンドで管理できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># コンポーネント一覧</span>
+$ gcloud components list
+
+<span style="color:#75715e"># コンポーネントのインストール</span>
+$ gcloud components install COMPONENT_ID
+<span style="color:#75715e"># インストール例</span>
+$ gcloud components install kubectl
+
+<span style="color:#75715e"># コンポーネントの更新</span>
+$ gcloud components update
+<span style="color:#75715e"># 指定バージョンへの変更</span>
+$ gcloud components update --version VERSION
+
+<span style="color:#75715e"># コンポーネントの削除</span>
+$ gcloud components remove COMPONENT_ID
 </code></pre></div><h4 ref="122-プロジェクト" >1.2.2. プロジェクト</h4><a class="anchor" id="122-プロジェクト"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># プロジェクト一覧</span>
 $ gcloud projects list

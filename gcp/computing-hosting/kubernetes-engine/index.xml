@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Google Kubernetes Engine on テックまとめ</title>
+    <link>https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/</link>
+    <description>Recent content in Google Kubernetes Engine on テックまとめ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <lastBuildDate>Sat, 30 Jan 2021 15:26:01 +0900</lastBuildDate><atom:link href="https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

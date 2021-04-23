@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-08T23:55:39 JST">
+<meta name="revised" content="2021-04-24T00:08:31 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -381,7 +381,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -390,9 +390,56 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/computing-hosting/">コンピューティングとホスティング</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/compute-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/compute-engine/">Compute Engine</a>
       
         
       
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/kubernetes-engine/">Google Kubernetes Engine</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/app-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/app-engine/">App Engine</a>
+      
+        
+      
+    </li>
+        </ul>
     </li>
               
 
@@ -606,6 +653,36 @@ if (!doNotTrack) {
       
       
           <a href="/kubernetes/kubectl-plugin/">kubectl plugin と Krew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/command/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/command/">コマンド</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/manifest/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/manifest/">マニフェスト</a>
       
         
       
@@ -918,7 +995,7 @@ Cloud Shell には固有のコマンドラインツールがあらかじめ実�
 </tbody>
 </table>
 <p>Cloud Console の 「サイドメニュー」-&gt;「 IAM と管理」-&gt;「 IAM 」から利用できる。</p>
-<h3 ref="32-メンバー" >3.2. メンバー</h3><a class="anchor" id="32-メンバー"></a>
+<h3 ref="32-メンバー誰が" >3.2. メンバー/「誰が」</h3><a class="anchor" id="32-メンバー誰が"></a>
 <p>リソースへのアクセスが許可される主体（「誰が」）には以下がある。</p>
 <table>
 <thead>
@@ -963,10 +1040,21 @@ Cloud Shell には固有のコマンドラインツールがあらかじめ実�
 <li>サービスアカウント事態もリソースで、人が「サービスアカウントとして実行」もできる</li>
 <li>サービスアカウントにうよって使われるキーは自動的に管理される</li>
 <li>ユーザがキーを作成・ダウンロードすることも可能</li>
+<li><code>gcloud iam service-accounts create SERVICE_ACCOUNT_ID</code> でサービスアカウントを作成する</li>
+<li>サービスアカウントには <strong>アクセススコープ</strong> を設定できる（以下、例）
+<ul>
+<li><code>https://www.googleapis.com/auth/cloud-platform</code> ：すべての Google Cloud リソースに対する完全アクセス権</li>
+<li><code>https://www.googleapis.com/auth/compute</code> ：Compute Engine メソッドに対するフル コントロール アクセス権</li>
+<li><code>https://www.googleapis.com/auth/compute.readonly</code> ：Compute Engine メソッドに対する読み取り専用アクセス権</li>
+<li><code>https://www.googleapis.com/auth/devstorage.read_only</code> ：Cloud Storage に対する読み取り専用アクセス権</li>
+<li><code>https://www.googleapis.com/auth/logging.write</code> ：Compute Engine ログに対する書き込みアクセス権</li>
+</ul>
+</li>
+<li>アクセススコープでは完全な権限(/auth/cloud-platform)を付与し、IAMロールで権限を絞るのがおすすめ</li>
 </ul>
 </li>
 </ul>
-<h3 ref="33-権限とロール" >3.3. 権限とロール</h3><a class="anchor" id="33-権限とロール"></a>
+<h3 ref="33-権限とロールどういう操作を" >3.3. 権限とロール/「どういう操作を」</h3><a class="anchor" id="33-権限とロールどういう操作を"></a>
 <p>リソースに対する操作の権限は以下の命名規則で表現される。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">&lt;サービス名&gt;.&lt;リソース&gt;.&lt;動詞&gt;
 
@@ -974,7 +1062,7 @@ ex<span style="color:#f92672">)</span>
 compute.instance.delete
 compute.instance.start
 compute.instance.setMachineType
-</code></pre></div><h3 ref="34-ロールの種類" >3.4. ロールの種類</h3><a class="anchor" id="34-ロールの種類"></a>
+</code></pre></div><h3 ref="34-ロールの種類どういう操作を" >3.4. ロールの種類/「どういう操作を」</h3><a class="anchor" id="34-ロールの種類どういう操作を"></a>
 <p>ロールには以下の種類がある。（ <a href="https://cloud.google.com/iam/docs/understanding-roles/#primitive%5C_roles">詳細</a> ）</p>
 <table>
 <thead>
@@ -1027,8 +1115,11 @@ compute.instance.setMachineType
 </tr>
 </tbody>
 </table>
-<h3 ref="35-リソース階層" >3.5. リソース階層</h3><a class="anchor" id="35-リソース階層"></a>
-<p>リソースは「 <strong>組織 &gt; フォルダ &gt; プロジェクト &gt; リソース</strong> 」のような階層構造になっている。</p>
+<p>Identity and Access Management API または gcloud コマンドライン ツールを使用して、プロジェクトのメンバーにオーナーロールを付与することはできない。オーナーは、 <strong>Cloud Console を使用することによってのみ</strong> プロジェクトに追加できます。</p>
+<p>事前定義ロールおよびカスタムロールのメタデータを確認する場合、 <code>gcloud iam roles describe ROLE_ID</code> コマンドで確認する。<br>
+<a href="https://cloud.google.com/iam/docs/understanding-roles?hl=ja#predefined_roles">事前定義ロールの一覧</a></p>
+<h3 ref="35-リソース階層何に対して" >3.5. リソース階層/「何に対して」</h3><a class="anchor" id="35-リソース階層何に対して"></a>
+<p>リソースは「 <strong>組織 &gt; フォルダ &gt; プロジェクト &gt; リソース</strong> 」のような階層構造にまとめることができる。</p>
 <ul>
 <li>組織
 <ul>
@@ -1056,6 +1147,7 @@ compute.instance.setMachineType
 </ul>
 </li>
 </ul>
+<p>例えば、「アカウント A に compute.instances.get ロールを 組織 X に対して付与」すると、「アカウント A は 組織 X に含まれる全てのフォルダの全てのプロジェクトの VM インスタンス情報を取得できる」ようになる。</p>
 <h3 ref="36-アクセス制御のベストプラクティス" >3.6. アクセス制御のベストプラクティス</h3><a class="anchor" id="36-アクセス制御のベストプラクティス"></a>
 <ul>
 <li><strong>最小権限の原則</strong> （より細かいロールで必要最低限の権限のみ付与する）に従って Cloud IAM のロールを付与する</li>
@@ -1066,6 +1158,7 @@ compute.instance.setMachineType
 <li>異なる権限を必要とする複数サービスがある場合は、サービス毎に個別のサービスアカウントを作成し、必要な権限のみ付与する</li>
 </ul>
 <h3 ref="37-監査ログ" >3.7. 監査ログ</h3><a class="anchor" id="37-監査ログ"></a>
+<p>権限管理された上で、オペレーションを監視するログに以下の種類がある。</p>
 <ul>
 <li>管理アクティビティ監査ログ
 <ul>
@@ -1082,6 +1175,61 @@ compute.instance.setMachineType
 <li>システムイベント監査ログ
 <ul>
 <li>Google システムによって生成される管理アクション</li>
+</ul>
+</li>
+</ul>
+<h4 ref="371-cloud-logging" >3.7.1. Cloud Logging</h4><a class="anchor" id="371-cloud-logging"></a>
+<p>Cloud Logging は IAM を使用して Google Cloud リソースのロギングデータへの <a href="https://cloud.google.com/logging/docs/access-control?hl=ja#permissions_and_roles">アクセス制御</a> を実施する。</p>
+<ul>
+<li><code>roles/logging.viewer</code>（ログビューア）（＝ <code>roles/viewer</code> ）
+<ul>
+<li>アクセスの透明性ログとデータアクセス監査ログ以外のすべての Logging 機能に対する読み取り専用権限</li>
+</ul>
+</li>
+<li><code>roles/logging.privateLogViewer</code>（プライベート ログビューア）
+<ul>
+<li><code>roles/logging.viewer</code> に加え、アクセスの透明性ログとデータアクセス監査ログの読み取り権限</li>
+<li>このロールは、_Required バケットと _Default バケットにのみ適用される</li>
+</ul>
+</li>
+<li><code>roles/logging.logWriter</code>（ログ書き込み）
+<ul>
+<li>サービスアカウントに付与して、ログの書き込みに十分な権限のみをアプリケーションに付与できる</li>
+<li>ただし、閲覧権限はない</li>
+</ul>
+</li>
+<li><code>roles/logging.bucketWriter</code>（ログバケット書き込み）
+<ul>
+<li>サービス アカウントに付与すると、ログバケットにログを書き込むための十分な権限を Cloud Logging に付与できる</li>
+<li>このロールを特定のバケットに制限するには、IAM 条件を使用する</li>
+</ul>
+</li>
+<li><code>roles/logging.configWriter</code>（ログ構成書き込み）は
+<ul>
+<li>ログベースの指標、除外、バケット、ビューを作成し、シンクをエクスポートする権限</li>
+<li>これらのアクションに Logs Explorer（コンソール）を使用するには、 <code>roles/logging.viewer</code> を追加する</li>
+</ul>
+</li>
+<li><code>roles/logging.admin</code>（Logging 管理者）
+<ul>
+<li>Logging に関連するすべての権限</li>
+</ul>
+</li>
+<li><code>roles/logging.viewAccessor</code>（ログ表示アクセス者）
+<ul>
+<li>ビュー内のログを読み取るための権限</li>
+<li>このロールを特定のバケット内のビューに制限するには、IAM 条件を使用</li>
+</ul>
+</li>
+<li><code>roles/editor</code>（プロジェクト編集者）
+<ul>
+<li>roles/logging.viewer の権限、ログエントリの書き込み権限、ログの削除権限、ログベースの指標の作成権限が含まれる</li>
+<li>この役割では、エクスポート シンクの作成や、アクセスの透明性ログまたはデータアクセス監査ログの読み取りを行うことはできない</li>
+</ul>
+</li>
+<li><code>roles/owner</code>（プロジェクト オーナー）
+<ul>
+<li>Logging に対する完全アクセス権（アクセスの透明性ログとデータアクセス監査ログ）</li>
 </ul>
 </li>
 </ul>
@@ -1121,7 +1269,32 @@ version: <span style="color:#ae81ff">1</span>
 
 <span style="color:#75715e"># メンバーにプロジェクトの権限を付与する # なお、リソースはプロジェクトなのでロールは基本ロールの「&#39;roles/browser&#39;」「&#39;roles/editor&#39;」「&#39;roles/owner&#39;」のみ</span>
 gcloud projects add-iam-policy-binding <span style="color:#f92672">[</span>PROJECT_ID<span style="color:#f92672">]</span> --member<span style="color:#f92672">=</span>MEMBER --role<span style="color:#f92672">=</span>ROLE
-</code></pre></div><h2 ref="5-google-cloud-サービス" >5. Google Cloud サービス</h2><a class="anchor" id="5-google-cloud-サービス"></a>
+</code></pre></div><h3 ref="42-cloud-monitoring" >4.2. Cloud Monitoring</h3><a class="anchor" id="42-cloud-monitoring"></a>
+<ul>
+<li><a href="https://cloud.google.com/monitoring/workspaces?hl=ja#accounts">ワークスペース</a> は、1 つ以上の Google Cloud プロジェクトまたは AWS アカウントに含まれるリソースをモニタリングするためのツール
+<ul>
+<li>各ワークスペースには、Google Cloud プロジェクトや AWS アカウントなど、1～100 個のモニタリング対象プロジェクトを作成できる</li>
+<li>ワークスペースの数に制限はありませんが、Google CloudプロジェクトとAWSアカウントを複数のワークスペースでモニタリングすることはできない</li>
+</ul>
+</li>
+<li>ホストプロジェクト
+<ul>
+<li>すべてのワークスペースには、ホスト プロジェクトがある</li>
+<li>ワークスペースの作成に使用した Google Cloud プロジェクトが、ワークスペースのホスト プロジェクト</li>
+</ul>
+</li>
+<li>モニタリング対象プロジェクト
+<ul>
+<li>ホストプロジェクトでワークスペースを作成すると、Google Cloud プロジェクトと AWS アカウントが追加できるようになる</li>
+<li>新しい空白の Google Cloud プロジェクトを使用してワークスペースをホストしてから、モニタリングするプロジェクトと AWS アカウントをワークスペースに追加するのがよい
+<ul>
+<li>ホスト プロジェクトと Workspace の名前を自由に選択でき、ワークスペース間でモニタリング対象プロジェクトを柔軟に移動できる</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 ref="5-google-cloud-サービス" >5. Google Cloud サービス</h2><a class="anchor" id="5-google-cloud-サービス"></a>
 <p>Cloud Console から Google Cloud が提供するサービスを利用することができ、以下のカテゴリで構成される。（<a href="https://cloud.google.com/docs/overview/cloud-platform-services#top_of_page">詳細</a>）</p>
 <ul>
 <li>コンピューティングとホスティング</li>

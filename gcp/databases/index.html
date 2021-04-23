@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-08T23:55:39 JST">
+<meta name="revised" content="2021-04-24T00:08:31 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -381,7 +381,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -390,9 +390,56 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/computing-hosting/">コンピューティングとホスティング</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/compute-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/compute-engine/">Compute Engine</a>
       
         
       
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/kubernetes-engine/">Google Kubernetes Engine</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/app-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/app-engine/">App Engine</a>
+      
+        
+      
+    </li>
+        </ul>
     </li>
               
 
@@ -610,6 +657,36 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/command/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/command/">コマンド</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/manifest/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/manifest/">マニフェスト</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -795,6 +872,57 @@ Cloud SQL が対応しているデータ形式には、ダンプファイル（.
 <p><a href="https://cloud.google.com/bigquery/docs">BigQuery</a> は Google Cloud Platform 上で動作する、ペタバイト規模のフルマネージド データ ウェアハウス。<br>
 データ アナリストやデータ サイエンティストは、サーバーを設定、管理することなく、大規模なデータセットに対するクエリ（ SQL ）やフィルタの実行、結果の集計、複雑な操作の実行が可能。<br>
 コマンドライン ツール（ <code>bq</code> ）またはウェブ コンソールを使用して、GCP プロジェクトに格納されているデータを管理、照会できる。</p>
+<h3 ref="コスト" >コスト</h3><a class="anchor" id="コスト"></a>
+<p>BigQuery のコストは大きく以下の 2 つある。</p>
+<ul>
+<li>分析料金
+<ul>
+<li>クエリの処理にかかる費用</li>
+<li>SQL クエリ、ユーザー定義関数、スクリプト、テーブルをスキャンする特定のデータ操作言語（DML）とデータ定義言語（DDL）のステートメントなど</li>
+</ul>
+</li>
+<li>ストレージ料金
+<ul>
+<li>BigQuery に読み込むデータを保存する費用</li>
+</ul>
+</li>
+</ul>
+<p>分析料金はさらに以下に分かれる。</p>
+<ul>
+<li>オンデマンド料金
+<ul>
+<li>各クエリによって処理されたバイト数に基づいて課金</li>
+<li>処理されるクエリデータは毎月 1 TB まで無料</li>
+<li>クエリの見積もりは <code>bq query --dry_run</code> で読み取られるバイト数を見積もり、Google Cloud 料金計算ツール（<a href="https://cloud.google.com/products/calculator/">Google Cloud Pricing Calculator</a>）で料金を見積もる</li>
+</ul>
+</li>
+<li>定額料金
+<ul>
+<li>仮想 CPU であるスロットを購入（スロットを購入すると、クエリの実行に使用できる専用の処理容量を購入したことになる）</li>
+<li>スロットは以下のコミットメント プランで使用できる
+<ul>
+<li>Flex Slots: 最初の 60 秒分のコミットメントを購入</li>
+<li>月間: 最初の 30 日分のコミットメントを購入</li>
+<li>年間: 365 日分のコミットメントを購入</li>
+</ul>
+</li>
+<li>月間プランと年間プランでは、長期的な容量コミットメントと引き換えに割引が適用される</li>
+</ul>
+</li>
+</ul>
+<p>ストレージ料金はさらに以下に分かれる。</p>
+<ul>
+<li>アクティブ
+<ul>
+<li>テーブルで、過去 90 日間で変更されたデータに対する月額料金</li>
+</ul>
+</li>
+<li>長期
+<ul>
+<li>テーブルまたはパーティションで、過去 90 日間変更されていないデータに対する月額料金</li>
+</ul>
+</li>
+</ul>
 		</div>
 
 
