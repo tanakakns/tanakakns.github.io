@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-24T00:08:31 JST">
+<meta name="revised" content="2021-04-24T17:37:24 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -829,6 +829,8 @@ if (!doNotTrack) {
 <li><a href="#2-%E3%83%84%E3%83%BC%E3%83%AB">ツール</a></li>
 <li><a href="#3-%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E9%9A%8E%E5%B1%A4%E3%81%A8%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1">リソース階層とアクセス制御</a></li>
 <li>リソースの管理</li>
+<li>監視</li>
+<li>コスト管理</li>
 <li><a href="#4-google-cloud-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9">Google Cloud サービス</a></li>
 </ol>
 <h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
@@ -965,13 +967,22 @@ Cloud Shell には固有のコマンドラインツールがあらかじめ実�
 <h3 ref="24-api-とサービス" >2.4. API とサービス</h3><a class="anchor" id="24-api-とサービス"></a>
 <p>Google Cloud API は、ビジネス管理から機械学習にまで及ぶさまざまな分野の API が 200 以上用意されており、サービスと同様に、すべて Google Cloud プロジェクト / アプリケーションと簡単に統合できる。<br>
 <a href="https://cloud.google.com/apis/design/">API 設計ガイド</a> で説明されているリソース指向の設計原則が適用されている。<br>
-なお、 Cloud API を利用する際は、各自で有効に設定する必要がある。（サイドメニュー「API とサービス」 -&gt; 「ライブラリ」から APIを検索して「有効にする」）</p>
+なお、 Cloud API を利用する際は、各自で有効に設定する必要がある。（サイドメニュー「API とサービス」 -&gt; 「ライブラリ」から APIを検索して「有効にする」）<br>
+以下のコマンドでも API の有効化が可能。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># API 有効化</span>
+$ gloucd services enable SERVICE_NAME
+
+<span style="color:#75715e"># 現在のプロジェクトで有効になっているAPIの一覧を表示</span>
+gcloud services list
+<span style="color:#75715e"># 現在のプロジェクトで有効にできるサービスの一覧を表示</span>
+gcloud services list --available
+</code></pre></div><p>なお、アカウントに対して、いかにロールで権限を与えようが、 <strong>API を有効化しないと利用できない</strong> ことに注意。</p>
 <ul>
 <li><a href="https://developers.google.com/apis-explorer/#p/">Google APIs Explorer</a></li>
 </ul>
 <h2 ref="3-リソース階層とアクセス制御" >3. リソース階層とアクセス制御</h2><a class="anchor" id="3-リソース階層とアクセス制御"></a>
 <h3 ref="31-cloud-identity-and-access-managementcloud-iam" >3.1. Cloud Identity and Access Management（Cloud IAM）</h3><a class="anchor" id="31-cloud-identity-and-access-managementcloud-iam"></a>
-<p><a href="https://cloud.google.com/iam/">Cloud Identity and Access Management（Cloud IAM）</a> は、「誰が」「どういう操作を」「何に対して」行う権限を持つかを管理するサービス。</p>
+<p><a href="https://cloud.google.com/iam/docs/how-to?hl=ja">Cloud Identity and Access Management（Cloud IAM）</a> は、「誰が」「どういう操作を」「何に対して」行う権限を持つかを管理するサービス。</p>
 <table>
 <thead>
 <tr>
@@ -1149,37 +1160,77 @@ compute.instance.setMachineType
 </ul>
 <p>例えば、「アカウント A に compute.instances.get ロールを 組織 X に対して付与」すると、「アカウント A は 組織 X に含まれる全てのフォルダの全てのプロジェクトの VM インスタンス情報を取得できる」ようになる。</p>
 <h3 ref="36-アクセス制御のベストプラクティス" >3.6. アクセス制御のベストプラクティス</h3><a class="anchor" id="36-アクセス制御のベストプラクティス"></a>
+<p><a href="https://cloud.google.com/iam/docs/resource-hierarchy-access-control?hl=ja#best_practices">ベストプラクティス</a></p>
 <ul>
 <li><strong>最小権限の原則</strong> （より細かいロールで必要最低限の権限のみ付与する）に従って Cloud IAM のロールを付与する</li>
 <li><strong>事前定義ロール</strong> を使用する（適切な事前定義ロールがない場合のみ <strong>カスタムロール</strong> を使用する）</li>
 <li>リソースレベルではなく、 <strong>組織またはプロジェクト</strong> レベルでポリシーを設定する</li>
-<li>個々のユーザではなく、 <strong>グループ</strong> にロールを付与する</li>
+<li>個々のユーザではなく、 <strong>グループ</strong> にロールを付与する
+<ul>
+<li><code>gcloud iam roles copy</code> コマンドを利用して既存プロジェクトのロールをグループにコピーして使ったりする</li>
+</ul>
+</li>
 <li>ラベルを使って、リソースのアノテーションをつけ、グループ化・フィルタリングを行う</li>
 <li>異なる権限を必要とする複数サービスがある場合は、サービス毎に個別のサービスアカウントを作成し、必要な権限のみ付与する</li>
 </ul>
-<h3 ref="37-監査ログ" >3.7. 監査ログ</h3><a class="anchor" id="37-監査ログ"></a>
-<p>権限管理された上で、オペレーションを監視するログに以下の種類がある。</p>
+<h3 ref="37-リソースへのアクセス権の付与変更取り消しhttpscloudgooglecomiamdocsgranting-changing-revoking-accesshlja" >3.7. <a href="https://cloud.google.com/iam/docs/granting-changing-revoking-access?hl=ja">リソースへのアクセス権の付与、変更、取り消し</a></h3><a class="anchor" id="37-リソースへのアクセス権の付与変更取り消しhttpscloudgooglecomiamdocsgranting-changing-revoking-accesshlja"></a>
+<p>ToDo</p>
+<h2 ref="4-リソースの管理" >4. リソースの管理</h2><a class="anchor" id="4-リソースの管理"></a>
+<p>ここまでで出たリソースを管理してみる。<br>
+基本 <code>gcloud</code> コマンドでの管理とする。</p>
+<h3 ref="41-プロジェクト" >4.1. プロジェクト</h3><a class="anchor" id="41-プロジェクト"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud projects COMMAND <span style="color:#f92672">[</span>GCLOUD_WIDE_FLAG ...<span style="color:#f92672">]</span>
+
+$ gcloud projects --help <span style="color:#75715e"># コマンドの help</span>
+</code></pre></div><p><code>gcloud projects</code> コマンドには「プロジェクトに対する CRUD」と「プロジェクトの IAMに関する操作」を実施できる。<br>
+<a href="https://www.qwiklabs.com/focuses/2794?parent=catalog">Qwiklabs と Google Cloud の概要</a> のラボ環境 Cloud Shell などを利用して実際に実行してみる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># プロジェクトの作成</span>
+$ gcloud projects create <span style="color:#f92672">[</span>PROJECT_ID<span style="color:#f92672">]</span>
+
+<span style="color:#75715e"># プロジェクトの一覧を取得 # プロジェクトが作成されていることを確認する</span>
+$ gcloud projects list
+PROJECT_ID                    NAME                          PROJECT_NUMBER
+qwiklabs-gcp-02-eac86d9938ef  qwiklabs-gcp-02-eac86d9938ef  <span style="color:#ae81ff">264608401336</span> <span style="color:#75715e"># これが作成したプロジェクトとする</span>
+
+<span style="color:#75715e"># プロジェクトの IAM ポリシーを取得 # 権限毎にユーザ・グループ・サービスアカウントが表示される</span>
+$ gcloud projects get-iam-policy qwiklabs-gcp-02-eac86d9938ef
+bindings:
+- members:
+  - serviceAccount:qwiklabs-gcp-02-eac86d9938ef@qwiklabs-gcp-02-eac86d9938ef.iam.gserviceaccount.com
+  - user:student-02-843d65d5d79e@qwiklabs.net <span style="color:#75715e"># 現在のユーザ</span>
+  role: roles/editor
+- members:
+  - serviceAccount:qwiklabs-gcp-02-eac86d9938ef@qwiklabs-gcp-02-eac86d9938ef.iam.gserviceaccount.com
+  role: roles/owner
+- members:
+  - serviceAccount:qwiklabs-gcp-02-eac86d9938ef@qwiklabs-gcp-02-eac86d9938ef.iam.gserviceaccount.com
+  - user:student-02-843d65d5d79e@qwiklabs.net <span style="color:#75715e"># 現在のユーザ</span>
+  role: roles/viewer
+etag: BwW_ToiGehg<span style="color:#f92672">=</span>
+version: <span style="color:#ae81ff">1</span>
+
+<span style="color:#75715e"># メンバーにプロジェクトの権限を付与する # なお、リソースはプロジェクトなのでロールは基本ロールの「&#39;roles/browser&#39;」「&#39;roles/editor&#39;」「&#39;roles/owner&#39;」のみ</span>
+gcloud projects add-iam-policy-binding <span style="color:#f92672">[</span>PROJECT_ID<span style="color:#f92672">]</span> --member<span style="color:#f92672">=</span>MEMBER --role<span style="color:#f92672">=</span>ROLE
+</code></pre></div><h2 ref="5-監視" >5. 監視</h2><a class="anchor" id="5-監視"></a>
+<p><a href="https://cloud.google.com/products/operations?hl=ja">Google Cloud のオペレーション スイート</a></p>
 <ul>
-<li>管理アクティビティ監査ログ
+<li>Cloud Logging
 <ul>
-<li>リソース構成やメタデータ変更オペレーションが記録される</li>
-<li>デフォルトで有効で無効にできない</li>
+<li>リアルタイムでログを管理して分析する、大規模なフルマネージドサービス</li>
+<li>アプリケーションとシステムのログデータのほか、GKE 環境、VM、Google Cloud サービスからのカスタム ログデータも取り込める</li>
+<li>選択したログを分析でき、アプリケーションのトラブルシューティングが加速する</li>
 </ul>
 </li>
-<li>データアクセス監査ログ
+<li>Cloud Monitoring
 <ul>
-<li>リソース構成やメタデータ読み取り API 操作が記録される</li>
-<li>デフォルトは無効</li>
-</ul>
-</li>
-<li>システムイベント監査ログ
-<ul>
-<li>Google システムによって生成される管理アクション</li>
+<li>組み込みの大規模な指標オブザーバビリティ</li>
+<li>クラウドで実行されるアプリケーションのパフォーマンスや稼働時間、全体的な動作状況を確認できる</li>
+<li>メトリクス・イベント・メタデータを収集し、チャートやダッシュボードで可視化してアラート管理できる</li>
 </ul>
 </li>
 </ul>
-<h4 ref="371-cloud-logging" >3.7.1. Cloud Logging</h4><a class="anchor" id="371-cloud-logging"></a>
-<p>Cloud Logging は IAM を使用して Google Cloud リソースのロギングデータへの <a href="https://cloud.google.com/logging/docs/access-control?hl=ja#permissions_and_roles">アクセス制御</a> を実施する。</p>
+<h3 ref="51-cloud-logging" >5.1. Cloud Logging</h3><a class="anchor" id="51-cloud-logging"></a>
+<p>Cloud Logging は IAM を使用して Google Cloud リソースのロギングデータへの <a href="https://cloud.google.com/logging/docs/access-control?hl=ja#permissions_and_roles">アクセス制御</a> を実施できる。</p>
 <ul>
 <li><code>roles/logging.viewer</code>（ログビューア）（＝ <code>roles/viewer</code> ）
 <ul>
@@ -1233,43 +1284,33 @@ compute.instance.setMachineType
 </ul>
 </li>
 </ul>
-<h2 ref="4-リソースの管理" >4. リソースの管理</h2><a class="anchor" id="4-リソースの管理"></a>
-<p>ここまでで出たリソースを管理してみる。<br>
-基本 <code>gcloud</code> コマンドでの管理とする。</p>
-<h3 ref="41-プロジェクト" >4.1. プロジェクト</h3><a class="anchor" id="41-プロジェクト"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud projects COMMAND <span style="color:#f92672">[</span>GCLOUD_WIDE_FLAG ...<span style="color:#f92672">]</span>
-
-$ gcloud projects --help <span style="color:#75715e"># コマンドの help</span>
-</code></pre></div><p><code>gcloud projects</code> コマンドには「プロジェクトに対する CRUD」と「プロジェクトの IAMに関する操作」を実施できる。<br>
-<a href="https://www.qwiklabs.com/focuses/2794?parent=catalog">Qwiklabs と Google Cloud の概要</a> のラボ環境 Cloud Shell などを利用して実際に実行してみる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># プロジェクトの作成</span>
-$ gcloud projects create <span style="color:#f92672">[</span>PROJECT_ID<span style="color:#f92672">]</span>
-
-<span style="color:#75715e"># プロジェクトの一覧を取得 # プロジェクトが作成されていることを確認する</span>
-$ gcloud projects list
-PROJECT_ID                    NAME                          PROJECT_NUMBER
-qwiklabs-gcp-02-eac86d9938ef  qwiklabs-gcp-02-eac86d9938ef  <span style="color:#ae81ff">264608401336</span> <span style="color:#75715e"># これが作成したプロジェクトとする</span>
-
-<span style="color:#75715e"># プロジェクトの IAM ポリシーを取得 # 権限毎にユーザ・グループ・サービスアカウントが表示される</span>
-$ gcloud projects get-iam-policy qwiklabs-gcp-02-eac86d9938ef
-bindings:
-- members:
-  - serviceAccount:qwiklabs-gcp-02-eac86d9938ef@qwiklabs-gcp-02-eac86d9938ef.iam.gserviceaccount.com
-  - user:student-02-843d65d5d79e@qwiklabs.net <span style="color:#75715e"># 現在のユーザ</span>
-  role: roles/editor
-- members:
-  - serviceAccount:qwiklabs-gcp-02-eac86d9938ef@qwiklabs-gcp-02-eac86d9938ef.iam.gserviceaccount.com
-  role: roles/owner
-- members:
-  - serviceAccount:qwiklabs-gcp-02-eac86d9938ef@qwiklabs-gcp-02-eac86d9938ef.iam.gserviceaccount.com
-  - user:student-02-843d65d5d79e@qwiklabs.net <span style="color:#75715e"># 現在のユーザ</span>
-  role: roles/viewer
-etag: BwW_ToiGehg<span style="color:#f92672">=</span>
-version: <span style="color:#ae81ff">1</span>
-
-<span style="color:#75715e"># メンバーにプロジェクトの権限を付与する # なお、リソースはプロジェクトなのでロールは基本ロールの「&#39;roles/browser&#39;」「&#39;roles/editor&#39;」「&#39;roles/owner&#39;」のみ</span>
-gcloud projects add-iam-policy-binding <span style="color:#f92672">[</span>PROJECT_ID<span style="color:#f92672">]</span> --member<span style="color:#f92672">=</span>MEMBER --role<span style="color:#f92672">=</span>ROLE
-</code></pre></div><h3 ref="42-cloud-monitoring" >4.2. Cloud Monitoring</h3><a class="anchor" id="42-cloud-monitoring"></a>
+<h4 ref="511-監査ログ" >5.1.1. 監査ログ</h4><a class="anchor" id="511-監査ログ"></a>
+<p>権限管理された上で、オペレーションを監視するログに以下の種類がある。（ <a href="https://cloud.google.com/logging/docs/audit">Cloud Audit Logs</a> ）</p>
+<ul>
+<li>管理アクティビティ監査ログ
+<ul>
+<li>リソース構成やメタデータ変更オペレーションが記録される</li>
+<li>デフォルトで有効で無効にできない</li>
+</ul>
+</li>
+<li>データアクセス監査ログ
+<ul>
+<li>リソース構成やメタデータ読み取り API 操作が記録される</li>
+<li>デフォルトは無効</li>
+</ul>
+</li>
+<li>システムイベント監査ログ
+<ul>
+<li>Google システムによって生成される管理アクション</li>
+</ul>
+</li>
+<li>ポリシー拒否監査ログ
+<ul>
+<li>セキュリティ ポリシー違反のため Google Cloud サービスがユーザーまたはサービス アカウントへのアクセスを拒否したときに、ポリシー拒否監査ログを記録する</li>
+</ul>
+</li>
+</ul>
+<h3 ref="52-cloud-monitoring" >5.2. Cloud Monitoring</h3><a class="anchor" id="52-cloud-monitoring"></a>
 <ul>
 <li><a href="https://cloud.google.com/monitoring/workspaces?hl=ja#accounts">ワークスペース</a> は、1 つ以上の Google Cloud プロジェクトまたは AWS アカウントに含まれるリソースをモニタリングするためのツール
 <ul>
@@ -1294,17 +1335,57 @@ gcloud projects add-iam-policy-binding <span style="color:#f92672">[</span>PROJE
 </ul>
 </li>
 </ul>
-<h2 ref="5-google-cloud-サービス" >5. Google Cloud サービス</h2><a class="anchor" id="5-google-cloud-サービス"></a>
+<h2 ref="6-コスト管理" >6. コスト管理</h2><a class="anchor" id="6-コスト管理"></a>
+<h3 ref="61-コスト算出" >6.1. コスト算出</h3><a class="anchor" id="61-コスト算出"></a>
+<p><a href="https://cloud.google.com/products/calculator/?hl=ja">Google Cloud Pricing Calculator</a> で各サービスに適した算出が可能。<br>
+ただし、 BigQuery など一部特殊なものもある。<br>
+<a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery?hl=ja#differences_between_exported_data_and_invoices">Cloud Billing データを BigQuery にエクスポートする</a></p>
+<h3 ref="62-請求" >6.2. 請求</h3><a class="anchor" id="62-請求"></a>
+<ul>
+<li>プロジェクトの請求設定の変更
+<ul>
+<li><a href="https://cloud.google.com/billing/docs/how-to/modify-project">https://cloud.google.com/billing/docs/how-to/modify-project</a></li>
+</ul>
+</li>
+<li>課金のコンセプト
+<ul>
+<li><a href="https://cloud.google.com/billing/docs/concepts?hl=ja#billing_account">https://cloud.google.com/billing/docs/concepts?hl=ja#billing_account</a></li>
+</ul>
+</li>
+</ul>
+<h2 ref="7-google-cloud-サービス" >7. Google Cloud サービス</h2><a class="anchor" id="7-google-cloud-サービス"></a>
 <p>Cloud Console から Google Cloud が提供するサービスを利用することができ、以下のカテゴリで構成される。（<a href="https://cloud.google.com/docs/overview/cloud-platform-services#top_of_page">詳細</a>）</p>
 <ul>
-<li>コンピューティングとホスティング</li>
-<li>ストレージ</li>
-<li>データベース</li>
-<li>ネットワーキング</li>
-<li>ビッグデータ</li>
-<li>機械学習</li>
-</ul>
+<li>
+<p>コンピューティングとホスティング</p>
+</li>
+<li>
+<p>ストレージ</p>
+</li>
+<li>
+<p>データベース</p>
+</li>
+<li>
+<p>ネットワーキング</p>
+</li>
+<li>
+<p>ビッグデータ</p>
+</li>
+<li>
+<p>機械学習</p>
+</li>
+<li>
 <p><a href="https://cloud.google.com/products?hl=ja">プロダクトとサービスの一覧</a></p>
+</li>
+<li>
+<p><a href="https://qiita.com/hayao_k/items/906ac1fba9e239e08ae8">AWS/Azure/GCPサービス比較 2021.04</a></p>
+</li>
+</ul>
+<p>以下、他ページに現状整理し辛いサービスを記載する。</p>
+<h3 ref="cloud-deployment-manager" >Cloud Deployment Manager</h3><a class="anchor" id="cloud-deployment-manager"></a>
+<p>AWS でいう CloudFormation 。<br>
+単一の API に対応した <strong>リソース</strong> とそのリソースをまとめた <strong>デプロイメント</strong> などで構成される。<br>
+<code>gcloud deployment-manager deployments</code> コマンドでデプロイメントを管理し、 <code>gcloud deployment-manager resouces</code> コマンドでデプロイメントに含まれるリソースを管理する。</p>
 		</div>
 
 

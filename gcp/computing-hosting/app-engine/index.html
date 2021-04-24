@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-24T00:08:31 JST">
+<meta name="revised" content="2021-04-24T17:37:24 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -836,15 +836,11 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p><strong>App Engine</strong> は Google のインフラストラクチャ上に仮想マシンを構築するサービス。</p>
+	    <p><strong>App Engine</strong> は Google の PaaS 。</p>
 <ol>
 <li><a href="#1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
-<li><a href="#2-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E4%BD%9C%E6%88%90">インスタンス作成</a></li>
-<li><a href="#3-%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E3%81%AE%E4%BD%9C%E6%88%90%E3%81%A8%E3%82%A2%E3%82%BF%E3%83%83%E3%83%81">ディスクの作成とアタッチ</a></li>
-<li><a href="#4-%E3%83%95%E3%82%A1%E3%82%A4%E3%82%A2%E3%82%A6%E3%82%A9%E3%83%BC%E3%83%AB%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%AE%E4%BD%9C%E6%88%90">ファイアウォールルールの作成</a></li>
-<li><a href="#3-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A">インスタンスへの接続</a></li>
-<li><a href="#4-cloud-monitoring">Cloud Monitoring</a></li>
-<li>コマンド整理</li>
+<li><a href="#2-app-engine-%E3%81%AE%E4%BD%9C%E6%88%90">App Engine の作成</a></li>
+<li><a href="#3-%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%BF%E3%82%A4%E3%83%97">スケールリングタイプ</a></li>
 </ol>
 <h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
 <ul>
@@ -889,15 +885,38 @@ if (!doNotTrack) {
 <li>各設定ファイルは <code>gcloud app deploy xxxx.yaml</code> で適用する</li>
 <li><code>gcloud app deploy --no-promote</code> で新しいバージョンをデプロイしますが、トラフィックが新しいバージョンに自動的にルーティングされない（テストできる）</li>
 <li><code>gcloud app logs tail</code> でログ確認</li>
-<li>新しいバージョンへのトラフィックの移行する場合、以下の方法がある
+<li>新しいバージョンへの <strong>トラフィック移行</strong> する場合、以下の方法がある
 <ul>
 <li><code>gcloud app services set-traffic [MY_SERVICE] --splits [MY_VERSION]=1</code> ：トラフィックの即時移行</li>
 <li><code>gcloud app services set-traffic [MY_SERVICE] --splits [MY_VERSION]=1 --migrate</code> ：トラフィックの段階的移行</li>
 </ul>
 </li>
-<li>また、移行だけでなく、A/B Testing などトラフィック分割も可能
+<li>また、移行だけでなく、A/B Testing など <strong>トラフィック分割</strong> も可能
 <ul>
 <li><code>gcloud app services set-traffic [MY_SERVICE] --splits [MY_VERSION1]=[VERSION1_WEIGHT],[MY_VERSION2]=[VERSION2_WEIGHT] --split-by [IP_OR_COOKIE]</code></li>
+</ul>
+</li>
+</ul>
+<h2 ref="3-スケーリングタイプ" >3. スケーリングタイプ</h2><a class="anchor" id="3-スケーリングタイプ"></a>
+<p><a href="https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed?hl=ja#scaling_types">スケーリングタイプ</a> は以下の 3 種類ある。</p>
+<ul>
+<li>自動スケーリング
+<ul>
+<li>リクエスト率、レスポンスのレイテンシなどのアプリケーションの指標に基づいてインスタンスを作成</li>
+<li>それぞれの指標のしきい値、および常時稼働する最小数のインスタンスを指定できる</li>
+</ul>
+</li>
+<li>基本スケーリング
+<ul>
+<li>アプリケーションがリクエストを受信したときに、インスタンスが作成される</li>
+<li>各インスタンスは、アプリケーションがアイドル状態になるとシャットダウン</li>
+<li>断続的な処理やユーザーのアクティビティに応じて動作する処理に適している</li>
+</ul>
+</li>
+<li>手動スケーリング
+<ul>
+<li>負荷レベルに関係なく、常に実行されるインスタンスの数を指定</li>
+<li>複雑な初期化などのタスクや、時間の経過に伴うメモリの状態に依存するアプリケーションが実行できるようになる</li>
 </ul>
 </li>
 </ul>

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-24T00:08:31 JST">
+<meta name="revised" content="2021-04-24T17:37:24 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -849,8 +849,33 @@ if (!doNotTrack) {
 </li>
 <li>サブネット
 <ul>
-<li>リージョンリソース、サブネット毎に IP アドレスの範囲が定義される</li>
-<li>ゾーンを跨げる</li>
+<li>リージョンリソース（マルチゾーンリソース）</li>
+<li>サブネット毎に プライマリおよびセカンダリ CIDR 範囲（IP アドレスの範囲）を定義できる</li>
+<li>VM インスタンスは、プライマリ CIDR 範囲からプライマリ内部 IP アドレスを取得する</li>
+<li>また、プライマリおよびセカンダリ CIDR 範囲に <a href="https://cloud.google.com/vpc/docs/alias-ip?hl=ja">エイリアス IP 範囲</a> を定義できる
+<ul>
+<li><strong>IP エイリアス</strong> は、物理的に一つの NIC に 2つ以上の IP アドレスを割り当てる方法で、 エイリアス IP 範囲は文字通りその範囲</li>
+<li>この技術を利用することで、あるクライアントが サーバ A の IP エイリアスに接続している状況で、その指定先を変更せずに サーバ B に同じ IP エイリアスを切り替えることができる</li>
+</ul>
+</li>
+<li>なお、VM インスタンスのネットワーク インターフェースには、1 つのプライマリ内部 IP アドレスが必要であり、1 つ以上のエイリアス IP 範囲、1 つの外部 IP アドレスを設定できる</li>
+</ul>
+</li>
+<li>IP アドレス
+<ul>
+<li>内部 IP アドレス
+<ul>
+<li>インターネット通信不可能（インターネット通信するにはなんらかの 外部 IP アドレスを持つプロキシを介する必要がある）</li>
+</ul>
+</li>
+<li>外部 IP アドレス
+<ul>
+<li>インターネット通信可能</li>
+<li>静的外部 IP アドレスには、リージョンまたはグローバルリソースを指定できる</li>
+<li>グローバル静的外部 IP アドレスは、グローバル負荷分散に使用されるグローバル転送ルールでのみ使用可能</li>
+</ul>
+</li>
+<li>内部・外部 IP アドレスは、エフェメラル（動的）または静的のいずれかになる</li>
 </ul>
 </li>
 <li>ファイアウォールルール

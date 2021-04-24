@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-24T00:08:31 JST">
+<meta name="revised" content="2021-04-24T17:37:24 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -844,6 +844,7 @@ if (!doNotTrack) {
 <li><a href="#4-%E3%83%95%E3%82%A1%E3%82%A4%E3%82%A2%E3%82%A6%E3%82%A9%E3%83%BC%E3%83%AB%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%AE%E4%BD%9C%E6%88%90">ファイアウォールルールの作成</a></li>
 <li><a href="#3-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A">インスタンスへの接続</a></li>
 <li><a href="#4-cloud-monitoring">Cloud Monitoring</a></li>
+<li>サービスアカウント</li>
 <li>コマンド整理</li>
 </ol>
 <ul>
@@ -1278,8 +1279,36 @@ $ sudo apt-get install google-fluentd
 左側のメニューで [稼働時間チェック] をクリックし、[稼働時間チェックの作成] をクリック。<br>
 左側のメニューで [アラート]、[Create Policy] の順にクリック。<br>
 ナビゲーション メニュー &gt; [Logging] &gt; [ログビューア] 。</p>
-<h2 ref="7-チャレンジクエスト" >7. チャレンジクエスト</h2><a class="anchor" id="7-チャレンジクエスト"></a>
-<h3 ref="71-apache-の-vm-インスタンスを作成" >7.1. Apache の VM インスタンスを作成</h3><a class="anchor" id="71-apache-の-vm-インスタンスを作成"></a>
+<h2 ref="7-サービスアカウント" >7. サービスアカウント</h2><a class="anchor" id="7-サービスアカウント"></a>
+<p>VM インスタンスにサービスアカウントを付与することによってリソースへのアクセス制御を行う。<br>
+サービスアカウントは以下のように作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サービスアカウントの作成</span>
+$ gcloud iam service-accounts create SERVICE_ACCOUNT_ID --display-name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;DISPLAY_NAME&#34;</span>
+
+<span style="color:#75715e"># サービスアカウントへのロールの付与</span>
+gcloud projects add-iam-policy-binding PROJECT_ID <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --member<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;serviceAccount:SERVICE_ACCOUNT_ID@PROJECT_ID.iam.gserviceaccount.com&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --role<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ROLE_NAME&#34;</span>
+</code></pre></div><p>VM インスタンス作成時にサービスアカウントを付与するには以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create INSTANCE_NAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --service-account<span style="color:#f92672">=</span>SERVICE_ACCOUNT_EMAIL <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">[</span>--scopes<span style="color:#f92672">=[</span>SCOPES,...<span style="color:#f92672">]]</span>
+</code></pre></div><p>既存の VM インスタンスにサービスアカウントを付与するのは以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances set-service-account INSTANCE_NAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --service-account<span style="color:#f92672">=</span>SERVICE_ACCOUNT <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">[</span>--scopes<span style="color:#f92672">=[</span>SCOPE,...<span style="color:#f92672">]</span>
+</code></pre></div><ul>
+<li><a href="https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=ja#best_practices">ベストプラクティス</a>
+<ul>
+<li>Compute Engine のデフォルトのサービス アカウントを使用せずに、新しいサービス アカウントを作成</li>
+<li>必要なリソースについてのみ、このサービス アカウントに IAM ロールを付与</li>
+<li>このサービス アカウントとして実行するようにインスタンスを構成</li>
+<li>インスタンスの <a href="https://www.googleapis.com/auth/cloud-platform">https://www.googleapis.com/auth/cloud-platform</a> スコープにすべての Google Cloud APIs への完全アクセス権を与えるには、インスタンスの IAM 権限をサービス アカウントの IAM のロールで完全に決定するようにする</li>
+</ul>
+</li>
+</ul>
+<h2 ref="8-コマンド整理" >8. コマンド整理</h2><a class="anchor" id="8-コマンド整理"></a>
+<h3 ref="81-apache-の-vm-インスタンスを作成" >8.1. Apache の VM インスタンスを作成</h3><a class="anchor" id="81-apache-の-vm-インスタンスを作成"></a>
 <ul>
 <li>Linux 仮想マシン インスタンスの作成</li>
 <li>VM インスタンスへの公開アクセスの有効化</li>
@@ -1309,7 +1338,7 @@ $ sudo su -
 $ apt-get update
 $ apt-get install apache2 -y
 $ service apache2 restart
-</code></pre></div><h2 ref="72-apache-の-vm-インスタンスを作成起動スクリプト利用" >7.2. Apache の VM インスタンスを作成（起動スクリプト利用）</h2><a class="anchor" id="72-apache-の-vm-インスタンスを作成起動スクリプト利用"></a>
+</code></pre></div><h2 ref="82-apache-の-vm-インスタンスを作成起動スクリプト利用" >8.2. Apache の VM インスタンスを作成（起動スクリプト利用）</h2><a class="anchor" id="82-apache-の-vm-インスタンスを作成起動スクリプト利用"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ゾーンの設定</span>
 $ gcloud config set compute/zone us-central1-a
 
