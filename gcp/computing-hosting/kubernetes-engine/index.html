@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-25T16:05:09 JST">
+<meta name="revised" content="2021-04-25T19:56:38 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -845,6 +845,7 @@ if (!doNotTrack) {
 <li>監視</li>
 </ol>
 <h3 ref="31-コンセプト" >3.1. コンセプト</h3><a class="anchor" id="31-コンセプト"></a>
+<p>ToDo</p>
 <h3 ref="32-クラスタ作成" >3.2. クラスタ作成</h3><a class="anchor" id="32-クラスタ作成"></a>
 <p>デフォルトのコンピューティング ゾーンを設定する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config set compute/zone us-central1-a
@@ -899,7 +900,7 @@ Deleting cluster my-cluster...done.
 Deleted <span style="color:#f92672">[</span>https://container.googleapis.com/v1/projects/qwiklabs-gcp-01-47d564cd39d1/zones/us-central1-a/clusters/my-cluster<span style="color:#f92672">]</span>.
 </code></pre></div><h3 ref="33-デプロイ管理" >3.3. デプロイ管理</h3><a class="anchor" id="33-デプロイ管理"></a>
 <h4 ref="331-deployment-オブジェクトの詳細" >3.3.1. Deployment オブジェクトの詳細</h4><a class="anchor" id="331-deployment-オブジェクトの詳細"></a>
-<p><code>kubectl explain</code> コマンドを使用すると、Deployment などのオブジェクトに関する情報が取得できる。</p>
+<p><code>kubectl explain</code> コマンドを使用すると、Deployment などのオブジェクトの設定項目に関する情報が取得できる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment
 
 <span style="color:#75715e"># 全てのフィールドを確認する場合</span>
@@ -1020,7 +1021,7 @@ REVISION  CHANGE-CAUSE
 <span style="color:#ae81ff">2</span>         &lt;none&gt;
 <span style="color:#ae81ff">3</span>         &lt;none&gt;
 
-<span style="color:#75715e"># マニフェストを確認（2.0.0 -&gt; 1.0.0 にもどってる</span>
+<span style="color:#75715e"># マニフェストを確認（2.0.0 -&gt; 1.0.0 に戻ってる）</span>
 $ kubectl edit deployment hello
 
 <span style="color:#75715e"># 全ての Pod がもどっているか確認</span>
@@ -1456,7 +1457,6 @@ $ git push --tags
 </table>
 <p>Cloud Platform Console の Cloud モニタリング（ナビゲーション メニュー &gt; [モニタリング]）で、左側のメニューにある [アラート]、[CREATE POLICY] の順にクリックし、SLO を監視するアラートを作成する。</p>
 <h2 ref="5-監視" >5. 監視</h2><a class="anchor" id="5-監視"></a>
-<p>GKE 用の監視機能がある。</p>
 <ul>
 <li>GKE 用 Google Cloud オペレーション スイートの概要
 <ul>
@@ -1464,6 +1464,19 @@ $ git push --tags
 </ul>
 </li>
 </ul>
+<p>GKEには、Cloud Monitoring および Cloud Logging との統合機能が含まれている。（ <a href="https://cloud.google.com/stackdriver/docs/solutions/gke/prometheus?hl=ja">Prometheus の使用</a> はこちらを参照）<br>
+<code>gcloud container clusters create</code> コマンドでクラスタを作成した場合、デフォルトで有効になっているが、既存のクラスタで有効にする場合は以下のコマンドを実行する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud container clusters update <span style="color:#f92672">[</span>CLUSTER_NAME<span style="color:#f92672">]</span> --enable-stackdriver-kubernetes
+<span style="color:#75715e"># ちなみに削除は「-no-enable-stackdriver-kubernetes」オプション</span>
+</code></pre></div><p>なお、現在はベータ版であるが、「 <code>--enable-logging-monitoring-system-only</code> 」オプションでシステムログのみ収集可能になる。（デフォルトは全ログ）<br>
+システムログとは以下を指す。</p>
+<ul>
+<li>名前空間 <code>kube-system</code> 、 <code>istio-system</code> 、 <code>knative-serving</code> 、 <code>gke-system</code> 、 <code>config-management-system</code>  で実行中のすべての Pod</li>
+<li>コンテナ化されていない重要なサービス:  <code>docker/containerd</code> ランタイム、 <code>kubelet</code> 、 <code>kubelet-monitor</code> 、 <code>node-problem-detector</code> 、 <code>kube-container-runtime-monitor</code></li>
+<li>ノードのシリアルポート出力（VM インスタンスのメタデータ <code>serial-port-logging-enable</code> が true に設定されている場合）</li>
+</ul>
+<p>アプリケーションログは、 コンテナが STDOUT と STDERR に書き込まれたワークロードのログを収集する。</p>
+<p><a href="http://cloud.google.com/stackdriver/docs/solutions/gke/managing-logs?hl=ja">GKE ログの管理</a></p>
 		</div>
 
 

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-25T16:05:09 JST">
+<meta name="revised" content="2021-04-25T19:56:38 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -936,28 +936,35 @@ VM オプションとして「可用性ポリシー」「サービスアカウ�
 </span><span style="color:#ae81ff"></span>    --zome<span style="color:#f92672">=[</span>ゾーン名<span style="color:#f92672">]</span> <span style="color:#ae81ff">\ </span><span style="color:#75715e"># カンマ区切りで複数指定した場合、マルチゾーン MIG になる</span>
     --region<span style="color:#f92672">=[</span>リージョン名<span style="color:#f92672">]</span> <span style="color:#ae81ff">\ </span><span style="color:#75715e"># リージョン（マルチゾーン） MIG になる</span>
 </code></pre></div><ul>
+<li>自動スケール（スケールイン・アウト）
+<ul>
 <li><a href="https://cloud.google.com/compute/docs/autoscaler?hl=ja#cool_down_period">クールダウン期間</a> （初期化期間）
 <ul>
 <li>新しく作成されたインスタンスを自動スケーリングの判断に含めない時間</li>
-<li>スケールアップを遅らせ、必要以上に多くのインスタンスが作成されないように設定する（アプリの初期化時間をテストすることを推奨）</li>
-<li>これを適切に設定しないと永遠にスケールされてしまう、、、</li>
+<li>インスタンスが起動しても、サービスが起動していなければヘルスチェック NG になるため、このご検知を発生させないために設定（アプリの初期化時間をテストすることを推奨）</li>
+<li>スケールアップの判定を遅らせ、必要以上に多くのインスタンスが作成されないようにするために設定する</li>
 </ul>
 </li>
 <li><a href="https://cloud.google.com/compute/docs/autoscaler?hl=ja#stabilization_period">安定化期間</a>
 <ul>
-<li>オートスケーラは直近(1分ではなく)10分間におけるピーク負荷に基づいてターゲットサイズを計算</li>
+<li>スケールインの判定のため、オートスケーラは直近10分間におけるピーク負荷に基づいてターゲットサイズを計算する（この 10 分を安定化期間という）</li>
 <li>ピーク負荷後のスケールダウンに10分の余裕を持たせることで、頻繁なスケールアップ/ダウンの繰り返しを回避する</li>
-<li>この 10 分を安定化期間という</li>
 </ul>
 </li>
+<li><a href="https://cloud.google.com/compute/docs/autoscaler/understanding-autoscaler-decisions?hl=ja">オートスケーラーによる判断の理解</a></li>
+</ul>
+</li>
+<li>ヘルスチェック（自動修復のための）
+<ul>
 <li>初期遅延
 <ul>
 <li>自動修復のためのヘルスチェックが新しく作成したインスタンスを対象にしない時間</li>
 <li>初期化完了前にUnhealthyと判断され、無駄な再作成を防ぐ目的で設定する</li>
 </ul>
 </li>
-<li><a href="https://cloud.google.com/compute/docs/autoscaler/understanding-autoscaler-decisions?hl=ja">オートスケーラーによる判断の理解</a></li>
 <li><a href="https://cloud.google.com/compute/docs/instance-groups/autohealing-instances-in-migs?hl=ja">ヘルスチェックと自動修復の設定</a></li>
+</ul>
+</li>
 </ul>
 <h3 ref="12-マシンタイプ" >1.2. マシンタイプ</h3><a class="anchor" id="12-マシンタイプ"></a>
 <ul>
@@ -1064,7 +1071,7 @@ coreos-stable-1911-3-0-v20181106  coreos-cloud  coreos-stable              READY
 </code></pre></div><h3 ref="15-スナップショット" >1.5. スナップショット</h3><a class="anchor" id="15-スナップショット"></a>
 <ul>
 <li>イメージより低コストで保存でき、バックアップに適する</li>
-<li>ディスクデータを複製できる点でイメージと似ているが、インスタンステンプレートからは起動できない</li>
+<li>ディスクデータを複製できる点でイメージと似ているが、 <strong>インスタンステンプレートからは起動できない</strong></li>
 </ul>
 <h3 ref="16-ゲスト環境" >1.6. ゲスト環境</h3><a class="anchor" id="16-ゲスト環境"></a>
 <ul>
@@ -1164,8 +1171,8 @@ INSTANCE_NAME  us-central1-c  n1-standard-2               10.128.0.3   34.70.76.
 </code></pre></div><p>なお、プロジェクト毎に <code>default</code> という名前のデフォルト VPC ネットワークが作成されており、ネットワークの詳細を指定せずに VM を作成すると、デフォルト VPC ネットワークと同じリージョンにあるサブネットにインスタンスが作成される。<br>
 以下のオプションを指定することで、対象のネットワークにインスタンスが作成される。</p>
 <ul>
-<li><code>--subnet=SUBNET_NAME</code>: サブネットの名前。ネットワークは指定したサブネットから推測される。</li>
-<li><code>--zone=ZONE_NAME</code>: VM を作成するゾーン（ <code>europe-west1-b</code> など）。リージョンはこのゾーンから推測される。</li>
+<li><code>--subnet=SUBNET_NAME</code>: サブネットの名前。 VPC は指定したサブネットから推測される。</li>
+<li><code>--zone=ZONE_NAME</code>: VM を作成するゾーン（ <code>europe-west1-b</code> など）。リージョンは指定したゾーンから推測される。</li>
 </ul>
 <p>また、以下のようなオプションもある。</p>
 <ul>
@@ -1256,12 +1263,12 @@ $ gcloud compute ssh gcelab2 --zone us-central1-c
 </code></pre></div><p>接続できたら、以下のコマンドの管理者権限になる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo su -
 </code></pre></div><p>ちなみに Linux は SSH 、 Windows は RDP で接続する。</p>
-<h2 ref="6-cloud-monitoring" >6. Cloud Monitoring</h2><a class="anchor" id="6-cloud-monitoring"></a>
+<h2 ref="6-cloud-monitoring--cloud-logging-連携" >6. Cloud Monitoring / Cloud Logging 連携</h2><a class="anchor" id="6-cloud-monitoring--cloud-logging-連携"></a>
 <p>Cloud Monitoring では、クラウドで実行されるアプリケーションのパフォーマンスや稼働時間、全体的な動作状況を確認できる。<br>
 Google Cloud、Amazon Web Services、ホストされた稼働時間プローブ、アプリケーション インストゥルメンテーション、よく使われるさまざまなアプリケーション コンポーネント（Cassandra、Nginx、Apache ウェブサーバー、Elasticsearch など）から、指標、イベント、メタデータを収集する。<br>
 これらのデータを取り込んでダッシュボード、グラフ、アラートを介して分析情報を提供する。<br>
 Cloud Monitoring のアラート機能を Slack、PagerDuty、HipChat、Campfire などに組み込むこともできる。</p>
-<p>インスタンスから情報を収集する VM に <a href="https://cloud.google.com/monitoring/agent">Monitoring エージェント</a> と Logging エージェントをインストールすることで収集可能となる。<br>
+<p>インスタンスから情報を収集する VM に <a href="https://cloud.google.com/monitoring/agent">Monitoring エージェント</a> と <a href="https://cloud.google.com/logging/docs/agent?hl=ja">Logging エージェント</a> をインストールすることで収集可能となる。<br>
 対象の VM インスタンスに SSH した後、以下のコマンドでインストールする。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Monitoring エージェントのインストール</span>
 $ curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh
@@ -1275,10 +1282,12 @@ $ sudo bash add-logging-agent-repo.sh
 $ sudo apt-get update
 $ sudo apt-get install google-fluentd
 </code></pre></div><p>また、Monitoring ワークスペースを作成する必要がある。</p>
-<p>Cloud Console で、ナビゲーション メニュー &gt; [モニタリング] をクリックすると、ワークスペースがプロビジョニングされる。<br>
-左側のメニューで [稼働時間チェック] をクリックし、[稼働時間チェックの作成] をクリック。<br>
-左側のメニューで [アラート]、[Create Policy] の順にクリック。<br>
-ナビゲーション メニュー &gt; [Logging] &gt; [ログビューア] 。</p>
+<ul>
+<li>Cloud Console で、ナビゲーション メニュー &gt; [モニタリング] をクリックすると、ワークスペースがプロビジョニングされる</li>
+<li>左側のメニューで [稼働時間チェック] をクリックし、[稼働時間チェックの作成] をクリック</li>
+<li>左側のメニューで [アラート]、[Create Policy] の順にクリック</li>
+<li>ナビゲーション メニュー &gt; [Logging] &gt; [ログビューア]</li>
+</ul>
 <h2 ref="7-サービスアカウント" >7. サービスアカウント</h2><a class="anchor" id="7-サービスアカウント"></a>
 <p>VM インスタンスにサービスアカウントを付与することによってリソースへのアクセス制御を行う。<br>
 サービスアカウントは以下のように作成する。</p>
@@ -1338,7 +1347,7 @@ $ sudo su -
 $ apt-get update
 $ apt-get install apache2 -y
 $ service apache2 restart
-</code></pre></div><h2 ref="82-apache-の-vm-インスタンスを作成起動スクリプト利用" >8.2. Apache の VM インスタンスを作成（起動スクリプト利用）</h2><a class="anchor" id="82-apache-の-vm-インスタンスを作成起動スクリプト利用"></a>
+</code></pre></div><h3 ref="82-apache-の-vm-インスタンスを作成起動スクリプト利用" >8.2. Apache の VM インスタンスを作成（起動スクリプト利用）</h3><a class="anchor" id="82-apache-の-vm-インスタンスを作成起動スクリプト利用"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ゾーンの設定</span>
 $ gcloud config set compute/zone us-central1-a
 

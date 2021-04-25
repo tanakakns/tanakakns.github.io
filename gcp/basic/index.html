@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-25T16:05:09 JST">
+<meta name="revised" content="2021-04-25T19:56:38 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1180,6 +1180,9 @@ compute.instance.setMachineType
 <li>RESOURCE：対象リソースの名前。</li>
 <li>MEMBER：ロールを付与する対象となるメンバの識別子。 <code>member-type:id</code> の形式。（例： <code>user:my-user@example.com</code> ）</li>
 <li>ROLE_ID：ロールの名前。（ <a href="https://cloud.google.com/iam/docs/understanding-roles?hl=ja#basic">基本ロール</a> 、 <a href="https://cloud.google.com/iam/docs/understanding-roles?hl=ja#predefined_roles">事前定義ロール</a> ）</li>
+<li>FORMAT：json か yaml 。</li>
+<li>FILE_PATH：ファイルのパス。</li>
+<li>PROJECT_ID：プロジェクト ID 。</li>
 </ul>
 <h4 ref="361-メンバにロールを付与する" >3.6.1. メンバにロールを付与する</h4><a class="anchor" id="361-メンバにロールを付与する"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud GROUP add-iam-policy-binding RESOURCE --member<span style="color:#f92672">=</span>MEMBER --role<span style="color:#f92672">=</span>ROLE_ID
@@ -1215,8 +1218,29 @@ $ gcloud projects get-iam-policy my-project --format json &gt; ~/policy.json
   <span style="color:#e6db74">&#34;etag&#34;</span>: <span style="color:#e6db74">&#34;BwUjMhCsNvY=&#34;</span>,
   <span style="color:#e6db74">&#34;version&#34;</span>: <span style="color:#ae81ff">1</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><h4 ref="364-ポリシーの設定" >3.6.4. ポリシーの設定</h4><a class="anchor" id="364-ポリシーの設定"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud projects set-iam-policy project-id filepath
+</code></pre></div><p>例の通り、ロールとそのロールが付与されたメンバの配列で表現される。</p>
+<h4 ref="364-ポリシーの設定" >3.6.4. ポリシーの設定</h4><a class="anchor" id="364-ポリシーの設定"></a>
+<p><code>gcloud projects get-iam-policy</code> で取得したポリシーの JSON/YAML を編集するなどして、以下のコマンドでポリシーを更新することができる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud projects set-iam-policy PROJECT_ID FILE_PATH
+
+<span style="color:#75715e"># ファイル例</span>
+<span style="color:#f92672">{</span>
+  <span style="color:#e6db74">&#34;bindings&#34;</span>: <span style="color:#f92672">[</span>
+    <span style="color:#f92672">{</span>
+      <span style="color:#e6db74">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;roles/owner&#34;</span>,
+      <span style="color:#e6db74">&#34;members&#34;</span>: <span style="color:#f92672">[</span>
+        <span style="color:#e6db74">&#34;user:fatima@example.com&#34;</span>
+      <span style="color:#f92672">]</span>
+    <span style="color:#f92672">}</span>,
+    <span style="color:#f92672">{</span>
+      <span style="color:#e6db74">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;roles/editor&#34;</span>,
+      <span style="color:#e6db74">&#34;members&#34;</span>: <span style="color:#f92672">[</span>
+        <span style="color:#e6db74">&#34;serviceAccount:service-account-13@appspot.gserviceaccount.com&#34;</span>,
+        <span style="color:#e6db74">&#34;user:wei@example.com&#34;</span>
+      <span style="color:#f92672">]</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">]</span>
+<span style="color:#f92672">}</span>
 </code></pre></div><h2 ref="4-リソースの管理" >4. リソースの管理</h2><a class="anchor" id="4-リソースの管理"></a>
 <p>ここまでで出たリソースを管理してみる。<br>
 基本 <code>gcloud</code> コマンドでの管理とする。</p>
@@ -1360,9 +1384,9 @@ gcloud projects add-iam-policy-binding <span style="color:#f92672">[</span>PROJE
 <li>ワークスペースの数に制限はありませんが、Google CloudプロジェクトとAWSアカウントを複数のワークスペースでモニタリングすることはできない</li>
 </ul>
 </li>
-<li>ホストプロジェクト
+<li><strong>ホストプロジェクト</strong>
 <ul>
-<li>すべてのワークスペースには、ホスト プロジェクトがある</li>
+<li>すべてのワークスペースには、ホストプロジェクトがある</li>
 <li>ワークスペースの作成に使用した Google Cloud プロジェクトが、ワークスペースのホスト プロジェクト</li>
 </ul>
 </li>
@@ -1381,7 +1405,7 @@ gcloud projects add-iam-policy-binding <span style="color:#f92672">[</span>PROJE
 <h3 ref="61-コスト算出" >6.1. コスト算出</h3><a class="anchor" id="61-コスト算出"></a>
 <p><a href="https://cloud.google.com/products/calculator/?hl=ja">Google Cloud Pricing Calculator</a> で各サービスに適した算出が可能。<br>
 ただし、 BigQuery など一部特殊なものもある。<br>
-<a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery?hl=ja#differences_between_exported_data_and_invoices">Cloud Billing データを BigQuery にエクスポートする</a></p>
+請求データの分析は <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery?hl=ja#differences_between_exported_data_and_invoices">Cloud Billing データを BigQuery にエクスポートする</a> を参照。</p>
 <h3 ref="62-請求" >6.2. 請求</h3><a class="anchor" id="62-請求"></a>
 <p>請求先アカウントのリンク（紐付け）を更新するためには、 <strong>請求先アカウント管理者</strong> および <strong>プロジェクト支払い管理者</strong> の権限が必要になる。</p>
 <ul>
