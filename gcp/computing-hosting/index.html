@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-27T00:23:23 JST">
+<meta name="revised" content="2021-04-27T17:24:18 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -825,48 +825,7 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <ol>
-<li><a href="#1-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E4%B8%80%E8%A6%A7">サービス一覧</a></li>
-</ol>
-
-
-
-
-<ul class="children children-li">
-
-<span><li>
-		<a href="/gcp/computing-hosting/compute-engine/" >Compute Engine</a></li>
-<p><p><strong>Compute Engine</strong> は Google のインフラストラクチャ上に仮想マシンを構築するサービス。</p>
-<ol>
-<li><a href="#1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
-<li><a href="#2-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E4%BD%9C%E6%88%90">インスタンス作成</a></li>
-<li><a href="#3-%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E3%81%AE%E4%BD%9C%E6%88%90%E3%81%A8%E3%82%A2%E3%82%BF%E3%83%83%E3%83%81">ディスクの作成とアタッチ</a></li>
-<li><a href="#4-%E3%83%95%E3%82%A1%E3%82%A4%E3%82%A2%E3%82%A6%E3%82%A9%E3%83%BC%E3%83%AB%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%AE%E4%BD%9C%E6%88%90">ファイアウォールルールの作成</a></li>
-<li><a href="#3-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A">インスタンスへの接続</a></li>
-<li><a href="#4-cloud-monitoring">Cloud Monitoring</a></li>
-<li>サービスアカウント</li>
-<li>コマンド整理</li>
-</ol></p>
-</span>
-
-<span><li>
-		<a href="/gcp/computing-hosting/kubernetes-engine/" >Google Kubernetes Engine</a></li>
-<p></p>
-</span>
-
-<span><li>
-		<a href="/gcp/computing-hosting/app-engine/" >App Engine</a></li>
-<p><p><strong>App Engine</strong> は Google の PaaS 。</p>
-<ol>
-<li><a href="#1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
-<li><a href="#2-app-engine-%E3%81%AE%E4%BD%9C%E6%88%90">App Engine の作成</a></li>
-<li><a href="#3-%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%BF%E3%82%A4%E3%83%97">スケールリングタイプ</a></li>
-</ol></p>
-</span>
-</ul>
-
-<h2 ref="1-サービス一覧" >1. サービス一覧</h2><a class="anchor" id="1-サービス一覧"></a>
-<p><a href="https://cloud.google.com/products/compute">Google Cloud のコンピューティング プロダクト</a></p>
+	    <p>Compute Engine、Kubernetes Engine、Cloud Run、App Engine、Cloud Functions</p>
 <table>
 <thead>
 <tr>
@@ -879,14 +838,14 @@ if (!doNotTrack) {
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">Compute Engine / GCE</td>
+<td style="text-align:left"><a href="./compute-engine">Compute Engine</a></td>
 <td style="text-align:left">IaaS</td>
 <td style="text-align:left">VMイメージ</td>
 <td style="text-align:left">一般的なワークロード</td>
 <td style="text-align:left">EC2</td>
 </tr>
 <tr>
-<td style="text-align:left">Kubernetes Engine / GKE</td>
+<td style="text-align:left"><a href="./kubernetes-engine">Kubernetes Engine</a></td>
 <td style="text-align:left">IaaS/PaaS</td>
 <td style="text-align:left">クラスタ</td>
 <td style="text-align:left">コンテナワークロード</td>
@@ -900,14 +859,14 @@ if (!doNotTrack) {
 <td style="text-align:left">Fargate</td>
 </tr>
 <tr>
-<td style="text-align:left">App Engine フレキシブル環境</td>
+<td style="text-align:left"><a href="./app-engine">App Engine</a> フレキシブル環境</td>
 <td style="text-align:left">PaaS</td>
 <td style="text-align:left">アプリ/コンテナ</td>
 <td style="text-align:left">HTTPサービス/バックエンドアプリ</td>
 <td style="text-align:left">Elastic Beanstalk</td>
 </tr>
 <tr>
-<td style="text-align:left">App Engine スタンダード環境</td>
+<td style="text-align:left"><a href="./app-engine">App Engine</a> スタンダード環境</td>
 <td style="text-align:left">PaaS</td>
 <td style="text-align:left">アプリ</td>
 <td style="text-align:left">HTTPサービス/バックエンドアプリ</td>
@@ -922,11 +881,6 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-
-
-
-
-
 		</div>
 
 
