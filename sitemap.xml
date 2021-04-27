@@ -23,10 +23,10 @@
     <loc>https://tanakakns.github.io/gcp/computing-hosting/compute-engine/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/docker/basic/</loc>
+    <loc>https://tanakakns.github.io/gcp/gcp-aws/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/gcp/basic/</loc>
+    <loc>https://tanakakns.github.io/docker/basic/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/istio/basic/</loc>
@@ -47,10 +47,10 @@
     <loc>https://tanakakns.github.io/git/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/gcp/gcp-aws/</loc>
+    <loc>https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/</loc>
+    <loc>https://tanakakns.github.io/gcp/tools/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/mac/asdf/</loc>
@@ -68,7 +68,7 @@
     <loc>https://tanakakns.github.io/gcp/computing-hosting/app-engine/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/gcp/cli/</loc>
+    <loc>https://tanakakns.github.io/gcp/access-control/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/go/pattern/</loc>
@@ -107,16 +107,16 @@
     <loc>https://tanakakns.github.io/kubernetes/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/gcp/big-data/</loc>
+    <loc>https://tanakakns.github.io/gcp/monitoring/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/istio/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/gcp/machine-learning/</loc>
+    <loc>https://tanakakns.github.io/gcp/big-data/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/gcp/monitoring/</loc>
+    <loc>https://tanakakns.github.io/gcp/machine-learning/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/</loc>
