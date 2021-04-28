@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-27T22:42:56 JST">
+<meta name="revised" content="2021-04-28T16:45:38 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -459,7 +459,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -468,9 +468,41 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/databases/">データベース</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/bigquery/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/bigquery/">BigQuery</a>
       
         
       
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/cloud-sql/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/cloud-sql/">Cloud SQL</a>
+      
+        
+      
+    </li>
+        </ul>
     </li>
               
 
@@ -842,10 +874,11 @@ if (!doNotTrack) {
 <li><a href="#2-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E4%BD%9C%E6%88%90">インスタンス作成</a></li>
 <li><a href="#3-%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E3%81%AE%E4%BD%9C%E6%88%90%E3%81%A8%E3%82%A2%E3%82%BF%E3%83%83%E3%83%81">ディスクの作成とアタッチ</a></li>
 <li><a href="#4-%E3%83%95%E3%82%A1%E3%82%A4%E3%82%A2%E3%82%A6%E3%82%A9%E3%83%BC%E3%83%AB%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%AE%E4%BD%9C%E6%88%90">ファイアウォールルールの作成</a></li>
-<li><a href="#3-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A">インスタンスへの接続</a></li>
-<li><a href="#4-cloud-monitoring">Cloud Monitoring</a></li>
-<li>サービスアカウント</li>
-<li>コマンド整理</li>
+<li><a href="#5-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9">ネットワークインターフェース</a></li>
+<li><a href="#6-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A">インスタンスへの接続</a></li>
+<li><a href="#7-cloud-monitoring--cloud-logging-%E9%80%A3%E6%90%BA">Cloud Monitoring / Cloud Logging 連携</a></li>
+<li><a href="#8-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88">サービスアカウント</a></li>
+<li><a href="#9-%E3%82%B1%E3%83%BC%E3%82%B9%E3%82%B9%E3%82%BF%E3%83%87%E3%82%A3">ケーススタディ</a></li>
 </ol>
 <ul>
 <li><a href="https://cloud.google.com/compute/docs/how-to?hl=ja">公式ガイド</a></li>
@@ -1252,7 +1285,20 @@ $ gcloud compute instances create apache --scopes storage-ro <span style="color:
 </code></pre></div><p>なお、ファイアウォールルールはインスタンスに付与された <strong>ネットワークタグ</strong> や <strong>サービスアカウント</strong> によって適用され、上記の <code>--target-tags</code> や <code>--target-service-accounts</code> オプションで設定された値と対応する。<br>
 インスタンス作成時（ <code>gcloud compute instances create</code> ）に <code>--tags</code> オプションを用いてネットワークタグを付与できるが、以下のコマンドで既存インスタンスにタグ付けすることもできる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances add-tags INSTANCE_NAME --tags<span style="color:#f92672">=</span>http-server
-</code></pre></div><h2 ref="5-インスタンスへの接続" >5. インスタンスへの接続</h2><a class="anchor" id="5-インスタンスへの接続"></a>
+</code></pre></div><h2 ref="5-ネットワークインターフェース" >5. ネットワークインターフェース</h2><a class="anchor" id="5-ネットワークインターフェース"></a>
+<p>ネットワークインターフェースの付与は <code>gcloud compute instances create</code> コマンド実行時の <a href="https://cloud.google.com/sdk/gcloud/reference/compute/instances/create?hl=ja#--network-interface"><code>--network-interface</code></a> オプションで実施できる。<br>
+<code>--network-interface</code> オプションを省略したり、 <code>--network-interface=''</code> を指定すると <code>default</code> ネットワークに <code>nic0</code> が作成される。<br>
+<code>--network-interface</code> オプションを複数指定すると、指定した数だけ、指定した順に <code>nic0</code> <code>nic1</code> &hellip; が作成される。（ <a href="https://cloud.google.com/vpc/docs/create-use-multiple-interfaces?hl=ja">複数のネットワーク インターフェースを持つインスタンスの作成</a> ）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$  gcloud compute instances create vm1 --machine-type<span style="color:#f92672">=</span>n1-standard-4 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --network-interface<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --network-interface<span style="color:#f92672">=</span>network<span style="color:#f92672">=</span>net1,subnet<span style="color:#f92672">=</span>net1-subnet-a,private-network-ip<span style="color:#f92672">=</span>10.128.0.2,address<span style="color:#f92672">=</span>my-external-address <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --network-interface<span style="color:#f92672">=</span>network<span style="color:#f92672">=</span>net2,subnet<span style="color:#f92672">=</span>net2-subnet-b,private-network-ip<span style="color:#f92672">=</span>10.129.0.2,no-address
+</code></pre></div><ul>
+<li><code>private-network-ip</code> を省略すると、エフェメラル（動的） 内部 IP が作成される</li>
+<li><code>address</code> はあらかじめ作成した外部 IP を指定する必要があるが、 <code>address=''</code> を指定するとエフェメラル（動的）外部 IP が作成される</li>
+<li><code>address</code> ではなく <code>no-address</code> を指定すると外部 IP は作成されない</li>
+</ul>
+<h2 ref="6-インスタンスへの接続" >6. インスタンスへの接続</h2><a class="anchor" id="6-インスタンスへの接続"></a>
 <p>Cloud Console にて「サイドメニュー」-&gt;「Compute Engine」-&gt;「 VM インスタンス」と選択し、該当インスタンスのレコードで「 SSH 」をクリックするとポップアップしてターミナルが立ち上がる。<br>
 もしくは、以下のコマンドを実行する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USEGE</span>
@@ -1263,7 +1309,7 @@ $ gcloud compute ssh gcelab2 --zone us-central1-c
 </code></pre></div><p>接続できたら、以下のコマンドの管理者権限になる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo su -
 </code></pre></div><p>ちなみに Linux は SSH 、 Windows は RDP で接続する。</p>
-<h2 ref="6-cloud-monitoring--cloud-logging-連携" >6. Cloud Monitoring / Cloud Logging 連携</h2><a class="anchor" id="6-cloud-monitoring--cloud-logging-連携"></a>
+<h2 ref="7-cloud-monitoring--cloud-logging-連携" >7. Cloud Monitoring / Cloud Logging 連携</h2><a class="anchor" id="7-cloud-monitoring--cloud-logging-連携"></a>
 <p>Cloud Monitoring では、クラウドで実行されるアプリケーションのパフォーマンスや稼働時間、全体的な動作状況を確認できる。<br>
 Google Cloud、Amazon Web Services、ホストされた稼働時間プローブ、アプリケーション インストゥルメンテーション、よく使われるさまざまなアプリケーション コンポーネント（Cassandra、Nginx、Apache ウェブサーバー、Elasticsearch など）から、指標、イベント、メタデータを収集する。<br>
 これらのデータを取り込んでダッシュボード、グラフ、アラートを介して分析情報を提供する。<br>
@@ -1288,7 +1334,7 @@ $ sudo apt-get install google-fluentd
 <li>左側のメニューで [アラート]、[Create Policy] の順にクリック</li>
 <li>ナビゲーション メニュー &gt; [Logging] &gt; [ログビューア]</li>
 </ul>
-<h2 ref="7-サービスアカウント" >7. サービスアカウント</h2><a class="anchor" id="7-サービスアカウント"></a>
+<h2 ref="8-サービスアカウント" >8. サービスアカウント</h2><a class="anchor" id="8-サービスアカウント"></a>
 <p>VM インスタンスにサービスアカウントを付与することによってリソースへのアクセス制御を行う。<br>
 サービスアカウントは以下のように作成する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サービスアカウントの作成</span>
@@ -1316,15 +1362,21 @@ gcloud projects add-iam-policy-binding PROJECT_ID <span style="color:#ae81ff">\
 </ul>
 </li>
 </ul>
-<h2 ref="8-コマンド整理" >8. コマンド整理</h2><a class="anchor" id="8-コマンド整理"></a>
-<h3 ref="81-apache-の-vm-インスタンスを作成" >8.1. Apache の VM インスタンスを作成</h3><a class="anchor" id="81-apache-の-vm-インスタンスを作成"></a>
+<h2 ref="9-ケーススタディ" >9. ケーススタディ</h2><a class="anchor" id="9-ケーススタディ"></a>
+<ol>
+<li><a href="#91-apache-%E3%81%AE-vm-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%92%E4%BD%9C%E6%88%90">Apache の VM インスタンスを作成</a></li>
+<li><a href="#92-%E8%B8%8F%E3%81%BF%E5%8F%B0%E7%B5%8C%E7%94%B1%E3%81%AE-rdp">踏み台経由の RDP</a></li>
+</ol>
+<h3 ref="91-apache-の-vm-インスタンスを作成" >9.1. Apache の VM インスタンスを作成</h3><a class="anchor" id="91-apache-の-vm-インスタンスを作成"></a>
+<p>要件は以下。</p>
 <ul>
 <li>Linux 仮想マシン インスタンスの作成</li>
 <li>VM インスタンスへの公開アクセスの有効化</li>
 <li>基本的な Apache ウェブサーバーの実行</li>
 <li>サーバーのテスト</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ゾーンの設定</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># リージョン・ゾーンの設定</span>
+$ gcloud config set compute/region us-central1
 $ gcloud config set compute/zone us-central1-a
 
 <span style="color:#75715e"># インスタンスの作成</span>
@@ -1347,15 +1399,18 @@ $ sudo su -
 $ apt-get update
 $ apt-get install apache2 -y
 $ service apache2 restart
-</code></pre></div><h3 ref="82-apache-の-vm-インスタンスを作成起動スクリプト利用" >8.2. Apache の VM インスタンスを作成（起動スクリプト利用）</h3><a class="anchor" id="82-apache-の-vm-インスタンスを作成起動スクリプト利用"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ゾーンの設定</span>
+
+<span style="color:#75715e"># 外部 IP に対して curl を実行し、 Apache ページが見れることを確認</span>
+</code></pre></div><p>VM インスタンスへログインして Apache の設定するのは面倒なので、メタデータに設定する起動スクリプトを利用するパターンは以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># リージョン・ゾーンの設定</span>
+$ gcloud config set compute/region us-central1
 $ gcloud config set compute/zone us-central1-a
 
 <span style="color:#75715e"># Cloud Storage バケットの作成</span>
 $ gsutil mb -c regional -l us-central1 gs://challenge-quest-12345
-<span style="color:#75715e"># Cloud Console でスクリプトをアップロード</span>
+<span style="color:#75715e"># Cloud Console でスクリプト resources-install-web.sh をアップロード</span>
 
-<span style="color:#75715e"># インスタンスの作成</span>
+<span style="color:#75715e"># インスタンスの作成（メタデータに Cloud Storage 上の起動スクリプトを設定し、Cloud Storage へのアクセススコープも付与）</span>
 $ gcloud compute instances create apache --scopes storage-ro <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --metadata startup-script-url<span style="color:#f92672">=</span>gs://challenge-quest-12345/resources-install-web.sh
 
@@ -1369,10 +1424,101 @@ $ gcloud compute firewall-rules create allow-http <span style="color:#ae81ff">\
 
 <span style="color:#75715e"># インスタンスへタグ追加</span>
 $ gcloud compute instances add-tags apache --tags<span style="color:#f92672">=</span>http-server
+
+<span style="color:#75715e"># 外部 IP に対して curl を実行し、 Apache ページが見れることを確認</span>
 </code></pre></div><p>ちなみに <code>resources-install-web.sh</code> は以下。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>apt-get update
 apt-get install -y apache2
+</code></pre></div><h3 ref="92-踏み台経由の-rdp" >9.2. 踏み台経由の RDP</h3><a class="anchor" id="92-踏み台経由の-rdp"></a>
+<p>要件は以下。</p>
+<ul>
+<li>環境は <code>us-central1</code> リージョン <code>us-central1-a</code> ゾーンに構築する</li>
+<li><code>securenetwork</code> VPC を作成し、 <code>default</code> VPC も利用する</li>
+<li><code>securenetwork</code> VPC の <code>us-central1</code> リージョンに <code>securenetwork-us</code> サブネットを作成</li>
+<li>Windows Server 2016 の VM インスタンスを 2 台作成する
+<ul>
+<li>踏み台サーバ： <code>vm-bastionhost</code>
+<ul>
+<li>nic0 ： <code>securenetwork</code> VPC 、<code>us-central1</code> リージョン、<code>securenetwork-us</code> サブネット、内部 IP あり、外部 IP あり</li>
+<li>nic1 ： <code>default</code> VPC 、<code>us-central1</code> リージョン、<code>default</code> サブネット、内部 IP あり、外部 IP なし</li>
+</ul>
+</li>
+<li>セキュアサーバ： <code>vm-securehost</code>
+<ul>
+<li>nic0 ： <code>securenetwork</code> VPC 、<code>us-central1</code> リージョン、<code>securenetwork-us</code> サブネット、内部 IP あり、外部 IP なし</li>
+<li>nic1 ： <code>default</code> VPC 、<code>us-central1</code> リージョン、<code>default</code> サブネット、内部 IP あり、外部 IP なし</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RDP を許可するファイアウォールルールを <code>securenetwork</code> VPC に作成し、踏み台サーバ <code>vm-bastionhost</code> に適用する</li>
+<li>各サーバのログインパスワードをリセットして、踏み台サーバ経由でセキュアサーバに RDP できることを確認する</li>
+</ul>
+<p>コマンドベースでの作成は以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># リージョン・ゾーンの設定</span>
+$ gcloud config set compute/region us-central1
+$ gcloud config set compute/zone us-central1-a
+
+<span style="color:#75715e"># securenetwork VPC を作成</span>
+$ gcloud compute networks create securenetwork --subnet-mode<span style="color:#f92672">=</span>custom
+
+<span style="color:#75715e"># securenetwork VPC の存在確認</span>
+$ gcloud compute networks list
+
+<span style="color:#75715e"># securenetwork-us サブネットを securenetwork VPC に作成</span>
+$ gcloud compute networks subnets create securenetwork-us --network<span style="color:#f92672">=</span>securenetwork --region<span style="color:#f92672">=</span>us-central1 --range<span style="color:#f92672">=</span>172.16.0.0/24
+
+<span style="color:#75715e"># securenetwork-us サブネットの存在確認</span>
+$ gcloud compute networks subnets list --sort-by<span style="color:#f92672">=</span>NETWORK
+
+<span style="color:#75715e"># 外部からの RDP を許可するファイアウォールルールを securenetwork VPC に作成（ターゲットタグ：allow-rdp）</span>
+$ gcloud compute firewall-rules create securenetwork-allow-rdp --direction<span style="color:#f92672">=</span>INGRESS --priority<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span> --network<span style="color:#f92672">=</span>securenetwork --action<span style="color:#f92672">=</span>ALLOW --rules<span style="color:#f92672">=</span>tcp:3389 --source-ranges<span style="color:#f92672">=</span>0.0.0.0/0 --target-tags<span style="color:#f92672">=</span>allow-rdp
+
+<span style="color:#75715e"># ファイアウォールルール securenetwork-allow-rdp の存在確認</span>
+$ gcloud compute firewall-rules list | grep securenetwork
+
+<span style="color:#75715e"># Windows サーバのイメージ検索</span>
+$ gcloud compute images list --project windows-cloud --no-standard-images
+NAME                                                  PROJECT        FAMILY                            DEPRECATED  STATUS
+windows-server-2016-dc-v20210413                      windows-cloud  windows-2016                                  READY
+
+<span style="color:#75715e"># 踏み台サーバ vm-bastionhost の作成</span>
+$ gcloud compute instances create vm-bastionhost <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --image<span style="color:#f92672">=</span>windows-server-2016-dc-v20210413 --image-project<span style="color:#f92672">=</span>windows-cloud <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --boot-disk-size<span style="color:#f92672">=</span>50GB --boot-disk-type<span style="color:#f92672">=</span>pd-balanced --boot-disk-device-name<span style="color:#f92672">=</span>vm-bastionhost <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-a <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --network-interface<span style="color:#f92672">=</span>network<span style="color:#f92672">=</span>securenetwork,subnet<span style="color:#f92672">=</span>securenetwork-us,address<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span> <span style="color:#ae81ff">\ </span><span style="color:#75715e"># nic0</span>
+    --network-interface<span style="color:#f92672">=</span>network<span style="color:#f92672">=</span>default,subnet<span style="color:#f92672">=</span>default,no-address <span style="color:#ae81ff">\ </span>               <span style="color:#75715e"># nic1</span>
+    --tags<span style="color:#f92672">=</span>allow-rdp
+
+<span style="color:#75715e"># セキュアサーバ vm-securehost の作成</span>
+$ gcloud compute instances create vm-securehost <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --image<span style="color:#f92672">=</span>windows-server-2016-dc-v20210413 --image-project<span style="color:#f92672">=</span>windows-cloud <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --boot-disk-size<span style="color:#f92672">=</span>50GB --boot-disk-type<span style="color:#f92672">=</span>pd-balanced --boot-disk-device-name<span style="color:#f92672">=</span>vm-securehost <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-a <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --network-interface<span style="color:#f92672">=</span>network<span style="color:#f92672">=</span>securenetwork,subnet<span style="color:#f92672">=</span>securenetwork-us,no-address <span style="color:#ae81ff">\ </span><span style="color:#75715e"># nic0</span>
+    --network-interface<span style="color:#f92672">=</span>network<span style="color:#f92672">=</span>default,subnet<span style="color:#f92672">=</span>default,no-address                  <span style="color:#75715e"># nic1</span>
+
+<span style="color:#75715e"># 作成した VM インスタンスの確認（ vm-bastionhost には外部 IP がある）</span>
+$ gcloud compute instances list
+NAME            ZONE           MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP            EXTERNAL_IP    STATUS
+vm-bastionhost  us-central1-a  n1-standard-1               172.16.0.2,10.128.0.3  35.188.38.100  RUNNING
+vm-securehost   us-central1-a  n1-standard-1               172.16.0.3,10.128.0.4                 RUNNING
+
+<span style="color:#75715e"># vm-bastionhost のログインパスワードのリセット</span>
+$ gcloud compute reset-windows-password vm-bastionhost --user app_admin --zone us-central1-a
+ip_address: 35.188.38.100
+password:   8Q6;6!lTnAo$.G3
+username:   app_admin
+
+<span style="color:#75715e"># vm-securehost のログインパスワードのリセット</span>
+$ gcloud compute reset-windows-password vm-securehost --user app_admin --zone us-central1-a
+password: <span style="color:#f92672">[</span>/3xiN<span style="color:#f92672">(</span>:uvp2CWR
+username: app_admin
+
+<span style="color:#75715e"># vm-bastionhost の securenetwork の外部 IP で RDP して、 vm-securehost の default ネットワークの内部 IP で RPD する</span>
+<span style="color:#75715e"># mstsc.exe コマンド</span>
 </code></pre></div>
 		</div>
 

@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>
+	Cloud SQL :: テックまとめ
+</title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2021-04-28T16:45:38 JST">
@@ -11,7 +13,7 @@
 
 
 
-<title>Tags :: テックまとめ</title>
+<title>Cloud SQL :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -60,9 +62,9 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/tags/"
+  <body data-url="/gcp/databases/cloud-sql/"
 
-  class="">
+  class="hidetoc hidenextpage ">
 
 <style type="text/css">
   #debug{
@@ -99,7 +101,9 @@ if (!doNotTrack) {
     </div>
     
 
-    <div>	
+    <div>
+
+		
 	
 			
 		
@@ -114,7 +118,9 @@ if (!doNotTrack) {
     <article>
       
       <aside class="">
-        	
+        
+
+		
 	
 			
 		
@@ -314,14 +320,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -451,7 +458,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item parent haschildren
         item_level_$level
         ">
 
@@ -460,7 +467,8 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/databases/">データベース</a>
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
         <ul>
@@ -481,7 +489,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/databases/cloud-sql/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/cloud-sql/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -765,7 +773,9 @@ if (!doNotTrack) {
 
 
 
-</ul>	
+</ul>
+
+		
 	
 			
 		
@@ -777,45 +787,133 @@ if (!doNotTrack) {
 
       <section class="page ">
       
-
-
-
-<div class="extra-pagination inner">
-<nav class="pagination" role="navigation">
 	
-	<span class="page-number"> 1  0</span>
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
 	
-</nav>
-
-</div>
-
-
-
-<div style="margin-bottom:2rem"></div>
-
-<nav class="pagination" role="navigation">
+  
+    <li class="">
+      <a class="text-link" href="/gcp/">
+        GCP
+      </a>
+    </li>
 	
-	<span class="page-number"> 1  0</span>
+  	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/databases/">
+        データベース
+      </a>
+    </li>
 	
-</nav>
+  	
+  
+    <li class="active">
+      
+        Cloud SQL
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>Cloud SQL</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
 
 
 
+
+
+
+	<div class="content">
+	    <p><a href="https://cloud.google.com/sql/docs">Cloud SQL</a> はクラウド上の PostgreSQL と MySQL のリレーショナル データベースを簡単に設定、維持、運用、管理できるようにするフルマネージド データベース サービス。<br>
+<strong>GCP 外からもアクセス可能</strong> なのが売りの 1 つらしい。<br>
+Cloud SQL が対応しているデータ形式には、ダンプファイル（.sql）と CSV ファイル（.csv）。</p>
+<ul>
+<li>メモ
+<ul>
+<li>Cloud SQL の構築は ゾーン を指定するものの、VPC やサブネットは指定できないみたい -&gt; ゾーンリソース？</li>
+<li>Cloud SQL を構築した後、 AUTHORIZATION の項目で、アクセスする VM インスタンスの <strong>グローバル IP</strong> を許可するリストに加える</li>
+<li>VM インスタンスから Cloud SQL にアクセスするには Cloud SQL の IP アドレス、ユーザ、パスワードを指定する</li>
+<li>グローバル IP だけでなく、 プライベート IP もサポートされている</li>
+</ul>
+</li>
+</ul>
+<h2 ref="インスタンスの作成" >インスタンスの作成</h2><a class="anchor" id="インスタンスの作成"></a>
+<p><a href="https://cloud.google.com/sql/docs/mysql/create-instance#gcloud">インスタンスの作成</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud sql instances create INSTANCE_NAME --cpu<span style="color:#f92672">=</span>NUMBER_CPUS --memory<span style="color:#f92672">=</span>MEMORY_SIZE --region<span style="color:#f92672">=</span>REGION
+</code></pre></div><h2 ref="cloud-shell-から-gcloud-でインスタンスに接続" >Cloud Shell から <code>gcloud</code> でインスタンスに接続</h2><a class="anchor" id="cloud-shell-から-gcloud-でインスタンスに接続"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud sql connect qwiklabs-demo --user<span style="color:#f92672">=</span>root
+</code></pre></div><h2 ref="cloud-sql-auth-proxy" >Cloud SQL Auth Proxy</h2><a class="anchor" id="cloud-sql-auth-proxy"></a>
+<ul>
+<li>Cloud SQL Auth Proxy はローカル環境から Cloud SQL へ接続するための仕組み</li>
+<li>テスト用</li>
+<li>ローカル PC に 「Cloud SQL Auth Proxy クライアント」を導入して、 <code>gcloud</code> で認証することにより接続できる</li>
+<li><a href="https://cloud.google.com/sql/docs/mysql/quickstart-proxy-test">Cloud SQL Auth Proxy を使用するためのクイックスタート</a></li>
+</ul>
+		</div>
+
+
+
+
+
+
+	
+	
 
       </section>
 
       
-      
-      <section class="right-menu ">
-      
-      
-      </section>
       
     </article>
     
     
     <footer>
-      	
+      
+
+		
 	
 			
 		
