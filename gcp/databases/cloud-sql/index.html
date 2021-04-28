@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-04-28T16:45:38 JST">
+<meta name="revised" content="2021-04-28T19:44:43 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -882,9 +882,22 @@ Cloud SQL が対応しているデータ形式には、ダンプファイル（.
 </li>
 </ul>
 <h2 ref="インスタンスの作成" >インスタンスの作成</h2><a class="anchor" id="インスタンスの作成"></a>
-<p><a href="https://cloud.google.com/sql/docs/mysql/create-instance#gcloud">インスタンスの作成</a></p>
+<ul>
+<li><a href="https://cloud.google.com/sql/docs/mysql/create-instance#gcloud">インスタンスの作成</a></li>
+<li><a href="https://cloud.google.com/sdk/gcloud/reference/sql/instances/create"><code>gcloud sql instances create</code></a></li>
+<li><a href="https://cloud.google.com/sdk/gcloud/reference/beta/sql/instances/create"><code>gcloud beta sql instances create</code></a></li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud sql instances create INSTANCE_NAME --cpu<span style="color:#f92672">=</span>NUMBER_CPUS --memory<span style="color:#f92672">=</span>MEMORY_SIZE --region<span style="color:#f92672">=</span>REGION
-</code></pre></div><h2 ref="cloud-shell-から-gcloud-でインスタンスに接続" >Cloud Shell から <code>gcloud</code> でインスタンスに接続</h2><a class="anchor" id="cloud-shell-から-gcloud-でインスタンスに接続"></a>
+</code></pre></div><ul>
+<li><strong>高可用性</strong> インスタンスを作成する場合は、<code>--zone</code>と <code>--secondary-zone</code> オプションを使用して、プライマリゾーンとセカンダリゾーンの両方を指定できる</li>
+<li>パブリックアクセスする場合は <code>--authorized-networks=192.168.100.0/24</code> のように許可する IP アドレスを指定する必要がある</li>
+<li>プライベートアクセスする場合は <code>--network=projects/testproject/global/networks/testsharednetwork</code> のように VPC を指定する必要がある
+<ul>
+<li>ただし、ベータ版コマンド（ <code>gcloud beta sql instances create</code>）でのみ有効</li>
+</ul>
+</li>
+</ul>
+<h2 ref="cloud-shell-から-gcloud-でインスタンスに接続" >Cloud Shell から <code>gcloud</code> でインスタンスに接続</h2><a class="anchor" id="cloud-shell-から-gcloud-でインスタンスに接続"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud sql connect qwiklabs-demo --user<span style="color:#f92672">=</span>root
 </code></pre></div><h2 ref="cloud-sql-auth-proxy" >Cloud SQL Auth Proxy</h2><a class="anchor" id="cloud-sql-auth-proxy"></a>
 <ul>
@@ -893,6 +906,55 @@ Cloud SQL が対応しているデータ形式には、ダンプファイル（.
 <li>ローカル PC に 「Cloud SQL Auth Proxy クライアント」を導入して、 <code>gcloud</code> で認証することにより接続できる</li>
 <li><a href="https://cloud.google.com/sql/docs/mysql/quickstart-proxy-test">Cloud SQL Auth Proxy を使用するためのクイックスタート</a></li>
 </ul>
+<h2 ref="ユースケース" >ユースケース</h2><a class="anchor" id="ユースケース"></a>
+<h3 ref="vm-インスタンスから-cloud-sql-に接続する" >VM インスタンスから Cloud SQL に接続する</h3><a class="anchor" id="vm-インスタンスから-cloud-sql-に接続する"></a>
+<ul>
+<li><code>default</code> ネットワークの <code>us-central1-a</code> ゾーンに <code>blog</code> VM インスタンスがある
+<ul>
+<li>内部 IP <code>10.128.0.3</code> 、 外部 IP <code>35.194.61.180</code></li>
+</ul>
+</li>
+<li><code>blog</code> VM インスタンスは 1 台で LAMP 構成になっている</li>
+<li>MySQL を <code>blog-db</code> という名前の Cloud SQL に移行して接続する
+<ul>
+<li><code>blog</code> の <code>/var/www/html/wordpress/wp-config.php</code> を書き換えて DB の接続先を変更する</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Cloud Shell ：リージョン・ゾーンの設定</span>
+$ gcloud config set compute/region us-central1
+$ gcloud config set compute/zone us-central1-a
+
+<span style="color:#75715e"># Cloud Shell ： Cloud SQL の作成</span>
+$ gcloud sql instances create blog-db --region<span style="color:#f92672">=</span>us-central1 --authorized-networks<span style="color:#f92672">=</span>35.194.61.180/32
+
+
+<span style="color:#75715e"># blod VM インスタンス： blod VM インスタンスへ SSH して mysql ダンプを取得</span>
+$ mysqldump --databases wordpress -h localhost -u blogadmin -pPassword1* <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --hex-blob --single-transaction <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --default-character-set<span style="color:#f92672">=</span>utf8mb4 &gt; dump.sql
+
+<span style="color:#75715e"># blod VM インスタンス： Cloud Storage バケット作成</span>
+$ gsutil mb gs://qwiklabs-gcp-01-9aec32589768
+
+<span style="color:#75715e"># blod VM インスタンス： ダンプをアップロード</span>
+$ gsutil cp dump.sql gs://qwiklabs-gcp-01-9aec32589768/
+
+<span style="color:#75715e"># blod VM インスタンス： アップロードを確認</span>
+$ gsutil ls gs://qwiklabs-gcp-01-9aec32589768/
+gs://qwiklabs-gcp-01-9aec32589768/dump.sql
+
+<span style="color:#75715e"># Cloud Console にて blog-db から gs://qwiklabs-gcp-01-9aec32589768/dump.sql をインポート</span>
+
+<span style="color:#75715e"># blod VM インスタンス： 試しに VM インスタンスから接続</span>
+$ mysql -h 35.239.119.80 -u root
+
+<span style="color:#75715e"># blod VM インスタンス： 設定ファイルを編集した後、 Apache リスタート</span>
+$ sudo service apache2 restart
+
+<span style="color:#75715e"># Cloud Shell ：接続テスト</span>
+$ curl http://35.194.61.180
+</code></pre></div>
 		</div>
 
 
