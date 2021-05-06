@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	機械学習 :: テックまとめ
+	Cloud Functions :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>機械学習 :: テックまとめ</title>
+<title>Cloud Functions :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/gcp/machine-learning/"
+  <body data-url="/gcp/computing-hosting/cloud-functions/"
 
   class="hidetoc hidenextpage ">
 
@@ -381,7 +381,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item parent haschildren
         item_level_$level
         ">
 
@@ -390,7 +390,8 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/computing-hosting/">コンピューティングとホスティング</a>
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
         <ul>
@@ -441,7 +442,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/cloud-functions/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/cloud-functions/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -582,7 +583,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/machine-learning/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/gcp/machine-learning/" class="dd-item
         item_level_$level
         ">
 
@@ -819,7 +820,177 @@ if (!doNotTrack) {
       <section class="page ">
       
 	
-	 
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/">
+        GCP
+      </a>
+    </li>
+	
+  	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/computing-hosting/">
+        コンピューティングとホスティング
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        Cloud Functions
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>Cloud Functions</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
+
+
+
+
+
+
+	<div class="content">
+	    <p><a href="https://cloud.google.com/functions/docs/how-to?hl=ja">Cloud Functions</a></p>
+<h2 ref="イベントとトリガーhttpscloudgooglecomfunctionsdocsconceptsevents-triggers" ><a href="https://cloud.google.com/functions/docs/concepts/events-triggers">イベントとトリガー</a></h2><a class="anchor" id="イベントとトリガーhttpscloudgooglecomfunctionsdocsconceptsevents-triggers"></a>
+<p>イベントとは、データベースでのデータの変更、ストレージ システムへのファイルの追加、新しい仮想マシン インスタンスの作成など。<br>
+イベントは対応の有無にかかわらず発生する。イベントへの対応（レスポンス）は、トリガーを作成して行う。<br>
+トリガーは、いわば特定のイベントや一連のイベントに関心があることの宣言であり、関数をトリガーにバインドすると、イベント情報を取得してなんらかの対応をとることができる。</p>
+<h2 ref="ユースケース" >ユースケース</h2><a class="anchor" id="ユースケース"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">ユースケース</th>
+<th style="text-align:left">説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">データ処理 / ETL</td>
+<td style="text-align:left">ファイルの作成、変更、削除などの Cloud Storage イベントをリッスン。画像処理、動画のコード変換、データの検証と変換、インターネット上の任意のサービスの呼び出しなどといった操作。</td>
+</tr>
+<tr>
+<td style="text-align:left">Webhook</td>
+<td style="text-align:left">シンプルな HTTP トリガーによって、GitHub、Slack、Stripe などのサードパーティ システムをはじめ、HTTP リクエストを送信できるあらゆる場所で発生したイベントに応答。</td>
+</tr>
+<tr>
+<td style="text-align:left">軽量 API</td>
+<td style="text-align:left">軽量な疎結合のロジックを組み合わせることで、アプリケーションのビルドや拡張を迅速に実行。関数は、イベントでトリガーされるようにすることも、HTTP(S) で直接呼び出すことも。</td>
+</tr>
+<tr>
+<td style="text-align:left">モバイル バックエンド</td>
+<td style="text-align:left">アプリ デベロッパー向けに Google が提供しているモバイル プラットフォームの Firebase を使用すればモバイル バックエンドを記述できる。これにより、Firebase Analytics、Firebase Realtime Database、Firebase Authentication、Firebase Storage からのイベントをリッスンして応答できる。</td>
+</tr>
+<tr>
+<td style="text-align:left">IoT</td>
+<td style="text-align:left">デバイスの膨大なストリーミング データを Cloud Pub/Sub に取り込み、Cloud Functions を呼び出してそのデータを処理、変換、保存するといった操作を完全にサーバーレスな形で実現。</td>
+</tr>
+</tbody>
+</table>
+<h2 ref="ユースケース-1" >ユースケース</h2><a class="anchor" id="ユースケース-1"></a>
+<p>Cloud Pub/Sub トピックに関する Cloud Functions のイベントを扱う。（ <a href="https://cloud.google.com/pubsub/architecture">Google Cloud Pub/Sub: Google 規模のメッセージ サービス</a> ）<br>
+イベント パラメータとコールバック パラメータについて詳しくは、 <a href="https://cloud.google.com/functions/docs/writing/background">バックグラウンド関数</a> を確認。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 関数コード用のディレクトリを作成</span>
+$ mkdir gcf_hello_world
+$ cd gcf_hello_world
+
+<span style="color:#75715e"># index.js を作成し、編集</span>
+/**
+* Pub/Sub でトリガーされるバックグラウンド Cloud Function 関数。
+* この関数は index.js によってエクスポートされ、トリガー トピックが
+* メッセージを受信すると実行されます。
+*
+* @param <span style="color:#f92672">{</span>object<span style="color:#f92672">}</span> data The event payload.
+* @param <span style="color:#f92672">{</span>object<span style="color:#f92672">}</span> context The event metadata.
+*/
+exports.helloWorld <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>data, context<span style="color:#f92672">)</span> <span style="color:#f92672">=</span>&gt; <span style="color:#f92672">{</span>
+const pubSubMessage <span style="color:#f92672">=</span> data;
+const name <span style="color:#f92672">=</span> pubSubMessage.data
+    ? Buffer.from<span style="color:#f92672">(</span>pubSubMessage.data, <span style="color:#e6db74">&#39;base64&#39;</span><span style="color:#f92672">)</span>.toString<span style="color:#f92672">()</span> : <span style="color:#e6db74">&#34;Hello World&#34;</span>;
+
+console.log<span style="color:#f92672">(</span><span style="color:#e6db74">`</span>My Cloud Function: <span style="color:#e6db74">${</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span><span style="color:#f92672">)</span>;
+<span style="color:#f92672">}</span>;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Cloud Storage バケット作成</span>
+$ gsutil mb -p <span style="color:#f92672">[</span>PROJECT_ID<span style="color:#f92672">]</span> gs://<span style="color:#f92672">[</span>BUCKET_NAME<span style="color:#f92672">]</span>
+<span style="color:#75715e"># gsutil mb -p qwiklabs-gcp-02-5fcdb48e7b6e gs://qwiklab-sample1234</span>
+</code></pre></div><p>次に新しい関数をデプロイするのだが、 <code>--trigger-topic</code> 、 <code>--trigger-bucket</code> 、 <code>--trigger-http</code> のいずれかを指定する必要がある。<br>
+ここでは、 <code>--trigger-topic</code> に <code>hello_world</code> を指定する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud functions deploy helloWorld <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --stage-bucket qwiklab-sample1234 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --trigger-topic hello_world <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --runtime nodejs8
+
+<span style="color:#75715e"># ステータスの確認</span>
+$ gcloud functions describe helloWorld
+</code></pre></div><p>関数をデプロイしてそれがアクティブになっていることを確認したら、関数がイベントを検出してメッセージをクラウド ログに書き込むかどうかをテストする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 関数のメッセージテストを実行</span>
+$ DATA<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>printf <span style="color:#e6db74">&#39;Hello World!&#39;</span>|base64<span style="color:#66d9ef">)</span> <span style="color:#f92672">&amp;&amp;</span> gcloud functions call helloWorld --data <span style="color:#e6db74">&#39;{&#34;data&#34;:&#34;&#39;</span>$DATA<span style="color:#e6db74">&#39;&#34;}&#39;</span>
+executionId: u4h75ec5oy6m
+
+<span style="color:#75715e"># ログを確認</span>
+$ gcloud functions logs read helloWorld
+LEVEL  NAME        EXECUTION_ID  TIME_UTC                 LOG
+D      helloWorld  u4h75ec5oy6m  2021-05-06 12:37:28.571  Function execution took <span style="color:#ae81ff">219</span> ms, finished with status: <span style="color:#e6db74">&#39;ok&#39;</span>
+I      helloWorld  u4h75ec5oy6m  2021-05-06 12:37:28.546  My Cloud Function: Hello World!
+D      helloWorld  u4h75ec5oy6m  2021-05-06 12:37:28.352  Function execution started
+</code></pre></div>
+		</div>
+
+
+
+
+
+
+	
 	
 
       </section>

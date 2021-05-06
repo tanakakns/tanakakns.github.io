@@ -23,6 +23,9 @@
     <loc>https://tanakakns.github.io/gcp/databases/bigquery/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/gcp/big-data/pubsub/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/gcp/databases/cloud-sql/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
@@ -71,9 +74,6 @@
     <loc>https://tanakakns.github.io/go/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/gcp/computing-hosting/app-engine/</loc>
-    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
-  </url><url>
     <loc>https://tanakakns.github.io/gcp/access-control/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
@@ -86,6 +86,9 @@
     <loc>https://tanakakns.github.io/aws/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/gcp/computing-hosting/app-engine/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
@@ -94,6 +97,9 @@
   </url><url>
     <loc>https://tanakakns.github.io/gcp/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/gcp/computing-hosting/cloud-functions/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/storage/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>

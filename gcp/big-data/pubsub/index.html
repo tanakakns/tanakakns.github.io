@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	機械学習 :: テックまとめ
+	Cloud Pub/Sub :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>機械学習 :: テックまとめ</title>
+<title>Cloud Pub/Sub :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/gcp/machine-learning/"
+  <body data-url="/gcp/big-data/pubsub/"
 
   class="hidetoc hidenextpage ">
 
@@ -550,7 +550,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/" class="dd-item parent haschildren
         item_level_$level
         ">
 
@@ -559,13 +559,14 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/big-data/">ビッグデータ</a>
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
         <ul>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/pubsub/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/pubsub/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -582,7 +583,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/machine-learning/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/gcp/machine-learning/" class="dd-item
         item_level_$level
         ">
 
@@ -819,7 +820,153 @@ if (!doNotTrack) {
       <section class="page ">
       
 	
-	 
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/">
+        GCP
+      </a>
+    </li>
+	
+  	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/big-data/">
+        ビッグデータ
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        Cloud Pub/Sub
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>Cloud Pub/Sub</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
+
+
+
+
+
+
+	<div class="content">
+	    <p><a href="https://cloud.google.com/pubsub/docs/concepts">Cloud Pub/Sub</a></p>
+<h2 ref="基本情報" >基本情報</h2><a class="anchor" id="基本情報"></a>
+<p>Google Cloud Pub/Sub は非同期グローバル メッセージング サービス。<br>
+Pub/Sub では、 <strong>topics</strong> 、 <strong>publishing</strong> 、 <strong>subscribing</strong> という 3 つのキーワードが頻出する。</p>
+<ul>
+<li>topic
+<ul>
+<li>複数のアプリケーションが共通のスレッドを通じて相互に接続できる共有文字列</li>
+</ul>
+</li>
+<li>パブリッシャー
+<ul>
+<li>メッセージを Cloud Pub/Sub トピックに push（publish）する</li>
+</ul>
+</li>
+<li>サブスクライバー
+<ul>
+<li>そのスレッドへの「subscription」を作成し、トピックからメッセージを pull するか、push サブスクリプション用の webhook を構成する</li>
+<li>すべてのサブスクライバーは、構成可能な時間の範囲内で各メッセージに確認応答を返信する必要がある</li>
+</ul>
+</li>
+</ul>
+<p>まとめると、パブリッシャーはメッセージを作成してトピックに送信し、サブスクライバーはトピックへのサブスクリプションを作成してトピックからメッセージを受け取る。</p>
+<p>以下のコマンドで <code>myTopic</code> というトピックを管理できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># トピックの作成</span>
+$ gcloud pubsub topics create myTopic
+
+<span style="color:#75715e"># 確認</span>
+$ gcloud pubsub topics list
+
+<span style="color:#75715e"># 削除</span>
+$ gcloud pubsub topics delete myTopic
+</code></pre></div><p>次のコマンドを実行して、トピック <code>myTopic</code> へのサブスクリプション <code>mySubscription</code> を作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サブスクリプションの作成</span>
+$ gcloud pubsub subscriptions create --topic myTopic mySubscription
+
+<span style="color:#75715e"># 確認</span>
+$ gcloud pubsub topics list-subscriptions myTopic
+
+<span style="color:#75715e"># 削除</span>
+$ gcloud pubsub subscriptions delete mySubscription
+</code></pre></div><p>作成したトピック <code>myTopic</code> にメッセージ <code>hello</code> をパブリッシュする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># メッセージのパブリッシュ</span>
+$ gcloud pubsub topics publish myTopic --message <span style="color:#e6db74">&#34;Hello&#34;</span>
+
+<span style="color:#75715e"># サブスクリプション経由でメッセージを pull</span>
+$ gcloud pubsub subscriptions pull mySubscription --auto-ack
+┌───────┬──────────────────┬──────────────┬────────────┬──────────────────┐
+│  DATA │    MESSAGE_ID    │ ORDERING_KEY │ ATTRIBUTES │ DELIVERY_ATTEMPT │
+├───────┼──────────────────┼──────────────┼────────────┼──────────────────┤
+│ Hello │ <span style="color:#ae81ff">2373143694323857</span> │              │            │                  │
+└───────┴──────────────────┴──────────────┴────────────┴──────────────────┘
+</code></pre></div><ul>
+<li><code>--auto-ack</code> フラグを指定せずに pull コマンドを使用すると、メッセージが 1 つだけ出力される。これは、サブスクライブしているトピックに複数のメッセージがある場合も同じ。</li>
+<li>特定のサブスクリプション ベースの pull コマンドから 1 つのメッセージが出力された後は、pull コマンドを使って同じメッセージに再びアクセスすることはできない。</li>
+</ul>
+<p>数量を指定して pull する場合は以下の通り。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud pubsub subscriptions pull mySubscription --auto-ack --limit<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</code></pre></div>
+		</div>
+
+
+
+
+
+
+	
 	
 
       </section>
