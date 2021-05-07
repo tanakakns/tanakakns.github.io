@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	GCP :: テックまとめ
+	VPC :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>GCP :: テックまとめ</title>
+<title>VPC :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/gcp/"
+  <body data-url="/gcp/networking/vpc/"
 
   class="hidetoc hidenextpage ">
 
@@ -320,7 +320,7 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent active haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
         item_level_$level
         ">
 
@@ -520,7 +520,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/networking/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/" class="dd-item parent haschildren
         item_level_$level
         ">
 
@@ -529,13 +529,14 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/networking/">ネットワーキング</a>
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
         <ul>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/networking/vpc/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/vpc/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -874,6 +875,12 @@ if (!doNotTrack) {
         
   
   	
+		
+  
+  	
+		
+  
+  	
 	<li >
       <a class="text-link" href="https://tanakakns.github.io/">
         
@@ -881,9 +888,25 @@ if (!doNotTrack) {
     </li>
 	
   
+    <li class="">
+      <a class="text-link" href="/gcp/">
+        GCP
+      </a>
+    </li>
+	
+  	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/networking/">
+        ネットワーキング
+      </a>
+    </li>
+	
+  	
+  
     <li class="active">
       
-        GCP
+        VPC
       
     </li>
 
@@ -904,7 +927,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>GCP</h1>
+			<h1>VPC</h1>
         
 
 		
@@ -924,58 +947,160 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <ul class="children children-li">
-
-<span><li>
-		<a href="/gcp/gcp-aws/" >GCP と AWS の比較</a></li>
-<p></p>
-</span>
-
-<span><li>
-		<a href="/gcp/tools/" >ツール</a></li>
-<p><p>Cloud Console、Cloud Shell、API とサービス、Google Cloud SDK、Cloud Deployment Manager</p></p>
-</span>
-
-<span><li>
-		<a href="/gcp/access-control/" >アクセス制御</a></li>
-<p></p>
-</span>
-
-<span><li>
-		<a href="/gcp/computing-hosting/" >コンピューティングとホスティング</a></li>
-<p><p>Compute Engine、Kubernetes Engine、Cloud Run、App Engine、Cloud Functions</p></p>
-</span>
-
-<span><li>
-		<a href="/gcp/storage/" >ストレージ</a></li>
-<p></p>
-</span>
-
-<span><li>
-		<a href="/gcp/databases/" >データベース</a></li>
-<p><p>Cloud SQL、Cloud Spanner、Bare Metal Solution、Cloud Bigtable、Firestore、Memorystore、BigQuery</p></p>
-</span>
-
-<span><li>
-		<a href="/gcp/networking/" >ネットワーキング</a></li>
-<p><p>VPC、Cloud Load Balancing、Identity-Aware Proxy</p></p>
-</span>
-
-<span><li>
-		<a href="/gcp/monitoring/" >監視</a></li>
-<p></p>
-</span>
-
-<span><li>
-		<a href="/gcp/big-data/" >ビッグデータ</a></li>
-<p></p>
-</span>
-
-<span><li>
-		<a href="/gcp/machine-learning/" >機械学習</a></li>
-<p></p>
-</span>
+	    <ul>
+<li><a href="https://cloud.google.com/vpc/docs">Virtual Private Cloud（VPC）</a></li>
 </ul>
+<h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
+<ul>
+<li>VPC ネットワーク
+<ul>
+<li>グローバルリソース、特定のリージョンやゾーンに関連付けできない</li>
+<li>リージョンを跨げる、IP レンジは指定しない</li>
+<li>VPC 内であれば、異なるリージョンのサブネット同士でプライベート IP で通信可能</li>
+<li>異なる VPC に所属するサブネット同士はプライベート IP で通信できないため、インターネット経由/Cloud VPN/VPCピアリングなどを利用する</li>
+</ul>
+</li>
+<li>サブネット
+<ul>
+<li>リージョンリソース（マルチゾーンリソース）</li>
+<li>サブネット毎に プライマリおよびセカンダリ CIDR 範囲（IP アドレスの範囲）を定義できる</li>
+<li>VM インスタンスは、プライマリ CIDR 範囲からプライマリ内部 IP アドレスを取得する</li>
+<li>また、プライマリおよびセカンダリ CIDR 範囲に <a href="https://cloud.google.com/vpc/docs/alias-ip?hl=ja">エイリアス IP 範囲</a> を定義できる
+<ul>
+<li><strong>IP エイリアス</strong> は、物理的に一つの NIC に 2つ以上の IP アドレスを割り当てる方法で、 エイリアス IP 範囲は文字通りその範囲</li>
+<li>この技術を利用することで、あるクライアントが サーバ A の IP エイリアスに接続している状況で、その指定先を変更せずに サーバ B に同じ IP エイリアスを切り替えることができる</li>
+</ul>
+</li>
+<li>なお、VM インスタンスのネットワーク インターフェースには、1 つのプライマリ内部 IP アドレスが必要であり、1 つ以上のエイリアス IP 範囲、1 つの外部 IP アドレスを設定できる</li>
+</ul>
+</li>
+<li>IP アドレス
+<ul>
+<li>内部 IP アドレス
+<ul>
+<li>インターネット通信不可能（インターネット通信するにはなんらかの 外部 IP アドレスを持つプロキシを介する必要がある）</li>
+</ul>
+</li>
+<li>外部 IP アドレス
+<ul>
+<li>インターネット通信可能</li>
+<li>静的外部 IP アドレスには、リージョンまたはグローバルリソースを指定できる</li>
+<li>グローバル静的外部 IP アドレスは、グローバル負荷分散に使用されるグローバル転送ルールでのみ使用可能</li>
+</ul>
+</li>
+<li>内部・外部 IP アドレスは、エフェメラル（動的）または静的のいずれかになる</li>
+</ul>
+</li>
+<li>ファイアウォールルール
+<ul>
+<li>VM インスタンスで発生するトラフィックをルールベースで許可・拒否</li>
+<li>上り（インスタンスに向かっていくトラフィック）・下り（インスタンスから出ていくトラフィック）それぞれで設定する</li>
+<li>タグやサービスアカウントを適用条件に加えることもできる</li>
+<li>以下の暗黙のルールがデフォルトで適用されている（ Cloud Console に表示されない）
+<ul>
+<li>暗黙の下り許可ルール：すべてのトラフィックを許可（アクション： <code>allow</code> 、宛先： <code>0.0.0.0/0</code> ）</li>
+<li>暗黙の上り許可ルール：すべてのトラフィックを許可（アクション： <code>deny</code> 、送信元： <code>0.0.0.0/0</code> ）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 ref="2-vpc" >2. VPC</h2><a class="anchor" id="2-vpc"></a>
+<p>Virtual Private Cloud（VPC）は、Compute Engine 仮想マシン（VM）インスタンス、Google Kubernetes Engine（GKE）クラスタ、<a href="https://cloud.google.com/appengine/docs/flexible">App Engine フレキシブル環境</a> にネットワーキング機能を提供する。</p>
+<h3 ref="21-vpc-ネットワーク" >2.1. VPC ネットワーク</h3><a class="anchor" id="21-vpc-ネットワーク"></a>
+<ul>
+<li>VPC ネットワークは、データセンター内のリージョン仮想サブネットワーク（ <strong>サブネット</strong> ）のリストで構成されるグローバルリソースであり、すべてグローバルな広域ネットワークで接続される。</li>
+<li><strong>ルート</strong>、<strong>ファイアウォール</strong> ルールを含む VPC ネットワークは <strong>グローバルリソース</strong> 。特定のリージョンやゾーンには関連付けられていない。</li>
+<li>サブネットは <a href="https://cloud.google.com/compute/docs/regions-zones/global-regional-zonal-resources#regionalresources">リージョンリソース</a> 。サブネットごとに IP アドレスの範囲が定義される。（ VPC には範囲が定義されない）</li>
+</ul>
+<h3 ref="22-vpc-のオプション" >2.2. VPC のオプション</h3><a class="anchor" id="22-vpc-のオプション"></a>
+<p>VPC のオプション、相互接続には以下のサービスがある。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">共有 VPC</td>
+<td style="text-align:left">組織内の複数プロジェクトから共通の VPC として利用できる</td>
+</tr>
+<tr>
+<td style="text-align:left">VPC ピアリング</td>
+<td style="text-align:left">異なる VPC 間でピアリングを形成し、組織・プロジェクトが異なる VPC であっても互いのサブネット同士がプライベート IP で通信できる</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud VPN</td>
+<td style="text-align:left">IPSec 接続を使用して VPC 同士、またはオンプレミスと VPC を接続する</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Interconnect</td>
+<td style="text-align:left">オンプレミスと VPC を専用線接続し、低レイテンシかつ高可用の接続を実現</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="23-サブネット作成モード" >2.3. サブネット作成モード</h3><a class="anchor" id="23-サブネット作成モード"></a>
+<p>サブネット作成モードには、自動モードとカスタムモードの 2 種類ある。</p>
+<ul>
+<li>自動モード
+<ul>
+<li>すべてのリージョンに 1 つずつサブネットが自動的に作成</li>
+<li>事前定義された IP 範囲（ <code>10.128.0.0/9</code> ）が使用される</li>
+<li>GCP に新しくリージョンが追加されると、サブネットも自動的に追加される</li>
+<li>カスタムモードへ変更可能</li>
+</ul>
+</li>
+<li>カスタムモード
+<ul>
+<li>すべてユーザが作成する必要がある</li>
+<li>サブネットの IP 範囲は作成後に変更可能であるが、VPC 内の他のサブネットと範囲が重複しないようにする必要があり、且つ、縮小は不可能</li>
+</ul>
+</li>
+</ul>
+<h3 ref="24-ネットワークの作成" >2.4. ネットワークの作成</h3><a class="anchor" id="24-ネットワークの作成"></a>
+<p>Cloud Console では、ナビゲーション メニュー（mainmenu.png） &gt; [VPC ネットワーク] &gt; [VPC ネットワーク]から作成する。<br>
+コマンドでの VPC 作成は以下。（自動モードではなくカスタムモードを指定）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks create privatenet --subnet-mode<span style="color:#f92672">=</span>custom
+</code></pre></div><p>先に作成した VPC にサブネットを 2 つ追加する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks subnets create privatesubnet-us --network<span style="color:#f92672">=</span>privatenet --region<span style="color:#f92672">=</span>us-central1 --range<span style="color:#f92672">=</span>172.16.0.0/24
+
+$ gcloud compute networks subnets create privatesubnet-eu --network<span style="color:#f92672">=</span>privatenet --region<span style="color:#f92672">=</span>europe-west4 --range<span style="color:#f92672">=</span>172.20.0.0/20
+</code></pre></div><p>作成したら、以下のコマンドで VPC およびサブネットを確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks list
+NAME           SUBNET_MODE  BGP_ROUTING_MODE  IPV4_RANGE  GATEWAY_IPV4
+default        AUTO         REGIONAL
+managementnet  CUSTOM       REGIONAL
+mynetwork      AUTO         REGIONAL
+privatenet     CUSTOM       REGIONAL
+
+$ gcloud compute networks subnets list --sort-by<span style="color:#f92672">=</span>NETWORK
+NAME                 REGION                   NETWORK        RANGE
+（省略）
+privatesubnet-us     us-central1              privatenet     172.16.0.0/24
+privatesubnet-eu     europe-west4             privatenet     172.20.0.0/20
+</code></pre></div><p>ファイアウォールは、Cloud Console で、ナビゲーション メニュー（mainmenu.png） &gt; [VPC ネットワーク] &gt; [ファイアウォール] から作成する。<br>
+コマンドでは以下。（先ほど作成した VPC に追加）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules create privatenet-allow-icmp-ssh-rdp --direction<span style="color:#f92672">=</span>INGRESS --priority<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span> --network<span style="color:#f92672">=</span>privatenet --action<span style="color:#f92672">=</span>ALLOW --rules<span style="color:#f92672">=</span>icmp,tcp:22,tcp:3389 --source-ranges<span style="color:#f92672">=</span>0.0.0.0/0
+
+Creating firewall...⠹Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-ed0a2d7fdd5c/global/firewalls/privatenet-allow-icmp-ssh-rdp<span style="color:#f92672">]</span>.
+Creating firewall...done.
+NAME                           NETWORK     DIRECTION  PRIORITY  ALLOW                 DENY  DISABLED
+privatenet-allow-icmp-ssh-rdp  privatenet  INGRESS    <span style="color:#ae81ff">1000</span>      icmp,tcp:22,tcp:3389        False
+</code></pre></div><p>作成したファイアウォールは以下のコマンドで確認する。</p>
+<pre><code>$ gcloud compute firewall-rules list --sort-by=NETWORK
+NAME                              NETWORK        DIRECTION  PRIORITY  ALLOW                         DENY  DISABLED
+（省略）
+privatenet-allow-icmp-ssh-rdp     privatenet     INGRESS    1000      icmp,tcp:22,tcp:3389                False
+</code></pre><p>これまで作成した VPC、サブネット に VM インスタンスを作成するコマンドは以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create privatenet-us-vm --zone<span style="color:#f92672">=</span>us-central1-c --machine-type<span style="color:#f92672">=</span>n1-standard-1 --subnet<span style="color:#f92672">=</span>privatesubnet-us
+</code></pre></div><p>作成したら VM インスタンスの存在を確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances list --sort-by<span style="color:#f92672">=</span>ZONE
+NAME                 ZONE            MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
+（省略）
+privatenet-us-vm     us-central1-c   n1-standard-1               172.16.0.2   35.223.37.245   RUNNING
+</code></pre></div>
 		</div>
 
 

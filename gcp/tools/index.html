@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-06T22:36:12 JST">
+<meta name="revised" content="2021-05-07T23:02:35 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -520,7 +520,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/networking/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -529,9 +529,56 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/networking/">ネットワーキング</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/vpc/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/vpc/">VPC</a>
       
         
       
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/load-balancing/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/load-balancing/">Cloud Load Balancing</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/iap/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/iap/">Identity-Aware Proxy</a>
+      
+        
+      
+    </li>
+        </ul>
     </li>
               
 
@@ -888,7 +935,8 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <h2 ref="1-cloud-console" >1. Cloud Console</h2><a class="anchor" id="1-cloud-console"></a>
+	    <p>Cloud Console、Cloud Shell、API とサービス、Google Cloud SDK、Cloud Deployment Manager</p>
+<h2 ref="1-cloud-console" >1. Cloud Console</h2><a class="anchor" id="1-cloud-console"></a>
 <ul>
 <li><a href="https://cloud.google.com/cloud-console/">Cloud Console</a>は、Google Cloud の開発ツールの中核であるウェブコンソール。</li>
 <li>ログインするにはユーザー名とパスワードが必要で、<a href="https://cloud.google.com/iam/">Cloud Identity and Access Management（Cloud IAM）</a> などの機能によりアクセス制御される。</li>
@@ -1136,7 +1184,10 @@ $ gcloud config set compute/region &lt;REGION&gt;
 
 <span style="color:#75715e"># デフォルトのゾーン設定（なお、ゾーンにリージョン情報も含まれるため設定せずとも推測される場合もある）</span>
 $ gcloud config set compute/zone &lt;ZONE&gt;
-</code></pre></div>
+</code></pre></div><h2 ref="5-cloud-deployment-manager" >5. Cloud Deployment Manager</h2><a class="anchor" id="5-cloud-deployment-manager"></a>
+<p>AWS でいう CloudFormation 。<br>
+単一の API に対応した <strong>リソース</strong> とそのリソースをまとめた <strong>デプロイメント</strong> などで構成される。<br>
+<code>gcloud deployment-manager deployments</code> コマンドでデプロイメントを管理し、 <code>gcloud deployment-manager resouces</code> コマンドでデプロイメントに含まれるリソースを管理する。</p>
 		</div>
 
 

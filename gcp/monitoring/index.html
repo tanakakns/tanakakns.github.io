@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-06T22:36:12 JST">
+<meta name="revised" content="2021-05-07T23:02:35 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -520,7 +520,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/networking/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -529,9 +529,56 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/networking/">ネットワーキング</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/vpc/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/vpc/">VPC</a>
       
         
       
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/load-balancing/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/load-balancing/">Cloud Load Balancing</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/iap/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/iap/">Identity-Aware Proxy</a>
+      
+        
+      
+    </li>
+        </ul>
     </li>
               
 
@@ -888,7 +935,11 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <h2 ref="stackdriverの種類" >Stackdriverの種類</h2><a class="anchor" id="stackdriverの種類"></a>
+	    <ol>
+<li>オペレーションスイート</li>
+</ol>
+<h2 ref="1-オペレーションスイートhttpscloudgooglecomproductsoperationshlja" >1. <a href="https://cloud.google.com/products/operations?hl=ja">オペレーションスイート</a></h2><a class="anchor" id="1-オペレーションスイートhttpscloudgooglecomproductsoperationshlja"></a>
+<p>旧称 Stackdriver</p>
 <ul>
 <li>Monitoring
 <ul>
@@ -920,6 +971,130 @@ if (!doNotTrack) {
 <li>Error Reporting
 <ul>
 <li>エラーをレポート。通知</li>
+</ul>
+</li>
+</ul>
+<h2 ref="5-監視" >5. 監視</h2><a class="anchor" id="5-監視"></a>
+<p><a href="https://cloud.google.com/products/operations?hl=ja">Google Cloud のオペレーション スイート</a></p>
+<ul>
+<li>Cloud Logging
+<ul>
+<li>リアルタイムでログを管理して分析する、大規模なフルマネージドサービス</li>
+<li>アプリケーションとシステムのログデータのほか、GKE 環境、VM、Google Cloud サービスからのカスタム ログデータも取り込める</li>
+<li>選択したログを分析でき、アプリケーションのトラブルシューティングが加速する</li>
+</ul>
+</li>
+<li>Cloud Monitoring
+<ul>
+<li>組み込みの大規模な指標オブザーバビリティ</li>
+<li>クラウドで実行されるアプリケーションのパフォーマンスや稼働時間、全体的な動作状況を確認できる</li>
+<li>メトリクス・イベント・メタデータを収集し、チャートやダッシュボードで可視化してアラート管理できる</li>
+</ul>
+</li>
+</ul>
+<h3 ref="51-cloud-logging" >5.1. Cloud Logging</h3><a class="anchor" id="51-cloud-logging"></a>
+<p>Cloud Logging は IAM を使用して Google Cloud リソースのロギングデータへの <a href="https://cloud.google.com/logging/docs/access-control?hl=ja#permissions_and_roles">アクセス制御</a> を実施できる。</p>
+<ul>
+<li><code>roles/logging.viewer</code>（ログビューア）（＝ <code>roles/viewer</code> ）
+<ul>
+<li>アクセスの透明性ログとデータアクセス監査ログ以外のすべての Logging 機能に対する読み取り専用権限</li>
+</ul>
+</li>
+<li><code>roles/logging.privateLogViewer</code>（プライベート ログビューア）
+<ul>
+<li><code>roles/logging.viewer</code> に加え、アクセスの透明性ログとデータアクセス監査ログの読み取り権限</li>
+<li>このロールは、_Required バケットと _Default バケットにのみ適用される</li>
+</ul>
+</li>
+<li><code>roles/logging.logWriter</code>（ログ書き込み）
+<ul>
+<li>サービスアカウントに付与して、ログの書き込みに十分な権限のみをアプリケーションに付与できる</li>
+<li>ただし、閲覧権限はない</li>
+</ul>
+</li>
+<li><code>roles/logging.bucketWriter</code>（ログバケット書き込み）
+<ul>
+<li>サービス アカウントに付与すると、ログバケットにログを書き込むための十分な権限を Cloud Logging に付与できる</li>
+<li>このロールを特定のバケットに制限するには、IAM 条件を使用する</li>
+</ul>
+</li>
+<li><code>roles/logging.configWriter</code>（ログ構成書き込み）は
+<ul>
+<li>ログベースの指標、除外、バケット、ビューを作成し、シンクをエクスポートする権限</li>
+<li>これらのアクションに Logs Explorer（コンソール）を使用するには、 <code>roles/logging.viewer</code> を追加する</li>
+</ul>
+</li>
+<li><code>roles/logging.admin</code>（Logging 管理者）
+<ul>
+<li>Logging に関連するすべての権限</li>
+</ul>
+</li>
+<li><code>roles/logging.viewAccessor</code>（ログ表示アクセス者）
+<ul>
+<li>ビュー内のログを読み取るための権限</li>
+<li>このロールを特定のバケット内のビューに制限するには、IAM 条件を使用</li>
+</ul>
+</li>
+<li><code>roles/editor</code>（プロジェクト編集者）
+<ul>
+<li>roles/logging.viewer の権限、ログエントリの書き込み権限、ログの削除権限、ログベースの指標の作成権限が含まれる</li>
+<li>この役割では、エクスポート シンクの作成や、アクセスの透明性ログまたはデータアクセス監査ログの読み取りを行うことはできない</li>
+</ul>
+</li>
+<li><code>roles/owner</code>（プロジェクト オーナー）
+<ul>
+<li>Logging に対する完全アクセス権（アクセスの透明性ログとデータアクセス監査ログ）</li>
+</ul>
+</li>
+</ul>
+<h4 ref="511-監査ログ" >5.1.1. 監査ログ</h4><a class="anchor" id="511-監査ログ"></a>
+<p>権限管理された上で、オペレーションを監視するログに以下の種類がある。（ <a href="https://cloud.google.com/logging/docs/audit">Cloud Audit Logs</a> ）</p>
+<ul>
+<li>管理アクティビティ監査ログ
+<ul>
+<li>リソース構成やメタデータ変更オペレーションが記録される</li>
+<li>デフォルトで有効で無効にできない</li>
+</ul>
+</li>
+<li>データアクセス監査ログ
+<ul>
+<li>リソース構成やメタデータ読み取り API 操作が記録される</li>
+<li>デフォルトは無効</li>
+</ul>
+</li>
+<li>システムイベント監査ログ
+<ul>
+<li>Google システムによって生成される管理アクション</li>
+</ul>
+</li>
+<li>ポリシー拒否監査ログ
+<ul>
+<li>セキュリティ ポリシー違反のため Google Cloud サービスがユーザーまたはサービス アカウントへのアクセスを拒否したときに、ポリシー拒否監査ログを記録する</li>
+</ul>
+</li>
+</ul>
+<h3 ref="52-cloud-monitoring" >5.2. Cloud Monitoring</h3><a class="anchor" id="52-cloud-monitoring"></a>
+<ul>
+<li><a href="https://cloud.google.com/monitoring/workspaces?hl=ja#accounts">ワークスペース</a> は、1 つ以上の Google Cloud プロジェクトまたは AWS アカウントに含まれるリソースをモニタリングするためのツール
+<ul>
+<li>各ワークスペースには、Google Cloud プロジェクトや AWS アカウントなど、1～100 個のモニタリング対象プロジェクトを作成できる</li>
+<li>ワークスペースの数に制限はありませんが、Google CloudプロジェクトとAWSアカウントを複数のワークスペースでモニタリングすることはできない</li>
+</ul>
+</li>
+<li><strong>ホストプロジェクト</strong>
+<ul>
+<li>すべてのワークスペースには、ホストプロジェクトがある</li>
+<li>ワークスペースの作成に使用した Google Cloud プロジェクトが、ワークスペースのホスト プロジェクト</li>
+</ul>
+</li>
+<li>モニタリング対象プロジェクト
+<ul>
+<li>ホストプロジェクトでワークスペースを作成すると、Google Cloud プロジェクトと AWS アカウントが追加できるようになる</li>
+<li>新しい空白の Google Cloud プロジェクトを使用してワークスペースをホストしてから、モニタリングするプロジェクトと AWS アカウントをワークスペースに追加するのがよい
+<ul>
+<li>ホスト プロジェクトと Workspace の名前を自由に選択でき、ワークスペース間でモニタリング対象プロジェクトを柔軟に移動できる</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
