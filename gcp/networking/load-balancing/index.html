@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-09T16:06:11 JST">
+<meta name="revised" content="2021-05-09T23:36:20 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1382,8 +1382,6 @@ $ gcloud compute instance-templates create us-east1-template <span style="color:
 </span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>http-server <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --image-family<span style="color:#f92672">=</span>debian-9 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --image-project<span style="color:#f92672">=</span>debian-cloud <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --scopes default <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --metadata startup-script-url<span style="color:#f92672">=</span>gs://cloud-training/gcpnet/httplb/startup.sh
 
@@ -1411,8 +1409,6 @@ $ gcloud compute instance-templates create europe-west1-template <span style="co
 </span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>http-server <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --image-family<span style="color:#f92672">=</span>debian-9 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --image-project<span style="color:#f92672">=</span>debian-cloud <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --scopes default <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --metadata startup-script-url<span style="color:#f92672">=</span>gs://cloud-training/gcpnet/httplb/startup.sh
 
@@ -1447,10 +1443,16 @@ $ gcloud compute backend-services create http-backend <span style="color:#ae81ff
 $ gcloud compute backend-services add-backend http-backend <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>us-east1-mig <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --instance-group-region<span style="color:#f92672">=</span>us-east1 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --balancing-mode<span style="color:#f92672">=</span>RATE <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --max-rate<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --capacity-scaler<span style="color:#f92672">=</span>1.0 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --global
 $ gcloud compute backend-services add-backend http-backend <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>europe-west1-mig <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --instance-group-region<span style="color:#f92672">=</span>europe-west1 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --balancing-mode<span style="color:#f92672">=</span>UTILIZATION <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --max-utilization<span style="color:#f92672">=</span>0.80 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --capacity-scaler<span style="color:#f92672">=</span>1.0 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --global
 
 <span style="color:#75715e"># フロントエンドを構成</span>
@@ -1487,38 +1489,44 @@ $ gcloud compute forwarding-rules create http-ipv6-rule <span style="color:#ae81
 </ul>
 <p>HTTP ロードバランサのストレステストを実施する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ストレステスト用の VM インスタンス を作成</span>
-$ gcloud compute instances create siege-vm <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-west1-c
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-b8e0aafe04ca/zones/us-west1-c/instances/siege-vm<span style="color:#f92672">]</span>.
+$ gcloud compute instances create siege-vm --zone<span style="color:#f92672">=</span>us-west1-c
+Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-04-c77142eb9067/zones/us-west1-c/instances/siege-vm<span style="color:#f92672">]</span>.
 NAME      ZONE        MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP    STATUS
-siege-vm  us-west1-c  n1-standard-1               10.138.0.2   34.83.236.190  RUNNING
+siege-vm  us-west1-c  n1-standard-1               10.138.0.2   34.105.25.106  RUNNING
 
 <span style="color:#75715e"># siege-vm に SSH して設定</span>
 $ gcloud compute ssh siege-vm --zone<span style="color:#f92672">=</span>us-west1-c
 $ sudo apt-get -y install siege
-$ export LB_IP<span style="color:#f92672">=</span>35.201.108.202 <span style="color:#75715e"># LB の IPV4</span>
+$ export LB_IP<span style="color:#f92672">=</span>34.98.93.118 <span style="color:#75715e"># LB の IPV4</span>
 $ siege -c <span style="color:#ae81ff">250</span> http://$LB_IP
+$ exit
 </code></pre></div><p>siege-vm をブラックリストに登録する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># siege-vm の外部 IP を確認</span>
 $ gcloud compute instances describe siege-vm
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Google Cloud Armor セキュリティ ポリシーを作成</span>
+</code></pre></div><p>Google Cloud Armor を構成し、 VM インスタンス siege-vm からのリクエストを遮断する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Google Cloud Armor セキュリティ ポリシーを作成</span>
 $ gcloud compute security-policies create denylist-siege
 
-<span style="color:#75715e"># セキュリティ ポリシーに対するデフォルトのルールを更新し、トラフィックを拒否</span>
-$ gcloud compute security-policies rules update <span style="color:#ae81ff">2147483647</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --security-policy denylist-siege <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --action <span style="color:#e6db74">&#34;deny-403&#34;</span>
+<span style="color:#75715e"># セキュリティ ポリシーに対するデフォルトのルールを更新し、トラフィックを許可</span>
+$ gcloud compute security-policies rules create <span style="color:#ae81ff">2147483647</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --src-ip-ranges<span style="color:#f92672">=</span><span style="color:#ae81ff">\*</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --security-policy<span style="color:#f92672">=</span>denylist-siege
 
-<span style="color:#75715e"># セキュリティ ポリシーにルールを追加</span>
+<span style="color:#75715e"># セキュリティ ポリシーにルールを追加し、siege-vm からのリクエストを拒否</span>
 $ gcloud compute security-policies rules create <span style="color:#ae81ff">1000</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --security-policy denylist-siege <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --src-ip-ranges <span style="color:#e6db74">&#34;34.83.236.190/32&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --action <span style="color:#e6db74">&#34;deny-403&#34;</span>
+</span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>deny<span style="color:#ae81ff">\(</span>403<span style="color:#ae81ff">\)</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --src-ip-ranges<span style="color:#f92672">=</span>34.105.25.106 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --security-policy<span style="color:#f92672">=</span>denylist-siege
 
 <span style="color:#75715e"># セキュリティ ポリシーをバックエンド サービスに接続</span>
 $ gcloud compute backend-services update http-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --security-policy denylist-siege <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global
+</span><span style="color:#ae81ff"></span>    --security-policy<span style="color:#f92672">=</span>denylist-siege
+</code></pre></div><p>VM インスタンス siege-vm に SSH して接続が拒否されるのを確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute ssh siege-vm --zone<span style="color:#f92672">=</span>us-west1-c
+$ export LB_IP<span style="color:#f92672">=</span>34.98.93.118 <span style="color:#75715e"># LB の IPV4</span>
+$ curl http://$LB_IP
+&lt;!doctype html&gt;&lt;meta charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>&gt;&lt;meta name<span style="color:#f92672">=</span>viewport content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1&#34;</span>&gt;&lt;title&gt;403&lt;/title&gt;403 Forbidden
 </code></pre></div>
 		</div>
 
