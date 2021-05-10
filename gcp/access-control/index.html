@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-10T14:25:33 JST">
+<meta name="revised" content="2021-05-10T22:56:51 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1007,7 +1007,7 @@ if (!doNotTrack) {
 <h2 ref="2-リソース階層とアクセス制御" >2. リソース階層とアクセス制御</h2><a class="anchor" id="2-リソース階層とアクセス制御"></a>
 <ul>
 <li>ToDo</li>
-<li>「権限管理」くらいのタイトルで一つの記事に切り出して際整理が必要。</li>
+<li>「権限管理」くらいのタイトルで一つの記事に切り出して際整理が必要か？</li>
 <li>ここが全て：https://cloud.google.com/iam/docs/overview?hl=ja</li>
 <li>理解の補足
 <ul>
@@ -1023,31 +1023,30 @@ if (!doNotTrack) {
 </li>
 </ul>
 <h3 ref="21-cloud-identity-and-access-managementcloud-iam" >2.1. Cloud Identity and Access Management（Cloud IAM）</h3><a class="anchor" id="21-cloud-identity-and-access-managementcloud-iam"></a>
-<p><a href="https://cloud.google.com/iam/docs/how-to?hl=ja">Cloud Identity and Access Management（Cloud IAM）</a> は、「誰が」「どういう操作を」「何に対して」行う権限を持つかを管理するサービス。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">制御内容</th>
-<th style="text-align:left">具体例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">誰が</td>
-<td style="text-align:left">メンバー</td>
-</tr>
-<tr>
-<td style="text-align:left">どういう操作を</td>
-<td style="text-align:left">ロール</td>
-</tr>
-<tr>
-<td style="text-align:left">何に対して</td>
-<td style="text-align:left">リソース</td>
-</tr>
-</tbody>
-</table>
+<p><a href="https://cloud.google.com/iam/docs/how-to?hl=ja">Cloud Identity and Access Management（Cloud IAM）</a> は、「誰が」「どういう操作を」「何に対して」行う権限を持つかを管理するサービス。<br>
+キーワードとしては以下のように整理できる。</p>
+<ul>
+<li><strong>メンバー</strong>
+<ul>
+<li>「誰が」</li>
+</ul>
+</li>
+<li><strong>ロール</strong>
+<ul>
+<li>「どういう操作を」「何に対して」</li>
+<li>権限のコレクションであり、権限によってリソースに対して許可されているオペレーションが決まる</li>
+<li>メンバーに対して付与する</li>
+</ul>
+</li>
+<li><strong>ポリシー</strong> / IAM ポリシー
+<ul>
+<li>1 つ以上のメンバーを 1 つのロールにバインドした一覧</li>
+<li>IAM ポリシーは IAM Policy オブジェクトによって表現され、バインディング リストで構成され（ <code>Binding</code> は、<code>members</code> のリストを <code>role</code> にバインドする）</li>
+</ul>
+</li>
+</ul>
 <p>Cloud Console の 「サイドメニュー」-&gt;「 IAM と管理」-&gt;「 IAM 」から利用できる。</p>
-<h3 ref="22-メンバー誰が" >2.2. メンバー/「誰が」</h3><a class="anchor" id="22-メンバー誰が"></a>
+<h3 ref="22-メンバー" >2.2. メンバー</h3><a class="anchor" id="22-メンバー"></a>
 <p>リソースへのアクセスが許可される主体（「誰が」）には以下がある。</p>
 <table>
 <thead>
@@ -1085,17 +1084,65 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-<p><strong>Google アカウント</strong> は <strong>個人管理</strong> と <strong>企業管理</strong> のものがある。<br>
-前者は個人の Gmail アカウントや（こんなことができると知らない人も多いが）任意のメールアドレスを個人利用の Google アカウントとして登録したもの。<br>
-後者は会社が Google Workspace （旧 G Suite）を導入している場合、そのユーザアカウントをそのまま利用できる。社外のユーザが GCP 環境にアクセスする場合は Cloud Identity を利用してユーザ管理することもできる。<br>
-<strong>Google グループ</strong> は単に Google アカウントをグループとしてまとめたもの（なので、説明は割愛する）。</p>
-<p>ToDo：<a href="https://cloud.google.com/resource-manager?hl=ja">Resource Manager</a></p>
-<p><img src="./img/google_account.png" alt="google_account"></p>
 <ul>
-<li>サービスアカウント
+<li><strong>Google アカウント</strong> （ <code>user:xxxx</code> の形式）
+<ul>
+<li>Gmail アカウント（ <code>@gmail.com</code> ）や Google アカウントに関連づけられているメールアドレス</li>
+<li>あまり知られていないが、任意のメールアドレスを <a href="https://accounts.google.com/signup?hl=ja">Google アカウント登録ページ</a>から Google アカウントとして登録できる
+<ul>
+<li>つまり、 <code>@gmail.com</code> じゃなくてもいい</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>サービスアカウント</strong> （ <code>serviceAccount:xxxx</code> の形式）
+<ul>
+<li>個々のエンドユーザではなく、アプリケーションのアカウント</li>
+<li><code>[サービスアカウント]@[プロジェクトID].iam.gserviceaccount.com</code></li>
+</ul>
+</li>
+<li><strong>Google グループ</strong> （ <code>group:xxxx</code> の形式）
+<ul>
+<li>Google アカウントとサービスアカウントの名前付きコレクション</li>
+<li>グループ固有のメールアドレスが関連付けられている（ <a href="https://groups.google.com/?hl=ja">Google グループ</a> ）</li>
+</ul>
+</li>
+<li><strong>Google Workspace ドメイン</strong> （ <code>domain:xxxx</code> の形式）
+<ul>
+<li><a href="https://workspace.google.com/?hl=ja">Google Workspace</a> （旧 G Suite）で作成された <strong>組織</strong> のインターネットドメイン（ <code>example.com</code> など ）</li>
+<li>Google Workspace ドメインにユーザーを追加すると、この <strong>組織</strong> のドメインでユーザアカウントが作成できる（ <code>username@example.com</code> など）</li>
+<li>そしてこれが  Google アカウントの仮想グループとなる</li>
+</ul>
+</li>
+<li><strong>Cloud Identity ドメイン</strong> （ <code>domain:xxxx</code> の形式）
+<ul>
+<li>Google Workspace ドメインに似ているが、 Drive、Meet、Docs といった Google Workspace のツール類は利用できない</li>
+<li>アカウント管理（ <code>username@example.com</code> など）や仮想グループ（ <code>example.com</code> など ）だけ</li>
+</ul>
+</li>
+<li><strong>認証済みのすべてのユーザー</strong> （ `` の形式）
+<ul>
+<li>すべてのサービス アカウント、および Google アカウントで認証されたユーザー全員を表す特殊な識別子 <code>allAuthenticatedUsers</code></li>
+</ul>
+</li>
+<li><strong>全ユーザー</strong> （ `` の形式）
+<ul>
+<li>認証されたユーザーと認証されていないユーザーの両方を含めて、インターネット上のユーザーを表す特殊な識別子 <code>allUsers</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Google アカウント</strong> は <strong>個人管理</strong> と <strong>企業管理</strong> のものがある。<br>
+前者は個人の Gmail アカウントや任意のメールアドレスを個人利用の Google アカウントとして登録したもの。<br>
+後者は会社が Google Workspace を導入している場合、そのユーザアカウントをそのまま利用できる。社外のユーザが GCP 環境にアクセスする場合は Cloud Identity を利用してユーザ管理することもできる。</p>
+<p><img src="./img/google_account.png" alt="google_account"></p>
+<p>サービスアカウントについて以下で補足する。</p>
 <ul>
 <li>アプリケーションやサーバのための ID</li>
-<li>サービスアカウント事態もリソースで、人が「サービスアカウントとして実行」もできる</li>
+<li>サービスアカウント自体もリソースで、人が「サービスアカウントとして実行」もできる
+<ul>
+<li>JSONをダウンロードして <code>gcloud auth activate-service-account --key-file credentials.json</code> する？</li>
+</ul>
+</li>
 <li>サービスアカウントによって使われるキーは自動的に管理される</li>
 <li>ユーザがキーを作成・ダウンロードすることも可能</li>
 <li><code>gcloud iam service-accounts create SERVICE_ACCOUNT_ID</code> でサービスアカウントを作成する</li>
@@ -1110,39 +1157,44 @@ if (!doNotTrack) {
 </li>
 <li>アクセススコープでは完全な権限(/auth/cloud-platform)を付与し、IAMロールで権限を絞るのがおすすめ</li>
 </ul>
-</li>
-</ul>
-<h3 ref="23-権限とロールどういう操作を" >2.3. 権限とロール/「どういう操作を」</h3><a class="anchor" id="23-権限とロールどういう操作を"></a>
-<p>リソースに対する操作の権限は以下の命名規則で表現される。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">&lt;サービス名&gt;.&lt;リソース&gt;.&lt;動詞&gt;
+<h3 ref="23-権限とロール" >2.3. 権限とロール</h3><a class="anchor" id="23-権限とロール"></a>
+<p>リソースに対する操作の <strong>権限</strong> は以下の命名規則で表現される。（多くの場合、権限は REST API メソッドと 1 対 1 で対応している）<br>
+リソースの例として、プロジェクト、Compute Engine インスタンス、Cloud Storage バケットなどがある。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&lt;サービス名&gt;.&lt;リソース&gt;.&lt;動詞&gt;
 
 ex<span style="color:#f92672">)</span>
 compute.instance.delete
 compute.instance.start
 compute.instance.setMachineType
-</code></pre></div><p>ロールには以下の種類がある。（ <a href="https://cloud.google.com/iam/docs/understanding-roles/#primitive%5C_roles">詳細</a> ）</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">ロール</th>
-<th style="text-align:left">内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">基本ロール</td>
-<td style="text-align:left"><strong>プロジェクト単位</strong> の権限セット。「オーナー」「編集者」「閲覧者」</td>
-</tr>
-<tr>
-<td style="text-align:left">事前定義ロール</td>
-<td style="text-align:left"><strong>1 サービス単位</strong> の権限セット。「&lt;サービス名&gt;オーナー」「&lt;サービス名&gt;編集者」「&lt;サービス名&gt;閲覧者」</td>
-</tr>
-<tr>
-<td style="text-align:left">カスタムロール</td>
-<td style="text-align:left">カスタムな権限セット。バケット一覧は取得できないが、特定のバケットには書き込める、とか。</td>
-</tr>
-</tbody>
-</table>
+</code></pre></div><p><strong>ロール</strong> は権限のコレクション。<br>
+<code>roles/service.roleName</code> の形式で指定し、たとえば、Cloud Storage には <code>roles/storage.objectAdmin</code> 、 <code>roles/storage.objectCreator</code> 、 <code>roles/storage.objectViewer</code> などのロールがある。<br>
+ロールには以下の種類がある。（ <a href="https://cloud.google.com/iam/docs/understanding-roles/#primitive%5C_roles">詳細</a> ）</p>
+<ul>
+<li><strong>基本ロール</strong>
+<ul>
+<li><strong>プロジェクト</strong> リソースに対する権限のコレクション</li>
+<li>「オーナー」「編集者」「閲覧者」「参照者」がある</li>
+<li>基本ロールには、すべての Google Cloud サービスにかかわる何千もの権限が含まれるため、基本的には付与しない
+<ul>
+<li>代わりに、ニーズに合わせて最も制限された 事前定義ロール または カスタムロール を付与すること</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>事前定義ロール</strong>
+<ul>
+<li>1 つの <strong>サービス</strong> リソースに対する権限コレクション</li>
+<li>「&lt;サービス名&gt;オーナー」「&lt;サービス名&gt;編集者」「&lt;サービス名&gt;閲覧者」のような名前のがある</li>
+<li>たとえば、Pub/Sub パブリッシャーの事前定義ロールは <code>roles/pubsub.publisher</code></li>
+</ul>
+</li>
+<li><strong>カスタムロール</strong>
+<ul>
+<li>自作する権限のコレクション</li>
+<li>バケット一覧は取得できないが、特定のバケットには書き込める、とか自由</li>
+</ul>
+</li>
+</ul>
 <p>権限付与には <strong>最小権限の原則</strong> （より細かいロールで必要最低限の権限のみ付与する） を適用すること。<br>
 また、異なる権限を必要とする複数のサービスがある場合は、サービス毎に個別のサービスアカウントを作成し、各サービスアカウントに必要な権限のみ付与すること。<br>
 なお、基本ロールのそれぞれの権限は以下の通り。</p>
@@ -1175,7 +1227,7 @@ compute.instance.setMachineType
 <p>Identity and Access Management API または gcloud コマンドライン ツールを使用して、プロジェクトのメンバーにオーナーロールを付与することはできない。オーナーは、 <strong>Cloud Console を使用することによってのみ</strong> プロジェクトに追加できます。</p>
 <p>事前定義ロールおよびカスタムロールのメタデータを確認する場合、 <code>gcloud iam roles describe ROLE_ID</code> コマンドで確認する。<br>
 <a href="https://cloud.google.com/iam/docs/understanding-roles?hl=ja#predefined_roles">事前定義ロールの一覧</a></p>
-<h3 ref="24-リソース階層何に対して" >2.4. リソース階層/「何に対して」</h3><a class="anchor" id="24-リソース階層何に対して"></a>
+<h3 ref="24-リソース階層" >2.4. リソース階層</h3><a class="anchor" id="24-リソース階層"></a>
 <p><a href="https://cloud.google.com/billing/docs/concepts#resource_overview">リソース</a> は「 <strong>組織 &gt; フォルダ &gt; プロジェクト &gt; リソース</strong> 」のような階層構造に <strong>まとめる</strong> ことができる。</p>
 <ul>
 <li>組織
@@ -1198,14 +1250,41 @@ compute.instance.setMachineType
 <li>そして、上位に設定されたポリシーは下位に継承される</li>
 </ul>
 </li>
-<li>リソース
+<li>各サービスのリソース
 <ul>
 <li>（省略）</li>
 </ul>
 </li>
 </ul>
-<p>例えば、「アカウント A に compute.instances.get 権限を 組織 X に対して付与」すると、「アカウント A は 組織 X に含まれる全てのフォルダの全てのプロジェクトの VM インスタンス情報を取得できる」ようになる。</p>
-<h3 ref="25-アクセス制御のベストプラクティス" >2.5. アクセス制御のベストプラクティス</h3><a class="anchor" id="25-アクセス制御のベストプラクティス"></a>
+<p><img src="./img/policy-inheritance.svg" alt="リソース階層"></p>
+<p>上位階層のリソースに関する権限付与についれ例を出すと、「アカウント A に compute.instances.get 権限を 組織 X に対して付与」すると、「アカウント A は 組織 X に含まれる全てのフォルダの全てのプロジェクトの VM インスタンス情報を取得できる」ようになる。</p>
+<p>リソースは <a href="https://cloud.google.com/resource-manager?hl=ja">Resource Manager</a> API を利用することで管理できる。</p>
+<h3 ref="25-ポリシー" >2.5. ポリシー</h3><a class="anchor" id="25-ポリシー"></a>
+<p>IAM ポリシーは前述した通り、バインディング リストで構成され（ <code>Binding</code> は、<code>members</code> のリストを <code>role</code> にバインドする）、 JSON で表現すると以下のようになる。</p>
+<pre><code>{
+  &quot;bindings&quot;: [
+    {
+      &quot;role&quot;: &quot;roles/storage.objectAdmin&quot;,
+       &quot;members&quot;: [
+         &quot;user:ali@example.com&quot;,
+         &quot;serviceAccount:my-other-app@appspot.gserviceaccount.com&quot;,
+         &quot;group:admins@example.com&quot;,
+         &quot;domain:google.com&quot;
+       ]
+    },
+    {
+      &quot;role&quot;: &quot;roles/storage.objectViewer&quot;,
+      &quot;members&quot;: [
+        &quot;user:maria@example.com&quot;
+      ]
+    }
+  ]
+}
+</code></pre><p>IAM ポリシーは、リソース階層の任意のレベル（組織レベル、フォルダレベル、プロジェクト レベル、リソースレベル）で設定でる。<br>
+リソースは親リソースのポリシーをすべて継承する。<br>
+特定のリソースに対して有効なポリシーは、そのリソースに設定されたポリシーとリソース階層の上位から継承されるポリシーを組み合わせたものとなる。<br>
+例えば、組織に「 ユーザ <code>user:hoge@example.com</code> のロールは <code>roles/storage.objectViewer</code> 」というポリシーが設定されていたとすると、その下のフォルダ、さらにその下のプロジェクトでも有効になる。</p>
+<h3 ref="26-アクセス制御のベストプラクティス" >2.6. アクセス制御のベストプラクティス</h3><a class="anchor" id="26-アクセス制御のベストプラクティス"></a>
 <p><a href="https://cloud.google.com/iam/docs/resource-hierarchy-access-control?hl=ja#best_practices">ベストプラクティス</a></p>
 <ul>
 <li><strong>最小権限の原則</strong> （より細かいロールで必要最低限の権限のみ付与する）に従って Cloud IAM のロールを付与する</li>
@@ -1219,7 +1298,7 @@ compute.instance.setMachineType
 <li>ラベルを使って、リソースのアノテーションをつけ、グループ化・フィルタリングを行う</li>
 <li>異なる権限を必要とする複数サービスがある場合は、サービス毎に個別のサービスアカウントを作成し、必要な権限のみ付与する</li>
 </ul>
-<h3 ref="26-リソースへのアクセス権の付与変更取り消しhttpscloudgooglecomiamdocsgranting-changing-revoking-accesshlja" >2.6. <a href="https://cloud.google.com/iam/docs/granting-changing-revoking-access?hl=ja">リソースへのアクセス権の付与、変更、取り消し</a></h3><a class="anchor" id="26-リソースへのアクセス権の付与変更取り消しhttpscloudgooglecomiamdocsgranting-changing-revoking-accesshlja"></a>
+<h3 ref="27-リソースへのアクセス権の付与変更取り消しhttpscloudgooglecomiamdocsgranting-changing-revoking-accesshlja" >2.7. <a href="https://cloud.google.com/iam/docs/granting-changing-revoking-access?hl=ja">リソースへのアクセス権の付与、変更、取り消し</a></h3><a class="anchor" id="27-リソースへのアクセス権の付与変更取り消しhttpscloudgooglecomiamdocsgranting-changing-revoking-accesshlja"></a>
 <p><code>gcloud</code> コマンドによるメンバのリソースに対するロールの付与について記載する。<br>
 以降のパラメータについては下記の通り。</p>
 <ul>
@@ -1231,17 +1310,17 @@ compute.instance.setMachineType
 <li>FILE_PATH：ファイルのパス。</li>
 <li>PROJECT_ID：プロジェクト ID 。</li>
 </ul>
-<h4 ref="261-メンバにロールを付与する" >2.6.1. メンバにロールを付与する</h4><a class="anchor" id="261-メンバにロールを付与する"></a>
+<h4 ref="271-メンバにロールを付与する" >2.7.1. メンバにロールを付与する</h4><a class="anchor" id="271-メンバにロールを付与する"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud GROUP add-iam-policy-binding RESOURCE --member<span style="color:#f92672">=</span>MEMBER --role<span style="color:#f92672">=</span>ROLE_ID
 
 <span style="color:#75715e"># 例：プロジェクト my-project のユーザー my-user@example.com に閲覧者の役割を付与する</span>
 $ gcloud projects add-iam-policy-binding my-project --member<span style="color:#f92672">=</span>user:my-user@example.com --role<span style="color:#f92672">=</span>roles/viewer
-</code></pre></div><h4 ref="262-メンバからロールを削除する" >2.6.2. メンバからロールを削除する</h4><a class="anchor" id="262-メンバからロールを削除する"></a>
+</code></pre></div><h4 ref="272-メンバからロールを削除する" >2.7.2. メンバからロールを削除する</h4><a class="anchor" id="272-メンバからロールを削除する"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud GROUP remove-iam-policy-binding RESOURCE --member<span style="color:#f92672">=</span>MEMBER --role<span style="color:#f92672">=</span>ROLE_ID
 
 <span style="color:#75715e"># 例：プロジェクト my-project のユーザー my-user@example.com から閲覧者のロールを取り消す</span>
 $ gcloud projects remove-iam-policy-binding my-project --member<span style="color:#f92672">=</span>user:my-user@example.com --role<span style="color:#f92672">=</span>roles/viewer
-</code></pre></div><h4 ref="263-ポリシーの取得" >2.6.3. ポリシーの取得</h4><a class="anchor" id="263-ポリシーの取得"></a>
+</code></pre></div><h4 ref="273-ポリシーの取得" >2.7.3. ポリシーの取得</h4><a class="anchor" id="273-ポリシーの取得"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud projects get-iam-policy PROJECT_ID --format<span style="color:#f92672">=</span>FORMAT &gt; FILE_PATH
 
 <span style="color:#75715e"># 例</span>
@@ -1266,7 +1345,7 @@ $ gcloud projects get-iam-policy my-project --format json &gt; ~/policy.json
   <span style="color:#e6db74">&#34;version&#34;</span>: <span style="color:#ae81ff">1</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>例の通り、ロールとそのロールが付与されたメンバの配列で表現される。</p>
-<h4 ref="264-ポリシーの設定" >2.6.4. ポリシーの設定</h4><a class="anchor" id="264-ポリシーの設定"></a>
+<h4 ref="274-ポリシーの設定" >2.7.4. ポリシーの設定</h4><a class="anchor" id="274-ポリシーの設定"></a>
 <p><code>gcloud projects get-iam-policy</code> で取得したポリシーの JSON/YAML を編集するなどして、以下のコマンドでポリシーを更新することができる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud projects set-iam-policy PROJECT_ID FILE_PATH
 
@@ -1288,7 +1367,36 @@ $ gcloud projects get-iam-policy my-project --format json &gt; ~/policy.json
     <span style="color:#f92672">}</span>
   <span style="color:#f92672">]</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><h2 ref="3-リソースの管理" >3. リソースの管理</h2><a class="anchor" id="3-リソースの管理"></a>
+</code></pre></div><h3 ref="28-カスタムロールの作成と管理httpscloudgooglecomiamdocscreating-custom-roleshlja" >2.8. <a href="https://cloud.google.com/iam/docs/creating-custom-roles?hl=ja">カスタムロールの作成と管理</a></h3><a class="anchor" id="28-カスタムロールの作成と管理httpscloudgooglecomiamdocscreating-custom-roleshlja"></a>
+<p>ToDo</p>
+<p>カスタムロールは以下のようにリソースレベルで作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 組織レベルの場合</span>
+$ gcloud iam roles create role-id --organization<span style="color:#f92672">=</span>organization-id <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --file<span style="color:#f92672">=</span>yaml-file-path
+
+<span style="color:#75715e"># プロジェクトレベルの場合</span>
+$ gcloud iam roles create role-id --project<span style="color:#f92672">=</span>project-id <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --file<span style="color:#f92672">=</span>yaml-file-path
+</code></pre></div><p>なお、インプットとなる YAML ファイルは以下の形式。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">title</span>: <span style="color:#ae81ff">role-title</span>
+<span style="color:#f92672">description</span>: <span style="color:#ae81ff">role-description</span>
+<span style="color:#f92672">stage</span>: <span style="color:#ae81ff">launch-stage</span>
+<span style="color:#f92672">includedPermissions</span>:
+- <span style="color:#ae81ff">permission-1</span>
+- <span style="color:#ae81ff">permission-2</span>
+</code></pre></div><p>YAML ファイルを利用しないで、すべてコマンドで作成することも可能。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 組織レベルの場合</span>
+$ gcloud iam roles create role-id --organization<span style="color:#f92672">=</span>organization-id <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --title<span style="color:#f92672">=</span>role-title --description<span style="color:#f92672">=</span>role-description <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --permissions<span style="color:#f92672">=</span>permissions-list --stage<span style="color:#f92672">=</span>launch-stage
+
+<span style="color:#75715e"># プロジェクトレベルの場合</span>
+$ gcloud iam roles create role-id --project<span style="color:#f92672">=</span>project-id <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --title<span style="color:#f92672">=</span>role-title --description<span style="color:#f92672">=</span>role-description <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --permissions<span style="color:#f92672">=</span>permissions-list --stage<span style="color:#f92672">=</span>launch-stage
+</code></pre></div><p>なお、 <code>gcloud iam roles update</code> コマンドを利用することで既存のカスタムロールを編集可能。（ <code>--stage=DISABLED</code> オプションで無効化することも）<br>
+<code>gcloud iam roles delete</code> コマンドで削除。 <code>gcloud iam roles undelete</code> コマンドで削除の取り消し。</p>
+<h2 ref="3-リソースの管理" >3. リソースの管理</h2><a class="anchor" id="3-リソースの管理"></a>
 <p>ここまでで出たリソースを管理してみる。<br>
 基本 <code>gcloud</code> コマンドでの管理とする。</p>
 <h3 ref="31-プロジェクト" >3.1. プロジェクト</h3><a class="anchor" id="31-プロジェクト"></a>
