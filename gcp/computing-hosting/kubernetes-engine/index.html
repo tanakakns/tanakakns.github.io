@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-10T22:56:51 JST">
+<meta name="revised" content="2021-05-11T22:29:53 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -947,7 +947,7 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <h2 ref="3-google-kubernetes-engine" >3. Google Kubernetes Engine</h2><a class="anchor" id="3-google-kubernetes-engine"></a>
+	    <p><a href="https://cloud.google.com/kubernetes-engine/docs/how-to">Google Kubernetes Engine</a></p>
 <ol>
 <li><a href="#3-1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
 <li><a href="#3-2-%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E4%BD%9C%E6%88%90">クラスタ作成</a></li>
@@ -955,9 +955,9 @@ if (!doNotTrack) {
 <li>Spinnaker と Kubernetes Engine を使用した継続的デリバリー パイプライン</li>
 <li>監視</li>
 </ol>
-<h3 ref="31-コンセプト" >3.1. コンセプト</h3><a class="anchor" id="31-コンセプト"></a>
+<h3 ref="1-コンセプト" >1. コンセプト</h3><a class="anchor" id="1-コンセプト"></a>
 <p>ToDo</p>
-<h3 ref="32-クラスタ作成" >3.2. クラスタ作成</h3><a class="anchor" id="32-クラスタ作成"></a>
+<h3 ref="2-クラスタ作成" >2. クラスタ作成</h3><a class="anchor" id="2-クラスタ作成"></a>
 <p>デフォルトのコンピューティング ゾーンを設定する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config set compute/zone us-central1-a
 
@@ -1009,8 +1009,8 @@ The following clusters will be deleted.
 Do you want to <span style="color:#66d9ef">continue</span> <span style="color:#f92672">(</span>Y/n<span style="color:#f92672">)</span>?  Y
 Deleting cluster my-cluster...done.
 Deleted <span style="color:#f92672">[</span>https://container.googleapis.com/v1/projects/qwiklabs-gcp-01-47d564cd39d1/zones/us-central1-a/clusters/my-cluster<span style="color:#f92672">]</span>.
-</code></pre></div><h3 ref="33-デプロイ管理" >3.3. デプロイ管理</h3><a class="anchor" id="33-デプロイ管理"></a>
-<h4 ref="331-deployment-オブジェクトの詳細" >3.3.1. Deployment オブジェクトの詳細</h4><a class="anchor" id="331-deployment-オブジェクトの詳細"></a>
+</code></pre></div><h3 ref="3-デプロイ管理" >3. デプロイ管理</h3><a class="anchor" id="3-デプロイ管理"></a>
+<h4 ref="31-deployment-オブジェクトの詳細" >3.1. Deployment オブジェクトの詳細</h4><a class="anchor" id="31-deployment-オブジェクトの詳細"></a>
 <p><code>kubectl explain</code> コマンドを使用すると、Deployment などのオブジェクトの設定項目に関する情報が取得できる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment
 
@@ -1019,7 +1019,7 @@ $ kubectl explain deployment --recursive
 
 <span style="color:#75715e"># 特定のフィールドを確認する場合</span>
 $ kubectl explain deployment.metadata.name
-</code></pre></div><h4 ref="332-deployment-の作成" >3.3.2. Deployment の作成</h4><a class="anchor" id="332-deployment-の作成"></a>
+</code></pre></div><h4 ref="32-deployment-の作成" >3.2. Deployment の作成</h4><a class="anchor" id="32-deployment-の作成"></a>
 <p>Google 提供の資材を使って、Cloud Console の Cloud Shell 上で実施していく。<br>
 まずはクラスタを作成する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># デフォルトのゾーンを設定</span>
@@ -1067,7 +1067,7 @@ frontend   LoadBalancer   10.115.243.177   34.66.110.111   443:31848/TCP   46s
 
 $ curl -ks https://34.66.110.111
 <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;Hello&#34;</span><span style="color:#f92672">}</span>
-</code></pre></div><h4 ref="333-スケールアウトイン" >3.3.3. スケールアウト・イン</h4><a class="anchor" id="333-スケールアウトイン"></a>
+</code></pre></div><h4 ref="33-スケールアウトイン" >3.3. スケールアウト・イン</h4><a class="anchor" id="33-スケールアウトイン"></a>
 <p>Deployment をスケーリングするには、 <code>spec.replicas</code> フィールドを更新する。<br>
 <code>kubectl explain</code> コマンドで、このフィールドの説明を確認してみる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment.spec.replicas
@@ -1091,7 +1091,7 @@ $ kubectl scale deployment hello --replicas<span style="color:#f92672">=</span><
 <span style="color:#75715e"># 確認</span>
 $ kubectl get pods | grep hello- | wc -l
 <span style="color:#ae81ff">3</span>
-</code></pre></div><h4 ref="333-ローリング-アップデート" >3.3.3. ローリング アップデート</h4><a class="anchor" id="333-ローリング-アップデート"></a>
+</code></pre></div><h4 ref="33-ローリング-アップデート" >3.3. ローリング アップデート</h4><a class="anchor" id="33-ローリング-アップデート"></a>
 <p>ReplicaSet が新たに作成され、古い ReplicaSet のレプリカ数が減少するにつれて、新しい ReplicaSet のレプリカ数が徐々に増加する形で実行される。<br>
 Deployment を更新するには、次のコマンドを実行してマニフェストを編集する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl edit deployment hello
@@ -1137,7 +1137,7 @@ $ kubectl edit deployment hello
 
 <span style="color:#75715e"># 全ての Pod がもどっているか確認</span>
 $ kubectl get pods -o jsonpath --template<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{range .items[*]}{.metadata.name}{&#34;\t&#34;}{&#34;\t&#34;}{.spec.containers[0].image}{&#34;\n&#34;}{end}&#39;</span>
-</code></pre></div><h4 ref="334-カナリア-デプロイ" >3.3.4. カナリア デプロイ</h4><a class="anchor" id="334-カナリア-デプロイ"></a>
+</code></pre></div><h4 ref="34-カナリア-デプロイ" >3.4. カナリア デプロイ</h4><a class="anchor" id="34-カナリア-デプロイ"></a>
 <p>カナリア デプロイでは、一部のユーザーに変更をリリースすることで、新しいリリースに伴うリスクを軽減する手法。<br>
 新しいバージョンの Deployment を作成する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/hello-canary.yaml
@@ -1167,7 +1167,7 @@ hello-canary   0/1     <span style="color:#ae81ff">1</span>            <span sty
     - <span style="color:#f92672">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
       <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
       <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">80</span>
-</code></pre></div><h4 ref="335-blue--green-デプロイ" >3.3.5. Blue / Green デプロイ</h4><a class="anchor" id="335-blue--green-デプロイ"></a>
+</code></pre></div><h4 ref="35-blue--green-デプロイ" >3.5. Blue / Green デプロイ</h4><a class="anchor" id="35-blue--green-デプロイ"></a>
 <p>Kubernetes は、古い「Blue」バージョン用と新しい「Green」バージョン用に 2 つの異なるデプロイを作成することでこれを実現します。<br>
 このデプロイには、ルータとして機能するサービスを介してアクセスする。<br>
 新しい「Green」バージョンが稼働したら、サービスを更新してそのバージョンを使用するように切り替えることにより実現する。</p>
@@ -1232,7 +1232,7 @@ hello-canary   0/1     <span style="color:#ae81ff">1</span>            <span sty
 <span style="color:#75715e"># 確認</span>
 $ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
 <span style="color:#75715e"># 1.0.0 しか返ってこない</span>
-</code></pre></div><h3 ref="34-spinnaker-と-kubernetes-engine-を使用した継続的デリバリー-パイプライン" >3.4. Spinnaker と Kubernetes Engine を使用した継続的デリバリー パイプライン</h3><a class="anchor" id="34-spinnaker-と-kubernetes-engine-を使用した継続的デリバリー-パイプライン"></a>
+</code></pre></div><h3 ref="4-spinnaker-と-kubernetes-engine-を使用した継続的デリバリー-パイプライン" >4. Spinnaker と Kubernetes Engine を使用した継続的デリバリー パイプライン</h3><a class="anchor" id="4-spinnaker-と-kubernetes-engine-を使用した継続的デリバリー-パイプライン"></a>
 <p>まずは環境を設定する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ゾーンの設定</span>
 $ gcloud config set compute/zone us-central1-f
@@ -1507,7 +1507,29 @@ $ git push --tags
 </ul>
 </li>
 </ul>
-<h3 ref="35-cloud-monitoring-apm-によるサイトの信頼性のトラブルシューティング" >3.5. Cloud Monitoring APM によるサイトの信頼性のトラブルシューティング</h3><a class="anchor" id="35-cloud-monitoring-apm-によるサイトの信頼性のトラブルシューティング"></a>
+<h2 ref="5-監視" >5. 監視</h2><a class="anchor" id="5-監視"></a>
+<h3 ref="51-cloud-monitoring-と-cloud-logging" >5.1. Cloud Monitoring と Cloud Logging</h3><a class="anchor" id="51-cloud-monitoring-と-cloud-logging"></a>
+<ul>
+<li>GKE 用 Google Cloud オペレーション スイートの概要
+<ul>
+<li><a href="https://cloud.google.com/stackdriver/docs/solutions/gke?hl=ja#skm-howto">https://cloud.google.com/stackdriver/docs/solutions/gke?hl=ja#skm-howto</a></li>
+</ul>
+</li>
+</ul>
+<p>GKEには、Cloud Monitoring および Cloud Logging との統合機能が含まれている。（ <a href="https://cloud.google.com/stackdriver/docs/solutions/gke/prometheus?hl=ja">Prometheus の使用</a> はこちらを参照）<br>
+<code>gcloud container clusters create</code> コマンドでクラスタを作成した場合、デフォルトで有効になっているが、既存のクラスタで有効にする場合は以下のコマンドを実行する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud container clusters update <span style="color:#f92672">[</span>CLUSTER_NAME<span style="color:#f92672">]</span> --enable-stackdriver-kubernetes
+<span style="color:#75715e"># ちなみに削除は「-no-enable-stackdriver-kubernetes」オプション</span>
+</code></pre></div><p>なお、現在はベータ版であるが、「 <code>--enable-logging-monitoring-system-only</code> 」オプションでシステムログのみ収集可能になる。（デフォルトは全ログ）<br>
+システムログとは以下を指す。</p>
+<ul>
+<li>名前空間 <code>kube-system</code> 、 <code>istio-system</code> 、 <code>knative-serving</code> 、 <code>gke-system</code> 、 <code>config-management-system</code>  で実行中のすべての Pod</li>
+<li>コンテナ化されていない重要なサービス:  <code>docker/containerd</code> ランタイム、 <code>kubelet</code> 、 <code>kubelet-monitor</code> 、 <code>node-problem-detector</code> 、 <code>kube-container-runtime-monitor</code></li>
+<li>ノードのシリアルポート出力（VM インスタンスのメタデータ <code>serial-port-logging-enable</code> が true に設定されている場合）</li>
+</ul>
+<p>アプリケーションログは、 コンテナが STDOUT と STDERR に書き込まれたワークロードのログを収集する。</p>
+<p><a href="http://cloud.google.com/stackdriver/docs/solutions/gke/managing-logs?hl=ja">GKE ログの管理</a></p>
+<h3 ref="52-cloud-monitoring-apm-によるサイトの信頼性のトラブルシューティング" >5.2. Cloud Monitoring APM によるサイトの信頼性のトラブルシューティング</h3><a class="anchor" id="52-cloud-monitoring-apm-によるサイトの信頼性のトラブルシューティング"></a>
 <p>Monitoring ワークスペースを作成して監視を行う。</p>
 <ul>
 <li>Cloud Console で、ナビゲーション メニュー &gt; [モニタリング] をクリック</li>
@@ -1567,27 +1589,6 @@ $ git push --tags
 </tbody>
 </table>
 <p>Cloud Platform Console の Cloud モニタリング（ナビゲーション メニュー &gt; [モニタリング]）で、左側のメニューにある [アラート]、[CREATE POLICY] の順にクリックし、SLO を監視するアラートを作成する。</p>
-<h2 ref="5-監視" >5. 監視</h2><a class="anchor" id="5-監視"></a>
-<ul>
-<li>GKE 用 Google Cloud オペレーション スイートの概要
-<ul>
-<li><a href="https://cloud.google.com/stackdriver/docs/solutions/gke?hl=ja#skm-howto">https://cloud.google.com/stackdriver/docs/solutions/gke?hl=ja#skm-howto</a></li>
-</ul>
-</li>
-</ul>
-<p>GKEには、Cloud Monitoring および Cloud Logging との統合機能が含まれている。（ <a href="https://cloud.google.com/stackdriver/docs/solutions/gke/prometheus?hl=ja">Prometheus の使用</a> はこちらを参照）<br>
-<code>gcloud container clusters create</code> コマンドでクラスタを作成した場合、デフォルトで有効になっているが、既存のクラスタで有効にする場合は以下のコマンドを実行する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud container clusters update <span style="color:#f92672">[</span>CLUSTER_NAME<span style="color:#f92672">]</span> --enable-stackdriver-kubernetes
-<span style="color:#75715e"># ちなみに削除は「-no-enable-stackdriver-kubernetes」オプション</span>
-</code></pre></div><p>なお、現在はベータ版であるが、「 <code>--enable-logging-monitoring-system-only</code> 」オプションでシステムログのみ収集可能になる。（デフォルトは全ログ）<br>
-システムログとは以下を指す。</p>
-<ul>
-<li>名前空間 <code>kube-system</code> 、 <code>istio-system</code> 、 <code>knative-serving</code> 、 <code>gke-system</code> 、 <code>config-management-system</code>  で実行中のすべての Pod</li>
-<li>コンテナ化されていない重要なサービス:  <code>docker/containerd</code> ランタイム、 <code>kubelet</code> 、 <code>kubelet-monitor</code> 、 <code>node-problem-detector</code> 、 <code>kube-container-runtime-monitor</code></li>
-<li>ノードのシリアルポート出力（VM インスタンスのメタデータ <code>serial-port-logging-enable</code> が true に設定されている場合）</li>
-</ul>
-<p>アプリケーションログは、 コンテナが STDOUT と STDERR に書き込まれたワークロードのログを収集する。</p>
-<p><a href="http://cloud.google.com/stackdriver/docs/solutions/gke/managing-logs?hl=ja">GKE ログの管理</a></p>
 		</div>
 
 

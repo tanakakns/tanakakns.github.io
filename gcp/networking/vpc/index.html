@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-10T22:56:51 JST">
+<meta name="revised" content="2021-05-11T22:29:53 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -950,6 +950,11 @@ if (!doNotTrack) {
 	    <ul>
 <li><a href="https://cloud.google.com/vpc/docs">Virtual Private Cloud（VPC）</a></li>
 </ul>
+<ol>
+<li><a href="#1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
+<li><a href="#2-vpc">VPC</a></li>
+<li><a href="#3-cloud-vpn">Cloud VPN</a></li>
+</ol>
 <h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
 <ul>
 <li>VPC ネットワーク
@@ -1100,7 +1105,23 @@ privatenet-allow-icmp-ssh-rdp     privatenet     INGRESS    1000      icmp,tcp:2
 NAME                 ZONE            MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
 （省略）
 privatenet-us-vm     us-central1-c   n1-standard-1               172.16.0.2   35.223.37.245   RUNNING
-</code></pre></div>
+</code></pre></div><h2 ref="3-cloud-vpn" >3. Cloud VPN</h2><a class="anchor" id="3-cloud-vpn"></a>
+<p><a href="https://cloud.google.com/network-connectivity/docs/vpn/concepts/overview?hl=ja#vpn-types">Cloud VPN</a> には以下の 2 種類ある。<br>
+サイト間の IPsec VPN 接続のみがサポートされる。<br>
+オンプレミスの VPN ルータ機器とそのグローバル IP を対象に接続することとなる。</p>
+<ul>
+<li>HA VPN
+<ul>
+<li>単一リージョン内の IPsec VPN 接続を使用して、オンプレミス ネットワークを VPC ネットワークに安全に接続できる</li>
+<li><strong>リージョン単位</strong> で、Cloud VPN ゲートウェイ と Cloud Router を構成し、それぞれ冗長化される</li>
+</ul>
+</li>
+<li>Classic VPN
+<ul>
+<li>レガシーのため省略</li>
+</ul>
+</li>
+</ul>
 		</div>
 
 

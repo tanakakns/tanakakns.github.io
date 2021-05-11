@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-10T22:56:51 JST">
+<meta name="revised" content="2021-05-11T22:29:53 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -958,11 +958,15 @@ if (!doNotTrack) {
 <li><a href="https://cloud.google.com/appengine/docs/standard">スタンダード環境</a>
 <ul>
 <li>サンドボックス内で実行される</li>
+<li>スケールアウト・インに対応（ 0 台までスケールインできる）</li>
+<li>VPC に接続されていない、利用するには <a href="https://cloud.google.com/vpc/docs/configure-serverless-vpc-access?hl=ja">サーバーレス VPC アクセス</a> を介する必要がる</li>
 </ul>
 </li>
 <li><a href="https://cloud.google.com/appengine/docs/flexible">フレキシブル環境</a>
 <ul>
 <li>Compute Engine 仮想マシン（VM）上の Docker コンテナ内で実行される</li>
+<li>スケールアップ・ダウンに対応（ スケールアウト・インではないので 0 台にはできない）</li>
+<li>VPC 環境で利用できる</li>
 </ul>
 </li>
 </ul>
