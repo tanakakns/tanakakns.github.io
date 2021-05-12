@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-11T22:29:53 JST">
+<meta name="revised" content="2021-05-12T21:28:57 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -515,6 +515,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/memorystore/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/memorystore/">Memorystore</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
               
@@ -573,6 +588,21 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/networking/iap/">Identity-Aware Proxy</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/interconnect/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/interconnect/">Cloud Interconnect</a>
       
         
       
@@ -1012,7 +1042,12 @@ if (!doNotTrack) {
 </li>
 <li>selector をサポートする点において ReplicationController と異なる</li>
 <li>set-based selector</li>
-<li>ReplicaSet の特殊な形として「 DaemonSet 」「 StatefulSet 」がある</li>
+<li>ReplicaSet の特殊な形として「 DaemonSet 」「 StatefulSet 」がある
+<ul>
+<li>DaemonSet ：全て(またはいくつか)のNodeが単一のPodのコピーを稼働させることを保証する。各ノードに 1 Pod ずつ起動したい（Fluentdなど）ときに有効。</li>
+<li>StatefulSet ：ReplicaSet がステートレスだとするとStatefulSetはステートフル。Podの識別子の順序管理など、個々の Pod の状態変化を前提として管理する。</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Deployments

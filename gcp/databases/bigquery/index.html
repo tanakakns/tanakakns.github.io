@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-11T22:29:53 JST">
+<meta name="revised" content="2021-05-12T21:28:57 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -517,6 +517,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/memorystore/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/memorystore/">Memorystore</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
               
@@ -575,6 +590,21 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/networking/iap/">Identity-Aware Proxy</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/interconnect/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/interconnect/">Cloud Interconnect</a>
       
         
       
@@ -950,7 +980,26 @@ if (!doNotTrack) {
 	    <p><a href="https://cloud.google.com/bigquery/docs">BigQuery</a> は Google Cloud Platform 上で動作する、ペタバイト規模のフルマネージド データ ウェアハウス。<br>
 データ アナリストやデータ サイエンティストは、サーバーを設定、管理することなく、大規模なデータセットに対するクエリ（ SQL ）やフィルタの実行、結果の集計、複雑な操作の実行が可能。<br>
 コマンドライン ツール（ <code>bq</code> ）またはウェブ コンソールを使用して、GCP プロジェクトに格納されているデータを管理、照会できる。</p>
-<h3 ref="コスト" >コスト</h3><a class="anchor" id="コスト"></a>
+<ol>
+<li>パーティション分割と有効期限</li>
+<li>コスト</li>
+</ol>
+<h2 ref="1-有効期限" >1. 有効期限</h2><a class="anchor" id="1-有効期限"></a>
+<p>BigQuery では以下のようにデータのパーティション分割と有効期限を設定できる。</p>
+<ul>
+<li><a href="https://cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time">パーティション分割</a>
+<ul>
+<li>取り込み時間パーティション分割テーブル</li>
+<li>日付、タイムスタンプ、日時パーティション分割テーブル</li>
+</ul>
+</li>
+<li><a href="http://cloud.google.com/bigquery/docs/best-practices-storage#use_the_expiration_settings_to_remove_unneeded_tables_and_partitions">有効期限</a>
+<ul>
+<li>パーティションやテーブルデータの有効期限を設定できる</li>
+</ul>
+</li>
+</ul>
+<h2 ref="2-コスト" >2. コスト</h2><a class="anchor" id="2-コスト"></a>
 <p>BigQuery のコストは大きく以下の 2 つある。</p>
 <ul>
 <li>分析料金

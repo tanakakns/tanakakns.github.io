@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-11T22:29:53 JST">
+<meta name="revised" content="2021-05-12T21:28:57 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -516,6 +516,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/memorystore/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/memorystore/">Memorystore</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
               
@@ -575,6 +590,21 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/networking/iap/">Identity-Aware Proxy</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/interconnect/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/interconnect/">Cloud Interconnect</a>
       
         
       
@@ -1250,6 +1280,26 @@ $ <span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do<
 <li>グローバル転送ルール</li>
 </ul>
 <h3 ref="324-https-ロードバランサの作成" >3.2.4. HTTP(S) ロードバランサの作成</h3><a class="anchor" id="324-https-ロードバランサの作成"></a>
+<p>外部 HTTP(S) ロードバランサの構成要素は以下の通り。</p>
+<ul>
+<li>グローバル外部 IP アドレス（ <code>addresses --global</code> ）：OSI 参照モデル第4層 - ネットワーク層：IP アドレス</li>
+<li>グローバル転送ルール（ <code>forwarding-rules</code> ）
+<ul>
+<li>IP アドレスが受信したトラフィックをプロキシへ転送する</li>
+</ul>
+</li>
+<li>HTTP プロキシ（ <code>target-http-proxies</code> ）： OSI 参照モデル第4層 - トランスポート層：TCP</li>
+<li>URL マップ（ <code>url-maps</code> ）： OSI 参照モデル第7層 - アプリケーション層：HTTP
+<ul>
+<li>ホストとパスに基づいてトラフィックを1つ以上の宛先に転送</li>
+</ul>
+</li>
+<li>バックエンドサービス（ backend-services ）
+<ul>
+<li>ヘルスチェック（　health-checks ）</li>
+</ul>
+</li>
+</ul>
 <p>負荷分散ターゲットの基となる インスタンステーンプレート　を作成する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instance-templates create lb-backend-template <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\

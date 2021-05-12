@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>
+	Memorystore :: テックまとめ
+</title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="revised" content="2021-05-12T21:28:57 JST">
@@ -11,7 +13,7 @@
 
 
 
-<title>Categories :: テックまとめ</title>
+<title>Memorystore :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -60,9 +62,9 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/categories/"
+  <body data-url="/gcp/databases/memorystore/"
 
-  class="">
+  class="hidetoc hidenextpage ">
 
 <style type="text/css">
   #debug{
@@ -99,7 +101,9 @@ if (!doNotTrack) {
     </div>
     
 
-    <div>	
+    <div>
+
+		
 	
 			
 		
@@ -114,7 +118,9 @@ if (!doNotTrack) {
     <article>
       
       <aside class="">
-        	
+        
+
+		
 	
 			
 		
@@ -314,14 +320,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -466,7 +473,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item parent haschildren
         item_level_$level
         ">
 
@@ -475,7 +482,8 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/databases/">データベース</a>
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
         <ul>
@@ -511,7 +519,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/databases/memorystore/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/memorystore/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -874,7 +882,9 @@ if (!doNotTrack) {
 
 
 
-</ul>	
+</ul>
+
+		
 	
 			
 		
@@ -886,45 +896,149 @@ if (!doNotTrack) {
 
       <section class="page ">
       
-
-
-
-<div class="extra-pagination inner">
-<nav class="pagination" role="navigation">
 	
-	<span class="page-number"> 1  0</span>
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
 	
-</nav>
-
-</div>
-
-
-
-<div style="margin-bottom:2rem"></div>
-
-<nav class="pagination" role="navigation">
+  
+    <li class="">
+      <a class="text-link" href="/gcp/">
+        GCP
+      </a>
+    </li>
 	
-	<span class="page-number"> 1  0</span>
+  	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/databases/">
+        データベース
+      </a>
+    </li>
 	
-</nav>
+  	
+  
+    <li class="active">
+      
+        Memorystore
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>Memorystore</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
 
 
 
+
+
+
+	<div class="content">
+	    <p><a href="https://cloud.google.com/memorystore/docs">Memorystore</a></p>
+<p>Memorystore には <a href="https://cloud.google.com/memorystore/docs/redis">Memorystore for Redis</a> と <a href="https://cloud.google.com/memorystore/docs/memcached">Memorystore for Memcached</a> の 2 種類ある。<br>
+ここでは、前者をベースに記載する。</p>
+<ol>
+<li>コンセプト</li>
+</ol>
+<h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
+<ul>
+<li>自作の VPC ではなく、 Google 管理の VPC や Google サービスネットワーク に作成される
+<ul>
+<li><strong>リージョン</strong> と <strong>ゾーン</strong> （代替ゾーン） を指定して作成できる</li>
+<li>VM インスタンスから接続するには 同一リージョン に作成する必要がある</li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/memorystore/docs/redis/networking?hl=ja#connection_modes">接続モード</a>
+<ul>
+<li><strong>ダイレクトピアリング</strong>
+<ul>
+<li>自身の VPC と Google 管理の VPC 間で <strong>VPC ピアリング</strong> を作成して接続する</li>
+</ul>
+</li>
+<li><strong>プライベートサービスアクセス</strong>
+<ul>
+<li>VPC の <a href="https://cloud.google.com/vpc/docs/private-services-access?hl=ja">プライベートサービスアクセス</a> で接続する</li>
+<li>こちらを利用すると Cloud VPN や Cloud Interconnect 経由でも接続できる</li>
+<li>共有 VPC になら VPC 内に Memorystore を作成できる？？？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>注意点
+<ul>
+<li>App Engine には Memorystore とは別途 <a href="https://cloud.google.com/appengine/docs/standard/php/memcache">App Engine memcache</a> というサービスがある
+<ul>
+<li>現状は推奨されておらず、 Memorystore を利用することが推奨されている</li>
+<li>App Engine memcache にはサービスレベル別に <strong>共有 memcache</strong> 、 <strong>専用 memcache</strong> があり、名前の通り後者の方がサービスレベルが高い</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+		</div>
+
+
+
+
+
+
+	
+	
 
       </section>
 
       
-      
-      <section class="right-menu ">
-      
-      
-      </section>
       
     </article>
     
     
     <footer>
-      	
+      
+
+		
 	
 			
 		

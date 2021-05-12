@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-11T22:29:53 JST">
+<meta name="revised" content="2021-05-12T21:28:57 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -516,6 +516,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/memorystore/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/memorystore/">Memorystore</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
               
@@ -575,6 +590,21 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/networking/iap/">Identity-Aware Proxy</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/interconnect/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/interconnect/">Cloud Interconnect</a>
       
         
       
@@ -954,6 +984,9 @@ if (!doNotTrack) {
 <li><a href="#1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
 <li><a href="#2-vpc">VPC</a></li>
 <li><a href="#3-cloud-vpn">Cloud VPN</a></li>
+<li><a href="#4-%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E6%8E%A5%E7%B6%9A">プライベート接続</a></li>
+<li><a href="#5-%E5%85%B1%E6%9C%89-vpc">共有 VPC</a></li>
+<li><a href="#6-cloud-cdn">Cloud CDN</a></li>
 </ol>
 <h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
 <ul>
@@ -1094,11 +1127,11 @@ Creating firewall...done.
 NAME                           NETWORK     DIRECTION  PRIORITY  ALLOW                 DENY  DISABLED
 privatenet-allow-icmp-ssh-rdp  privatenet  INGRESS    <span style="color:#ae81ff">1000</span>      icmp,tcp:22,tcp:3389        False
 </code></pre></div><p>作成したファイアウォールは以下のコマンドで確認する。</p>
-<pre><code>$ gcloud compute firewall-rules list --sort-by=NETWORK
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules list --sort-by<span style="color:#f92672">=</span>NETWORK
 NAME                              NETWORK        DIRECTION  PRIORITY  ALLOW                         DENY  DISABLED
 （省略）
-privatenet-allow-icmp-ssh-rdp     privatenet     INGRESS    1000      icmp,tcp:22,tcp:3389                False
-</code></pre><p>これまで作成した VPC、サブネット に VM インスタンスを作成するコマンドは以下。</p>
+privatenet-allow-icmp-ssh-rdp     privatenet     INGRESS    <span style="color:#ae81ff">1000</span>      icmp,tcp:22,tcp:3389                False
+</code></pre></div><p>これまで作成した VPC、サブネット に VM インスタンスを作成するコマンドは以下。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create privatenet-us-vm --zone<span style="color:#f92672">=</span>us-central1-c --machine-type<span style="color:#f92672">=</span>n1-standard-1 --subnet<span style="color:#f92672">=</span>privatesubnet-us
 </code></pre></div><p>作成したら VM インスタンスの存在を確認する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances list --sort-by<span style="color:#f92672">=</span>ZONE
@@ -1121,6 +1154,59 @@ privatenet-us-vm     us-central1-c   n1-standard-1               172.16.0.2   35
 <li>レガシーのため省略</li>
 </ul>
 </li>
+</ul>
+<h2 ref="4-プライベート接続" >4. プライベート接続</h2><a class="anchor" id="4-プライベート接続"></a>
+<ul>
+<li><a href="http://cloud.google.com/vpc/docs/private-service-connect">Private Service Connect</a>
+<ul>
+<li>VPC ネットワークの内部 IP アドレスを使用してプライベートエンドポイントを作成し、インターネットを介さず Google API に接続できるサービス</li>
+<li><code>storage.googleapis.com</code> などの公開サービスのエンドポイントではなく、 <code>storage-vialink1.p.googleapis.com</code> や <code>bigtable-adsteam.p.googleapis.com</code> など意味のある DNS 名で名前解決でき、 Google のネットワーク内でルーティングされる
+<ul>
+<li>Cloud Storage などの Google サービスだけでなく、 <strong>Cloud VPN</strong> または <strong>Cloud Interconnect</strong> 経由で接続しているオンプレミス ネットワークでも使用可能</li>
+</ul>
+</li>
+<li>Private Service Connect を使用するには、外部 IP アドレスのない VM インスタンスのプライマリインターフェースが、 <strong>限定公開の Google アクセス</strong> が有効になっているサブネット内に存在する必要がある</li>
+<li>Private Service Connect エンドポイントは、 <strong>ピアリングされた VPC ネットワークからアクセスできない</strong></li>
+</ul>
+</li>
+</ul>
+<h2 ref="5-共有-vpc" >5. 共有 VPC</h2><a class="anchor" id="5-共有-vpc"></a>
+<p><a href="https://cloud.google.com/vpc/docs/shared-vpc?hl=ja">共有 VPC</a> は、同じ <strong>組織</strong> （リソース階層のルート）内のプロジェクトで共有して利用できる VPC 。<br>
+共有 VPC に参加するプロジェクトは、 <strong>ホストプロジェクト</strong> または <strong>サービスプロジェクト</strong> のいずれかである必要がある。</p>
+<ul>
+<li>ホストプロジェクト
+<ul>
+<li><a href="https://cloud.google.com/vpc/docs/shared-vpc?hl=ja#iam_in_shared_vpc">共有 VPC 管理者</a> がホストプロジェクトとして有効化したプロジェクト</li>
+<li>共有 VPC 管理者が 1 つ以上の 共有 VPC を作成し、 1 つ以上のサービスプロジェクトが接続される</li>
+</ul>
+</li>
+<li>サービスプロジェクト
+<ul>
+<li>共有 VPC 管理者がホストプロジェクトに接続したプロジェクト</li>
+<li>接続したプロジェクトには、共有 VPC への参加が許可される</li>
+</ul>
+</li>
+<li>制約
+<ul>
+<li>1 つのプロジェクトを同時にホスト プロジェクトとサービス プロジェクトの両方にすることはできない</li>
+<li>ホストプロジェクトを複数作成できるが、各サービスプロジェクトは 1 つのホストプロジェクトにしか接続できない</li>
+</ul>
+</li>
+</ul>
+<h2 ref="6-cloud-cdn" >6. Cloud CDN</h2><a class="anchor" id="6-cloud-cdn"></a>
+<p><a href="https://cloud.google.com/cdn/docs/overview">Cloud CDN</a> は、Google のグローバル エッジ ネットワークを使用して、ユーザーの近くからコンテンツを配信する。<br>
+Cloud CDN は、外部 HTTP(S) 負荷分散の Cloud Load Balancing と連携し、前段に位置する。</p>
+<ul>
+<li>外部 HTTP(S) 負荷分散の Cloud Load Balancing を介した インスタンスグループ</li>
+<li>外部 HTTP(S) 負荷分散の Cloud Load Balancing を介した <a href="https://cloud.google.com/load-balancing/docs/negs">ネットワークエンドポイントグループ（ NEG ）</a></li>
+<li>Cloud Storage のバケット</li>
+</ul>
+<p>デフォルトでは、Cloud CDN は完全なリクエストURLを使用して <strong>キャッシュキー</strong> を構築する。<br>
+キャッシュヒット率を最適化するために、 <strong>カスタムキャッシュキー</strong> を使用できる。<br>
+キャッシュキーをカスタマイズして、プロトコル、ホスト、クエリ文字列の任意の組み合わせの追加や省略を行うことができる。<br>
+たとえば、異なるドメインで同じロゴを使用する 2 つのウェブサイトがあるとします。HTTP と HTTPS のどちらで表示されるかにかかわらず、ロゴはキャッシュに保存される必要がある。ロゴを保存するバックエンド サービスのキャッシュキーをカスタマイズするときに、[プロトコル] チェックボックスをオフにすると、HTTP と HTTPS によるリクエストがロゴのキャッシュエントリの一致としてカウントされるようになる。</p>
+<ul>
+<li><a href="https://cloud.google.com/cdn/docs/best-practices">コンテンツ配信のベスト プラクティス</a></li>
 </ul>
 		</div>
 

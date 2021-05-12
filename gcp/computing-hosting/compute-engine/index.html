@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-11T22:29:53 JST">
+<meta name="revised" content="2021-05-12T21:28:57 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -517,6 +517,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/memorystore/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/memorystore/">Memorystore</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
               
@@ -575,6 +590,21 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/networking/iap/">Identity-Aware Proxy</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/interconnect/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/interconnect/">Cloud Interconnect</a>
       
         
       
@@ -1077,6 +1107,7 @@ VM オプションとして「可用性ポリシー」「サービスアカウ�
 <li><a href="https://cloud.google.com/compute/docs/instance-groups/autohealing-instances-in-migs?hl=ja">ヘルスチェックと自動修復の設定</a></li>
 </ul>
 </li>
+<li><a href="https://cloud.google.com/compute/docs/instance-groups/rolling-out-updates-to-managed-instance-groups">ローリングアップデート</a></li>
 </ul>
 <h3 ref="12-マシンタイプ" >1.2. マシンタイプ</h3><a class="anchor" id="12-マシンタイプ"></a>
 <ul>
@@ -1364,7 +1395,8 @@ $ gcloud compute instances create apache --scopes storage-ro <span style="color:
 </code></pre></div><p>なお、ファイアウォールルールはインスタンスに付与された <strong>ネットワークタグ</strong> や <strong>サービスアカウント</strong> によって適用され、上記の <code>--target-tags</code> や <code>--target-service-accounts</code> オプションで設定された値と対応する。<br>
 インスタンス作成時（ <code>gcloud compute instances create</code> ）に <code>--tags</code> オプションを用いてネットワークタグを付与できるが、以下のコマンドで既存インスタンスにタグ付けすることもできる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances add-tags INSTANCE_NAME --tags<span style="color:#f92672">=</span>http-server
-</code></pre></div><h2 ref="5-ネットワークインターフェース" >5. ネットワークインターフェース</h2><a class="anchor" id="5-ネットワークインターフェース"></a>
+</code></pre></div><p>また、ファイアウォールルールの優先度は、0〜65535の整数で表現され、値が小さいほど優先度が高くなる。（ <a href="https://cloud.google.com/vpc/docs/firewalls#priority_order_for_firewall_rules">優先度</a> ）</p>
+<h2 ref="5-ネットワークインターフェース" >5. ネットワークインターフェース</h2><a class="anchor" id="5-ネットワークインターフェース"></a>
 <p>ネットワークインターフェースの付与は <code>gcloud compute instances create</code> コマンド実行時の <a href="https://cloud.google.com/sdk/gcloud/reference/compute/instances/create?hl=ja#--network-interface"><code>--network-interface</code></a> オプションで実施できる。<br>
 <code>--network-interface</code> オプションを省略したり、 <code>--network-interface=''</code> を指定すると <code>default</code> ネットワークに <code>nic0</code> が作成される。<br>
 <code>--network-interface</code> オプションを複数指定すると、指定した数だけ、指定した順に <code>nic0</code> <code>nic1</code> &hellip; が作成される。（ <a href="https://cloud.google.com/vpc/docs/create-use-multiple-interfaces?hl=ja">複数のネットワーク インターフェースを持つインスタンスの作成</a> ）</p>
