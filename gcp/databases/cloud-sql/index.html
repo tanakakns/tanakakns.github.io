@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-12T21:28:57 JST">
+<meta name="revised" content="2021-05-14T23:07:16 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -351,6 +351,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/monitoring/">監視</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/gcp/tools/" class="dd-item
         item_level_$level
         ">
@@ -610,21 +625,6 @@ if (!doNotTrack) {
       
     </li>
         </ul>
-    </li>
-              
-
-    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
-        item_level_$level
-        ">
-
-      
-      
-      
-      
-          <a href="/gcp/monitoring/">監視</a>
-      
-        
-      
     </li>
               
 
@@ -977,7 +977,14 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p><a href="https://cloud.google.com/sql/docs">Cloud SQL</a> はクラウド上の PostgreSQL 、 MySQL 、 SQL Server のリレーショナル データベースを簡単に設定、維持、運用、管理できるようにするフルマネージド データベース サービス。<br>
+	    <ol>
+<li>コンセプト</li>
+<li>インスタンスの作成</li>
+<li>レプリケーション</li>
+<li>ユースケース</li>
+</ol>
+<h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
+<p><a href="https://cloud.google.com/sql/docs">Cloud SQL</a> はクラウド上の PostgreSQL 、 MySQL 、 SQL Server のリレーショナル データベースを簡単に設定、維持、運用、管理できるようにするフルマネージド データベース サービス。<br>
 <strong>GCP 外からもアクセス可能</strong> なのが売りの 1 つらしい。<br>
 Cloud SQL が対応しているデータ形式には、ダンプファイル（.sql）と CSV ファイル（.csv）。</p>
 <ul>
@@ -994,7 +1001,7 @@ Cloud SQL が対応しているデータ形式には、ダンプファイル（.
 </ul>
 </li>
 </ul>
-<h2 ref="インスタンスの作成" >インスタンスの作成</h2><a class="anchor" id="インスタンスの作成"></a>
+<h2 ref="2-インスタンスの作成" >2. インスタンスの作成</h2><a class="anchor" id="2-インスタンスの作成"></a>
 <ul>
 <li><a href="https://cloud.google.com/sql/docs/mysql/create-instance#gcloud">インスタンスの作成</a></li>
 <li><a href="https://cloud.google.com/sdk/gcloud/reference/sql/instances/create"><code>gcloud sql instances create</code></a></li>
@@ -1010,17 +1017,40 @@ Cloud SQL が対応しているデータ形式には、ダンプファイル（.
 </ul>
 </li>
 </ul>
-<h2 ref="cloud-shell-から-gcloud-でインスタンスに接続" >Cloud Shell から <code>gcloud</code> でインスタンスに接続</h2><a class="anchor" id="cloud-shell-から-gcloud-でインスタンスに接続"></a>
+<h3 ref="21-cloud-shell-から-gcloud-でインスタンスに接続" >2.1. Cloud Shell から <code>gcloud</code> でインスタンスに接続</h3><a class="anchor" id="21-cloud-shell-から-gcloud-でインスタンスに接続"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud sql connect qwiklabs-demo --user<span style="color:#f92672">=</span>root
-</code></pre></div><h2 ref="cloud-sql-auth-proxy" >Cloud SQL Auth Proxy</h2><a class="anchor" id="cloud-sql-auth-proxy"></a>
+</code></pre></div><h2 ref="22-cloud-sql-auth-proxy" >2.2. Cloud SQL Auth Proxy</h2><a class="anchor" id="22-cloud-sql-auth-proxy"></a>
 <ul>
 <li>Cloud SQL Auth Proxy はローカル環境から Cloud SQL へ接続するための仕組み</li>
 <li>テスト用</li>
 <li>ローカル PC に 「Cloud SQL Auth Proxy クライアント」を導入して、 <code>gcloud</code> で認証することにより接続できる</li>
 <li><a href="https://cloud.google.com/sql/docs/mysql/quickstart-proxy-test">Cloud SQL Auth Proxy を使用するためのクイックスタート</a></li>
 </ul>
-<h2 ref="ユースケース" >ユースケース</h2><a class="anchor" id="ユースケース"></a>
-<h3 ref="vm-インスタンスから-cloud-sql-に接続する" >VM インスタンスから Cloud SQL に接続する</h3><a class="anchor" id="vm-インスタンスから-cloud-sql-に接続する"></a>
+<h2 ref="3-レプリケーション" >3. レプリケーション</h2><a class="anchor" id="3-レプリケーション"></a>
+<ul>
+<li>高可用性構成
+<ul>
+<li>HA を構成し、可用性を高める</li>
+<li>リードレプリカじゃない（ HA なので）</li>
+<li>同一リージョン・複数ゾーンで構成され、 <strong>フェールオーバーに対応</strong> する</li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/sql/docs/postgres/replication#read-replicas">リードレプリカ</a>
+<ul>
+<li>プライマリインスタンスの正確なコピーを作成し、読み取り専用のセカンダリインスタンスとして構成する</li>
+<li>プライマリインスタンスごとに最大 10 個のリードレプリカを作成できる</li>
+<li><strong>フェールオーバーできない</strong></li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/sql/docs/postgres/replication#cross-region-read-replicas">クロスリージョン リードレプリカ</a>
+<ul>
+<li>リードレプリカはクロスリージョンにも対応する</li>
+<li><strong>フェールオーバーできない</strong></li>
+</ul>
+</li>
+</ul>
+<h2 ref="4-ユースケース" >4. ユースケース</h2><a class="anchor" id="4-ユースケース"></a>
+<h3 ref="41-vm-インスタンスから-cloud-sql-に接続する" >4.1. VM インスタンスから Cloud SQL に接続する</h3><a class="anchor" id="41-vm-インスタンスから-cloud-sql-に接続する"></a>
 <ul>
 <li><code>default</code> ネットワークの <code>us-central1-a</code> ゾーンに <code>blog</code> VM インスタンスがある
 <ul>

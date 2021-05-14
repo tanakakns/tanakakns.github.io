@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-12T21:28:57 JST">
+<meta name="revised" content="2021-05-14T23:07:16 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -351,6 +351,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/monitoring/">監視</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/gcp/tools/" class="dd-item
         item_level_$level
         ">
@@ -610,21 +625,6 @@ if (!doNotTrack) {
       
     </li>
         </ul>
-    </li>
-              
-
-    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
-        item_level_$level
-        ">
-
-      
-      
-      
-      
-          <a href="/gcp/monitoring/">監視</a>
-      
-        
-      
     </li>
               
 
@@ -981,10 +981,50 @@ if (!doNotTrack) {
 データ アナリストやデータ サイエンティストは、サーバーを設定、管理することなく、大規模なデータセットに対するクエリ（ SQL ）やフィルタの実行、結果の集計、複雑な操作の実行が可能。<br>
 コマンドライン ツール（ <code>bq</code> ）またはウェブ コンソールを使用して、GCP プロジェクトに格納されているデータを管理、照会できる。</p>
 <ol>
+<li>アクセスコントロール</li>
 <li>パーティション分割と有効期限</li>
+<li>外部データソースに対するクエリ</li>
 <li>コスト</li>
 </ol>
-<h2 ref="1-有効期限" >1. 有効期限</h2><a class="anchor" id="1-有効期限"></a>
+<h2 ref="1-アクセスコントロール" >1. アクセスコントロール</h2><a class="anchor" id="1-アクセスコントロール"></a>
+<p><a href="https://cloud.google.com/bigquery/docs/access-control#bigquery">BigQuery の IAM 事前定義ロール</a></p>
+<ul>
+<li>BigQuery 管理者 <code>roles/bigquery.admin</code>
+<ul>
+<li>全権限</li>
+</ul>
+</li>
+<li>BigQuery データ編集者 <code>roles/bigquery.dataEditor</code>
+<ul>
+<li>テーブル・ビュー・データ・データセットの CRUD</li>
+<li>ジョブに関する権限は無い</li>
+</ul>
+</li>
+<li>BigQuery データオーナー <code>roles/bigquery.dataOwner</code>
+<ul>
+<li>BigQuery データ編集者 <code>roles/bigquery.dataEditor</code> の上位互換？</li>
+<li>ジョブに関する権限は無い</li>
+</ul>
+</li>
+<li>BigQuery データ閲覧者 <code>roles/bigquery.dataViewer</code>
+<ul>
+<li>テーブル・ビュー・データ・データセットの Read のみ</li>
+<li>ジョブに関する権限は無い</li>
+</ul>
+</li>
+<li>BigQuery ジョブユーザー <code>roles/bigquery.jobUser</code>
+<ul>
+<li>ジョブの作成・実行権限</li>
+<li>ジョブを通じてのみデータへアクセスできる（直接データを閲覧sうる権限は無い）</li>
+</ul>
+</li>
+<li>BigQuery メタデータ閲覧者 <code>roles/bigquery.metadataViewer</code>
+<ul>
+<li>メタデータ（テーブル・ビュー・データセット） の Read のみ</li>
+</ul>
+</li>
+</ul>
+<h2 ref="2-有効期限" >2. 有効期限</h2><a class="anchor" id="2-有効期限"></a>
 <p>BigQuery では以下のようにデータのパーティション分割と有効期限を設定できる。</p>
 <ul>
 <li><a href="https://cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time">パーティション分割</a>
@@ -999,7 +1039,16 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 ref="2-コスト" >2. コスト</h2><a class="anchor" id="2-コスト"></a>
+<h2 ref="3-外部データソースに対するクエリ" >3. 外部データソースに対するクエリ</h2><a class="anchor" id="3-外部データソースに対するクエリ"></a>
+<p>BigQuery は <a href="https://cloud.google.com/bigquery/external-data-sources">外部データソース</a> に対してクエリを発行できる。</p>
+<ul>
+<li>Cloud SQL</li>
+<li>Bigtable</li>
+<li>Cloud Storage</li>
+<li>Google ドライブ</li>
+</ul>
+<p>ただし、データの生合成が取れないなどの制約はある。</p>
+<h2 ref="4-コスト" >4. コスト</h2><a class="anchor" id="4-コスト"></a>
 <p>BigQuery のコストは大きく以下の 2 つある。</p>
 <ul>
 <li>分析料金

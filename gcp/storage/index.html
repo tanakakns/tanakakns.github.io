@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-12T21:28:57 JST">
+<meta name="revised" content="2021-05-14T23:07:16 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -351,6 +351,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/monitoring/">監視</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/gcp/tools/" class="dd-item
         item_level_$level
         ">
@@ -609,21 +624,6 @@ if (!doNotTrack) {
       
     </li>
         </ul>
-    </li>
-              
-
-    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
-        item_level_$level
-        ">
-
-      
-      
-      
-      
-          <a href="/gcp/monitoring/">監視</a>
-      
-        
-      
     </li>
               
 
@@ -1073,7 +1073,9 @@ if (!doNotTrack) {
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil acl ch -d AllUsers gs://YOUR-BUCKET-NAME/ada.jpg
 </code></pre></div><p>オブジェクトの削除。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil rm gs://YOUR-BUCKET-NAME/ada.jpg
-</code></pre></div><h3 ref="16-再試行方法httpscloudgooglecomstoragedocsretry-strategy" >1.6. <a href="https://cloud.google.com/storage/docs/retry-strategy">再試行方法</a></h3><a class="anchor" id="16-再試行方法httpscloudgooglecomstoragedocsretry-strategy"></a>
+</code></pre></div><h4 ref="151-boto-構成ファイル" >1.5.1. boto 構成ファイル</h4><a class="anchor" id="151-boto-構成ファイル"></a>
+<p><a href="">boto 構成ファイル</a> は、Amazon S3 SDK for Python でも使用される <code>~/.boto</code> ファイルで、 Cloud Storage へアクセスするための認証情報・暗号鍵情報を管理できる。</p>
+<h3 ref="16-再試行方法httpscloudgooglecomstoragedocsretry-strategy" >1.6. <a href="https://cloud.google.com/storage/docs/retry-strategy">再試行方法</a></h3><a class="anchor" id="16-再試行方法httpscloudgooglecomstoragedocsretry-strategy"></a>
 <p>Cloud Storage へのリクエストに失敗した場合に再試行するかどうかを決定するには、リクエストのタイプとべき等性を検討する必要がある。</p>
 <ul>
 <li>リトライ

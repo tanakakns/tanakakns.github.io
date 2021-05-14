@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-12T21:28:57 JST">
+<meta name="revised" content="2021-05-14T23:07:16 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -351,6 +351,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item parent active
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/monitoring/">監視</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/gcp/tools/" class="dd-item
         item_level_$level
         ">
@@ -609,21 +624,6 @@ if (!doNotTrack) {
       
     </li>
         </ul>
-    </li>
-              
-
-    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item parent active
-        item_level_$level
-        ">
-
-      
-      
-      
-      
-          <a href="/gcp/monitoring/">監視</a>
-      
-        
-      
     </li>
               
 
@@ -966,24 +966,32 @@ if (!doNotTrack) {
 
 	<div class="content">
 	    <ol>
-<li>オペレーションスイート</li>
+<li>コンセプト</li>
 </ol>
-<h2 ref="1-オペレーションスイートhttpscloudgooglecomproductsoperationshlja" >1. <a href="https://cloud.google.com/products/operations?hl=ja">オペレーションスイート</a></h2><a class="anchor" id="1-オペレーションスイートhttpscloudgooglecomproductsoperationshlja"></a>
-<p>旧称 Stackdriver</p>
+<h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
+<p><a href="https://cloud.google.com/products/operations?hl=ja">オペレーションスイート</a>（旧称 Stackdriver）</p>
+<ol>
+<li>Cloud Logging
 <ul>
-<li>Monitoring
+<li>リアルタイムでログを収集・分析する、大規模なフルマネージドサービス
 <ul>
-<li>アラート定義</li>
-<li>アップタイムチェック、稼働時間モニタリング</li>
-<li>AWSもまとめてみれる</li>
+<li>選択したログを分析でき、アプリケーションのトラブルシューティングが加速する</li>
+<li>ログに基づいた指標（メトリクス）定義</li>
+<li>フィルターや検索でアプリケーションログを見る</li>
+<li>VM インスタンスに対してはエージェントを導入する必要がある</li>
 </ul>
 </li>
-<li>Logging
-<ul>
-<li>ログに基づいた指標定義</li>
-<li>フィルターや検索でアプリケーションログを見る</li>
+<li>アプリケーションとシステムのログデータのほか、GKE 環境、VM、Google Cloud サービスからのカスタム ログデータも取り込める</li>
 <li>BigQuery、Google Cloud Storage、Pub/Subへのエクスポート</li>
-<li>エージェント導入できる</li>
+</ul>
+</li>
+<li>Cloud Monitoring
+<ul>
+<li>組み込みの大規模な指標オブザーバビリティ</li>
+<li>クラウドで実行されるアプリケーションのパフォーマンスや稼働時間、全体的な動作状況を確認できる</li>
+<li>メトリクス・イベント・メタデータを収集し、チャートやダッシュボードで可視化してアラート管理できる</li>
+<li>アラート定義、アップタイムチェック、稼働時間モニタリング</li>
+<li>AWSもまとめてみれる</li>
 </ul>
 </li>
 <li>Trace
@@ -1000,29 +1008,18 @@ if (!doNotTrack) {
 </li>
 <li>Error Reporting
 <ul>
-<li>エラーをレポート。通知</li>
+<li>エラーをレポート、通知</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>エージェント
+<ul>
+<li>インスタンスから情報を収集する VM に <a href="https://cloud.google.com/monitoring/agent">Monitoring エージェント</a> と <a href="https://cloud.google.com/logging/docs/agent?hl=ja">Logging エージェント</a> をインストールすることで収集可能となる</li>
 </ul>
 </li>
 </ul>
-<h2 ref="5-監視" >5. 監視</h2><a class="anchor" id="5-監視"></a>
-<p><a href="https://cloud.google.com/products/operations?hl=ja">Google Cloud のオペレーション スイート</a></p>
-<ul>
-<li>Cloud Logging
-<ul>
-<li>リアルタイムでログを管理して分析する、大規模なフルマネージドサービス</li>
-<li>アプリケーションとシステムのログデータのほか、GKE 環境、VM、Google Cloud サービスからのカスタム ログデータも取り込める</li>
-<li>選択したログを分析でき、アプリケーションのトラブルシューティングが加速する</li>
-</ul>
-</li>
-<li>Cloud Monitoring
-<ul>
-<li>組み込みの大規模な指標オブザーバビリティ</li>
-<li>クラウドで実行されるアプリケーションのパフォーマンスや稼働時間、全体的な動作状況を確認できる</li>
-<li>メトリクス・イベント・メタデータを収集し、チャートやダッシュボードで可視化してアラート管理できる</li>
-</ul>
-</li>
-</ul>
-<h3 ref="51-cloud-logging" >5.1. Cloud Logging</h3><a class="anchor" id="51-cloud-logging"></a>
+<h2 ref="1-cloud-logging" >1. Cloud Logging</h2><a class="anchor" id="1-cloud-logging"></a>
 <p>Cloud Logging は IAM を使用して Google Cloud リソースのロギングデータへの <a href="https://cloud.google.com/logging/docs/access-control?hl=ja#permissions_and_roles">アクセス制御</a> を実施できる。</p>
 <ul>
 <li><code>roles/logging.viewer</code>（ログビューア）（＝ <code>roles/viewer</code> ）
@@ -1077,7 +1074,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h4 ref="511-監査ログ" >5.1.1. 監査ログ</h4><a class="anchor" id="511-監査ログ"></a>
+<h3 ref="11-監査ログ" >1.1. 監査ログ</h3><a class="anchor" id="11-監査ログ"></a>
 <p>権限管理された上で、オペレーションを監視するログに以下の種類がある。（ <a href="https://cloud.google.com/logging/docs/audit">Cloud Audit Logs</a> ）</p>
 <ul>
 <li>管理アクティビティ監査ログ
@@ -1103,12 +1100,13 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h3 ref="52-cloud-monitoring" >5.2. Cloud Monitoring</h3><a class="anchor" id="52-cloud-monitoring"></a>
+<p>現状、アクティビティログというサービスがあるが、 Deprecated なので監査ログを使用すること。</p>
+<h2 ref="2-cloud-monitoring" >2. Cloud Monitoring</h2><a class="anchor" id="2-cloud-monitoring"></a>
 <ul>
 <li><a href="https://cloud.google.com/monitoring/workspaces?hl=ja#accounts">ワークスペース</a> は、1 つ以上の Google Cloud プロジェクトまたは AWS アカウントに含まれるリソースをモニタリングするためのツール
 <ul>
 <li>各ワークスペースには、Google Cloud プロジェクトや AWS アカウントなど、1～100 個のモニタリング対象プロジェクトを作成できる</li>
-<li>ワークスペースの数に制限はありませんが、Google CloudプロジェクトとAWSアカウントを複数のワークスペースでモニタリングすることはできない</li>
+<li>ワークスペースの数に制限はないが、Google CloudプロジェクトとAWSアカウントを複数のワークスペースでモニタリングすることはできない</li>
 </ul>
 </li>
 <li><strong>ホストプロジェクト</strong>
@@ -1127,6 +1125,7 @@ if (!doNotTrack) {
 </li>
 </ul>
 </li>
+<li><a href="https://cloud.google.com/monitoring/custom-metrics">カスタムメトリクス</a></li>
 </ul>
 		</div>
 
