@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-14T23:07:16 JST">
+<meta name="revised" content="2021-05-18T21:19:55 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -994,11 +994,14 @@ if (!doNotTrack) {
 <li>AWSもまとめてみれる</li>
 </ul>
 </li>
-<li>Trace
+<li><a href="https://cloud.google.com/trace/docs/overview">Cloud Trace</a>
 <ul>
-<li>Google App Engine 用のレイテンシのサンプリング</li>
-<li>URL ごとの統計</li>
-<li>レイテンシの分布</li>
+<li>各プログラミング言語に対応したライブラリを使用することで、HTTP ヘッダを挿入し、VM、コンテナー、AppEngine、トレースをキャプチャする
+<ul>
+<li>ロードバランサにも対応</li>
+</ul>
+</li>
+<li>URL ごとの統計、レイテンシの分布</li>
 </ul>
 </li>
 <li>Debugger
@@ -1020,7 +1023,8 @@ if (!doNotTrack) {
 </li>
 </ul>
 <h2 ref="1-cloud-logging" >1. Cloud Logging</h2><a class="anchor" id="1-cloud-logging"></a>
-<p>Cloud Logging は IAM を使用して Google Cloud リソースのロギングデータへの <a href="https://cloud.google.com/logging/docs/access-control?hl=ja#permissions_and_roles">アクセス制御</a> を実施できる。</p>
+<p>Cloud Logging は IAM を使用して Google Cloud リソースのロギングデータへの <a href="https://cloud.google.com/logging/docs/access-control?hl=ja#permissions_and_roles">アクセス制御</a> を実施できる。<br>
+ログは <strong>400 日間</strong> 保存されるが、延長することはできない。長期保存するには Cloud Storage などへエキスポートする必要がある。</p>
 <ul>
 <li><code>roles/logging.viewer</code>（ログビューア）（＝ <code>roles/viewer</code> ）
 <ul>
@@ -1101,6 +1105,27 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p>現状、アクティビティログというサービスがあるが、 Deprecated なので監査ログを使用すること。</p>
+<h3 ref="12-エキスポートシンク" >1.2. エキスポート・シンク</h3><a class="anchor" id="12-エキスポートシンク"></a>
+<p>Cloud Logging は以下のエキスポート・シンクをサポートする。<br>
+gcloud 、Cloud Console、Google Cloud APIs ログシンクでログシンクのエクスポート先を作成してから、<a href="https://cloud.google.com/logging/docs/export/aggregated_sinks">集約シンク</a> を作成する。</p>
+<ul>
+<li>Cloud Storage
+<ul>
+<li>Cloud Storage バケットに保存される JSON ファイル</li>
+</ul>
+</li>
+<li>BigQuery
+<ul>
+<li>BigQuery データセットに作成されるテーブ。</li>
+</ul>
+</li>
+<li>Pub/Sub
+<ul>
+<li>Pub/Sub トピックに配信される JSON メッセージ</li>
+<li>サードパーティによる Logging との統合サービス（Splunk など）をサポート</li>
+</ul>
+</li>
+</ul>
 <h2 ref="2-cloud-monitoring" >2. Cloud Monitoring</h2><a class="anchor" id="2-cloud-monitoring"></a>
 <ul>
 <li><a href="https://cloud.google.com/monitoring/workspaces?hl=ja#accounts">ワークスペース</a> は、1 つ以上の Google Cloud プロジェクトまたは AWS アカウントに含まれるリソースをモニタリングするためのツール
