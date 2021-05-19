@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-18T21:19:55 JST">
+<meta name="revised" content="2021-05-19T23:12:24 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -381,7 +381,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/access-control/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/access-control-and-security/" class="dd-item
         item_level_$level
         ">
 
@@ -389,7 +389,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/gcp/access-control/">アクセス制御</a>
+          <a href="/gcp/access-control-and-security/">アクセス制御とセキュリティ</a>
       
         
       
@@ -986,6 +986,85 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
+<h2 ref="データ分析パイプライン" >データ分析パイプライン</h2><a class="anchor" id="データ分析パイプライン"></a>
+<p>「取り込み」 -&gt; 「処理」 -&gt; 「分析」 -&gt; 「可視化」の順で処理をする。</p>
+<ul>
+<li>取り込み
+<ul>
+<li>Cloud Pub/Sub：ストリーミングの場合はこちら</li>
+<li>Cloud Storage：ストリーミングではなく一時保存する場合はこちらでも</li>
+</ul>
+</li>
+<li>処理
+<ul>
+<li>Cloud Dataflow（推奨）： Apache Beam 準拠の ETL 処理、サーバレス</li>
+<li>Cloud Dataproc：マネージド Hadoop/Spark、クラスタ管理が必要、既存の Hadoop/Sparkジョブがある場合はこちらでも</li>
+</ul>
+</li>
+<li>分析
+<ul>
+<li>BigQuery</li>
+</ul>
+</li>
+<li>可視化
+<ul>
+<li>DataPortal</li>
+</ul>
+</li>
+</ul>
+<h2 ref="dataflow-と-dataproc" >Dataflow と Dataproc</h2><a class="anchor" id="dataflow-と-dataproc"></a>
+<ul>
+<li>Google Cloud Dataflow
+<ul>
+<li>Dataflowは、サーバーレス、高速、費用効果の高い統合ストリームおよびバッチデータ処理</li>
+<li>バッチパイプラインとストリーミングパイプラインの両方に適する</li>
+<li>参照：https://cloud.google.com/dataflow</li>
+</ul>
+</li>
+<li>Google Cloud Dataproc
+<ul>
+<li>オープンソースのデータと分析の処理をクラウドで高速、簡単、かつ安全にする</li>
+<li>フルマネージドのApache Spark、Apache Hadoop、Presto、およびその他のOSSクラスターを構築できる</li>
+<li>しかし、Dataprocは、バッチおよびストリーム処理には適していない</li>
+<li>参照：https://cloud.google.com/dataproc#section-5</li>
+</ul>
+</li>
+</ul>
+<h2 ref="その他ビッグデータ系サービス" >その他ビッグデータ系サービス</h2><a class="anchor" id="その他ビッグデータ系サービス"></a>
+<ul>
+<li>Cloud Data Loss Prevention
+<ul>
+<li>GCP内で処理されるデータを監査し、機密データ(電話番号、メールアドレス等の個人情報等）の有無の検知やマスキング処理等が可能なサービス</li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/dataprep/">Dataprep by Trifacta</a>
+<ul>
+<li>分析用に異種の大規模なデータセット（構造化データと非構造化データ）の視覚的な探索、データクレンジング、構造化されたデータに変換して準備を行うためのインテリジェントデータサービス</li>
+<li>Cloud Storage・BigQuery・デスクトップに保存されたデータを処理して、データを洗練してからCloud Storage・BigQueryにエクスポートできる</li>
+<li>Qwiklabs の <a href="https://googlecourses.qwiklabs.com/focuses/11580?parent=catalog">Cloud Dataprep でデータ変換パイプラインを作成する</a> で体験できる。</li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/datalab">Cloud Datalab</a>
+<ul>
+<li>データを探索、分析、変換、視覚化し、GCPで機械学習モデルを構築するために作成された強力なインタラクティブツール</li>
+<li>Compute Engineで実行され、複数のクラウドサービスに簡単に接続できるため、データサイエンスのタスクに集中できる</li>
+<li>一方でデータのクレンジングには適さない</li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/composer">Cloud Composer</a>
+<ul>
+<li>Apache Airflow で構築された、フルマネージドのワークフローオーケストレーションサービス</li>
+</ul>
+</li>
+</ul>
+<h2 ref="dataprep-by-trifacta" >Dataprep by Trifacta</h2><a class="anchor" id="dataprep-by-trifacta"></a>
+<p>ここでは、 Dataprep by Trifacta を利用して以下を実施する。</p>
+<ul>
+<li>BigQuery データセットを Cloud Dataprep に接続する。</li>
+<li>Cloud Dataprep でデータセットの品質を調べる。</li>
+<li>Cloud Dataprep でデータ変換パイプラインを作成する。</li>
+<li>BigQuery に出力される変換ジョブをスケジュールする。</li>
+</ul>
 		</div>
 
 

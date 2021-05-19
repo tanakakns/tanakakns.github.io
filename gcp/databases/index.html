@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-18T21:19:55 JST">
+<meta name="revised" content="2021-05-19T23:12:24 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -381,7 +381,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/access-control/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/access-control-and-security/" class="dd-item
         item_level_$level
         ">
 
@@ -389,7 +389,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/gcp/access-control/">アクセス制御</a>
+          <a href="/gcp/access-control-and-security/">アクセス制御とセキュリティ</a>
       
         
       
@@ -975,59 +975,68 @@ if (!doNotTrack) {
 <th style="text-align:left">モデル</th>
 <th style="text-align:left">提供</th>
 <th style="text-align:left">ユースケース</th>
+<th style="text-align:left">備考</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><a href="./cloud-sql">Cloud SQL</a> ※<a href="https://cloud.google.com/sql/docs">doc</a></td>
+<td style="text-align:left"><a href="./cloud-sql">Cloud SQL</a></td>
 <td style="text-align:left">リレーショナル（ SQL ）</td>
 <td style="text-align:left">インスタンス</td>
 <td style="text-align:left">小規模（TB級）、水平スケーラビリティ不可</td>
+<td style="text-align:left"><a href="https://cloud.google.com/sql/docs">doc</a></td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="./cloud-spanner">Cloud Spanner</a> ※<a href="https://cloud.google.com/spanner/docs">doc</a></td>
+<td style="text-align:left"><a href="./cloud-spanner">Cloud Spanner</a></td>
 <td style="text-align:left">リレーショナル（ SQL ）</td>
 <td style="text-align:left">インスタンス？</td>
 <td style="text-align:left">大規模（PB級）、水平スケーラビリティ、グローバル分散</td>
+<td style="text-align:left"><a href="https://cloud.google.com/spanner/docs">doc</a></td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="./bare-metal-solution">Bare Metal Solution</a> ※<a href="https://cloud.google.com/bare-metal/docs">doc</a></td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-<td></td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="./cloud-bigtable">Cloud Bigtable</a> ※<a href="https://cloud.google.com/bigtable/docs">doc</a></td>
+<td style="text-align:left"><a href="./cloud-bigtable">Cloud Bigtable</a></td>
 <td style="text-align:left">Key-Value（ HBase 互換）</td>
 <td style="text-align:left"></td>
 <td style="text-align:left">大容量（PB級）、超低レイテンシ（レイテンシが許容されるなら BQ ）</td>
+<td style="text-align:left"><a href="https://cloud.google.com/bigtable/docs">doc</a></td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="./firestore">Firestore</a> ※旧 <a href="https://cloud.google.com/datastore/docs?hl=ja">Datastore</a> ※<a href="https://cloud.google.com/firestore/docs">doc</a></td>
-<td style="text-align:left">ドキュメント</td>
+<td style="text-align:left"><a href="./firestore-native">Firestore ネイティブモード</a></td>
+<td style="text-align:left">ドキュメント（ドキュメントとコレクション）</td>
 <td style="text-align:left">サーバレス</td>
 <td style="text-align:left">TB級、トランザクション可能、サーバレス、水平スケーラビリティ</td>
+<td style="text-align:left"><a href="https://cloud.google.com/firestore/docs">doc</a>、<a href="https://firebase.google.com/products/realtime-database/">Firebase Realtime Database</a>の後継</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="./firebase-realtime-database">Firebase Realtime Database</a> ※<a href="https://firebase.google.com/products/realtime-database/">doc</a></td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-<td></td>
+<td style="text-align:left"><a href="./firestore-datastore">Firestore Datastore モード</a></td>
+<td style="text-align:left">ドキュメント（エンティティと種類）</td>
+<td style="text-align:left">サーバレス</td>
+<td style="text-align:left">TB級、トランザクション可能、サーバレス、水平スケーラビリティ</td>
+<td style="text-align:left"><a href="https://cloud.google.com/firestore/docs/concepts">doc</a>、<a href="https://cloud.google.com/datastore/docs?hl=ja">Datastore</a>の後継</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="./memorystore">Memorystore</a> ※<a href="https://cloud.google.com/memorystore/docs">doc</a></td>
+<td style="text-align:left"><a href="./memorystore">Memorystore</a></td>
 <td style="text-align:left">インメモリ</td>
 <td style="text-align:left"></td>
 <td style="text-align:left">キャッシュ、超低レイテンシ、非永続化</td>
+<td style="text-align:left"><a href="https://cloud.google.com/memorystore/docs">doc</a></td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="./bigquery">BigQuery</a> ※<a href="https://cloud.google.com/bigquery/docs?hl=ja">doc</a></td>
+<td style="text-align:left"><a href="./bigquery">BigQuery</a></td>
 <td style="text-align:left">DWH（ SQL ）</td>
 <td style="text-align:left"></td>
 <td style="text-align:left">大規模（PB級）なデータアナリティクス</td>
+<td style="text-align:left"><a href="https://cloud.google.com/bigquery/docs?hl=ja">doc</a></td>
 </tr>
 </tbody>
 </table>
+<ul>
+<li><a href="https://cloud.google.com/firestore/docs/firestore-or-datastore?hl=ja#feature_comparison">ネイティブ モードと Datastore モードからの選択</a>
+<ul>
+<li>モバイルと直接通信の場合はネイティブモード、サーバとの直接通信の場合は Datastore モードが推奨</li>
+</ul>
+</li>
+</ul>
 <h2 ref="データ移行" >データ移行</h2><a class="anchor" id="データ移行"></a>
 <ul>
 <li>gsutil ：オンプレミスデータの転送量が少ない場合
@@ -1051,32 +1060,6 @@ if (!doNotTrack) {
 </ul>
 </li>
 <li>BigQuery Data Transfer Service ：あらかじめ設定されたスケジュールに基づき、BigQuery へのデータの移動を自動化するマネージド サービス</li>
-</ul>
-<h2 ref="データ分析パイプライン" >データ分析パイプライン</h2><a class="anchor" id="データ分析パイプライン"></a>
-<p>「取り込み」 -&gt; 「処理」 -&gt; 「分析」 -&gt; 「可視化」の順で処理をする。</p>
-<ul>
-<li>取り込み
-<ul>
-<li>Cloud Pub/Sub：ストリーミングの場合はこちら</li>
-<li>Cloud Storage：ストリーミングではなく一時保存する場合はこちらでも</li>
-</ul>
-</li>
-<li>処理
-<ul>
-<li>Cloud Dataflow（推奨）： Apache Beam 準拠の ETL 処理、サーバレス</li>
-<li>Cloud Dataproc：マネージド Hadoop/Spark、クラスタ管理が必要、既存の Hadoop/Sparkジョブがある場合はこちらでも</li>
-</ul>
-</li>
-<li>分析
-<ul>
-<li>BigQuery</li>
-</ul>
-</li>
-<li>可視化
-<ul>
-<li>DataPortal</li>
-</ul>
-</li>
 </ul>
 		</div>
 

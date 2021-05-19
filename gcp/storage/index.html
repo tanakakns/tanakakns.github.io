@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-18T21:19:55 JST">
+<meta name="revised" content="2021-05-19T23:12:24 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -381,7 +381,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/access-control/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/access-control-and-security/" class="dd-item
         item_level_$level
         ">
 
@@ -389,7 +389,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/gcp/access-control/">アクセス制御</a>
+          <a href="/gcp/access-control-and-security/">アクセス制御とセキュリティ</a>
       
         
       
@@ -1027,7 +1027,11 @@ if (!doNotTrack) {
 </table>
 <h3 ref="13-ライフサイクル" >1.3. ライフサイクル</h3><a class="anchor" id="13-ライフサイクル"></a>
 <p>古いデータはアーカイブしたり削除したいといったニーズに対応する、オブジェクト管理に関する運用を効率化するための機構。<br>
-複数の条件と、その条件にマッチした際の操作（削除 or ストレージクラスの変更）を設定できる。</p>
+複数の条件と、その条件にマッチした際の操作（削除 or ストレージクラスの変更）を設定できる。<br>
+<code>gsutil lifecycle set</code> コマンドで 1 つ以上のバケットにライフサイクル管理構成を設定できる。<br>
+コマンドラインで指定する <code>config-json-file</code> は、ライフサイクル構成 JSON ドキュメントを含むローカルファイルへのパスである必要がある。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil lifecycle set &lt;config-json-file&gt; gs://&lt;bucket_name&gt;...
+</code></pre></div><p>参照：https://cloud.google.com/storage/docs/gsutil/commands/lifecycle</p>
 <h3 ref="14-バージョニング" >1.4. バージョニング</h3><a class="anchor" id="14-バージョニング"></a>
 <p>説明省略。</p>
 <h3 ref="15-gsutil" >1.5. <code>gsutil</code></h3><a class="anchor" id="15-gsutil"></a>

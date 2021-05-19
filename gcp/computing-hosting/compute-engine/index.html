@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-18T21:19:55 JST">
+<meta name="revised" content="2021-05-19T23:12:24 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -381,7 +381,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/access-control/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/access-control-and-security/" class="dd-item
         item_level_$level
         ">
 
@@ -389,7 +389,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/gcp/access-control/">アクセス制御</a>
+          <a href="/gcp/access-control-and-security/">アクセス制御とセキュリティ</a>
       
         
       
@@ -987,6 +987,7 @@ if (!doNotTrack) {
 <li><a href="#6-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A">インスタンスへの接続</a></li>
 <li><a href="#7-cloud-monitoring--cloud-logging-%E9%80%A3%E6%90%BA">Cloud Monitoring / Cloud Logging 連携</a></li>
 <li><a href="#8-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88">サービスアカウント</a></li>
+<li><a href="#9-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97">アクセススコープ</a></li>
 <li><a href="#9-%E3%82%B1%E3%83%BC%E3%82%B9%E3%82%B9%E3%82%BF%E3%83%87%E3%82%A3">ケーススタディ</a></li>
 </ol>
 <ul>
@@ -1003,6 +1004,7 @@ if (!doNotTrack) {
 <li><a href="#16-%E3%82%B2%E3%82%B9%E3%83%88%E7%92%B0%E5%A2%83">ゲスト環境</a></li>
 <li><a href="#17-%E3%83%A1%E3%82%BF%E3%83%87%E3%83%BC%E3%82%BF%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC">メタデータサーバー</a></li>
 <li><a href="#18-%E3%83%A9%E3%82%A4%E3%83%97%E3%83%9E%E3%82%A4%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">ライブマイグレーション</a></li>
+<li><a href="#19-%E3%83%A9%E3%83%99%E3%83%AB">ラベル</a></li>
 </ol>
 <h3 ref="11-vm-インスタンス" >1.1. VM インスタンス</h3><a class="anchor" id="11-vm-インスタンス"></a>
 <p>マシンタイプとストレージからなる。<br>
@@ -1238,6 +1240,8 @@ coreos-stable-1911-3-0-v20181106  coreos-cloud  coreos-stable              READY
 </ul>
 </li>
 </ul>
+<h3 ref="19-ラベル" >1.9. ラベル</h3><a class="anchor" id="19-ラベル"></a>
+<p>Compute の各リソースには <a href="https://cloud.google.com/compute/docs/labeling-resources">リソースのラベル付け</a> を行うことができ、これにより簡単にリソースをグループ化することができる。</p>
 <h2 ref="2-インスタンス作成" >2. インスタンス作成</h2><a class="anchor" id="2-インスタンス作成"></a>
 <ol>
 <li><a href="#21-gcloud-%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E8%A8%AD%E5%AE%9A">gcloud コマンドの設定</a></li>
@@ -1384,6 +1388,14 @@ $ gcloud compute instances create apache --scopes storage-ro <span style="color:
 </ul>
 </li>
 </ul>
+<h3 ref="31-永続ディスクの操作" >3.1. 永続ディスクの操作</h3><a class="anchor" id="31-永続ディスクの操作"></a>
+<p>永続ディスクは、インスタンスを停止することなく <a href="https://cloud.google.com/compute/docs/disks/working-with-persistent-disks#resize_pd">サイズを変更</a> することができる。<br>
+以下の手順で行う。</p>
+<ol>
+<li>ディスクのサイズ変更：<code>gcloud compute disks resize DISK_NAME --size DISK_SIZE</code></li>
+<li>ディスクのバックアップ</li>
+<li>ファイルシステムとパーティションのサイズの変更</li>
+</ol>
 <h2 ref="4-ファイアウォールルールの作成" >4. ファイアウォールルールの作成</h2><a class="anchor" id="4-ファイアウォールルールの作成"></a>
 <p>以下のコマンドでファイアウォールルールを作成する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules create allow-http <span style="color:#ae81ff">\
@@ -1466,19 +1478,32 @@ gcloud projects add-iam-policy-binding PROJECT_ID <span style="color:#ae81ff">\
 </code></pre></div><ul>
 <li><a href="https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=ja#best_practices">ベストプラクティス</a>
 <ul>
-<li>Compute Engine のデフォルトのサービス アカウントを使用せずに、新しいサービス アカウントを作成</li>
+<li>Compute Engine のデフォルトのサービスアカウントを使用せずに、新しいサービスアカウントを作成</li>
 <li>必要なリソースについてのみ、このサービス アカウントに IAM ロールを付与</li>
 <li>このサービス アカウントとして実行するようにインスタンスを構成</li>
-<li>インスタンスの <a href="https://www.googleapis.com/auth/cloud-platform">https://www.googleapis.com/auth/cloud-platform</a> スコープにすべての Google Cloud APIs への完全アクセス権を与えるには、インスタンスの IAM 権限をサービス アカウントの IAM のロールで完全に決定するようにする</li>
 </ul>
 </li>
 </ul>
-<h2 ref="9-ケーススタディ" >9. ケーススタディ</h2><a class="anchor" id="9-ケーススタディ"></a>
+<h2 ref="9-アクセススコープ" >9. アクセススコープ</h2><a class="anchor" id="9-アクセススコープ"></a>
+<p><strong>アクセススコープ</strong> は、インスタンスの権限を指定するレガシーな方法。<br>
+セキュリティメカニズムではなく、gcloud ツールまたはクライアントライブラリからのリクエストで使用されるデフォルトの OAuth スコープを定義するもの。<br>
+これは、gRPC や SignBlob API など、OAuth を介して認証を受けないリクエストには影響しないことに注意。<br>
+<code>gcloud compute instances create</code> コマンドの <code>--scopes</code> オプションを使用して、 VM インスタンスに付与することができる。<br>
+以下のようなアクセススコープがある。</p>
+<ul>
+<li><code>https://www.googleapis.com/auth/cloud-platform</code> ：すべての Google Cloud リソースに対する完全アクセス権</li>
+<li><code>https://www.googleapis.com/auth/compute</code> ：Compute Engine メソッドに対するフル コントロール アクセス権</li>
+<li><code>https://www.googleapis.com/auth/compute.readonly</code> ：Compute Engine メソッドに対する読み取り専用アクセス権</li>
+<li><code>https://www.googleapis.com/auth/devstorage.read_only</code> ：Cloud Storage に対する読み取り専用アクセス権</li>
+<li><code>https://www.googleapis.com/auth/logging.write</code> ：Compute Engine ログに対する書き込みアクセス権</li>
+</ul>
+<p>ベストプラクティスとしては、 VM インスタンスのアクセススコープに完全な権限( <code>https://www.googleapis.com/auth/cloud-platform</code> )を付与し、サービスアカウントの IAM ロールで権限を絞るのがよい。</p>
+<h2 ref="10-ケーススタディ" >10. ケーススタディ</h2><a class="anchor" id="10-ケーススタディ"></a>
 <ol>
 <li><a href="#91-apache-%E3%81%AE-vm-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%92%E4%BD%9C%E6%88%90">Apache の VM インスタンスを作成</a></li>
 <li><a href="#92-%E8%B8%8F%E3%81%BF%E5%8F%B0%E7%B5%8C%E7%94%B1%E3%81%AE-rdp">踏み台経由の RDP</a></li>
 </ol>
-<h3 ref="91-apache-の-vm-インスタンスを作成" >9.1. Apache の VM インスタンスを作成</h3><a class="anchor" id="91-apache-の-vm-インスタンスを作成"></a>
+<h3 ref="101-apache-の-vm-インスタンスを作成" >10.1. Apache の VM インスタンスを作成</h3><a class="anchor" id="101-apache-の-vm-インスタンスを作成"></a>
 <p>要件は以下。</p>
 <ul>
 <li>Linux 仮想マシン インスタンスの作成</li>
@@ -1541,7 +1566,7 @@ $ gcloud compute instances add-tags apache --tags<span style="color:#f92672">=</
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>apt-get update
 apt-get install -y apache2
-</code></pre></div><h3 ref="92-踏み台経由の-rdp" >9.2. 踏み台経由の RDP</h3><a class="anchor" id="92-踏み台経由の-rdp"></a>
+</code></pre></div><h3 ref="102-踏み台経由の-rdp" >10.2. 踏み台経由の RDP</h3><a class="anchor" id="102-踏み台経由の-rdp"></a>
 <p>要件は以下。</p>
 <ul>
 <li>環境は <code>us-central1</code> リージョン <code>us-central1-a</code> ゾーンに構築する</li>

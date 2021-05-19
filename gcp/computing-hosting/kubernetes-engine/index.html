@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-18T21:19:55 JST">
+<meta name="revised" content="2021-05-19T23:12:24 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -381,7 +381,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/access-control/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/access-control-and-security/" class="dd-item
         item_level_$level
         ">
 
@@ -389,7 +389,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/gcp/access-control/">アクセス制御</a>
+          <a href="/gcp/access-control-and-security/">アクセス制御とセキュリティ</a>
       
         
       
@@ -1040,6 +1040,38 @@ The following clusters will be deleted.
 Do you want to <span style="color:#66d9ef">continue</span> <span style="color:#f92672">(</span>Y/n<span style="color:#f92672">)</span>?  Y
 Deleting cluster my-cluster...done.
 Deleted <span style="color:#f92672">[</span>https://container.googleapis.com/v1/projects/qwiklabs-gcp-01-47d564cd39d1/zones/us-central1-a/clusters/my-cluster<span style="color:#f92672">]</span>.
+</code></pre></div><h3 ref="21-限定公開-kubernetes-クラスタのセットアップ" >2.1. 限定公開 Kubernetes クラスタのセットアップ</h3><a class="anchor" id="21-限定公開-kubernetes-クラスタのセットアップ"></a>
+<p>Kubernetes Engine における限定公開クラスタとは、公共のインターネットからマスターにアクセスできないようにするクラスタ。<br>
+このクラスタのノードにはプライベート アドレスしかない（パブリック IP アドレスがない）ため、隔離された環境でワークロードが実行される。<br>
+ノードとマスターは、VPC ピアリングを使用して相互に通信する。<br>
+Kubernetes Engine API では、アドレス範囲が CIDR（Classless Inter-Domain Routing）ブロックとして表される。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud beta container clusters create private-cluster <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --private-cluster <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --master-ipv4-cidr 172.16.0.16/28 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --enable-ip-alias <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --create-subnetwork <span style="color:#e6db74">&#34;&#34;</span>
+</code></pre></div><p>なお、カスタム サブネットワークを使用する限定公開クラスタの作成は以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サブネットワークとセカンダリ範囲を作成</span>
+$ gcloud compute networks subnets create my-subnet <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --network default <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --range 10.0.4.0/22 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --enable-private-ip-google-access <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --region us-central1 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --secondary-range my-svc-range<span style="color:#f92672">=</span>10.0.32.0/20,my-pod-range<span style="color:#f92672">=</span>10.4.0.0/14
+<span style="color:#75715e"># サブネットワークを使用する限定公開クラスタを作成</span>
+$ gcloud beta container clusters create private-cluster2 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --private-cluster <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --enable-ip-alias <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --master-ipv4-cidr 172.16.0.32/28 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --subnetwork my-subnet <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --services-secondary-range-name my-svc-range <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --cluster-secondary-range-name my-pod-range
+
+<span style="color:#75715e"># 外部アドレス範囲を承認（プライベートアクセスできる、IP の CIDR を設定する）</span>
+<span style="color:#75715e"># [MY_EXTERNAL_RANGE] は、前の出力で取得した外部アドレスの CIDR 範囲に置き換え</span>
+$ gcloud container clusters update private-cluster2 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --enable-master-authorized-networks <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --master-authorized-networks <span style="color:#f92672">[</span>MY_EXTERNAL_RANGE<span style="color:#f92672">]</span>
 </code></pre></div><h2 ref="3-デプロイ管理" >3. デプロイ管理</h2><a class="anchor" id="3-デプロイ管理"></a>
 <h3 ref="31-deployment-オブジェクトの詳細" >3.1. Deployment オブジェクトの詳細</h3><a class="anchor" id="31-deployment-オブジェクトの詳細"></a>
 <p><code>kubectl explain</code> コマンドを使用すると、Deployment などのオブジェクトの設定項目に関する情報が取得できる。</p>
