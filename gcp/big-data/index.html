@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-20T09:59:50 JST">
+<meta name="revised" content="2021-05-20T15:21:34 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1041,6 +1041,7 @@ if (!doNotTrack) {
 <ul>
 <li>分析用に異種の大規模なデータセット（構造化データと非構造化データ）の視覚的な探索、データクレンジング、構造化されたデータに変換して準備を行うためのインテリジェントデータサービス</li>
 <li>Cloud Storage・BigQuery・デスクトップに保存されたデータを処理して、データを洗練してからCloud Storage・BigQueryにエクスポートできる</li>
+<li>Chrome ブラウザでのみ操作可能</li>
 <li>Qwiklabs の <a href="https://googlecourses.qwiklabs.com/focuses/11580?parent=catalog">Cloud Dataprep でデータ変換パイプラインを作成する</a> で体験できる。</li>
 </ul>
 </li>
@@ -1058,13 +1059,182 @@ if (!doNotTrack) {
 </li>
 </ul>
 <h2 ref="dataprep-by-trifacta" >Dataprep by Trifacta</h2><a class="anchor" id="dataprep-by-trifacta"></a>
-<p>ここでは、 Dataprep by Trifacta を利用して以下を実施する。</p>
+<p>Cloud Dataprep は Chrome ブラウザからのみ利用できる。<br>
+Cloud Console から以下の手順で開く。</p>
 <ul>
-<li>BigQuery データセットを Cloud Dataprep に接続する。</li>
-<li>Cloud Dataprep でデータセットの品質を調べる。</li>
-<li>Cloud Dataprep でデータ変換パイプラインを作成する。</li>
-<li>BigQuery に出力される変換ジョブをスケジュールする。</li>
+<li>ナビゲーション メニューを開き、[Dataprep] を選択 -&gt; 利用規約に同意 -&gt; いろいろ許可</li>
+<li>[Sign in with Google] ウィンドウが表示された場合は GCP のアカウントでログイン -&gt; 規約などに同意</li>
+<li>ストレージ バケットのデフォルトの場所を使用するように求められたら [Continue] をクリック</li>
 </ul>
+<h2 ref="ユースケース" >ユースケース</h2><a class="anchor" id="ユースケース"></a>
+<h3 ref="google-cloud-での-iot-分析パイプラインの構築" >Google Cloud での IoT 分析パイプラインの構築</h3><a class="anchor" id="google-cloud-での-iot-分析パイプラインの構築"></a>
+<p>要件は以下。</p>
+<ul>
+<li>Cloud IoT Core を使用して MQTT ベースのデバイスを接続、管理します（シミュレートされたデバイスを使用します）。</li>
+<li>Cloud Pub/Sub を使用して Cloud IoT Core から情報のストリームを取り込みます。</li>
+<li>Cloud Dataflow を使用して IoT データを処理します。</li>
+<li>BigQuery を使用して IoT データを分析します。</li>
+</ul>
+<p>手順は以下。<br>
+まずは、 API を有効にする。</p>
+<ul>
+<li>ナビゲーション メニュー &gt; [API とサービス] をクリックし、以下の API を有効化する
+<ul>
+<li>Cloud IoT API</li>
+<li>Cloud Pub/Sub API</li>
+<li>Dataflow API</li>
+</ul>
+</li>
+</ul>
+<p>Cloud Pub/Sub トピックの作成する。</p>
+<ul>
+<li>ナビゲーション メニュー &gt; [Pub/Sub] &gt; [トピック] へ移動し、 <code>iotlab</code> トピックを作成</li>
+<li>作成したトピックの [View permissions] を選択し、[権限] ダイアログで、[ADD MEMBER] をクリックし、[新しいメンバー] に <code>cloud-iot@system.gserviceaccount.com</code> を追加</li>
+<li>[Select a role] メニューから新しいメンバーに [Pub/Sub] &gt; [Pub/Sub パブリッシャー] 役割を付与して「保存」</li>
+</ul>
+<p>Pub/Sub に送信されたメッセージを集約し、BigQuery に保存するため、BigQuery データセットを作成する。</p>
+<ul>
+<li>ナビゲーション メニュー &gt; [BigQuery] に移動、[完了] をクリック</li>
+<li>左側のメニューからプロジェクト ID をクリック -&gt;  [データセットを作成] をクリック -&gt; データセットに「iotlabdataset」という名前を付け、他のすべてのフィールドはそのままにして、[データセットを作成]</li>
+<li>データセットをクリックして、コンソールの右側にある [+ テーブルを作成] をクリック</li>
+<li>ソース フィールドが [空のテーブル] に設定されていることを確認</li>
+<li>[送信先] セクションの [テーブル名] フィールドに、「sensordata」と入力</li>
+<li>[スキーマ] セクションで、[+ フィールドを追加] ボタンをクリックして次のフィールドを追加
+<ul>
+<li>フィールド名として「timestamp」と入力し、フィールドの [型] を [TIMESTAMP] に設定</li>
+<li>フィールド名として「device」と入力し、フィールドの [型] を [STRING] に設定</li>
+<li>フィールド名として「temperature」と入力し、フィールドの [型] を [FLOAT] に設定</li>
+</ul>
+</li>
+<li>他のデフォルト設定は変更せずに、[テーブルを作成] をクリック</li>
+</ul>
+<p>Cloud Dataflow パイプラインの作業スペースとして Cloud Storage バケットを作成する。</p>
+<ul>
+<li>ナビゲーション メニュー &gt; [Storage] に移動</li>
+<li>[バケットを作成] をクリックし、[バケットに名前を付ける] には「qwiklabs-gcp-03-b799ccdd7f75-bucket」</li>
+<li>[デフォルトのストレージ クラスを選択する] で、まだ選択されていない場合は [Multi-Regional] をクリック</li>
+<li>[場所] で最も近いもの（ asia ）を選択し、[作成] をクリック</li>
+</ul>
+<p>Cloud Dataflow パイプラインを設定する。<br>
+ここでは、Pub/Sub からセンサーデータを読み取り、一定の期間の最高気温を計算し、これを BigQuery に書き込むストリーミング データ パイプラインを設定する。</p>
+<ul>
+<li>ナビゲーション メニュー &gt; [Dataflow] に移動</li>
+<li>上部のメニューバーの [テンプレートからジョブを作成] をクリック</li>
+<li>ジョブ作成ダイアログの [ジョブ名] に「iotlabflow」と入力</li>
+<li>[リージョン エンドポイント] では、リージョンに [us-central1] を選択</li>
+<li>[Dataflow テンプレート] には、[Pub/Sub Topic to BigQuery] を選択
+<ul>
+<li>このテンプレートを選択すると、フォームが更新され、下に新しいフィールドが表示される</li>
+</ul>
+</li>
+<li>[Pub/Sub input topic] には、<code>projects/qwiklabs-gcp-03-b799ccdd7f75/topics/iotlab</code></li>
+<li>[BigQuery output table] には、 <code>qwiklabs-gcp-03-b799ccdd7f75:iotlabdataset.sensordata</code></li>
+<li>[一時的なロケーション] には、<code>gs://qwiklabs-gcp-03-b799ccdd7f75-bucket/tmp/</code></li>
+<li>[オプション パラメータ] をクリック</li>
+<li>[最大ワーカー数] に「2」と入力</li>
+<li>[マシンタイプ] に「n1-standard-1」と入力</li>
+<li>[ジョブを実行] をクリック</li>
+</ul>
+<p>Compute Engine VM を準備する。<br>
+事前にプロビジョニング済みの iot-device-simulator という VM インスタンスを使用して、MQTT 接続された IoT デバイスをエミュレートする Python スクリプトのインスタンスを実行する。<br>
+また、デバイスをエミュレートする前に、この VM インスタンスを使用して Cloud IoT Core デバイス レジストリにデータを入力する。</p>
+<ul>
+<li>ナビゲーション メニュー &gt; [Compute Engine] &gt; [VM インスタンス] に移動し、 <code>iot-device-simulator</code> の[SSH] プルダウン矢印をクリックして、[ブラウザ ウィンドウで開く] を選択</li>
+<li>以下を実行</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo pip install virtualenv
+$ virtualenv -p python3 venv
+$ source venv/bin/activate
+$ sudo apt-get remove google-cloud-sdk -y
+$ curl https://sdk.cloud.google.com | bash
+$ exit
+
+$ source venv/bin/activate
+$ gcloud init
+<span style="color:#75715e"># [1] 982998799090-compute@developer.gserviceaccount.com</span>
+<span style="color:#75715e"># [2] Log in with a new account</span>
+<span style="color:#75715e"># と出た場合は 2 を選択</span>
+https://accounts.google.com/o/oauth2/auth?response_type<span style="color:#f92672">=</span>code&amp;client_id<span style="color:#f92672">=</span>32555940559.apps.googleusercontent.com&amp;r
+edirect_uri<span style="color:#f92672">=</span>urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&amp;scope<span style="color:#f92672">=</span>openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.ema
+il+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.adm
+in+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&amp;stat
+e<span style="color:#f92672">=</span>AQXJKoqhVh09dIRVOaK1xeMqEeZQ1l&amp;access_type<span style="color:#f92672">=</span>offline&amp;code_challenge_method<span style="color:#f92672">=</span>S256&amp;prompt<span style="color:#f92672">=</span>consent&amp;code_challenge<span style="color:#f92672">=</span>356k-
+gg6lJMSpeXG7G6X3Ey8l_YzI_Sdiqkhpc23Bco
+</code></pre></div><ul>
+<li>表示された URL をクリックすると、新しいブラウザ ウィンドウが開き、確認コードが表示される（ログインを求められた場合はログインする）
+<ul>
+<li>4/1AY0e-g7q-H3BMTQfsIZ3k79YIs6016W_NSH0wsQQsO-0FNzK8a_PS62Jw5U</li>
+</ul>
+</li>
+<li>[Enter verification code:] プロンプトに対して確認コードを貼り付けて、Enter キーを押す</li>
+<li>[Pick cloud project to use] へのレスポンスで、Qwiklabs によって作成されたプロジェクトを選択</li>
+<li>次のコマンド（ <code>gcloud components update</code> ）を入力して、SDK のコンポーネントが最新であることを確認</li>
+<li>次のコマンド（ <code>gcloud components install beta</code> ）を入力して、ベータ コンポーネントをインストール</li>
+<li>次のコマンド（ <code>sudo apt-get update</code> ）を入力して、Debian Linux パッケージ リポジトリに関するシステムの情報を更新</li>
+<li>次のコマンド（ <code>sudo apt-get install python-pip openssl git -y</code> ）を入力して、必要な各種ソフトウェア パッケージがインストールされていることを確認</li>
+<li>pip を使用して必要な Python コンポーネントを追加（ <code>pip install pyjwt paho-mqtt cryptography</code> ）</li>
+<li>次のコマンド（ <code>git clone http://github.com/GoogleCloudPlatform/training-data-analyst</code> ）を入力して、このラボで分析するデータを追加</li>
+</ul>
+<p>IoT デバイスのレジストリを作成する。<br>
+iot-device-simulator VM インスタンスの SSH セッションで、次のコマンドを実行する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT_ID<span style="color:#f92672">=</span>qwiklabs-gcp-03-b799ccdd7f75
+$ export MY_REGION<span style="color:#f92672">=</span>asia-east1
+$ gcloud beta iot registries create iotlab-registry <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --project<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --event-notification-config<span style="color:#f92672">=</span>topic<span style="color:#f92672">=</span>projects/$PROJECT_ID/topics/iotlab
+</code></pre></div><p>暗号鍵ペアを作成する。<br>
+IoT デバイスが Cloud IoT Core に安全に接続できるようにするには、暗号鍵ペアを作成する必要がある。<br>
+iot-device-simulator VM インスタンスの SSH セッションで、次のコマンドを入力して適切なディレクトリに鍵ペアを作成。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd $HOME/training-data-analyst/quests/iotlab/
+$ openssl req -x509 -newkey rsa:2048 -keyout rsa_private.pem <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -nodes -out rsa_cert.pem -subj <span style="color:#e6db74">&#34;/CN=unused&#34;</span>
+</code></pre></div><p>この openssl コマンドにより、RSA 暗号鍵ペアが作成され、rsa_private.pem というファイルに書き込まれる。<br>
+次にシミュレートされたデバイスをレジストリに追加する。<br>
+iot-device-simulator VM インスタンスの SSH セッションで、次のコマンドを入力して temp-sensor-buenos-aires というデバイスを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud beta iot devices create temp-sensor-buenos-aires <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --project<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --registry<span style="color:#f92672">=</span>iotlab-registry <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --public-key path<span style="color:#f92672">=</span>rsa_cert.pem,type<span style="color:#f92672">=</span>rs256
+$ gcloud beta iot devices create temp-sensor-istanbul <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --project<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --registry<span style="color:#f92672">=</span>iotlab-registry <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --public-key path<span style="color:#f92672">=</span>rsa_cert.pem,type<span style="color:#f92672">=</span>rs256
+</code></pre></div><p>シミュレートされたデバイスを実行する。<br>
+iot-device-simulator VM インスタンスの SSH セッションで、以下のコマンドを入力して、pki.google.com から CA ルート証明書を適切なディレクトリにダウンロード。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd $HOME/training-data-analyst/quests/iotlab/
+$ wget https://pki.google.com/roots.pem
+</code></pre></div><p>以下のコマンドを入力して、シミュレートされた 1 つ目のデバイスを実行。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ python cloudiot_mqtt_example_json.py <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --project_id<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --cloud_region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --registry_id<span style="color:#f92672">=</span>iotlab-registry <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --device_id<span style="color:#f92672">=</span>temp-sensor-buenos-aires <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --private_key_file<span style="color:#f92672">=</span>rsa_private.pem <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --message_type<span style="color:#f92672">=</span>event <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --algorithm<span style="color:#f92672">=</span>RS256 &gt; buenos-aires-log.txt 2&gt;&amp;<span style="color:#ae81ff">1</span> &amp;
+</code></pre></div><p>以下のコマンドを入力して、シミュレートされた 2 つ目のデバイスを実行。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ python cloudiot_mqtt_example_json.py <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --project_id<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --cloud_region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --registry_id<span style="color:#f92672">=</span>iotlab-registry <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --device_id<span style="color:#f92672">=</span>temp-sensor-istanbul <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --private_key_file<span style="color:#f92672">=</span>rsa_private.pem <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --message_type<span style="color:#f92672">=</span>event <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   --algorithm<span style="color:#f92672">=</span>RS256
+</code></pre></div><p>テレメトリー データは、シミュレートされたデバイスから Cloud IoT Core を経由して Cloud Pub/Sub トピックに流れる。<br>
+データフロー ジョブは Pub/Sub トピックからメッセージを読み取り、その内容を BigQuery テーブルに書き込む。</p>
+<p>次に、BigQuery を使用してセンサーデータを分析する。</p>
+<ul>
+<li>Cloud Console でナビゲーション メニューを開き、[BigQuery] を選択</li>
+<li>クエリエディタに次のクエリを入力し、[実行] をクリック</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">timestamp</span>, device, temperature <span style="color:#66d9ef">from</span> iotlabdataset.sensordata
+<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">timestamp</span> <span style="color:#66d9ef">DESC</span>
+<span style="color:#66d9ef">LIMIT</span> <span style="color:#ae81ff">100</span>
+</code></pre></div>
 		</div>
 
 

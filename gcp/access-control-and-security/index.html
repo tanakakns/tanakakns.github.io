@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-20T09:59:50 JST">
+<meta name="revised" content="2021-05-20T15:21:34 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1027,7 +1027,7 @@ if (!doNotTrack) {
 </ul>
 <h2 ref="2-リソース階層とアクセス制御" >2. リソース階層とアクセス制御</h2><a class="anchor" id="2-リソース階層とアクセス制御"></a>
 <ul>
-<li>ここが全て：https://cloud.google.com/iam/docs/overview?hl=ja</li>
+<li><a href="https://cloud.google.com/iam/docs/overview?hl=ja">ここの説明</a> が全て</li>
 <li>理解の補足
 <ul>
 <li><a href="https://medium.com/google-cloud-jp/gcp-iam-beginner-b2e1ef7ad9c2">GCP の IAM をおさらいしよう</a></li>
@@ -1059,8 +1059,9 @@ if (!doNotTrack) {
 </li>
 <li><strong>ポリシー</strong> / IAM ポリシー
 <ul>
-<li>1 つ以上のメンバーを 1 つのロールにバインドした一覧</li>
+<li>1 つ以上のメンバーを 1 つのロールにバインドした一覧（「誰が」「どういう操作を」「何に対して」全て含まれる）</li>
 <li>IAM ポリシーは IAM Policy オブジェクトによって表現され、バインディング リストで構成され（ <code>Binding</code> は、<code>members</code> のリストを <code>role</code> にバインドする）</li>
+<li>このポリシーを <strong>組織</strong> ・ <strong>フォルダ</strong> ・ <strong>プロジェクト</strong> に設定する</li>
 </ul>
 </li>
 </ul>
@@ -1103,12 +1104,12 @@ if (!doNotTrack) {
 <li>アカウント管理（ <code>username@example.com</code> など）や仮想グループ（ <code>example.com</code> など ）だけ</li>
 </ul>
 </li>
-<li><strong>認証済みのすべてのユーザー</strong> （ `` の形式）
+<li><strong>認証済みのすべてのユーザー</strong>
 <ul>
 <li>すべてのサービス アカウント、および Google アカウントで認証されたユーザー全員を表す特殊な識別子 <code>allAuthenticatedUsers</code></li>
 </ul>
 </li>
-<li><strong>全ユーザー</strong> （ `` の形式）
+<li><strong>全ユーザー</strong>
 <ul>
 <li>認証されたユーザーと認証されていないユーザーの両方を含めて、インターネット上のユーザーを表す特殊な識別子 <code>allUsers</code></li>
 </ul>
@@ -1130,15 +1131,17 @@ if (!doNotTrack) {
 </li>
 </ul>
 <h3 ref="23-権限とロール" >2.3. 権限とロール</h3><a class="anchor" id="23-権限とロール"></a>
+<h4 ref="231-権限" >2.3.1. 権限</h4><a class="anchor" id="231-権限"></a>
 <p>リソースに対する操作の <strong>権限</strong> は以下の命名規則で表現される。（多くの場合、権限は REST API メソッドと 1 対 1 で対応している）<br>
 リソースの例として、プロジェクト、Compute Engine インスタンス、Cloud Storage バケットなどがある。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&lt;サービス名&gt;.&lt;リソース&gt;.&lt;動詞&gt;
 
-ex<span style="color:#f92672">)</span>
+例
 compute.instance.delete
 compute.instance.start
 compute.instance.setMachineType
-</code></pre></div><p><strong>ロール</strong> は権限のコレクション。<br>
+</code></pre></div><h4 ref="231-ロール" >2.3.1. ロール</h4><a class="anchor" id="231-ロール"></a>
+<p><strong>ロール</strong> は権限のコレクション。<br>
 <code>roles/service.roleName</code> の形式で指定し、たとえば、Cloud Storage には <code>roles/storage.objectAdmin</code> 、 <code>roles/storage.objectCreator</code> 、 <code>roles/storage.objectViewer</code> などのロールがある。<br>
 ロールには以下の種類がある。（ <a href="https://cloud.google.com/iam/docs/understanding-roles/#primitive%5C_roles">詳細</a> ）</p>
 <ul>
@@ -1229,7 +1232,7 @@ compute.instance.setMachineType
 </li>
 </ul>
 <p><img src="./img/policy-inheritance.svg" alt="リソース階層"></p>
-<p>上位階層のリソースに関する権限付与についれ例を出すと、「アカウント A に compute.instances.get 権限を 組織 X に対して付与」すると、「アカウント A は 組織 X に含まれる全てのフォルダの全てのプロジェクトの VM インスタンス情報を取得できる」ようになる。</p>
+<p>上位階層のリソースに関する権限付与について例を出すと、『「アカウント A に compute.instances.get 権限を付与したポリシー」を 組織 X に対して付与』すると、『アカウント A は 組織 X に含まれる全てのフォルダの全てのプロジェクトの VM インスタンス情報を取得できる』ようになる。</p>
 <p>リソースは <a href="https://cloud.google.com/resource-manager?hl=ja">Resource Manager</a> API を利用することで管理できる。</p>
 <h3 ref="25-ポリシー" >2.5. ポリシー</h3><a class="anchor" id="25-ポリシー"></a>
 <p>IAM ポリシーは前述した通り、バインディング リストで構成され（ <code>Binding</code> は、<code>members</code> のリストを <code>role</code> にバインドする）、 JSON で表現すると以下のようになる。</p>
@@ -1267,7 +1270,7 @@ compute.instance.setMachineType
 <li><code>gcloud iam roles copy</code> コマンドを利用して既存プロジェクトのロールをグループにコピーして使ったりする</li>
 </ul>
 </li>
-<li>ラベルを使って、リソースのアノテーションをつけ、グループ化・フィルタリングを行う</li>
+<li>ラベルを使って、リソースにアノテーションをつけ、グループ化・フィルタリングを行う</li>
 <li>異なる権限を必要とする複数サービスがある場合は、サービス毎に個別のサービスアカウントを作成し、必要な権限のみ付与する</li>
 </ul>
 <h3 ref="27-リソースへのアクセス権の付与変更取り消しhttpscloudgooglecomiamdocsgranting-changing-revoking-accesshlja" >2.7. <a href="https://cloud.google.com/iam/docs/granting-changing-revoking-access?hl=ja">リソースへのアクセス権の付与、変更、取り消し</a></h3><a class="anchor" id="27-リソースへのアクセス権の付与変更取り消しhttpscloudgooglecomiamdocsgranting-changing-revoking-accesshlja"></a>
@@ -1287,6 +1290,9 @@ compute.instance.setMachineType
 
 <span style="color:#75715e"># 例：プロジェクト my-project のユーザー my-user@example.com に閲覧者の役割を付与する</span>
 $ gcloud projects add-iam-policy-binding my-project --member<span style="color:#f92672">=</span>user:my-user@example.com --role<span style="color:#f92672">=</span>roles/viewer
+
+<span style="color:#75715e"># 例：組織 my-organization のユーザー my-user@example.com に閲覧者の役割を付与する</span>
+$ gcloud organizations add-iam-policy-binding my-organization --member<span style="color:#f92672">=</span>user:my-user@example.com --role<span style="color:#f92672">=</span>roles/viewer
 </code></pre></div><h4 ref="272-メンバからロールを削除する" >2.7.2. メンバからロールを削除する</h4><a class="anchor" id="272-メンバからロールを削除する"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud GROUP remove-iam-policy-binding RESOURCE --member<span style="color:#f92672">=</span>MEMBER --role<span style="color:#f92672">=</span>ROLE_ID
 
