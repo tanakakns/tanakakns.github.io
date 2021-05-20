@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-19T23:12:24 JST">
+<meta name="revised" content="2021-05-20T09:59:50 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -966,32 +966,33 @@ if (!doNotTrack) {
 
 	<div class="content">
 	    <ol>
-<li>コンセプト</li>
+<li><a href="#1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
+<li><a href="#2-cloud-logging">Cloud Logging</a></li>
+<li><a href="#3-cloud-monitoring">Cloud Monitoring</a></li>
 </ol>
 <h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
 <p><a href="https://cloud.google.com/products/operations?hl=ja">オペレーションスイート</a>（旧称 Stackdriver）</p>
 <ol>
-<li>Cloud Logging
+<li><a href="https://cloud.google.com/logging/docs/concepts?hl=ja">Cloud Logging</a>
 <ul>
-<li>リアルタイムでログを収集・分析する、大規模なフルマネージドサービス
+<li>リアルタイムでログを収集・分析する大規模なフルマネージドサービス
 <ul>
-<li>選択したログを分析でき、アプリケーションのトラブルシューティングが加速する</li>
+<li>フィルターや検索でログ分析でき、トラブルシューティングが加速</li>
 <li>ログに基づいた指標（メトリクス）定義</li>
-<li>フィルターや検索でアプリケーションログを見る</li>
-<li>VM インスタンスに対してはエージェントを導入する必要がある</li>
+<li>VM インスタンスに対しては<a href="https://cloud.google.com/logging/docs/agent?hl=ja">Logging エージェント</a>を導入する必要がある（ GKE ノードはデフォルトで導入済）</li>
+<li>ログは <strong>400 日間</strong> 保存されるが延長することはできないので、長期保存するには Cloud Storage などへエキスポートする必要がある</li>
 </ul>
 </li>
-<li>アプリケーションとシステムのログデータのほか、GKE 環境、VM、Google Cloud サービスからのカスタム ログデータも取り込める</li>
-<li>BigQuery、Google Cloud Storage、Pub/Subへのエクスポート</li>
+<li>アプリケーションとシステムのログデータのほか、GKE 環境 や Google Cloud サービスからのカスタム ログデータも取り込める</li>
+<li>BigQuery、Google Cloud Storage、Pub/Subへのエクスポートできる</li>
 </ul>
 </li>
-<li>Cloud Monitoring
+<li><a href="https://cloud.google.com/monitoring/docs/concepts?hl=ja">Cloud Monitoring</a>
 <ul>
-<li>組み込みの大規模な指標オブザーバビリティ</li>
+<li>組み込みの大規模なリソース指標（メトリクス）オブザーバビリティ</li>
 <li>クラウドで実行されるアプリケーションのパフォーマンスや稼働時間、全体的な動作状況を確認できる</li>
-<li>メトリクス・イベント・メタデータを収集し、チャートやダッシュボードで可視化してアラート管理できる</li>
-<li>アラート定義、アップタイムチェック、稼働時間モニタリング</li>
-<li>AWSもまとめてみれる</li>
+<li>メトリクス・イベント・メタデータを収集し、<strong>ワークスペース</strong> を作成することでチャートやダッシュボードで可視化してアラート管理できる</li>
+<li>AWS にも対応</li>
 </ul>
 </li>
 <li><a href="https://cloud.google.com/trace/docs/overview">Cloud Trace</a>
@@ -1022,9 +1023,9 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 ref="1-cloud-logging" >1. Cloud Logging</h2><a class="anchor" id="1-cloud-logging"></a>
-<p>Cloud Logging は IAM を使用して Google Cloud リソースのロギングデータへの <a href="https://cloud.google.com/logging/docs/access-control?hl=ja#permissions_and_roles">アクセス制御</a> を実施できる。<br>
-ログは <strong>400 日間</strong> 保存されるが、延長することはできない。長期保存するには Cloud Storage などへエキスポートする必要がある。</p>
+<h2 ref="2-cloud-logging" >2. Cloud Logging</h2><a class="anchor" id="2-cloud-logging"></a>
+<h3 ref="21-アクセス制御" >2.1. アクセス制御</h3><a class="anchor" id="21-アクセス制御"></a>
+<p>IAM を使用して Google Cloud リソースのロギングデータへの <a href="https://cloud.google.com/logging/docs/access-control?hl=ja#permissions_and_roles">アクセス制御</a> を実施できる。</p>
 <ul>
 <li><code>roles/logging.viewer</code>（ログビューア）（＝ <code>roles/viewer</code> ）
 <ul>
@@ -1078,7 +1079,19 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h3 ref="11-監査ログ" >1.1. 監査ログ</h3><a class="anchor" id="11-監査ログ"></a>
+<h3 ref="21-監査ログ" >2.1. 監査ログ</h3><a class="anchor" id="21-監査ログ"></a>
+<ul>
+<li>Google Cloud Platform のログ： GCP サービス固定ログ</li>
+<li>ユーザー作成のログ：ユーザ独自ログで、Logging エージェント、Cloud Logging API、または Cloud Logging クライアント ライブラリから取り込んだもの</li>
+<li>セキュリティログ
+<ul>
+<li>監査ログ（<a href="https://cloud.google.com/logging/docs/audit">Cloud Audit Logs</a>）</li>
+<li><a href="https://cloud.google.com/logging/docs/audit/access-transparency-overview">アクセスの透過ログ</a>： Google スタッフによる操作ログ</li>
+</ul>
+</li>
+<li>マルチクラウドとハイブリッド クラウドのログ： Azure や AWS など別クラウドから取り込んだログ</li>
+</ul>
+<h4 ref="211-監査ログ" >2.1.1. 監査ログ</h4><a class="anchor" id="211-監査ログ"></a>
 <p>権限管理された上で、オペレーションを監視するログに以下の種類がある。（ <a href="https://cloud.google.com/logging/docs/audit">Cloud Audit Logs</a> ）</p>
 <ul>
 <li>管理アクティビティ監査ログ
@@ -1105,7 +1118,7 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p>現状、アクティビティログというサービスがあるが、 Deprecated なので監査ログを使用すること。</p>
-<h3 ref="12-エキスポートシンク" >1.2. エキスポート・シンク</h3><a class="anchor" id="12-エキスポートシンク"></a>
+<h3 ref="22-エキスポートシンク" >2.2. エキスポート・シンク</h3><a class="anchor" id="22-エキスポートシンク"></a>
 <p>Cloud Logging は以下のエキスポート・シンクをサポートする。<br>
 gcloud 、Cloud Console、Google Cloud APIs ログシンクでログシンクのエクスポート先を作成してから、<a href="https://cloud.google.com/logging/docs/export/aggregated_sinks">集約シンク</a> を作成する。</p>
 <ul>
@@ -1126,7 +1139,7 @@ gcloud 、Cloud Console、Google Cloud APIs ログシンクでログシンクの
 </ul>
 </li>
 </ul>
-<h2 ref="2-cloud-monitoring" >2. Cloud Monitoring</h2><a class="anchor" id="2-cloud-monitoring"></a>
+<h2 ref="3-cloud-monitoring" >3. Cloud Monitoring</h2><a class="anchor" id="3-cloud-monitoring"></a>
 <ul>
 <li><a href="https://cloud.google.com/monitoring/workspaces?hl=ja#accounts">ワークスペース</a> は、1 つ以上の Google Cloud プロジェクトまたは AWS アカウントに含まれるリソースをモニタリングするためのツール
 <ul>
