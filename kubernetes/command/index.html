@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-21T22:20:25 JST">
+<meta name="revised" content="2021-05-26T22:49:43 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1127,6 +1127,11 @@ To further debug and diagnose cluster problems, use <span style="color:#e6db74">
 </ul>
 <h2 ref="kubectl-label" ><code>kubectl label</code></h2><a class="anchor" id="kubectl-label"></a>
 <p>リソースに対して label の追加・更新・削除を行う。</p>
+<h2 ref="kubectl-set" ><code>kubectl set</code></h2><a class="anchor" id="kubectl-set"></a>
+<p>オブジェクトに特定の features を設定するコマンド。<br>
+例えば、以下のコマンドはデプロイメントのイメージのみ変更する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl set image deployment/&lt;demployment&gt; &lt;new-image&gt;
+</code></pre></div>
 		</div>
 
 

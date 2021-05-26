@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-21T22:20:25 JST">
+<meta name="revised" content="2021-05-26T22:49:43 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1061,6 +1061,122 @@ if (!doNotTrack) {
 </li>
 <li>BigQuery Data Transfer Service ：あらかじめ設定されたスケジュールに基づき、BigQuery へのデータの移動を自動化するマネージド サービス</li>
 </ul>
+<h2 ref="firestore-datastore-モード" >Firestore Datastore モード</h2><a class="anchor" id="firestore-datastore-モード"></a>
+<h3 ref="コンセプト" >コンセプト</h3><a class="anchor" id="コンセプト"></a>
+<ul>
+<li>エンティティ
+<ul>
+<li>エンティティは 1 つ以上の名前付きプロパティを持ち、各プロパティが 1 つ以上の値を持つ</li>
+<li>同じ種類のエンティティが同じプロパティを持つとは限らない</li>
+<li>エンティティの特定のプロパティの値がすべて同じデータ型である必要はない</li>
+</ul>
+</li>
+<li>プロパティ
+<ul>
+<li>整数、浮動小数点数、文字列、日付、バイナリデータ のデータ型をサポート</li>
+</ul>
+</li>
+<li>キー</li>
+<li>祖先キー
+<ul>
+<li>そのエンティティの親となるエンティティの主キー</li>
+<li>こうすることで、エンティティがツリー構造になる</li>
+<li>このツリーを <strong>エンティティグループ</strong> という</li>
+</ul>
+</li>
+<li>エンティティグループ
+<ul>
+<li>祖先キーとキーから構成されるツリー構造となったエンティティ群</li>
+<li>エンティティグループに対する書き込み処理は1秒間1回しか実行できないが、一貫性のあるクエリを実現できる
+<ul>
+<li>Datastore の提供するクエリは基本的に 結果整合のクエリ だが、エンティティグループにおいては例外で、これがエンティティグループを作る理由</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>RDBMS と比較した場合は以下の対応になる。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">RDBMS</th>
+<th style="text-align:center">Datastore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">スキーマ（データベース）</td>
+<td style="text-align:center">ネームスペース</td>
+</tr>
+<tr>
+<td style="text-align:center">テーブル</td>
+<td style="text-align:center">カインド（種類）</td>
+</tr>
+<tr>
+<td style="text-align:center">レコード</td>
+<td style="text-align:center">エンティティ</td>
+</tr>
+<tr>
+<td style="text-align:center">プライマリキー</td>
+<td style="text-align:center">キー + 祖先キー</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="操作" >操作</h3><a class="anchor" id="操作"></a>
+<p>Go 言語の場合で記載する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">エンティティの作成</span>
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Task</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">Category</span>        <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">Done</span>            <span style="color:#66d9ef">bool</span>
+        <span style="color:#a6e22e">Priority</span>        <span style="color:#66d9ef">float64</span>
+        <span style="color:#a6e22e">Description</span>     <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`datastore:&#34;,noindex&#34;`</span>
+        <span style="color:#a6e22e">PercentComplete</span> <span style="color:#66d9ef">float64</span>
+        <span style="color:#a6e22e">Created</span>         <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Time</span>
+}
+<span style="color:#a6e22e">task</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Task</span>{
+        <span style="color:#a6e22e">Category</span>:        <span style="color:#e6db74">&#34;Personal&#34;</span>,
+        <span style="color:#a6e22e">Done</span>:            <span style="color:#66d9ef">false</span>,
+        <span style="color:#a6e22e">Priority</span>:        <span style="color:#ae81ff">4</span>,
+        <span style="color:#a6e22e">Description</span>:     <span style="color:#e6db74">&#34;Learn Cloud Datastore&#34;</span>,
+        <span style="color:#a6e22e">PercentComplete</span>: <span style="color:#ae81ff">10.0</span>,
+        <span style="color:#a6e22e">Created</span>:         <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>(),
+}
+
+<span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">エンティティの登録</span><span style="color:#960050;background-color:#1e0010">・</span><span style="color:#a6e22e">更新</span>
+<span style="color:#a6e22e">key</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">datastore</span>.<span style="color:#a6e22e">IncompleteKey</span>(<span style="color:#e6db74">&#34;Task&#34;</span>, <span style="color:#66d9ef">nil</span>)
+<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Put</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">task</span>)
+
+<span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">エンティティの取得</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">task</span> <span style="color:#a6e22e">Task</span>
+<span style="color:#a6e22e">taskKey</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">datastore</span>.<span style="color:#a6e22e">NameKey</span>(<span style="color:#e6db74">&#34;Task&#34;</span>, <span style="color:#e6db74">&#34;sampleTask&#34;</span>, <span style="color:#66d9ef">nil</span>)
+<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">taskKey</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">task</span>)
+
+<span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">エンティティの削除</span>
+<span style="color:#a6e22e">key</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">datastore</span>.<span style="color:#a6e22e">NameKey</span>(<span style="color:#e6db74">&#34;Task&#34;</span>, <span style="color:#e6db74">&#34;sampletask&#34;</span>, <span style="color:#66d9ef">nil</span>)
+<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Delete</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">key</span>)
+
+<span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">一括オペレーション</span><span style="color:#960050;background-color:#1e0010">（</span><span style="color:#a6e22e">バッチ</span><span style="color:#960050;background-color:#1e0010">）</span>
+<span style="color:#a6e22e">tasks</span> <span style="color:#f92672">:=</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">Task</span>{
+        {
+                <span style="color:#a6e22e">Category</span>:    <span style="color:#e6db74">&#34;Personal&#34;</span>,
+                <span style="color:#a6e22e">Done</span>:        <span style="color:#66d9ef">false</span>,
+                <span style="color:#a6e22e">Priority</span>:    <span style="color:#ae81ff">4</span>,
+                <span style="color:#a6e22e">Description</span>: <span style="color:#e6db74">&#34;Learn Cloud Datastore&#34;</span>,
+        },
+        {
+                <span style="color:#a6e22e">Category</span>:    <span style="color:#e6db74">&#34;Personal&#34;</span>,
+                <span style="color:#a6e22e">Done</span>:        <span style="color:#66d9ef">false</span>,
+                <span style="color:#a6e22e">Priority</span>:    <span style="color:#ae81ff">5</span>,
+                <span style="color:#a6e22e">Description</span>: <span style="color:#e6db74">&#34;Integrate Cloud Datastore&#34;</span>,
+        },
+}
+<span style="color:#a6e22e">keys</span> <span style="color:#f92672">:=</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">datastore</span>.<span style="color:#a6e22e">Key</span>{
+        <span style="color:#a6e22e">datastore</span>.<span style="color:#a6e22e">IncompleteKey</span>(<span style="color:#e6db74">&#34;Task&#34;</span>, <span style="color:#66d9ef">nil</span>),
+        <span style="color:#a6e22e">datastore</span>.<span style="color:#a6e22e">IncompleteKey</span>(<span style="color:#e6db74">&#34;Task&#34;</span>, <span style="color:#66d9ef">nil</span>),
+}
+<span style="color:#a6e22e">keys</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">PutMulti</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">keys</span>, <span style="color:#a6e22e">tasks</span>)
+<span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">その他に</span> <span style="color:#a6e22e">GetMulti</span> <span style="color:#960050;background-color:#1e0010">、</span> <span style="color:#a6e22e">DeleteMulti</span> <span style="color:#a6e22e">もある</span>
+</code></pre></div>
 		</div>
 
 
