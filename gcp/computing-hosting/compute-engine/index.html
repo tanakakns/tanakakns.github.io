@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-05-26T22:49:43 JST">
+<meta name="revised" content="2021-06-04T21:21:15 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1394,7 +1394,7 @@ $ gcloud compute instances create apache --scopes storage-ro <span style="color:
 <ol>
 <li>ディスクのサイズ変更：<code>gcloud compute disks resize DISK_NAME --size DISK_SIZE</code></li>
 <li>ディスクのバックアップ</li>
-<li>ファイルシステムとパーティションのサイズの変更</li>
+<li>ファイルシステムとパーティションのサイズの変更（ <code>resize2fs</code> / <code>xfs_growfs</code> によって OS にサイズを再認識させる必要あり ）</li>
 </ol>
 <h2 ref="4-ファイアウォールルールの作成" >4. ファイアウォールルールの作成</h2><a class="anchor" id="4-ファイアウォールルールの作成"></a>
 <p>以下のコマンドでファイアウォールルールを作成する。</p>
