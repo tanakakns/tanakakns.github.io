@@ -17,7 +17,7 @@
     <loc>https://tanakakns.github.io/kubernetes/concept/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/mac/</loc>
+    <loc>https://tanakakns.github.io/design/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/databases/bigquery/</loc>
@@ -35,7 +35,13 @@
     <loc>https://tanakakns.github.io/gcp/gcp-aws/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/database/rdb/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/gcp/networking/vpc/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/design/architecture/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/docker/basic/</loc>
@@ -59,7 +65,7 @@
     <loc>https://tanakakns.github.io/istio/concept/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/git/</loc>
+    <loc>https://tanakakns.github.io/mac/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/networking/load-balancing/</loc>
@@ -80,7 +86,7 @@
     <loc>https://tanakakns.github.io/kubernetes/kubectl-plugin/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/go/</loc>
+    <loc>https://tanakakns.github.io/git/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/networking/iap/</loc>
@@ -98,7 +104,7 @@
     <loc>https://tanakakns.github.io/kubernetes/command/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/aws/</loc>
+    <loc>https://tanakakns.github.io/go/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/app-engine/</loc>
@@ -113,7 +119,7 @@
     <loc>https://tanakakns.github.io/kubernetes/manifest/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/gcp/</loc>
+    <loc>https://tanakakns.github.io/database/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/cloud-functions/</loc>
@@ -122,29 +128,35 @@
     <loc>https://tanakakns.github.io/gcp/storage/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/terraform/</loc>
+    <loc>https://tanakakns.github.io/aws/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/databases/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/docker/</loc>
+    <loc>https://tanakakns.github.io/gcp/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/networking/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/kubernetes/</loc>
+    <loc>https://tanakakns.github.io/terraform/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/istio/</loc>
+    <loc>https://tanakakns.github.io/docker/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/big-data/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/kubernetes/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/gcp/machine-learning/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/istio/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/</loc>
     <lastmod>2021-01-30T18:42:35+09:00</lastmod>

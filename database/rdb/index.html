@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	Cloud Interconnect :: テックまとめ
+	RDB :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>Cloud Interconnect :: テックまとめ</title>
+<title>RDB :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/gcp/networking/interconnect/"
+  <body data-url="/database/rdb/"
 
   class="hidetoc hidenextpage ">
 
@@ -337,14 +337,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/database/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/database/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/database/">Database</a>
@@ -352,7 +353,7 @@ if (!doNotTrack) {
         <ul>
               
 
-    <li data-nav-id="https://tanakakns.github.io/database/rdb/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/database/rdb/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -384,15 +385,14 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -614,7 +614,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/networking/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -623,8 +623,7 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/networking/">ネットワーキング</a>
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
         <ul>
@@ -675,7 +674,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/networking/interconnect/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/interconnect/" class="dd-item
         item_level_$level
         ">
 
@@ -972,9 +971,6 @@ if (!doNotTrack) {
 		
   
   	
-		
-  
-  	
 	<li >
       <a class="text-link" href="https://tanakakns.github.io/">
         
@@ -983,16 +979,8 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/gcp/">
-        GCP
-      </a>
-    </li>
-	
-  	
-  
-    <li class="">
-      <a class="text-link" href="/gcp/networking/">
-        ネットワーキング
+      <a class="text-link" href="/database/">
+        Database
       </a>
     </li>
 	
@@ -1000,7 +988,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        Cloud Interconnect
+        RDB
       
     </li>
 
@@ -1021,7 +1009,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>Cloud Interconnect</h1>
+			<h1>RDB</h1>
         
 
 		
@@ -1041,35 +1029,48 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p><a href="https://cloud.google.com/network-connectivity/docs/interconnect/concepts/overview?hl=ja">Cloud Interconnect</a></p>
-<ol>
-<li><a href="#1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
+	    <ol>
+<li><a href="#1-sql">SQL</a></li>
 </ol>
-<h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
+<h2 ref="1-sql" >1. SQL</h2><a class="anchor" id="1-sql"></a>
+<h3 ref="結合" >結合</h3><a class="anchor" id="結合"></a>
 <ul>
-<li><a href="https://cloud.google.com/network-connectivity/docs/interconnect/concepts/dedicated-overview?hl=ja">Dedicated Interconnect</a>
+<li>INNER JOIN
 <ul>
-<li>オンプレミス ネットワークと Google のネットワークを物理的に直接接続</li>
+<li>指定カラムの値が一致するレコード同士を結合（一致するものだけであり、一致しないものは選択・表示されない）</li>
+<li><code>SELECT * FROM users INNER JOIN accounts ON users.id = accounts.user_id</code></li>
 </ul>
 </li>
-<li><a href="https://cloud.google.com/network-connectivity/docs/interconnect/concepts/partner-overview?hl=ja">Partner Interconnect</a>
+<li>LEFT OUTER JOIN
 <ul>
-<li>サポート対象のサービスプロバイダを介して、オンプレミス ネットワークと VPC ネットワークを接続</li>
+<li>指定のカラムの値が一致するレコード同士を結合</li>
+<li>左のテーブルに存在し、右のテーブルに存在しない値はNULLでパディングされる</li>
+<li><code>SELECT * FROM users LEFT OUTER JOIN accounts ON users.id = accounts.id</code></li>
 </ul>
 </li>
-<li><a href="https://cloud.google.com/network-connectivity/docs/direct-peering?hl=ja">ダイレクトピアリング</a>
+<li>RIGHT OUTER JOIN
 <ul>
-<li>Google Cloud の外部に存在し、 Google Workspace アプリケーションにアクセスする必要がない限り、Google Cloud への推奨のアクセス方法は、Dedicated Interconnect または Partner Interconnect</li>
+<li>LEFT OUTER JOINの逆</li>
+<li>指定のカラムの値が一致するレコード同士を結合</li>
+<li>右のテーブルに存在し、左のテーブルに存在しない値はNULLでパディングされる</li>
+<li><code>SELECT * from users RIGHT OUTER JOIN accounts ON users.id = accounts.id</code></li>
 </ul>
 </li>
-<li><a href="https://cloud.google.com/network-connectivity/docs/carrier-peering?hl=ja">キャリアピアリング</a>
+<li>CROSS JOIN
 <ul>
-<li>Dedicated Interconnect に対する Partner Interconnect 、ダイレクトピアリングに対するキャリアピアリング</li>
+<li>MySQL では INNER JOIN と同等</li>
 </ul>
 </li>
-<li><a href="https://cloud.google.com/network-connectivity/docs/cdn-interconnect?hl=ja">CDN Interconnect</a>
+<li>UNION
 <ul>
-<li>GCP から Akamai などの CDN プロバイダに対してダイレクトコネクションできる</li>
+<li>複数の結果セットをひとつの結果セットに結合</li>
+<li>カラムの数、順番、データ型が一致していなければならない</li>
+<li><strong>重複する行は削除されてユニークな値のみ</strong> が結果として得られる</li>
+</ul>
+</li>
+<li>UNION ALL
+<ul>
+<li>UNION と異なり、 <strong>重複する行も結果として得られる</strong></li>
 </ul>
 </li>
 </ul>
