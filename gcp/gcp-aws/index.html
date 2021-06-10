@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-08T17:51:33 JST">
+<meta name="revised" content="2021-06-10T20:30:12 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -582,7 +582,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/databases/cloud-sql/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/sql/" class="dd-item
         item_level_$level
         ">
 
@@ -590,7 +590,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/gcp/databases/cloud-sql/">Cloud SQL</a>
+          <a href="/gcp/databases/sql/">Cloud SQL</a>
       
         
       
@@ -606,6 +606,21 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/databases/memorystore/">Memorystore</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/spanner/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/spanner/">Cloud Spanner</a>
       
         
       
@@ -1029,8 +1044,8 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p><a href="https://qiita.com/hayao_k/items/906ac1fba9e239e08ae8">AWS/Azure/GCPサービス比較 2021.04</a></p>
-<h2 ref="違い" >違い</h2><a class="anchor" id="違い"></a>
+	    <h2 ref="違い" >違い</h2><a class="anchor" id="違い"></a>
+<p><a href="https://qiita.com/hayao_k/items/906ac1fba9e239e08ae8">AWS/Azure/GCPサービス比較 2021.04</a></p>
 <ul>
 <li>IAM
 <ul>
@@ -1082,6 +1097,511 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
+<h2 ref="gcp-サービス一覧" >GCP サービス一覧</h2><a class="anchor" id="gcp-サービス一覧"></a>
+<p><a href="https://cloud.google.com/blog/ja/products/gcp/google-cloud-platform-paperprint">一行でわかる Google Cloud Platform</a></p>
+<h3 ref="api-プラットフォームとエコシステム" >API プラットフォームとエコシステム</h3><a class="anchor" id="api-プラットフォームとエコシステム"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Apigee API Platform</td>
+<td style="text-align:left">API の開発ツール。開発からデプロイ、公開、モニタリング等を一元管理</td>
+</tr>
+<tr>
+<td style="text-align:left">Apigee Sense</td>
+<td style="text-align:left">悪意のある攻撃から API を保護</td>
+</tr>
+<tr>
+<td style="text-align:left">API Monetization</td>
+<td style="text-align:left">API のマネタイズツール</td>
+</tr>
+<tr>
+<td style="text-align:left">API Analytics</td>
+<td style="text-align:left">API のモニタリング及び分析</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Endpoints</td>
+<td style="text-align:left">GCP 向けの API ゲートウェイ管理サービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Launcher</td>
+<td style="text-align:left">GCP ユーザー向けに提供されているマーケットプレイス。サードパーティーが提供する製品を購入可能</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="internet-of-thingsiot" >Internet of Things（IoT）</h3><a class="anchor" id="internet-of-thingsiot"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Cloud IoT Core</td>
+<td style="text-align:left">IoT センサーやデバイスの管理・データ取込のためのマネージドサービス</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="データ転送" >データ転送</h3><a class="anchor" id="データ転送"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Google Transfer Appliance</td>
+<td style="text-align:left">専用機器を利用した大規模データ移行サービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Storage Transfer Service</td>
+<td style="text-align:left">Google クラウドへのデータ移行サービス</td>
+</tr>
+<tr>
+<td style="text-align:left">BigQuery Data Transfer Service</td>
+<td style="text-align:left">自動的に一括で BigQuery にデータをロードするサービス</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="id-管理とセキュリティ" >ID 管理とセキュリティ</h3><a class="anchor" id="id-管理とセキュリティ"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Cloud IAM</td>
+<td style="text-align:left">GCP 各種サービスやバックエンドへのアクセス管理</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Identity-Aware Proxy</td>
+<td style="text-align:left">ウェブサービスへの Google アカウントによる認証とアクセス制御</td>
+</tr>
+<tr>
+<td style="text-align:left">Data Loss Prevention API</td>
+<td style="text-align:left">クレジットカード番号等の機密情報を自動で検知、マスキング</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Key Management Service</td>
+<td style="text-align:left">Google 以外が提供する暗号鍵を生成・管理・利用するためのサービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Resource Manager</td>
+<td style="text-align:left">GCP 各種サービスやバックエンドへのアクセスを組織やグループの単位で管理</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Security Scanner</td>
+<td style="text-align:left">App Engine で開発されたサービスを対象としたセキュリティスキャン。一般的な脆弱性を検出</td>
+</tr>
+<tr>
+<td style="text-align:left">Security Key Enforcement</td>
+<td style="text-align:left">2 段階認証を必須化するサービス</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="モニタリングツール" >モニタリングツール</h3><a class="anchor" id="モニタリングツール"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Stackdriver Monitoring</td>
+<td style="text-align:left">インフラストラクチャを含むシステム全体のモニタリング</td>
+</tr>
+<tr>
+<td style="text-align:left">Stackdriver Logging</td>
+<td style="text-align:left">インフラストラクチャを含むシステム全体のログ管理</td>
+</tr>
+<tr>
+<td style="text-align:left">Stackdriver Error Reporting</td>
+<td style="text-align:left">アプリケーションのエラー管理</td>
+</tr>
+<tr>
+<td style="text-align:left">Stackdriver Trace</td>
+<td style="text-align:left">アプリケーションのパフォーマンスに影響するボトルネックを検出・分析</td>
+</tr>
+<tr>
+<td style="text-align:left">Stackdriver Debugger</td>
+<td style="text-align:left">本番環境でのリアルタイムなデバッガー</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Deployment Manager</td>
+<td style="text-align:left">システム全体の環境をテンプレートから自動的に展開</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Console</td>
+<td style="text-align:left">GCP 管理用ウェブコンソール</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Shell</td>
+<td style="text-align:left">ブラウザでアクセスするコマンド入力インターフェース</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Console Mobile App</td>
+<td style="text-align:left">GCP 管理用モバイルアプリ（Android / iOS 対応）</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Billing API</td>
+<td style="text-align:left">経理システム等から接続可能な請求情報を取得する API</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud APIs</td>
+<td style="text-align:left">GCP 管理用 API。GCP の管理をシステムやプログラムから行うための API 群</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="開発者向けツール" >開発者向けツール</h3><a class="anchor" id="開発者向けツール"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Cloud SDK</td>
+<td style="text-align:left">GCP の管理・実行をシステムやプログラムから行うための SDK</td>
+</tr>
+<tr>
+<td style="text-align:left">Container Builder</td>
+<td style="text-align:left">アプリと実行環境をパッケージングし、コンテナにするサービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Container Registry</td>
+<td style="text-align:left">コンテナの登録と管理</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Source Repositories</td>
+<td style="text-align:left">ソースコード管理システム。プライベートで Git リポジトリをホスティングするサービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Tools for Android Studio</td>
+<td style="text-align:left">Android Studio 上で GCP を利用するための支援ツール</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Tools for IntelliJ</td>
+<td style="text-align:left">IntelliJ 上で GCP を利用するための支援ツール</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Tools for PowerShell</td>
+<td style="text-align:left">PowerShell 上で GCP を利用するための支援ツール</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Tools for Visual Studio</td>
+<td style="text-align:left">Visual Studio 上で GCP を利用するための支援ツール</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Tools for Eclipse</td>
+<td style="text-align:left">Eclipse 上で GCP を利用するための支援ツール</td>
+</tr>
+<tr>
+<td style="text-align:left">Gradle App Engine Plugin</td>
+<td style="text-align:left">Gradle App Engine Plugin</td>
+</tr>
+<tr>
+<td style="text-align:left">Maven App Engine Plugin</td>
+<td style="text-align:left">Maven App Engine Plugin</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="ストレージ" >ストレージ</h3><a class="anchor" id="ストレージ"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Cloud Storage</td>
+<td style="text-align:left">クラウド上のストレージ。オブジェクトストレージ</td>
+</tr>
+<tr>
+<td style="text-align:left">Nearline</td>
+<td style="text-align:left">月 1 回程度のアクセスを想定したアーカイブストレージ</td>
+</tr>
+<tr>
+<td style="text-align:left">Coldline</td>
+<td style="text-align:left">年 1 回程度のアクセスを想定したアーカイブストレージ</td>
+</tr>
+<tr>
+<td style="text-align:left">Persistent Disk</td>
+<td style="text-align:left">仮想マシン（VM）用 ストレージ</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="コンピュート" >コンピュート</h3><a class="anchor" id="コンピュート"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Compute Engine</td>
+<td style="text-align:left">仮想マシンをはじめとする、仮想マシン用ストレージやネットワーク</td>
+</tr>
+<tr>
+<td style="text-align:left">Google App Engine</td>
+<td style="text-align:left">自動で柔軟にスケール可能なフルマネージドかつサーバレスのウェブアプリ向けバックエンド</td>
+</tr>
+<tr>
+<td style="text-align:left">Kubernetes Engine</td>
+<td style="text-align:left">コンテナを簡単に管理するための、Kubernetes マネージドサービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Functions</td>
+<td style="text-align:left">ファイル追加等のイベント単位で処理・実行が可能なサーバーレス環境</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="機械学習machine-learning" >機械学習（Machine Learning）</h3><a class="anchor" id="機械学習machine-learning"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Cloud Machine Learning Engine</td>
+<td style="text-align:left">機械学習のモデルをトレーニングするためのマネージドサービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Job Discovery</td>
+<td style="text-align:left">機械学習を活用した求人情報に特化した検索用 API</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Natural Language</td>
+<td style="text-align:left">自然言語処理用 API</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Speech API</td>
+<td style="text-align:left">音声をテキストに変換する API</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Text-to-Speech</td>
+<td style="text-align:left">テキストを音声に変換する API</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Translation API</td>
+<td style="text-align:left">ニューラルネットを活用した機械翻訳（NMT）API</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Vision API</td>
+<td style="text-align:left">画像認識用 API （自動のラベル付、文字抽出、顔検出）</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Video Intelligence</td>
+<td style="text-align:left">動画に写り込んだ内容を自動的に検出及びラベル付、シーン分割する API</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud AutoML</td>
+<td style="text-align:left">高品質かつビジネスニーズに即した独自の機械学習モデルを構築可能</td>
+</tr>
+<tr>
+<td style="text-align:left">Dialogflow Enterprise Edition</td>
+<td style="text-align:left">様々なプラットフォームに対応する会話アプリ開発サービス</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="ビッグデータ" >ビッグデータ</h3><a class="anchor" id="ビッグデータ"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Google BigQuery</td>
+<td style="text-align:left">ビッグデータ用分析システム。超並列分散データウェアハウス</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Dataflow</td>
+<td style="text-align:left">マネージド ストリーム / バッチデータ処理。IoT センサーから収拾したデータ等の前処理向けシステム</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Dataproc</td>
+<td style="text-align:left">お手軽マネージド Spark / Hadoop サービス。IoT センサーから収拾したデータ等の前処理向けシステム</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Dataprep</td>
+<td style="text-align:left">ブラウザで設定可能なストリーム / バッチデータ処理。IoT センサーから収拾したデータ等の前処理向けシステム</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Composer</td>
+<td style="text-align:left">ワークフローを管理するための Apache Airflow マネージドサービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Pub/Sub</td>
+<td style="text-align:left">メッセージキューサービス。グローバルかつリアルタイムに集まるデータを保管・処理</td>
+</tr>
+<tr>
+<td style="text-align:left">Google Data Studio</td>
+<td style="text-align:left">データを簡単に可視化するダッシュボード</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Datalab</td>
+<td style="text-align:left">データをインタラクティブに可視化し分析するためのツール</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="ネットワーク" >ネットワーク</h3><a class="anchor" id="ネットワーク"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Virtual Private Cloud</td>
+<td style="text-align:left">Google が管理するネットワーク内に構築するプライベートな超大規模ネットワークサービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Google Load Balancing</td>
+<td style="text-align:left">超大規模ネットワーク向け、グローバル負荷分散サービス。ロードバランサー</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Armor</td>
+<td style="text-align:left">GCP 上に構築されたシステムやサービスを DDoS 攻撃等から保護</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud CDN</td>
+<td style="text-align:left">コンテンツ配信ネットワーク</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud DNS</td>
+<td style="text-align:left">高信頼の DNS サービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Google Cloud VPN</td>
+<td style="text-align:left">VPN 経由による GCP への直接接続サービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Direct Peering</td>
+<td style="text-align:left">GCP へのダイレクトピアリングによる直接接続サービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Carrier Peering</td>
+<td style="text-align:left">GCP へのキャリアパートナー経由のピアリングによる直接接続サービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Dedicated Interconnect</td>
+<td style="text-align:left">専用線で自社環境から GCP へ繋ぐ接続サービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Partner Interconnect</td>
+<td style="text-align:left">サービスプロバイダー経由で自社環境から GCP へ繋ぐ接続サービス</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="モバイルfirebase" >モバイル（Firebase）</h3><a class="anchor" id="モバイルfirebase"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Realtime Database</td>
+<td style="text-align:left">マルチデバイスにリアルタイムに同期できるデータベース</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Firestore</td>
+<td style="text-align:left">マルチデバイスにリアルタイムに同期でき、スケーラビリティが向上したデータベース</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Storage</td>
+<td style="text-align:left">クラウド上のストレージ。オブジェクトストレージ</td>
+</tr>
+<tr>
+<td style="text-align:left">Hosting</td>
+<td style="text-align:left">ウェブコンテンツのホスティングサービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Authentication</td>
+<td style="text-align:left">Google や Twitter 等のアカウントによるアプリ認証を簡単に追加できるサービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Functions</td>
+<td style="text-align:left">ファイル追加等のイベント単位で処理・実行が可能なサーバーレス環境</td>
+</tr>
+<tr>
+<td style="text-align:left">Test Lab for Android</td>
+<td style="text-align:left">実際の Android 搭載デバイスでアプリを実行・テストするサービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Performance Monitoring</td>
+<td style="text-align:left">アプリケーションのパフォーマンスモニタリング</td>
+</tr>
+<tr>
+<td style="text-align:left">Crashlytics</td>
+<td style="text-align:left">クラッシュレポーティングと分析</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Messaging</td>
+<td style="text-align:left">デバイスへのメッセージ送信 デバイスへの通知送信</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="データベース" >データベース</h3><a class="anchor" id="データベース"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">サービス</th>
+<th style="text-align:left">一行説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Cloud SQL</td>
+<td style="text-align:left">MySQL / PostgreSQL のマネージドサービス</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Bigtable</td>
+<td style="text-align:left">HBase 互換の NoSQL DB</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Datastore</td>
+<td style="text-align:left">水平スケールする NoSQL DB</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Spanner</td>
+<td style="text-align:left">リレーショナル DB と NoSQL の特性を備えた DB。データをグローバルで複製・同期</td>
+</tr>
+<tr>
+<td style="text-align:left">Cloud Memorystore for Redis</td>
+<td style="text-align:left">Redis のインメモリー型データストア マネージドサービス</td>
+</tr>
+</tbody>
+</table>
 		</div>
 
 

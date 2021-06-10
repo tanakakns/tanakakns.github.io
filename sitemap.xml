@@ -26,7 +26,7 @@
     <loc>https://tanakakns.github.io/gcp/big-data/pubsub/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/gcp/databases/cloud-sql/</loc>
+    <loc>https://tanakakns.github.io/gcp/databases/sql/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/compute-engine/</loc>
@@ -111,6 +111,9 @@
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/networking/interconnect/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/gcp/databases/spanner/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/</loc>

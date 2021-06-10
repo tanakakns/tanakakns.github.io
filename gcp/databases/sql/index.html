@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	kubectl plugin と Krew :: テックまとめ
+	Cloud SQL :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>kubectl plugin と Krew :: テックまとめ</title>
+<title>Cloud SQL :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/kubernetes/kubectl-plugin/"
+  <body data-url="/gcp/databases/sql/"
 
   class="hidetoc hidenextpage ">
 
@@ -384,14 +384,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -551,7 +552,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item parent haschildren
         item_level_$level
         ">
 
@@ -560,7 +561,8 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/databases/">データベース</a>
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
         <ul>
@@ -581,7 +583,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/databases/sql/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/sql/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -818,15 +820,14 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/kubernetes/">Kubernetes</a>
@@ -864,7 +865,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/kubernetes/kubectl-plugin/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/kubectl-plugin/" class="dd-item
         item_level_$level
         ">
 
@@ -986,6 +987,9 @@ if (!doNotTrack) {
 		
   
   	
+		
+  
+  	
 	<li >
       <a class="text-link" href="https://tanakakns.github.io/">
         
@@ -994,8 +998,16 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/kubernetes/">
-        Kubernetes
+      <a class="text-link" href="/gcp/">
+        GCP
+      </a>
+    </li>
+	
+  	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/databases/">
+        データベース
       </a>
     </li>
 	
@@ -1003,7 +1015,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        kubectl plugin と Krew
+        Cloud SQL
       
     </li>
 
@@ -1024,7 +1036,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>kubectl plugin と Krew</h1>
+			<h1>Cloud SQL</h1>
         
 
 		
@@ -1044,133 +1056,127 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p>kubectlのプラグイン機構 と <strong>Krew</strong> についてまとめる。</p>
-<ol>
-<li>kubectl plugin</li>
-<li>Krew</li>
+	    <ol>
+<li>コンセプト</li>
+<li>インスタンスの作成</li>
+<li>レプリケーション</li>
+<li>ユースケース</li>
 </ol>
-<h2 ref="1-kubectl-plugin" >1. kubectl plugin</h2><a class="anchor" id="1-kubectl-plugin"></a>
-<p><strong>kubectl plugin</strong> は kubectl のプラグイン機構で、kubectl に任意のサブコマンドを追加する機能である。<br>
-このプラグイン機構は、 <code>PATH</code> の通ったディレクトリに配置された実行ファイルの名前が特定のプレフィックスで開始しているものを呼び出すというもので、kubectl plugin の場合はプレフィックスが <code>kubectl-</code> 。<br>
-例えば <code>kubectl-foo</code> という実行ファイルを作成し、 <code>PATH</code> の通ったディレクトリに配置すると、 <code>kubectl foo</code> コマンドとして実行できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% echo <span style="color:#e6db74">&#39;#!/bin/bash\n\necho &#34;foo&#34;&#39;</span> &gt; /usr/local/bin/kubectl-foo
-% chmod +x /usr/local/bin/kubectl-foo
-% /usr/local/bin/kubectl-foo
-foo
-% kubectl foo
-foo
-</code></pre></div><p><code>kubectl plugin list</code> コマンドで利用可能なプラグインの一覧を取得できる。</p>
-<p>公式：<a href="https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/">Extend kubectl with plugins</a></p>
-<h2 ref="2-krew" >2. Krew</h2><a class="anchor" id="2-krew"></a>
-<p><a href="https://github.com/kubernetes-sigs/krew">Krew</a> は、 kubectl plugin をパッケージマネージャ Homebrew 風に管理できるツール。</p>
-<h3 ref="21-インストール" >2.1. インストール</h3><a class="anchor" id="21-インストール"></a>
-<p><a href="https://krew.sigs.k8s.io/docs/user-guide/setup/install/">公式</a> を参照するのが望ましいが、ここでは実際にやった手順を残しておく。</p>
-<p><code>git</code> がインストールされていることを確認した後、以下を実行する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% <span style="color:#f92672">(</span>
-  set -x; cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>mktemp -d<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
-  OS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>uname | tr <span style="color:#e6db74">&#39;[:upper:]&#39;</span> <span style="color:#e6db74">&#39;[:lower:]&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
-  ARCH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>uname -m | sed -e <span style="color:#e6db74">&#39;s/x86_64/amd64/&#39;</span> -e <span style="color:#e6db74">&#39;s/\(arm\)\(64\)\?.*/\1\2/&#39;</span> -e <span style="color:#e6db74">&#39;s/aarch64$/arm64/&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
-  curl -fsSLO <span style="color:#e6db74">&#34;https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
-  tar zxvf krew.tar.gz <span style="color:#f92672">&amp;&amp;</span>
-  KREW<span style="color:#f92672">=</span>./krew-<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>OS<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">${</span>ARCH<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
-  <span style="color:#e6db74">&#34;</span>$KREW<span style="color:#e6db74">&#34;</span> install krew
-<span style="color:#f92672">)</span>
-
-（中略）
-
-<span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> | Use this plugin:
- |      kubectl krew
- | Documentation:
- |      https://krew.sigs.k8s.io/
- | Caveats:
- | <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> |  | krew is now installed! To start using kubectl plugins, you need to add
- |  | krew<span style="color:#960050;background-color:#1e0010">&#39;</span>s installation directory to your PATH:
- |  | 
- |  |   * macOS/Linux:
- |  |     - Add the following to your ~/.bashrc or ~/.zshrc:
- |  |         export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>KREW_ROOT<span style="color:#66d9ef">:-</span>$HOME/.krew<span style="color:#e6db74">}</span><span style="color:#e6db74">/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
- |  |     - Restart your shell.
- |  | 
- |  |   * Windows: Add %USERPROFILE%<span style="color:#ae81ff">\.</span>krew<span style="color:#ae81ff">\b</span>in to your PATH environment variable
- |  | 
- |  | To list krew commands and to get help, run:
- |  |   $ kubectl krew
- |  | For a full list of available plugins, run:
- |  |   $ kubectl krew search
- |  | 
- |  | You can find documentation at
- |  |   https://krew.sigs.k8s.io/docs/user-guide/quickstart/.
- | /
-/
-</code></pre></div><p><code>$HOME/.krew/bin</code> ディレクトリを作成し、パスを通す。（もちろん、プロファイルに記載する）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>KREW_ROOT<span style="color:#66d9ef">:-</span>$HOME/.krew<span style="color:#e6db74">}</span><span style="color:#e6db74">/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
-</code></pre></div><p><code>kubectl krew</code> コマンドを実行し、 Usage が表示されてば完了。<br>
-また、 Krew 自身も kubectl plugin なので、 <code>kubectl plugin list</code> で表示される。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl plugin list
-The following compatible plugins are available:
-
-/Users/pepese/.krew/bin/kubectl-krew
-</code></pre></div><p>アンインストールしたい場合は、 <code>rm -rf -- ~/.krew</code> 実行と、環境変数を設定したプロファイルを削除すればいい。</p>
-<h3 ref="22-クイックスタート" >2.2. クイックスタート</h3><a class="anchor" id="22-クイックスタート"></a>
-<p>先に同じく <a href="https://krew.sigs.k8s.io/docs/user-guide/quickstart/">公式</a> を参照するのが、望ましいがここでは実際にやった手順を残しておく。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"><span style="color:#75715e"># プラグインリストの更新</span>
-% kubectl krew update
-
-<span style="color:#75715e"># プラグインの検索</span>
-% kubectl krew search
-（いっぱい出る）
-
-<span style="color:#75715e"># プラグイン検索（キーワード指定）</span>
-% kubectl krew search ctx
-NAME           DESCRIPTION                                      INSTALLED
-access-matrix  Show an RBAC access matrix <span style="color:#66d9ef">for</span> server resources  no
-allctx         Run commands on contexts in your kubeconfig      no
-ctx            Switch between contexts in your kubeconfig       no
-
-<span style="color:#75715e"># プラグインのインストール</span>
-% kubectl krew install ctx
-Updated the local copy of plugin index.
-Installing plugin: ctx
-Installed plugin: ctx
-<span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> | Use this plugin:
- |      kubectl ctx
- | Documentation:
- |      https://github.com/ahmetb/kubectx
- | Caveats:
- | <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> |  | If fzf is installed on your machine, you can interactively choose
- |  | between the entries using the arrow keys, or by fuzzy searching
- |  | as you type.
- |  | See https://github.com/ahmetb/kubectx <span style="color:#66d9ef">for</span> customization and details.
- | /
-/
-WARNING: You installed plugin <span style="color:#e6db74">&#34;ctx&#34;</span> from the krew-index plugin repository.
-   These plugins are not audited <span style="color:#66d9ef">for</span> security by the Krew maintainers.
-   Run them at your own risk.
-
-<span style="color:#75715e"># プラグインの実行</span>
-% kubectl ctx
-
-<span style="color:#75715e"># プラグインの更新</span>
-% kubectl krew upgrade
-Updated the local copy of plugin index.
-Upgrading plugin: ctx
-Skipping plugin ctx, it is already on the newest version
-Upgrading plugin: krew
-Skipping plugin krew, it is already on the newest version
-
-<span style="color:#75715e"># プラグインのアンインストール</span>
-% kubectl krew uninstall ctx
-</code></pre></div><h2 ref="参考" >参考</h2><a class="anchor" id="参考"></a>
+<h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
+<p><a href="https://cloud.google.com/sql/docs">Cloud SQL</a> はクラウド上の PostgreSQL 、 MySQL 、 SQL Server のリレーショナル データベースを簡単に設定、維持、運用、管理できるようにするフルマネージド データベース サービス。<br>
+<strong>GCP 外からもアクセス可能</strong> なのが売りの 1 つらしい。<br>
+Cloud SQL が対応しているデータ形式には、ダンプファイル（.sql）と CSV ファイル（.csv）。</p>
 <ul>
-<li><a href="https://krew.sigs.k8s.io/docs/">公式ドキュメント</a></li>
-<li><a href="https://qiita.com/superbrothers/items/b4a0aab0575ca6d65739">kubectl のプラグイン機能 kubectl plugin を使おう！</a></li>
-<li><a href="https://techblog.yahoo.co.jp/entry/2020081830014718/">kubectlのプラグイン機構とおすすめプラグインのご紹介</a></li>
-<li><a href="https://qiita.com/superbrothers/items/f2fb422b70ab6f61e531">Krew のカスタムプラグインインデックスで kubectl プラグインを配布しよう</a></li>
+<li>特徴
+<ul>
+<li>Cloud SQL の構築は ゾーン を指定するものの、VPC やサブネットは指定できない -&gt; <strong>ゾーンリソース</strong> -&gt; ゾーン障害に対応できない
+<ul>
+<li>同一リージョン・別ゾーンに対して <strong>フェールオーバーレプリカ</strong> を作成できる（別リージョンは無理）</li>
 </ul>
+</li>
+<li>Cloud SQL を構築した後、 AUTHORIZATION の項目で、アクセスする VM インスタンスの <strong>グローバル IP</strong> を許可するリストに加える</li>
+<li>VM インスタンスから Cloud SQL にアクセスするには Cloud SQL の IP アドレス、ユーザ、パスワードを指定する</li>
+<li>グローバル IP だけでなく、 プライベート IP もサポートされている</li>
+</ul>
+</li>
+</ul>
+<h2 ref="2-インスタンスの作成" >2. インスタンスの作成</h2><a class="anchor" id="2-インスタンスの作成"></a>
+<ul>
+<li><a href="https://cloud.google.com/sql/docs/mysql/create-instance#gcloud">インスタンスの作成</a></li>
+<li><a href="https://cloud.google.com/sdk/gcloud/reference/sql/instances/create"><code>gcloud sql instances create</code></a></li>
+<li><a href="https://cloud.google.com/sdk/gcloud/reference/beta/sql/instances/create"><code>gcloud beta sql instances create</code></a></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud sql instances create INSTANCE_NAME --cpu<span style="color:#f92672">=</span>NUMBER_CPUS --memory<span style="color:#f92672">=</span>MEMORY_SIZE --region<span style="color:#f92672">=</span>REGION
+</code></pre></div><ul>
+<li><strong>高可用性</strong> インスタンスを作成する場合は、<code>--zone</code>と <code>--secondary-zone</code> オプションを使用して、プライマリゾーンとセカンダリゾーンの両方を指定できる</li>
+<li>パブリックアクセスする場合は <code>--authorized-networks=192.168.100.0/24</code> のように許可する IP アドレスを指定する必要がある</li>
+<li>プライベートアクセスする場合は <code>--network=projects/testproject/global/networks/testsharednetwork</code> のように VPC を指定する必要がある
+<ul>
+<li>ただし、ベータ版コマンド（ <code>gcloud beta sql instances create</code>）でのみ有効</li>
+</ul>
+</li>
+</ul>
+<h3 ref="21-cloud-shell-から-gcloud-でインスタンスに接続" >2.1. Cloud Shell から <code>gcloud</code> でインスタンスに接続</h3><a class="anchor" id="21-cloud-shell-から-gcloud-でインスタンスに接続"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud sql connect qwiklabs-demo --user<span style="color:#f92672">=</span>root
+</code></pre></div><h2 ref="22-cloud-sql-auth-proxy" >2.2. Cloud SQL Auth Proxy</h2><a class="anchor" id="22-cloud-sql-auth-proxy"></a>
+<ul>
+<li>Cloud SQL Auth Proxy はローカル環境から Cloud SQL へ接続するための仕組み</li>
+<li>テスト用</li>
+<li>ローカル PC に 「Cloud SQL Auth Proxy クライアント」を導入して、 <code>gcloud</code> で認証することにより接続できる</li>
+<li><a href="https://cloud.google.com/sql/docs/mysql/quickstart-proxy-test">Cloud SQL Auth Proxy を使用するためのクイックスタート</a></li>
+</ul>
+<h2 ref="3-レプリケーション" >3. レプリケーション</h2><a class="anchor" id="3-レプリケーション"></a>
+<ul>
+<li>高可用性構成
+<ul>
+<li>HA を構成し、可用性を高める</li>
+<li>リードレプリカじゃない（ HA なので）</li>
+<li>同一リージョン・複数ゾーンで構成され、 <strong>フェールオーバーに対応</strong> する</li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/sql/docs/postgres/replication#read-replicas">リードレプリカ</a>
+<ul>
+<li>プライマリインスタンスの正確なコピーを作成し、読み取り専用のセカンダリインスタンスとして構成する</li>
+<li>プライマリインスタンスごとに最大 10 個のリードレプリカを作成できる</li>
+<li><strong>フェールオーバーできない</strong></li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/sql/docs/postgres/replication#cross-region-read-replicas">クロスリージョン リードレプリカ</a>
+<ul>
+<li>リードレプリカはクロスリージョンにも対応する</li>
+<li><strong>フェールオーバーできない</strong></li>
+</ul>
+</li>
+</ul>
+<h2 ref="4-ユースケース" >4. ユースケース</h2><a class="anchor" id="4-ユースケース"></a>
+<h3 ref="41-vm-インスタンスから-cloud-sql-に接続する" >4.1. VM インスタンスから Cloud SQL に接続する</h3><a class="anchor" id="41-vm-インスタンスから-cloud-sql-に接続する"></a>
+<ul>
+<li><code>default</code> ネットワークの <code>us-central1-a</code> ゾーンに <code>blog</code> VM インスタンスがある
+<ul>
+<li>内部 IP <code>10.128.0.3</code> 、 外部 IP <code>35.194.61.180</code></li>
+</ul>
+</li>
+<li><code>blog</code> VM インスタンスは 1 台で LAMP 構成になっている</li>
+<li>MySQL を <code>blog-db</code> という名前の Cloud SQL に移行して接続する
+<ul>
+<li><code>blog</code> の <code>/var/www/html/wordpress/wp-config.php</code> を書き換えて DB の接続先を変更する</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Cloud Shell ：リージョン・ゾーンの設定</span>
+$ gcloud config set compute/region us-central1
+$ gcloud config set compute/zone us-central1-a
+
+<span style="color:#75715e"># Cloud Shell ： Cloud SQL の作成</span>
+$ gcloud sql instances create blog-db --region<span style="color:#f92672">=</span>us-central1 --authorized-networks<span style="color:#f92672">=</span>35.194.61.180/32
+
+
+<span style="color:#75715e"># blod VM インスタンス： blod VM インスタンスへ SSH して mysql ダンプを取得</span>
+$ mysqldump --databases wordpress -h localhost -u blogadmin -pPassword1* <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --hex-blob --single-transaction <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --default-character-set<span style="color:#f92672">=</span>utf8mb4 &gt; dump.sql
+
+<span style="color:#75715e"># blod VM インスタンス： Cloud Storage バケット作成</span>
+$ gsutil mb gs://qwiklabs-gcp-01-9aec32589768
+
+<span style="color:#75715e"># blod VM インスタンス： ダンプをアップロード</span>
+$ gsutil cp dump.sql gs://qwiklabs-gcp-01-9aec32589768/
+
+<span style="color:#75715e"># blod VM インスタンス： アップロードを確認</span>
+$ gsutil ls gs://qwiklabs-gcp-01-9aec32589768/
+gs://qwiklabs-gcp-01-9aec32589768/dump.sql
+
+<span style="color:#75715e"># Cloud Console にて blog-db から gs://qwiklabs-gcp-01-9aec32589768/dump.sql をインポート</span>
+
+<span style="color:#75715e"># blod VM インスタンス： 試しに VM インスタンスから接続</span>
+$ mysql -h 35.239.119.80 -u root
+
+<span style="color:#75715e"># blod VM インスタンス： 設定ファイルを編集した後、 Apache リスタート</span>
+$ sudo service apache2 restart
+
+<span style="color:#75715e"># Cloud Shell ：接続テスト</span>
+$ curl http://35.194.61.180
+</code></pre></div>
 		</div>
 
 
