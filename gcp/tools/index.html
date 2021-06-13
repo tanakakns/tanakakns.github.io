@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-10T20:30:12 JST">
+<meta name="revised" content="2021-06-13T17:22:41 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1045,6 +1045,15 @@ if (!doNotTrack) {
 
 	<div class="content">
 	    <p>Cloud Console、Cloud Shell、API とサービス、Google Cloud SDK、Cloud Deployment Manager</p>
+<ol>
+<li>Cloud Console</li>
+<li>Cloud Shell</li>
+<li>API とサービス</li>
+<li>Cloud SDK</li>
+<li>Cloud Deployment Manager</li>
+<li>Cloud Build</li>
+<li>Cloud Tasks</li>
+</ol>
 <h2 ref="1-cloud-console" >1. Cloud Console</h2><a class="anchor" id="1-cloud-console"></a>
 <ul>
 <li><a href="https://cloud.google.com/cloud-console/">Cloud Console</a>は、Google Cloud の開発ツールの中核であるウェブコンソール。</li>
@@ -1074,8 +1083,8 @@ $ gcloud services list --available
 <ul>
 <li><a href="https://developers.google.com/apis-explorer/#p/">Google APIs Explorer</a></li>
 </ul>
-<h2 ref="4-google-cloud-sdk" >4. Google Cloud SDK</h2><a class="anchor" id="4-google-cloud-sdk"></a>
-<p><a href="https://cloud.google.com/sdk/docs">Google Cloud SDK</a> は、GCP にホスティングされているリソースとアプリケーションの管理に使用できる一連のツール。</p>
+<h2 ref="4-cloud-sdk" >4. Cloud SDK</h2><a class="anchor" id="4-cloud-sdk"></a>
+<p><a href="https://cloud.google.com/sdk/docs">Cloud SDK</a> は、GCP にホスティングされているリソースとアプリケーションの管理に使用できる一連のツール。</p>
 <ul>
 <li><code>gcloud</code> CLI： Google Cloud APIs の操作をコマンドラインで実施できる</li>
 <li>クライアントライブラリ：各プログラミング言語のクライアントライブラリ</li>
@@ -1299,6 +1308,83 @@ $ gcloud config set compute/zone &lt;ZONE&gt;
 <code>gcloud deployment-manager deployments</code> コマンドでデプロイメントを管理し、 <code>gcloud deployment-manager resouces</code> コマンドでデプロイメントに含まれるリソースを管理する。</p>
 <h2 ref="6-cloud-build" >6. Cloud Build</h2><a class="anchor" id="6-cloud-build"></a>
 <p><a href="https://cloud.google.com/build/docs/concepts?hl=ja">doc</a></p>
+<p><strong>ビルド構成</strong> を作成して、実行するタスクを Cloud Build に指示できる。<br>
+依存関係をフェッチして、単体テスト、静的分析、結合テストを実行し、docker、gradle、maven、bazel、gulp などのビルドツールでアーティファクトを作成するようにビルドを構成できる。<br>
+Cloud Build は、一連の <strong>ビルドステップ</strong> としてビルドを実行し、各ビルドステップは、 <em>Docker コンテナで実行</em> される。ビルドステップの実行は、スクリプトでコマンドを実行する場合と似ている。<br>
+Cloud Build や Cloud Build コミュニティで提供されているビルドステップを使用することも、独自のカスタム ビルドステップを作成することもできる。</p>
+<ul>
+<li>Cloud Build が提供するビルドステップ
+<ul>
+<li>一般的な言語とタスク用にサポート対象のオープンソース ビルドステップが用意されている</li>
+</ul>
+</li>
+<li>コミュニティ提供のビルドステップ
+<ul>
+<li>Cloud Build のユーザー コミュニティで、オープンソースのビルドステップが提供されている</li>
+</ul>
+</li>
+<li>カスタム ビルドステップ
+<ul>
+<li>ビルドで使用する独自のビルドステップを作成できる</li>
+</ul>
+</li>
+</ul>
+<p>各ビルドステップは、ローカルの Docker ネットワーク <code>cloudbuild</code> に接続しているコンテナで実行され、ビルドステップが相互に通信を行い、データ（ファイル等）を共有できる。</p>
+<h3 ref="61-ビルドのライフサイクル" >6.1. ビルドのライフサイクル</h3><a class="anchor" id="61-ビルドのライフサイクル"></a>
+<p>一般的な Cloud Build ビルドのライフサイクルは以下の通り。</p>
+<ol>
+<li>アプリケーション コードと必要なアセットを準備</li>
+<li>Cloud Build の命令が含まれる YAML または JSON 形式のビルド構成ファイルを作成</li>
+<li>Cloud Build にビルドを送信</li>
+<li>Cloud Build は提供されたビルド構成に基づいてビルドを実行</li>
+<li>該当する場合、ビルドされたイメージは Container Registry に push される</li>
+</ol>
+<p>ビルドを Cloud Build に送信する前にテストする場合に、<code>cloud-build-local</code> ツールを用いてローカルでビルドを実行できる。</p>
+<h3 ref="62-ビルド構成ファイル" >6.2. ビルド構成ファイル</h3><a class="anchor" id="62-ビルド構成ファイル"></a>
+<p><a href="https://cloud.google.com/build/docs/build-config?hl=ja">ビルド構成</a> ファイルは YAML または JSON 構文で記述する。<br>
+curl などのサードパーティの http ツールを使用してビルド リクエストを送信する場合は、JSON 構文を使用する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">steps</span>:
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#f92672">args</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+  <span style="color:#f92672">env</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+  <span style="color:#f92672">dir</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#f92672">id</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#f92672">waitFor</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+  <span style="color:#f92672">entrypoint</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#f92672">secretEnv</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#f92672">volumes</span>: <span style="color:#ae81ff">object(Volume)</span>
+  <span style="color:#f92672">timeout</span>: <span style="color:#ae81ff">string (Duration format)</span>
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#ae81ff">...</span>
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#ae81ff">...</span>
+<span style="color:#f92672">timeout</span>: <span style="color:#ae81ff">string (Duration format)</span>
+<span style="color:#f92672">queueTtl</span>: <span style="color:#ae81ff">string (Duration format)</span>
+<span style="color:#f92672">logsBucket</span>: <span style="color:#ae81ff">string</span>
+<span style="color:#f92672">options</span>:
+ <span style="color:#f92672">env</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+ <span style="color:#f92672">secretEnv</span>: <span style="color:#ae81ff">string</span>
+ <span style="color:#f92672">volumes</span>: <span style="color:#ae81ff">object(Volume)</span>
+ <span style="color:#f92672">sourceProvenanceHash</span>: <span style="color:#ae81ff">enum(HashType)</span>
+ <span style="color:#f92672">machineType</span>: <span style="color:#ae81ff">enum(MachineType)</span>
+ <span style="color:#f92672">diskSizeGb</span>: <span style="color:#ae81ff">string (int64 format)</span>
+ <span style="color:#f92672">substitutionOption</span>: <span style="color:#ae81ff">enum(SubstitutionOption)</span>
+ <span style="color:#f92672">dynamicSubstitutions</span>: <span style="color:#ae81ff">boolean</span>
+ <span style="color:#f92672">logStreamingOption</span>: <span style="color:#ae81ff">enum(LogStreamingOption)</span>
+ <span style="color:#f92672">logging</span>: <span style="color:#ae81ff">enum(LoggingMode)</span>
+<span style="color:#f92672">substitutions: map (key: string, value</span>: <span style="color:#ae81ff">string)</span>
+<span style="color:#f92672">tags</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+<span style="color:#f92672">serviceAccount</span>: <span style="color:#ae81ff">string</span>
+<span style="color:#f92672">secrets</span>: <span style="color:#ae81ff">object(Secret)</span>
+<span style="color:#f92672">availableSecrets</span>: <span style="color:#ae81ff">object(Secrets)</span>
+<span style="color:#f92672">artifacts</span>: <span style="color:#ae81ff">object (Artifacts)</span>
+<span style="color:#f92672">images</span>:
+- [<span style="color:#ae81ff">string, string, ...]</span>
+</code></pre></div><h2 ref="7-cloud-tasks" >7. Cloud Tasks</h2><a class="anchor" id="7-cloud-tasks"></a>
+<p><a href="https://cloud.google.com/tasks/docs/concepts?hl=ja">docs</a></p>
+<p>Cloud Tasks と Cloud Pub/Sub は類似しているように思える。<br>
+しかし、最大の違いは Cloud Tasks は Publisher が <strong>明示的に</strong> タスクをコントロールできることにある。<br>
+Cloud Pub/Sub は、 Publisher が Subscriber をコントロールすることはできない。</p>
 		</div>
 
 
