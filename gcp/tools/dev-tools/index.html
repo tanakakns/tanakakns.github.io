@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	Homebrew :: テックまとめ
+	開発ツール :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>Homebrew :: テックまとめ</title>
+<title>開発ツール :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/mac/homebrew/"
+  <body data-url="/gcp/tools/dev-tools/"
 
   class="hidetoc hidenextpage ">
 
@@ -166,15 +166,14 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/mac/">Mac開発環境</a>
@@ -197,7 +196,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item
         item_level_$level
         ">
 
@@ -385,14 +384,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -430,7 +430,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/tools/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/tools/" class="dd-item parent haschildren
         item_level_$level
         ">
 
@@ -439,7 +439,8 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/tools/">ツール</a>
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
         <ul>
@@ -460,7 +461,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/tools/dev-tools/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/tools/dev-tools/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -1018,6 +1019,9 @@ if (!doNotTrack) {
 		
   
   	
+		
+  
+  	
 	<li >
       <a class="text-link" href="https://tanakakns.github.io/">
         
@@ -1026,8 +1030,16 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/mac/">
-        Mac開発環境
+      <a class="text-link" href="/gcp/">
+        GCP
+      </a>
+    </li>
+	
+  	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/tools/">
+        ツール
       </a>
     </li>
 	
@@ -1035,7 +1047,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        Homebrew
+        開発ツール
       
     </li>
 
@@ -1056,7 +1068,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>Homebrew</h1>
+			<h1>開発ツール</h1>
         
 
 		
@@ -1076,98 +1088,94 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p>Mac のパッケージマネージャである <a href="http://brew.sh/index_ja.html">Homebrew</a> について。</p>
-<ol>
-<li>環境設定</li>
-<li>brew tap</li>
-<li>brew cask</li>
-<li>おすすめ</li>
+	    <ol>
+<li>Cloud Deployment Manager</li>
+<li>Cloud Build</li>
+<li>Cloud Tasks</li>
 </ol>
-<h2 ref="1-環境設定" >1. 環境設定</h2><a class="anchor" id="1-環境設定"></a>
-<h3 ref="11-インストール" >1.1. インストール</h3><a class="anchor" id="11-インストール"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% /usr/bin/ruby -e <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span style="color:#66d9ef">)</span><span style="color:#e6db74">”
-</span><span style="color:#e6db74">==&gt; This script will install:
-</span><span style="color:#e6db74">/usr/local/bin/brew
-</span><span style="color:#e6db74">/usr/local/share/doc/homebrew
-</span><span style="color:#e6db74">/usr/local/share/man/man1/brew.1
-</span><span style="color:#e6db74">/usr/local/share/zsh/site-functions/_brew
-</span><span style="color:#e6db74">/usr/local/etc/bash_completion.d/brew
-</span><span style="color:#e6db74">/usr/local/Homebrew
-</span><span style="color:#e6db74">==&gt; The following new directories will be created:
-</span><span style="color:#e6db74">/usr/local/Cellar
-</span><span style="color:#e6db74">/usr/local/Homebrew
-</span><span style="color:#e6db74">/usr/local/Frameworks
-</span><span style="color:#e6db74">/usr/local/bin
-</span><span style="color:#e6db74">/usr/local/include
-</span><span style="color:#e6db74">/usr/local/lib
-</span><span style="color:#e6db74">/usr/local/opt
-</span><span style="color:#e6db74">/usr/local/sbin
-</span><span style="color:#e6db74">/usr/local/share/zsh
-</span><span style="color:#e6db74">/usr/local/share/zsh/site-functions
-</span></code></pre></div><p>上記を実行後、 <code>brew doctor</code> で問題がないことを確認。<br>
-もしWarningが出たらメッセージに従って対処する。<br>
-筆者の場合はXcodeをインストールしてCommand Line Toolsをアップデートしたら解決した。<br>
-変更があるかもしれないので<a href="http://brew.sh/index_ja.html">公式</a>を確認のこと。</p>
+<h2 ref="1-cloud-deployment-manager" >1. Cloud Deployment Manager</h2><a class="anchor" id="1-cloud-deployment-manager"></a>
+<p>AWS でいう CloudFormation 。<br>
+単一の API に対応した <strong>リソース</strong> とそのリソースをまとめた <strong>デプロイメント</strong> などで構成される。<br>
+<code>gcloud deployment-manager deployments</code> コマンドでデプロイメントを管理し、 <code>gcloud deployment-manager resouces</code> コマンドでデプロイメントに含まれるリソースを管理する。</p>
+<h2 ref="2-cloud-build" >2. Cloud Build</h2><a class="anchor" id="2-cloud-build"></a>
+<p><a href="https://cloud.google.com/build/docs/concepts?hl=ja">doc</a></p>
+<p><strong>ビルド構成</strong> を作成して、実行するタスクを Cloud Build に指示できる。<br>
+依存関係をフェッチして、単体テスト、静的分析、結合テストを実行し、docker、gradle、maven、bazel、gulp などのビルドツールでアーティファクトを作成するようにビルドを構成できる。<br>
+Cloud Build は、一連の <strong>ビルドステップ</strong> としてビルドを実行し、各ビルドステップは、 <em>Docker コンテナで実行</em> される。ビルドステップの実行は、スクリプトでコマンドを実行する場合と似ている。<br>
+Cloud Build や Cloud Build コミュニティで提供されているビルドステップを使用することも、独自のカスタム ビルドステップを作成することもできる。</p>
 <ul>
-<li><code>/usr/local/Cellar/</code>
+<li>Cloud Build が提供するビルドステップ
 <ul>
-<li>Homebrewでインストールしたソフトウェアはここに配備される</li>
+<li>一般的な言語とタスク用にサポート対象のオープンソース ビルドステップが用意されている</li>
 </ul>
 </li>
-<li><code>/usr/local/bin/</code>
+<li>コミュニティ提供のビルドステップ
 <ul>
-<li>インストールしたソフトウェアのコマンドのシンボリックリンクはここに配備される</li>
+<li>Cloud Build のユーザー コミュニティで、オープンソースのビルドステップが提供されている</li>
+</ul>
+</li>
+<li>カスタム ビルドステップ
+<ul>
+<li>ビルドで使用する独自のビルドステップを作成できる</li>
 </ul>
 </li>
 </ul>
-<h3 ref="12-homebrew-のアップデート" >1.2. Homebrew のアップデート</h3><a class="anchor" id="12-homebrew-のアップデート"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew update
-</code></pre></div><h3 ref="13-ソフトウェアのインストール" >1.3. ソフトウェアのインストール</h3><a class="anchor" id="13-ソフトウェアのインストール"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew install &lt;software&gt;
-</code></pre></div><p>なお、かつて Homebrew の拡張であった <strong>Cask</strong> は本体に統合された。<br>
-明示的に Cask 管理のソフトウェアをインストールする場合は以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew install &lt;software&gt; --cask
-</code></pre></div><h3 ref="14ソフトウェアの更新" >1.4.ソフトウェアの更新</h3><a class="anchor" id="14ソフトウェアの更新"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew upgrade &lt;software&gt;
-</code></pre></div><p>ソフトウェアを指定しない場合は、インストールしたもの全てが更新される。</p>
-<h3 ref="15-キャッシュされている古いソフトウェアの削除" >1.5. キャッシュされている古いソフトウェアの削除</h3><a class="anchor" id="15-キャッシュされている古いソフトウェアの削除"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew cleanup
-</code></pre></div><h2 ref="2-brew-tap" >2. brew tap</h2><a class="anchor" id="2-brew-tap"></a>
-<p>brew tap は、公式以外の formula を追加することのできる Homebrew のサブコマンド。<br>
-Homebrewをインストールした際に標準で組み込まれている。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew tap &lt;userName&gt;/&lt;repository&gt;
-</code></pre></div><p>上記コマンドを実行すると、GitHub 公開リポジトリ (<a href="https://github.com/">https://github.com/</a><!-- raw HTML omitted -->/homebrew-<!-- raw HTML omitted -->) が参照され、/usr/local/Library/Taps以下にインストールされる。<br>
-<code>brew tap</code> コマンドでこれまでにインストールされたソフトウェアの一覧が見れる。<br>
-また、 <code>brew tap &lt;url&gt;</code> コマンドでGitHub以外のソフトウェアもインストール可能。</p>
-<h2 ref="3-brew-cask" >3. brew cask</h2><a class="anchor" id="3-brew-cask"></a>
-<p>brewやbrew tapでソフトウェアをインストールする際、目的のソフトウェアを動かすには依存するその他のソフトウェアをインストールする必要がある場合がある。<br>
-そんなときbrew caskを使用すると目的のソフトウェアをインストールするだけで依存するソフトウェアもインストールしてくれる。<br>
-さらにGoogle ChromeやAtomといったソフトのインストールも可能となる。</p>
-<ul>
-<li><code>/usr/local/Caskroom/</code>
-<ul>
-<li>Cask でインストールしたソフトウェアはここに配備される</li>
-</ul>
-</li>
-<li><code>/usr/local/bin/</code>
-<ul>
-<li>インストールしたソフトウェアのコマンドのシンボリックリンクはここに配備される</li>
-</ul>
-</li>
-</ul>
-<h3 ref="31-インストール" >3.1. インストール</h3><a class="anchor" id="31-インストール"></a>
-<p>Homebrew 本体に統合され、インストール不要になった。<br>
-<code>--cask</code> オプションで <code>brew cask</code> コマンドは代替可能。</p>
-<h2 ref="4-おすすめ" >4. おすすめ</h2><a class="anchor" id="4-おすすめ"></a>
-<ul>
-<li><code>brew install iterm2 --cask</code></li>
-<li><code>brew install visual-studio-code --cask</code></li>
-<li><code>brew install google-chrome --cask</code></li>
-<li><code>brew install zoom</code></li>
-<li><code>brew install microsoft-teams --cask</code></li>
-<li><code>brew install mattermost --cask</code></li>
-<li><code>brew install hugo</code></li>
-</ul>
+<p>各ビルドステップは、ローカルの Docker ネットワーク <code>cloudbuild</code> に接続しているコンテナで実行され、ビルドステップが相互に通信を行い、データ（ファイル等）を共有できる。</p>
+<h3 ref="21-ビルドのライフサイクル" >2.1. ビルドのライフサイクル</h3><a class="anchor" id="21-ビルドのライフサイクル"></a>
+<p>一般的な Cloud Build ビルドのライフサイクルは以下の通り。</p>
+<ol>
+<li>アプリケーション コードと必要なアセットを準備</li>
+<li>Cloud Build の命令が含まれる YAML または JSON 形式のビルド構成ファイルを作成</li>
+<li>Cloud Build にビルドを送信</li>
+<li>Cloud Build は提供されたビルド構成に基づいてビルドを実行</li>
+<li>該当する場合、ビルドされたイメージは Container Registry に push される</li>
+</ol>
+<p>ビルドを Cloud Build に送信する前にテストする場合に、<code>cloud-build-local</code> ツールを用いてローカルでビルドを実行できる。</p>
+<h3 ref="22-ビルド構成ファイル" >2.2. ビルド構成ファイル</h3><a class="anchor" id="22-ビルド構成ファイル"></a>
+<p><a href="https://cloud.google.com/build/docs/build-config?hl=ja">ビルド構成</a> ファイルは YAML または JSON 構文で記述する。<br>
+curl などのサードパーティの http ツールを使用してビルド リクエストを送信する場合は、JSON 構文を使用する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">steps</span>:
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#f92672">args</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+  <span style="color:#f92672">env</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+  <span style="color:#f92672">dir</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#f92672">id</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#f92672">waitFor</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+  <span style="color:#f92672">entrypoint</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#f92672">secretEnv</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#f92672">volumes</span>: <span style="color:#ae81ff">object(Volume)</span>
+  <span style="color:#f92672">timeout</span>: <span style="color:#ae81ff">string (Duration format)</span>
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#ae81ff">...</span>
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
+  <span style="color:#ae81ff">...</span>
+<span style="color:#f92672">timeout</span>: <span style="color:#ae81ff">string (Duration format)</span>
+<span style="color:#f92672">queueTtl</span>: <span style="color:#ae81ff">string (Duration format)</span>
+<span style="color:#f92672">logsBucket</span>: <span style="color:#ae81ff">string</span>
+<span style="color:#f92672">options</span>:
+ <span style="color:#f92672">env</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+ <span style="color:#f92672">secretEnv</span>: <span style="color:#ae81ff">string</span>
+ <span style="color:#f92672">volumes</span>: <span style="color:#ae81ff">object(Volume)</span>
+ <span style="color:#f92672">sourceProvenanceHash</span>: <span style="color:#ae81ff">enum(HashType)</span>
+ <span style="color:#f92672">machineType</span>: <span style="color:#ae81ff">enum(MachineType)</span>
+ <span style="color:#f92672">diskSizeGb</span>: <span style="color:#ae81ff">string (int64 format)</span>
+ <span style="color:#f92672">substitutionOption</span>: <span style="color:#ae81ff">enum(SubstitutionOption)</span>
+ <span style="color:#f92672">dynamicSubstitutions</span>: <span style="color:#ae81ff">boolean</span>
+ <span style="color:#f92672">logStreamingOption</span>: <span style="color:#ae81ff">enum(LogStreamingOption)</span>
+ <span style="color:#f92672">logging</span>: <span style="color:#ae81ff">enum(LoggingMode)</span>
+<span style="color:#f92672">substitutions: map (key: string, value</span>: <span style="color:#ae81ff">string)</span>
+<span style="color:#f92672">tags</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+<span style="color:#f92672">serviceAccount</span>: <span style="color:#ae81ff">string</span>
+<span style="color:#f92672">secrets</span>: <span style="color:#ae81ff">object(Secret)</span>
+<span style="color:#f92672">availableSecrets</span>: <span style="color:#ae81ff">object(Secrets)</span>
+<span style="color:#f92672">artifacts</span>: <span style="color:#ae81ff">object (Artifacts)</span>
+<span style="color:#f92672">images</span>:
+- [<span style="color:#ae81ff">string, string, ...]</span>
+</code></pre></div><h2 ref="3-cloud-tasks" >3. Cloud Tasks</h2><a class="anchor" id="3-cloud-tasks"></a>
+<p><a href="https://cloud.google.com/tasks/docs/concepts?hl=ja">docs</a></p>
+<p>Cloud Tasks と Cloud Pub/Sub は類似しているように思える。<br>
+しかし、最大の違いは Cloud Tasks は Publisher が <strong>明示的に</strong> タスクをコントロールできることにある。<br>
+Cloud Pub/Sub は、 Publisher が Subscriber をコントロールすることはできない。</p>
 		</div>
 
 

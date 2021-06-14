@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-13T17:22:41 JST">
+<meta name="revised" content="2021-06-14T17:28:12 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -430,7 +430,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/tools/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/tools/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -439,9 +439,41 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/tools/">ツール</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/tools/management-tools/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/tools/management-tools/">管理ツール</a>
       
         
       
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/tools/dev-tools/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/tools/dev-tools/">開発ツール</a>
+      
+        
+      
+    </li>
+        </ul>
     </li>
               
 
@@ -1063,7 +1095,7 @@ if (!doNotTrack) {
 <li>ユースケース</li>
 </ol>
 <h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
-<p><a href="https://cloud.google.com/sql/docs">Cloud SQL</a> はクラウド上の PostgreSQL 、 MySQL 、 SQL Server のリレーショナル データベースを簡単に設定、維持、運用、管理できるようにするフルマネージド データベース サービス。<br>
+<p><a href="https://cloud.google.com/sql/docs">Cloud SQL</a> はクラウド上の MySQL 、 PostgreSQL 、 SQL Server のリレーショナル データベースを簡単に設定、維持、運用、管理できるようにするフルマネージド データベース サービス。<br>
 <strong>GCP 外からもアクセス可能</strong> なのが売りの 1 つらしい。<br>
 Cloud SQL が対応しているデータ形式には、ダンプファイル（.sql）と CSV ファイル（.csv）。</p>
 <ul>
@@ -1116,15 +1148,29 @@ Cloud SQL が対応しているデータ形式には、ダンプファイル（.
 </li>
 <li><a href="https://cloud.google.com/sql/docs/postgres/replication#read-replicas">リードレプリカ</a>
 <ul>
-<li>プライマリインスタンスの正確なコピーを作成し、読み取り専用のセカンダリインスタンスとして構成する</li>
+<li>プライマリインスタンスの正確なコピーを作成し、読み取り専用のセカンダリインスタンスとして構成する（リードレプリカ）</li>
+<li>プライマリインスタンス、スタンバイインスタンス、リードレプリカの 3 種類で構成される
+<ul>
+<li>スタンバイインスタンスは文字通り、プライマリインスタンスのフェールオーバー用で通常は機能していない</li>
+</ul>
+</li>
 <li>プライマリインスタンスごとに最大 10 個のリードレプリカを作成できる</li>
-<li><strong>フェールオーバーできない</strong></li>
+<li>リードレプリカは <strong>フェールオーバーできない</strong></li>
 </ul>
 </li>
 <li><a href="https://cloud.google.com/sql/docs/postgres/replication#cross-region-read-replicas">クロスリージョン リードレプリカ</a>
 <ul>
 <li>リードレプリカはクロスリージョンにも対応する</li>
-<li><strong>フェールオーバーできない</strong></li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/sql/docs/mysql/replication#external-read-replicas">外部リードレプリカ</a>
+<ul>
+<li>Cloud SQL プライマリ インスタンスを複製する外部インスタンス</li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/sql/docs/mysql/replication/replication-from-external">外部サーバーからのレプリケーション</a>
+<ul>
+<li>外部インスタンスがプライマリで、 Cloud SQL がレプリカの構成</li>
 </ul>
 </li>
 </ul>
