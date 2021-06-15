@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-14T17:28:12 JST">
+<meta name="revised" content="2021-06-15T21:01:03 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1095,6 +1095,7 @@ if (!doNotTrack) {
 <li>アクセスコントロール</li>
 <li>パーティション分割と有効期限</li>
 <li>外部データソースに対するクエリ</li>
+<li>BigQuery へのデータの読み込み</li>
 <li>コスト</li>
 </ol>
 <h2 ref="1-アクセスコントロール" >1. アクセスコントロール</h2><a class="anchor" id="1-アクセスコントロール"></a>
@@ -1135,7 +1136,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 ref="2-有効期限" >2. 有効期限</h2><a class="anchor" id="2-有効期限"></a>
+<h2 ref="2-パーティション分割と有効期限" >2. パーティション分割と有効期限</h2><a class="anchor" id="2-パーティション分割と有効期限"></a>
 <p>BigQuery では以下のようにデータのパーティション分割と有効期限を設定できる。</p>
 <ul>
 <li><a href="https://cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time">パーティション分割</a>
@@ -1159,7 +1160,41 @@ if (!doNotTrack) {
 <li>Google ドライブ</li>
 </ul>
 <p>ただし、データの生合成が取れないなどの制約はある。</p>
-<h2 ref="4-コスト" >4. コスト</h2><a class="anchor" id="4-コスト"></a>
+<h2 ref="4-bigquery-へのデータの読み込み" >4. BigQuery へのデータの読み込み</h2><a class="anchor" id="4-bigquery-へのデータの読み込み"></a>
+<p><a href="https://cloud.google.com/bigquery/docs/loading-data">読み込み</a> には以下の選択肢がある。</p>
+<ul>
+<li>バッチ読み込み
+<ul>
+<li>単一のバッチオペレーションでソースデータ（CSV ファイル、外部データベース、ログファイルなど）を BigQuery テーブルに読み込む</li>
+<li>従来の抽出、変換、読み込み（ETL）ジョブはこのカテゴリに分類される</li>
+<li>バッチ読み込みは、一回限りまたは定期的なスケジュールで行える
+<ul>
+<li>BigQuery Data Transfer Service の転送はスケジュールに基づいて実行</li>
+<li>Cloud Composer などのオーケストレーション サービスを使用して、読み込みジョブをスケジュール</li>
+<li>cron ジョブを使用して、スケジュールに従ってデータを読み込み</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ストリーミング
+<ul>
+<li>データを一度に 1 つずつ、または一括して送信し、ストリーミング API を直接呼び出すコードを記述できる</li>
+<li>あるいは、Dataflow を Apache Beam SDK で使用してストリーミング パイプラインを設定することもできる</li>
+<li>ストリーミングは別途 <strong>追加料金が発生</strong> することに注意（ <a href="https://cloud.google.com/bigquery/pricing#data_ingestion_pricing">参考</a> ）</li>
+</ul>
+</li>
+<li>クエリ結果のテーブル追加・上書き
+<ul>
+<li>データ操作言語（DML）ステートメントを使用して、既存のテーブルへの一括挿入や、新しいテーブルでのクエリの結果の保存ができる</li>
+</ul>
+</li>
+<li>サードパーティアプリケーションやサービスの利用
+<ul>
+<li>一部のサードパーティ アプリケーションやサービスでは、データを BigQuery に取り込むためのコネクタが提供されている</li>
+</ul>
+</li>
+</ul>
+<h2 ref="5-コスト" >5. コスト</h2><a class="anchor" id="5-コスト"></a>
 <p>BigQuery のコストは大きく以下の 2 つある。</p>
 <ul>
 <li>分析料金
