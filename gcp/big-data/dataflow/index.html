@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	初期設定 :: テックまとめ
+	Dataflow :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>初期設定 :: テックまとめ</title>
+<title>Dataflow :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/go/initial-setting/"
+  <body data-url="/gcp/big-data/dataflow/"
 
   class="hidetoc hidenextpage ">
 
@@ -260,15 +260,14 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/go/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/go/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/go/">Go言語</a>
@@ -276,7 +275,7 @@ if (!doNotTrack) {
         <ul>
               
 
-    <li data-nav-id="https://tanakakns.github.io/go/initial-setting/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/go/initial-setting/" class="dd-item
         item_level_$level
         ">
 
@@ -385,14 +384,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -738,7 +738,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/" class="dd-item parent haschildren
         item_level_$level
         ">
 
@@ -747,7 +747,8 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/big-data/">ビッグデータ</a>
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
         <ul>
@@ -768,7 +769,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/dataflow/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/dataflow/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -1033,6 +1034,9 @@ if (!doNotTrack) {
 		
   
   	
+		
+  
+  	
 	<li >
       <a class="text-link" href="https://tanakakns.github.io/">
         
@@ -1041,8 +1045,16 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/go/">
-        Go言語
+      <a class="text-link" href="/gcp/">
+        GCP
+      </a>
+    </li>
+	
+  	
+  
+    <li class="">
+      <a class="text-link" href="/gcp/big-data/">
+        ビッグデータ
       </a>
     </li>
 	
@@ -1050,7 +1062,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        初期設定
+        Dataflow
       
     </li>
 
@@ -1071,7 +1083,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>初期設定</h1>
+			<h1>Dataflow</h1>
         
 
 		
@@ -1091,320 +1103,95 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p>Go言語の初期設定周りについて。</p>
-<ol>
-<li><a href="#1-%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0">環境変数</a></li>
-<li><a href="#2-go-modules">Go Modules</a></li>
-<li><a href="#3-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90">プロジェクトの作成</a></li>
-<li><a href="#4-vs-code">VS Code</a></li>
-<li><a href="#5-docker-%E3%81%AB%E3%82%88%E3%82%8B%E3%83%9E%E3%83%AB%E3%83%81%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B8%E3%83%93%E3%83%AB%E3%83%89">docker によるマルチステージビルド</a></li>
-</ol>
-<h2 ref="1-環境変数" >1. 環境変数</h2><a class="anchor" id="1-環境変数"></a>
-<p><a href="https://golang.org/doc/install/source#environment">https://golang.org/doc/install/source#environment</a></p>
+	    <p><a href="https://cloud.google.com/dataflow/docs/concepts">Dataflow</a></p>
+<h2 ref="1-プログラミングモデル" >1. プログラミングモデル</h2><a class="anchor" id="1-プログラミングモデル"></a>
+<p>Dataflow は Apache Beam に準拠しており、バッチとストリーミングの両方のデータの並列処理パイプラインを定義するオープンソースの統合モデル。<br>
+以下のような構成要素からなる。</p>
 <ul>
-<li><code>GOROOT</code>
+<li>パイプライン
 <ul>
-<li>go のバイナリのホームまでのパス</li>
-<li><code>go env GOROOT</code> で値確認</li>
+<li>入力データの読み取り、そのデータの変換、出力データの書き込みに関連する、一連の計算全体をカプセル化したもの</li>
+<li>Apache Beam プログラムでは、まず、Pipeline オブジェクトを構築し、そのオブジェクトを基礎として使用してパイプラインのデータセットを作成する</li>
 </ul>
 </li>
-<li><code>GOPATH</code>
+<li>PCollection
 <ul>
-<li><code>go env GOPATH</code> で値確認</li>
-<li>go の各種資材が配置パスであってプロジェクトのパスでないことに注意</li>
-<li>プロジェクトのパスは <code>$GOPATH/src/github.com/&lt;Githubアカウント名&gt;/&lt;プロジェクト名&gt;</code>
-<ul>
-<li>ただし、後述する <strong>GOPATH mode</strong> の場合</li>
+<li>パイプライン データとして機能する複数要素のデータセット</li>
+<li>Apache Beam 変換では、PCollection オブジェクトをパイプラインの各ステップの入力と出力として使用する</li>
 </ul>
 </li>
+<li>変換
+<ul>
+<li>データを変換する処理オペレーション</li>
+<li>1 つ以上の PCollection を入力として受け取り、そのコレクションの各要素に対して指定したオペレーションを実行して、1 つ以上の PCollection を出力</li>
 </ul>
 </li>
-<li><code>GOOS</code>
+<li>ParDo
 <ul>
-<li>コンパイルして作成するバイナリの対象 OS を指定する</li>
+<li>Apache Beam SDK のコア並列処理オペレーション</li>
+<li>入力 PCollection の各要素に対してユーザー指定の関数を呼び出し、0 個以上の出力要素を 1 つの出力 PCollection に収集</li>
+<li>これはなんらかの変換や演算処理を提供するオペレーションではないことに注意</li>
 </ul>
 </li>
-<li><code>GOARCH</code>
+<li>パイプライン I/O コネクタ
 <ul>
-<li>コンパイルして作成するバイナリの対象 CPU を指定する</li>
+<li>パイプラインにデータを読み込み、パイプラインから出力データの書き出しをサポート</li>
+<li>ソースとシンクで構成されている</li>
+<li>Apache Beam のすべてのソースとシンクの変換によって、さまざまなデータ ストレージ形式のデータをパイプラインが扱えるようになる</li>
 </ul>
 </li>
-</ul>
-<p><code>.zshenv</code> （ bash の場合は <code>.bash_profile</code> ）に以下を追記。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">export GOROOT<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>go env GOROOT<span style="color:#e6db74">`</span>
-export GOPATH<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>go env GOPATH<span style="color:#e6db74">`</span>
-export PATH<span style="color:#f92672">=</span>$GOPATH/bin:$PATH
-<span style="color:#75715e"># export PATH=$GOROOT/bin:$GOPATH/bin:$PATH</span>
-export GO111MODULE<span style="color:#f92672">=</span>on
-</code></pre></div><p>反映。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% exec $SHELL -l
-</code></pre></div><p>また、 <code>$GOPATH</code> 以下のディレクトリ構造は以下のようになる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">$GOPATH
-├─bin/ <span style="color:#75715e"># Goツール類の実行ファイルが格納されるディレクトリ</span>
-├─pkg/ <span style="color:#75715e"># ビルドしたパッケージオブジェクトが格納されるディレクトリ</span>
-│  ├─darwin_amd64/
-│  │ ├─github.com/
-│  │ │  └─GitHubアカウント名
-│  │ │    ├─<span style="color:#e6db74">`</span>*.a<span style="color:#e6db74">`</span>ファイル<span style="color:#f92672">[</span>^1<span style="color:#f92672">]</span>
-│  │ │    └─GitHubレポジトリ名/<span style="color:#e6db74">`</span>*.a<span style="color:#e6db74">`</span>ファイル<span style="color:#f92672">[</span>^2<span style="color:#f92672">]</span>
-│  │ └─pkg.in/
-│  │   ├─パッケージ名/
-│  │   └─<span style="color:#e6db74">`</span>*.a<span style="color:#e6db74">`</span>ファイル
-│  └─mod/ <span style="color:#75715e"># Go Modules で取得したモジュール類が格納されるディレクトリ</span>
-│    ├─cache/ <span style="color:#75715e"># download したモジュール類のメタ情報や実態のzipなどのキャッシュ</span>
-│    ├─github.com/ <span style="color:#75715e"># リポジトリから取得したモジュール</span>
-│    └─gopkg.in/ <span style="color:#75715e"># リポジトリから取得したモジュール</span>
-└─src/ <span style="color:#75715e"># パッケージごとのソースコードを配置するディレクトリ</span>
-  ├─gopkg.in/
-  │  └─パッケージ名/
-  │    └─LICENSEとか<span style="color:#e6db74">`</span>*.go<span style="color:#e6db74">`</span>とかREADMEとか
-  └─github.com/
-    ├─GitHubアカウント名
-    │  └─GitHubレポジトリ名/
-    │    └─LICENSEとか<span style="color:#e6db74">`</span>*.go<span style="color:#e6db74">`</span>とかREADMEとか
-    └─&lt;あなたのGitHubユーザ名&gt; <span style="color:#75715e"># Go Modules OFF の場合</span>
-      └─GitHubレポジトリ名/ <span style="color:#75715e"># プロジェクトディレクトリ（複数）</span>
-        ├─go.mod
-        ├─go.sum
-        ├─main.go
-        └─その他、あなたが開発中のソフトウェアのコード
-</code></pre></div><h2 ref="2-go-modules" >2. Go Modules</h2><a class="anchor" id="2-go-modules"></a>
-<p>Go v1.11 から導入 Go v1.12 から正式リリースされている依存関係管理ツール <strong>Go Modules</strong> （旧名 vgo）の概要について記載する。</p>
+<li>集計
 <ul>
-<li>Minimal Version Selection
-<ul>
-<li>Go Modulesは <a href="https://semver.org/">Semantic Versioning</a> に基づいてモジュールの管理を行なう</li>
+<li>複数の入力要素からなんらかの値を計算するプロセス</li>
 </ul>
 </li>
-<li>Go Modulesは <strong>GOPATH mode</strong> と <strong>module-aware mode</strong> という２つのモードがあり、環境変数 <code>GO111MODULE</code> で切り替える
+<li>ユーザー定義関数（UDF）
 <ul>
-<li><strong>GOPATH mode</strong>
-<ul>
-<li><code>$GOPATH/src</code> 配下で <code>go get</code> コマンドを利用した依存性管理（ go v1.10 以前と同じ）</li>
-<li>標準 pkg 以外を全部 <code>$GOPATH/src</code> 以下のディレクトリで管理する</li>
-<li><code>$GOPATH/src/github.com</code> 配下に普通に <code>git clone</code> した状態のモジュールを参照する
-<ul>
-<li><code>go get</code> で <code>go1</code> タグ・ブランチもしくは最新の <code>master</code> ブランチを取得したもの</li>
+<li>Apache Beam 内の一部のオペレーションでは、変換を構成する方法としてユーザー定義コードを実行でる</li>
+<li>ParDo では、ユーザー定義コードはすべての要素に適用するオペレーションを指定し、Combine では、値の結合方法を指定する</li>
+<li>パイプラインには、ランナーの言語とは異なる言語で書かれた UDF が含まれている場合、複数の言語で書かれた UDF が含まれている場合もある</li>
 </ul>
 </li>
-</ul>
-</li>
-<li><strong>module-aware mode</strong>
+<li>ランナー
 <ul>
-<li><code>go mod</code> コマンド・ <code>go.mod</code> ファイルを利用した依存性管理（ <code>go.sum</code> ：依存モジュールのチェックサムの管理）</li>
-<li>標準 pkg 以外の全てのパッケージをモジュールとして管理する</li>
-<li>GOPATH mode とは異なり、 <code>$GOPATH/pkg/mod</code> 配下に同じモジュールでも Semantic Versioning された単位で管理され <code>go.mod</code> に記載されたバージョンを参照する</li>
-</ul>
-</li>
-<li>環境変数 <code>GO111MODULE</code>
+<li>パイプラインを受け入れて実行するソフトウェア</li>
+<li>ほとんどのランナーは、超並列ビッグデータ処理システムへの変換装置またはアダプタ
 <ul>
-<li><code>GO111MODULE=off</code> ： <strong>GOPATH mode</strong></li>
-<li><code>GO111MODULE=on</code> ： <strong>module-aware mode</strong></li>
-<li><code>GO111MODULE=auto</code> ： <code>$GOPATH/src</code> 配下では GOPATH mode 、それ以外では module-aware mode で動作する</li>
+<li>ローカルのテストとデバッグのための他のランナーも存在する</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p>従来通り <code>$GOPATH</code> 配下でプロジェクトを作成・開発し且つ module-aware mode を利用したい場合には <code>GO111MODULE=on</code> とする必要がある。<br>
-また、 <code>$GOPATH</code> 配下以外でプロジェクトを作成する場合であっても module-aware mode を利用すれば <code>$GOPATH/pkg/mod</code> 配下で依存モジュールが管理される。</p>
-<h2 ref="3-プロジェクトの作成" >3. プロジェクトの作成</h2><a class="anchor" id="3-プロジェクトの作成"></a>
-<p><code>$GOPATH</code> 配下で github および Go Modules を利用したプロジェクトの初回作成は以下のような感じ。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% mkdir -p $GOPATH/src/github.com/&lt;あなたのGithubアカウント名&gt;
-% cd $GOPATH/src/github.com/&lt;あなたのGithubアカウント名&gt;
-% mkdir &lt;golangプロジェクト&gt; <span style="color:#75715e"># プロジェクトディレクトリの作成</span>
-% cd &lt;golangプロジェクト&gt;
-% export GO111MODULE<span style="color:#f92672">=</span>on
-% go mod init              <span style="color:#75715e"># `GO111MODULE=on go mod init` のように一行でも</span>
-go: creating new go.mod: module github.com/&lt;あなたのGithubアカウント名&gt;/&lt;golangプロジェクト&gt;
-% ls
-go.mod
-% touch main.go             <span style="color:#75715e"># 依存ライブラリ含め好きなコード書く</span>
-% go mod tidy              <span style="color:#75715e"># 依存ライブラリの解決</span>
-% go run main.go            <span style="color:#75715e"># ビルド+実行</span>
-% go build main.go          <span style="color:#75715e"># ビルド</span>
-% ./main
-</code></pre></div><p>基本的にはどこのディレクトリで開発しようとも <strong>module-aware mode</strong> で開発することになると思う。</p>
-<h2 ref="4-vs-code" >4. VS Code</h2><a class="anchor" id="4-vs-code"></a>
-<h3 ref="41-拡張機能" >4.1. 拡張機能</h3><a class="anchor" id="41-拡張機能"></a>
-<p>VS Code には Go の各種ツールと連携する拡張機能があり、 VS Code 内ターミナルから以下のようにコマンドラインツールを導入することにより自動で拡張機能インストールの案内をしてくれる。<br>
-Go の拡張機能をインストールしてから、VSCode でコマンドパレット(Cmd+Shift+P)を開いて <code>GO: Install/Update tools</code> で検索した後、全チェックしてインストールしてもいいし、以下で 1 つずつ入れてもいい。</p>
+<p>また、 <strong>ストリーミングパイプライン</strong> においては以下のような概念がある。</p>
 <ul>
-<li>goimports
+<li>ウィンドウ
 <ul>
-<li>過不足のimportの自動補完</li>
-<li><code>go get golang.org/x/tools/cmd/goimports</code></li>
-</ul>
-</li>
-<li>gocode
+<li>入力となるコレクションをタイムスタンプに応じて処理の単位として分割する幅
 <ul>
-<li>ヘルパー機能</li>
-<li><code>go get -u -v github.com/nsf/gocode</code></li>
-</ul>
-</li>
-<li>godef
-<ul>
-<li>呼び出し関数へのジャンプなど</li>
-<li><code>go get -u -v github.com/rogpeppe/godef</code></li>
-</ul>
-</li>
-<li>gogetdoc
-<ul>
-<li><code>go get -u -v github.com/zmb3/gogetdoc</code></li>
-</ul>
-</li>
-<li>golint
-<ul>
-<li>lint</li>
-<li><code>go get -u -v golang.org/x/lint/golint</code></li>
-</ul>
-</li>
-<li>go-outline
-<ul>
-<li><code>go get -u -v github.com/lukehoban/go-outline</code></li>
-</ul>
-</li>
-<li>goreturns
-<ul>
-<li><code>go get -u -v sourcegraph.com/sqs/goreturns</code></li>
-</ul>
-</li>
-<li>gorename
-<ul>
-<li><code>go get -u -v golang.org/x/tools/cmd/gorename</code></li>
-</ul>
-</li>
-<li>gopkgs
-<ul>
-<li><code>go get -u -v github.com/tpng/gopkgs</code></li>
-</ul>
-</li>
-<li>go-symbols
-<ul>
-<li><code>go get -u -v github.com/newhook/go-symbols</code></li>
-</ul>
-</li>
-<li>guru
-<ul>
-<li><code>go get -u -v golang.org/x/tools/cmd/guru</code></li>
-</ul>
-</li>
-<li>gotests
-<ul>
-<li><code>go get -u -v github.com/cweill/gotests/...</code></li>
-</ul>
-</li>
-<li>gomodifytags
-<ul>
-<li>Go Struct Tags の自動生成</li>
-<li><code>go get github.com/fatih/gomodifytags</code></li>
+<li>タンブリング ウィンドウ（Apache Beam では固定ウィンドウ）：データ ストリームを重なりなく分ける一定の時間間隔。</li>
+<li>ホッピング ウィンドウ（Apache Beam ではスライディング ウィンドウ）：データ ストリーム内の一定の時間間隔。タンブリング ウインドウは重ならないが、ホッピング ウインドウは重なることがある</li>
+<li>セッション ウィンドウ：連続しないデータ間のギャップがある場合に、そこを切れ目とするウィンドウ。ユーザ行動に起因するものなど。</li>
 </ul>
 </li>
 </ul>
-<p>以下の静的解析についてはコマンドを実行する必要がある。</p>
+</li>
+<li>ウォーターマーク
 <ul>
-<li><code>go fmt</code> （ = <code>gofmt -w -l</code> ）
-<ul>
-<li>VS Code ではコード保存時に勝手に実行してくれる</li>
+<li>ウィンドウにつけるタイムスタンプを基にした目印</li>
+<li>データの遅延などを見つける</li>
 </ul>
 </li>
-<li><code>go vet ./...</code></li>
-<li><code>golint ./...</code>
+<li>トリガー
 <ul>
-<li>これは VS Code が教えてくれたりもするが、コマンド叩くと一覧表示されるのでコマンドを併用してもいい</li>
-</ul>
-</li>
-<li><code>errcheck ./...</code>
-<ul>
-<li><code>go get -u github.com/kisielk/errcheck</code></li>
+<li>データが到着したときに集計結果をいつ出力するかを決定する</li>
+<li>デフォルトでは、ウォーターマークを基に決定される</li>
 </ul>
 </li>
 </ul>
-<h3 ref="42-editorconfig" >4.2. .editorconfig</h3><a class="anchor" id="42-editorconfig"></a>
-<p>VS Code に <code>EditorConfig for VS Code</code> をインストールして、プロジェクトルートに以下の <code>.editorconfig</code> を配置する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">root = true
-
-[*]
-end_of_line = lf
-insert_final_newline = true
-trim_trailing_whitespace = false
-charset = utf-8
-indent_style = space
-indent_size = 2
-
-[{Makefile,go.mod,go.sum,*.go}]
-indent_style = tab
-indent_size = 4
-trim_trailing_whitespace = true
-</code></pre></div><p>Go のインデントは <strong>ハードタブ</strong> が推奨される。</p>
-<h3 ref="43-デバッグ実行" >4.3. デバッグ実行</h3><a class="anchor" id="43-デバッグ実行"></a>
-<p>デバッガとして <strong>Delve</strong> を導入する。</p>
-<ul>
-<li>デバッガツール delve のインストール
-<ul>
-<li><code>go get -u github.com/derekparker/delve/cmd/dlv</code></li>
-</ul>
-</li>
-<li>VSCodeにGo言語の拡張機能をインストール
-<ul>
-<li><code>Rich Go language support for Visual Studio Code</code></li>
-</ul>
-</li>
-</ul>
-<p>コードにブレークポイントを設定して、 VSCode の <code>Debug</code> から <code>Start Debugging</code> を実行。（ <code>F5</code> でも）<br>
-以下を実行可能。</p>
-<ul>
-<li>継続実行（Continue）
-<ul>
-<li>次のブレークポイントに到達するまで処理を継続させる</li>
-</ul>
-</li>
-<li>ステップオーバー（Step Over）
-<ul>
-<li>見えているソースコードの次の行に移動する。 カーソル位置の関数の中は実行され、終了するところまで処理が進む</li>
-</ul>
-</li>
-<li>ステップイン（Step Into）
-<ul>
-<li>関数呼び出しの中に飛び込む。下のレイヤーに降り ていくときに使う</li>
-</ul>
-</li>
-<li>ステップアウト（Step Out）
-<ul>
-<li>いま実行している関数が終了するところまで処理 を進める</li>
-</ul>
-</li>
-<li>再スタート（Restart）
-<ul>
-<li>一度終了して再度実行を開始する</li>
-</ul>
-</li>
-<li>停止（Stop）
-<ul>
-<li>一度終了する</li>
-</ul>
-</li>
-</ul>
-<p>例えば <code>fmt.Println()</code> をステップインして細かいところを見ていこう。<br>
-<code>syscall.Write()</code> などでシステムコールされているのがわかる。（ Win だと別コード）<br>
-今回はデバッガのステップインでコードを掘っていったが、カーソルがあたっている位置の関数で <code>Go to Definition</code> （ <code>F12</code> ）しても関数の定義に飛ぶ。<br>
-また、カーソルがあたっている位置の関数や変数で <code>Find All Reference</code> （ <code>Shift+F12</code> ） すれば、使われている位置がリストされる。</p>
-<h2 ref="5-docker-によるマルチステージビルド" >5. docker によるマルチステージビルド</h2><a class="anchor" id="5-docker-によるマルチステージビルド"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> golang:1.13.3-alpine3.10 as build</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /build</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> go.mod .<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> go.sum .<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> go mod download<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> . .<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> CGO_ENABLED<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> GOOS<span style="color:#f92672">=</span>linux GOARCH<span style="color:#f92672">=</span>amd64 go build main.go<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> alpine:3.10</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apk add --no-cache tzdata<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> TZ Asia/Tokyo<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>build /build/main /usr/local/bin/main<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8080</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;/usr/local/bin/main&#34;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div>
+<h2 ref="2-データ共有" >2. データ共有</h2><a class="anchor" id="2-データ共有"></a>
+<p>Dataflow には、パイプライン間でデータを共有する仕組みは無い。<br>
+Cloud Storage や AppEngineのインメモリキャッシュなどを利用することになる。</p>
 		</div>
 
 

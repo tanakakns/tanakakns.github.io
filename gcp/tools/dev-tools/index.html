@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-15T21:01:03 JST">
+<meta name="revised" content="2021-06-16T20:20:54 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -767,6 +767,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/dataflow/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/big-data/dataflow/">Dataflow</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
               
@@ -1092,6 +1107,7 @@ if (!doNotTrack) {
 <li>Cloud Deployment Manager</li>
 <li>Cloud Build</li>
 <li>Cloud Tasks</li>
+<li>Cloud Composer</li>
 </ol>
 <h2 ref="1-cloud-deployment-manager" >1. Cloud Deployment Manager</h2><a class="anchor" id="1-cloud-deployment-manager"></a>
 <p>AWS でいう CloudFormation 。<br>
@@ -1176,6 +1192,54 @@ curl などのサードパーティの http ツールを使用してビルド �
 <p>Cloud Tasks と Cloud Pub/Sub は類似しているように思える。<br>
 しかし、最大の違いは Cloud Tasks は Publisher が <strong>明示的に</strong> タスクをコントロールできることにある。<br>
 Cloud Pub/Sub は、 Publisher が Subscriber をコントロールすることはできない。</p>
+<h2 ref="4-cloud-composer" >4. Cloud Composer</h2><a class="anchor" id="4-cloud-composer"></a>
+<p><a href="https://cloud.google.com/composer/docs/concepts/overview">Cloud Composer</a> は、フルマネージドのワークフロー オーケストレーション サービスで、クラウドとオンプレミス データセンターにまたがるワークフローを作成できる。<br>
+Apache Airflow オープンソース プロジェクトを基に構築され、Python プログラミング言語を使用して運用される。</p>
+<ul>
+<li>ワークフロー
+<ul>
+<li>データの取り込み、変換、分析、利用のための一連のタスクを表す</li>
+<li>Airflow では、ワークフローは DAG（有向非巡回グラフ：Directed Acyclic Graph）を使用して作成される</li>
+</ul>
+</li>
+<li>DAG
+<ul>
+<li>スケジューリングして実行するタスクのコレクション</li>
+<li>Python スクリプトで作成され、コードを使用して DAG の構造（タスクとそれらの依存関係）を定義</li>
+</ul>
+</li>
+</ul>
+<p>Cloud Scheduler や cron の単なる代わりではなく、さまざまな機能を提供する。<br>
+スケジュール・トリガーをきっかけに各種 <a href="https://cloud.google.com/composer/docs/how-to/using/writing-dags#operators">演算子</a> により処理を実行する。</p>
+<ul>
+<li>スケジュール
+<ul>
+<li>cron などと同様、時間起因でワークフローを実行する</li>
+</ul>
+</li>
+<li>トリガー
+<ul>
+<li>Cloud Storage の変更や Cloud Function に起因してワークフローを実行する</li>
+</ul>
+</li>
+<li>演算子
+<ul>
+<li>BashOperator ： Bash スクリプトの実行（ <code>cloud</code> など各種コマンドが実行できる）</li>
+<li>PythonOperator ： Python コードの実行</li>
+<li>Google Cloud の演算子
+<ul>
+<li>Dataflow の演算子 ： Dataflow で Apache Beam ジョブを実行</li>
+<li>Cloud Data Fusion の演算子 ： Cloud Data Fusion パイプラインの管理と実行</li>
+<li>Dataproc の演算子 ： Dataproc で Hadoop ジョブと Spark ジョブを実行</li>
+<li>Datastore の演算子 ： Datastore でデータの読み取りと書き込みを実行</li>
+<li>AI Platform の演算子 ： AI Platform でトレーニング ジョブと予測ジョブを実行</li>
+<li>Cloud Storage の演算子 ： Cloud Storage でデータの読み取りと書き込みを実行</li>
+</ul>
+</li>
+<li>EmailOperator ： メール送信による通知</li>
+</ul>
+</li>
+</ul>
 		</div>
 
 

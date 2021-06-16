@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-15T21:01:03 JST">
+<meta name="revised" content="2021-06-16T20:20:54 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -767,6 +767,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/dataflow/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/big-data/dataflow/">Dataflow</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
               
@@ -1287,7 +1302,23 @@ if (!doNotTrack) {
 }
 <span style="color:#a6e22e">keys</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">PutMulti</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">keys</span>, <span style="color:#a6e22e">tasks</span>)
 <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">その他に</span> <span style="color:#a6e22e">GetMulti</span> <span style="color:#960050;background-color:#1e0010">、</span> <span style="color:#a6e22e">DeleteMulti</span> <span style="color:#a6e22e">もある</span>
-</code></pre></div>
+</code></pre></div><h2 ref="bigtable" >Bigtable</h2><a class="anchor" id="bigtable"></a>
+<h3 ref="bigtable-インスタンスの変更" >Bigtable インスタンスの変更</h3><a class="anchor" id="bigtable-インスタンスの変更"></a>
+<p>以下の場合、ダウンタイム無しで設定を変更できる。</p>
+<ul>
+<li>各クラスタのノードの数</li>
+<li>インスタンス内のクラスタの数</li>
+<li>インスタンスのアプリ プロファイル（レプリケーション設定が含まれている）</li>
+<li>インスタンスのラベル（インスタンスに関するメタデータを提供する）</li>
+<li>インスタンスの表示名</li>
+</ul>
+<p>ただし、以下を変更する場合は、Bigtable インスタンスを新たに作成し、データを移行する必要がある。</p>
+<ul>
+<li>インスタンス ID</li>
+<li>ストレージ タイプ（SSD または HDD）</li>
+<li>顧客管理の暗号鍵（CMEK）の構成</li>
+</ul>
+<p>移行の方法としては、Dataflowを使用して古いBigTableインスタンスから新しいインスタンスにデータを移行するなどがあげられる。</p>
 		</div>
 
 

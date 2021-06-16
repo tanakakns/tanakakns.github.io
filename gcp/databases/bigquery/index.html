@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-15T21:01:03 JST">
+<meta name="revised" content="2021-06-16T20:20:54 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -767,6 +767,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/dataflow/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/big-data/dataflow/">Dataflow</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
               
@@ -1096,6 +1111,7 @@ if (!doNotTrack) {
 <li>パーティション分割と有効期限</li>
 <li>外部データソースに対するクエリ</li>
 <li>BigQuery へのデータの読み込み</li>
+<li>BiGQuery へのクエリ</li>
 <li>コスト</li>
 </ol>
 <h2 ref="1-アクセスコントロール" >1. アクセスコントロール</h2><a class="anchor" id="1-アクセスコントロール"></a>
@@ -1159,7 +1175,7 @@ if (!doNotTrack) {
 <li>Cloud Storage</li>
 <li>Google ドライブ</li>
 </ul>
-<p>ただし、データの生合成が取れないなどの制約はある。</p>
+<p>ただし、データの整合性が取れないなどの制約はある。</p>
 <h2 ref="4-bigquery-へのデータの読み込み" >4. BigQuery へのデータの読み込み</h2><a class="anchor" id="4-bigquery-へのデータの読み込み"></a>
 <p><a href="https://cloud.google.com/bigquery/docs/loading-data">読み込み</a> には以下の選択肢がある。</p>
 <ul>
@@ -1180,7 +1196,7 @@ if (!doNotTrack) {
 <ul>
 <li>データを一度に 1 つずつ、または一括して送信し、ストリーミング API を直接呼び出すコードを記述できる</li>
 <li>あるいは、Dataflow を Apache Beam SDK で使用してストリーミング パイプラインを設定することもできる</li>
-<li>ストリーミングは別途 <strong>追加料金が発生</strong> することに注意（ <a href="https://cloud.google.com/bigquery/pricing#data_ingestion_pricing">参考</a> ）</li>
+<li>ストリーミングはデータサイズによって別途 <strong>追加料金が発生</strong> することに注意（ <a href="https://cloud.google.com/bigquery/pricing#data_ingestion_pricing">参考</a> ）</li>
 </ul>
 </li>
 <li>クエリ結果のテーブル追加・上書き
@@ -1194,7 +1210,42 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 ref="5-コスト" >5. コスト</h2><a class="anchor" id="5-コスト"></a>
+<h2 ref="5-bigquery-へのクエリ" >5. BigQuery へのクエリ</h2><a class="anchor" id="5-bigquery-へのクエリ"></a>
+<h3 ref="51-クエリの種類" >5.1. クエリの種類</h3><a class="anchor" id="51-クエリの種類"></a>
+<p>BigQuery には次のようなクエリ・ジョブがある。</p>
+<ul>
+<li>インタラクティブ クエリ
+<ul>
+<li>すぐに実行されるクエリ（デフォルト）</li>
+</ul>
+</li>
+<li>バッチ クエリ
+<ul>
+<li>BigQuery はユーザーに代わって各バッチクエリをキューに格納し、アイドル状態のリソースが使用可能になると直ちに（通常は数分以内に）クエリを開始する</li>
+</ul>
+</li>
+<li>クエリジョブ
+<ul>
+<li>データの読み込み、データのエクスポート、データのクエリ、データのコピーなど、BigQuery がユーザーに代わって実行するアクションのこと</li>
+</ul>
+</li>
+</ul>
+<h3 ref="52-クエリの結果" >5.2. クエリの結果</h3><a class="anchor" id="52-クエリの結果"></a>
+<p>すべてのクエリ結果は <strong>永続テーブル</strong> または <strong>一時テーブル</strong> に保存される。</p>
+<ul>
+<li>永続テーブル
+<ul>
+<li>ユーザーがアクセス可能なデータセットに含まれる新規または既存のテーブル</li>
+</ul>
+</li>
+<li>一時テーブル
+<ul>
+<li>永続的なテーブルに書き込まれていない一時テーブルを使用してクエリ結果をキャッシュに保存する（通常 24 時間）</li>
+<li><code>CURRENT_TIMESTAMP()</code> や <code>NOW()</code> といった日時関数や <code>SESSION_USER()</code> 関数など、また、ワイルドカードを利用する場合はキャッシュは機能しない</li>
+</ul>
+</li>
+</ul>
+<h2 ref="6-コスト" >6. コスト</h2><a class="anchor" id="6-コスト"></a>
 <p>BigQuery のコストは大きく以下の 2 つある。</p>
 <ul>
 <li>分析料金
@@ -1245,6 +1296,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
+<p>また、 <a href="https://cloud.google.com/bigquery/docs/custom-quotas#controlling_query_costs_using_bigquery_custom_quotas">カスタムコスト管理</a> を利用することにより、1 日に処理されるクエリデータの量に対する上限を指定することができる。</p>
 		</div>
 
 
