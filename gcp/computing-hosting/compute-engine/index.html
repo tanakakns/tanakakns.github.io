@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-16T20:20:54 JST">
+<meta name="revised" content="2021-06-17T21:54:50 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1522,6 +1522,20 @@ $ gcloud compute instances create apache --scopes storage-ro <span style="color:
 <li>ディスクのバックアップ</li>
 <li>ファイルシステムとパーティションのサイズの変更（ <code>resize2fs</code> / <code>xfs_growfs</code> によって OS にサイズを再認識させる必要あり ）</li>
 </ol>
+<h3 ref="32-スナップショット" >3.2. スナップショット</h3><a class="anchor" id="32-スナップショット"></a>
+<p><a href="https://cloud.google.com/compute/docs/disks/create-snapshots">スナップショット</a> を作成すると、以下のパターンでディスクとして復元できる。</p>
+<ul>
+<li>スナップショットから新しい永続ディスクを作成
+<ul>
+<li>新しいディスクを作成して、スナップショットをソースとして選択</li>
+</ul>
+</li>
+<li>スナップショットから新しいインスタンスを作成
+<ul>
+<li>新しいインスタンスを作成するときに、スナップショットを使用してそのインスタンスのブートディスクとデータディスクを作成できる</li>
+</ul>
+</li>
+</ul>
 <h2 ref="4-ファイアウォールルールの作成" >4. ファイアウォールルールの作成</h2><a class="anchor" id="4-ファイアウォールルールの作成"></a>
 <p>以下のコマンドでファイアウォールルールを作成する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules create allow-http <span style="color:#ae81ff">\

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-16T20:20:54 JST">
+<meta name="revised" content="2021-06-17T21:54:50 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1112,6 +1112,7 @@ if (!doNotTrack) {
 <li>外部データソースに対するクエリ</li>
 <li>BigQuery へのデータの読み込み</li>
 <li>BiGQuery へのクエリ</li>
+<li>テーブルスキーマの変更</li>
 <li>コスト</li>
 </ol>
 <h2 ref="1-アクセスコントロール" >1. アクセスコントロール</h2><a class="anchor" id="1-アクセスコントロール"></a>
@@ -1152,6 +1153,143 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Capability</th>
+<th style="text-align:center"><strong>dataViewer</strong></th>
+<th style="text-align:center"><strong>dataEditor</strong></th>
+<th style="text-align:center"><strong>dataOwner</strong></th>
+<th style="text-align:center"><strong>metadataViewer</strong></th>
+<th style="text-align:center"><strong>user</strong></th>
+<th style="text-align:center"><strong>jobUser</strong></th>
+<th style="text-align:center"><strong>admin</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">List/Get projects</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+</tr>
+<tr>
+<td style="text-align:left">List tables</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+</tr>
+<tr>
+<td style="text-align:left">Get table metadata</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+</tr>
+<tr>
+<td style="text-align:left">Get table data</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+</tr>
+<tr>
+<td style="text-align:left">Create tables</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+</tr>
+<tr>
+<td style="text-align:left">Modify/Delete tables</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+</tr>
+<tr>
+<td style="text-align:left">Get dataset metadata</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+</tr>
+<tr>
+<td style="text-align:left">Create new datasets</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+</tr>
+<tr>
+<td style="text-align:left">Modify/Delete datasets</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Self</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+</tr>
+<tr>
+<td style="text-align:left">Create jobs/queries</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">o</td>
+</tr>
+<tr>
+<td style="text-align:left">Get jobs</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Self</td>
+<td style="text-align:center">Any</td>
+</tr>
+<tr>
+<td style="text-align:left">List jobs</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Any</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Any</td>
+</tr>
+</tbody>
+</table>
+<p>なお、リソースに対する権限コントロールの最小は <strong>データセット</strong> となる。テーブル・ビュー・行・列単位の権限コントロールはできない。</p>
 <h2 ref="2-パーティション分割と有効期限" >2. パーティション分割と有効期限</h2><a class="anchor" id="2-パーティション分割と有効期限"></a>
 <p>BigQuery では以下のようにデータのパーティション分割と有効期限を設定できる。</p>
 <ul>
@@ -1175,7 +1313,8 @@ if (!doNotTrack) {
 <li>Cloud Storage</li>
 <li>Google ドライブ</li>
 </ul>
-<p>ただし、データの整合性が取れないなどの制約はある。</p>
+<p>ただし、データの整合性が取れないなどの制約はある。<br>
+外部データソースにクエリする場合でも、 <a href="https://cloud.google.com/bigquery/external-table-definition">外部データソースに対するテーブル定義ファイルの作成</a> は必要。</p>
 <h2 ref="4-bigquery-へのデータの読み込み" >4. BigQuery へのデータの読み込み</h2><a class="anchor" id="4-bigquery-へのデータの読み込み"></a>
 <p><a href="https://cloud.google.com/bigquery/docs/loading-data">読み込み</a> には以下の選択肢がある。</p>
 <ul>
@@ -1210,6 +1349,8 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
+<p>なお、CSV ファイルなどからデータを読み込む際、形式などに不正がありインポートに失敗するレコードが含まれる場合、BigQueryの機能で自動でどうこうすることはできない。<br>
+Dataflow などで行のバリデーションを実施した上でインポートするしかない。</p>
 <h2 ref="5-bigquery-へのクエリ" >5. BigQuery へのクエリ</h2><a class="anchor" id="5-bigquery-へのクエリ"></a>
 <h3 ref="51-クエリの種類" >5.1. クエリの種類</h3><a class="anchor" id="51-クエリの種類"></a>
 <p>BigQuery には次のようなクエリ・ジョブがある。</p>
@@ -1242,10 +1383,24 @@ if (!doNotTrack) {
 <ul>
 <li>永続的なテーブルに書き込まれていない一時テーブルを使用してクエリ結果をキャッシュに保存する（通常 24 時間）</li>
 <li><code>CURRENT_TIMESTAMP()</code> や <code>NOW()</code> といった日時関数や <code>SESSION_USER()</code> 関数など、また、ワイルドカードを利用する場合はキャッシュは機能しない</li>
+<li>また、ジョブ構成、GCPコンソール、従来のWeb UI、コマンドライン、またはAPIで宛先テーブルが指定されている場合もクエリ結果はキャッシュされない</li>
 </ul>
 </li>
 </ul>
-<h2 ref="6-コスト" >6. コスト</h2><a class="anchor" id="6-コスト"></a>
+<h2 ref="6-テーブルスキーマの変更" >6. テーブルスキーマの変更</h2><a class="anchor" id="6-テーブルスキーマの変更"></a>
+<p><a href="https://cloud.google.com/bigquery/docs/managing-table-schemas">テーブルスキーマの変更</a> を行う際、以下の場合その変更はネイティブにサポートされている。</p>
+<ul>
+<li>スキーマ定義への列の追加</li>
+<li>スキーマ定義からの列の削除またはドロップ</li>
+<li>列のモードの REQUIRED から NULLABLE への緩和</li>
+</ul>
+<p>しかし以下の場合、新しいテーブルを作成して、 SELECT-INSERT してデータ移行する必要がある。</p>
+<ul>
+<li>列の名前の変更</li>
+<li>列のデータ型の変更</li>
+<li>列のモードの変更（REQUIRED 列を NULLABLE に緩和することを除く）</li>
+</ul>
+<h2 ref="7-コスト" >7. コスト</h2><a class="anchor" id="7-コスト"></a>
 <p>BigQuery のコストは大きく以下の 2 つある。</p>
 <ul>
 <li>分析料金

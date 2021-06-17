@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-16T20:20:54 JST">
+<meta name="revised" content="2021-06-17T21:54:50 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1129,7 +1129,7 @@ if (!doNotTrack) {
 <li>ParDo
 <ul>
 <li>Apache Beam SDK のコア並列処理オペレーション</li>
-<li>入力 PCollection の各要素に対してユーザー指定の関数を呼び出し、0 個以上の出力要素を 1 つの出力 PCollection に収集</li>
+<li>入力 PCollection の <strong>各要素</strong> に対してユーザー指定の関数を呼び出し、0 個以上の出力要素を 1 つの出力 PCollection に収集</li>
 <li>これはなんらかの変換や演算処理を提供するオペレーションではないことに注意</li>
 </ul>
 </li>
@@ -1192,6 +1192,23 @@ if (!doNotTrack) {
 <h2 ref="2-データ共有" >2. データ共有</h2><a class="anchor" id="2-データ共有"></a>
 <p>Dataflow には、パイプライン間でデータを共有する仕組みは無い。<br>
 Cloud Storage や AppEngineのインメモリキャッシュなどを利用することになる。</p>
+<h2 ref="3-停止" >3. 停止</h2><a class="anchor" id="3-停止"></a>
+<p>Dataflow <a href="https://cloud.google.com/dataflow/docs/guides/stopping-a-pipeline">停止</a> する場合は次のオプションがある。</p>
+<ul>
+<li>キャンセル
+<ul>
+<li>ストリーミング処理中であっても直ちに Dataflow が停止する</li>
+<li>処理中のデータが失われる可能性がある</li>
+</ul>
+</li>
+<li>ドレイン
+<ul>
+<li>仕掛かり中のストリーミング処理を全て完了してから停止する</li>
+<li>処理中のデータは失われない</li>
+<li>ただし、バッチ処理ではこのオプションは機能しない</li>
+</ul>
+</li>
+</ul>
 		</div>
 
 
