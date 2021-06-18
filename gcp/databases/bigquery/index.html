@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-17T21:54:50 JST">
+<meta name="revised" content="2021-06-18T17:43:52 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1305,6 +1305,8 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
+<p><a href="https://cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=ja">パーティション分割テーブルのクエリ</a> を実行したい場合、 疑似列 <code>_PARTITIONTIME</code> / <code>_PARTITIONDATE</code> が使用でき、適切にパーティションに対してクエリできる。<br>
+さらに、 「From <code>bigquery-public-data.noaa_gsod.gsod*</code>」 のようなワイルドカードを利用したテーブルに対しては、 疑似列 <code>_TABLE_SUFFIX</code> を利用することでその範囲を指定できる。</p>
 <h2 ref="3-外部データソースに対するクエリ" >3. 外部データソースに対するクエリ</h2><a class="anchor" id="3-外部データソースに対するクエリ"></a>
 <p>BigQuery は <a href="https://cloud.google.com/bigquery/external-data-sources">外部データソース</a> に対してクエリを発行できる。</p>
 <ul>
@@ -1346,6 +1348,7 @@ if (!doNotTrack) {
 <li>サードパーティアプリケーションやサービスの利用
 <ul>
 <li>一部のサードパーティ アプリケーションやサービスでは、データを BigQuery に取り込むためのコネクタが提供されている</li>
+<li><a href="https://cloud.google.com/bigquery-transfer/docs/transfer-service-overview">BigQuery Data Transfer Service</a> を利用すれば Google Analytics などの Google のサービスや一部のクラウド/SaaS のストレージ/DWHからデータをインポートできる</li>
 </ul>
 </li>
 </ul>
@@ -1400,6 +1403,9 @@ Dataflow などで行のバリデーションを実施した上でインポー�
 <li>列のデータ型の変更</li>
 <li>列のモードの変更（REQUIRED 列を NULLABLE に緩和することを除く）</li>
 </ul>
+<h2 ref="7-承認済みのビュー" >7. 承認済みのビュー</h2><a class="anchor" id="7-承認済みのビュー"></a>
+<p>データセットに表示アクセス権を設定する場合、BigQuery では <a href="https://cloud.google.com/bigquery/docs/authorized-views">承認済みのビュー</a> を作成する。<br>
+承認済みビューを使用すると、元のソースデータへのアクセス権がないユーザーでも、クエリの結果を特定のユーザーやグループと共有できる。</p>
 <h2 ref="7-コスト" >7. コスト</h2><a class="anchor" id="7-コスト"></a>
 <p>BigQuery のコストは大きく以下の 2 つある。</p>
 <ul>

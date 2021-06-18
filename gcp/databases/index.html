@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-17T21:54:50 JST">
+<meta name="revised" content="2021-06-18T17:43:52 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1302,7 +1302,15 @@ if (!doNotTrack) {
 }
 <span style="color:#a6e22e">keys</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">PutMulti</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">keys</span>, <span style="color:#a6e22e">tasks</span>)
 <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">その他に</span> <span style="color:#a6e22e">GetMulti</span> <span style="color:#960050;background-color:#1e0010">、</span> <span style="color:#a6e22e">DeleteMulti</span> <span style="color:#a6e22e">もある</span>
-</code></pre></div><h2 ref="bigtable" >Bigtable</h2><a class="anchor" id="bigtable"></a>
+</code></pre></div><h3 ref="エンティティのエクスポートとインポート" >エンティティのエクスポートとインポート</h3><a class="anchor" id="エンティティのエクスポートとインポート"></a>
+<p>バックアップなどのために <a href="https://cloud.google.com/datastore/docs/export-import-entities">エンティティのエクスポートとインポート</a> を実行する場合、以下の方法で <strong>マネージドエクスポート・インポートサービス</strong> を利用できる。</p>
+<ul>
+<li>Cloud Console</li>
+<li>gcloud コマンドライン ツール</li>
+<li>Datastore Admin API（REST、RPC）</li>
+</ul>
+<p>ただ、スケジューラ機能は無いので、 cron ジョブで実行するなどが必要になる。</p>
+<h2 ref="bigtable" >Bigtable</h2><a class="anchor" id="bigtable"></a>
 <h3 ref="bigtable-インスタンスの変更" >Bigtable インスタンスの変更</h3><a class="anchor" id="bigtable-インスタンスの変更"></a>
 <p>以下の場合、ダウンタイム無しで設定を変更できる。</p>
 <ul>
@@ -1336,6 +1344,8 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
+<h3 ref="レプリケーション" >レプリケーション</h3><a class="anchor" id="レプリケーション"></a>
+<p>クラスタ単位のレプリケーションをするみたい。驚き。（ <a href="https://cloud.google.com/bigtable/docs/replication-overview">参考</a> ）</p>
 <h3 ref="パフォーマンステスト" >パフォーマンステスト</h3><a class="anchor" id="パフォーマンステスト"></a>
 <p>Bigtable でパフォーマンステストを実施する場合は以下の点に留意する。</p>
 <ul>
