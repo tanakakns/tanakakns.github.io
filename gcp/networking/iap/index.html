@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-18T17:43:52 JST">
+<meta name="revised" content="2021-06-19T13:52:58 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1183,8 +1183,8 @@ $ gcloud app deploy
 </code></pre></div><p>このアプリケーションは以下のようなコードで <code>X-Goog-IAP-JWT-Assertion</code> ヘッダ を検証している。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">user</span>():
     assertion <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>headers<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;X-Goog-IAP-JWT-Assertion&#39;</span>)
-    <span style="color:#66d9ef">if</span> assertion <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span> None, None
+    <span style="color:#66d9ef">if</span> assertion <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>, <span style="color:#66d9ef">None</span>
 
     info <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>decode(
         assertion,
