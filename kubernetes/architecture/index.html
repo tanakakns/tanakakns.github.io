@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-21T21:29:35 JST">
+<meta name="revised" content="2021-06-24T22:15:36 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -954,6 +954,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/administration/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/administration/">管理</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1105,19 +1120,23 @@ if (!doNotTrack) {
 </li>
 </ul>
 <h2 ref="サーバ構成" >サーバ構成</h2><a class="anchor" id="サーバ構成"></a>
-<p>k8s ではホストマシン（物理サーバ、もしくは仮想マシン、インスタンス）の種別として <strong>Control Plane</strong> と <strong>Worker Nodes</strong> がある。<br>
+<p>k8s ではホストマシン（物理サーバ、もしくは仮想マシン、インスタンス）の種別として <strong>Master Nodes</strong> と <strong>Worker Nodes</strong> がある。<br>
 それぞれで実行されるコンポーネントは以下の通り。各コンポーネントはそれぞれ各サーバ上で独立したプロセスとして常駐する。</p>
 <ul>
-<li><strong>Control Plane</strong> ： 管理サーバ。クライアントツール（ <strong>kubectl</strong> ）から Control Plane を経由して Worker Nodes をコントロールする。
+<li><strong>Master Nodes</strong> / <strong>Control Plane</strong> ： 管理サーバ。クライアントツール（ <strong>kubectl</strong> ）から Control Plane を経由して Worker Nodes をコントロールする。
 <ul>
 <li><code>kube-apiserver</code></li>
 <li><code>etcd</code></li>
+<li><code>kube-controller-manager</code>
+<ul>
+<li><code>node-controller</code> 、 <code>replication-controller</code></li>
+</ul>
+</li>
 <li><code>kube-scheduler</code></li>
-<li><code>kube-controller-manager</code></li>
 <li><code>cloud-controller-manager</code></li>
 </ul>
 </li>
-<li><strong>Worker Nodes</strong> ： Control Plane から管理されるワーカーサーバ。複数台で構成されるクラスタ構成をとり、コンテナがマウントされる。
+<li><strong>Worker Nodes</strong> / <strong>Data Plane</strong> ： Control Plane から管理されるワーカーサーバ。複数台で構成されるクラスタ構成をとり、コンテナがマウントされる。
 <ul>
 <li><code>kubelet</code></li>
 <li><code>kube-proxy</code></li>
@@ -1173,17 +1192,29 @@ if (!doNotTrack) {
 </li>
 </ul>
 <h2 ref="コンポーネント" >コンポーネント</h2><a class="anchor" id="コンポーネント"></a>
-<p>ここでは先ほど紹介した Control Plane/Worker Nodes に配備されている主要コンポーネントについて記載する。</p>
-<h3 ref="kube-apiserver--control-plane" >kube-apiserver / Control Plane</h3><a class="anchor" id="kube-apiserver--control-plane"></a>
+<p>ここでは先ほど紹介した Master Nodes / Worker Nodes に配備されている主要コンポーネントについて記載する。</p>
+<h3 ref="kube-apiserver--master-nodes" >kube-apiserver / Master Nodes</h3><a class="anchor" id="kube-apiserver--master-nodes"></a>
 <p>Kubernetes API を外部に提供するコンポーネント。<br>
 REST API を提供しているが、通常はクライアントツール <code>kubectl</code> でコントロールする。<code>kubectl</code> から設定情報を受け付けて、 クラスタが保持すべき状態として情報を <code>etcd</code> へ保存する。<br>
 <code>kube-apiserver</code> 以外のコンポーネントは直接 <code>etcd</code> を参照せず、 <code>kube-apiserver</code> を通してリソースにアクセスする。<br>
 なお、 <code>kube-apiserver</code> は水平スケールによりトラフィックを分散させることが可能。<br>
 コンテナが作成されるまでのフロー例は以下のようになる。</p>
 <ol>
-<li><code>kubectl</code> で Deployment API を呼ぶ</li>
-<li>Deployment Controller が検知し、 ReplicaSet API を呼ぶ</li>
-<li>ReplicaSet Controller が検知し、 Pod API を呼ぶ</li>
+<li><code>kubectl</code> で Deployment API を呼ぶ
+<ul>
+<li><code>api-server</code> はリクエストの <strong>認証</strong> と <strong>バリデーション</strong> を実行し、 <code>etcd</code> にデータを保存したのち結果を返却</li>
+</ul>
+</li>
+<li>Deployment Controller が検知し、 ReplicaSet API を呼ぶ
+<ul>
+<li><code>api-server</code> 経由で <code>etcd</code> に保存された Deployment に関する情報の変更を検知</li>
+</ul>
+</li>
+<li>ReplicaSet Controller が検知し、 Pod API を呼ぶ
+<ul>
+<li><code>api-server</code> 経由で <code>etcd</code> に保存された ReplicaSet に関する情報の変更を検知</li>
+</ul>
+</li>
 <li>Scheduler が検知し、配置先 Node を決定し、 Pod API を呼ぶ</li>
 <li>Kubelet が検知し、 Pod を作成
 <ul>
@@ -1191,37 +1222,13 @@ REST API を提供しているが、通常はクライアントツール <code>k
 </ul>
 </li>
 </ol>
-<h3 ref="etcd--control-plane" >etcd / Control Plane</h3><a class="anchor" id="etcd--control-plane"></a>
+<h3 ref="etcd--master-nodes" >etcd / Master Nodes</h3><a class="anchor" id="etcd--master-nodes"></a>
 <p>k8s クラスタの全ての情報が保存される分散 KVS 。<br>
 <code>etcd</code> へアクセスするコンポーネントは <code>kube-apiserver</code> のみで、他のコンポーネントは <code>kube-apiserver</code> を介してアクセスする。<br>
 分散合意アルゴリズム Raft の特性上、奇数台で冗長構成にする必要がある。<br>
 <code>etcdctl shapshot</code> コマンドなどで定期的にバックアップしておく。</p>
-<h3 ref="kube-scheduler--control-plane" >kube-scheduler / Control Plane</h3><a class="anchor" id="kube-scheduler--control-plane"></a>
-<p><code>kube-scheduler</code> の仕事は、新規に <code>etcd</code> に登録された Pod に対して最適な Worker Node を選択して割り当てること。<br>
-<code>go routine</code> の無限ループ（間隔 0s ）で以下の処理を繰り返す。</p>
-<ol>
-<li><code>kube-apiserver</code> 経由で <code>etcd</code> にアクセスし、Worker Nodes へ未割り当ての Pod 情報を 1 つ取得する</li>
-<li>Pod の設定情報から最適な Woker Node を選択する</li>
-<li>選択した Worker Node の情報を<code>kube-apiserver</code> 経由で <code>etcd</code> にアクセスし、保存する</li>
-</ol>
-<p>Worker Node の選択は、 <code>predicates</code> と呼ばれる条件にによるフィルタと、 <code>priorities</code> という優先度付けによって行われる。</p>
-<ul>
-<li><code>predicates</code>
-<ul>
-<li>Worker Node をフィルタする条件。</li>
-<li>例えば nodeSelector による Worker Node の選択や request に対するリソースの空き状況によるフィルタがある。</li>
-</ul>
-</li>
-<li><code>priorities</code>
-<ul>
-<li>Worker Node の優先度付け。</li>
-<li>例えば Pod を出来る限り Worker Nodes、ゾーンを分散させるような優先度付けがある。</li>
-</ul>
-</li>
-</ul>
-<p>参考：https://qiita.com/tkusumi/items/58fdadbe4053812cb44e</p>
-<h3 ref="kube-controller-manager--control-plane" >kube-controller-manager / Control Plane</h3><a class="anchor" id="kube-controller-manager--control-plane"></a>
-<p><code>etcd</code> の情報とクラスタの現在の状態を比較し、 <code>etcd</code> の状態へ更新する（ <code>kube-apiserver</code> 経由）。
+<h3 ref="kube-controller-manager--master-nodes" >kube-controller-manager / Master Nodes</h3><a class="anchor" id="kube-controller-manager--master-nodes"></a>
+<p>5 秒の無限ループ周期で <code>kube-apiserver</code> 経由で <code>etcd</code> の情報とクラスタの現在の状態を比較し、 <code>etcd</code> の状態へ更新する（ <code>kube-apiserver</code> 経由）。
 Controller は自作可能であるが、デフォルトで以下のような Controller がある。</p>
 <ul>
 <li>Node Controller
@@ -1250,7 +1257,31 @@ Controller は自作可能であるが、デフォルトで以下のような Co
 <p>なお、 Controller は複数プロセス存在するが、バイナリとしては 1 つにまとめられる。
 また、各 Controller は <code>go routine</code> で起動し、 <code>kube-apiserver</code> 経由で <code>etcd</code> へアクセスし、登録情報と現在のクラスタの状態を比較し続ける。<br>
 <code>kube-controller-manager</code> は状態の差分を検出、 <code>etcd</code> へ登録するが、実際のクラスタへの反映作業は <code>kubelet</code> が行う。</p>
-<h3 ref="cloud-controller-manager--control-plane" >cloud-controller-manager / Control Plane</h3><a class="anchor" id="cloud-controller-manager--control-plane"></a>
+<h3 ref="kube-scheduler--master-nodes" >kube-scheduler / Master Nodes</h3><a class="anchor" id="kube-scheduler--master-nodes"></a>
+<p><code>kube-scheduler</code> の仕事は、新規に <code>etcd</code> に登録された Pod に対して最適な Worker Nodes を選択して割り当てること。<br>
+<code>go routine</code> の無限ループ（間隔 0s ）で以下の処理を繰り返す。</p>
+<ol>
+<li><code>kube-apiserver</code> 経由で <code>etcd</code> にアクセスし、Worker Nodes へ未割り当ての Pod 情報を 1 つ取得する</li>
+<li>Pod の設定情報から最適な Woker Node を選択する</li>
+<li>選択した Worker Node の情報を<code>kube-apiserver</code> 経由で <code>etcd</code> にアクセスし、保存する</li>
+</ol>
+<p>Worker Node の選択は、 <code>predicates</code> と呼ばれる条件にによるフィルタと、 <code>priorities</code> という優先度付けによって行われる。</p>
+<ul>
+<li><code>predicates</code>
+<ul>
+<li>Worker Node をフィルタする条件。</li>
+<li>例えば nodeSelector による Worker Node の選択や request に対するリソースの空き状況によるフィルタがある。</li>
+</ul>
+</li>
+<li><code>priorities</code>
+<ul>
+<li>Worker Node の優先度付け。</li>
+<li>例えば Pod を出来る限り Worker Nodes、ゾーンを分散させるような優先度付けがある。</li>
+</ul>
+</li>
+</ul>
+<p>参考：https://qiita.com/tkusumi/items/58fdadbe4053812cb44e</p>
+<h3 ref="cloud-controller-manager--master-nodes" >cloud-controller-manager / Master Nodes</h3><a class="anchor" id="cloud-controller-manager--master-nodes"></a>
 <p>クラウド特有の制御ロジックを組み込むコンポーネント。<br>
 <code>kube-controller-manager</code> 同様、内部に以下のような Controller を持つ。</p>
 <ul>

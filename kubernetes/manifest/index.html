@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-21T21:29:35 JST">
+<meta name="revised" content="2021-06-24T22:15:36 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -954,6 +954,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/administration/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/administration/">管理</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1102,7 +1117,7 @@ if (!doNotTrack) {
 <li><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/">マニフェスト リファリンス</a></li>
 </ul>
 <h2 ref="1-マニフェストの雛形" >1. マニフェストの雛形</h2><a class="anchor" id="1-マニフェストの雛形"></a>
-<p>ドライラン（ <code>kubectl run/create --dry-run=client</code> ）と yaml 表示（ <code>-o yaml</code> を）組み合わせるとマニフェストの雛形を標準出力できる。</p>
+<p>ドライラン（ <code>kubectl run/create --dry-run=client</code> ）と yaml 表示（ <code>-o yaml</code> / <code>--output=yaml</code> を）組み合わせるとマニフェストの雛形を標準出力できる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">$ kubectl run sample --image nginx -o yaml --dry-run=client</span>
 <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
@@ -1128,7 +1143,70 @@ if (!doNotTrack) {
         <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample</span>
         <span style="color:#f92672">resources</span>: {}
 <span style="color:#f92672">status</span>: {}
-</code></pre></div><h2 ref="2-マニフェストの理解" >2. マニフェストの理解</h2><a class="anchor" id="2-マニフェストの理解"></a>
+</code></pre></div><ul>
+<li>deployment
+<ul>
+<li><code>kubectl run mydeploy --image=nginx --output=yaml --dry-run=client</code></li>
+</ul>
+</li>
+<li>pod
+<ul>
+<li><code>--restart=Never</code> を付けると Pod になる</li>
+<li><code>kubectl run mypod --restart=Never --image=nginx --output=yaml --dry-run=client</code></li>
+</ul>
+</li>
+<li>job
+<ul>
+<li><code>--restart=OnFailure</code> を付けると Job になる</li>
+<li><code>kubectl run myjob --restart=OnFailure --image=ubuntu --output=yaml --dry-run=client -- echo hello</code></li>
+</ul>
+</li>
+<li>cronjob
+<ul>
+<li><code>--schedule</code> を付けると CronJob になる</li>
+<li><code>kubectl run mycron --schedule &quot;1 * * * *&quot; --image=nginx --output=yaml --dry-run=client</code></li>
+</ul>
+</li>
+<li>service
+<ul>
+<li><code>kubectl create svc clusterip myapp --tcp=80 --output=yaml --dry-run=client</code></li>
+</ul>
+</li>
+<li>configmap
+<ul>
+<li><code>kubectl create cm mycm --from-literal mykey=myval --output=yaml --dry-run=client</code></li>
+<li><code>--from-file</code> でファイルを指定した場合ちゃんとインデントしてくれる</li>
+<li><code>kubectl create cm mycm --from-file myfile.yaml --output=yaml --dry-run=client</code></li>
+</ul>
+</li>
+<li>secret
+<ul>
+<li>値は base64 エンコードされているので編集に注意</li>
+<li><code>kubectl create secret generic mysecret --from-literal mykey=myval --output=yaml --dry-run=client</code></li>
+</ul>
+</li>
+<li>serviceaccount
+<ul>
+<li><code>kubectl create serviceaccount mysc --output=yaml --dry-run=client</code></li>
+</ul>
+</li>
+<li>clusterrolebinding
+<ul>
+<li><code>kubectl create clusterrolebinding myclusterrolebinding --clusterrole=edit --serviceaccount default:mysc --output=yaml --dry-run=client</code></li>
+</ul>
+</li>
+<li>rolebinding
+<ul>
+<li><code>kubectl create rolebinding cluster-admin-binding --role=edit --serviceaccount default:mysc --output=yaml --dry-run=client</code></li>
+</ul>
+</li>
+<li>poddisruptionbudget
+<ul>
+<li><code>kubectl create pdb my-pdb --selector=app=nginx --min-available=1 --output=yaml --dry-run=client</code></li>
+</ul>
+</li>
+</ul>
+<h2 ref="2-マニフェストの理解" >2. マニフェストの理解</h2><a class="anchor" id="2-マニフェストの理解"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:sample-pod.yml" data-lang="yaml:sample-pod.yml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
 <span style="color:#f92672">metadata</span>:
@@ -1185,7 +1263,7 @@ pod <span style="color:#e6db74">&#34;sample-pod&#34;</span> deleted
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
 <span style="color:#75715e"># LBの追加など</span>
 </code></pre></div><p>また、複数のマニフェストファイルを一気に適用したい場合は、ディレクトリにまとめ <code>-f</code> で指定して実行することができる。<br>
-その歳、ファイル名辞書順で実行されることに注意。</p>
+その際、ファイル名辞書順で実行されることに注意。</p>
 <h3 ref="21-label-と-annotation" >2.1. Label と Annotation</h3><a class="anchor" id="21-label-と-annotation"></a>
 <p>両者とも key-value 形式（ <code>key: value</code> ）でデータを保持する仕組みであるが、用途が異なる。</p>
 <h4 ref="211-label" >2.1.1. Label</h4><a class="anchor" id="211-label"></a>
@@ -1364,7 +1442,16 @@ namespace リソース（ <code>kind: Namespace</code> ）を作成し、各リ�
 <span style="color:#f92672">metadata</span>: <span style="color:#75715e"># 先の metadata に同じ。</span>
 <span style="color:#f92672">spec</span>:     <span style="color:#75715e"># 先の Deployment の spec.template.spec に同じ。</span>
 <span style="color:#f92672">status</span>:   <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podstatus-v1-core</span>
-</code></pre></div><h4 ref="241-lifecycle--lifecycle-events--lifecycle-handler" >2.4.1. Lifecycle / Lifecycle Events / Lifecycle Handler</h4><a class="anchor" id="241-lifecycle--lifecycle-events--lifecycle-handler"></a>
+</code></pre></div><p>pod のマニフェストに以下を足したものが ReplicaSet 。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">&lt;integer&gt;</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">&lt;key1&gt;</span>: <span style="color:#ae81ff">&lt;value1&gt;</span>
+  <span style="color:#f92672">template</span>:
+      <span style="color:#ae81ff">&lt;podの定義に同じ&gt;</span>
+</code></pre></div><p>なお、 ReplicaSet はマニフェスト上はほぼ Deployment に同じ</p>
+<h4 ref="241-lifecycle--lifecycle-events--lifecycle-handler" >2.4.1. Lifecycle / Lifecycle Events / Lifecycle Handler</h4><a class="anchor" id="241-lifecycle--lifecycle-events--lifecycle-handler"></a>
 <p>Pod には <a href="https://kubernetes.io/ja/docs/concepts/workloads/pods/pod-lifecycle/">のライフサイクル</a> がり、 <code>status.phase</code> は Pod のライフサイクルにおけるフェーズを表しており、 Pod の状態を確認する上で重要となる。</p>
 <table>
 <thead>
