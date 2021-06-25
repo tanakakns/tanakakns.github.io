@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-24T22:15:36 JST">
+<meta name="revised" content="2021-06-25T18:10:47 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1248,7 +1248,8 @@ To further debug and diagnose cluster problems, use <span style="color:#e6db74">
 
 <span style="color:#75715e"># Secret</span>
 % kubectl create secret generic my-secret --from-literal<span style="color:#f92672">=</span>key1<span style="color:#f92672">=</span>supersecret --from-literal<span style="color:#f92672">=</span>key2<span style="color:#f92672">=</span>topsecret
-</code></pre></div><p>なお、 Pod だけを作りたい場合は <code>kubectl run</code> を利用する。</p>
+</code></pre></div><p>なお、 Pod だけを作りたい場合は <code>kubectl run</code> を利用する。<br>
+また、Service の <code>selector</code> の設定が正しく Pod を捉えているかどうかは <code>kubectl get pods --selector=&quot;app=monolith,secure=enabled&quot;</code> などのコマンドで対象の Pod を取得できるか、で検査できる。</p>
 <h2 ref="kubectl-run" ><code>kubectl run</code></h2><a class="anchor" id="kubectl-run"></a>
 <p><code>kubectl create</code> がだいたいなんでも作れたのに対し、 <code>kubectl run</code> は Pod のみの実行に特化。<br>
 オプションで Service をつけれたりもするが、基本は <code>kubectl create</code> でリソースを作成するのがよい。</p>

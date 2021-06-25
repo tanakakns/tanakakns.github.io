@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-24T22:15:36 JST">
+<meta name="revised" content="2021-06-25T18:10:47 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1260,16 +1260,12 @@ if (!doNotTrack) {
 </ul>
 </blockquote>
 <h3 ref="service" >Service</h3><a class="anchor" id="service"></a>
-<p>Service は以下の種類の <strong>L4</strong> ロードバランサを提供する。<br>
+<p>Service は以下の種類の <strong>L4</strong> ロードバランサを提供し、クラスタ内の各ノードに仮想敵に構成される。<br>
 実質、ClusterIP、NodePort、LoadBalancer の 3 種類。</p>
 <ul>
-<li>ClusterIP
+<li><strong>ClusterIP</strong>
 <ul>
-<li>k8s <strong>クラスタ内からのみ疎通可能な IP</strong> となる Service （なので、「Cluster」IP
-<ul>
-<li>k8s クラスタ内でのみ疎通可能な仮想 IP</li>
-</ul>
-</li>
+<li>k8s <strong>クラスタ内からのみ疎通可能な IP</strong> となる Service （なので、「Cluster」IP）をノード内に仮想敵に構成する</li>
 <li>k8s クラスタ外から通信を受け付ける必要のない箇所のロードバランサ</li>
 <li>各 Pod は IP を持つが個々にアクセスしていては負荷分散できないのでそれを 1 つの IP に束ねる</li>
 <li>name がホスト名として機能し、 クラスタ内部 DNS により名前解決される
@@ -1280,6 +1276,12 @@ if (!doNotTrack) {
 </li>
 <li>各ノードの <code>kube-proxy</code> 通信の転送を行う</li>
 <li>type は <code>ClusterIP</code></li>
+<li>設定する Port は以下の通り
+<ul>
+<li><code>port</code> ： Service のポート。 Service は内部的な仮想 IP アドレスを持っており、 Pod へ転送する際の From のポート。</li>
+<li><code>targetPort</code> ：転送先の Pod のボート。</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>ExternalIP（ ClusterIP の一種）
@@ -1290,9 +1292,9 @@ if (!doNotTrack) {
 <li><code>spec.externalIPs</code> の IP は自分でノードの IP を調べて記載する必要があり、 <code>spec.ports[].port</code> の port で受け、該当セレクタの <code>spec.ports[].targetPort</code> へ流す</li>
 </ul>
 </li>
-<li>NodePort
+<li><strong>NodePort</strong>
 <ul>
-<li>クラスタ内の各ノードに外部からアクセス可能な IP を与える</li>
+<li>クラスタ内の各ノードに外部からアクセス可能な IP を与え、ノード内の仮想的な Service にトラフィックを転送する</li>
 <li>ExternalIP に類似したサービスだが、ノードの IP を指定する必要がなく、全ノードが対応する</li>
 <li>違いは「ノードのIPアドレス:ポート」で通信を受信する点
 <ul>
@@ -1301,9 +1303,16 @@ if (!doNotTrack) {
 </li>
 <li>デフォルトで利用できるノードポートの範囲は「30000〜32767」であり、クラスタ内でユニークなポートでなければならないことに注意</li>
 <li>type は <code>NodePort</code></li>
+<li>設定する Port は以下の通り
+<ul>
+<li><code>nodePort</code> ：ノードが受け取るポート。このポートが受けたリクエストは Service へ転送される。</li>
+<li><code>port</code> ： Service のポート。 Service は内部的な仮想 IP アドレスを持っており、 Pod へ転送する際の From のポート。</li>
+<li><code>targetPort</code> ：転送先の Pod のボート。</li>
 </ul>
 </li>
-<li>LoadBalancer
+</ul>
+</li>
+<li><strong>LoadBalancer</strong>
 <ul>
 <li>商用環境で k8s クラスタ外部から通信を受ける際に良い Service</li>
 <li>k8s クラスタ外部（例えばロードバランサ）から疎通性のある仮想 IP を払い出せる</li>
@@ -1312,6 +1321,13 @@ if (!doNotTrack) {
 <li>クラウド利用の場合、サービスからのトラフィックをクラスタ内のノードに転送するクラウドプロバイダが提供するロードバランサが実態
 <ul>
 <li>そのため、基盤が LoadBalancer Service に対応している必要がある</li>
+</ul>
+</li>
+<li>設定する Port は以下の通り
+<ul>
+<li><code>nodePort</code> ：ノードが受け取るポート。このポートが受けたリクエストは Service へ転送される。</li>
+<li><code>port</code> ： Service のポート。 Service は内部的な仮想 IP アドレスを持っており、 Pod へ転送する際の From のポート。</li>
+<li><code>targetPort</code> ：転送先の Pod のボート。</li>
 </ul>
 </li>
 </ul>
@@ -1333,7 +1349,8 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<p>サービスのセレクタの設定が正しく Pod を捉えているかどうかは <code>kubectl get pods -l &quot;app=monolith,secure=enabled&quot;</code> などのコマンドで対象の Pod を取得できるか、で検査できる。</p>
+<p>Service の転送先は Pod となり（ Deployment/Replicaset ではない）、その Pod の <code>labels</code> を <code>selector</code> で指定することにより転送先を特定する。
+Service の <code>selector</code> の設定が正しく Pod を捉えているかどうかは <code>kubectl get pods --selector=&quot;app=monolith,secure=enabled&quot;</code> などのコマンドで対象の Pod を取得できるか、で検査できる。</p>
 <h3 ref="ingress" >Ingress</h3><a class="anchor" id="ingress"></a>
 <p>Service とは異なり、 <strong>L7</strong> ロードバランサを提供する。<br>
 <code>kind: Service</code> ではなく、 <code>kind: Ingress</code> で提供される。<br>

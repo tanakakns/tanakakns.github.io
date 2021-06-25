@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-24T22:15:36 JST">
+<meta name="revised" content="2021-06-25T18:10:47 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1118,7 +1118,8 @@ if (!doNotTrack) {
 </ul>
 <h2 ref="1-マニフェストの雛形" >1. マニフェストの雛形</h2><a class="anchor" id="1-マニフェストの雛形"></a>
 <p>ドライラン（ <code>kubectl run/create --dry-run=client</code> ）と yaml 表示（ <code>-o yaml</code> / <code>--output=yaml</code> を）組み合わせるとマニフェストの雛形を標準出力できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">$ kubectl run sample --image nginx -o yaml --dry-run=client</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">$ kubectl run sample --image=nginx --dry-run=client -o yaml</span>
+
 <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
 <span style="color:#f92672">metadata</span>:
@@ -1144,15 +1145,19 @@ if (!doNotTrack) {
         <span style="color:#f92672">resources</span>: {}
 <span style="color:#f92672">status</span>: {}
 </code></pre></div><ul>
-<li>deployment
-<ul>
-<li><code>kubectl run mydeploy --image=nginx --output=yaml --dry-run=client</code></li>
-</ul>
-</li>
 <li>pod
 <ul>
-<li><code>--restart=Never</code> を付けると Pod になる</li>
-<li><code>kubectl run mypod --restart=Never --image=nginx --output=yaml --dry-run=client</code></li>
+<li><code>kubectl run mypod --image=nginx --labels=app=mypod --output=yaml --dry-run=client</code>
+<ul>
+<li><code>--restart=Never</code> を付けなくても Pod になるっぽい</li>
+<li><code>--expose</code> オプションをつけると ClusterIP も作成される</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>deployment
+<ul>
+<li><code>kubectl create deployment mydeploy --image=nginx --replicas=4 --output=yaml --dry-run=client</code></li>
 </ul>
 </li>
 <li>job
@@ -1167,9 +1172,18 @@ if (!doNotTrack) {
 <li><code>kubectl run mycron --schedule &quot;1 * * * *&quot; --image=nginx --output=yaml --dry-run=client</code></li>
 </ul>
 </li>
-<li>service
+<li>service / clusterIP
 <ul>
-<li><code>kubectl create svc clusterip myapp --tcp=80 --output=yaml --dry-run=client</code></li>
+<li><code>kubectl create svc clusterip myapp --tcp=80 --output=yaml --dry-run=client</code>
+<ul>
+<li>これだと <code>selector</code> は作成されない</li>
+</ul>
+</li>
+<li><code>kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml</code>
+<ul>
+<li>こうすると <code>selector</code> も勝手に作成してくれる</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>configmap
@@ -1436,6 +1450,7 @@ namespace リソース（ <code>kind: Namespace</code> ）を作成し、各リ�
 <li>spec.template.spec.affinity : <a href="https://qiita.com/sheepland/items/ed12b3dc4a8f1df7c4ec">参考</a></li>
 </ul>
 <p><code>livenessProbe</code>、<code>readinessProbe</code> については <a href="https://kubernetes.io/ja/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">こちら</a> 。</p>
+<p>また、 Pod の <code>spec.nodeName</code> を指定することで、スケジューラに任せず手動で Pod の配置ノードを指定することができる。</p>
 <h3 ref="24-pod" >2.4. Pod</h3><a class="anchor" id="24-pod"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">core/v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
@@ -1450,8 +1465,117 @@ namespace リソース（ <code>kind: Namespace</code> ）を作成し、各リ�
       <span style="color:#f92672">&lt;key1&gt;</span>: <span style="color:#ae81ff">&lt;value1&gt;</span>
   <span style="color:#f92672">template</span>:
       <span style="color:#ae81ff">&lt;podの定義に同じ&gt;</span>
-</code></pre></div><p>なお、 ReplicaSet はマニフェスト上はほぼ Deployment に同じ</p>
-<h4 ref="241-lifecycle--lifecycle-events--lifecycle-handler" >2.4.1. Lifecycle / Lifecycle Events / Lifecycle Handler</h4><a class="anchor" id="241-lifecycle--lifecycle-events--lifecycle-handler"></a>
+</code></pre></div><p>なお、 ReplicaSet はマニフェスト上はほぼ Deployment に同じ。</p>
+<h4 ref="241-taints-tolerations" >2.4.1. Taints, Tolerations</h4><a class="anchor" id="241-taints-tolerations"></a>
+<p>Taints / Tolerations は Node Affinity と逆の機能。<br>
+<strong>Taints</strong> は「汚れ」、 <strong>Tolerations</strong> は「寛容」といった意味になる。<br>
+Taints は Node に付与し、 Tolerations は Pod に付与する。<br>
+つまり、 Nodeに「汚れ」をつければ、それに「寛容」な Pod しかスケジュールされないということ。<br>
+注意したいのは、スケジュールされることを <strong>許容するだけで引きつけるわけではない</strong> ということ。<br>
+Taints / Tolerations は以下の項目で設定できる。</p>
+<ul>
+<li>Key-Value
+<ul>
+<li>Labels と同様</li>
+</ul>
+</li>
+<li>Effect
+<ul>
+<li>以下のような効果がある
+<ul>
+<li><code>NoSchedule</code> ：TaintとTolerationがマッチした場合にのみに、PodがNodeにスケジューリングされる。</li>
+<li><code>PreferNoSchedule</code> ： <code>NoSchedule</code> の緩いバージョン。どうしても行き場のなくなった Pod は受け入れる。</li>
+<li><code>NoExecute</code> ：基本的に <code>NoSchedule</code> と同じだが、条件に合わない Pod がすでに実行中の場合は追い出す。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Node に Taints を付与する場合は以下のコマンドを実行する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl taint nodes node1 key1<span style="color:#f92672">=</span>value1:NoSchedule
+
+<span style="color:#75715e"># ちなみに最後に（ - ）をつけるとその taint を削除できる</span>
+$ kubectl taint nodes node1 key1<span style="color:#f92672">=</span>value1:NoSchedule-
+</code></pre></div><p>Pod に Tolerations を付与する場合はマニフェストの <code>spec.tolerations</code> に以下を記述する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">tolerations</span>:
+- <span style="color:#f92672">key</span>: <span style="color:#e6db74">&#34;key1&#34;</span>
+  <span style="color:#f92672">operator</span>: <span style="color:#e6db74">&#34;Equal&#34;</span>
+  <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;value1&#34;</span>
+  <span style="color:#f92672">effect</span>: <span style="color:#e6db74">&#34;NoSchedule&#34;</span>
+</code></pre></div><h4 ref="242-node-selectors" >2.4.2. Node Selectors</h4><a class="anchor" id="242-node-selectors"></a>
+<p>Pod を特定の Node にスケジュールしたい場合 <strong>Node Selectors</strong> を利用する。<br>
+Node に Labels を付与し、 Pod の <code>nodeSelector</code> にその Labels を付与することで設定できる。<br>
+Node に Labels を付与するコマンドは以下の通り。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE: kubectl label nodes &lt;node-name&gt; &lt;label-key&gt;=&lt;label-value&gt;</span>
+$ kubectl label nodes node-1 size<span style="color:#f92672">=</span>Large
+</code></pre></div><p>また、 Pod のマニフェストの <code>spec.nodeSelector</code> に以下を設定する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">nodeSelector</span>:
+  <span style="color:#f92672">size</span>: <span style="color:#ae81ff">Large</span>
+</code></pre></div><p>Node Selectors は <code>size=Large</code> もしくは <code>size=Middle</code> のどちらか、といった柔軟性のあるスケジュールはできない。<br>
+こういう場合は Node Affinity を使う。</p>
+<h4 ref="243-node-affinity" >2.4.3. Node Affinity</h4><a class="anchor" id="243-node-affinity"></a>
+<p><strong>Node Affinity</strong> は Pod に対して設定し、 Node Selector と同様 Node に付与された Labels を見る。<br>
+Pod のマニフェストの <code>spec.affinity</code> に以下の設定をする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">affinity</span>:
+  <span style="color:#f92672">nodeAffinity</span>:
+    <span style="color:#f92672">requiredDuringSchedulingIgnoredDuringExecution</span>:
+      <span style="color:#f92672">nodeSelectorTerms</span>:
+      - <span style="color:#f92672">matchExpressions</span>:
+        - <span style="color:#f92672">key</span>: <span style="color:#ae81ff">size</span>
+          <span style="color:#f92672">operator</span>: <span style="color:#ae81ff">In</span>
+          <span style="color:#f92672">values</span>:
+          - <span style="color:#ae81ff">Large</span>
+</code></pre></div><p>3 行目の長ったらしいのは <strong>NodeAffinityType</strong>。以下の種類がある。<br>
+（ <code>DuringScheduling</code> と <code>DuringExecution</code> に <code>required</code> / <code>preferred</code> / <code>Ignored</code> が修飾されていることに注目。）</p>
+<ul>
+<li>requiredDuringSchedulingIgnoredDuringExecution
+<ul>
+<li>必ず Affinity の通りにスケジュールされるが、すでに実行中のものは再スケジュールされない</li>
+</ul>
+</li>
+<li>preferredDuringSchedulingIgnoredDuringExecution
+<ul>
+<li>できるだけ Affinity の通りにスケジュールされるが、すでに実行中のものは再スケジュールされない</li>
+</ul>
+</li>
+<li>requiredDuringSchedulingRequiredDuringExecution
+<ul>
+<li>必ず Affinity の通りにスケジュールされ、さらに、すでに実行中のものは再スケジュールされる</li>
+</ul>
+</li>
+</ul>
+<h4 ref="244-resource-requirements" >2.4.4. Resource Requirements</h4><a class="anchor" id="244-resource-requirements"></a>
+<p><code>spec.containers.resources</code> を設定することで、 Pod に割り当てるリソース（ CPU/Mem/Disk ）の要求について記載することができる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">resources</span>:
+  <span style="color:#f92672">requests</span>:
+    <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">100m</span>
+    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">64Mi</span>
+  <span style="color:#f92672">limits</span>:
+    <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">2</span>
+    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">1Gi</span>
+</code></pre></div><p><code>resuests</code> は下限、 <code>limits</code> は上限と理解すればいい。<br>
+なお、デフォルトでは、 <code>requests</code> は <code>CPU=0.5</code> / <code>Mem=256Mi</code> 、 <code>limits</code> は <code>CPU=1</code> / <code>Mem=512Mi</code> となる。
+<code>CPU=1</code> は 1 vCPU や 1 core や 1 Hyperthread を意味し、 <code>CPU=1=1000m</code> となる。<br>
+また、 Mem については以下の通り。</p>
+<ul>
+<li>1G = 1,000,000,000 bytes</li>
+<li>1M = 1,000,000 bytes</li>
+<li>1K = 1,000 bytes</li>
+<li>1Gi = 1,073,741,824 bytes</li>
+<li>1Mi = 1,048,576 bytes</li>
+<li>1Ki = 1,024 bytes</li>
+</ul>
+<h4 ref="245-static-pod" >2.4.5. Static Pod</h4><a class="anchor" id="245-static-pod"></a>
+<p>Kubernetes の Master Nodes の機能がなかった場合でも、 <code>kubelet</code> は単独で Pod を起動することができる。（ DaemonSet や Service など Pod 以外は出来ない）<br>
+この Pod を <strong>Static Pod</strong> と呼ぶ。<br>
+<code>kubelet.service</code> プロセス実行時のオプションに <code>--pod-manifest-path</code> というオプションがあり、このパスに Pod のマニフェストを配置することにより Static Pod を実行することができる。<br>
+（ <code>/etc/Kubernetes/manifest</code> あたり）<br>
+もしくは、<code>kubelet.service</code> プロセス実行時のオプションに <code>--config</code> オプションがあり、ここで指定された設定の yaml ファイルの中の <code>staticPodPath</code> という設定項目になる。<br>
+Master Nodes が機能している場合、 <code>kubelet</code> は自動的に各 Static Pod に対応する mirror pod を <code>kube-apiserver</code> 上に作成するため、 <code>kubectl get</code> などでも見ることができる。<br>
+Master Nodes が機能していない場合、作成された Static Pod は <code>docker ps</code> コマンドで確認できる。<br>
+Master Nodes が機能している・いないにかかわらず、 Static Pod に対する変更は各 Static Pod が配置されている Node のマニフェストファイルを変更する他ない。<br>
+<code>kube-apiserver</code> に何らかの問題が発生しても機能継続できるように、 Master Nodes のコンポーネントで Static Pod により構成されているものがある。</p>
+<h4 ref="246-lifecycle--lifecycle-events--lifecycle-handler" >2.4.6. Lifecycle / Lifecycle Events / Lifecycle Handler</h4><a class="anchor" id="246-lifecycle--lifecycle-events--lifecycle-handler"></a>
 <p>Pod には <a href="https://kubernetes.io/ja/docs/concepts/workloads/pods/pod-lifecycle/">のライフサイクル</a> がり、 <code>status.phase</code> は Pod のライフサイクルにおけるフェーズを表しており、 Pod の状態を確認する上で重要となる。</p>
 <table>
 <thead>
@@ -1558,16 +1682,6 @@ Liveness/Readiness Probe の双方で以下の 3 種類のヘルスチェック�
 <li>httpGet : HTTPのGETリクエストを発行</li>
 </ul>
 <p>先の probe と同様だ。</p>
-<h4 ref="242-resource-requirements" >2.4.2. Resource Requirements</h4><a class="anchor" id="242-resource-requirements"></a>
-<p>Pod に割り当てるリソースの要求について記載する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">resources</span>:
-  <span style="color:#f92672">requests</span>:
-    <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">100m</span>
-    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">64Mi</span>
-  <span style="color:#f92672">limits</span>:
-    <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">2</span>
-    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">1Gi</span>
-</code></pre></div><p><code>resuests</code> は下限、 <code>limits</code> は上限と理解すればいい。</p>
 <h3 ref="25-service" >2.5. Service</h3><a class="anchor" id="25-service"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
@@ -1603,6 +1717,13 @@ Liveness/Readiness Probe の双方で以下の 3 種類のヘルスチェック�
   - <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP    </span> <span style="color:#75715e"># Service が受信するプロトコルとポートマッピング</span>
     <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>          <span style="color:#75715e"># Service が受信 Port</span>
     <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">9376</span>  <span style="color:#75715e"># Pod の Port</span>
+</code></pre></div><p>Service の <code>selector</code> の設定が正しく Pod を捉えているかどうかは <code>kubectl get pods --selector=&quot;app=monolith,secure=enabled&quot;</code> などのコマンドで対象の Pod を取得できるか、で検査できる。</p>
+<h3 ref="26-daemonset" >2.6. DaemonSet</h3><a class="anchor" id="26-daemonset"></a>
+<p>各 Node に 1 Pod ずつ配置する。<br>
+Monitoring/Logging Agent などを仕込むのに最適。（ <code>kube-proxy</code> は DaemonSet で配置されているものもある）<br>
+DaemonSet のマニフェストは ReplicaSet のそれに酷似している。<br>
+なお、 DaemonSet や ReplicaSet は <code>kubectl create</code> コマンドでは作成できないので、下記のような Deployment 作成コマンドでマニフェストの雛形を作成し、その後 <code>kind</code> を修正するなどして DaemonSet のマニフェストを作成してから apply するとよい。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create deployment elasticsearch --image<span style="color:#f92672">=</span>k8s.gcr.io/fluentd-elasticsearch:1.20 --namespace<span style="color:#f92672">=</span>kube-system --dry-run<span style="color:#f92672">=</span>client -o yaml &gt; fluent.yaml
 </code></pre></div><h2 ref="3-その他のリソース" >3. その他のリソース</h2><a class="anchor" id="3-その他のリソース"></a>
 <p>基本的なリソース以外に以下について記載する。</p>
 <ul>
