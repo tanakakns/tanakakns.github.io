@@ -4,16 +4,16 @@
 <html>
   <head>
     <title>
-	管理 :: テックまとめ
+	クラスタ管理 :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-25T18:10:47 JST">
+<meta name="revised" content="2021-06-28T23:13:04 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
 
-<title>管理 :: テックまとめ</title>
+<title>クラスタ管理 :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -964,7 +964,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/kubernetes/administration/">管理</a>
+          <a href="/kubernetes/administration/">クラスタ管理</a>
       
         
       
@@ -1037,7 +1037,145 @@ if (!doNotTrack) {
       <section class="page ">
       
 	
-	 
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/kubernetes/">
+        Kubernetes
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        クラスタ管理
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>クラスタ管理</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
+
+
+
+
+
+
+	<div class="content">
+	    <p>Application Lifecycle Management について。</p>
+<h2 ref="1-rolling-update-and-rollbacks" >1. Rolling Update and Rollbacks</h2><a class="anchor" id="1-rolling-update-and-rollbacks"></a>
+<p>Deployment のマニフェストの <code>spec.template.spec.containers.image</code> を変更し <code>kubectl apply</code> すれば、デフォルトの設定で <strong>ローリングアップデート</strong> される。<br>
+もしくは <code>kubectl set image deployment/&lt;deployment-name&gt; &lt;pod-name&gt;=&lt;image-name&gt;</code> で直接イメージを変更しても同様。<br>
+ロールアウトの確認方法は以下の通り。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># rollout の状況を確認</span>
+$ kubectl rollout status deployment &lt;deployment-name&gt;
+
+<span style="color:#75715e"># これまでの rollout を確認</span>
+$ kubectl rollout history deployment &lt;deployment-name&gt;
+
+<span style="color:#75715e"># ロールバック</span>
+$ kubectl rollout undo deployment &lt;deployment-name&gt;
+</code></pre></div><p>なお、ローリングアップデートされる際は ReplicaSet が再度作成されている。</p>
+<h2 ref="2-cluster-maintainance" >2. Cluster Maintainance</h2><a class="anchor" id="2-cluster-maintainance"></a>
+<h3 ref="21-os-の更新" >2.1. OS の更新</h3><a class="anchor" id="21-os-の更新"></a>
+<p>クラスタからノードが消失した場合、 <code>kube-scheduler</code> 起動時に設定したオプション <code>--pod-eviction-timeout=5m0s</code> が経過すると消失したノードに配置されていた Pod （ただし、 ReplicaSet の場合）は他のアクティブなノードで再作成される。（ ReplicaSet ではない場合は際作成されない）<br>
+障害でノードが消失する場合は仕方ないが、メンテナンスでノードを停止する場合は、ノードから Pod を <strong>ドレイン</strong> して他のノードへ Pod を移す必要がある。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 指定ノードの Pod を Graceful Shutdown させ、徐々に Pod を退避する</span>
+$ kubectl drain &lt;node-name&gt; <span style="color:#f92672">[</span>--ignore-daemonsets<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span>
+</code></pre></div><p>なお、ノードをクラスタに復帰させた場合は <code>uncordon</code> する。（ cordon は遮蔽 の意）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl uncordon &lt;node-name&gt;
+
+<span style="color:#75715e"># ちなみに以下のコマンドはノードの Pod を直ちに停止させる（ Graceful Shutdown しない）</span>
+<span style="color:#75715e"># そして、停止した Pod を他のノードに退避させることもない</span>
+$ kubectl cordon &lt;node-name&gt;
+</code></pre></div><h3 ref="22-kubernetes-の更新" >2.2. Kubernetes の更新</h3><a class="anchor" id="22-kubernetes-の更新"></a>
+<p>Kubernetes クラスタにインストール・実行されている各コンポーネントの更新方法について記載する。<br>
+Kubernetes にインストールされているコンポーネントのバージョンは <code>kubectl get nodes</code> の <code>VERSION</code> 項目にて確認できる。<br>
+ただし、 <code>etcd</code> や <code>CoreDNS</code> は <code>kube-apiserver</code> などの Kubernetes コンポーネントとは別プロジェクトであるためバージョニングが異なることに注意。</p>
+<p>Kubernetes のコンポーネントは、マイナーバージョン 3 つまでであれば <strong>ライブアップグレード</strong> をサポートしている。<br>
+しかしながら、一気にバージョンアップするのではなく、 1 つずつバージョンアップすることが推奨される。</p>
+<ul>
+<li>Master Nodes 、 Worker Nodes の順にアップグレードする</li>
+<li>Master Nodes 上で以下を実行する
+<ul>
+<li>OS を確認する <code>cat /etc/*release*/</code>
+<ul>
+<li>OS に応じたアップグレード手順を実施する必要があるため</li>
+<li>以下の参考 URL を見ながら実施すること</li>
+</ul>
+</li>
+<li><code>kubeadm</code> を更新する： <code>apt-get upgrade -y kubeadm=1.12.0-00</code></li>
+<li><code>kubeadm upgrade plan</code> でアップグレード情報を確認</li>
+<li><code>kubeadm upgrade apply v1.13.3</code> でアップグレードを実行</li>
+<li><code>kubectl get nodes</code> コマンド結果の <code>VERSION</code> を見てアップグレード出来ているか確認する</li>
+<li>必要であれば後述の <code>kubelet</code> <code>kubectl</code> のバージョンアップも実施する</li>
+</ul>
+</li>
+<li>Worker Nodes を 1 つずつアップグレードする（バージョンアップしたノードを足して、古いノードを削除、を繰り返してもいい）
+<ul>
+<li><code>kubectl drain &lt;node-name&gt;</code> @MasterNodes</li>
+<li><code>kubeadm</code> を更新する： <code>apt-get upgrade -y kubeadm=1.12.0-00</code></li>
+<li><code>kubelet</code> を更新する： <code>apt-get upgrade -y kubelet=1.12.0-00</code></li>
+<li>設定を更新する： <code>kubeadm upgrade node config --kubelet-version v1.12.0</code></li>
+<li><code>kubelet</code> を再起動する： <code>systemctl restart kubelet</code></li>
+<li><code>kubectl get nodes</code> コマンド結果の <code>VERSION</code> を見てアップグレード出来ているか確認する</li>
+<li><code>kubectl uncordon &lt;node-name&gt;</code> @MasterNodes</li>
+</ul>
+</li>
+</ul>
+<p>参考：<a href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/">Upgrading kubeadm clusters</a></p>
+		</div>
+
+
+
+
+
+
+	
 	
 
       </section>

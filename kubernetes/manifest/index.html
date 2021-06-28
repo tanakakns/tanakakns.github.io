@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-25T18:10:47 JST">
+<meta name="revised" content="2021-06-28T23:13:04 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -964,7 +964,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/kubernetes/administration/">管理</a>
+          <a href="/kubernetes/administration/">クラスタ管理</a>
       
         
       
@@ -1567,15 +1567,36 @@ Pod のマニフェストの <code>spec.affinity</code> に以下の設定をす
 </ul>
 <h4 ref="245-static-pod" >2.4.5. Static Pod</h4><a class="anchor" id="245-static-pod"></a>
 <p>Kubernetes の Master Nodes の機能がなかった場合でも、 <code>kubelet</code> は単独で Pod を起動することができる。（ DaemonSet や Service など Pod 以外は出来ない）<br>
-この Pod を <strong>Static Pod</strong> と呼ぶ。<br>
-<code>kubelet.service</code> プロセス実行時のオプションに <code>--pod-manifest-path</code> というオプションがあり、このパスに Pod のマニフェストを配置することにより Static Pod を実行することができる。<br>
-（ <code>/etc/Kubernetes/manifest</code> あたり）<br>
-もしくは、<code>kubelet.service</code> プロセス実行時のオプションに <code>--config</code> オプションがあり、ここで指定された設定の yaml ファイルの中の <code>staticPodPath</code> という設定項目になる。<br>
-Master Nodes が機能している場合、 <code>kubelet</code> は自動的に各 Static Pod に対応する mirror pod を <code>kube-apiserver</code> 上に作成するため、 <code>kubectl get</code> などでも見ることができる。<br>
+この Pod を <strong>Static Pod</strong> と呼ぶ。
+Static Pod の作成方法は以下の通り。</p>
+<ul>
+<li><code>kubelet.service</code> プロセス実行時のオプションに <code>--pod-manifest-path</code> というオプションがあり、このパスに Pod のマニフェストを配置することにより Static Pod を実行することができる。
+<ul>
+<li><code>/etc/Kubernetes/manifest</code> あたり</li>
+</ul>
+</li>
+<li>もしくは、<code>kubelet.service</code> プロセス実行時のオプションに <code>--config</code> オプションがあり、ここで指定された設定の yaml ファイルの中の <code>staticPodPath</code> という設定項目になる</li>
+<li>上記で確認した Path にマニフェストファイルを配置すれば自動で作成される（作成されなければ <code>systemctl restart kubelet</code> で再起動）</li>
+<li>作成された Static Pod は「<!-- raw HTML omitted -->-<!-- raw HTML omitted -->」というふうに suffix にノード名が付与される</li>
+</ul>
+<p>Master Nodes が機能している場合、 <code>kubelet</code> は自動的に各 Static Pod に対応する mirror pod を <code>kube-apiserver</code> 上に作成するため、 <code>kubectl get</code> などでも見ることができる。<br>
 Master Nodes が機能していない場合、作成された Static Pod は <code>docker ps</code> コマンドで確認できる。<br>
 Master Nodes が機能している・いないにかかわらず、 Static Pod に対する変更は各 Static Pod が配置されている Node のマニフェストファイルを変更する他ない。<br>
 <code>kube-apiserver</code> に何らかの問題が発生しても機能継続できるように、 Master Nodes のコンポーネントで Static Pod により構成されているものがある。</p>
-<h4 ref="246-lifecycle--lifecycle-events--lifecycle-handler" >2.4.6. Lifecycle / Lifecycle Events / Lifecycle Handler</h4><a class="anchor" id="246-lifecycle--lifecycle-events--lifecycle-handler"></a>
+<h4 ref="246-multiple-scheduler" >2.4.6. Multiple Scheduler</h4><a class="anchor" id="246-multiple-scheduler"></a>
+<p><code>kube-scheduler</code> は複数起動することができる。<br>
+複数のスケジューラがある場合、 Pod のマニフェストにて <code>spec.schedulerName</code> でスケジューラ名を指定することにより目的のスケジューラによって処理させることができる。<br>
+スケジューラを起動する際、以下のオプションを指定することで、スケジューラに命名およびリーダーの選出が可能になる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kube-second-scheduler</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">gcr.io/my-gcp-project/my-kube-scheduler:1.0</span>
+        <span style="color:#f92672">command</span>:
+        - <span style="color:#ae81ff">/usr/local/bin/kube-scheduler</span>
+        - --<span style="color:#ae81ff">address=0.0.0.0</span>
+        - --<span style="color:#ae81ff">leader-elect=false         </span> <span style="color:#75715e"># リーダー選出対象外</span>
+        - --<span style="color:#ae81ff">scheduler-name=my-scheduler</span> <span style="color:#75715e"># スケジューラの命名</span>
+</code></pre></div><h4 ref="247-lifecycle--lifecycle-events--lifecycle-handler" >2.4.7. Lifecycle / Lifecycle Events / Lifecycle Handler</h4><a class="anchor" id="247-lifecycle--lifecycle-events--lifecycle-handler"></a>
 <p>Pod には <a href="https://kubernetes.io/ja/docs/concepts/workloads/pods/pod-lifecycle/">のライフサイクル</a> がり、 <code>status.phase</code> は Pod のライフサイクルにおけるフェーズを表しており、 Pod の状態を確認する上で重要となる。</p>
 <table>
 <thead>
@@ -1724,6 +1745,60 @@ Monitoring/Logging Agent などを仕込むのに最適。（ <code>kube-proxy</
 DaemonSet のマニフェストは ReplicaSet のそれに酷似している。<br>
 なお、 DaemonSet や ReplicaSet は <code>kubectl create</code> コマンドでは作成できないので、下記のような Deployment 作成コマンドでマニフェストの雛形を作成し、その後 <code>kind</code> を修正するなどして DaemonSet のマニフェストを作成してから apply するとよい。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create deployment elasticsearch --image<span style="color:#f92672">=</span>k8s.gcr.io/fluentd-elasticsearch:1.20 --namespace<span style="color:#f92672">=</span>kube-system --dry-run<span style="color:#f92672">=</span>client -o yaml &gt; fluent.yaml
+</code></pre></div><h3 ref="27-configmap-secrets" >2.7. ConfigMap /Secrets</h3><a class="anchor" id="27-configmap-secrets"></a>
+<h4 ref="configmap" >ConfigMap</h4><a class="anchor" id="configmap"></a>
+<p>ConfigMap は以下の通りコマンドで作成するか、マニフェストを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># コマンドのみで作成</span>
+<span style="color:#75715e"># USAGE: kubectl create configmap &lt;config-name&gt; --from-literal=&lt;key&gt;=&lt;value&gt;</span>
+$ kubectl create configmap app-config --from-literal<span style="color:#f92672">=</span>APP_COLOR<span style="color:#f92672">=</span>blue --from-literal<span style="color:#f92672">=</span>APP_MOD<span style="color:#f92672">=</span>prod
+
+<span style="color:#75715e"># マニフェストファイルを利用する場合</span>
+<span style="color:#75715e"># USAGE: kubectl create configmap &lt;config-name&gt; --from-file=&lt;file-name&gt;</span>
+$ kubectl create configmap app-config --from-file<span style="color:#f92672">=</span>app_config.properties
+</code></pre></div><pre><code class="language-txt:app_config.properties" data-lang="txt:app_config.properties">APP_COLOR: blue
+APP_MOD: prod
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:app-config.yaml" data-lang="yaml:app-config.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-config</span>
+<span style="color:#f92672">data</span>:
+  <span style="color:#f92672">APP_COLOR</span>: <span style="color:#ae81ff">blue</span>
+  <span style="color:#f92672">APP_MOD</span>: <span style="color:#ae81ff">prod</span>
+</code></pre></div><p>Pod のマニフェストからは以下のように参照する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">containers</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hoge</span>
+    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">hoge</span>
+    <span style="color:#f92672">envFrom</span>:
+    - <span style="color:#f92672">configMapRef</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-config</span>
+</code></pre></div><h4 ref="secret" >Secret</h4><a class="anchor" id="secret"></a>
+<p>Secret は以下の通りコマンドで作成するか、マニフェストを作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># コマンドのみで作成</span>
+<span style="color:#75715e"># USAGE: kubectl create secret generic &lt;secret-name&gt; --from-literal=&lt;key&gt;=&lt;value&gt;</span>
+$ kubectl create secret generic app-secret --from-literal<span style="color:#f92672">=</span>APP_COLOR<span style="color:#f92672">=</span>blue --from-literal<span style="color:#f92672">=</span>APP_MOD<span style="color:#f92672">=</span>prod
+
+<span style="color:#75715e"># マニフェストファイルを利用する場合</span>
+<span style="color:#75715e"># USAGE: kubectl create secret generic &lt;secret-name&gt; --from-file=&lt;file-name&gt;</span>
+$ kubectl create secret generic app-secret --from-file<span style="color:#f92672">=</span>app_secret.properties
+</code></pre></div><pre><code class="language-txt:app_secret.properties" data-lang="txt:app_secret.properties">APP_COLOR: blue
+APP_MOD: prod
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:app-secret.yaml" data-lang="yaml:app-secret.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-secret</span>
+<span style="color:#f92672">data</span>:
+  <span style="color:#f92672">APP_COLOR</span>: <span style="color:#ae81ff">blue</span>
+  <span style="color:#f92672">APP_MOD</span>: <span style="color:#ae81ff">prod</span>
+</code></pre></div><p>ただし、マニフェストファイルに環境変数を記載する際は、 value 値を <code>base64</code> コマンドなどで Base64 化する必要がある。（デコードは <code>base64 --decode</code> ）<br>
+Pod のマニフェストからは以下のように参照する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">containers</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hoge</span>
+    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">hoge</span>
+    <span style="color:#f92672">envFrom</span>:
+    - <span style="color:#f92672">secretRef</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-secret</span>
 </code></pre></div><h2 ref="3-その他のリソース" >3. その他のリソース</h2><a class="anchor" id="3-その他のリソース"></a>
 <p>基本的なリソース以外に以下について記載する。</p>
 <ul>

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-25T18:10:47 JST">
+<meta name="revised" content="2021-06-28T23:13:04 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -964,7 +964,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/kubernetes/administration/">管理</a>
+          <a href="/kubernetes/administration/">クラスタ管理</a>
       
         
       
@@ -1156,6 +1156,7 @@ if (!doNotTrack) {
 <li>cAdvisor
 <ul>
 <li>各 Node 上にあるコンテナのCPU、メモリ、ファイル、ネットワーク使用量といった、リソースの使用量と性能の指標を監視・収集するエージェント</li>
+<li><code>kubelet</code> に同梱されている</li>
 </ul>
 </li>
 </ul>
@@ -1340,6 +1341,8 @@ Controller は自作可能であるが、デフォルトで以下のような Co
 </li>
 </ul>
 <p>上記のような複数のコンテナランタイムを利用できる背景には、 CRI ( <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md">Container Runtime Interface</a> ) や OCI ( <a href="https://opencontainers.org/">Open Container Initiative</a>) や CNI ( <a href="https://github.com/containernetworking/cni">Container Network Interface</a> ) などの標準化が進んでいることが挙げられる。</p>
+<p>また、 <code>kubelet</code> には <code>cAdvisor</code> が同梱されており、取得したメトリクスを <code>metrics-server</code> へ送信する。<br>
+<code>metrics-server</code> はオンメモリにしかその結果を収集しないので、高級的なモニタリングを行うには他のソリューションを利用する必要がある。</p>
 <h3 ref="kube-proxy--worker-nodes" >kube-proxy / Worker Nodes</h3><a class="anchor" id="kube-proxy--worker-nodes"></a>
 <p>k8s クラスタの各 Worker Node で動作するネットワークプロキシで、トラフィックのルーティングを担当する。<br>
 <code>kube-apiserver</code> をポーリングして設定変更を検知する。<br>
@@ -1373,6 +1376,12 @@ Controller は自作可能であるが、デフォルトで以下のような Co
 <p>k8s クラスタの名前解決/<strong>サービスディスカバリ</strong>を担当するクラスタ内の DNS サーバ。<br>
 <code>kube-apiserver</code> をポーリングして設定変更を検知する。<br>
 <code>kube-dns</code> の後継として <a href="https://kubernetes.io/ja/docs/tasks/administer-cluster/coredns/">CoreDNS</a> がある。</p>
+<h3 ref="metrics-server" >metrics-server</h3><a class="anchor" id="metrics-server"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
+$ cd kubernetes-metrics-server/
+$ kubectl apply -f .
+</code></pre></div><p>なお、 <code>metrics-server</code> をインストールすることによって、 <code>kubectl top node</code> や <code>kubectl top pod</code> コマンドなどでメトリクス情報を確認できるようになる。<br>
+<code>metrics-server</code> はオンメモリにのみメトリクス情報を保持するので、恒久的なモニタリングには他のソリューションが必要となる。</p>
 		</div>
 
 
