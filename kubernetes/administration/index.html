@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-28T23:13:04 JST">
+<meta name="revised" content="2021-06-29T22:43:55 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1168,6 +1168,431 @@ Kubernetes にインストールされているコンポーネントのバージ
 </li>
 </ul>
 <p>参考：<a href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/">Upgrading kubeadm clusters</a></p>
+<h2 ref="3-バックアップとリストア" >3. バックアップとリストア</h2><a class="anchor" id="3-バックアップとリストア"></a>
+<p>バックアップとリスト対象になるものは以下</p>
+<ul>
+<li>Resource Configuration
+<ul>
+<li>Github などで管理</li>
+<li>上記のように管理できていないものは <code>kubectl get all --all-namespaces -o yaml &gt; all-deploy-services.yaml</code> などで取得</li>
+</ul>
+</li>
+<li>etcd Cluster
+<ul>
+<li>etcd の起動オプションに <code>--data-dir</code> があり、Master Nodes の各ディレクトリをバックアップする</li>
+<li><code>ETCDCTL_API=3 etcdctl snapshot save snapshot.db</code> コマンドでバックアップ可能</li>
+<li><code>ETCDCTL_API=3 etcdctl snapshot status snapshot.db</code> コマンドで内容を確認できる</li>
+<li><code>service kube-apiserver stop</code> コマンドで <code>kube-apiserver</code> を停止させた後、 <code>ETCDCTL_API=3 etcdctl snapshot restore snapshot.db --data-dir=/var/lib/etcd-from-backup</code> でリストアする</li>
+<li>etcd の起動オプション <code>--data-dir</code> や Static Pod であればマニフェストの設定を確認した後、 <code>systemctl daemon-reload &amp;&amp; service etcd restart</code> で再起動する</li>
+<li>最後に <code>service kube-apiserver start</code> コマンドで <code>kube-apiserver</code> を起動</li>
+</ul>
+</li>
+<li>Persistent Volumes</li>
+</ul>
+<p>なお、  <code>etcdctl</code> コマンドを打ってもエラーが発生する場合は、下記のようにエンドポイントや証明書を指定すること。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ETCDCTL_API<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> etcdctl --endpoints<span style="color:#f92672">=</span>https://127.0.0.1:2379 --cacert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.crt --key<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.key snapshot save /opt/snapshot-pre-boot.db
+
+$ ETCDCTL_API<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> etcdctl --endpoints<span style="color:#f92672">=</span>https://127.0.0.1:2379 --cacert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.crt --key<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.key snapshot restore /opt/snapshot-pre-boot.db --data-dir<span style="color:#f92672">=</span>/var/lib/etcd-from-backup
+</code></pre></div><p>参考： <a href="https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster">Backing up an etcd cluster</a></p>
+<h2 ref="4-セキュリティ" >4. セキュリティ</h2><a class="anchor" id="4-セキュリティ"></a>
+<p><code>kube-apiserver</code> に <code>kubectl</code> でアクセスする際は以下のセキュリティ事項がある。</p>
+<ul>
+<li>誰がアクセスするのか -&gt; Authentication / 認証
+<ul>
+<li>以下のような方法がある
+<ul>
+<li>Username / Password</li>
+<li>Username / Token</li>
+<li>Certificates</li>
+<li>ID Providor や LDAP</li>
+<li>Service Accounts</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>何を実行するのか  -&gt; Authorization / 認可・承認
+<ul>
+<li>以下のような方法がある
+<ul>
+<li>RBAC Authorization ( Role Based Access Control)</li>
+<li>ABAC Authorization ( Attribute Based Access Control)</li>
+<li>Node Authorization</li>
+<li>Webhook Mode</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 ref="41-authentication--認証" >4.1. Authentication / 認証</h3><a class="anchor" id="41-authentication--認証"></a>
+<p><strong>Account</strong> には以下の 2 種類がある。</p>
+<ul>
+<li><strong>User</strong>
+<ul>
+<li>管理者、開発者</li>
+<li>Kubernetes は User を管理しない</li>
+</ul>
+</li>
+<li><strong>Service Accounts</strong>
+<ul>
+<li>Bots など</li>
+<li>Kubernetes は Service Accounts を管理する
+<ul>
+<li><code>kubectl create serviceaccount sa1</code></li>
+<li><code>kubectl get serviceacceount</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 ref="411-パスワードトークン認証" >4.1.1. パスワード・トークン認証</h4><a class="anchor" id="411-パスワードトークン認証"></a>
+<p><code>kube-apiserver</code> が 静的ファイルを用いてユーザ認証する方法は以下の通り。<br>
+まず、以下のファイルを準備する。</p>
+<pre><code class="language-csv:user-details.csv" data-lang="csv:user-details.csv"># Password,UserName,UserID
+password123,user1,u0001
+password123,user2,u0002
+password123,user3,u0003
+</code></pre><p>そして、上記のファイルを <code>kube-apiserver.service</code> の起動オプション <code>--basic-auth-file</code> に指定する。<br>
+また、以下のように 4 項目目にグループを指定することもできるし、パスワードではなくトークンでもいい。（トークンファイルの場合は <code>--token-auth-file</code> オプションで指定 ）</p>
+<pre><code class="language-csv:user-token-details.csv" data-lang="csv:user-token-details.csv"># Password,UserName,UserID,GroupID
+token123,user1,u0001,group1
+token123,user2,u0002,group1
+token123,user3,u0003,group2
+</code></pre><p>しかし、この方法は推奨されておらず、 Deprecated である。</p>
+<h4 ref="412-証明書認証" >4.1.2. 証明書認証</h4><a class="anchor" id="412-証明書認証"></a>
+<p>まずは、 SSL/TSL 証明書まわりの復習。</p>
+<ul>
+<li>SSL/TLS Certificates まわりの登場人物
+<ul>
+<li>秘密鍵： <code>openssl genrsa 1024 -out server.key</code> （ <code>.key</code> や <code>-key.pem</code> の形式が多い）</li>
+<li>公開鍵： <code>openssl rsa -in server.key -pubout &gt; server.pem</code> （ <code>.pem</code> や <code>.crt</code> の形式が多い）</li>
+<li>証明書署名要求(CSR / Certificate Signing Request)： <code>openssl req -new -key server.key &gt; server.csr</code> （ <code>.csr</code> の形式が多い）</li>
+<li>証明書： <code>openssl x509 -req -days 3650 -signkey server.key &lt; server.csr &gt; server.crt</code> （ <code>.crt</code> や <code>.pem</code> の形式が多い）</li>
+</ul>
+</li>
+<li>証明書の種類
+<ul>
+<li>サーバ証明書
+<ul>
+<li>サーバ側が提示する証明書、Webサイトの身分証</li>
+<li>サーバ証明書は 認証局/CA が管理する</li>
+<li>暗号化に必要な公開鍵が含まれる</li>
+</ul>
+</li>
+<li>クライアント証明書
+<ul>
+<li>クライアント側が提示する証明書、クライアントの身分証</li>
+</ul>
+</li>
+<li>ルート証明書
+<ul>
+<li>認証局/CA 自体の正当性をチェックする</li>
+<li>サーバ証明書の検証のために使用する証明書</li>
+</ul>
+</li>
+<li>自己証明証明書（オレオレ証明書）
+<ul>
+<li>正式な認証局ベンダーでなく、個人で構築した認証局などで発行したルート証明書</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>サーバ証明書
+<ul>
+<li>「SSL/TSL による通信の暗号化」と「サーバ証明書による本人確認」を実施できる</li>
+<li>鍵の送受信は以下のステップ
+<ul>
+<li>ユーザは「▲公開鍵」「▼秘密鍵」「■サーバ証明書」を作成して、「▲公開鍵」「■サーバ証明書」をサーバに送付</li>
+<li>サーバは「■サーバ証明書」を検証し、「●共通鍵」を生成して、「▲公開鍵」により暗号化した「●共通鍵」をユーザに送付</li>
+<li>ユーザは受け取った「●共通鍵」を「▼秘密鍵」で復号化</li>
+<li>以降、データの送受信を行う際は「●共通鍵」で暗号化・復号化を行う</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>上記の証明書は以下のように利用される。</p>
+<ul>
+<li><code>kube-apiserver</code> 、 <code>etcd</code> 、 <code>kubelet</code> はサーバ証明書を利用</li>
+<li><code>kube-apiserver</code> にアクセスする admin ユーザ、 <code>kube-scheduler</code> 、 <code>kube-controller-manager</code> 、 <code>kube-proxy</code> 、 <code>kubelet</code> はクライアント証明書を利用</li>
+<li><code>kubelet</code> 、 <code>etcd</code> にアクセスする <code>kube-apiserver</code> はクライアント証明書を利用</li>
+</ul>
+<h4 ref="鍵証明書の作成方法" >鍵・証明書の作成方法</h4><a class="anchor" id="鍵証明書の作成方法"></a>
+<p>上記の通り、サーバ・クライアント証明書が必要な訳だが、それらを管理する認証局/CA を Kubernetes クラスタに作成する必要がある。<br>
+まずは、 CA の準備をする。</p>
+<ul>
+<li>CA の秘密鍵の作成： <code>openssl genrsa 2048 -out ca.key</code></li>
+<li>CA の CSR の作成： <code>openssl req -new -key ca.key -subj &quot;/CN=KUBERNETES-CA&quot; -out ca.csr</code></li>
+<li>CA の ルート証明書の作成： <code>openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt</code>
+<ul>
+<li>CA 自身が署名する自己証明書となる</li>
+</ul>
+</li>
+</ul>
+<p>なお、 <code>etcd</code> には別途 CA が必要であるため注意が必要。<br>
+次に admin ユーザのクライアント証明書を作成する。</p>
+<ul>
+<li>admin ユーザの秘密鍵の作成： <code>openssl genrsa 2048 -out admin.key</code></li>
+<li>admin ユーザの CSR の作成： <code>openssl req -new -key admin.key -subj &quot;/CN=kube-admin/O=system:masters&quot; -out admin.csr</code>
+<ul>
+<li><code>system:masters</code> の権限で <code>kube-admin</code> アカウントの要求になる</li>
+</ul>
+</li>
+<li>admin ユーザのクライアント証明書の作成： <code>openssl x509 -req -in admin.csr -CA ca.crt -CAkey ca.key -out admin.crt</code>
+<ul>
+<li>CA に署名してもらう</li>
+</ul>
+</li>
+</ul>
+<p>上記の要領で他のクライアント証明書も作成する。<br>
+なお、以上で作成した鍵・証明書を用いて kube-admin が <code>kube-apiserver</code> にアクセスする際は以下のようになる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl https://kube-apiserver:6443/api/v1/pods <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --key admin.key <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --cert admin.crt <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --cacert ca.crt
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:kube-config.yaml" data-lang="yaml:kube-config.yaml"><span style="color:#75715e"># kubectl を使う場合の kube-config.yaml の設定例</span>
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">clusters</span>:
+- <span style="color:#f92672">cluster</span>:
+    <span style="color:#f92672">certificate-authority</span>: <span style="color:#ae81ff">ca.crt</span>
+    <span style="color:#f92672">server</span>: <span style="color:#ae81ff">https://kube-apiserver:6443</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubernetes</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Config</span>
+<span style="color:#f92672">users</span>:
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubernetes-admin</span>
+  <span style="color:#f92672">user</span>: 
+    <span style="color:#f92672">client-certificate</span>: <span style="color:#ae81ff">admin.crt</span>
+    <span style="color:#f92672">client-key</span>: <span style="color:#ae81ff">admin.key</span>
+</code></pre></div><p>次に <code>kube-apiserver</code> のサーバ証明書を作成する。<br>
+（あまり知られていないが <code>kube-apiserver</code> のホスト名は <code>kubernetes</code>）<br>
+（つまり、 <code>kubernetes</code> 、 <code>kubernetes.default</code> 、 <code>kubernetes.defalt.svc.cluster.local</code> のような感じで扱われる）</p>
+<ul>
+<li><code>kube-apiserver</code> の秘密鍵の作成： <code>openssl genrsa 2048 -out apiserver.key</code></li>
+<li><code>kube-apiserver</code> の CSR の作成： <code>openssl req -new -key apiserver.key -subj &quot;/CN=kube-apiserver&quot; -out apiserver.csr</code></li>
+<li><code>kube-apiserver</code> の サーバ証明書の作成： <code>openssl x509 -req -in apiserver.csr -CA ca.crt -CAkey ca.key -out apiserver.crt</code>
+<ul>
+<li>CA に署名してもらう</li>
+</ul>
+</li>
+</ul>
+<p>なお、<code>kube-apiserver</code> でサーバ証明書を作成する際は <code>openssl.cnf</code> ファイルで以下のように設定しておく必要がある。（ <code>alt_names</code> に注目 ）</p>
+<pre><code class="language-txt:openssl.cnf" data-lang="txt:openssl.cnf">[req]
+req_extensions = v3_req
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation,
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = kubernetes
+DNS.2 = kubernetes.default
+DNS.3 = kubernetes.default.svc
+DNS.4 = kubernetes.default.svc.cluster.local
+IP.1 = 10.96.0.1   # GlobalIP
+IP.2 = 172.17.0.87 # PriveteIP
+</code></pre><p>以上のように作成した鍵・証明書を <code>apiserver.service</code> の起動オプションに付与する必要がある。<br>
+他のサーバ証明書も同じ要領で作る。</p>
+<h4 ref="鍵証明書情報の確認方法" >鍵・証明書情報の確認方法</h4><a class="anchor" id="鍵証明書情報の確認方法"></a>
+<p>上記のような鍵・証明書を含めた Master/Worker Nodes の構築をスクラッチで行うのは所謂 <strong>The Hard Way</strong> 。<br>
+ここでは、 <code>kubeadm</code> を用いて作成した場合の鍵・証明書情報の確認方法について見てみる。</p>
+<ul>
+<li><code>etc/kubernetes/manifests/</code> 配下に Static Pod として作成されたコンポーネントのマニフェストがある
+<ul>
+<li>kube-apiserver.yaml 、など</li>
+<li>上記の yaml ファイルを確認すれば <code>spec.containers.command</code> に起動コマンドのオプションがあるので、そこで鍵・証明書のパスを確認できる</li>
+</ul>
+</li>
+<li><code>openssl x509 -in /etc/kubernetes/pki/apiserver.crt -txt -noout</code> コマンドで中身が確認できる</li>
+<li>以下に各コンポーネントの鍵・証明書の配置や発行者などを一覧化した Excel がある
+<ul>
+<li><a href="https://github.com/mmumshad/kubernetes-the-hard-way/tree/master/tools">https://github.com/mmumshad/kubernetes-the-hard-way/tree/master/tools</a></li>
+</ul>
+</li>
+</ul>
+<h4 ref="certificate-api" >Certificate API</h4><a class="anchor" id="certificate-api"></a>
+<p>jane というユーザが新規に admin ユーザになる場合を想定する。</p>
+<ul>
+<li>jane の秘密鍵を作成する： <code>openssl genrsa 2048 -out jane.key</code></li>
+<li>jane の CSR を作成する： <code>openssl req -new -key jane.key -subj &quot;/CN=jane&quot; -out jane.csr</code></li>
+<li>jane の CertificateSigningRequest を作成する： <code>kubectl apply -f jane-csr.yaml</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:jane-csr.yaml" data-lang="yaml:jane-csr.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">certificates.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">CertificateSigningRequest</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">jane</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">signerName</span>: <span style="color:#ae81ff">kubernetes.io/kube-apiserver-client</span>
+  <span style="color:#f92672">groups</span>:
+  - <span style="color:#ae81ff">system:authenticated</span>
+  <span style="color:#f92672">usages</span>:
+  - <span style="color:#ae81ff">digital signature</span>
+  - <span style="color:#ae81ff">key encipherment</span>
+  - <span style="color:#ae81ff">server auth</span>
+  <span style="color:#f92672">request</span>: [ <span style="color:#ae81ff">cat jane.csr | base64 の結果 ]</span>
+</code></pre></div><p>参考： <a href="https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#kubernetes-signers">Kubernetes signers</a></p>
+<ul>
+<li><code>kubectl get csr</code>
+<ul>
+<li>Pendding の jane を確認</li>
+</ul>
+</li>
+<li><code>kubectl certificate approve jane</code> ：承認
+<ul>
+<li>ちなみに <code>kubectl certificate deny jane</code> で却下できる</li>
+</ul>
+</li>
+<li><code>kubectl get csr jane -o yaml</code> ：クライアント証明書の取得</li>
+<li>クライアント証明書は Base64 になっているので <code>echo &lt;cert_base64&gt; | base64 --decode</code> でデコード</li>
+</ul>
+<p>なお、上記の Certificate API は <code>kube-controller-manager</code> によって管理されているので、<code>kube-controller-manager</code> の起動オプション <code>--cluster-signing-cert-file</code> および <code>--cluster-signing-key-file</code> にそれぞれ CA のルート証明書と秘密鍵を設定しておく必要がある。</p>
+<h2 ref="42-kubeconfig" >4.2. KubeConfig</h2><a class="anchor" id="42-kubeconfig"></a>
+<p>デフォルトでは <code>$HOME/.kube/config</code> にある。<br>
+内容は大きく <code>clusters</code> 、 <code>users</code> 、 <code>contexts</code> の 3 領域ある。</p>
+<ul>
+<li><code>clusters</code> ：アクセス先のクラスタ情報
+<ul>
+<li>エンドポイントなどの情報はここ</li>
+</ul>
+</li>
+<li><code>users</code> ：アクセス先クラスタのユーザ情報
+<ul>
+<li>鍵・証明書などの情報はここ</li>
+</ul>
+</li>
+<li><code>contexts</code> ： <code>clusters</code> と <code>users</code> の組合せ</li>
+</ul>
+<pre><code class="language-yaml:config" data-lang="yaml:config">apiVersion: v1
+kind: Config
+current-context: ...
+
+clusters:
+- name: my-kube-playgroud # ▲
+  cluster:
+    certificate-authority: /path/to/ca.crt # certificate-authority-data: でベタ貼りもおk
+    server: https://my-kube-playgroud:6443
+users:
+- name: my-kube-admin # ●
+  user:
+    client-certificate: /path/to/admin.crt
+    client-key: /path/to/admin.key
+
+- name: my-kube-admin@my-kube-playground
+  context:
+    cluster: my-kube-playgroud # ▲
+    user: my-kube-admin        # ●
+    namespace: ...
+</code></pre><ul>
+<li><code>kubectl config view</code> コマンドで KubeConfig 情報を閲覧できる</li>
+<li><code>kubectl config user-context &lt;context&gt;</code> で current-context の変更</li>
+</ul>
+<h2 ref="rbac" >RBAC</h2><a class="anchor" id="rbac"></a>
+<h3 ref="role-と-rolebinding" >Role と RoleBinding</h3><a class="anchor" id="role-と-rolebinding"></a>
+<p>以下のマニフェストで <code>Role</code> を作成できる。（ <code>kubectl apply -f developer-role.yaml</code> ）</p>
+<pre><code class="language-yaml:" data-lang="yaml:">apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer
+  namespace: default
+rules:
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;pods&quot;]
+  verbs: [&quot;list&quot;, &quot;get&quot;, &quot;create&quot;, &quot;update&quot;, &quot;delete&quot;]
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;ConfigMap&quot;]
+  verbs: [&quot;create&quot;]
+</code></pre><p><code>Role</code> は <code>namespace</code> 毎に有効となる。<br>
+次に上記で作成した <code>Role</code> を <code>User</code> に紐づけるための <code>RoleBinding</code> を作成する。（ <code>kubectl apply -f devuser-developer-binding.yaml</code> ）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:devuser-developer-binding.yaml" data-lang="yaml:devuser-developer-binding.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">RoleBinding</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">devuser-developer-binding</span>
+<span style="color:#f92672">subjects</span>:
+- <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">User</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">dev-user</span>
+  <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
+<span style="color:#f92672">roleRef</span>:
+  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">developer</span>
+  <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
+</code></pre></div><p>以上で <code>Role</code> および <code>RoleBinding</code> は作成できる。<br>
+なお、繰り返しになるが、 <code>Role</code> は <code>namespace</code> 毎に有効となるため、 <code>pods</code> や <code>services</code> などの <code>namespace</code> を指定して作成するオブジェクトが対象となる。<br>
+これらは以下のコマンドで確認する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Role の確認</span>
+$ kubectl get roles
+$ kubectl describe role developer
+
+<span style="color:#75715e"># RoleBinding の確認</span>
+$ kubectl get rolebindings
+$ kubectl describe rolebinding devuser-developer-binding
+</code></pre></div><p>なお、各ユーザは自分の権限を以下のコマンドで確認できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl auth can-i create deployments
+yes
+ 
+$ kubectl auth can-i delete nodes
+no
+ 
+$ kubectl auth can-i create deployments --as dev-user
+no
+ 
+$ kubectl auth can-i create pods --as dev-user
+yes
+ 
+$ kubectl auth can-i create pods --as dev-user --namespace test
+no
+</code></pre></div><p>なお、 <code>kubectl api-resources</code> コマンドを利用するとリソースの一覧が取得できる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl api-resources
+NAME                              SHORTNAMES   APIVERSION                             NAMESPACED   KIND
+bindings                                       v1                                     true         Binding
+componentstatuses                 cs           v1                                     false        ComponentStatus
+configmaps                        cm           v1                                     true         ConfigMap
+endpoints                         ep           v1                                     true         Endpoints
+events                            ev           v1                                     true         Event
+limitranges                       limits       v1                                     true         LimitRange
+namespaces                        ns           v1                                     false        Namespace
+（省略）
+</code></pre></div><h3 ref="clusterrole-と-clusterrolebinding" >ClusterRole と ClusterRoleBinding</h3><a class="anchor" id="clusterrole-と-clusterrolebinding"></a>
+<p><code>namespace</code> 毎に作成するオブジェクトに対して指定する <code>Role</code> に対して、 <code>ClusterRole</code> はクラスタ横断（ <code>namespace</code> 横断）のオブジェクトに対して指定する。<br>
+<code>nodes</code> や <code>PV</code> などである。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:cluster-admin-role.yaml" data-lang="yaml:cluster-admin-role.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterRole</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cluster-administrator</span>
+<span style="color:#f92672">rules</span>:
+- <span style="color:#f92672">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>]
+  <span style="color:#f92672">resources</span>: [<span style="color:#e6db74">&#34;nodes&#34;</span>]
+  <span style="color:#f92672">verbs</span>: [<span style="color:#e6db74">&#34;list&#34;</span>, <span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;create&#34;</span>, <span style="color:#e6db74">&#34;delete&#34;</span>]
+</code></pre></div><p>次に上記で作成した <code>ClusterRole</code> を <code>User</code> に紐づけるための <code>ClusterRoleBinding</code> を作成する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:cluster-admin-role-binding.yaml" data-lang="yaml:cluster-admin-role-binding.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterRoleBinding</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cluster-admin-role-binding</span>
+<span style="color:#f92672">subjects</span>:
+- <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">User</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cluster-admin</span>
+  <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
+<span style="color:#f92672">roleRef</span>:
+  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterRole</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cluster-administrator</span>
+  <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
+</code></pre></div><h2 ref="image-security" >Image Security</h2><a class="anchor" id="image-security"></a>
+<p>普段マニフェストに記載している <code>image: nginx</code> は省略系で、フルで記載すると <code>image: docker.io/nginx/nginx</code> となる。（なお、 <code>docker.io</code> は Docker Hub の URL）<br>
+フォーマットとは <code>image: &lt;Registry&gt;/&lt;User Account&gt;/&lt;Image Repository&gt;</code> で <code>nginx</code> は <code>&lt;Image Repository&gt;</code> のみ記載している。<br>
+Private Registory を利用する場合、認証が必要になるが、その際はどうするのか？<br>
+以下の通り <code>Secret</code> を利用することになる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Private Registory 認証用の Secret 作成</span>
+$ kubectl create secret docker-registry regcred <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --docker-server<span style="color:#f92672">=</span>private-registry.io <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --docker-username<span style="color:#f92672">=</span>registry-user <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --docker-password<span style="color:#f92672">=</span>registry-password <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --docker-email<span style="color:#f92672">=</span>registry-user@org.com
+</code></pre></div><p>上記の Secret を Pod のマニフェストの <code>spec.imagePullSecrets</code> に指定する。</p>
+<h2 ref="security-context" >Security Context</h2><a class="anchor" id="security-context"></a>
+<p>Pod マニフェストの <code>securityContext</code> 項目を設定することにより、コンテナで実行されるプロセスの実行ユーザなどを指定することができる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">securityContext</span>:
+  <span style="color:#f92672">runAsUser</span>: <span style="color:#ae81ff">1000</span>
+  <span style="color:#f92672">runAsGroup</span>: <span style="color:#ae81ff">3000</span>
+  <span style="color:#f92672">fsGroup</span>: <span style="color:#ae81ff">2000</span>
+  <span style="color:#f92672">fsGroupChangePolicy</span>: <span style="color:#e6db74">&#34;OnRootMismatch&#34;</span>
+</code></pre></div><p>なお、ユーザを指定しない場合は <code>root</code> ユーザとなる。</p>
+<h2 ref="network-policy" >Network Policy</h2><a class="anchor" id="network-policy"></a>
 		</div>
 
 

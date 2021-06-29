@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-28T23:13:04 JST">
+<meta name="revised" content="2021-06-29T22:43:55 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1220,17 +1220,29 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 ref="2-マニフェストの理解" >2. マニフェストの理解</h2><a class="anchor" id="2-マニフェストの理解"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:sample-pod.yml" data-lang="yaml:sample-pod.yml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample-pod</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
-      <span style="color:#f92672">imege</span>: <span style="color:#ae81ff">nginx:1.7.9</span>
-      <span style="color:#f92672">ports</span>:
-        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+<p>なお、マニフェストの項目についてコマンドで調べたい場合は <code>kubectl explain</code> コマンドを利用するとよい。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pod マニフェストの概要</span>
+$ kubectl explain pods
+
+<span style="color:#75715e"># Pod マニフェストの詳細（いっぱい出過ぎる）</span>
+$ kubectl explain pods --recursive
+
+<span style="color:#75715e"># grep で絞るとよい（ -A 3 はヒット行から 3 行取得の意）</span>
+$ kubectl explain pods --recursive | grep image -A <span style="color:#ae81ff">3</span>
+
+<span style="color:#75715e">## 2. マニフェストの理解</span>
+
+<span style="color:#e6db74">```</span> yaml:sample-pod.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-pod
+spec:
+  containers:
+    - name: nginx
+      imege: nginx:1.7.9
+      ports:
+        - containerPort: <span style="color:#ae81ff">80</span>
 </code></pre></div><p>全てのマニフェストには以下の項目が含まれる。</p>
 <ul>
 <li>apiVersion
