@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-06-29T22:43:55 JST">
+<meta name="revised" content="2021-06-30T20:33:05 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1316,7 +1316,7 @@ token123,user3,u0003,group2
 <li><code>kube-apiserver</code> にアクセスする admin ユーザ、 <code>kube-scheduler</code> 、 <code>kube-controller-manager</code> 、 <code>kube-proxy</code> 、 <code>kubelet</code> はクライアント証明書を利用</li>
 <li><code>kubelet</code> 、 <code>etcd</code> にアクセスする <code>kube-apiserver</code> はクライアント証明書を利用</li>
 </ul>
-<h4 ref="鍵証明書の作成方法" >鍵・証明書の作成方法</h4><a class="anchor" id="鍵証明書の作成方法"></a>
+<h4 ref="413-鍵証明書の作成方法" >4.1.3. 鍵・証明書の作成方法</h4><a class="anchor" id="413-鍵証明書の作成方法"></a>
 <p>上記の通り、サーバ・クライアント証明書が必要な訳だが、それらを管理する認証局/CA を Kubernetes クラスタに作成する必要がある。<br>
 まずは、 CA の準備をする。</p>
 <ul>
@@ -1390,7 +1390,7 @@ IP.1 = 10.96.0.1   # GlobalIP
 IP.2 = 172.17.0.87 # PriveteIP
 </code></pre><p>以上のように作成した鍵・証明書を <code>apiserver.service</code> の起動オプションに付与する必要がある。<br>
 他のサーバ証明書も同じ要領で作る。</p>
-<h4 ref="鍵証明書情報の確認方法" >鍵・証明書情報の確認方法</h4><a class="anchor" id="鍵証明書情報の確認方法"></a>
+<h4 ref="414-鍵証明書情報の確認方法" >4.1.4. 鍵・証明書情報の確認方法</h4><a class="anchor" id="414-鍵証明書情報の確認方法"></a>
 <p>上記のような鍵・証明書を含めた Master/Worker Nodes の構築をスクラッチで行うのは所謂 <strong>The Hard Way</strong> 。<br>
 ここでは、 <code>kubeadm</code> を用いて作成した場合の鍵・証明書情報の確認方法について見てみる。</p>
 <ul>
@@ -1407,7 +1407,7 @@ IP.2 = 172.17.0.87 # PriveteIP
 </ul>
 </li>
 </ul>
-<h4 ref="certificate-api" >Certificate API</h4><a class="anchor" id="certificate-api"></a>
+<h4 ref="415-certificate-api" >4.1.5. Certificate API</h4><a class="anchor" id="415-certificate-api"></a>
 <p>jane というユーザが新規に admin ユーザになる場合を想定する。</p>
 <ul>
 <li>jane の秘密鍵を作成する： <code>openssl genrsa 2048 -out jane.key</code></li>
@@ -1443,7 +1443,7 @@ IP.2 = 172.17.0.87 # PriveteIP
 <li>クライアント証明書は Base64 になっているので <code>echo &lt;cert_base64&gt; | base64 --decode</code> でデコード</li>
 </ul>
 <p>なお、上記の Certificate API は <code>kube-controller-manager</code> によって管理されているので、<code>kube-controller-manager</code> の起動オプション <code>--cluster-signing-cert-file</code> および <code>--cluster-signing-key-file</code> にそれぞれ CA のルート証明書と秘密鍵を設定しておく必要がある。</p>
-<h2 ref="42-kubeconfig" >4.2. KubeConfig</h2><a class="anchor" id="42-kubeconfig"></a>
+<h3 ref="42-kubeconfig" >4.2. KubeConfig</h3><a class="anchor" id="42-kubeconfig"></a>
 <p>デフォルトでは <code>$HOME/.kube/config</code> にある。<br>
 内容は大きく <code>clusters</code> 、 <code>users</code> 、 <code>contexts</code> の 3 領域ある。</p>
 <ul>
@@ -1483,8 +1483,8 @@ users:
 <li><code>kubectl config view</code> コマンドで KubeConfig 情報を閲覧できる</li>
 <li><code>kubectl config user-context &lt;context&gt;</code> で current-context の変更</li>
 </ul>
-<h2 ref="rbac" >RBAC</h2><a class="anchor" id="rbac"></a>
-<h3 ref="role-と-rolebinding" >Role と RoleBinding</h3><a class="anchor" id="role-と-rolebinding"></a>
+<h3 ref="43-rbac" >4.3. RBAC</h3><a class="anchor" id="43-rbac"></a>
+<h4 ref="431-role-と-rolebinding" >4.3.1. Role と RoleBinding</h4><a class="anchor" id="431-role-と-rolebinding"></a>
 <p>以下のマニフェストで <code>Role</code> を作成できる。（ <code>kubectl apply -f developer-role.yaml</code> ）</p>
 <pre><code class="language-yaml:" data-lang="yaml:">apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -1548,7 +1548,7 @@ events                            ev           v1                               
 limitranges                       limits       v1                                     true         LimitRange
 namespaces                        ns           v1                                     false        Namespace
 （省略）
-</code></pre></div><h3 ref="clusterrole-と-clusterrolebinding" >ClusterRole と ClusterRoleBinding</h3><a class="anchor" id="clusterrole-と-clusterrolebinding"></a>
+</code></pre></div><h4 ref="432-clusterrole-と-clusterrolebinding" >4.3.2. ClusterRole と ClusterRoleBinding</h4><a class="anchor" id="432-clusterrole-と-clusterrolebinding"></a>
 <p><code>namespace</code> 毎に作成するオブジェクトに対して指定する <code>Role</code> に対して、 <code>ClusterRole</code> はクラスタ横断（ <code>namespace</code> 横断）のオブジェクトに対して指定する。<br>
 <code>nodes</code> や <code>PV</code> などである。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:cluster-admin-role.yaml" data-lang="yaml:cluster-admin-role.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
@@ -1572,7 +1572,7 @@ namespaces                        ns           v1                               
   <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterRole</span>
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cluster-administrator</span>
   <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
-</code></pre></div><h2 ref="image-security" >Image Security</h2><a class="anchor" id="image-security"></a>
+</code></pre></div><h3 ref="44-image-security" >4.4. Image Security</h3><a class="anchor" id="44-image-security"></a>
 <p>普段マニフェストに記載している <code>image: nginx</code> は省略系で、フルで記載すると <code>image: docker.io/nginx/nginx</code> となる。（なお、 <code>docker.io</code> は Docker Hub の URL）<br>
 フォーマットとは <code>image: &lt;Registry&gt;/&lt;User Account&gt;/&lt;Image Repository&gt;</code> で <code>nginx</code> は <code>&lt;Image Repository&gt;</code> のみ記載している。<br>
 Private Registory を利用する場合、認証が必要になるが、その際はどうするのか？<br>
@@ -1584,7 +1584,7 @@ $ kubectl create secret docker-registry regcred <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --docker-password<span style="color:#f92672">=</span>registry-password <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --docker-email<span style="color:#f92672">=</span>registry-user@org.com
 </code></pre></div><p>上記の Secret を Pod のマニフェストの <code>spec.imagePullSecrets</code> に指定する。</p>
-<h2 ref="security-context" >Security Context</h2><a class="anchor" id="security-context"></a>
+<h3 ref="45-security-context" >4.5. Security Context</h3><a class="anchor" id="45-security-context"></a>
 <p>Pod マニフェストの <code>securityContext</code> 項目を設定することにより、コンテナで実行されるプロセスの実行ユーザなどを指定することができる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">securityContext</span>:
   <span style="color:#f92672">runAsUser</span>: <span style="color:#ae81ff">1000</span>
@@ -1592,7 +1592,222 @@ $ kubectl create secret docker-registry regcred <span style="color:#ae81ff">\
   <span style="color:#f92672">fsGroup</span>: <span style="color:#ae81ff">2000</span>
   <span style="color:#f92672">fsGroupChangePolicy</span>: <span style="color:#e6db74">&#34;OnRootMismatch&#34;</span>
 </code></pre></div><p>なお、ユーザを指定しない場合は <code>root</code> ユーザとなる。</p>
-<h2 ref="network-policy" >Network Policy</h2><a class="anchor" id="network-policy"></a>
+<h3 ref="46-network-policy" >4.6. Network Policy</h3><a class="anchor" id="46-network-policy"></a>
+<p>NetworkPolicy を適用すれば、 Pod に対して Inress / Egress のトラフィックを制限することができる。<br>
+なお、 NetworkPolicy を適用しない場合、全てのトラフィックが許可される。</p>
+<ul>
+<li>Ingress
+<ul>
+<li>自分から見て、リクエストを送信するトラフィック</li>
+<li>Egress に対するレスポンスは Ingress でないことに注意</li>
+</ul>
+</li>
+<li>Egress
+<ul>
+<li>自分から見て、リクエストを送信するトラフィック</li>
+<li>Ingress に対するレスポンスは Egress でないことに注意</li>
+</ul>
+</li>
+</ul>
+<p>例えば、以下の NetworkPolicy は Port 3306 の DB サーバに対して、 api-server からのトラフィックを許可し、その他は遮断するポリシー。<br>
+（バックアップ用に DB から cidr:192.168.5.10/32 帯にある Port 80 にアクセスできるようにしている。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">NetworkPolicy</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">db-policy</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">podSelector</span>:     <span style="color:#75715e"># policy を適用する Pod の選択</span>
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">role</span>: <span style="color:#ae81ff">db</span>
+  <span style="color:#f92672">policyTypes</span>:
+  - <span style="color:#ae81ff">Ingress</span>
+  - <span style="color:#ae81ff">Egress</span>
+  <span style="color:#f92672">ingress</span>:
+  - <span style="color:#f92672">from</span>:
+    - <span style="color:#f92672">podSelector</span>: <span style="color:#75715e"># Ingress を許可する Pod の選択</span>
+        <span style="color:#f92672">matchLabels</span>:
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">api-pod</span>
+      <span style="color:#f92672">namespaceSelector</span>: <span style="color:#75715e"># 「-」を見れば分かるがこのルールは上記の PodSelector と and 条件</span>
+        <span style="color:#f92672">matchLabels</span>:
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">prod</span>
+    - <span style="color:#f92672">ipBlock</span>: <span style="color:#75715e"># これは or 条件</span>
+        <span style="color:#f92672">cidr</span>: <span style="color:#ae81ff">192.168.5.10</span><span style="color:#ae81ff">/32</span>
+    <span style="color:#f92672">ports</span>:          <span style="color:#75715e"># Ingress を許可する Port</span>
+    - <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
+      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">3306</span>
+  <span style="color:#f92672">egress</span>:
+  - <span style="color:#f92672">to</span>:
+    - <span style="color:#f92672">ipBlock</span>:
+        <span style="color:#f92672">cidr</span>: <span style="color:#ae81ff">192.168.5.10</span><span style="color:#ae81ff">/32</span>
+    <span style="color:#f92672">ports</span>:
+    - <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
+      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+</code></pre></div><p>ネットワークソリューションによっては NetworkPolicy をサポートしていないものがあるので注意。（例えば、 Flannel ）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get networkpolicies
+</code></pre></div><h2 ref="5-storage" >5. Storage</h2><a class="anchor" id="5-storage"></a>
+<p>Docker の場合、以下のコマンドを実行することによってコンテナ内にホストのディレクトリをマウントできる。</p>
+<pre><code>$ docker run mysql -v data_volume:/var/lib/mysql
+</code></pre><ul>
+<li>ホストコンピュータの Docker インストールディレクトリに <code>volumes</code> というディレクトリがある</li>
+<li><code>volumes</code> ディレクトリ内に <code>data_volume</code> というディレクトリが作成され、コンテナに関係なく永続化される</li>
+<li>ホストの <code>data_volume</code> ディレクトリが、 コンテナの <code>/var/lib/mysql</code> ディレクトリにマウントされる</li>
+</ul>
+<p>といった動きになる。</p>
+<pre><code>$ docker run mysql -v /data/mysql:/var/lib/mysql
+</code></pre><ul>
+<li>上記のように実行した場合は、ホストの <code>/data/mysql</code> ディレクトリが、コンテナの <code>/var/lib/mysql</code> ディレクトリにマウントされる</li>
+</ul>
+<p>つまり、 <strong>ホストのとあるディレクトリを Volume と定義して、それをコンテナにマウントする</strong> のが Volume の仕組みだ。<br>
+厳密にいうと、前者の例（ <code>data_volume</code> ）のように Volume を定義してマウントする方法を <strong>ボリュームマウンティング</strong> 、後者の例（ <code>/data/mysql</code> ）のようにディレクトリを直接マウントする方法を <strong>バインドマウンティング</strong> という。<br>
+厳密なコマンドに直すと以下のようになる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># バインドマウンティング</span>
+$ docker run mysql --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span>/data/mysql,target<span style="color:#f92672">=</span>/var/lib/mysql
+</code></pre></div><p>以上のような Docker の volume 操作は Storage Drivers で実現される。<br>
+Storage Driver は Docker プロセスがイメージやコンテナに加えられた変更を差分形式で保持する方式で、上記で 「ディレクトリをマウント」と表現してきたが厳密にはそうではない。<br>
+一方 Volume Drivers というものがあり、これは Docker プロセスを経由せずとも、直接コンテナからホストのディレクトリをマウントできる仕組みだ。</p>
+<ul>
+<li>Storage Drivers
+<ul>
+<li>AUFS, ZFS, BTRFS, Device Mapper, Overlay, Overlay2 など</li>
+</ul>
+</li>
+<li>Volume Drivers ( Volume Plugin )
+<ul>
+<li>Local, Azure File Storage, Convoy, DigitalOcean Block Storage, Flocker, gce-docker, GlusterFS, NetApp, RexRay, Portworx, VMware vSphere Storage など</li>
+</ul>
+</li>
+</ul>
+<p>Docker で Volume Drivers を利用する方法は以下のようになる。</p>
+<pre><code>$ docker run mysql -it \
+    --name mysql \
+    --volume-driver rexray/ebs |
+    --mount src=ebs-vol,target=/var/lib/mysql
+</code></pre><p>Kubernetes からは CSI (Container Storage Interface) 準拠した形で上記の機能が呼び出されることになる。</p>
+<h3 ref="51-volumes" >5.1. Volumes</h3><a class="anchor" id="51-volumes"></a>
+<p>Volume は Pod の <code>spec.volumes</code> で定義し、 <code>spec.containers.volumeMouts</code> で Pod にマウントする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">random-number-generator</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">containers</span>:
+  - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">alpine</span>
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">alpine</span>
+    <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>,<span style="color:#e6db74">&#34;-c&#34;</span>]
+    <span style="color:#f92672">args</span>: [<span style="color:#e6db74">&#34;shuf -i 0-100 -n 1 &gt;&gt; /opt/number.out;&#34;</span>]
+    <span style="color:#f92672">volumeMounts</span>:
+    - <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/opt</span>
+      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data-volume</span>
+  <span style="color:#f92672">volumes</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data-volume</span>
+    <span style="color:#f92672">hostPath</span>:
+      <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/data</span>
+      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">Directory</span>
+</code></pre></div><p>上記の <code>type: Directory</code> の Volume の場合、 Pod がスケジューリングされた Node の <code>/data</code> をマウントする訳だが、同じ ReplicaSet の Pod が同じ Node へスケジューリングされる補償はない。<br>
+例えば、下記のように AWS S3 を Volume として定義して利用することもできる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">volumes</span>:
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data-volume</span>
+  <span style="color:#f92672">awsElasticBlockStore</span>:
+  <span style="color:#f92672">hostPath</span>:
+    <span style="color:#f92672">volumeID: &lt;volume-id&gt; path</span>: <span style="color:#ae81ff">/data</span>
+    <span style="color:#f92672">fsType</span>: <span style="color:#ae81ff">ext4</span>
+</code></pre></div><h3 ref="52-persistent-volumes" >5.2. Persistent Volumes</h3><a class="anchor" id="52-persistent-volumes"></a>
+<p>先の Volume では、 Pod マニフェストの <code>spec.volumes</code> に定義するため、 Pod 毎にいちいち設定しなければならない。<br>
+Volume の一元管理が可能となるオブジェクトとして <strong>PersistentVolume</strong> がある。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolume</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">pv-vol1</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">accessModes</span>:
+  - <span style="color:#ae81ff">ReadWriteOnce</span>
+  <span style="color:#f92672">capacity</span>:
+    <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">1Gi</span>
+  <span style="color:#f92672">awsElasticBlockStore</span>:
+    <span style="color:#f92672">volumeID</span>: <span style="color:#ae81ff">&lt;volume-id&gt;</span>
+    <span style="color:#f92672">fsType</span>: <span style="color:#ae81ff">ext4</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create –f pv-definition.yaml
+$ kubectl get persistentvolume
+</code></pre></div><h3 ref="53-persistent-volume-claims" >5.3. Persistent Volume Claims</h3><a class="anchor" id="53-persistent-volume-claims"></a>
+<p>Claim は「請求」の意。<br>
+<strong>PersistentVolumeClaim</strong> を利用すれば、 Kubernetes 上に作成された PersistentVolume の中から条件に合うものを「請求」して取得することができる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolumeClaim</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">myclaim</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">accessModes</span>:
+  - <span style="color:#ae81ff">ReadWriteOnce</span>
+  <span style="color:#f92672">resources</span>:
+    <span style="color:#f92672">requests</span>:
+      <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">500Mi</span>
+</code></pre></div><p>例えば、ある PVC を apply して様子を見てみる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get pv,pvc
+NAME                      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                   STORAGECLASS   REASON   AGE
+persistentvolume/pv0001   1Gi        RWO            Delete           Bound    default/pv-slow-claim   slow                    6m24s
+
+NAME                                  STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/pv-slow-claim   Bound    pv0001   1Gi        RWO            slow           42s
+</code></pre></div><p>PVC の条件に合う PV である pv0001 が選ばれ、 PVC の VOLUME 項目に pv0001 が割り当てられているのが分かる。<br>
+この PVC を利用して Pod から PV を「請求」するのは以下の通り。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">pvc-slow-test</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">containers</span>:
+  - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">alpine</span>
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">alpine</span>
+    <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;tail&#34;</span>, <span style="color:#e6db74">&#34;-f&#34;</span>, <span style="color:#e6db74">&#34;/dev/null&#34;</span>]
+    <span style="color:#f92672">volumeMounts</span>:
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">claim-volume</span>
+      <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/data</span>
+  <span style="color:#f92672">volumes</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">claim-volume</span>
+    <span style="color:#f92672">persistentVolumeClaim</span>: <span style="color:#75715e"># ここで「請求」してる</span>
+      <span style="color:#f92672">claimName</span>: <span style="color:#ae81ff">pv-slow-claim</span>
+</code></pre></div><p>マニフェストだけ見ても PVC だけなので、どの PV が割り当てられるか分からない。<br>
+上記のマニフェストを apply した後、 describe コマンドなどで確認するしかない。<br>
+つまり、 <strong>PV は静的</strong> なのに対して、 <strong>PVC は動的</strong> な Volume 取得方法となる。</p>
+<h3 ref="54-storage-class" >5.4. Storage Class</h3><a class="anchor" id="54-storage-class"></a>
+<p>PV は静的なオブジェクトなので、例えば、 GCP などのクラウドのストレージをプロビジョンする必要がある場合はその実行を別途行わなければならない。<br>
+<strong>StorageClass</strong> はクラウドなどプロビジョニングを要するストレージを動的に確保してくれる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:sc-definition.yaml" data-lang="yaml:sc-definition.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">storage.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">StorageClass</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">google-storage</span>
+<span style="color:#f92672">provisioner</span>: <span style="color:#ae81ff">kubernetes.io/gce-pd</span> <span style="color:#75715e"># これを指定する必要あり</span>
+</code></pre></div><p>上記の StorageClass を利用して、 PVC を作成する場合は <code>storageClassName</code> 項目で作成した StorageClass を指定する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:pvc-definition.yaml" data-lang="yaml:pvc-definition.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolumeClaim</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">myclaim</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">accessModes</span>:
+  - <span style="color:#ae81ff">ReadWriteOnce</span>
+  <span style="color:#f92672">storageClassNme</span>: <span style="color:#ae81ff">google-storage</span> <span style="color:#75715e"># これ</span>
+  <span style="color:#f92672">resources</span>:
+    <span style="color:#f92672">requests</span>:
+      <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">500Mi</span>
+</code></pre></div><h2 ref="6-networking" >6. Networking</h2><a class="anchor" id="6-networking"></a>
+<p>Linux のネットワーク系基本コマンドは以下の通り。</p>
+<ul>
+<li><code>ip link</code></li>
+<li><code>ip addr</code></li>
+<li><code>ip addr add 192.168.1.10/24 dev eth0</code></li>
+<li><code>ip route</code></li>
+<li><code>route</code></li>
+<li><code>ip route add 192.168.1.0/24 via 192.168.2.1</code></li>
+<li><code>cat /proc/sys/net/ipv4/ip_forward</code></li>
+</ul>
+<p>Linux の DNS 系基本コマンドは以下の通り。</p>
+<ul>
+<li><code>cat &quot;192.168.1.11 db&quot; &gt;&gt; /etc/hosts</code></li>
+<li><code>cat &quot;nameserver 192.168.1.100&quot; &gt;&gt; /etc/resolv.conf</code></li>
+<li><code>nslookup www.google.com</code></li>
+<li><code>dig www.google.com</code></li>
+</ul>
+<p>また、DNS レコードの <code>A</code> とか <code>AAAA</code> とか <code>CNAME</code> とか復習せんとあかんかも、、、</p>
 		</div>
 
 
