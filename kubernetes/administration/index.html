@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-02T21:18:19 JST">
+<meta name="revised" content="2021-07-05T21:58:56 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1993,6 +1993,120 @@ $ kubectl get ingress <span style="color:#75715e"># Ingress Resource のこと�
 <ul>
 <li><a href="https://github.com/mmumshad/certified-kubernetes-administrator-course">https://github.com/mmumshad/certified-kubernetes-administrator-course</a></li>
 </ul>
+<h2 ref="8-troubleshooting" >8. Troubleshooting</h2><a class="anchor" id="8-troubleshooting"></a>
+<h3 ref="81-application-failure" >8.1. Application Failure</h3><a class="anchor" id="81-application-failure"></a>
+<ul>
+<li><code>kubectl get all</code> で全体感を確認</li>
+<li><code>name</code> や <code>port</code> に誤りが無いか確認</li>
+<li>Service の Selector に矛盾がないか確認</li>
+<li>DB の ID/Pass などといった環境変数に誤りが無いか確認</li>
+</ul>
+<h3 ref="82-control-plane-failure" >8.2. Control Plane Failure</h3><a class="anchor" id="82-control-plane-failure"></a>
+<ul>
+<li><code>kubectl get po -n kube-system</code> で全コンポーネントの稼働を確認</li>
+<li>各のプロセスの状態を確認
+<ul>
+<li><code>service kube-apiserver status</code></li>
+<li><code>service kube-controller-manager status</code></li>
+<li><code>service kube-scheduler status</code></li>
+</ul>
+</li>
+<li>Worker Nodes のコンポーネントについても忘れず確認
+<ul>
+<li><code>service kubelet status</code> / <code>systemctl status kubelet</code></li>
+<li><code>service kube-proxy status</code></li>
+</ul>
+</li>
+<li>さらにログを確認
+<ul>
+<li><code>kubectl logs kube-apiserver-master -n kube-system</code></li>
+<li><code>sudo journalctl -u kube-apiserver</code>
+<ul>
+<li><strong>systemd</strong> で管理されたデーモンのログを見るコマンド</li>
+<li><code>/usr/lib/systemd/system/xxxx.service</code> という形式で <strong>unit</strong> という単位で管理される（だから <code>-u</code> ）
+<ul>
+<li><code>etc/systemd/system/xxxx.service.d</code></li>
+</ul>
+</li>
+<li>unit の管理には <code>systemctl</code> コマンドを利用する</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>serviceやsystemctlとは何か？<br>
+serviceとsystemctlは、どちらも Linux で楽にコマンドを実行するためのプログラム。</p>
+<ul>
+<li>service
+<ul>
+<li>/etc/init.dにあるシェルスクリプトのファイルを指定することで、シェルを実行してくれるもの</li>
+<li>例えば、MySQLの実行時にservice mysql startとすると思うが、これは/etc/init.d/mysqlと言うシェルスクリプトにstartと言う引数を与えることで、mysqlを実行している</li>
+</ul>
+</li>
+<li>systemctl
+<ul>
+<li>/lib/systemdにある設定ファイルを指定して、コマンドを実行するもの</li>
+<li>serviceと大きく異なる点は、serviceはシェルを実行するのに対してsystemctlは独自の設定ファイルを使って実行する点だ</li>
+</ul>
+</li>
+</ul>
+<p>どちらも使える状態であれば、systemctlを使うのが望ましい。</p>
+<h3 ref="83-woker-nodes-failure" >8.3. Woker Nodes Failure</h3><a class="anchor" id="83-woker-nodes-failure"></a>
+<ul>
+<li><code>kubectl get nodes</code> でノードの状態を確認</li>
+<li><code>Ready</code> では無いノードに対して <code>kubectl describe node &lt;node-name&gt;</code> して <code>Unknown</code> の項目を確認</li>
+<li>ノードで <code>top</code> <code>df -h</code> などしてリソースの状態を確認</li>
+<li><code>kubelet</code> の状態を確認
+<ul>
+<li><code>service kubelet status</code> / <code>systemctl status kubelet</code></li>
+<li><code>sudo journalctl -u kubelet</code>
+<ul>
+<li>Shift + G でボトムが見れる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>kubelet</code> の証明書を確認
+<ul>
+<li><code>openssl x509 -in /var/lib/kubelet/woker-1.crt -text</code></li>
+</ul>
+</li>
+<li><code>kubectl cluster-info</code> でクラスタに関する設定が見れる</li>
+</ul>
+<h3 ref="84-network-troubleshooting" >8.4. Network Troubleshooting</h3><a class="anchor" id="84-network-troubleshooting"></a>
+<ul>
+<li>CNI
+<ul>
+<li><code>kubelet</code> のオプション <code>--cni-bin-dir</code> や <code>--network-plugin</code> を確認</li>
+<li>CNI 系の Pod が稼働していることも確認</li>
+</ul>
+</li>
+<li>DNS
+<ul>
+<li>kubeDNS や coreDNS が稼働していることを確認（ Deployments ）</li>
+<li>各々の設定ファイルや ConfigMap を確認</li>
+<li><code>proxy . /etc/resolve.conf</code></li>
+</ul>
+</li>
+<li><code>kube-proxy</code>
+<ul>
+<li>DaemonSet になっているので確認</li>
+</ul>
+</li>
+</ul>
+<h2 ref="9-advanced-kubectl" >9. Advanced kubectl</h2><a class="anchor" id="9-advanced-kubectl"></a>
+<p><strong>JSON PATH</strong> を利用したコマンド。（ JSON PATH は <code>metadata.name</code> みたいなやつ）<br>
+<code>kubectl</code> は <code>kube-apiserver</code> と JSON 形式で通信しているが、コマンドの結果はユーザに見やすい表形式で、且つ、間引いた情報で出力されている。<br>
+<code>-o wide</code> オプションである程度詳細情報まで表示できるが、 <code>-o json</code> オプションを利用すれば全情報が JSON 形式で出力される。<br>
+しかし、あまりにも情報が多いので <code>-o=jsonpath=</code> オプションと JSON PATH を利用して情報をフィルタリングできる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># シングルクオート と 中括弧 で囲む</span>
+$ kubectl get po -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{ .items[0].spec.containers[0].image }&#39;</span>
+<span style="color:#75715e"># 中括弧単位で複数の JSON PATH を指定できる</span>
+$ kubectl get po -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{ .items[*].metadata.name }{ .items[*].status.capacity.cpu }&#39;</span>
+<span style="color:#75715e"># 改行を挟んで見やすくできる</span>
+$ kubectl get po -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{ .items[*].metadata.name }{&#34;\n&#34;}{ .items[*].status.capacity.cpu }&#39;</span>
+</code></pre></div><p><code>range</code> などの JSON PATH の演算子も利用できる。<br>
+他にも <code>-o=custom-columns=</code> 、 <code>--sort-by=.metadata.name</code> などのオプションもある。</p>
 		</div>
 
 
