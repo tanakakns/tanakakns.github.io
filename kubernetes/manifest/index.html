@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-05T21:58:56 JST">
+<meta name="revised" content="2021-07-06T20:10:47 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1172,18 +1172,24 @@ if (!doNotTrack) {
 <li><code>kubectl run mycron --schedule &quot;1 * * * *&quot; --image=nginx --output=yaml --dry-run=client</code></li>
 </ul>
 </li>
-<li>service / clusterIP
+<li>service / ClusterIP
 <ul>
-<li><code>kubectl create svc clusterip myapp --tcp=80 --output=yaml --dry-run=client</code>
+<li><code>kubectl create svc clusterip myapp --tcp=80 --dry-run=client -o yaml</code>
 <ul>
 <li>これだと <code>selector</code> は作成されない</li>
 </ul>
 </li>
-<li><code>kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml</code>
+<li><code>kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml</code> # default で ClusterIP
 <ul>
 <li>こうすると <code>selector</code> も勝手に作成してくれる</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>service / NodePort
+<ul>
+<li><code>kubectl expose deployment hr-web-app --type=NodePort --port=8080 --name=hr-web-app-service --dry-run=client -o yaml</code></li>
+<li><code>--type</code> は他に <code>LoadBalancer</code> と <code>ExternalName</code> もサポートする</li>
 </ul>
 </li>
 <li>configmap

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-05T21:58:56 JST">
+<meta name="revised" content="2021-07-06T20:10:47 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -2095,6 +2095,7 @@ serviceとsystemctlは、どちらも Linux で楽にコマンドを実行する
 </li>
 </ul>
 <h2 ref="9-advanced-kubectl" >9. Advanced kubectl</h2><a class="anchor" id="9-advanced-kubectl"></a>
+<h3 ref="91-json-pah" >9.1. JSON PAH</h3><a class="anchor" id="91-json-pah"></a>
 <p><strong>JSON PATH</strong> を利用したコマンド。（ JSON PATH は <code>metadata.name</code> みたいなやつ）<br>
 <code>kubectl</code> は <code>kube-apiserver</code> と JSON 形式で通信しているが、コマンドの結果はユーザに見やすい表形式で、且つ、間引いた情報で出力されている。<br>
 <code>-o wide</code> オプションである程度詳細情報まで表示できるが、 <code>-o json</code> オプションを利用すれば全情報が JSON 形式で出力される。<br>
@@ -2107,6 +2108,9 @@ $ kubectl get po -o<span style="color:#f92672">=</span>jsonpath<span style="colo
 $ kubectl get po -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{ .items[*].metadata.name }{&#34;\n&#34;}{ .items[*].status.capacity.cpu }&#39;</span>
 </code></pre></div><p><code>range</code> などの JSON PATH の演算子も利用できる。<br>
 他にも <code>-o=custom-columns=</code> 、 <code>--sort-by=.metadata.name</code> などのオプションもある。</p>
+<h3 ref="92-check-kubeconfig" >9.2. check kubeconfig</h3><a class="anchor" id="92-check-kubeconfig"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl cluster-info --kubeconfig /root/admin.kubeconfig
+</code></pre></div>
 		</div>
 
 
