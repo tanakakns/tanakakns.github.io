@@ -140,7 +140,7 @@
     <loc>https://tanakakns.github.io/gcp/storage/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/kubernetes/administration/</loc>
+    <loc>https://tanakakns.github.io/kubernetes/application-management/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/aws/</loc>
@@ -148,6 +148,9 @@
   </url><url>
     <loc>https://tanakakns.github.io/gcp/databases/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/kubernetes/cluster-management/</loc>
+    <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>

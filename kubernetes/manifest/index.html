@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-07T20:49:24 JST">
+<meta name="revised" content="2021-07-08T20:18:02 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -956,7 +956,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/kubernetes/administration/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/application-management/" class="dd-item
         item_level_$level
         ">
 
@@ -964,7 +964,22 @@ if (!doNotTrack) {
       
       
       
-          <a href="/kubernetes/administration/">クラスタ管理</a>
+          <a href="/kubernetes/application-management/">アプリケーション管理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/cluster-management/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/cluster-management/">クラスタ管理</a>
       
         
       
@@ -1109,15 +1124,20 @@ if (!doNotTrack) {
 	    <p>kubernetes では <code>kubectl</code> に様々コマンドがあるが、基本的には <code>kubectl create/delete/apply</code> コマンドと <strong>マニフェスト</strong> とよぶ YAML/JSON ファイルを使用することで、リソースの作成/削除/更新できる。</p>
 <ol>
 <li><a href="#1-%E3%83%9E%E3%83%8B%E3%83%95%E3%82%A7%E3%82%B9%E3%83%88%E9%9B%9B%E5%BD%A2">マニフェストの雛形</a></li>
-<li><a href="#2-%E3%83%9E%E3%83%8B%E3%83%95%E3%82%A7%E3%82%B9%E3%83%88%E7%90%86%E8%A7%A3">マニフェストの理解</a></li>
-<li>その他のリソース</li>
+<li><a href="#2-%E5%85%B1%E9%80%9A%E4%BA%8B%E9%A0%85">共通事項</a></li>
+<li><a href="#3-deployment">Deployment</a></li>
+<li><a href="#4-pod">Pod</a></li>
+<li><a href="#5-service">Service</a></li>
+<li><a href="#6-daemonset">DaemonSet</a></li>
+<li><a href="#7-configmap-secret">ConfigMap / Secret</a></li>
+<li><a href="#8-%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9">その他のリソース</a></li>
 </ol>
 <ul>
 <li><a href="https://kubernetes.io/ja/docs/reference/">Kubernetes リファレンス</a></li>
 <li><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/">マニフェスト リファリンス</a></li>
 </ul>
 <h2 ref="1-マニフェストの雛形" >1. マニフェストの雛形</h2><a class="anchor" id="1-マニフェストの雛形"></a>
-<p>ドライラン（ <code>kubectl run/create --dry-run=client</code> ）と yaml 表示（ <code>-o yaml</code> / <code>--output=yaml</code> を）組み合わせるとマニフェストの雛形を標準出力できる。</p>
+<p>ドライラン（ <code>kubectl run/create --dry-run=client</code> ）と yaml 表示（ <code>-o yaml</code> or <code>--output=yaml</code> を）組み合わせるとマニフェストの雛形を標準出力できる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">$ kubectl run sample --image=nginx --dry-run=client -o yaml</span>
 
 <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
@@ -1147,7 +1167,7 @@ if (!doNotTrack) {
 </code></pre></div><ul>
 <li>pod
 <ul>
-<li><code>kubectl run mypod --image=nginx --labels=app=mypod --output=yaml --dry-run=client</code>
+<li><code>kubectl run mypod --image=nginx --labels=app=mypod --dry-run=client -o yaml</code>
 <ul>
 <li><code>--restart=Never</code> を付けなくても Pod になるっぽい</li>
 <li><code>--expose</code> オプションをつけると ClusterIP も作成される</li>
@@ -1157,19 +1177,19 @@ if (!doNotTrack) {
 </li>
 <li>deployment
 <ul>
-<li><code>kubectl create deployment mydeploy --image=nginx --replicas=4 --output=yaml --dry-run=client</code></li>
+<li><code>kubectl create deployment mydeploy --image=nginx --replicas=4 --dry-run=client -o yaml</code></li>
 </ul>
 </li>
 <li>job
 <ul>
 <li><code>--restart=OnFailure</code> を付けると Job になる</li>
-<li><code>kubectl run myjob --restart=OnFailure --image=ubuntu --output=yaml --dry-run=client -- echo hello</code></li>
+<li><code>kubectl run myjob --restart=OnFailure --image=ubuntu --dry-run=client -o yaml -- echo hello</code></li>
 </ul>
 </li>
 <li>cronjob
 <ul>
 <li><code>--schedule</code> を付けると CronJob になる</li>
-<li><code>kubectl run mycron --schedule &quot;1 * * * *&quot; --image=nginx --output=yaml --dry-run=client</code></li>
+<li><code>kubectl run mycron --schedule &quot;1 * * * *&quot; --image=nginx --dry-run=client -o yaml</code></li>
 </ul>
 </li>
 <li>service / ClusterIP
@@ -1194,35 +1214,35 @@ if (!doNotTrack) {
 </li>
 <li>configmap
 <ul>
-<li><code>kubectl create cm mycm --from-literal mykey=myval --output=yaml --dry-run=client</code></li>
+<li><code>kubectl create cm mycm --from-literal mykey=myval --dry-run=client -o yaml</code></li>
 <li><code>--from-file</code> でファイルを指定した場合ちゃんとインデントしてくれる</li>
-<li><code>kubectl create cm mycm --from-file myfile.yaml --output=yaml --dry-run=client</code></li>
+<li><code>kubectl create cm mycm --from-file myfile.yaml --dry-run=client -o yaml</code></li>
 </ul>
 </li>
 <li>secret
 <ul>
 <li>値は base64 エンコードされているので編集に注意</li>
-<li><code>kubectl create secret generic mysecret --from-literal mykey=myval --output=yaml --dry-run=client</code></li>
+<li><code>kubectl create secret generic mysecret --from-literal=ID=id --from-literal=PASSWORD=pass --dry-run=client -o yaml</code></li>
 </ul>
 </li>
 <li>serviceaccount
 <ul>
-<li><code>kubectl create serviceaccount mysc --output=yaml --dry-run=client</code></li>
+<li><code>kubectl create serviceaccount mysc --dry-run=client -o yaml</code></li>
 </ul>
 </li>
 <li>clusterrolebinding
 <ul>
-<li><code>kubectl create clusterrolebinding myclusterrolebinding --clusterrole=edit --serviceaccount default:mysc --output=yaml --dry-run=client</code></li>
+<li><code>kubectl create clusterrolebinding myclusterrolebinding --clusterrole=edit --serviceaccount default:mysc --dry-run=client -o yaml</code></li>
 </ul>
 </li>
 <li>rolebinding
 <ul>
-<li><code>kubectl create rolebinding cluster-admin-binding --role=edit --serviceaccount default:mysc --output=yaml --dry-run=client</code></li>
+<li><code>kubectl create rolebinding cluster-admin-binding --role=edit --serviceaccount default:mysc --dry-run=client -o yaml</code></li>
 </ul>
 </li>
 <li>poddisruptionbudget
 <ul>
-<li><code>kubectl create pdb my-pdb --selector=app=nginx --min-available=1 --output=yaml --dry-run=client</code></li>
+<li><code>kubectl create pdb my-pdb --selector=app=nginx --min-available=1 --dry-run=client -o yaml</code></li>
 </ul>
 </li>
 </ul>
@@ -1235,20 +1255,17 @@ $ kubectl explain pods --recursive
 
 <span style="color:#75715e"># grep で絞るとよい（ -A 3 はヒット行から 3 行取得の意）</span>
 $ kubectl explain pods --recursive | grep image -A <span style="color:#ae81ff">3</span>
-
-<span style="color:#75715e">## 2. マニフェストの理解</span>
-
-<span style="color:#e6db74">```</span> yaml:sample-pod.yml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: sample-pod
-spec:
-  containers:
-    - name: nginx
-      imege: nginx:1.7.9
-      ports:
-        - containerPort: <span style="color:#ae81ff">80</span>
+</code></pre></div><h2 ref="2-共通事項" >2. 共通事項</h2><a class="anchor" id="2-共通事項"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:sample-pod.yml" data-lang="yaml:sample-pod.yml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample-pod</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">containers</span>:
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
+      <span style="color:#f92672">imege</span>: <span style="color:#ae81ff">nginx:1.7.9</span>
+      <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
 </code></pre></div><p>全てのマニフェストには以下の項目が含まれる。</p>
 <ul>
 <li>apiVersion
@@ -1296,9 +1313,16 @@ pod <span style="color:#e6db74">&#34;sample-pod&#34;</span> deleted
 <span style="color:#75715e"># LBの追加など</span>
 </code></pre></div><p>また、複数のマニフェストファイルを一気に適用したい場合は、ディレクトリにまとめ <code>-f</code> で指定して実行することができる。<br>
 その際、ファイル名辞書順で実行されることに注意。</p>
-<h3 ref="21-label-と-annotation" >2.1. Label と Annotation</h3><a class="anchor" id="21-label-と-annotation"></a>
-<p>両者とも key-value 形式（ <code>key: value</code> ）でデータを保持する仕組みであるが、用途が異なる。</p>
-<h4 ref="211-label" >2.1.1. Label</h4><a class="anchor" id="211-label"></a>
+<h3 ref="21-metadata" >2.1. metadata</h3><a class="anchor" id="21-metadata"></a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">metadata</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#objectmeta-v1-meta</span>
+  <span style="color:#f92672">annotations</span>:  <span style="color:#75715e"># 任意のメタデータを保存および取得する。外部ツールなどによって設定・変更・保存される箇所でもある。</span>
+    <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
+  <span style="color:#f92672">labels</span>:       <span style="color:#75715e"># ReplicaSet、Service の selector で利用。</span>
+    <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
+  <span style="color:#f92672">name</span>:         <span style="color:#75715e"># namespace 内で一意なオブジェクトの名前。</span>
+  <span style="color:#f92672">namespace</span>:    <span style="color:#75715e"># 名前空間名。空は default と同じ。 DNS_LABEL である必要があり、変更できない。</span>
+</code></pre></div><p>Label と Annotation は key-value 形式（ <code>key: value</code> ）でデータを保持する仕組みであるが、用途が異なる。</p>
+<h3 ref="22-label" >2.2. Label</h3><a class="anchor" id="22-label"></a>
 <ul>
 <li>各リソースの <code>metadata</code> で設定する</li>
 <li>あるリソースが 1 つ以上のリソースを管理する場合、 <code>selector</code> にて Label を指定することにより対象リソースを発見する
@@ -1309,7 +1333,7 @@ pod <span style="color:#e6db74">&#34;sample-pod&#34;</span> deleted
 </ul>
 </li>
 </ul>
-<h4 ref="212-annotation" >2.1.2. Annotation</h4><a class="anchor" id="212-annotation"></a>
+<h3 ref="23-annotation" >2.3. Annotation</h3><a class="anchor" id="23-annotation"></a>
 <ul>
 <li>リソースオブジェクトに関する不特定の情報を保存する方法
 <ul>
@@ -1321,42 +1345,26 @@ pod <span style="color:#e6db74">&#34;sample-pod&#34;</span> deleted
 </ul>
 </li>
 </ul>
-<h3 ref="22-namespace" >2.2. namespace</h3><a class="anchor" id="22-namespace"></a>
+<h3 ref="24-namespace" >2.4. namespace</h3><a class="anchor" id="24-namespace"></a>
 <p>namespace は k8s クラスタ上で論理的にシステムを分割する仕組み。<br>
 namespace リソース（ <code>kind: Namespace</code> ）を作成し、各リソースの <code>metadata</code> にラベル付け（ <code>namespace: test</code> ）して利用する。</p>
-<h3 ref="23-deployment" >2.3. Deployment</h3><a class="anchor" id="23-deployment"></a>
+<h2 ref="3-deployment" >3. Deployment</h2><a class="anchor" id="3-deployment"></a>
 <p>リソースには色々あるが、理解すべきリソースは少ない。そのうちの一つ。<br>
 （その他は、Service、DaemonSet、CronJobくらい？）</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">app/v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
 <span style="color:#f92672">metadata</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#objectmeta-v1-meta</span>
-  <span style="color:#f92672">annotations</span>:                <span style="color:#75715e"># 任意のメタデータを保存および取得する。外部ツールなどによって設定・変更・保存される箇所でもある。</span>
+  <span style="color:#f92672">annotations</span>:  <span style="color:#75715e"># 任意のメタデータを保存および取得する。外部ツールなどによって設定・変更・保存される箇所でもある。</span>
     <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
-  <span style="color:#f92672">clusterName</span>: <span style="color:#ae81ff">string        </span> <span style="color:#75715e"># オブジェクトが所属するクラスタ名。異なるクラスターで同じ名前と名前空間を持つリソースを区別するために使用。使わない。</span>
-  <span style="color:#f92672">creationTimestamp</span>:          <span style="color:#75715e"># このオブジェクトが作成されたサーバ時間。変更できない。</span>
-  <span style="color:#f92672">deletionGracePeriodSeconds</span>: <span style="color:#75715e"># オブジェクトの正常終了までの時間。読み取り専用。</span>
-  <span style="color:#f92672">deletionTimestamp</span>:          <span style="color:#75715e"># オブジェクトが削除される時間。読み取り専用。</span>
-  <span style="color:#f92672">finalizers</span>:                 <span style="color:#75715e"># リストからエントリを削除する責任のあるコンポーネントの識別子。削除のみ可能。</span>
-  <span style="color:#f92672">generateName</span>:               <span style="color:#75715e"># name が設定されていない場合にのみオプションで設定される名前。</span>
-  <span style="color:#f92672">generation</span>:                 <span style="color:#75715e"># 状態の世代を表す。読み取り専用。</span>
-  <span style="color:#f92672">initializers</span>:               <span style="color:#75715e"># オブジェクトの作成時にシステムの不変条件を強制するコントローラー。DEPRECATED。</span>
-  <span style="color:#f92672">labels</span>:                     <span style="color:#75715e"># ReplicaSet、Service の selector で利用。</span>
+  <span style="color:#f92672">labels</span>:       <span style="color:#75715e"># ReplicaSet、Service の selector で利用。</span>
     <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
-  <span style="color:#f92672">managedFields</span>:              <span style="color:#75715e"># 内部のワークフロー用でユーザは設定・理解の必要はない。</span>
-  <span style="color:#f92672">name</span>:                       <span style="color:#75715e"># namespace 内で一意なオブジェクトの名前。</span>
-  <span style="color:#f92672">namespace</span>:                  <span style="color:#75715e"># 名前空間名。空は default と同じ。 DNS_LABEL である必要があり、変更できない。</span>
-  <span style="color:#f92672">ownerReferences</span>:            <span style="color:#75715e"># このオブジェクトに依存するオブジェクトのリスト。コントローラにより管理される。</span>
-  <span style="color:#f92672">resourceVersion</span>:            <span style="color:#75715e"># オブジェクトがいつ変更されたかを判断するためにクライアントが使用できるこのオブジェクトの内部バージョン。読み取り専用。</span>
-  <span style="color:#f92672">selfLink</span>:                   <span style="color:#75715e"># このオブジェクトを表すURL。読み取り専用。</span>
-  <span style="color:#f92672">uid</span>:                        <span style="color:#75715e"># このオブジェクトの一意な ID 。システムにより管理される。</span>
+  <span style="color:#f92672">name</span>:         <span style="color:#75715e"># namespace 内で一意なオブジェクトの名前。</span>
+  <span style="color:#f92672">namespace</span>:    <span style="color:#75715e"># 名前空間名。空は default と同じ。 DNS_LABEL である必要があり、変更できない。</span>
 <span style="color:#f92672">spec</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#deploymentspec-v1-apps</span>
-  <span style="color:#f92672">minReadySeconds</span>:         <span style="color:#75715e"># コンテナがクラッシュすることなく、新しく作成されたポッドの準備が整うまでの最小秒数。デフォルト 0 。</span>
-  <span style="color:#f92672">paused</span>: <span style="color:#ae81ff">bool            </span> <span style="color:#75715e"># 展開が一時停止されていることを示す。</span>
-  <span style="color:#f92672">progressDeadlineSeconds</span>: <span style="color:#75715e"># 展開が失敗したと見なされるまで最大秒数。</span>
-  <span style="color:#f92672">replicas</span>:                <span style="color:#75715e"># Pod のリプリケーション数。</span>
-  <span style="color:#f92672">revisionHistoryLimit</span>:    <span style="color:#75715e"># ロールバックを許可するReplicaSetの世代数。デフォルト 10 。</span>
-  <span style="color:#f92672">selector</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#labelselector-v1-meta</span>
-            <span style="color:#75715e"># ReplicaSet が Pod を選択するための Label Selector 。</span>
+  <span style="color:#f92672">replicas</span>: <span style="color:#75715e"># Pod のリプリケーション数。</span>
+  <span style="color:#f92672">selector</span>: <span style="color:#75715e"># ReplicaSet が Pod を選択するための Label Selector 。</span>
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">&lt;key1&gt;</span>: <span style="color:#ae81ff">&lt;value1&gt;  </span> <span style="color:#75715e"># ReplicaSet の対象セレクタ。Pod 定義 の metadata.labels に一致させる。</span>
     <span style="color:#f92672">matchExpressions</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#labelselectorrequirement-v1-meta</span>
                       <span style="color:#75715e"># Label Selector のリスト。 AND で評価される。</span>
     <span style="color:#f92672">matchLabels</span>:      <span style="color:#75715e"># key-value 形式の Label Selector のリスト。 AND で評価される。matchExpressions の方が複雑な表現が可能。</span>
@@ -1370,98 +1378,30 @@ namespace リソース（ <code>kind: Namespace</code> ）を作成し、各リ�
             <span style="color:#75715e"># 作成する Pod の定義</span>
     <span style="color:#f92672">metadata</span>: <span style="color:#75715e"># 先の metadata に同じ。</span>
     <span style="color:#f92672">spec</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#podspec-v1-core</span>
-      <span style="color:#f92672">activeDeadlineSeconds</span>: <span style="color:#75715e"># Pod が非アクティブになってから強制終了されるまでの秒数。</span>
-      <span style="color:#f92672">affinity</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#affinity-v1-core</span>
-                <span style="color:#75715e"># Pod をスケジューリングする際の制約。</span>
-      <span style="color:#f92672">automountServiceAccountToken</span>: <span style="color:#75715e"># サービスアカウントトークンを自動的にマウントする必要があるかどうかを示す。</span>
+      <span style="color:#f92672">affinity</span>:   <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#affinity-v1-core</span>
       <span style="color:#f92672">containers</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#container-v1-core</span>
-                  <span style="color:#75715e"># Pod に属するコンテナのリスト。</span>
-        <span style="color:#f92672">args</span>:                     <span style="color:#75715e"># ENTRYPOINT へ引数。</span>
         <span style="color:#f92672">command</span>:                  <span style="color:#75715e"># ENTRYPOINT 配列。</span>
         <span style="color:#f92672">env</span>:                      <span style="color:#75715e"># 環境変数のリスト。</span>
         <span style="color:#f92672">envFrom</span>:                  <span style="color:#75715e"># 環境変数を設定するソースのリスト。</span>
         <span style="color:#f92672">image</span>:                    <span style="color:#75715e"># Docker イメージ名。</span>
-        <span style="color:#f92672">imagePullPolicy</span>:          <span style="color:#75715e"># Docker イメージの pull ポリシー。 Always, Never, IfNotPresent のいずれか。</span>
-        <span style="color:#f92672">lifecycle</span>:                <span style="color:#75715e"># コンテナのライフサイクルイベントに応じて管理システムが実行するアクション。</span>
+        <span style="color:#f92672">imagePullPolicy</span>:          <span style="color:#75715e"># Docker イメージの pull ポリシー。 Always（常にpull）, Never（ローカルのみ）, IfNotPresent（ローカルに無ければpull）。</span>
         <span style="color:#f92672">livenessProbe</span>:            <span style="color:#75715e"># コンテナ死活の定期的な調査。</span>
         <span style="color:#f92672">name</span>:                     <span style="color:#75715e"># コンテナ名。DNS_LABEL となる。</span>
         <span style="color:#f92672">ports</span>:                    <span style="color:#75715e"># コンテナの公開ポートのリスト。</span>
         <span style="color:#f92672">readinessProbe</span>:           <span style="color:#75715e"># コンテナサービスの準備状況の定期的な調査。</span>
-        <span style="color:#f92672">resources</span>:                <span style="color:#75715e"># コンテナが利用するコンピュートリソース。</span>
         <span style="color:#f92672">securityContext</span>:          <span style="color:#75715e"># Pod を実行するセキュリティオプション。</span>
-        <span style="color:#f92672">stdin</span>:                    <span style="color:#75715e"># コンテナがコンテナーランタイムで標準入力にバッファーを割り当てるかどうか。デフォルト false は EOF になる。</span>
-        <span style="color:#f92672">stdinOnce</span>:                <span style="color:#75715e"># 単一の接続によって開かれた後に、コンテナランタイムがstdinチャネルを閉じるかどうか。デフォルト false 。</span>
-        <span style="color:#f92672">terminationMessagePath</span>:   <span style="color:#75715e"># オプション：コンテナの終了メッセージが書き込まれるファイルがコンテナのファイルシステムにマウントされるパス。</span>
-        <span style="color:#f92672">terminationMessagePolicy</span>: <span style="color:#75715e"># 終了メッセージの入力方法。</span>
-        <span style="color:#f92672">tty</span>:                      <span style="color:#75715e"># コンテナに TTY を割り当てるか否か。デフォルト false 。</span>
-        <span style="color:#f92672">volumeDevices</span>:            <span style="color:#75715e"># コンテナが使用するブロックデバイスのリスト。</span>
         <span style="color:#f92672">volumeMounts</span>:             <span style="color:#75715e"># コンテナのファイルシステムにマウントするポッドボリューム。</span>
-        <span style="color:#f92672">workingDir</span>:               <span style="color:#75715e"># コンテナの作業ディレクトリ。</span>
-      <span style="color:#f92672">dnsConfig</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#poddnsconfig-v1-core</span>
-        <span style="color:#f92672">nameservers</span>: <span style="color:#75715e"># DNSネームサーバーのIPアドレスのリスト。</span>
-        <span style="color:#f92672">options</span>:     <span style="color:#75715e"># DNSリゾルバーオプションのリスト。</span>
-        <span style="color:#f92672">searches</span>:    <span style="color:#75715e"># ホスト名検索用のDNS検索ドメインのリスト。</span>
-      <span style="color:#f92672">dnsPolicy</span>:   <span style="color:#75715e"># Pod の DNS ポリシー。ClusterFirstWithHostNet, ClusterFirst（デフォルト）, Default, None 。</span>
-      <span style="color:#f92672">enableServiceLinks</span>: <span style="color:#75715e"># サービスに関する情報をDockerリンクの構文と一致する Pod の環境変数に注入するか否か。デフォルト true 。</span>
-      <span style="color:#f92672">hostAliases</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#hostalias-v1-core</span>
-                   <span style="color:#75715e"># Pod の hosts ファイルへの追加設定。</span>
-      <span style="color:#f92672">hostIPC</span>:     <span style="color:#75715e"># ホストの IPC 名前空間を使うか否か。デフォルト false 。</span>
-      <span style="color:#f92672">hostNetwork</span>: <span style="color:#75715e"># Pod に要求されたホストネットワーキング。ホストのネットワーク名前空間を使用。デフォルト false 。</span>
-      <span style="color:#f92672">hostPID</span>:     <span style="color:#75715e"># ホストの PID 名前空間を利用するか否か。デフォルト false 。</span>
-      <span style="color:#f92672">hostname</span>:    <span style="color:#75715e"># Pod のホスト名。指定しない場合システムが付与。</span>
-      <span style="color:#f92672">imagePullSecrets</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#localobjectreference-v1-core</span>
-                        <span style="color:#75715e"># Docker イメージを Pull する際のシークレット。</span>
-      <span style="color:#f92672">initContainers</span>:    <span style="color:#75715e"># Pod に属する初期化コンテナのリスト。コンテナが開始される前に順番に実行される。</span>
-      <span style="color:#f92672">nodeName</span>:          <span style="color:#75715e"># Pod を特定のノードへスケジューリングする。</span>
-      <span style="color:#f92672">nodeSelector</span>:      <span style="color:#75715e"># Pod を配置するノードのセレクタ。</span>
-      <span style="color:#f92672">overhead</span>:          <span style="color:#75715e"># 特定の RuntimeClass の Pod の実行に関連するリソースオーバーヘッドを表す。コントローラにより自動入力される。</span>
-      <span style="color:#f92672">preemptionPolicy</span>:  <span style="color:#75715e"># 優先度の低い Pod を先取りするポリシー。</span>
-      <span style="color:#f92672">priority</span>:          <span style="color:#75715e"># 優先度の値。値が大きいほど優先度が高い。</span>
-      <span style="color:#f92672">priorityClassName</span>: <span style="color:#75715e"># Pod の優先順位を示す。</span>
-      <span style="color:#f92672">readinessGates</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#podreadinessgate-v1-core</span>
-                      <span style="color:#75715e"># Pod の準備状況を評価する。</span>
-      <span style="color:#f92672">restartPolicy</span>:    <span style="color:#75715e"># Pod 内の全てのコンテナの再起動ポリシー。</span>
-      <span style="color:#f92672">runtimeClassName</span>: <span style="color:#75715e"># Pod 実行に使用する RuntimeClass オブジェクト。</span>
-      <span style="color:#f92672">schedulerName</span>:    <span style="color:#75715e"># Pod を管理するスケジューラ。</span>
-      <span style="color:#f92672">securityContext</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#podsecuritycontext-v1-core</span>
-                       <span style="color:#75715e"># Pod レベルのセキュリティ属性。</span>
-      <span style="color:#f92672">serviceAccount</span>:                <span style="color:#75715e"># Deprecated</span>
-      <span style="color:#f92672">serviceAccountName</span>:            <span style="color:#75715e"># Pod の実行に使用する ServiceAccount 名。</span>
-      <span style="color:#f92672">shareProcessNamespace</span>:         <span style="color:#75715e"># Pod 内の全てのコンテナ間で PID 空間を共有する。デフォルト false 。</span>
-      <span style="color:#f92672">subdomain</span>:                     <span style="color:#75715e"># サブドメインを指定する。&#34;&lt;hostname&gt;.&lt;subdomain&gt;.&lt;pod namespace&gt;.svc.&lt;cluster domain&gt;&#34; 。</span>
-      <span style="color:#f92672">terminationGracePeriodSeconds</span>: <span style="color:#75715e"># Pod が Graceful Stop するのに要する秒数。デフォルト 30 秒。</span>
+      <span style="color:#f92672">initContainers</span>:     <span style="color:#75715e"># Pod に属する初期化コンテナのリスト。コンテナが開始される前に順番に実行される。</span>
+      <span style="color:#f92672">nodeName</span>:           <span style="color:#75715e"># Pod を特定のノードへスケジューリング場合、明示的に指定する。</span>
+      <span style="color:#f92672">nodeSelector</span>:       <span style="color:#75715e"># Pod を配置するノードのセレクタ。</span>
+      <span style="color:#f92672">schedulerName</span>:      <span style="color:#75715e"># Pod を管理する kube-scheduler を明示的に指定する場合に設定。</span>
+      <span style="color:#f92672">securityContext</span>:    <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#podsecuritycontext-v1-core</span>
+                          <span style="color:#75715e"># Pod レベルのセキュリティ属性。</span>
+      <span style="color:#f92672">serviceAccountName</span>: <span style="color:#75715e"># Pod の実行に使用する ServiceAccount 名。</span>
       <span style="color:#f92672">tolerations</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#toleration-v1-core</span>
                    <span style="color:#75715e"># Pod を特定のノードに配置する際に利用。 nodeSelector の方が古い。</span>
       <span style="color:#f92672">volumes</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#volume-v1-core</span>
                <span style="color:#75715e"># マウントできるボリュームのリスト。</span>
-</code></pre></div><p>上記、すごい量だが、必要最低限は。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">app/v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">annotations</span>:
-    <span style="color:#f92672">&lt;key&gt;</span>: <span style="color:#ae81ff">&lt;value&gt;</span>
-  <span style="color:#f92672">labels</span>:                  <span style="color:#75715e"># Deployment の Label</span>
-    <span style="color:#f92672">&lt;key&gt;</span>: <span style="color:#ae81ff">&lt;value&gt;</span>
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">&lt;string&gt;          </span> <span style="color:#75715e"># Deployment 名</span>
-  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">&lt;string&gt;     </span> <span style="color:#75715e"># Deployment の namespace</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">&lt;integer&gt;     </span> <span style="color:#75715e"># ReplicaSet のレプリカ数。</span>
-  <span style="color:#f92672">selector</span>:
-    <span style="color:#f92672">matchLabels</span>:
-      <span style="color:#f92672">&lt;key1&gt;</span>: <span style="color:#ae81ff">&lt;value1&gt;    </span> <span style="color:#75715e"># ReplicaSet の対象セレクタ。以下の Pod 定義 の Label に一致させる。</span>
-  <span style="color:#f92672">template</span>:                <span style="color:#75715e"># Pod 定義</span>
-    <span style="color:#f92672">metadata</span>:
-      <span style="color:#f92672">labels</span>:              <span style="color:#75715e"># Pod の Label</span>
-        <span style="color:#f92672">&lt;key1&gt;</span>: <span style="color:#ae81ff">&lt;value1&gt;</span>
-    <span style="color:#f92672">spec</span>:
-      <span style="color:#f92672">containers</span>:
-        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">&lt;string&gt;   </span> <span style="color:#75715e"># Pod に利用するコンテナイメージ</span>
-        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">&lt;string&gt;    </span> <span style="color:#75715e"># Pod 名</span>
-        <span style="color:#f92672">ports</span>:
-        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">&lt;string&gt;</span> <span style="color:#75715e"># Docker イメージの pull ポリシー。 Always（常にpull）, Never（ローカルのみ）, IfNotPresent（ローカルに無ければpull）</span>
-        <span style="color:#f92672">livenessProbe</span>:            <span style="color:#75715e"># コンテナ死活の定期的な調査。</span>
-        <span style="color:#f92672">readinessProbe</span>:           <span style="color:#75715e"># コンテナサービスの準備状況の定期的な調査。</span>
-        <span style="color:#f92672">resources</span>: {}
 </code></pre></div><p>ケースによっては追加で以下を意識する必要がある。</p>
 <ul>
 <li>spec.strategy</li>
@@ -1469,12 +1409,11 @@ namespace リソース（ <code>kind: Namespace</code> ）を作成し、各リ�
 </ul>
 <p><code>livenessProbe</code>、<code>readinessProbe</code> については <a href="https://kubernetes.io/ja/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">こちら</a> 。</p>
 <p>また、 Pod の <code>spec.nodeName</code> を指定することで、スケジューラに任せず手動で Pod の配置ノードを指定することができる。</p>
-<h3 ref="24-pod" >2.4. Pod</h3><a class="anchor" id="24-pod"></a>
+<h2 ref="4-pod" >4. Pod</h2><a class="anchor" id="4-pod"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">core/v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
 <span style="color:#f92672">metadata</span>: <span style="color:#75715e"># 先の metadata に同じ。</span>
 <span style="color:#f92672">spec</span>:     <span style="color:#75715e"># 先の Deployment の spec.template.spec に同じ。</span>
-<span style="color:#f92672">status</span>:   <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podstatus-v1-core</span>
 </code></pre></div><p>pod のマニフェストに以下を足したものが ReplicaSet 。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">spec</span>:
   <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">&lt;integer&gt;</span>
@@ -1484,7 +1423,7 @@ namespace リソース（ <code>kind: Namespace</code> ）を作成し、各リ�
   <span style="color:#f92672">template</span>:
       <span style="color:#ae81ff">&lt;podの定義に同じ&gt;</span>
 </code></pre></div><p>なお、 ReplicaSet はマニフェスト上はほぼ Deployment に同じ。</p>
-<h4 ref="241-taints-tolerations" >2.4.1. Taints, Tolerations</h4><a class="anchor" id="241-taints-tolerations"></a>
+<h3 ref="41-taints-tolerations" >4.1. Taints, Tolerations</h3><a class="anchor" id="41-taints-tolerations"></a>
 <p>Taints / Tolerations は Node Affinity と逆の機能。<br>
 <strong>Taints</strong> は「汚れ」、 <strong>Tolerations</strong> は「寛容」といった意味になる。<br>
 Taints は Node に付与し、 Tolerations は Pod に付与する。<br>
@@ -1520,7 +1459,7 @@ $ kubectl taint nodes node1 key1<span style="color:#f92672">=</span>value1:NoSch
   <span style="color:#f92672">operator</span>: <span style="color:#e6db74">&#34;Equal&#34;</span>
   <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;value1&#34;</span>
   <span style="color:#f92672">effect</span>: <span style="color:#e6db74">&#34;NoSchedule&#34;</span>
-</code></pre></div><h4 ref="242-node-selectors" >2.4.2. Node Selectors</h4><a class="anchor" id="242-node-selectors"></a>
+</code></pre></div><h3 ref="42-node-selectors" >4.2. Node Selectors</h3><a class="anchor" id="42-node-selectors"></a>
 <p>Pod を特定の Node にスケジュールしたい場合 <strong>Node Selectors</strong> を利用する。<br>
 Node に Labels を付与し、 Pod の <code>nodeSelector</code> にその Labels を付与することで設定できる。<br>
 Node に Labels を付与するコマンドは以下の通り。</p>
@@ -1531,7 +1470,7 @@ $ kubectl label nodes node-1 size<span style="color:#f92672">=</span>Large
   <span style="color:#f92672">size</span>: <span style="color:#ae81ff">Large</span>
 </code></pre></div><p>Node Selectors は <code>size=Large</code> もしくは <code>size=Middle</code> のどちらか、といった柔軟性のあるスケジュールはできない。<br>
 こういう場合は Node Affinity を使う。</p>
-<h4 ref="243-node-affinity" >2.4.3. Node Affinity</h4><a class="anchor" id="243-node-affinity"></a>
+<h3 ref="43-node-affinity" >4.3. Node Affinity</h3><a class="anchor" id="43-node-affinity"></a>
 <p><strong>Node Affinity</strong> は Pod に対して設定し、 Node Selector と同様 Node に付与された Labels を見る。<br>
 Pod のマニフェストの <code>spec.affinity</code> に以下の設定をする。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">affinity</span>:
@@ -1562,7 +1501,7 @@ Pod のマニフェストの <code>spec.affinity</code> に以下の設定をす
 </ul>
 </li>
 </ul>
-<h4 ref="244-resource-requirements" >2.4.4. Resource Requirements</h4><a class="anchor" id="244-resource-requirements"></a>
+<h3 ref="44-resource-requirements" >4.4. Resource Requirements</h3><a class="anchor" id="44-resource-requirements"></a>
 <p><code>spec.containers.resources</code> を設定することで、 Pod に割り当てるリソース（ CPU/Mem/Disk ）の要求について記載することができる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">resources</span>:
   <span style="color:#f92672">requests</span>:
@@ -1583,7 +1522,7 @@ Pod のマニフェストの <code>spec.affinity</code> に以下の設定をす
 <li>1Mi = 1,048,576 bytes</li>
 <li>1Ki = 1,024 bytes</li>
 </ul>
-<h4 ref="245-static-pod" >2.4.5. Static Pod</h4><a class="anchor" id="245-static-pod"></a>
+<h3 ref="45-static-pod" >4.5. Static Pod</h3><a class="anchor" id="45-static-pod"></a>
 <p>Kubernetes の Master Nodes の機能がなかった場合でも、 <code>kubelet</code> は単独で Pod を起動することができる。（ DaemonSet や Service など Pod 以外は出来ない）<br>
 この Pod を <strong>Static Pod</strong> と呼ぶ。
 Static Pod の作成方法は以下の通り。</p>
@@ -1601,7 +1540,7 @@ Static Pod の作成方法は以下の通り。</p>
 Master Nodes が機能していない場合、作成された Static Pod は <code>docker ps</code> コマンドで確認できる。<br>
 Master Nodes が機能している・いないにかかわらず、 Static Pod に対する変更は各 Static Pod が配置されている Node のマニフェストファイルを変更する他ない。<br>
 <code>kube-apiserver</code> に何らかの問題が発生しても機能継続できるように、 Master Nodes のコンポーネントで Static Pod により構成されているものがある。</p>
-<h4 ref="246-multiple-scheduler" >2.4.6. Multiple Scheduler</h4><a class="anchor" id="246-multiple-scheduler"></a>
+<h3 ref="46-multiple-scheduler" >4.6. Multiple Scheduler</h3><a class="anchor" id="46-multiple-scheduler"></a>
 <p><code>kube-scheduler</code> は複数起動することができる。<br>
 複数のスケジューラがある場合、 Pod のマニフェストにて <code>spec.schedulerName</code> でスケジューラ名を指定することにより目的のスケジューラによって処理させることができる。<br>
 スケジューラを起動する際、以下のオプションを指定することで、スケジューラに命名およびリーダーの選出が可能になる。</p>
@@ -1614,7 +1553,7 @@ Master Nodes が機能している・いないにかかわらず、 Static Pod �
         - --<span style="color:#ae81ff">address=0.0.0.0</span>
         - --<span style="color:#ae81ff">leader-elect=false         </span> <span style="color:#75715e"># リーダー選出対象外</span>
         - --<span style="color:#ae81ff">scheduler-name=my-scheduler</span> <span style="color:#75715e"># スケジューラの命名</span>
-</code></pre></div><h4 ref="247-lifecycle--lifecycle-events--lifecycle-handler" >2.4.7. Lifecycle / Lifecycle Events / Lifecycle Handler</h4><a class="anchor" id="247-lifecycle--lifecycle-events--lifecycle-handler"></a>
+</code></pre></div><h3 ref="47-lifecycle--lifecycle-events--lifecycle-handler" >4.7. Lifecycle / Lifecycle Events / Lifecycle Handler</h3><a class="anchor" id="47-lifecycle--lifecycle-events--lifecycle-handler"></a>
 <p>Pod には <a href="https://kubernetes.io/ja/docs/concepts/workloads/pods/pod-lifecycle/">のライフサイクル</a> がり、 <code>status.phase</code> は Pod のライフサイクルにおけるフェーズを表しており、 Pod の状態を確認する上で重要となる。</p>
 <table>
 <thead>
@@ -1721,7 +1660,7 @@ Liveness/Readiness Probe の双方で以下の 3 種類のヘルスチェック�
 <li>httpGet : HTTPのGETリクエストを発行</li>
 </ul>
 <p>先の probe と同様だ。</p>
-<h3 ref="25-service" >2.5. Service</h3><a class="anchor" id="25-service"></a>
+<h2 ref="5-service" >5. Service</h2><a class="anchor" id="5-service"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
 <span style="color:#f92672">metadata</span>: <span style="color:#75715e"># 先の metadata に同じ。</span>
@@ -1757,14 +1696,14 @@ Liveness/Readiness Probe の双方で以下の 3 種類のヘルスチェック�
     <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>          <span style="color:#75715e"># Service が受信 Port</span>
     <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">9376</span>  <span style="color:#75715e"># Pod の Port</span>
 </code></pre></div><p>Service の <code>selector</code> の設定が正しく Pod を捉えているかどうかは <code>kubectl get pods --selector=&quot;app=monolith,secure=enabled&quot;</code> などのコマンドで対象の Pod を取得できるか、で検査できる。</p>
-<h3 ref="26-daemonset" >2.6. DaemonSet</h3><a class="anchor" id="26-daemonset"></a>
+<h2 ref="6-daemonset" >6. DaemonSet</h2><a class="anchor" id="6-daemonset"></a>
 <p>各 Node に 1 Pod ずつ配置する。<br>
 Monitoring/Logging Agent などを仕込むのに最適。（ <code>kube-proxy</code> は DaemonSet で配置されているものもある）<br>
 DaemonSet のマニフェストは ReplicaSet のそれに酷似している。<br>
 なお、 DaemonSet や ReplicaSet は <code>kubectl create</code> コマンドでは作成できないので、下記のような Deployment 作成コマンドでマニフェストの雛形を作成し、その後 <code>kind</code> を修正するなどして DaemonSet のマニフェストを作成してから apply するとよい。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create deployment elasticsearch --image<span style="color:#f92672">=</span>k8s.gcr.io/fluentd-elasticsearch:1.20 --namespace<span style="color:#f92672">=</span>kube-system --dry-run<span style="color:#f92672">=</span>client -o yaml &gt; fluent.yaml
-</code></pre></div><h3 ref="27-configmap-secrets" >2.7. ConfigMap /Secrets</h3><a class="anchor" id="27-configmap-secrets"></a>
-<h4 ref="configmap" >ConfigMap</h4><a class="anchor" id="configmap"></a>
+</code></pre></div><h2 ref="7-configmap--secret" >7. ConfigMap / Secret</h2><a class="anchor" id="7-configmap--secret"></a>
+<h3 ref="71-configmap" >7.1. ConfigMap</h3><a class="anchor" id="71-configmap"></a>
 <p>ConfigMap は以下の通りコマンドで作成するか、マニフェストを作成する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># コマンドのみで作成</span>
 <span style="color:#75715e"># USAGE: kubectl create configmap &lt;config-name&gt; --from-literal=&lt;key&gt;=&lt;value&gt;</span>
@@ -1790,7 +1729,7 @@ APP_MOD: prod
     <span style="color:#f92672">envFrom</span>:
     - <span style="color:#f92672">configMapRef</span>:
         <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-config</span>
-</code></pre></div><h4 ref="secret" >Secret</h4><a class="anchor" id="secret"></a>
+</code></pre></div><h3 ref="72-secret" >7.2. Secret</h3><a class="anchor" id="72-secret"></a>
 <p>Secret は以下の通りコマンドで作成するか、マニフェストを作成する。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># コマンドのみで作成</span>
 <span style="color:#75715e"># USAGE: kubectl create secret generic &lt;secret-name&gt; --from-literal=&lt;key&gt;=&lt;value&gt;</span>
@@ -1817,13 +1756,13 @@ Pod のマニフェストからは以下のように参照する。</p>
     <span style="color:#f92672">envFrom</span>:
     - <span style="color:#f92672">secretRef</span>:
         <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-secret</span>
-</code></pre></div><h2 ref="3-その他のリソース" >3. その他のリソース</h2><a class="anchor" id="3-その他のリソース"></a>
+</code></pre></div><h2 ref="8-その他のリソース" >8. その他のリソース</h2><a class="anchor" id="8-その他のリソース"></a>
 <p>基本的なリソース以外に以下について記載する。</p>
 <ul>
 <li><a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">HPA（HorizontalPodAutoscaler）</a></li>
 <li><a href="https://kubernetes.io/docs/tasks/run-application/configure-pdb/">PBD（PodDisruptionBudget）</a></li>
 </ul>
-<h3 ref="31-hpahorizontalpodautoscaler" >3.1. HPA（HorizontalPodAutoscaler）</h3><a class="anchor" id="31-hpahorizontalpodautoscaler"></a>
+<h3 ref="81-hpahorizontalpodautoscaler" >8.1. HPA（HorizontalPodAutoscaler）</h3><a class="anchor" id="81-hpahorizontalpodautoscaler"></a>
 <p>HPA は pod の負荷に応じて自動的に pod の数を水平スケールさせるリソース。<br>
 Deployment, ReplicaSet, ReplicationController, StatefulSetはscaled resource objectと呼ばれ、これらがauto scalingの対象リソースとなる。</p>
 <pre><code class="language-apiVersion:" data-lang="apiVersion:">kind: HorizontalPodAutoscaler
@@ -1843,7 +1782,7 @@ spec:
       name: cpu
       targetAverageUtilization: 50 # CPU使用率が常に50%になるように指定
 </code></pre><p><a href="https://qiita.com/sheepland/items/37ea0b77df9a4b4c9d80">参考</a></p>
-<h3 ref="32-pbdpoddisruptionbudget" >3.2. PBD（PodDisruptionBudget）</h3><a class="anchor" id="32-pbdpoddisruptionbudget"></a>
+<h3 ref="82-pbdpoddisruptionbudget" >8.2. PBD（PodDisruptionBudget）</h3><a class="anchor" id="82-pbdpoddisruptionbudget"></a>
 <ul>
 <li><code>kubectl drain</code> によって対象 Node から Pod を退去でき、以降も Pod がスケジューリングされないように出来る
 <ul>

@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	App Engine :: テックまとめ
+	アプリケーション管理 :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>App Engine :: テックまとめ</title>
+<title>アプリケーション管理 :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/gcp/computing-hosting/app-engine/"
+  <body data-url="/kubernetes/application-management/"
 
   class="hidetoc hidenextpage ">
 
@@ -384,15 +384,14 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -492,7 +491,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -501,8 +500,7 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/computing-hosting/">コンピューティングとホスティング</a>
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
         <ul>
@@ -538,7 +536,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/app-engine/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/app-engine/" class="dd-item
         item_level_$level
         ">
 
@@ -867,14 +865,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/kubernetes/">Kubernetes</a>
@@ -957,7 +956,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/kubernetes/application-management/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/application-management/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -1064,9 +1063,6 @@ if (!doNotTrack) {
 		
   
   	
-		
-  
-  	
 	<li >
       <a class="text-link" href="https://tanakakns.github.io/">
         
@@ -1075,16 +1071,8 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/gcp/">
-        GCP
-      </a>
-    </li>
-	
-  	
-  
-    <li class="">
-      <a class="text-link" href="/gcp/computing-hosting/">
-        コンピューティングとホスティング
+      <a class="text-link" href="/kubernetes/">
+        Kubernetes
       </a>
     </li>
 	
@@ -1092,7 +1080,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        App Engine
+        アプリケーション管理
       
     </li>
 
@@ -1113,7 +1101,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>App Engine</h1>
+			<h1>アプリケーション管理</h1>
         
 
 		
@@ -1133,96 +1121,23 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p><strong>App Engine</strong> は Google の PaaS 。</p>
-<ol>
-<li><a href="#1-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">コンセプト</a></li>
-<li><a href="#2-app-engine-%E3%81%AE%E4%BD%9C%E6%88%90">App Engine の作成</a></li>
-<li><a href="#3-%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%BF%E3%82%A4%E3%83%97">スケールリングタイプ</a></li>
+	    <ol>
+<li>リリース</li>
 </ol>
-<h2 ref="1-コンセプト" >1. コンセプト</h2><a class="anchor" id="1-コンセプト"></a>
-<ul>
-<li><a href="https://cloud.google.com/appengine/docs/standard">スタンダード環境</a>
-<ul>
-<li><strong>VPC 外</strong> のサンドボックス内で実行される
-<ul>
-<li>VPC に接続するには <a href="https://cloud.google.com/vpc/docs/configure-serverless-vpc-access?hl=ja">サーバーレス VPC アクセス</a> を介する必要がる</li>
-</ul>
-</li>
-<li>スケールアウト・インに対応（ 0 台までスケールインできる）</li>
-</ul>
-</li>
-<li><a href="https://cloud.google.com/appengine/docs/flexible">フレキシブル環境</a>
-<ul>
-<li><strong>VPC 内</strong> の Compute Engine 仮想マシン（VM）上の Docker コンテナ内で実行される</li>
-<li>スケールアップ・ダウンに対応（ スケールアウト・インではないので 0 台にはできない）</li>
-</ul>
-</li>
-</ul>
-<p><strong>1 リージョン・マルチゾーン</strong> で構成される。<br>
-また、 App Engine を作成すると、デフォルトで 単一リージョンの Cloud Storage パケットが作成される。</p>
-<h2 ref="2-app-engine-の作成" >2. App Engine の作成</h2><a class="anchor" id="2-app-engine-の作成"></a>
-<ul>
-<li>Cloud Build API を有効にする</li>
-<li>App Engine アプリを初期化する
-<ul>
-<li><code>gcloud app create --project=[YOUR_PROJECT_ID]</code></li>
-</ul>
-</li>
-<li>ランタイムに対応する <a href="https://cloud.google.com/appengine/docs/standard/go/quickstart">コンポーネント</a> をインストール
-<ul>
-<li><code>gcloud components install app-engine-go</code></li>
-</ul>
-</li>
-<li>以下の設定ファイルで App Engine の設定を行う
-<ul>
-<li><a href="https://cloud.google.com/appengine/docs/standard/go/config/appref"><code>app.yaml</code></a> ：オンラインの場合
-<ul>
-<li><code>service1.yaml</code> <code>service2.yaml</code> といった形でサービス単位で分割管理できる</li>
-</ul>
-</li>
-<li><a href="https://cloud.google.com/appengine/docs/standard/go/scheduling-jobs-with-cron-yaml"><code>cron.yaml</code></a> ：ジョブの場合</li>
-<li><a href="https://cloud.google.com/appengine/docs/standard/go/reference/dispatch-yaml"><code>dispatch.yaml</code></a> ：ルーティング設定</li>
-<li><a href="https://cloud.google.com/appengine/docs/standard/go/configuring-datastore-indexes-with-index-yaml"><code>index.yaml</code></a> ： Datastore の設定</li>
-</ul>
-</li>
-<li>各設定ファイルは <code>gcloud app deploy xxxx.yaml</code> で適用する</li>
-<li><code>gcloud app deploy --no-promote</code> で新しいバージョンをデプロイしますが、トラフィックが新しいバージョンに自動的にルーティングされない（テストできる）</li>
-<li><code>gcloud app logs tail</code> でログ確認</li>
-<li>新しいバージョンへの <strong>トラフィック移行</strong> する場合、以下の方法がある
-<ul>
-<li><code>gcloud app services set-traffic [MY_SERVICE] --splits [MY_VERSION]=1</code> ：トラフィックの即時移行</li>
-<li><code>gcloud app services set-traffic [MY_SERVICE] --splits [MY_VERSION]=1 --migrate</code> ：トラフィックの段階的移行</li>
-</ul>
-</li>
-<li>また、移行だけでなく、A/B Testing など <strong>トラフィック分割</strong> も可能
-<ul>
-<li><code>gcloud app services set-traffic [MY_SERVICE] --splits [MY_VERSION1]=[VERSION1_WEIGHT],[MY_VERSION2]=[VERSION2_WEIGHT] --split-by [IP_OR_COOKIE]</code></li>
-</ul>
-</li>
-</ul>
-<h2 ref="3-スケーリングタイプ" >3. スケーリングタイプ</h2><a class="anchor" id="3-スケーリングタイプ"></a>
-<p><a href="https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed?hl=ja#scaling_types">スケーリングタイプ</a> は以下の 3 種類ある。</p>
-<ul>
-<li>自動スケーリング
-<ul>
-<li>リクエスト率、レスポンスのレイテンシなどのアプリケーションの指標に基づいてインスタンスを作成</li>
-<li>それぞれの指標のしきい値、および常時稼働する最小数のインスタンスを指定できる</li>
-</ul>
-</li>
-<li>基本スケーリング
-<ul>
-<li>アプリケーションがリクエストを受信したときに、インスタンスが作成される</li>
-<li>各インスタンスは、アプリケーションがアイドル状態になるとシャットダウン</li>
-<li>断続的な処理やユーザーのアクティビティに応じて動作する処理に適している</li>
-</ul>
-</li>
-<li>手動スケーリング
-<ul>
-<li>負荷レベルに関係なく、常に実行されるインスタンスの数を指定</li>
-<li>複雑な初期化などのタスクや、時間の経過に伴うメモリの状態に依存するアプリケーションが実行できるようになる</li>
-</ul>
-</li>
-</ul>
+<h2 ref="1-リリース" >1. リリース</h2><a class="anchor" id="1-リリース"></a>
+<h3 ref="11-rolling-update-and-rollbacks" >1.1. Rolling Update and Rollbacks</h3><a class="anchor" id="11-rolling-update-and-rollbacks"></a>
+<p>Deployment のマニフェストの <code>spec.template.spec.containers.image</code> を変更し <code>kubectl apply</code> すれば、デフォルトの設定で <strong>ローリングアップデート</strong> される。<br>
+もしくは <code>kubectl set image deployment/&lt;deployment-name&gt; &lt;pod-name&gt;=&lt;image-name&gt;</code> で直接イメージを変更しても同様。<br>
+ロールアウトの確認方法は以下の通り。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># rollout の状況を確認</span>
+$ kubectl rollout status deployment &lt;deployment-name&gt;
+
+<span style="color:#75715e"># これまでの rollout を確認</span>
+$ kubectl rollout history deployment &lt;deployment-name&gt;
+
+<span style="color:#75715e"># ロールバック</span>
+$ kubectl rollout undo deployment &lt;deployment-name&gt;
+</code></pre></div><p>なお、ローリングアップデートされる際は ReplicaSet が再度作成されている。</p>
 		</div>
 
 

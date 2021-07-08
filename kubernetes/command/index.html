@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-07T20:49:24 JST">
+<meta name="revised" content="2021-07-08T20:18:02 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -956,7 +956,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/kubernetes/administration/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/application-management/" class="dd-item
         item_level_$level
         ">
 
@@ -964,7 +964,22 @@ if (!doNotTrack) {
       
       
       
-          <a href="/kubernetes/administration/">クラスタ管理</a>
+          <a href="/kubernetes/application-management/">アプリケーション管理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/cluster-management/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/cluster-management/">クラスタ管理</a>
       
         
       
@@ -1181,21 +1196,21 @@ Use <span style="color:#e6db74">&#34;kubectl options&#34;</span> <span style="co
 </code></pre></div><h2 ref="基本設定" >基本設定</h2><a class="anchor" id="基本設定"></a>
 <p><code>kubectl</code> コマンドの設定情報は <code>${HOME}/.kube/config</code> にある。<br>
 これを <code>kubeconfig</code> と呼ぶ。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">current-context current-contextを表示する
-delete-cluster  指定したコンテキストをkubeconfigから削除する
-delete-context  指定したコンテキストをkubeconfigから削除する
-delete-user     Delete the specified user from the kubeconfig
-get-clusters    kubeconfigで定義されたクラスターを表示する
-get-contexts    1つまたは複数のコンテキストを記述する
-get-users       Display users defined in the kubeconfig
-rename-context  Renames a context from the kubeconfig file.
-set             kubeconfigに個別の変数を設定する
-set-cluster     kubeconfigにクラスターエントリを設定する
-set-context     kubeconfigにコンテキストエントリを設定する
-set-credentials kubeconfigにユーザーエントリを設定する
-unset           kubeconfigから変数を個別に削除する
-use-context     kubeconfigにcurrent-contextを設定する
-view            マージされたkubeconfigの設定または指定されたkubeconfigを表示する
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">current-context <span style="color:#75715e"># current-contextを表示する</span>
+delete-cluster  <span style="color:#75715e"># 指定したコンテキストをkubeconfigから削除する</span>
+delete-context  <span style="color:#75715e"># 指定したコンテキストをkubeconfigから削除する</span>
+delete-user     <span style="color:#75715e"># Delete the specified user from the kubeconfig</span>
+get-clusters    <span style="color:#75715e"># kubeconfigで定義されたクラスターを表示する</span>
+get-contexts    <span style="color:#75715e"># 1つまたは複数のコンテキストを記述する</span>
+get-users       <span style="color:#75715e"># Display users defined in the kubeconfig</span>
+rename-context  <span style="color:#75715e"># Renames a context from the kubeconfig file.</span>
+set             <span style="color:#75715e"># kubeconfigに個別の変数を設定する</span>
+set-cluster     <span style="color:#75715e"># kubeconfigにクラスターエントリを設定する</span>
+set-context     <span style="color:#75715e"># kubeconfigにコンテキストエントリを設定する</span>
+set-credentials <span style="color:#75715e"># kubeconfigにユーザーエントリを設定する</span>
+unset           <span style="color:#75715e"># kubeconfigから変数を個別に削除する</span>
+use-context     <span style="color:#75715e"># kubeconfigにcurrent-contextを設定する</span>
+view            <span style="color:#75715e"># マージされたkubeconfigの設定または指定されたkubeconfigを表示する</span>
 </code></pre></div><p>kind 環境でやる。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl config current-context
 kind-kind
@@ -1272,7 +1287,7 @@ To further debug and diagnose cluster problems, use <span style="color:#e6db74">
 <h2 ref="kubectl-set" ><code>kubectl set</code></h2><a class="anchor" id="kubectl-set"></a>
 <p>オブジェクトに特定の features を設定するコマンド。<br>
 例えば、以下のコマンドはデプロイメントのイメージのみ変更する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl set image deployment/&lt;demployment&gt; &lt;new-image&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl set image deployment &lt;demployment-name&gt; &lt;new-image&gt; --record
 </code></pre></div>
 		</div>
 

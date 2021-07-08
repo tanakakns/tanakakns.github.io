@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-07T20:49:24 JST">
+<meta name="revised" content="2021-07-08T20:18:02 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -956,7 +956,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/kubernetes/administration/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/application-management/" class="dd-item
         item_level_$level
         ">
 
@@ -964,7 +964,22 @@ if (!doNotTrack) {
       
       
       
-          <a href="/kubernetes/administration/">クラスタ管理</a>
+          <a href="/kubernetes/application-management/">アプリケーション管理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/cluster-management/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/cluster-management/">クラスタ管理</a>
       
         
       
@@ -1375,7 +1390,8 @@ Controller は自作可能であるが、デフォルトで以下のような Co
 <h3 ref="kube-dnscoredns--worker-nodes" >kube-dns・CoreDNS / Worker Nodes</h3><a class="anchor" id="kube-dnscoredns--worker-nodes"></a>
 <p>k8s クラスタの名前解決/<strong>サービスディスカバリ</strong>を担当するクラスタ内の DNS サーバ。<br>
 <code>kube-apiserver</code> をポーリングして設定変更を検知する。<br>
-<code>kube-dns</code> の後継として <a href="https://kubernetes.io/ja/docs/tasks/administer-cluster/coredns/">CoreDNS</a> がある。</p>
+<code>kube-dns</code> の後継として <a href="https://kubernetes.io/ja/docs/tasks/administer-cluster/coredns/">CoreDNS</a> がある。<br>
+2 冗長の DaemonSet として構成される。（ことが多い？）</p>
 <h3 ref="metrics-server" >metrics-server</h3><a class="anchor" id="metrics-server"></a>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
 $ cd kubernetes-metrics-server/
