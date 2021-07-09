@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-08T20:18:02 JST">
+<meta name="revised" content="2021-07-09T22:37:55 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1695,7 +1695,8 @@ Liveness/Readiness Probe の双方で以下の 3 種類のヘルスチェック�
   - <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP    </span> <span style="color:#75715e"># Service が受信するプロトコルとポートマッピング</span>
     <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>          <span style="color:#75715e"># Service が受信 Port</span>
     <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">9376</span>  <span style="color:#75715e"># Pod の Port</span>
-</code></pre></div><p>Service の <code>selector</code> の設定が正しく Pod を捉えているかどうかは <code>kubectl get pods --selector=&quot;app=monolith,secure=enabled&quot;</code> などのコマンドで対象の Pod を取得できるか、で検査できる。</p>
+</code></pre></div><p>Service の <code>selector</code> の設定が正しく Pod を捉えているかどうかは <code>kubectl get pods --selector=&quot;app=monolith,secure=enabled&quot;</code> などのコマンドで対象の Pod を取得できるか、で検査できる。<br>
+さらに、ネットワーク疎通する場合は <code>nc -v &lt;host/IP&gt; &lt;port&gt;</code> コマンドで確認するのがよい。（ <code>curl</code> は busybox に default で入ってない、、、）</p>
 <h2 ref="6-daemonset" >6. DaemonSet</h2><a class="anchor" id="6-daemonset"></a>
 <p>各 Node に 1 Pod ずつ配置する。<br>
 Monitoring/Logging Agent などを仕込むのに最適。（ <code>kube-proxy</code> は DaemonSet で配置されているものもある）<br>

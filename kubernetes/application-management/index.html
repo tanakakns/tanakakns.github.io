@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-08T20:18:02 JST">
+<meta name="revised" content="2021-07-09T22:37:55 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1123,6 +1123,7 @@ if (!doNotTrack) {
 	<div class="content">
 	    <ol>
 <li>リリース</li>
+<li>スケールイン・アウト</li>
 </ol>
 <h2 ref="1-リリース" >1. リリース</h2><a class="anchor" id="1-リリース"></a>
 <h3 ref="11-rolling-update-and-rollbacks" >1.1. Rolling Update and Rollbacks</h3><a class="anchor" id="11-rolling-update-and-rollbacks"></a>
@@ -1138,6 +1139,31 @@ $ kubectl rollout history deployment &lt;deployment-name&gt;
 <span style="color:#75715e"># ロールバック</span>
 $ kubectl rollout undo deployment &lt;deployment-name&gt;
 </code></pre></div><p>なお、ローリングアップデートされる際は ReplicaSet が再度作成されている。</p>
+<h2 ref="2-スケールインアウト" >2. スケールイン・アウト</h2><a class="anchor" id="2-スケールインアウト"></a>
+<p>Deployment をスケーリングするには、 <code>spec.replicas</code> フィールドを更新する。<br>
+<code>kubectl explain</code> コマンドで、このフィールドの説明を確認してみる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment.spec.replicas
+KIND:     Deployment
+VERSION:  apps/v1
+FIELD:    replicas &lt;integer&gt;
+DESCRIPTION:
+     Number of desired pods. This is a pointer to distinguish between explicit
+     zero and not specified. Defaults to 1.
+</code></pre></div><p><code>kubectl scale</code> コマンドでスケールアウト・インする。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pod 数を 5 へスケールアウト</span>
+$ kubectl scale deployment hello --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
+
+<span style="color:#75715e"># 確認</span>
+$ kubectl get pods | grep hello- | wc -l
+<span style="color:#ae81ff">5</span>
+
+<span style="color:#75715e"># Pod 数を 3 へスケールイン</span>
+$ kubectl scale deployment hello --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+
+<span style="color:#75715e"># 確認</span>
+$ kubectl get pods | grep hello- | wc -l
+<span style="color:#ae81ff">3</span>
+</code></pre></div>
 		</div>
 
 
