@@ -17,6 +17,12 @@
     <loc>https://tanakakns.github.io/kubernetes/concept/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/well-architected-framework/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/networking/vpc/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/design/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
@@ -74,6 +80,9 @@
     <loc>https://tanakakns.github.io/mac/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/computing/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/gcp/networking/load-balancing/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
@@ -98,6 +107,9 @@
     <loc>https://tanakakns.github.io/git/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/container/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/gcp/networking/iap/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
@@ -114,6 +126,9 @@
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/go/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/storage/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/app-engine/</loc>
@@ -146,6 +161,9 @@
     <loc>https://tanakakns.github.io/aws/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/migration/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/gcp/databases/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
@@ -153,6 +171,9 @@
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/networking/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/networking/</loc>
@@ -164,7 +185,13 @@
     <loc>https://tanakakns.github.io/terraform/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/dev-tools/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/docker/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/security/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/big-data/</loc>
@@ -177,6 +204,9 @@
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/istio/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/database/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/</loc>
