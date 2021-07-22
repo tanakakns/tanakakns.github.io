@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1299,7 +1316,7 @@ if (!doNotTrack) {
 <p><strong>kubectl plugin</strong> は kubectl のプラグイン機構で、kubectl に任意のサブコマンドを追加する機能である。<br>
 このプラグイン機構は、 <code>PATH</code> の通ったディレクトリに配置された実行ファイルの名前が特定のプレフィックスで開始しているものを呼び出すというもので、kubectl plugin の場合はプレフィックスが <code>kubectl-</code> 。<br>
 例えば <code>kubectl-foo</code> という実行ファイルを作成し、 <code>PATH</code> の通ったディレクトリに配置すると、 <code>kubectl foo</code> コマンドとして実行できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% echo <span style="color:#e6db74">&#39;#!/bin/bash\n\necho &#34;foo&#34;&#39;</span> &gt; /usr/local/bin/kubectl-foo
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% echo <span style="color:#e6db74">&#39;#!/bin/bash\n\necho &#34;foo&#34;&#39;</span> &gt; /usr/local/bin/kubectl-foo
 % chmod +x /usr/local/bin/kubectl-foo
 % /usr/local/bin/kubectl-foo
 foo
@@ -1312,7 +1329,7 @@ foo
 <h3 ref="21-インストール" >2.1. インストール</h3><a class="anchor" id="21-インストール"></a>
 <p><a href="https://krew.sigs.k8s.io/docs/user-guide/setup/install/">公式</a> を参照するのが望ましいが、ここでは実際にやった手順を残しておく。</p>
 <p><code>git</code> がインストールされていることを確認した後、以下を実行する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% <span style="color:#f92672">(</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% <span style="color:#f92672">(</span>
   set -x; cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>mktemp -d<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
   OS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>uname | tr <span style="color:#e6db74">&#39;[:upper:]&#39;</span> <span style="color:#e6db74">&#39;[:lower:]&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
   ARCH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>uname -m | sed -e <span style="color:#e6db74">&#39;s/x86_64/amd64/&#39;</span> -e <span style="color:#e6db74">&#39;s/\(arm\)\(64\)\?.*/\1\2/&#39;</span> -e <span style="color:#e6db74">&#39;s/aarch64$/arm64/&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
@@ -1351,17 +1368,17 @@ foo
  | /
 /
 </code></pre></div><p><code>$HOME/.krew/bin</code> ディレクトリを作成し、パスを通す。（もちろん、プロファイルに記載する）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>KREW_ROOT<span style="color:#66d9ef">:-</span>$HOME/.krew<span style="color:#e6db74">}</span><span style="color:#e6db74">/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>KREW_ROOT<span style="color:#66d9ef">:-</span>$HOME/.krew<span style="color:#e6db74">}</span><span style="color:#e6db74">/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
 </code></pre></div><p><code>kubectl krew</code> コマンドを実行し、 Usage が表示されてば完了。<br>
 また、 Krew 自身も kubectl plugin なので、 <code>kubectl plugin list</code> で表示される。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl plugin list
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl plugin list
 The following compatible plugins are available:
 
 /Users/pepese/.krew/bin/kubectl-krew
 </code></pre></div><p>アンインストールしたい場合は、 <code>rm -rf -- ~/.krew</code> 実行と、環境変数を設定したプロファイルを削除すればいい。</p>
 <h3 ref="22-クイックスタート" >2.2. クイックスタート</h3><a class="anchor" id="22-クイックスタート"></a>
 <p>先に同じく <a href="https://krew.sigs.k8s.io/docs/user-guide/quickstart/">公式</a> を参照するのが、望ましいがここでは実際にやった手順を残しておく。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"><span style="color:#75715e"># プラグインリストの更新</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"><span style="color:#75715e"># プラグインリストの更新</span>
 % kubectl krew update
 
 <span style="color:#75715e"># プラグインの検索</span>

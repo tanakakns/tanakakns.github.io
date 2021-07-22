@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1325,7 +1342,7 @@ if (!doNotTrack) {
 <a href="https://cloud.google.com/apis/design/">API 設計ガイド</a> で説明されているリソース指向の設計原則が適用されている。<br>
 なお、 Cloud API を利用する際は、各自で有効に設定する必要がある。（サイドメニュー「API とサービス」 -&gt; 「ライブラリ」から APIを検索して「有効にする」）<br>
 以下のコマンドでも API の有効化が可能。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># API 有効化</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># API 有効化</span>
 $ gloucd services enable SERVICE_NAME
 
 <span style="color:#75715e"># 現在のプロジェクトで有効になっているAPIの一覧を表示</span>
@@ -1358,7 +1375,7 @@ $ gcloud services list --available
 </ul>
 <h4 ref="411-インストール" >4.1.1. インストール</h4><a class="anchor" id="411-インストール"></a>
 <p>Mac へのインストールは以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf plugin add gcloud
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf plugin add gcloud
 ✅  All dependencies found on system!
 
 % asdf list-all gcloud
@@ -1433,7 +1450,7 @@ bq 2.0.66
 core 2021.03.26
 gsutil 4.60
 </code></pre></div><h4 ref="412-使い方" >4.1.2. 使い方</h4><a class="anchor" id="412-使い方"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud GROUP COMMAND OPTIONS
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud GROUP COMMAND OPTIONS
 </code></pre></div><p>GROUP は多段になっており、  <code>gcloud compute images list</code> （ <code>compute image</code> が GROUP で <code>list</code> が COMMAND ）のように 2 コ以上続くこともある。<br>
 COMMAND は GROUP によって異なるが、共通的なものに以下がある。</p>
 <table>
@@ -1467,7 +1484,7 @@ COMMAND は GROUP によって異なるが、共通的なものに以下があ�
 </tbody>
 </table>
 <p>たとえば、有効なアカウント名の一覧を取得するコマンドは以下。（ GROUP が 1 段の例）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud auth list
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud auth list
 
 Credentialed Accounts
 ACTIVE  ACCOUNT
@@ -1475,7 +1492,7 @@ ACTIVE  ACCOUNT
 To set the active account, run:
     $ gcloud config set account <span style="color:#e6db74">`</span>ACCOUNT<span style="color:#e6db74">`</span>
 </code></pre></div><p>たとえば、プロジェクト ID の一覧を取得するコマンドは以下。（ GROUP が 2 段の例）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config list project
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config list project
 
 <span style="color:#f92672">[</span>core<span style="color:#f92672">]</span>
 project <span style="color:#f92672">=</span> qwiklabs-gcp-44776a13dea667a6
@@ -1486,7 +1503,7 @@ project <span style="color:#f92672">=</span> qwiklabs-gcp-44776a13dea667a6
 Google Cloud SDK に含まれる <code>bq</code> や <code>gsutil</code> などの構成要素を <a href="https://cloud.google.com/sdk/docs/components">コンポーネント</a> という。<br>
 つまり <code>gcloud</code> は Google Cloud SDK のコンポーネントを管理する機能も含むことになる。<br>
 Google Cloud SDK の設定情報の管理は以下のコマンドを利用する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Google Cloud SDK の設定一覧表示</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Google Cloud SDK の設定一覧表示</span>
 $ gcloud config list
 
 <span style="color:#75715e"># 未設定の設定も含めて全て表示</span>
@@ -1509,13 +1526,13 @@ $ gcloud components update --version VERSION
 $ gcloud components remove COMPONENT_ID
 </code></pre></div><h4 ref="415-よく使うコマンド" >4.1.5. よく使うコマンド</h4><a class="anchor" id="415-よく使うコマンド"></a>
 <p>プロジェクト情報の管理。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># プロジェクト一覧</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># プロジェクト一覧</span>
 $ gcloud projects list
 
 <span style="color:#75715e"># プロジェクト切り替え</span>
 $ gcloud config set project &lt;your-project-id&gt;
 </code></pre></div><p>リージョン・ゾーンなどの設定情報の管理。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
 $ gcloud compute project-info describe --project &lt;your_project_ID&gt;
 
 <span style="color:#75715e"># 具体例</span>
@@ -1551,7 +1568,7 @@ quotas:
 selfLink: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-97e14e7c9a36
 xpnProjectStatus: UNSPECIFIED_XPN_PROJECT_STATUS
 </code></pre></div><p>デフォルトのリージョン・ゾーンなどの情報の設定。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># デフォルトのリージョン設定</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># デフォルトのリージョン設定</span>
 $ gcloud config set compute/region &lt;REGION&gt;
 
 <span style="color:#75715e"># デフォルトのゾーン設定（なお、ゾーンにリージョン情報も含まれるため設定せずとも推測される場合もある）</span>

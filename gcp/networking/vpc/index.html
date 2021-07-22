@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1426,13 +1443,13 @@ if (!doNotTrack) {
 <h3 ref="24-ネットワークの作成" >2.4. ネットワークの作成</h3><a class="anchor" id="24-ネットワークの作成"></a>
 <p>Cloud Console では、ナビゲーション メニュー（mainmenu.png） &gt; [VPC ネットワーク] &gt; [VPC ネットワーク]から作成する。<br>
 コマンドでの VPC 作成は以下。（自動モードではなくカスタムモードを指定）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks create privatenet --subnet-mode<span style="color:#f92672">=</span>custom
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks create privatenet --subnet-mode<span style="color:#f92672">=</span>custom
 </code></pre></div><p>先に作成した VPC にサブネットを 2 つ追加する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks subnets create privatesubnet-us --network<span style="color:#f92672">=</span>privatenet --region<span style="color:#f92672">=</span>us-central1 --range<span style="color:#f92672">=</span>172.16.0.0/24
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks subnets create privatesubnet-us --network<span style="color:#f92672">=</span>privatenet --region<span style="color:#f92672">=</span>us-central1 --range<span style="color:#f92672">=</span>172.16.0.0/24
 
 $ gcloud compute networks subnets create privatesubnet-eu --network<span style="color:#f92672">=</span>privatenet --region<span style="color:#f92672">=</span>europe-west4 --range<span style="color:#f92672">=</span>172.20.0.0/20
 </code></pre></div><p>作成したら、以下のコマンドで VPC およびサブネットを確認する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks list
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute networks list
 NAME           SUBNET_MODE  BGP_ROUTING_MODE  IPV4_RANGE  GATEWAY_IPV4
 default        AUTO         REGIONAL
 managementnet  CUSTOM       REGIONAL
@@ -1446,21 +1463,21 @@ privatesubnet-us     us-central1              privatenet     172.16.0.0/24
 privatesubnet-eu     europe-west4             privatenet     172.20.0.0/20
 </code></pre></div><p>ファイアウォールは、Cloud Console で、ナビゲーション メニュー（mainmenu.png） &gt; [VPC ネットワーク] &gt; [ファイアウォール] から作成する。<br>
 コマンドでは以下。（先ほど作成した VPC に追加）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules create privatenet-allow-icmp-ssh-rdp --direction<span style="color:#f92672">=</span>INGRESS --priority<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span> --network<span style="color:#f92672">=</span>privatenet --action<span style="color:#f92672">=</span>ALLOW --rules<span style="color:#f92672">=</span>icmp,tcp:22,tcp:3389 --source-ranges<span style="color:#f92672">=</span>0.0.0.0/0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules create privatenet-allow-icmp-ssh-rdp --direction<span style="color:#f92672">=</span>INGRESS --priority<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span> --network<span style="color:#f92672">=</span>privatenet --action<span style="color:#f92672">=</span>ALLOW --rules<span style="color:#f92672">=</span>icmp,tcp:22,tcp:3389 --source-ranges<span style="color:#f92672">=</span>0.0.0.0/0
 
 Creating firewall...⠹Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-ed0a2d7fdd5c/global/firewalls/privatenet-allow-icmp-ssh-rdp<span style="color:#f92672">]</span>.
 Creating firewall...done.
 NAME                           NETWORK     DIRECTION  PRIORITY  ALLOW                 DENY  DISABLED
 privatenet-allow-icmp-ssh-rdp  privatenet  INGRESS    <span style="color:#ae81ff">1000</span>      icmp,tcp:22,tcp:3389        False
 </code></pre></div><p>作成したファイアウォールは以下のコマンドで確認する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules list --sort-by<span style="color:#f92672">=</span>NETWORK
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules list --sort-by<span style="color:#f92672">=</span>NETWORK
 NAME                              NETWORK        DIRECTION  PRIORITY  ALLOW                         DENY  DISABLED
 （省略）
 privatenet-allow-icmp-ssh-rdp     privatenet     INGRESS    <span style="color:#ae81ff">1000</span>      icmp,tcp:22,tcp:3389                False
 </code></pre></div><p>これまで作成した VPC、サブネット に VM インスタンスを作成するコマンドは以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create privatenet-us-vm --zone<span style="color:#f92672">=</span>us-central1-c --machine-type<span style="color:#f92672">=</span>n1-standard-1 --subnet<span style="color:#f92672">=</span>privatesubnet-us
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create privatenet-us-vm --zone<span style="color:#f92672">=</span>us-central1-c --machine-type<span style="color:#f92672">=</span>n1-standard-1 --subnet<span style="color:#f92672">=</span>privatesubnet-us
 </code></pre></div><p>作成したら VM インスタンスの存在を確認する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances list --sort-by<span style="color:#f92672">=</span>ZONE
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances list --sort-by<span style="color:#f92672">=</span>ZONE
 NAME                 ZONE            MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
 （省略）
 privatenet-us-vm     us-central1-c   n1-standard-1               172.16.0.2   35.223.37.245   RUNNING
@@ -1557,7 +1574,7 @@ Cloud CDN は、外部 HTTP(S) 負荷分散の Cloud Load Balancing と連携し
 <li>各々の VM インスタンスから他方の VM インスタンスへ SSH できることを確認する。</li>
 </ul>
 <p>まずは、 VPC・サブネット・ファイアウォールルール・VM インスタンスを作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">###</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">###</span>
 <span style="color:#75715e"># Project-A：qwiklabs-gcp-00-5e5e0d21f51f</span>
 <span style="color:#75715e">###</span>
 <span style="color:#75715e"># Project ID を設定</span>
@@ -1601,7 +1618,7 @@ vm-b  us-central1-a  n1-standard-1               10.8.0.2     35.232.49.173  RUN
 <span style="color:#75715e"># ファイアウォールルール作成</span>
 $ gcloud compute firewall-rules create network-b-fw --network network-b --allow tcp:22,icmp
 </code></pre></div><p>次にVPC ネットワーク ピアリング セッションを設定する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">###</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">###</span>
 <span style="color:#75715e"># network-a を network-b にピアリングする</span>
 <span style="color:#75715e">###</span>
 <span style="color:#75715e"># Project-A の ID を設定</span>
@@ -1644,7 +1661,7 @@ $ gcloud compute routes list --project qwiklabs-gcp-00-6069f8516f00
 NAME                            NETWORK    DEST_RANGE     NEXT_HOP                  PRIORITY
 peering-route-8fd601b505e3037b  network-b  10.0.0.0/16    peer-ba                   <span style="color:#ae81ff">0</span> <span style="color:#75715e"># この行を確認する</span>
 </code></pre></div><p>Project-A の VM インスタンス vm-a へ SSH して Project-B の VM インスタンスのプライベート IP に ping が通ることを確認する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Project-A の ID を設定</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Project-A の ID を設定</span>
 $ gcloud config set project qwiklabs-gcp-00-5e5e0d21f51f
 
 <span style="color:#75715e"># Project-A の VM インスタンス vm-a へ SSH</span>

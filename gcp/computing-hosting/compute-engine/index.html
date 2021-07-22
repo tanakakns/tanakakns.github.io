@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1389,7 +1406,7 @@ VM オプションとして「可用性ポリシー」「サービスアカウ�
 <h4 ref="111-インスタンステンプレート" >1.1.1. インスタンステンプレート</h4><a class="anchor" id="111-インスタンステンプレート"></a>
 <p><a href="https://cloud.google.com/compute/docs/instance-templates?hl=ja">インスタンステンプレート</a> は、VM インスタンスと MIG を作成する際にテンプレートとして利用できるリソース。<br>
 インスタンステンプレートで、マシンタイプ、イメージ、ラベルなどを定義できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instance-templates create example-template-custom <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instance-templates create example-template-custom <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --machine-type e2-standard-4 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --image-family debian-9 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --image-project debian-cloud <span style="color:#ae81ff">\
@@ -1398,7 +1415,7 @@ VM オプションとして「可用性ポリシー」「サービスアカウ�
 <h4 ref="112-マネージドインスタンスグループ-mig-" >1.1.2. マネージドインスタンスグループ（ MIG ）</h4><a class="anchor" id="112-マネージドインスタンスグループ-mig-"></a>
 <p>インスタンステンプレートからインスタンスを起動・グループ化することにより、負荷分散やオートスケール、ヘルスチェックによる自動復旧を可能にする。<br>
 なお、 MIG には <strong>ゾーン MIG</strong> と <strong>リージョン（マルチゾーン） MIG</strong> の 2 種類あり、可用性の観点から後者にすることが推奨される。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instance-groups managed create <span style="color:#f92672">[</span>インスタンスグループ名<span style="color:#f92672">]</span> <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instance-groups managed create <span style="color:#f92672">[</span>インスタンスグループ名<span style="color:#f92672">]</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --base-instance-name<span style="color:#f92672">=[</span>作成されるインスタンス名<span style="color:#f92672">]</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --size<span style="color:#f92672">=[</span>インスタンス数<span style="color:#f92672">]</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --template<span style="color:#f92672">=[</span>インスタンステンプレート名<span style="color:#f92672">]</span> <span style="color:#ae81ff">\
@@ -1443,7 +1460,7 @@ VM オプションとして「可用性ポリシー」「サービスアカウ�
 <li>割と自由に設定できる カスタムタイプ もある</li>
 </ul>
 <p>提供されているマシンタイプは以下のコマンドで一覧取得できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute machine-types list
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute machine-types list
 WARNING: The following filter keys were not present in any resource : deprecated.state
 NAME              ZONE                       CPUS  MEMORY_GB  DEPRECATED
 a2-highgpu-1g     us-central1-a              <span style="color:#ae81ff">12</span>    85.00
@@ -1530,7 +1547,7 @@ a2-highgpu-4g     us-central1-a              <span style="color:#ae81ff">48</spa
 </li>
 </ul>
 <p>公開 OS イメージの情報は、以下のコマンドで取得可能。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute images list
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute images list
 NAME                              PROJECT       FAMILY         DEPRECATED  STATUS
 centos-6-v20181011                centos-cloud  centos-6                   READY
 centos-7-v20181011                centos-cloud  centos-7                   READY
@@ -1576,7 +1593,7 @@ coreos-stable-1911-3-0-v20181106  coreos-cloud  coreos-stable              READY
 </ol>
 <h3 ref="21-gcloud-コマンドの設定" >2.1. gcloud コマンドの設定</h3><a class="anchor" id="21-gcloud-コマンドの設定"></a>
 <p>gcloud コマンドの設定情報の確認と変更について記載する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 設定情報の確認（値が設定されている情報のみ）</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 設定情報の確認（値が設定されている情報のみ）</span>
 $ gcloud config list
 
 <span style="color:#75715e"># 設定情報の確認（ unset も含めてすべて）</span>
@@ -1591,7 +1608,7 @@ $ gcloud config get-value project
 その他、 <code>SECTION/PROPERTY</code> に関する情報は <a href="https://cloud.google.com/sdk/gcloud/reference/config/set?hl=ja"><code>gcloud config set</code></a> を参照。<br>
 情報の設定は <code>gcloud config set</code> コマンドを利用する。<br>
 以下は、 gcloud コマンドで多用する情報のため、ターミナルセッション開始時に設定することを推奨する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># `--project` オプションを省略可能にする</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># `--project` オプションを省略可能にする</span>
 $ gcloud config set project &lt;PROJECT ID&gt;
 
 <span style="color:#75715e"># `--region` オプションを省略可能にする</span>
@@ -1601,7 +1618,7 @@ $ gcloud config set compute/region &lt;REGION&gt;
 $ gcloud config set compute/zone &lt;ZONE&gt;
 </code></pre></div><p><code>gcloud</code> コマンドで設定したデフォルト値は <code>bq</code> や <code>gsutil</code> などの <strong>Cloud SDK で共有される</strong> 。（全てかどうかはわからない、、、）<br>
 なお、PROJECT 、 REGION 、 ZONE の選択肢となる一覧情報は以下のコマンドで取得可能。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># プロジェクト一覧</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># プロジェクト一覧</span>
 $ gcloud projects list
 
 <span style="color:#75715e"># リージョン一覧</span>
@@ -1610,16 +1627,16 @@ $ gcloud compute regions list
 <span style="color:#75715e"># ゾーン一覧</span>
 $ gcloud compute zones list
 </code></pre></div><p>また、 <code>gcloud compute</code> ではメタデータを持っており、 <code>project-info</code> で参照できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute project-info describe --project &lt;PROJECT ID&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute project-info describe --project &lt;PROJECT ID&gt;
 <span style="color:#75715e"># 例えば、以下のようなメタデータを持っている（持っていないときもある）</span>
 <span style="color:#75715e"># リージョン情報：google-compute-default-region</span>
 <span style="color:#75715e"># ゾーン情報　　：google-compute-default-zone</span>
 </code></pre></div><p>また、コマンドでの設定ではなく環境変数を利用してもいい。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT_ID<span style="color:#f92672">=</span>&lt;your_project_ID&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT_ID<span style="color:#f92672">=</span>&lt;your_project_ID&gt;
 $ export ZONE<span style="color:#f92672">=</span>&lt;your_zone&gt;
 </code></pre></div><h3 ref="22-インスタンス作成" >2.2. インスタンス作成</h3><a class="anchor" id="22-インスタンス作成"></a>
 <p><a href="https://cloud.google.com/sdk/gcloud/reference/compute/instances/create?hl=ja">gcloud compute instances create</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create INSTANCE_NAME --machine-type n1-standard-2
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create INSTANCE_NAME --machine-type n1-standard-2
 
 Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-03-7b6d0cd2d87a/zones/us-central1-c/instances/gcelab2<span style="color:#f92672">]</span>.
 NAME           ZONE           MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP   STATUS
@@ -1639,7 +1656,7 @@ INSTANCE_NAME  us-central1-c  n1-standard-2               10.128.0.3   34.70.76.
 </li>
 </ul>
 <p>上記コマンドで作成したら、下記コマンドで確認する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute instances describe INSTANCE_NAME
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute instances describe INSTANCE_NAME
 </code></pre></div><p>なお、プロジェクト毎に <code>default</code> という名前のデフォルト VPC ネットワークが作成されており、ネットワークの詳細を指定せずに VM を作成すると、デフォルト VPC ネットワークと同じリージョンにあるサブネットにインスタンスが作成される。<br>
 以下のオプションを指定することで、対象のネットワークにインスタンスが作成される。</p>
 <ul>
@@ -1653,7 +1670,7 @@ INSTANCE_NAME  us-central1-c  n1-standard-2               10.128.0.3   34.70.76.
 </ul>
 <h3 ref="23-起動スクリプト" >2.3. 起動スクリプト</h3><a class="anchor" id="23-起動スクリプト"></a>
 <p>メタデータ（ <code>--metadata</code> オプション）に起動スクリプトの情報を付与して起動時に実行させることができる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create www1 <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create www1 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --image-family debian-9 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --image-project debian-cloud <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --zone us-central1-a <span style="color:#ae81ff">\
@@ -1664,7 +1681,7 @@ INSTANCE_NAME  us-central1-c  n1-standard-2               10.128.0.3   34.70.76.
 </span><span style="color:#e6db74">    sudo service apache2 restart
 </span><span style="color:#e6db74">    echo &#39;&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www1&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#39; | tee /var/www/html/index.html&#34;</span>
 </code></pre></div><p>起動スクリプトが長いなどと行った場合、 Cloud Storage バケットに配置してあるスクリプトを実行することも可能。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Cloud Storage バケットの作成</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Cloud Storage バケットの作成</span>
 $ gsutil mb -c regional -l us-central1 gs://challenge-quest-12345
 <span style="color:#75715e"># Cloud Console でスクリプトをアップロード</span>
 
@@ -1676,14 +1693,14 @@ $ gcloud compute instances create apache --scopes storage-ro <span style="color:
 <p><a href="https://cloud.google.com/compute/docs/nodes/provisioning-sole-tenant-vms?hl=ja">https://cloud.google.com/compute/docs/nodes/provisioning-sole-tenant-vms?hl=ja</a></p>
 <h4 ref="241-単一テナントノード-テンプレートを作成" >2.4.1. 単一テナントノード テンプレートを作成</h4><a class="anchor" id="241-単一テナントノード-テンプレートを作成"></a>
 <p><a href="https://cloud.google.com/compute/docs/nodes/sole-tenant-nodes?hl=ja">単一テナントノード</a> のテンプレートを作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute sole-tenancy node-templates create TEMPLATE_NAME <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute sole-tenancy node-templates create TEMPLATE_NAME <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --node-type<span style="color:#f92672">=</span>NODE_TYPE <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  <span style="color:#f92672">[</span>--node-affinity-labels<span style="color:#f92672">=</span>AFFINITY_LABELS <span style="color:#ae81ff">\]</span>
   <span style="color:#f92672">[</span>--region<span style="color:#f92672">=</span>REGION <span style="color:#ae81ff">\]</span>
   <span style="color:#f92672">[</span>--accelerator type<span style="color:#f92672">=</span>GPU_TYPE,count<span style="color:#f92672">=</span>GPU_COUNT <span style="color:#ae81ff">\]</span>
   <span style="color:#f92672">[</span>--disk type<span style="color:#f92672">=</span>local-ssd,count<span style="color:#f92672">=</span>DISK_COUNT,size<span style="color:#f92672">=</span>DISK_SIZE<span style="color:#f92672">]</span>
 </code></pre></div><h4 ref="242-単一ノードグループの自動スケーリング" >2.4.2. 単一ノードグループの自動スケーリング</h4><a class="anchor" id="242-単一ノードグループの自動スケーリング"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute sole-tenancy node-groups create group-name <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% gcloud compute sole-tenancy node-groups create group-name <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --node-template template-name <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --target-size size <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --maintenance-policy maintenance-policy <span style="color:#ae81ff">\
@@ -1696,9 +1713,9 @@ $ gcloud compute instances create apache --scopes storage-ro <span style="color:
 <li><a href="https://cloud.google.com/compute/docs/disks/add-persistent-disk">ディスクの作成とアタッチ</a></li>
 </ul>
 <p>ディスクの作成は以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute disks create DISK_NAME --size DISK_SIZE --type DISK_TYPE
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute disks create DISK_NAME --size DISK_SIZE --type DISK_TYPE
 </code></pre></div><p>作成したディスクは以下でインスタンスにアタッチする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances attach-disk INSTANCE_NAME --disk DISK_NAME
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances attach-disk INSTANCE_NAME --disk DISK_NAME
 </code></pre></div><p>なお、アタッチしたディスクはマウントしないと利用できないことに注意。<br>
 また、インスタンス作成時（ <code>gcloud compute instances create</code> ）にディスクをアタッチした状態で起動するには以下の方法がある。</p>
 <ul>
@@ -1737,7 +1754,7 @@ $ gcloud compute instances create apache --scopes storage-ro <span style="color:
 </ul>
 <h2 ref="4-ファイアウォールルールの作成" >4. ファイアウォールルールの作成</h2><a class="anchor" id="4-ファイアウォールルールの作成"></a>
 <p>以下のコマンドでファイアウォールルールを作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules create allow-http <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules create allow-http <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --direction<span style="color:#f92672">=</span>ingress <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --source-ranges<span style="color:#f92672">=</span>0.0.0.0/0 <span style="color:#ae81ff">\
@@ -1745,13 +1762,13 @@ $ gcloud compute instances create apache --scopes storage-ro <span style="color:
 </span><span style="color:#ae81ff"></span>    --rules<span style="color:#f92672">=</span>tcp:80
 </code></pre></div><p>なお、ファイアウォールルールはインスタンスに付与された <strong>ネットワークタグ</strong> や <strong>サービスアカウント</strong> によって適用され、上記の <code>--target-tags</code> や <code>--target-service-accounts</code> オプションで設定された値と対応する。<br>
 インスタンス作成時（ <code>gcloud compute instances create</code> ）に <code>--tags</code> オプションを用いてネットワークタグを付与できるが、以下のコマンドで既存インスタンスにタグ付けすることもできる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances add-tags INSTANCE_NAME --tags<span style="color:#f92672">=</span>http-server
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances add-tags INSTANCE_NAME --tags<span style="color:#f92672">=</span>http-server
 </code></pre></div><p>また、ファイアウォールルールの優先度は、0〜65535の整数で表現され、値が小さいほど優先度が高くなる。（ <a href="https://cloud.google.com/vpc/docs/firewalls#priority_order_for_firewall_rules">優先度</a> ）</p>
 <h2 ref="5-ネットワークインターフェース" >5. ネットワークインターフェース</h2><a class="anchor" id="5-ネットワークインターフェース"></a>
 <p>ネットワークインターフェースの付与は <code>gcloud compute instances create</code> コマンド実行時の <a href="https://cloud.google.com/sdk/gcloud/reference/compute/instances/create?hl=ja#--network-interface"><code>--network-interface</code></a> オプションで実施できる。<br>
 <code>--network-interface</code> オプションを省略したり、 <code>--network-interface=''</code> を指定すると <code>default</code> ネットワークに <code>nic0</code> が作成される。<br>
 <code>--network-interface</code> オプションを複数指定すると、指定した数だけ、指定した順に <code>nic0</code> <code>nic1</code> &hellip; が作成される。（ <a href="https://cloud.google.com/vpc/docs/create-use-multiple-interfaces?hl=ja">複数のネットワーク インターフェースを持つインスタンスの作成</a> ）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$  gcloud compute instances create vm1 --machine-type<span style="color:#f92672">=</span>n1-standard-4 <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$  gcloud compute instances create vm1 --machine-type<span style="color:#f92672">=</span>n1-standard-4 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --network-interface<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --network-interface<span style="color:#f92672">=</span>network<span style="color:#f92672">=</span>net1,subnet<span style="color:#f92672">=</span>net1-subnet-a,private-network-ip<span style="color:#f92672">=</span>10.128.0.2,address<span style="color:#f92672">=</span>my-external-address <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --network-interface<span style="color:#f92672">=</span>network<span style="color:#f92672">=</span>net2,subnet<span style="color:#f92672">=</span>net2-subnet-b,private-network-ip<span style="color:#f92672">=</span>10.129.0.2,no-address
@@ -1763,13 +1780,13 @@ $ gcloud compute instances create apache --scopes storage-ro <span style="color:
 <h2 ref="6-インスタンスへの接続" >6. インスタンスへの接続</h2><a class="anchor" id="6-インスタンスへの接続"></a>
 <p>Cloud Console にて「サイドメニュー」-&gt;「Compute Engine」-&gt;「 VM インスタンス」と選択し、該当インスタンスのレコードで「 SSH 」をクリックするとポップアップしてターミナルが立ち上がる。<br>
 もしくは、以下のコマンドを実行する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USEGE</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USEGE</span>
 $ gcloud compute ssh <span style="color:#f92672">[</span>インスタンス名<span style="color:#f92672">]</span> --project<span style="color:#f92672">=</span>PROJECT_ID --zone<span style="color:#f92672">=</span>ZONE VM_NAME
 
 <span style="color:#75715e"># 具体例（Pass Phrase は空でいい）</span>
 $ gcloud compute ssh gcelab2 --zone us-central1-c
 </code></pre></div><p>接続できたら、以下のコマンドの管理者権限になる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo su -
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo su -
 </code></pre></div><p>ちなみに Linux は SSH 、 Windows は RDP で接続する。</p>
 <h2 ref="7-cloud-monitoring--cloud-logging-連携" >7. Cloud Monitoring / Cloud Logging 連携</h2><a class="anchor" id="7-cloud-monitoring--cloud-logging-連携"></a>
 <p>Cloud Monitoring では、クラウドで実行されるアプリケーションのパフォーマンスや稼働時間、全体的な動作状況を確認できる。<br>
@@ -1778,7 +1795,7 @@ Google Cloud、Amazon Web Services、ホストされた稼働時間プローブ�
 Cloud Monitoring のアラート機能を Slack、PagerDuty、HipChat、Campfire などに組み込むこともできる。</p>
 <p>インスタンスから情報を収集する VM に <a href="https://cloud.google.com/monitoring/agent">Monitoring エージェント</a> と <a href="https://cloud.google.com/logging/docs/agent?hl=ja">Logging エージェント</a> をインストールすることで収集可能となる。<br>
 対象の VM インスタンスに SSH した後、以下のコマンドでインストールする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Monitoring エージェントのインストール</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Monitoring エージェントのインストール</span>
 $ curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh
 $ sudo bash add-monitoring-agent-repo.sh
 $ sudo apt-get update
@@ -1799,7 +1816,7 @@ $ sudo apt-get install google-fluentd
 <h2 ref="8-サービスアカウント" >8. サービスアカウント</h2><a class="anchor" id="8-サービスアカウント"></a>
 <p>VM インスタンスにサービスアカウントを付与することによってリソースへのアクセス制御を行う。<br>
 サービスアカウントは以下のように作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サービスアカウントの作成</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サービスアカウントの作成</span>
 $ gcloud iam service-accounts create SERVICE_ACCOUNT_ID --display-name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;DISPLAY_NAME&#34;</span>
 
 <span style="color:#75715e"># サービスアカウントへのロールの付与</span>
@@ -1807,11 +1824,11 @@ gcloud projects add-iam-policy-binding PROJECT_ID <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --member<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;serviceAccount:SERVICE_ACCOUNT_ID@PROJECT_ID.iam.gserviceaccount.com&#34;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --role<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ROLE_NAME&#34;</span>
 </code></pre></div><p>VM インスタンス作成時にサービスアカウントを付与するには以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create INSTANCE_NAME <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create INSTANCE_NAME <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --service-account<span style="color:#f92672">=</span>SERVICE_ACCOUNT_EMAIL <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    <span style="color:#f92672">[</span>--scopes<span style="color:#f92672">=[</span>SCOPES,...<span style="color:#f92672">]]</span>
 </code></pre></div><p>既存の VM インスタンスにサービスアカウントを付与するのは以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances set-service-account INSTANCE_NAME <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances set-service-account INSTANCE_NAME <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --service-account<span style="color:#f92672">=</span>SERVICE_ACCOUNT <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    <span style="color:#f92672">[</span>--scopes<span style="color:#f92672">=[</span>SCOPE,...<span style="color:#f92672">]</span>
 </code></pre></div><ul>
@@ -1850,7 +1867,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID <span style="color:#ae81ff">\
 <li>基本的な Apache ウェブサーバーの実行</li>
 <li>サーバーのテスト</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># リージョン・ゾーンの設定</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># リージョン・ゾーンの設定</span>
 $ gcloud config set compute/region us-central1
 $ gcloud config set compute/zone us-central1-a
 
@@ -1877,7 +1894,7 @@ $ service apache2 restart
 
 <span style="color:#75715e"># 外部 IP に対して curl を実行し、 Apache ページが見れることを確認</span>
 </code></pre></div><p>VM インスタンスへログインして Apache の設定するのは面倒なので、メタデータに設定する起動スクリプトを利用するパターンは以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># リージョン・ゾーンの設定</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># リージョン・ゾーンの設定</span>
 $ gcloud config set compute/region us-central1
 $ gcloud config set compute/zone us-central1-a
 
@@ -1902,7 +1919,7 @@ $ gcloud compute instances add-tags apache --tags<span style="color:#f92672">=</
 
 <span style="color:#75715e"># 外部 IP に対して curl を実行し、 Apache ページが見れることを確認</span>
 </code></pre></div><p>ちなみに <code>resources-install-web.sh</code> は以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>apt-get update
 apt-get install -y apache2
 </code></pre></div><h3 ref="102-踏み台経由の-rdp" >10.2. 踏み台経由の RDP</h3><a class="anchor" id="102-踏み台経由の-rdp"></a>
@@ -1931,7 +1948,7 @@ apt-get install -y apache2
 <li>各サーバのログインパスワードをリセットして、踏み台サーバ経由でセキュアサーバに RDP できることを確認する</li>
 </ul>
 <p>コマンドベースでの作成は以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># リージョン・ゾーンの設定</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># リージョン・ゾーンの設定</span>
 $ gcloud config set compute/region us-central1
 $ gcloud config set compute/zone us-central1-a
 

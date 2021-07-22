@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1349,7 +1366,7 @@ Cloud Build や Cloud Build コミュニティで提供されているビルド�
 <h3 ref="22-ビルド構成ファイル" >2.2. ビルド構成ファイル</h3><a class="anchor" id="22-ビルド構成ファイル"></a>
 <p><a href="https://cloud.google.com/build/docs/build-config?hl=ja">ビルド構成</a> ファイルは YAML または JSON 構文で記述する。<br>
 curl などのサードパーティの http ツールを使用してビルド リクエストを送信する場合は、JSON 構文を使用する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">steps</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">steps</span>:
 - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
   <span style="color:#f92672">args</span>: [<span style="color:#ae81ff">string, string, ...]</span>
   <span style="color:#f92672">env</span>: [<span style="color:#ae81ff">string, string, ...]</span>

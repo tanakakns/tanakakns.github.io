@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1299,7 +1316,7 @@ if (!doNotTrack) {
 <p>Deployment のマニフェストの <code>spec.template.spec.containers.image</code> を変更し <code>kubectl apply</code> すれば、デフォルトの設定で <strong>ローリングアップデート</strong> される。<br>
 もしくは <code>kubectl set image deployment/&lt;deployment-name&gt; &lt;pod-name&gt;=&lt;image-name&gt;</code> で直接イメージを変更しても同様。<br>
 ロールアウトの確認方法は以下の通り。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># rollout の状況を確認</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># rollout の状況を確認</span>
 $ kubectl rollout status deployment &lt;deployment-name&gt;
 
 <span style="color:#75715e"># これまでの rollout を確認</span>
@@ -1311,7 +1328,7 @@ $ kubectl rollout undo deployment &lt;deployment-name&gt;
 <h2 ref="2-スケールインアウト" >2. スケールイン・アウト</h2><a class="anchor" id="2-スケールインアウト"></a>
 <p>Deployment をスケーリングするには、 <code>spec.replicas</code> フィールドを更新する。<br>
 <code>kubectl explain</code> コマンドで、このフィールドの説明を確認してみる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment.spec.replicas
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment.spec.replicas
 KIND:     Deployment
 VERSION:  apps/v1
 FIELD:    replicas &lt;integer&gt;
@@ -1319,7 +1336,7 @@ DESCRIPTION:
      Number of desired pods. This is a pointer to distinguish between explicit
      zero and not specified. Defaults to 1.
 </code></pre></div><p><code>kubectl scale</code> コマンドでスケールアウト・インする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pod 数を 5 へスケールアウト</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pod 数を 5 へスケールアウト</span>
 $ kubectl scale deployment hello --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
 
 <span style="color:#75715e"># 確認</span>

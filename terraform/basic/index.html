@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1341,7 +1358,7 @@ if (!doNotTrack) {
 </table>
 <h1 ref="環境設定" >環境設定</h1><a class="anchor" id="環境設定"></a>
 <p>コマンドのバージョン管理ツール <a href="https://asdf-vm.com/#/">asdf</a> で導入する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ asdf plugin add terraform
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ asdf plugin add terraform
 $ asdf plugin list
 terraform
 $ asdf list-all terraform
@@ -1365,16 +1382,16 @@ Terraform v0.14.6
 <h1 ref="tf-ファイルを書く" ><code>.tf</code> ファイルを書く</h1><a class="anchor" id="tf-ファイルを書く"></a>
 <h2 ref="基本設定" >基本設定</h2><a class="anchor" id="基本設定"></a>
 <p>変数を管理するファイルを作成する。( <code>variables.tf</code> )</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform:variables.tf" data-lang="terraform:variables.tf"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;access_key&#34;</span> {}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform:variables.tf" data-lang="terraform:variables.tf"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;access_key&#34;</span> {}
 <span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;secret_key&#34;</span> {}
 <span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;region&#34;</span> {}
 </code></pre></div><p>変数に値を設定するファイルを作成する。（ <code>terraform.tfvars</code> ）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#a6e22e">access_key</span> = <span style="color:#e6db74">&#34;access_key&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#a6e22e">access_key</span> = <span style="color:#e6db74">&#34;access_key&#34;</span>
 <span style="color:#a6e22e">secret_key</span> = <span style="color:#e6db74">&#34;secret_key&#34;</span>
 <span style="color:#a6e22e">region</span> = <span style="color:#e6db74">&#34;ap-northeast-1&#34;</span>
 </code></pre></div><p>上記はファイルではなく環境変数（ <code>TF_VAR_access_key</code> , <code>TF_VAR_secret_key</code> ）や <code>terraform</code> コマンドオプション（ <code>-var</code> ）からの読み込みも可能。<br>
 AWS を Provider 設定するファイルを作成する。（ <code>aws.tf</code> ）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#a6e22e">terraform</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#a6e22e">terraform</span> {
   <span style="color:#a6e22e">required_version</span> = <span style="color:#e6db74">&#34;&gt;= 0.12.0&#34;</span>
 
   <span style="color:#a6e22e">backend</span> <span style="color:#e6db74">&#34;s3&#34;</span> {
@@ -1397,7 +1414,7 @@ AWS を Provider 設定するファイルを作成する。（ <code>aws.tf</cod
 tfstate ファイルの保存場所は <code>terraform init</code> コマンド実行時の <code>.tf</code> ファイルの設定に基づいて作成される。<br>
 複数人で開発する場合、個々人の tfstate に差分があっては、同じ <code>*.tf</code> ファイルであっても実行に差分が発生するため、 S3 など共有できる場所に tfstate を保存するのがよい。<br>
 <code>backend</code> を設定せずに <code>terraform init</code> を実行すると以下のようになる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ terraform init
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ terraform init
 
 Initializing the backend...
 
@@ -1425,7 +1442,7 @@ drwxr-xr-x  <span style="color:#ae81ff">3</span> xxxx  staff   <span style="colo
 -rw-r--r--  <span style="color:#ae81ff">1</span> xxxx  staff   <span style="color:#ae81ff">70</span>  <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">13</span> 16:46 variables.tf
 </code></pre></div><h1 ref="環境差分の扱い" >環境差分の扱い</h1><a class="anchor" id="環境差分の扱い"></a>
 <p>独自なので参考までに。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree
 .
 ├── modules
 │   ├── variables.tf <span style="color:#75715e"># 変数定義、値の代入は各環境(dev/std/prd)の main.tf で</span>
@@ -1443,7 +1460,7 @@ drwxr-xr-x  <span style="color:#ae81ff">3</span> xxxx  staff   <span style="colo
         ├── main.tf
         └── terraform.tfvars
 </code></pre></div><p>各環境の <code>main.tf</code> は以下のような感じ。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#a6e22e">terraform</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#a6e22e">terraform</span> {
   <span style="color:#a6e22e">required_version</span> = <span style="color:#e6db74">&#34;&gt;= 0.12&#34;</span>
 
   <span style="color:#a6e22e">backend</span> <span style="color:#e6db74">&#34;s3&#34;</span> {
@@ -1469,17 +1486,17 @@ drwxr-xr-x  <span style="color:#ae81ff">3</span> xxxx  staff   <span style="colo
   <span style="color:#a6e22e">hoge</span>        = <span style="color:#e6db74">&#34;hoge&#34;</span>
 }
 </code></pre></div><p><code>terraform.tfvars</code> は以下のような感じ。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#a6e22e">access_key</span> = <span style="color:#e6db74">&#34;access_key&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#a6e22e">access_key</span> = <span style="color:#e6db74">&#34;access_key&#34;</span>
 <span style="color:#a6e22e">secret_key</span> = <span style="color:#e6db74">&#34;secret_key&#34;</span>
 </code></pre></div><p><code>aws.tf</code> は以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#66d9ef">provider</span> <span style="color:#e6db74">&#34;aws&#34;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#66d9ef">provider</span> <span style="color:#e6db74">&#34;aws&#34;</span> {
   <span style="color:#a6e22e">version</span>    = <span style="color:#e6db74">&#34;~&gt; 2.25&#34;</span>
   <span style="color:#a6e22e">access_key</span> = var.<span style="color:#a6e22e">access_key</span>
   <span style="color:#a6e22e">secret_key</span> = var.<span style="color:#a6e22e">secret_key</span>
   <span style="color:#a6e22e">region</span>     = var.<span style="color:#a6e22e">region</span>
 }
 </code></pre></div><p><code>variable.tf</code> は以下のような感じ。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;access_key&#34;</span> {}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;access_key&#34;</span> {}
 <span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;secret_key&#34;</span> {}
 <span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;region&#34;</span> {
   <span style="color:#a6e22e">default</span> = <span style="color:#e6db74">&#34;ap-northeast-1&#34;</span>

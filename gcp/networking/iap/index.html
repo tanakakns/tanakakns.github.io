@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1305,7 +1322,7 @@ if (!doNotTrack) {
 	    <h2 ref="4-identity-aware-proxy" >4. Identity-Aware Proxy</h2><a class="anchor" id="4-identity-aware-proxy"></a>
 <p><a href="https://cloud.google.com/iap/docs/concepts-overview?hl=ja">Identity-Aware Proxy</a> （ Cloud IAP ）は、ID とコンテキストを使用して、アプリケーションや VM へのアクセスを保護するサービス。<br>
 実際に利用してみる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># App Engine のサンプルアプリケーションを入手して起動する</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># App Engine のサンプルアプリケーションを入手して起動する</span>
 $ git clone https://github.com/googlecodelabs/user-authentication-with-iap.git
 $ cd user-authentication-with-iap/1-HelloWorld <span style="color:#75715e"># Python/Flask の Web App</span>
 $ gcloud app deploy
@@ -1361,26 +1378,26 @@ IAP を Cloud Console を利用して設定する。</p>
 </ol>
 <p>アプリが IAP で保護されると、通過するリクエストに対して IAP がヘッダーを付与する。<br>
 ヘッダ情報を表示するアプリに更新して内容を確認してみる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/user-authentication-with-iap/2-HelloUser
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/user-authentication-with-iap/2-HelloUser
 $ gcloud app deploy
 </code></pre></div><p>新バージョンのアプリは以下のようなコードでヘッダ情報を取得している。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">user_email <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>headers<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;X-Goog-Authenticated-User-Email&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">user_email <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>headers<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;X-Goog-Authenticated-User-Email&#39;</span>)
 user_id <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>headers<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;X-Goog-Authenticated-User-ID&#39;</span>)
 </code></pre></div><p>アプリケーションにアクセスしてみる。（なお、 URL を再表示しているが、アプリのバージョンが変わっただけなので URL に変更はない）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud app browse
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud app browse
 Did not detect your browser. Go to this link to view your app:
 https://qwiklabs-gcp-01-837dcf92a29f.uc.r.appspot.com
 </code></pre></div><p>アプリケーションにアクセスしているユーザのメールアドレスと ID が表示されているのがわかる。<br>
 IAP を無効（ Cloud Console ウィンドウで、ナビゲーション メニュー &gt; [セキュリティ] &gt; [Identity-Aware Proxy] をクリックし、 App Engine アプリの隣にある IAP 切り替えスイッチをクリックして IAP を無効）にしてからアプリのブラウザをリロードすると、メールアドレスと ID は表示されなくなり、 IAP によってヘッダが付与されなくなることがわかる。</p>
 <p>現状、このアプリケーションは以下のようなコマンドでも確認できる通り、 <strong>なりすまし</strong> が可能な状態である。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -X GET &lt;your-url-here&gt; -H <span style="color:#e6db74">&#34;X-Goog-Authenticated-User-Email: totally fake email&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -X GET &lt;your-url-here&gt; -H <span style="color:#e6db74">&#34;X-Goog-Authenticated-User-Email: totally fake email&#34;</span>
 </code></pre></div><p>なりすましを防ぐために <strong>暗号検証</strong> を使用する。<br>
 これは、 IAP によって付与される <code>X-Goog-IAP-JWT-Assertion</code> ヘッダで実現する。所謂 JWT Token だ。<br>
 暗号検証に対応したアプリに更新する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/user-authentication-with-iap/3-HelloVerifiedUser
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~/user-authentication-with-iap/3-HelloVerifiedUser
 $ gcloud app deploy
 </code></pre></div><p>このアプリケーションは以下のようなコードで <code>X-Goog-IAP-JWT-Assertion</code> ヘッダ を検証している。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">user</span>():
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">user</span>():
     assertion <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>headers<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;X-Goog-IAP-JWT-Assertion&#39;</span>)
     <span style="color:#66d9ef">if</span> assertion <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>, <span style="color:#66d9ef">None</span>

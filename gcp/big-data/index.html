@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1480,7 +1497,7 @@ Cloud Console から以下の手順で開く。</p>
 <li>ナビゲーション メニュー &gt; [Compute Engine] &gt; [VM インスタンス] に移動し、 <code>iot-device-simulator</code> の[SSH] プルダウン矢印をクリックして、[ブラウザ ウィンドウで開く] を選択</li>
 <li>以下を実行</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo pip install virtualenv
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo pip install virtualenv
 $ virtualenv -p python3 venv
 $ source venv/bin/activate
 $ sudo apt-get remove google-cloud-sdk -y
@@ -1515,7 +1532,7 @@ gg6lJMSpeXG7G6X3Ey8l_YzI_Sdiqkhpc23Bco
 </ul>
 <p>IoT デバイスのレジストリを作成する。<br>
 iot-device-simulator VM インスタンスの SSH セッションで、次のコマンドを実行する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT_ID<span style="color:#f92672">=</span>qwiklabs-gcp-03-b799ccdd7f75
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT_ID<span style="color:#f92672">=</span>qwiklabs-gcp-03-b799ccdd7f75
 $ export MY_REGION<span style="color:#f92672">=</span>asia-east1
 $ gcloud beta iot registries create iotlab-registry <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --project<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
@@ -1524,13 +1541,13 @@ $ gcloud beta iot registries create iotlab-registry <span style="color:#ae81ff">
 </code></pre></div><p>暗号鍵ペアを作成する。<br>
 IoT デバイスが Cloud IoT Core に安全に接続できるようにするには、暗号鍵ペアを作成する必要がある。<br>
 iot-device-simulator VM インスタンスの SSH セッションで、次のコマンドを入力して適切なディレクトリに鍵ペアを作成。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd $HOME/training-data-analyst/quests/iotlab/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd $HOME/training-data-analyst/quests/iotlab/
 $ openssl req -x509 -newkey rsa:2048 -keyout rsa_private.pem <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    -nodes -out rsa_cert.pem -subj <span style="color:#e6db74">&#34;/CN=unused&#34;</span>
 </code></pre></div><p>この openssl コマンドにより、RSA 暗号鍵ペアが作成され、rsa_private.pem というファイルに書き込まれる。<br>
 次にシミュレートされたデバイスをレジストリに追加する。<br>
 iot-device-simulator VM インスタンスの SSH セッションで、次のコマンドを入力して temp-sensor-buenos-aires というデバイスを作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud beta iot devices create temp-sensor-buenos-aires <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud beta iot devices create temp-sensor-buenos-aires <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --project<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --registry<span style="color:#f92672">=</span>iotlab-registry <span style="color:#ae81ff">\
@@ -1542,10 +1559,10 @@ $ gcloud beta iot devices create temp-sensor-istanbul <span style="color:#ae81ff
 </span><span style="color:#ae81ff"></span>  --public-key path<span style="color:#f92672">=</span>rsa_cert.pem,type<span style="color:#f92672">=</span>rs256
 </code></pre></div><p>シミュレートされたデバイスを実行する。<br>
 iot-device-simulator VM インスタンスの SSH セッションで、以下のコマンドを入力して、pki.google.com から CA ルート証明書を適切なディレクトリにダウンロード。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd $HOME/training-data-analyst/quests/iotlab/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd $HOME/training-data-analyst/quests/iotlab/
 $ wget https://pki.google.com/roots.pem
 </code></pre></div><p>以下のコマンドを入力して、シミュレートされた 1 つ目のデバイスを実行。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ python cloudiot_mqtt_example_json.py <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ python cloudiot_mqtt_example_json.py <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --project_id<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --cloud_region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --registry_id<span style="color:#f92672">=</span>iotlab-registry <span style="color:#ae81ff">\
@@ -1554,7 +1571,7 @@ $ wget https://pki.google.com/roots.pem
 </span><span style="color:#ae81ff"></span>   --message_type<span style="color:#f92672">=</span>event <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --algorithm<span style="color:#f92672">=</span>RS256 &gt; buenos-aires-log.txt 2&gt;&amp;<span style="color:#ae81ff">1</span> &amp;
 </code></pre></div><p>以下のコマンドを入力して、シミュレートされた 2 つ目のデバイスを実行。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ python cloudiot_mqtt_example_json.py <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ python cloudiot_mqtt_example_json.py <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --project_id<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --cloud_region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --registry_id<span style="color:#f92672">=</span>iotlab-registry <span style="color:#ae81ff">\
@@ -1569,7 +1586,7 @@ $ wget https://pki.google.com/roots.pem
 <li>Cloud Console でナビゲーション メニューを開き、[BigQuery] を選択</li>
 <li>クエリエディタに次のクエリを入力し、[実行] をクリック</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">timestamp</span>, device, temperature <span style="color:#66d9ef">from</span> iotlabdataset.sensordata
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">timestamp</span>, device, temperature <span style="color:#66d9ef">from</span> iotlabdataset.sensordata
 <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">timestamp</span> <span style="color:#66d9ef">DESC</span>
 <span style="color:#66d9ef">LIMIT</span> <span style="color:#ae81ff">100</span>
 </code></pre></div><h3 ref="dataflow-と-bigquery-を使用した-google-cloud-での-etl-処理" >Dataflow と BigQuery を使用した Google Cloud での ETL 処理</h3><a class="anchor" id="dataflow-と-bigquery-を使用した-google-cloud-での-etl-処理"></a>

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1444,11 +1461,11 @@ token123,user3,u0003,group2
 </ul>
 <p>上記の要領で他のクライアント証明書も作成する。<br>
 なお、以上で作成した鍵・証明書を用いて kube-admin が <code>kube-apiserver</code> にアクセスする際は以下のようになる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl https://kube-apiserver:6443/api/v1/pods <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl https://kube-apiserver:6443/api/v1/pods <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --key admin.key <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --cert admin.crt <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --cacert ca.crt
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:kube-config.yaml" data-lang="yaml:kube-config.yaml"><span style="color:#75715e"># kubectl を使う場合の kube-config.yaml の設定例</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:kube-config.yaml" data-lang="yaml:kube-config.yaml"><span style="color:#75715e"># kubectl を使う場合の kube-config.yaml の設定例</span>
 <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">clusters</span>:
 - <span style="color:#f92672">cluster</span>:
@@ -1513,7 +1530,7 @@ IP.2 = 172.17.0.87 # PriveteIP
 <li>jane の CSR を作成する： <code>openssl req -new -key jane.key -subj &quot;/CN=jane&quot; -out jane.csr</code></li>
 <li>jane の CertificateSigningRequest を作成する： <code>kubectl apply -f jane-csr.yaml</code></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:jane-csr.yaml" data-lang="yaml:jane-csr.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">certificates.k8s.io/v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:jane-csr.yaml" data-lang="yaml:jane-csr.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">certificates.k8s.io/v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">CertificateSigningRequest</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">jane</span>
@@ -1599,7 +1616,7 @@ rules:
   verbs: [&quot;create&quot;]
 </code></pre><p><code>Role</code> は <code>namespace</code> 毎に有効となる。<br>
 次に上記で作成した <code>Role</code> を <code>User</code> に紐づけるための <code>RoleBinding</code> を作成する。（ <code>kubectl apply -f devuser-developer-binding.yaml</code> ）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:devuser-developer-binding.yaml" data-lang="yaml:devuser-developer-binding.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:devuser-developer-binding.yaml" data-lang="yaml:devuser-developer-binding.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">RoleBinding</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">devuser-developer-binding</span>
@@ -1614,7 +1631,7 @@ rules:
 </code></pre></div><p>以上で <code>Role</code> および <code>RoleBinding</code> は作成できる。<br>
 なお、繰り返しになるが、 <code>Role</code> は <code>namespace</code> 毎に有効となるため、 <code>pods</code> や <code>services</code> などの <code>namespace</code> を指定して作成するオブジェクトが対象となる。<br>
 これらは以下のコマンドで確認する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Role の確認</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Role の確認</span>
 $ kubectl get roles
 $ kubectl describe role developer
 
@@ -1622,7 +1639,7 @@ $ kubectl describe role developer
 $ kubectl get rolebindings
 $ kubectl describe rolebinding devuser-developer-binding
 </code></pre></div><p>なお、各ユーザは自分の権限を以下のコマンドで確認できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl auth can-i create deployments
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl auth can-i create deployments
 yes
  
 $ kubectl auth can-i delete nodes
@@ -1637,7 +1654,7 @@ yes
 $ kubectl auth can-i create pods --as dev-user --namespace test
 no
 </code></pre></div><p>なお、 <code>kubectl api-resources</code> コマンドを利用するとリソースの一覧が取得できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl api-resources
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl api-resources
 NAME                              SHORTNAMES   APIVERSION                             NAMESPACED   KIND
 bindings                                       v1                                     true         Binding
 componentstatuses                 cs           v1                                     false        ComponentStatus
@@ -1650,7 +1667,7 @@ namespaces                        ns           v1                               
 </code></pre></div><h4 ref="432-clusterrole-と-clusterrolebinding" >4.3.2. ClusterRole と ClusterRoleBinding</h4><a class="anchor" id="432-clusterrole-と-clusterrolebinding"></a>
 <p><code>namespace</code> 毎に作成するオブジェクトに対して指定する <code>Role</code> に対して、 <code>ClusterRole</code> はクラスタ横断（ <code>namespace</code> 横断）のオブジェクトに対して指定する。<br>
 <code>nodes</code> や <code>PV</code> などである。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:cluster-admin-role.yaml" data-lang="yaml:cluster-admin-role.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:cluster-admin-role.yaml" data-lang="yaml:cluster-admin-role.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterRole</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cluster-administrator</span>
@@ -1659,7 +1676,7 @@ namespaces                        ns           v1                               
   <span style="color:#f92672">resources</span>: [<span style="color:#e6db74">&#34;nodes&#34;</span>]
   <span style="color:#f92672">verbs</span>: [<span style="color:#e6db74">&#34;list&#34;</span>, <span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;create&#34;</span>, <span style="color:#e6db74">&#34;delete&#34;</span>]
 </code></pre></div><p>次に上記で作成した <code>ClusterRole</code> を <code>User</code> に紐づけるための <code>ClusterRoleBinding</code> を作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:cluster-admin-role-binding.yaml" data-lang="yaml:cluster-admin-role-binding.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:cluster-admin-role-binding.yaml" data-lang="yaml:cluster-admin-role-binding.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterRoleBinding</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cluster-admin-role-binding</span>
@@ -1676,7 +1693,7 @@ namespaces                        ns           v1                               
 フォーマットとは <code>image: &lt;Registry&gt;/&lt;User Account&gt;/&lt;Image Repository&gt;</code> で <code>nginx</code> は <code>&lt;Image Repository&gt;</code> のみ記載している。<br>
 Private Registory を利用する場合、認証が必要になるが、その際はどうするのか？<br>
 以下の通り <code>Secret</code> を利用することになる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Private Registory 認証用の Secret 作成</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Private Registory 認証用の Secret 作成</span>
 $ kubectl create secret docker-registry regcred <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --docker-server<span style="color:#f92672">=</span>private-registry.io <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --docker-username<span style="color:#f92672">=</span>registry-user <span style="color:#ae81ff">\
@@ -1685,7 +1702,7 @@ $ kubectl create secret docker-registry regcred <span style="color:#ae81ff">\
 </code></pre></div><p>上記の Secret を Pod のマニフェストの <code>spec.imagePullSecrets</code> に指定する。</p>
 <h3 ref="45-security-context" >4.5. Security Context</h3><a class="anchor" id="45-security-context"></a>
 <p>Pod マニフェストの <code>securityContext</code> 項目を設定することにより、コンテナで実行されるプロセスの実行ユーザなどを指定することができる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">securityContext</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">securityContext</span>:
   <span style="color:#f92672">runAsUser</span>: <span style="color:#ae81ff">1000</span>
   <span style="color:#f92672">runAsGroup</span>: <span style="color:#ae81ff">3000</span>
   <span style="color:#f92672">fsGroup</span>: <span style="color:#ae81ff">2000</span>
@@ -1710,7 +1727,7 @@ $ kubectl create secret docker-registry regcred <span style="color:#ae81ff">\
 </ul>
 <p>例えば、以下の NetworkPolicy は Port 3306 の DB サーバに対して、 api-server からのトラフィックを許可し、その他は遮断するポリシー。<br>
 （バックアップ用に DB から cidr:192.168.5.10/32 帯にある Port 80 にアクセスできるようにしている。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.k8s.io/v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.k8s.io/v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">NetworkPolicy</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">db-policy</span>
@@ -1742,7 +1759,7 @@ $ kubectl create secret docker-registry regcred <span style="color:#ae81ff">\
     - <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
       <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
 </code></pre></div><p>ネットワークソリューションによっては NetworkPolicy をサポートしていないものがあるので注意。（例えば、 Flannel ）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get networkpolicies
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get networkpolicies
 </code></pre></div>
 		</div>
 

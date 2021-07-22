@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1355,14 +1372,14 @@ if (!doNotTrack) {
 複数の条件と、その条件にマッチした際の操作（削除 or ストレージクラスの変更）を設定できる。<br>
 <code>gsutil lifecycle set</code> コマンドで 1 つ以上のバケットにライフサイクル管理構成を設定できる。<br>
 コマンドラインで指定する <code>config-json-file</code> は、ライフサイクル構成 JSON ドキュメントを含むローカルファイルへのパスである必要がある。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil lifecycle set &lt;config-json-file&gt; gs://&lt;bucket_name&gt;...
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil lifecycle set &lt;config-json-file&gt; gs://&lt;bucket_name&gt;...
 </code></pre></div><p>参照：https://cloud.google.com/storage/docs/gsutil/commands/lifecycle</p>
 <h3 ref="14-バージョニング" >1.4. バージョニング</h3><a class="anchor" id="14-バージョニング"></a>
 <p>説明省略。</p>
 <h3 ref="15-gsutil" >1.5. <code>gsutil</code></h3><a class="anchor" id="15-gsutil"></a>
 <p><code>gsutil</code> コマンドを利用して管理できる。<br>
 バケットの作成。（ Make Bucket で <code>mb</code> ）（ <code>gs</code> は google strage ？）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil mb gs://YOUR-BUCKET-NAME/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil mb gs://YOUR-BUCKET-NAME/
 </code></pre></div><ul>
 <li>バケットの名前空間はグローバルなのでグローバルでユニークであり、一般公開されるため、バケット名に機密情報を含めない</li>
 <li>バケット名に使用できる文字は、小文字、数字、ダッシュ（-）、アンダースコア（_）、ドット（.）のみ
@@ -1389,19 +1406,19 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p>ローカルから Cloud Storage バケットへのコピーは以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil cp FILE_NAME gs://YOUR-BUCKET-NAME
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil cp FILE_NAME gs://YOUR-BUCKET-NAME
 </code></pre></div><p>Cloud Storage バケットからローカルへのコピーは以下。（オプション <code>-r</code> ）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil cp -r gs://YOUR-BUCKET-NAME/FILE_NAME .
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil cp -r gs://YOUR-BUCKET-NAME/FILE_NAME .
 </code></pre></div><p>image-folder という名前のフォルダを作成し、そこに画像（ada.jpg）をコピーします。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil cp gs://YOUR-BUCKET-NAME/ada.jpg gs://YOUR-BUCKET-NAME/image-folder/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil cp gs://YOUR-BUCKET-NAME/ada.jpg gs://YOUR-BUCKET-NAME/image-folder/
 </code></pre></div><p>一覧表示。（ただし、下の階層までは表示されない）（ <code>-l</code> オプションをつけると詳細表示される）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil ls gs://YOUR-BUCKET-NAME
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil ls gs://YOUR-BUCKET-NAME
 </code></pre></div><p>オブジェクトを一般公開する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil acl ch -u AllUsers:R gs://YOUR-BUCKET-NAME/ada.jpg
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil acl ch -u AllUsers:R gs://YOUR-BUCKET-NAME/ada.jpg
 </code></pre></div><p>公開を削除する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil acl ch -d AllUsers gs://YOUR-BUCKET-NAME/ada.jpg
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil acl ch -d AllUsers gs://YOUR-BUCKET-NAME/ada.jpg
 </code></pre></div><p>オブジェクトの削除。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil rm gs://YOUR-BUCKET-NAME/ada.jpg
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gsutil rm gs://YOUR-BUCKET-NAME/ada.jpg
 </code></pre></div><h4 ref="151-boto-構成ファイル" >1.5.1. boto 構成ファイル</h4><a class="anchor" id="151-boto-構成ファイル"></a>
 <p><a href="">boto 構成ファイル</a> は、Amazon S3 SDK for Python でも使用される <code>~/.boto</code> ファイルで、 Cloud Storage へアクセスするための認証情報・暗号鍵情報を管理できる。</p>
 <h3 ref="16-再試行方法httpscloudgooglecomstoragedocsretry-strategy" >1.6. <a href="https://cloud.google.com/storage/docs/retry-strategy">再試行方法</a></h3><a class="anchor" id="16-再試行方法httpscloudgooglecomstoragedocsretry-strategy"></a>

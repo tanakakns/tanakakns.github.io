@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1326,7 +1343,7 @@ Pub/Sub では、 <strong>topics</strong> 、 <strong>publishing</strong> 、 <s
 </ul>
 <p>まとめると、パブリッシャーはメッセージを作成してトピックに送信し、サブスクライバーはトピックへのサブスクリプションを作成してトピックからメッセージを受け取る。</p>
 <p>以下のコマンドで <code>myTopic</code> というトピックを管理できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># トピックの作成</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># トピックの作成</span>
 $ gcloud pubsub topics create myTopic
 
 <span style="color:#75715e"># 確認</span>
@@ -1335,7 +1352,7 @@ $ gcloud pubsub topics list
 <span style="color:#75715e"># 削除</span>
 $ gcloud pubsub topics delete myTopic
 </code></pre></div><p>次のコマンドを実行して、トピック <code>myTopic</code> へのサブスクリプション <code>mySubscription</code> を作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サブスクリプションの作成</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サブスクリプションの作成</span>
 $ gcloud pubsub subscriptions create --topic myTopic mySubscription
 
 <span style="color:#75715e"># 確認</span>
@@ -1344,7 +1361,7 @@ $ gcloud pubsub topics list-subscriptions myTopic
 <span style="color:#75715e"># 削除</span>
 $ gcloud pubsub subscriptions delete mySubscription
 </code></pre></div><p>作成したトピック <code>myTopic</code> にメッセージ <code>hello</code> をパブリッシュする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># メッセージのパブリッシュ</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># メッセージのパブリッシュ</span>
 $ gcloud pubsub topics publish myTopic --message <span style="color:#e6db74">&#34;Hello&#34;</span>
 
 <span style="color:#75715e"># サブスクリプション経由でメッセージを pull</span>
@@ -1359,7 +1376,7 @@ $ gcloud pubsub subscriptions pull mySubscription --auto-ack
 <li>特定のサブスクリプション ベースの pull コマンドから 1 つのメッセージが出力された後は、pull コマンドを使って同じメッセージに再びアクセスすることはできない。</li>
 </ul>
 <p>数量を指定して pull する場合は以下の通り。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud pubsub subscriptions pull mySubscription --auto-ack --limit<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud pubsub subscriptions pull mySubscription --auto-ack --limit<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
 </code></pre></div>
 		</div>
 

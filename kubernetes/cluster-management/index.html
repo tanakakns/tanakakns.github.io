@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1303,10 +1320,10 @@ if (!doNotTrack) {
 <h2 ref="1-ノードの更新" >1. ノードの更新</h2><a class="anchor" id="1-ノードの更新"></a>
 <p>クラスタからノードが消失した場合、 <code>kube-scheduler</code> 起動時に設定したオプション <code>--pod-eviction-timeout=5m0s</code> が経過すると消失したノードに配置されていた Pod （ただし、 ReplicaSet の場合）は他のアクティブなノードで再作成される。（ ReplicaSet ではない場合は際作成されない）<br>
 障害でノードが消失する場合は仕方ないが、 OS 更新などのメンテナンス作業でノードを停止する場合は、ノードから Pod を <strong>ドレイン</strong> して他のノードへ Pod を移す必要がある。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 指定ノードの Pod を Graceful Shutdown させ、徐々に Pod を退避する</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 指定ノードの Pod を Graceful Shutdown させ、徐々に Pod を退避する</span>
 $ kubectl drain &lt;node-name&gt; <span style="color:#f92672">[</span>--ignore-daemonsets<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span>
 </code></pre></div><p>なお、ノードをクラスタに復帰させた場合は <code>uncordon</code> する。（ cordon は遮蔽 の意）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl uncordon &lt;node-name&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl uncordon &lt;node-name&gt;
 
 <span style="color:#75715e"># ちなみに以下のコマンドはノードの Pod を直ちに停止させる（ Graceful Shutdown しない）</span>
 <span style="color:#75715e"># そして、停止した Pod を他のノードに退避させることもない</span>
@@ -1369,7 +1386,7 @@ Kubernetes にインストールされているコンポーネントのバージ
 <li>Persistent Volumes</li>
 </ul>
 <p>なお、  <code>etcdctl</code> コマンドを打ってもエラーが発生する場合は、下記のようにエンドポイントや証明書を指定すること。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ETCDCTL_API<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> etcdctl --endpoints<span style="color:#f92672">=</span>https://127.0.0.1:2379 --cacert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.crt --key<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.key snapshot save /opt/snapshot-pre-boot.db
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ETCDCTL_API<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> etcdctl --endpoints<span style="color:#f92672">=</span>https://127.0.0.1:2379 --cacert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.crt --key<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.key snapshot save /opt/snapshot-pre-boot.db
 
 $ ETCDCTL_API<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> etcdctl --endpoints<span style="color:#f92672">=</span>https://127.0.0.1:2379 --cacert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.crt --key<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.key snapshot restore /opt/snapshot-pre-boot.db --data-dir<span style="color:#f92672">=</span>/var/lib/etcd-from-backup
 </code></pre></div><p>参考： <a href="https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster">Backing up an etcd cluster</a></p>
@@ -1389,7 +1406,7 @@ $ ETCDCTL_API<span style="color:#f92672">=</span><span style="color:#ae81ff">3</
 <p>つまり、 <strong>ホストのとあるディレクトリを Volume と定義して、それをコンテナにマウントする</strong> のが Volume の仕組みだ。<br>
 厳密にいうと、前者の例（ <code>data_volume</code> ）のように Volume を定義してマウントする方法を <strong>ボリュームマウンティング</strong> 、後者の例（ <code>/data/mysql</code> ）のようにディレクトリを直接マウントする方法を <strong>バインドマウンティング</strong> という。<br>
 厳密なコマンドに直すと以下のようになる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># バインドマウンティング</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># バインドマウンティング</span>
 $ docker run mysql --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span>/data/mysql,target<span style="color:#f92672">=</span>/var/lib/mysql
 </code></pre></div><p>以上のような Docker の volume 操作は Storage Drivers で実現される。<br>
 Storage Driver は Docker プロセスがイメージやコンテナに加えられた変更を差分形式で保持する方式で、上記で 「ディレクトリをマウント」と表現してきたが厳密にはそうではない。<br>
@@ -1414,7 +1431,7 @@ Storage Driver は Docker プロセスがイメージやコンテナに加えら
 </code></pre><p>Kubernetes からは CSI (Container Storage Interface) 準拠した形で上記の機能が呼び出されることになる。</p>
 <h3 ref="41-volumes" >4.1. Volumes</h3><a class="anchor" id="41-volumes"></a>
 <p>Volume は Pod の <code>spec.volumes</code> で定義し、 <code>spec.containers.volumeMouts</code> で Pod にマウントする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">random-number-generator</span>
@@ -1434,7 +1451,7 @@ Storage Driver は Docker プロセスがイメージやコンテナに加えら
       <span style="color:#f92672">type</span>: <span style="color:#ae81ff">Directory</span>
 </code></pre></div><p>上記の <code>type: Directory</code> の Volume の場合、 Pod がスケジューリングされた Node の <code>/data</code> をマウントする訳だが、同じ ReplicaSet の Pod が同じ Node へスケジューリングされる補償はない。<br>
 例えば、下記のように AWS S3 を Volume として定義して利用することもできる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">volumes</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">volumes</span>:
 - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data-volume</span>
   <span style="color:#f92672">awsElasticBlockStore</span>:
   <span style="color:#f92672">hostPath</span>:
@@ -1443,7 +1460,7 @@ Storage Driver は Docker プロセスがイメージやコンテナに加えら
 </code></pre></div><h3 ref="42-persistent-volumes" >4.2. Persistent Volumes</h3><a class="anchor" id="42-persistent-volumes"></a>
 <p>先の Volume では、 Pod マニフェストの <code>spec.volumes</code> に定義するため、 Pod 毎にいちいち設定しなければならない。<br>
 Volume の一元管理が可能となるオブジェクトとして <strong>PersistentVolume</strong> がある。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolume</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">pv-vol1</span>
@@ -1455,12 +1472,12 @@ Volume の一元管理が可能となるオブジェクトとして <strong>Pers
   <span style="color:#f92672">awsElasticBlockStore</span>:
     <span style="color:#f92672">volumeID</span>: <span style="color:#ae81ff">&lt;volume-id&gt;</span>
     <span style="color:#f92672">fsType</span>: <span style="color:#ae81ff">ext4</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create –f pv-definition.yaml
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create –f pv-definition.yaml
 $ kubectl get persistentvolume
 </code></pre></div><h3 ref="43-persistent-volume-claims" >4.3. Persistent Volume Claims</h3><a class="anchor" id="43-persistent-volume-claims"></a>
 <p>Claim は「請求」の意。<br>
 <strong>PersistentVolumeClaim</strong> を利用すれば、 Kubernetes 上に作成された PersistentVolume の中から条件に合うものを「請求」して取得することができる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolumeClaim</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">myclaim</span>
@@ -1471,7 +1488,7 @@ $ kubectl get persistentvolume
     <span style="color:#f92672">requests</span>:
       <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">500Mi</span>
 </code></pre></div><p>例えば、ある PVC を apply して様子を見てみる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get pv,pvc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get pv,pvc
 NAME                      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                   STORAGECLASS   REASON   AGE
 persistentvolume/pv0001   1Gi        RWO            Delete           Bound    default/pv-slow-claim   slow                    6m24s
 
@@ -1479,7 +1496,7 @@ NAME                                  STATUS   VOLUME   CAPACITY   ACCESS MODES 
 persistentvolumeclaim/pv-slow-claim   Bound    pv0001   1Gi        RWO            slow           42s
 </code></pre></div><p>PVC の条件に合う PV である pv0001 が選ばれ、 PVC の VOLUME 項目に pv0001 が割り当てられているのが分かる。<br>
 この PVC を利用して Pod から PV を「請求」するのは以下の通り。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">pvc-slow-test</span>
@@ -1501,13 +1518,13 @@ persistentvolumeclaim/pv-slow-claim   Bound    pv0001   1Gi        RWO          
 <h3 ref="44-storage-class" >4.4. Storage Class</h3><a class="anchor" id="44-storage-class"></a>
 <p>PV は静的なオブジェクトなので、例えば、 GCP などのクラウドのストレージをプロビジョンする必要がある場合はその実行を別途行わなければならない。<br>
 <strong>StorageClass</strong> はクラウドなどプロビジョニングを要するストレージを動的に確保してくれる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:sc-definition.yaml" data-lang="yaml:sc-definition.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">storage.k8s.io/v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:sc-definition.yaml" data-lang="yaml:sc-definition.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">storage.k8s.io/v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">StorageClass</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">google-storage</span>
 <span style="color:#f92672">provisioner</span>: <span style="color:#ae81ff">kubernetes.io/gce-pd</span> <span style="color:#75715e"># これを指定する必要あり</span>
 </code></pre></div><p>上記の StorageClass を利用して、 PVC を作成する場合は <code>storageClassName</code> 項目で作成した StorageClass を指定する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:pvc-definition.yaml" data-lang="yaml:pvc-definition.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:pvc-definition.yaml" data-lang="yaml:pvc-definition.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolumeClaim</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">myclaim</span>
@@ -1539,13 +1556,13 @@ persistentvolumeclaim/pv-slow-claim   Bound    pv0001   1Gi        RWO          
 <p>また、DNS レコードの <code>A</code> とか <code>AAAA</code> とか <code>CNAME</code> とか復習せんとあかんかも、、、</p>
 <h3 ref="51-pod-networking" >5.1. Pod Networking</h3><a class="anchor" id="51-pod-networking"></a>
 <p>CNI は <code>kubelet</code> の以下のオプションによって設定される。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubelet <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubelet <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --network-;lugin<span style="color:#f92672">=</span>cni <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --cni-conf-dir<span style="color:#f92672">=</span>/etc/cni/net.d <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --cni-bin-dir<span style="color:#f92672">=</span>/etc/cni/bin <span style="color:#75715e"># /opt/cti/bin</span>
 $ ./net-script.sh add &lt;container&gt; &lt;namespace&gt;
 </code></pre></div><p>CNI 設定ファイルは JSON 形式で以下のようになっている。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
    <span style="color:#f92672">&#34;cniVersion&#34;</span>:<span style="color:#e6db74">&#34;0.2.0&#34;</span>,
    <span style="color:#f92672">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;mynet&#34;</span>,
    <span style="color:#f92672">&#34;type&#34;</span>:<span style="color:#e6db74">&#34;bridge&#34;</span>,
@@ -1565,11 +1582,11 @@ $ ./net-script.sh add &lt;container&gt; &lt;namespace&gt;
 <p>weave は CNI Plugin の 1 つ。<br>
 ここでは weave plugin の設定についてみる。<br>
 weave のエージェントは Demonset として 各ノートに deploy する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f <span style="color:#e6db74">&#34;https://cloud.weave.works/k8s/net?k8s-version=</span><span style="color:#66d9ef">$(</span>kubectl version | base64 | tr -d <span style="color:#e6db74">&#39;\n&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f <span style="color:#e6db74">&#34;https://cloud.weave.works/k8s/net?k8s-version=</span><span style="color:#66d9ef">$(</span>kubectl version | base64 | tr -d <span style="color:#e6db74">&#39;\n&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 $ kubectl get pods –n kube-system
 </code></pre></div><h3 ref="53-service-networking" >5.3. Service Networking</h3><a class="anchor" id="53-service-networking"></a>
 <p><code>kube-proxy</code> には以下のモードがあり、 default は iptables 。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kube-proxy --proxy-mode <span style="color:#f92672">[</span>userspace | iptables | ipvs <span style="color:#f92672">]</span> ...
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kube-proxy --proxy-mode <span style="color:#f92672">[</span>userspace | iptables | ipvs <span style="color:#f92672">]</span> ...
 </code></pre></div><h3 ref="54-dns" >5.4. DNS</h3><a class="anchor" id="54-dns"></a>
 <p>web-service という Service があった場合、以下のように名前登録される。</p>
 <ul>
@@ -1608,7 +1625,7 @@ LoadBalancer は内部的には NodePortで構成され、 GCP などのプロ�
 こういう場合に <strong>Ingress</strong> を用いる。<br>
 内部的には、Nginx などで実現した <strong>Ingress Controller</strong> と、 ルーティングルールの設定を記載する <strong>Ingress Resource</strong> からなる。<br>
 Nginx の場合の Ingress Controller は以下のような Deployment / ConfigMap / Service(NodePort) / ServiceAccont で実現することになる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx-ingress-controller</span>
@@ -1641,11 +1658,11 @@ Nginx の場合の Ingress Controller は以下のような Deployment / ConfigM
           <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
         - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">https</span>
           <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">443</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx-configuration</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx-ingress</span>
@@ -1662,13 +1679,13 @@ Nginx の場合の Ingress Controller は以下のような Deployment / ConfigM
     <span style="color:#f92672">name</span>: <span style="color:#ae81ff">https</span>
   <span style="color:#f92672">selectors</span>:
     <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx-ingress</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ServiceAccount</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx-ingress-serviceaccount</span>
 </code></pre></div><p>Ingress Controller 用の Image を使うなど決まりがある。<br>
 Ingress Resource は以下のように作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:Ingress-wear.yaml" data-lang="yaml:Ingress-wear.yaml"><span style="color:#75715e"># 振り分けが無い場合</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:Ingress-wear.yaml" data-lang="yaml:Ingress-wear.yaml"><span style="color:#75715e"># 振り分けが無い場合</span>
 <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
 <span style="color:#f92672">metadata</span>:
@@ -1677,7 +1694,7 @@ Ingress Resource は以下のように作成する。</p>
   <span style="color:#f92672">backend</span>:
     <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">wear-service</span>
     <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">80</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:Ingress-wear-watch.yaml" data-lang="yaml:Ingress-wear-watch.yaml"><span style="color:#75715e"># パスベースの振り分けの場合</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:Ingress-wear-watch.yaml" data-lang="yaml:Ingress-wear-watch.yaml"><span style="color:#75715e"># パスベースの振り分けの場合</span>
 <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
 <span style="color:#f92672">metadata</span>:
@@ -1694,7 +1711,7 @@ Ingress Resource は以下のように作成する。</p>
         <span style="color:#f92672">backend</span>:
           <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">watch-service</span>
           <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">80</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:Ingress-wear-watch.yaml" data-lang="yaml:Ingress-wear-watch.yaml"><span style="color:#75715e"># ホスト名ベースの振り分けの場合</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:Ingress-wear-watch.yaml" data-lang="yaml:Ingress-wear-watch.yaml"><span style="color:#75715e"># ホスト名ベースの振り分けの場合</span>
 <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
 <span style="color:#f92672">metadata</span>:
@@ -1713,7 +1730,7 @@ Ingress Resource は以下のように作成する。</p>
       - <span style="color:#f92672">backend</span>:
           <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">watch-service</span>
           <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">80</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f Ingress-wear.yaml
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f Ingress-wear.yaml
 $ kubectl get ingress <span style="color:#75715e"># Ingress Resource のことが ingress</span>
 </code></pre></div><p>上記のように、振り分けルールに応じて作成する。</p>
 <h2 ref="6-kubeadm" >6. kubeadm</h2><a class="anchor" id="6-kubeadm"></a>
@@ -1829,7 +1846,7 @@ serviceとsystemctlは、どちらも Linux で楽にコマンドを実行する
 <code>kubectl</code> は <code>kube-apiserver</code> と JSON 形式で通信しているが、コマンドの結果はユーザに見やすい表形式で、且つ、間引いた情報で出力されている。<br>
 <code>-o wide</code> オプションである程度詳細情報まで表示できるが、 <code>-o json</code> オプションを利用すれば全情報が JSON 形式で出力される。<br>
 しかし、あまりにも情報が多いので <code>-o=jsonpath=</code> オプションと JSON PATH を利用して情報をフィルタリングできる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># シングルクオート と 中括弧 で囲む</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># シングルクオート と 中括弧 で囲む</span>
 $ kubectl get po -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{ .items[0].spec.containers[0].image }&#39;</span>
 <span style="color:#75715e"># 中括弧単位で複数の JSON PATH を指定できる</span>
 $ kubectl get po -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{ .items[*].metadata.name }{ .items[*].status.capacity.cpu }&#39;</span>
@@ -1838,7 +1855,7 @@ $ kubectl get po -o<span style="color:#f92672">=</span>jsonpath<span style="colo
 </code></pre></div><p><code>range</code> などの JSON PATH の演算子も利用できる。<br>
 他にも <code>-o=custom-columns=</code> 、 <code>--sort-by=.metadata.name</code> などのオプションもある。</p>
 <h3 ref="82-check-kubeconfig" >8.2. check kubeconfig</h3><a class="anchor" id="82-check-kubeconfig"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl cluster-info --kubeconfig /root/admin.kubeconfig
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl cluster-info --kubeconfig /root/admin.kubeconfig
 </code></pre></div><h2 ref="9-etc" >9. etc</h2><a class="anchor" id="9-etc"></a>
 <ul>
 <li><a href="https://nishipy.com/archives/1233">「Kubernetes the hard way」を図で理解したい -前編-</a></li>

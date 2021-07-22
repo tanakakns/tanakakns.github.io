@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1315,11 +1332,11 @@ if (!doNotTrack) {
 <p>ToDo</p>
 <h2 ref="2-クラスタ作成" >2. クラスタ作成</h2><a class="anchor" id="2-クラスタ作成"></a>
 <p>デフォルトのコンピューティング ゾーンを設定する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config set compute/zone us-central1-a
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config set compute/zone us-central1-a
 
 Updated property <span style="color:#f92672">[</span>compute/zone<span style="color:#f92672">]</span>.
 </code></pre></div><p>GKE クラスタを作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
 $ gcloud container clusters create <span style="color:#f92672">[</span>CLUSTER-NAME<span style="color:#f92672">]</span>
 
 <span style="color:#75715e"># 具体例</span>
@@ -1331,7 +1348,7 @@ kubeconfig entry generated <span style="color:#66d9ef">for</span> my-cluster.
 NAME        LOCATION       MASTER_VERSION   MASTER_IP      MACHINE_TYPE  NODE_VERSION     NUM_NODES  STATUS
 my-cluster  us-central1-a  1.18.16-gke.302  34.67.190.125  e2-medium     1.18.16-gke.302  <span style="color:#ae81ff">3</span>          RUNNING
 </code></pre></div><p>クラスタの認証情報を取得する。（ kubeconfig に設定が追加される）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
 $ gcloud container clusters get-credentials <span style="color:#f92672">[</span>CLUSTER-NAME<span style="color:#f92672">]</span>
 
 <span style="color:#75715e"># 具体例</span>
@@ -1339,7 +1356,7 @@ $ gcloud container clusters get-credentials my-cluster
 Fetching cluster endpoint and auth data.
 kubeconfig entry generated <span style="color:#66d9ef">for</span> my-cluster.
 </code></pre></div><p>試しに作成したクラスタにコンテナをデプロイする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create deployment hello-server --image<span style="color:#f92672">=</span>gcr.io/google-samples/hello-app:1.0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create deployment hello-server --image<span style="color:#f92672">=</span>gcr.io/google-samples/hello-app:1.0
 deployment.apps/hello-server created
 
 $ kubectl expose deployment hello-server --type<span style="color:#f92672">=</span>LoadBalancer --port <span style="color:#ae81ff">8080</span>
@@ -1355,7 +1372,7 @@ Hello, world!
 Version: 1.0.0
 Hostname: hello-server-57684579f-kw54q
 </code></pre></div><p>クラスタを削除する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE</span>
 $ gcloud container clusters delete <span style="color:#f92672">[</span>CLUSTER-NAME<span style="color:#f92672">]</span>
 
 <span style="color:#75715e"># 具体例</span>
@@ -1370,13 +1387,13 @@ Deleted <span style="color:#f92672">[</span>https://container.googleapis.com/v1/
 このクラスタのノードにはプライベート アドレスしかない（パブリック IP アドレスがない）ため、隔離された環境でワークロードが実行される。<br>
 ノードとマスターは、VPC ピアリングを使用して相互に通信する。<br>
 Kubernetes Engine API では、アドレス範囲が CIDR（Classless Inter-Domain Routing）ブロックとして表される。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud beta container clusters create private-cluster <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud beta container clusters create private-cluster <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --private-cluster <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --master-ipv4-cidr 172.16.0.16/28 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --enable-ip-alias <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --create-subnetwork <span style="color:#e6db74">&#34;&#34;</span>
 </code></pre></div><p>なお、カスタム サブネットワークを使用する限定公開クラスタの作成は以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サブネットワークとセカンダリ範囲を作成</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サブネットワークとセカンダリ範囲を作成</span>
 $ gcloud compute networks subnets create my-subnet <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --network default <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --range 10.0.4.0/22 <span style="color:#ae81ff">\
@@ -1400,7 +1417,7 @@ $ gcloud container clusters update private-cluster2 <span style="color:#ae81ff">
 </code></pre></div><h2 ref="3-デプロイ管理" >3. デプロイ管理</h2><a class="anchor" id="3-デプロイ管理"></a>
 <h3 ref="31-deployment-オブジェクトの詳細" >3.1. Deployment オブジェクトの詳細</h3><a class="anchor" id="31-deployment-オブジェクトの詳細"></a>
 <p><code>kubectl explain</code> コマンドを使用すると、Deployment などのオブジェクトの設定項目に関する情報が取得できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment
 
 <span style="color:#75715e"># 全てのフィールドを確認する場合</span>
 $ kubectl explain deployment --recursive
@@ -1410,7 +1427,7 @@ $ kubectl explain deployment.metadata.name
 </code></pre></div><h3 ref="32-deployment-の作成" >3.2. Deployment の作成</h3><a class="anchor" id="32-deployment-の作成"></a>
 <p>Google 提供の資材を使って、Cloud Console の Cloud Shell 上で実施していく。<br>
 まずはクラスタを作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># デフォルトのゾーンを設定</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># デフォルトのゾーンを設定</span>
 $ gcloud config set compute/zone us-central1-a
 
 <span style="color:#75715e"># サンプルコードを入手</span>
@@ -1423,23 +1440,23 @@ $ gcloud container clusters create bootcamp --num-nodes <span style="color:#ae81
 NAME      LOCATION       MASTER_VERSION   MASTER_IP     MACHINE_TYPE  NODE_VERSION     NUM_NODES  STATUS
 bootcamp  us-central1-a  1.18.16-gke.302  35.238.203.7  e2-medium     1.18.16-gke.302  <span style="color:#ae81ff">5</span>          RUNNING
 </code></pre></div><p><code>deployments/auth.yaml</code> の <code>image</code> を以下のように変更する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">…</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">…</span>
 <span style="color:#f92672">containers</span>:
 - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">auth</span>
   <span style="color:#f92672">image</span>: <span style="color:#ae81ff">kelseyhightower/auth:1.0.0</span>
 ...
 </code></pre></div><p>Deployment でレプリカが 1 つ作成され、バージョン 1.0.0 の auth コンテナが使用される。<br>
 <code>kubectl create</code> を使用して Deployment オブジェクトを作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/auth.yaml
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/auth.yaml
 
 <span style="color:#75715e"># 確認</span>
 $ kubectl get deployments
 $ kubectl get replicasets
 $ kubectl get pods
 </code></pre></div><p>次に、auth デプロイ用のサービスを作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f services/auth.yaml
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f services/auth.yaml
 </code></pre></div><p>ここまでで <code>auth</code> を作成したが、 <code>hello</code> 、 <code>frontend</code> も作成していく。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># hello</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># hello</span>
 $ kubectl create -f deployments/hello.yaml
 $ kubectl create -f services/hello.yaml
 
@@ -1449,7 +1466,7 @@ $ kubectl create configmap nginx-frontend-conf --from-file<span style="color:#f9
 $ kubectl create -f deployments/frontend.yaml
 $ kubectl create -f services/frontend.yaml
 </code></pre></div><p><code>frontend</code> の外部 IP を確認して <code>curl</code> で動確する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get services frontend
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get services frontend
 NAME       TYPE           CLUSTER-IP       EXTERNAL-IP     PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>         AGE
 frontend   LoadBalancer   10.115.243.177   34.66.110.111   443:31848/TCP   46s
 
@@ -1458,7 +1475,7 @@ $ curl -ks https://34.66.110.111
 </code></pre></div><h3 ref="33-スケールアウトイン" >3.3. スケールアウト・イン</h3><a class="anchor" id="33-スケールアウトイン"></a>
 <p>Deployment をスケーリングするには、 <code>spec.replicas</code> フィールドを更新する。<br>
 <code>kubectl explain</code> コマンドで、このフィールドの説明を確認してみる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment.spec.replicas
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl explain deployment.spec.replicas
 KIND:     Deployment
 VERSION:  apps/v1
 FIELD:    replicas &lt;integer&gt;
@@ -1466,7 +1483,7 @@ DESCRIPTION:
      Number of desired pods. This is a pointer to distinguish between explicit
      zero and not specified. Defaults to 1.
 </code></pre></div><p><code>kubectl scale</code> コマンドでスケールアウト・インする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pod 数を 5 へスケールアウト</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pod 数を 5 へスケールアウト</span>
 $ kubectl scale deployment hello --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
 
 <span style="color:#75715e"># 確認</span>
@@ -1482,10 +1499,10 @@ $ kubectl get pods | grep hello- | wc -l
 </code></pre></div><h3 ref="33-ローリング-アップデート" >3.3. ローリング アップデート</h3><a class="anchor" id="33-ローリング-アップデート"></a>
 <p>ReplicaSet が新たに作成され、古い ReplicaSet のレプリカ数が減少するにつれて、新しい ReplicaSet のレプリカ数が徐々に増加する形で実行される。<br>
 Deployment を更新するには、次のコマンドを実行してマニフェストを編集する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl edit deployment hello
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl edit deployment hello
 <span style="color:#75715e"># image を「kelseyhightower/hello:1.0.0」から「kelseyhightower/hello:2.0.0」へ変更</span>
 </code></pre></div><p>新しい ReplicaSet の確認、および、ロールアウト履歴にも新しいエントリがあるか確認する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get replicaset
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get replicaset
 NAME                  DESIRED   CURRENT   READY   AGE
 auth-7cffdb8677       <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>       14m
 frontend-7b4b97c4dc   <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>       12m
@@ -1498,19 +1515,19 @@ REVISION  CHANGE-CAUSE
 <span style="color:#ae81ff">1</span>         &lt;none&gt;
 <span style="color:#ae81ff">2</span>         &lt;none&gt;
 </code></pre></div><p>ロールアウトの状況は以下のコマンドで確認できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl rollout status deployment/hello
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl rollout status deployment/hello
 
 <span style="color:#75715e"># もしくは</span>
 
 $ kubectl get pods -o jsonpath --template<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{range .items[*]}{.metadata.name}{&#34;\t&#34;}{&#34;\t&#34;}{.spec.containers[0].image}{&#34;\n&#34;}{end}&#39;</span>
 </code></pre></div><p>ロールアウトの状況が芳しくない場合、以下のコマンドで停止・再開ができる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ロールアウト停止</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ロールアウト停止</span>
 $ kubectl rollout pause deployment/hello
 
 <span style="color:#75715e"># ロールアウト再開</span>
 $ kubectl rollout resume deployment/hello
 </code></pre></div><p>なお、なんらか問題が発生して、ロールバックが必要な場合は以下のコマンドで実施できる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ロールバック</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ロールバック</span>
 $ kubectl rollout undo deployment/hello
 
 <span style="color:#75715e"># ロールアウト履歴確認</span>
@@ -1528,7 +1545,7 @@ $ kubectl get pods -o jsonpath --template<span style="color:#f92672">=</span><sp
 </code></pre></div><h3 ref="34-カナリア-デプロイ" >3.4. カナリア デプロイ</h3><a class="anchor" id="34-カナリア-デプロイ"></a>
 <p>カナリア デプロイでは、一部のユーザーに変更をリリースすることで、新しいリリースに伴うリスクを軽減する手法。<br>
 新しいバージョンの Deployment を作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/hello-canary.yaml
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/hello-canary.yaml
 
 <span style="color:#75715e"># 確認</span>
 $ kubectl get deployments
@@ -1539,11 +1556,11 @@ hello          3/3     <span style="color:#ae81ff">3</span>            <span sty
 hello-canary   0/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">0</span>           8s  <span style="color:#75715e"># 新しい hello</span>
 </code></pre></div><p>この状態だと、単純に新しい別の Deployment を作成しただけに見えるが、 hello-canary の Label に <code>app:hello</code> が設定されており、これは hello service のセレクタになっているため、リクエストがルーティングされ、カナリアデプロイされた状態になっている。<br>
 以下のコマンドを何度が実行していると、レスポンスが異なっており、カナリアデプロイされていることがわかる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
 <span style="color:#75715e"># {&#34;version&#34;:&#34;1.0.0&#34;} or {&#34;version&#34;:&#34;2.0.0&#34;}</span>
 </code></pre></div><p>ユーザーをいずれかのデプロイに「固定」したい場合、 <strong>セッション アフィニティ</strong> を指定してサービスを作成することで実現できる。<br>
 以下の例では Client の IP でルーティングを固定している。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
 <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;hello&#34;</span>
@@ -1560,11 +1577,11 @@ hello-canary   0/1     <span style="color:#ae81ff">1</span>            <span sty
 このデプロイには、ルータとして機能するサービスを介してアクセスする。<br>
 新しい「Green」バージョンが稼働したら、サービスを更新してそのバージョンを使用するように切り替えることにより実現する。</p>
 <p>既存の hello サービスを、<code>app:hello</code> 、 <code>version: 1.0.0</code> のセレクタを持つように更新する。（元々は <code>app:hello</code> だけ）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-blue.yaml
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-blue.yaml
 <span style="color:#75715e"># resource service/hello is missing という警告は無視</span>
 </code></pre></div><p>Green の Deployment をデプロイする。（元々の hello は Blue の扱いで image のバージョンは 1.0.0）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/hello-green.yaml
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f deployments/hello-green.yaml
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
 <span style="color:#f92672">metadata</span>:
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hello-green</span>
@@ -1608,14 +1625,14 @@ hello-canary   0/1     <span style="color:#ae81ff">1</span>            <span sty
             <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">5</span>
             <span style="color:#f92672">timeoutSeconds</span>: <span style="color:#ae81ff">1</span>
 </code></pre></div><p>現状は Blue （つまり 1.0.0）であることを確認する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
 <span style="color:#75715e"># 何度叩いても 1.0.0</span>
 </code></pre></div><p>次に新しいバージョン（つまり Green ）を指定するようにサービスを更新する。（ セレクタが <code>version: 2.0.0</code> になっている）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-green.yaml
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-green.yaml
 </code></pre></div><p><code>curl</code> で確認すると今度は <code>2.0.0</code> しか返ってこない。（つまり、 Blue -&gt; Green になった！）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
 </code></pre></div><p>ロールバックしたいときは再度 service を Blue に戻せばいい。（つまり、セレクタを <code>version: 1.0.0</code> にするだけ）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-blue.yaml
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f services/hello-blue.yaml
 
 <span style="color:#75715e"># 確認</span>
 $ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend -o<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.status.loadBalancer.ingress[0].ip}&#34;</span><span style="color:#e6db74">`</span>/version
@@ -1650,7 +1667,7 @@ $ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend 
 </ul>
 <p>GKEには、Cloud Monitoring および Cloud Logging との統合機能が含まれている。（ <a href="https://cloud.google.com/stackdriver/docs/solutions/gke/prometheus?hl=ja">Prometheus の使用</a> はこちらを参照）<br>
 <code>gcloud container clusters create</code> コマンドでクラスタを作成した場合、デフォルトで有効になっているが、既存のクラスタで有効にする場合は以下のコマンドを実行する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud container clusters update <span style="color:#f92672">[</span>CLUSTER_NAME<span style="color:#f92672">]</span> --enable-stackdriver-kubernetes
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud container clusters update <span style="color:#f92672">[</span>CLUSTER_NAME<span style="color:#f92672">]</span> --enable-stackdriver-kubernetes
 <span style="color:#75715e"># ちなみに削除は「-no-enable-stackdriver-kubernetes」オプション</span>
 </code></pre></div><p>なお、現在はベータ版であるが、「 <code>--enable-logging-monitoring-system-only</code> 」オプションでシステムログのみ収集可能になる。（デフォルトは全ログ）<br>
 システムログとは以下を指す。</p>
@@ -1724,7 +1741,7 @@ $ curl -ks https://<span style="color:#e6db74">`</span>kubectl get svc frontend 
 <h2 ref="6-ユースケース" >6. ユースケース</h2><a class="anchor" id="6-ユースケース"></a>
 <h3 ref="61-spinnaker-と-kubernetes-engine-を使用した継続的デリバリー-パイプライン" >6.1. Spinnaker と Kubernetes Engine を使用した継続的デリバリー パイプライン</h3><a class="anchor" id="61-spinnaker-と-kubernetes-engine-を使用した継続的デリバリー-パイプライン"></a>
 <p>まずは環境を設定する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ゾーンの設定</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ゾーンの設定</span>
 $ gcloud config set compute/zone us-central1-f
 
 <span style="color:#75715e"># プロジェクトを確認して環境変数へ</span>
@@ -1737,7 +1754,7 @@ $ export PROJECT<span style="color:#f92672">=</span>qwiklabs-gcp-04-4ceec88343aa
 $ gcloud container clusters create spinnaker-tutorial <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --machine-type<span style="color:#f92672">=</span>n1-standard-2
 </code></pre></div><p>Spinnaker 用のサービスアカウントを作成して Cloud Storage にデータを保存できるようにする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Spinnaker 用のサービスアカウントの作成</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Spinnaker 用のサービスアカウントの作成</span>
 $ gcloud iam service-accounts create spinnaker-account <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --display-name spinnaker-account
 
@@ -1756,19 +1773,19 @@ $ gcloud projects add-iam-policy-binding $PROJECT <span style="color:#ae81ff">\
 $ gcloud iam service-accounts keys create spinnaker-sa.json <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>     --iam-account $SA_EMAIL
 </code></pre></div><p>Container Registry からの通知に使用する Cloud Pub/Sub トピックを作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud pubsub topics create projects/$PROJECT/topics/gcr
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud pubsub topics create projects/$PROJECT/topics/gcr
 </code></pre></div><p>イメージの push についての通知を受け取れるように、Spinnaker から読み取ることができるサブスクリプションを作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud pubsub subscriptions create gcr-triggers <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud pubsub subscriptions create gcr-triggers <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --topic projects/<span style="color:#e6db74">${</span>PROJECT<span style="color:#e6db74">}</span>/topics/gcr
 </code></pre></div><p>Spinnaker のサービス アカウントに、gcr-triggers サブスクリプションからの読み取り権限を付与する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export SA_EMAIL<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud iam service-accounts list <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export SA_EMAIL<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud iam service-accounts list <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;displayName:spinnaker-account&#34;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(email)&#39;</span><span style="color:#66d9ef">)</span>
 
 $ gcloud beta pubsub subscriptions add-iam-policy-binding gcr-triggers <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --role roles/pubsub.subscriber --member serviceAccount:$SA_EMAIL
 </code></pre></div><p>Spinnaker をデプロイするために Helm を準備する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># helm バイナリ取得・展開</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># helm バイナリ取得・展開</span>
 $ wget https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz
 $ tar zxfv helm-v3.1.1-linux-amd64.tar.gz
 $ cp linux-amd64/helm .
@@ -1785,7 +1802,7 @@ $ kubectl create clusterrolebinding --clusterrole<span style="color:#f92672">=</
 $ ./helm repo add stable https://charts.helm.sh/stable
 $ ./helm repo update
 </code></pre></div><p>Spinnaker を作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 環境変数の準備</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 環境変数の準備</span>
 $ export PROJECT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud info <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(config.project)&#39;</span><span style="color:#66d9ef">)</span>
 $ export BUCKET<span style="color:#f92672">=</span>$PROJECT-spinnaker-config
@@ -1793,7 +1810,7 @@ $ export BUCKET<span style="color:#f92672">=</span>$PROJECT-spinnaker-config
 <span style="color:#75715e"># Cloud Storage バケットの作成</span>
 $ gsutil mb -c regional -l us-central1 gs://$BUCKET
 </code></pre></div><p><code>spinnaker-config.yaml</code> ファイルの作成。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export SA_JSON<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cat spinnaker-sa.json<span style="color:#66d9ef">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export SA_JSON<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cat spinnaker-sa.json<span style="color:#66d9ef">)</span>
 $ export PROJECT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud info --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(config.project)&#39;</span><span style="color:#66d9ef">)</span>
 $ export BUCKET<span style="color:#f92672">=</span>$PROJECT-spinnaker-config
 $ cat &gt; spinnaker-config.yaml <span style="color:#e6db74">&lt;&lt;EOF
@@ -1836,15 +1853,15 @@ $ cat &gt; spinnaker-config.yaml <span style="color:#e6db74">&lt;&lt;EOF
 </span><span style="color:#e6db74">          --message-format GCR
 </span><span style="color:#e6db74">EOF</span>
 </code></pre></div><p>Spinnaker チャートをデプロイする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./helm install -n default cd stable/spinnaker -f spinnaker-config.yaml <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./helm install -n default cd stable/spinnaker -f spinnaker-config.yaml <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>           --version 2.0.0-rc9 --timeout 10m0s --wait
 </code></pre></div><p>ポートフォワードして Spinnaker の管理画面を確認する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export DECK_POD<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>kubectl get pods --namespace default -l <span style="color:#e6db74">&#34;cluster=spin-deck&#34;</span> <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export DECK_POD<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>kubectl get pods --namespace default -l <span style="color:#e6db74">&#34;cluster=spin-deck&#34;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{.items[0].metadata.name}&#34;</span><span style="color:#66d9ef">)</span>
 $ kubectl port-forward --namespace default $DECK_POD 8080:9000 &gt;&gt; /dev/null &amp;
 </code></pre></div><p>Cloud Shell ウィンドウの最上部で [ウェブでプレビュー] をクリックし、[ポート 8080 でプレビュー] をクリックすると Spinnaker の管理画面が見れる。<br>
 次に Docker イメージを作成する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サンプルアプリの取得・展開</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># サンプルアプリの取得・展開</span>
 $ gsutil -m cp -r gs://spls/gsp114/sample-app.tar .
 $ mkdir sample-app
 $ tar xvf sample-app.tar -C ./sample-app
@@ -1882,13 +1899,13 @@ Container Builder はソースコードを自動的にチェックアウトし�
 </ul>
 <p>これ以降、文字 &ldquo;v&rdquo; が先頭に付いている Git タグをソースコード リポジトリに push すると、Container Builder が自動的にアプリケーションをビルドして、Docker イメージとして Container Registry に push する。</p>
 <p>Spinnaker で使用するために Kubernetes マニフェストを準備する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud info --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(config.project)&#39;</span><span style="color:#66d9ef">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud info --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(config.project)&#39;</span><span style="color:#66d9ef">)</span>
 $ gsutil mb -l us-central1 gs://$PROJECT-kubernetes-manifests
 $ gsutil versioning set on gs://$PROJECT-kubernetes-manifests
 $ sed -i s/PROJECT/$PROJECT/g k8s/deployments/*
 $ git commit -a -m <span style="color:#e6db74">&#34;Set project ID&#34;</span>
 </code></pre></div><p>Git タグを作成してイメージをビルドしてみる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git tag v1.0.0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git tag v1.0.0
 $ git push --tags
 Enumerating objects: 14, <span style="color:#66d9ef">done</span>.
 Counting objects: 100% <span style="color:#f92672">(</span>14/14<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
@@ -1900,15 +1917,15 @@ remote: Resolving deltas: 100% <span style="color:#f92672">(</span>5/5<span styl
 To https://source.developers.google.com/p/qwiklabs-gcp-00-c0fdab7fa347/r/sample-app
  * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         v1.0.0 -&gt; v1.0.0
 </code></pre></div><p>Spinnaker を管理する spin CLI をインストールする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -LO https://storage.googleapis.com/spinnaker-artifacts/spin/1.14.0/linux/amd64/spin
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -LO https://storage.googleapis.com/spinnaker-artifacts/spin/1.14.0/linux/amd64/spin
 $ chmod +x spin
 </code></pre></div><p>spin を使用して、Spinnaker 内に sample という名前のアプリを作成。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./spin application save --application-name sample <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./spin application save --application-name sample <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>                        --owner-email <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>gcloud config get-value core/account<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>                        --cloud-providers kubernetes <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>                        --gate-endpoint http://localhost:8080/gate
 </code></pre></div><p>sample-app ソースコード ディレクトリから次のコマンドを実行します。これにより、サンプル パイプラインが Spinnaker インスタンスにアップロードされます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud info --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(config.project)&#39;</span><span style="color:#66d9ef">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gcloud info --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;value(config.project)&#39;</span><span style="color:#66d9ef">)</span>
 $ sed s/PROJECT/$PROJECT/g spinnaker/pipeline-deploy.json &gt; pipeline.json
 $ ./spin pipeline save --gate-endpoint http://localhost:8080/gate -f pipeline.json
 </code></pre></div><p>パイプラインの実行を手動でトリガーして確認する。</p>
@@ -1936,7 +1953,7 @@ $ ./spin pipeline save --gate-endpoint http://localhost:8080/gate -f pipeline.js
 <li>アプリケーションをビルド、テスト、デプロイするためのパイプラインを手動でトリガーした。</li>
 </ul>
 <p>次に、コードの変更によるパイプラインのトリガーを行う。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># sample-app ディレクトリから次のコマンドを実行して、アプリの色をオレンジ色から青色に変更</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># sample-app ディレクトリから次のコマンドを実行して、アプリの色をオレンジ色から青色に変更</span>
 $ sed -i <span style="color:#e6db74">&#39;s/orange/blue/g&#39;</span> cmd/gke-info/common-service.go
 
 <span style="color:#75715e"># 変更にタグを付け、ソースコード リポジトリに push</span>

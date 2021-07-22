@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1295,7 +1312,7 @@ if (!doNotTrack) {
 <a href="http://kubernetes.io/ja/docs/reference/kubectl/cheatsheet/">kubectlチートシート</a>
 <a href="https://cstoku.dev/posts/2018/k8sdojo-23/">Kubernetes道場 23日目 - kubectlを網羅する</a></p>
 <h2 ref="全体像" >全体像</h2><a class="anchor" id="全体像"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl --help
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl --help
 kubectl controls the Kubernetes cluster manager.
 
  Find more information at: https://kubernetes.io/docs/reference/kubectl/overview/
@@ -1365,7 +1382,7 @@ Use <span style="color:#e6db74">&#34;kubectl options&#34;</span> <span style="co
 </code></pre></div><h2 ref="基本設定" >基本設定</h2><a class="anchor" id="基本設定"></a>
 <p><code>kubectl</code> コマンドの設定情報は <code>${HOME}/.kube/config</code> にある。<br>
 これを <code>kubeconfig</code> と呼ぶ。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">current-context <span style="color:#75715e"># current-contextを表示する</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">current-context <span style="color:#75715e"># current-contextを表示する</span>
 delete-cluster  <span style="color:#75715e"># 指定したコンテキストをkubeconfigから削除する</span>
 delete-context  <span style="color:#75715e"># 指定したコンテキストをkubeconfigから削除する</span>
 delete-user     <span style="color:#75715e"># Delete the specified user from the kubeconfig</span>
@@ -1381,7 +1398,7 @@ unset           <span style="color:#75715e"># kubeconfigから変数を個別に
 use-context     <span style="color:#75715e"># kubeconfigにcurrent-contextを設定する</span>
 view            <span style="color:#75715e"># マージされたkubeconfigの設定または指定されたkubeconfigを表示する</span>
 </code></pre></div><p>kind 環境でやる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl config current-context
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl config current-context
 kind-kind
 
 % kubectl cluster-info --context kind-kind
@@ -1392,7 +1409,7 @@ To further debug and diagnose cluster problems, use <span style="color:#e6db74">
 </code></pre></div><h3 ref="context" >context</h3><a class="anchor" id="context"></a>
 <p><code>kubecnfig</code> に含まれる設定は <code>contexts</code> <code>clusters</code> <code>users</code> の 3 種類で、 <code>contexts</code> に <code>cluster</code> （接続先クラスタ情報）と <code>users</code> （ credential 情報）が含まれる。</p>
 <p>基本設定でも特に <code>context</code> 設定については以下だけ覚えておく。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl config view            <span style="color:#75715e"># kubeconfig の表示</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl config view            <span style="color:#75715e"># kubeconfig の表示</span>
 
 % kubectl config current-context <span style="color:#75715e"># 現在の context を取得</span>
 % kubectl config get-contexts    <span style="color:#75715e"># context の一覧を取得</span>
@@ -1418,7 +1435,7 @@ To further debug and diagnose cluster problems, use <span style="color:#e6db74">
 <li>service: Create a Service using specified subcommand.</li>
 <li>serviceaccount: Create a ServiceAccount with the specified name.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"><span style="color:#75715e"># Deployment</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"><span style="color:#75715e"># Deployment</span>
 % kubectl create deployment nginx --image<span style="color:#f92672">=</span>nginx --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
 
 <span style="color:#75715e"># Job</span>
@@ -1437,7 +1454,7 @@ To further debug and diagnose cluster problems, use <span style="color:#e6db74">
 <h2 ref="kubectl-run" ><code>kubectl run</code></h2><a class="anchor" id="kubectl-run"></a>
 <p><code>kubectl create</code> がだいたいなんでも作れたのに対し、 <code>kubectl run</code> は Pod のみの実行に特化。<br>
 オプションで Service をつけれたりもするが、基本は <code>kubectl create</code> でリソースを作成するのがよい。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"><span style="color:#75715e"># Pod</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"><span style="color:#75715e"># Pod</span>
 % kubectl run nginx --image<span style="color:#f92672">=</span>nginx
 
 <span style="color:#75715e"># PodとServiceを同時に作成</span>
@@ -1456,7 +1473,7 @@ To further debug and diagnose cluster problems, use <span style="color:#e6db74">
 <h2 ref="kubectl-set" ><code>kubectl set</code></h2><a class="anchor" id="kubectl-set"></a>
 <p>オブジェクトに特定の features を設定するコマンド。<br>
 例えば、以下のコマンドはデプロイメントのイメージのみ変更する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl set image deployment &lt;demployment-name&gt; &lt;new-image&gt; --record
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl set image deployment &lt;demployment-name&gt; &lt;new-image&gt; --record
 </code></pre></div>
 		</div>
 

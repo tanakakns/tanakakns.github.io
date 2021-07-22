@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -507,7 +507,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -516,9 +516,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1349,7 +1366,7 @@ if (!doNotTrack) {
 </ul>
 <h3 ref="12-コメント" >1.2 コメント</h3><a class="anchor" id="12-コメント"></a>
 <p>コメントは、記述されているものの名​​前で始まり、ピリオドで終わる必要がある。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Request represents a request to run a command.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Request represents a request to run a command.
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Request</span> <span style="color:#66d9ef">struct</span> { <span style="color:#f92672">...</span>
 
 <span style="color:#75715e">// Encode writes the JSON encoding of req to w.
@@ -1357,9 +1374,9 @@ if (!doNotTrack) {
 </code></pre></div><h3 ref="13-context" >1.3. Context</h3><a class="anchor" id="13-context"></a>
 <p>一連オンライントランザクション処理の流れなどで保持しておく必要のある値をコンテキストで管理する。（セキュリティ資格情報、トレース情報、期限、キャンセルのシグナルなど）<br>
 Contextを利用するほとんどの関数で一番最初の引数に指定して引き回す。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">F</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#75715e">/* other arguments */</span>) {}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">F</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#75715e">/* other arguments */</span>) {}
 </code></pre></div><h3 ref="14-スライス" >1.4. スライス</h3><a class="anchor" id="14-スライス"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">t</span> []<span style="color:#66d9ef">string</span>  <span style="color:#75715e">// Good
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">t</span> []<span style="color:#66d9ef">string</span>  <span style="color:#75715e">// Good
 </span><span style="color:#75715e"></span>
 <span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{} <span style="color:#75715e">// Bad
 </span></code></pre></div><p>前者は <code>nil</code> スライスを返し、後者は非 <code>nil</code> スライスを返却する。どちらも <code>cap</code> , <code>len</code>ともにゼロだが、前者が優先スタイル。<br>
@@ -1368,7 +1385,7 @@ Contextを利用するほとんどの関数で一番最初の引数に指定し�
 <p>通常のエラー処理に <code>painc</code> を使用せず、エラーと複数の戻り値を使用する。</p>
 <h3 ref="16-エラーの文字列" >1.6. エラーの文字列</h3><a class="anchor" id="16-エラーの文字列"></a>
 <p>エラー文字列は、通常、他のコンテキストに従って出力されるため、大文字にしない。ただし、固有名詞や頭文字で始まる場合は大文字。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Bad
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Bad
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;Something bad&#34;</span>)
 <span style="color:#75715e">// 通常はこのようにフォーマットされて出力される
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;something bad&#34;</span>)
@@ -1376,7 +1393,7 @@ Contextを利用するほとんどの関数で一番最初の引数に指定し�
 </code></pre></div><h3 ref="17-エラーハンドリング" >1.7. エラーハンドリング</h3><a class="anchor" id="17-エラーハンドリング"></a>
 <p>関数の戻り値としてエラーが返ってくるときに、絶対に受け取り、処理をする必要がある。本当に例外の時 のみ panicを利用。<br>
 また、エラーが発生したときは先にエラーハンドリングを書く。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Bad
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Bad
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
     <span style="color:#75715e">// error handling
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span>
@@ -1392,7 +1409,7 @@ Contextを利用するほとんどの関数で一番最初の引数に指定し�
 }
 <span style="color:#75715e">// use x
 </span></code></pre></div><p>ただし、エラーのみを返却する関数を実行する場合は「 <code>err</code> 変数の受け取りを複数回繰り返していると <code>:=</code> だけで書けないという状況」に落ちいってしまうため、以下の記載を許容する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Good
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Good
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
     <span style="color:#75715e">// error handling
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span>
@@ -1439,7 +1456,7 @@ Contextを利用するほとんどの関数で一番最初の引数に指定し�
 </ul>
 <h3 ref="まとめ" >まとめ</h3><a class="anchor" id="まとめ"></a>
 <p><code>io.Reader</code> <code>io.Writer</code> <code>io.Closer</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Reader</span> <span style="color:#66d9ef">interface</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Reader</span> <span style="color:#66d9ef">interface</span> {
     <span style="color:#a6e22e">Read</span>(<span style="color:#a6e22e">p</span> []<span style="color:#66d9ef">byte</span>) (<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)
 }
 <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Writer</span> <span style="color:#66d9ef">interface</span> {
@@ -1460,7 +1477,7 @@ Contextを利用するほとんどの関数で一番最初の引数に指定し�
 <ul>
 <li><a href="https://hori-ryota.com/blog/golang-channel-pattern/">Go の channel 処理パターン集</a></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -1497,14 +1514,14 @@ Contextを利用するほとんどの関数で一番最初の引数に指定し�
 		}
 	}
 }
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">お仕事1: <span style="color:#ae81ff">2</span> + 3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">お仕事1: <span style="color:#ae81ff">2</span> + 3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
 お仕事2: <span style="color:#ae81ff">4</span> + 5 <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>
 お仕事4: <span style="color:#ae81ff">8</span> + 9 <span style="color:#f92672">=</span> <span style="color:#ae81ff">17</span>
 お仕事0: <span style="color:#ae81ff">0</span> + 1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
 お仕事3: <span style="color:#ae81ff">6</span> + 7 <span style="color:#f92672">=</span> <span style="color:#ae81ff">13</span>
 お仕事おしまい。
 </code></pre></div><p><code>sync.WaitGroup</code> を利用したら以下も同じ結果。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -1544,7 +1561,7 @@ Contextを利用するほとんどの関数で一番最初の引数に指定し�
 }
 </code></pre></div><h2 ref="5-その他パターン" >5. その他パターン</h2><a class="anchor" id="5-その他パターン"></a>
 <h3 ref="51-設計単位" >5.1. 設計単位</h3><a class="anchor" id="51-設計単位"></a>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">trace</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">trace</span>
 
 <span style="color:#f92672">import</span> (
     <span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -1572,7 +1589,7 @@ Contextを利用するほとんどの関数で一番最初の引数に指定し�
 <h3 ref="61-nomethod-イディオム" >6.1. NoMethod イディオム</h3><a class="anchor" id="61-nomethod-イディオム"></a>
 <p>例えば、JSON上では時刻を「unixtime形式」で表現し、プログラム中では「time.Time型」として表現することで、プログラム中で時刻の比較や計算をしやすくしたい、といったケースがあったとする。<br>
 その際 <code>encoding/json</code> パッケージには、 <code>Marshaler</code> と <code>Unmarshaler</code> インターフェースが用意されており、以下のようにカスタマイズの実装ができる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// 対象の構造体
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// 対象の構造体
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Resource</span> <span style="color:#66d9ef">struct</span> {
         <span style="color:#a6e22e">ID</span>        <span style="color:#66d9ef">int64</span>     <span style="color:#e6db74">`json:&#34;id&#34;`</span>
         <span style="color:#a6e22e">Timestamp</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Time</span> <span style="color:#e6db74">`json:&#34;-&#34;`</span>
@@ -1611,7 +1628,7 @@ Contextを利用するほとんどの関数で一番最初の引数に指定し�
 }
 </code></pre></div><p>この時、たままたメソッド定義が被って <code>Marshaler</code> と <code>Unmarshaler</code> インターフェースに対応してしまっている（ <code>MarshalJSON()</code> / <code>UnmarshalJSON()</code> を実装してしまっている）が、上記のようなカスタマイズの実装を適用したくないとする。<br>
 その際は以下のようにメソッド定義の無い型として再定義することによって回避することができる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Resource</span> <span style="color:#66d9ef">struct</span>{}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Resource</span> <span style="color:#66d9ef">struct</span>{}
 
 <span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Resource</span>) <span style="color:#a6e22e">MarshalJSON</span>() ([]<span style="color:#66d9ef">byte</span>, <span style="color:#66d9ef">error</span>) {
     <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">NoMethod</span> <span style="color:#a6e22e">Resource</span>   <span style="color:#75715e">// メソッド定義の無い型に再定義（中身は同じ）

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-19T20:25:55 JST">
+<meta name="revised" content="2021-07-22T14:55:14 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -506,7 +506,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -515,9 +515,26 @@ if (!doNotTrack) {
       
       
           <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
       
         
       
+    </li>
+        </ul>
     </li>
               
 
@@ -1341,7 +1358,7 @@ if (!doNotTrack) {
 <h2 ref="ユースケース-1" >ユースケース</h2><a class="anchor" id="ユースケース-1"></a>
 <p>Cloud Pub/Sub トピックに関する Cloud Functions のイベントを扱う。（ <a href="https://cloud.google.com/pubsub/architecture">Google Cloud Pub/Sub: Google 規模のメッセージ サービス</a> ）<br>
 イベント パラメータとコールバック パラメータについて詳しくは、 <a href="https://cloud.google.com/functions/docs/writing/background">バックグラウンド関数</a> を確認。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 関数コード用のディレクトリを作成</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 関数コード用のディレクトリを作成</span>
 $ mkdir gcf_hello_world
 $ cd gcf_hello_world
 
@@ -1361,12 +1378,12 @@ const name <span style="color:#f92672">=</span> pubSubMessage.data
 
 console.log<span style="color:#f92672">(</span><span style="color:#e6db74">`</span>My Cloud Function: <span style="color:#e6db74">${</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span><span style="color:#f92672">)</span>;
 <span style="color:#f92672">}</span>;
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Cloud Storage バケット作成</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Cloud Storage バケット作成</span>
 $ gsutil mb -p <span style="color:#f92672">[</span>PROJECT_ID<span style="color:#f92672">]</span> gs://<span style="color:#f92672">[</span>BUCKET_NAME<span style="color:#f92672">]</span>
 <span style="color:#75715e"># gsutil mb -p qwiklabs-gcp-02-5fcdb48e7b6e gs://qwiklab-sample1234</span>
 </code></pre></div><p>次に新しい関数をデプロイするのだが、 <code>--trigger-topic</code> 、 <code>--trigger-bucket</code> 、 <code>--trigger-http</code> のいずれかを指定する必要がある。<br>
 ここでは、 <code>--trigger-topic</code> に <code>hello_world</code> を指定する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud functions deploy helloWorld <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud functions deploy helloWorld <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --stage-bucket qwiklab-sample1234 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --trigger-topic hello_world <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --runtime nodejs8
@@ -1374,7 +1391,7 @@ $ gsutil mb -p <span style="color:#f92672">[</span>PROJECT_ID<span style="color:
 <span style="color:#75715e"># ステータスの確認</span>
 $ gcloud functions describe helloWorld
 </code></pre></div><p>関数をデプロイしてそれがアクティブになっていることを確認したら、関数がイベントを検出してメッセージをクラウド ログに書き込むかどうかをテストする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 関数のメッセージテストを実行</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 関数のメッセージテストを実行</span>
 $ DATA<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>printf <span style="color:#e6db74">&#39;Hello World!&#39;</span>|base64<span style="color:#66d9ef">)</span> <span style="color:#f92672">&amp;&amp;</span> gcloud functions call helloWorld --data <span style="color:#e6db74">&#39;{&#34;data&#34;:&#34;&#39;</span>$DATA<span style="color:#e6db74">&#39;&#34;}&#39;</span>
 executionId: u4h75ec5oy6m
 
