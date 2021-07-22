@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	ビッグデータ :: テックまとめ
+	EC2 :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>ビッグデータ :: テックまとめ</title>
+<title>EC2 :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/gcp/big-data/"
+  <body data-url="/aws/computing/ec2/"
 
   class="hidetoc hidenextpage ">
 
@@ -369,14 +369,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/aws/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/aws/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/aws/">AWS</a>
@@ -399,7 +400,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/computing/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/aws/computing/" class="dd-item parent haschildren
         item_level_$level
         ">
 
@@ -408,13 +409,14 @@ if (!doNotTrack) {
       
       
           <a href="/aws/computing/">コンピューティング</a>
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
         <ul>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/computing/ec2/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/computing/ec2/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -572,15 +574,14 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -926,7 +927,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/" class="dd-item parent active haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -935,8 +936,7 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/big-data/">ビッグデータ</a>
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
         <ul>
@@ -1267,6 +1267,9 @@ if (!doNotTrack) {
 		
   
   	
+		
+  
+  	
 	<li >
       <a class="text-link" href="https://tanakakns.github.io/">
         
@@ -1275,8 +1278,16 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/gcp/">
-        GCP
+      <a class="text-link" href="/aws/">
+        AWS
+      </a>
+    </li>
+	
+  	
+  
+    <li class="">
+      <a class="text-link" href="/aws/computing/">
+        コンピューティング
       </a>
     </li>
 	
@@ -1284,7 +1295,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        ビッグデータ
+        EC2
       
     </li>
 
@@ -1305,7 +1316,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>ビッグデータ</h1>
+			<h1>EC2</h1>
         
 
 		
@@ -1325,288 +1336,284 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <table>
-<thead>
-<tr>
-<th style="text-align:left">サービス</th>
-<th style="text-align:left">モデル</th>
-<th style="text-align:left">形式</th>
-<th style="text-align:left">ユースケース</th>
-<th style="text-align:left">対応AWS</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><a href="./pubsub">Cloud Pub/Sub</a></td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 ref="データ分析パイプライン" >データ分析パイプライン</h2><a class="anchor" id="データ分析パイプライン"></a>
-<p>「取り込み」 -&gt; 「処理」 -&gt; 「分析」 -&gt; 「可視化」の順で処理をする。</p>
+	    <p>Amazon EC2](<a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/concepts.html">https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/concepts.html</a>)についてまとめる。</p>
 <ul>
-<li>取り込み
+<li>概要</li>
+<li>Amazon EC2 Auto Scaling</li>
+</ul>
+<h1 ref="概要" >概要</h1><a class="anchor" id="概要"></a>
+<p>EC2 を作成する際は以下の設定が必要になる。</p>
 <ul>
-<li>Cloud Pub/Sub：ストリーミングの場合はこちら</li>
-<li>Cloud Storage：ストリーミングではなく一時保存する場合はこちらでも</li>
+<li>AMI の選択
+<ul>
+<li>Amazon Machine Image 、インスタンス用に事前に設定されたテンプレート</li>
 </ul>
 </li>
-<li>処理
+<li>インスタンスタイプの選択</li>
+<li>インスタンスの設定
 <ul>
-<li>Cloud Dataflow（推奨）： Apache Beam 準拠の ETL 処理、サーバレス</li>
-<li>Cloud Dataproc：マネージド Hadoop/Spark、クラスタ管理が必要、既存の Hadoop/Sparkジョブがある場合はこちらでも</li>
+<li>ネットワーク</li>
+<li>プレイスメントグループ</li>
 </ul>
 </li>
-<li>分析
+<li>ストレージの設定</li>
+<li>タグの設定</li>
+<li>セキュリティグループの設定</li>
+<li>その他</li>
+</ul>
+<p>以降、設定に必要な知識について記載する。（ただし、 VPC 関連については省略する。）</p>
+<h2 ref="ami-の選択" >AMI の選択</h2><a class="anchor" id="ami-の選択"></a>
+<p>AMI は以下の項目の選択が可能。</p>
 <ul>
-<li>BigQuery</li>
+<li>アーキテクチャ
+<ul>
+<li>x86 / Arm</li>
 </ul>
 </li>
-<li>可視化
+<li>ビット数
 <ul>
-<li>DataPortal</li>
+<li>32bit / 64bit</li>
 </ul>
 </li>
-</ul>
-<h2 ref="dataflow-と-dataproc" >Dataflow と Dataproc</h2><a class="anchor" id="dataflow-と-dataproc"></a>
+<li>仮想化方式
 <ul>
-<li>Google Cloud Dataflow
-<ul>
-<li>Dataflowは、サーバーレス、高速、費用効果の高い統合ストリームおよびバッチデータ処理</li>
-<li>バッチパイプラインとストリーミングパイプラインの両方に適する</li>
-<li>参照：https://cloud.google.com/dataflow</li>
+<li>準仮想化（ Paravirtual : PV ）※古いので利用は推奨しない</li>
+<li>完全仮想化（ Hardware-assisted VM : HVM ）</li>
 </ul>
 </li>
-<li>Google Cloud Dataproc
+<li><strong>ルートボリューム</strong> （ブートストレージ / OSがインストールされるボリューム）
 <ul>
-<li>オープンソースのデータと分析の処理をクラウドで高速、簡単、かつ安全にする</li>
-<li>フルマネージドのApache Spark、Apache Hadoop、Presto、およびその他のOSSクラスターを構築できる</li>
-<li>しかし、Dataprocは、バッチおよびストリーム処理には適していない</li>
-<li>参照：https://cloud.google.com/dataproc#section-5</li>
-<li>Dataproc はストレージとして HDFS / Cloud Storage を選択できる
+<li>EBS Backed
 <ul>
-<li>HDFS は 揮発性で、クラスタを削除するとデータも消えることに注意</li>
+<li>ルートボリュームが EBS スナップショットから作成された EBS で起動が早い</li>
 </ul>
 </li>
-<li>BigQuery/BigTable/Cloud Storage に対するプログラマブルな <a href="https://cloud.google.com/dataproc/docs/concepts/connectors/bigquery">コネクタ</a> が提供されている</li>
+<li>Instance Store-Backed
+<ul>
+<li>ルートボリュームがインスタンスストアで S3 に保存されたテンプレートから作成されるため起動が遅い</li>
+<li>ただし、起動後のデータアクセスが早いのでキャッシュ利用には向く</li>
 </ul>
 </li>
 </ul>
-<h2 ref="その他ビッグデータ系サービス" >その他ビッグデータ系サービス</h2><a class="anchor" id="その他ビッグデータ系サービス"></a>
+</li>
+</ul>
+<p>推奨は、 64bit HVM EBS-Backed 。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/AMIs.html">参考</a></p>
+<blockquote>
+<h3 ref="物理ホストの専有" >物理ホストの専有</h3><a class="anchor" id="物理ホストの専有"></a>
 <ul>
-<li>Cloud Data Loss Prevention
+<li>2 つの方法
 <ul>
-<li>GCP内で処理されるデータを監査し、機密データ(電話番号、メールアドレス等の個人情報等）の有無の検知やマスキング処理等が可能なサービス</li>
+<li>ハードウェア専有インスタンス（Dedicated Instance）<a href="https://aws.amazon.com/jp/ec2/pricing/dedicated-instances/">参考</a></li>
+<li>Amazon EC2 Dedicated Host <a href="https://aws.amazon.com/jp/ec2/dedicated-hosts/">参考</a></li>
 </ul>
 </li>
-<li><a href="https://cloud.google.com/dataprep/">Dataprep by Trifacta</a>
+<li>共通の機能
 <ul>
-<li>分析用に異種の大規模なデータセット（構造化データと非構造化データ）の視覚的な探索、データクレンジング、構造化されたデータに変換して準備を行うためのインテリジェントデータサービス</li>
-<li>Cloud Storage・BigQuery・デスクトップに保存されたデータを処理して、データを洗練してからCloud Storage・BigQueryにエクスポートできる</li>
-<li>Chrome ブラウザでのみ操作可能</li>
-<li>Qwiklabs の <a href="https://googlecourses.qwiklabs.com/focuses/11580?parent=catalog">Cloud Dataprep でデータ変換パイプラインを作成する</a> で体験できる。</li>
+<li>ユーザ専有の物理サーバにインスタンスを起動可能（他ユーザのインスタンスは起動しない）</li>
+<li>従量課金やクラウドのメリットはそのまま確保</li>
 </ul>
 </li>
-<li><a href="https://cloud.google.com/datalab">Cloud Datalab</a>
+<li>Dedicated Hosts の特徴
 <ul>
-<li>データを探索、分析、変換、視覚化し、GCPで機械学習モデルを構築するために作成された強力なインタラクティブツール
-<ul>
-<li>データクレンジングには適していない</li>
-</ul>
-</li>
-<li>Compute Engineで実行され、複数のクラウドサービスに簡単に接続できるため、データサイエンスのタスクに集中できる</li>
-<li>一方でデータのクレンジングには適さない</li>
-</ul>
-</li>
-<li><a href="https://cloud.google.com/composer">Cloud Composer</a>
-<ul>
-<li>Apache Airflow で構築された、フルマネージドのワークフローオーケストレーションサービス</li>
+<li>物理ホストへのインスタンス配置が制御・確認可能</li>
+<li>物理ホスト単位のソフトウェアライセンスを持ち込み（ BYOL ）可能</li>
+<li>物理ホスト単位で課金</li>
+<li>一部の OS が利用できないので注意</li>
 </ul>
 </li>
 </ul>
-<h2 ref="dataprep-by-trifacta" >Dataprep by Trifacta</h2><a class="anchor" id="dataprep-by-trifacta"></a>
-<p>Cloud Dataprep は Chrome ブラウザからのみ利用できる。<br>
-Cloud Console から以下の手順で開く。</p>
+</blockquote>
+<h2 ref="インスタンスタイプの選択" >インスタンスタイプの選択</h2><a class="anchor" id="インスタンスタイプの選択"></a>
+<p>EC2 <strong>インスタンスタイプ</strong> のネーミングポリシーは以下の通り。</p>
+<pre><code># フォーマット
+[インスタンスファミリー][インスタンス世代][(追加機能)].[インスタンスサイズ]
+# 例
+c5d.xlarge
+</code></pre><p>各桁の意味は以下の通り。</p>
 <ul>
-<li>ナビゲーション メニューを開き、[Dataprep] を選択 -&gt; 利用規約に同意 -&gt; いろいろ許可</li>
-<li>[Sign in with Google] ウィンドウが表示された場合は GCP のアカウントでログイン -&gt; 規約などに同意</li>
-<li>ストレージ バケットのデフォルトの場所を使用するように求められたら [Continue] をクリック</li>
+<li>インスタンスファミリー（ 1 桁目）</li>
+<li>インスタンス世代（ 2 桁目）</li>
+<li>追加機能（ 3 桁目）</li>
+<li>インスタンスサイズ（ドット以降）</li>
 </ul>
-<h2 ref="ユースケース" >ユースケース</h2><a class="anchor" id="ユースケース"></a>
-<h3 ref="google-cloud-での-iot-分析パイプラインの構築" >Google Cloud での IoT 分析パイプラインの構築</h3><a class="anchor" id="google-cloud-での-iot-分析パイプラインの構築"></a>
-<p>要件は以下。</p>
+<p><a href="https://aws.amazon.com/jp/ec2/instance-types/">インスタンスタイプ一覧</a></p>
+<h2 ref="インスタンスの設定ネットワーク" >インスタンスの設定：ネットワーク</h2><a class="anchor" id="インスタンスの設定ネットワーク"></a>
+<h3 ref="ip-の種類" >IP の種類</h3><a class="anchor" id="ip-の種類"></a>
 <ul>
-<li>Cloud IoT Core を使用して MQTT ベースのデバイスを接続、管理します（シミュレートされたデバイスを使用します）。</li>
-<li>Cloud Pub/Sub を使用して Cloud IoT Core から情報のストリームを取り込みます。</li>
-<li>Cloud Dataflow を使用して IoT データを処理します。</li>
-<li>BigQuery を使用して IoT データを分析します。</li>
+<li>Privete IP
+<ul>
+<li>必ず割り当てられる IP アドレス</li>
+<li>EC2 作成時に設定可能</li>
+<li>stop/start しても変化なく固定の IP</li>
 </ul>
-<p>手順は以下。<br>
-まずは、 API を有効にする。</p>
+</li>
+<li>Public IP
 <ul>
-<li>ナビゲーション メニュー &gt; [API とサービス] をクリックし、以下の API を有効化する
+<li>ランダムに割り当てられる Public IP</li>
+<li>stop/start すると別の IP が割り当てられる</li>
+<li>付与しないこともできる</li>
+</ul>
+</li>
+<li>Elastic IP (EIP)
 <ul>
-<li>Cloud IoT API</li>
-<li>Cloud Pub/Sub API</li>
-<li>Dataflow API</li>
+<li>別インスタンスへ再マップも可能な固定の Public IP</li>
+<li>stop/start しても変化なく固定の IP</li>
+<li>利用していなくても課金される</li>
 </ul>
 </li>
 </ul>
-<p>Cloud Pub/Sub トピックの作成する。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/using-instance-addressing.html">参考</a></p>
+<h3 ref="eni" >ENI</h3><a class="anchor" id="eni"></a>
+<p>ENI ( Elastic Network Interfaces ) は、 VPC 上で実現する仮想ネットワークインターフェース。<br>
+以下を ENI に紐づけて管理する。</p>
 <ul>
-<li>ナビゲーション メニュー &gt; [Pub/Sub] &gt; [トピック] へ移動し、 <code>iotlab</code> トピックを作成</li>
-<li>作成したトピックの [View permissions] を選択し、[権限] ダイアログで、[ADD MEMBER] をクリックし、[新しいメンバー] に <code>cloud-iot@system.gserviceaccount.com</code> を追加</li>
-<li>[Select a role] メニューから新しいメンバーに [Pub/Sub] &gt; [Pub/Sub パブリッシャー] 役割を付与して「保存」</li>
+<li>Private IP</li>
+<li>Elatic IP</li>
+<li>MAC アドレス</li>
+<li>セキュリティグループ</li>
 </ul>
-<p>Pub/Sub に送信されたメッセージを集約し、BigQuery に保存するため、BigQuery データセットを作成する。</p>
+<p>インスタンス障害時に NIC 付け替えなどの運用が可能に。<br>
+また、インスタンスによって割り当て可能な数が異なることに注意。<br>
+<a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/using-eni.html">参考</a></p>
+<h3 ref="拡張ネットワーキング" >拡張ネットワーキング</h3><a class="anchor" id="拡張ネットワーキング"></a>
+<p>EC2 インスタンスの持つ通信性能を最大化する機能。<br>
+以下の 2 タイプある。</p>
 <ul>
-<li>ナビゲーション メニュー &gt; [BigQuery] に移動、[完了] をクリック</li>
-<li>左側のメニューからプロジェクト ID をクリック -&gt;  [データセットを作成] をクリック -&gt; データセットに「iotlabdataset」という名前を付け、他のすべてのフィールドはそのままにして、[データセットを作成]</li>
-<li>データセットをクリックして、コンソールの右側にある [+ テーブルを作成] をクリック</li>
-<li>ソース フィールドが [空のテーブル] に設定されていることを確認</li>
-<li>[送信先] セクションの [テーブル名] フィールドに、「sensordata」と入力</li>
-<li>[スキーマ] セクションで、[+ フィールドを追加] ボタンをクリックして次のフィールドを追加
+<li>Intel 82599VF (ixgbevf)</li>
+<li>Elastic Network Adapter (ENA)</li>
+</ul>
+<p><a href="https://aws.amazon.com/jp/premiumsupport/knowledge-center/enable-configure-enhanced-networking/">参考</a></p>
+<h3 ref="ネットワーク帯域" >ネットワーク帯域</h3><a class="anchor" id="ネットワーク帯域"></a>
+<p>EC2 間のネットワーク帯域には以下の制限がある。</p>
 <ul>
-<li>フィールド名として「timestamp」と入力し、フィールドの [型] を [TIMESTAMP] に設定</li>
-<li>フィールド名として「device」と入力し、フィールドの [型] を [STRING] に設定</li>
-<li>フィールド名として「temperature」と入力し、フィールドの [型] を [FLOAT] に設定</li>
+<li>シングルフロー通信
+<ul>
+<li>最大 5 Gbps または 10 Gbps （同一 Cluster Placement Group の場合）</li>
 </ul>
 </li>
-<li>他のデフォルト設定は変更せずに、[テーブルを作成] をクリック</li>
-</ul>
-<p>Cloud Dataflow パイプラインの作業スペースとして Cloud Storage バケットを作成する。</p>
+<li>マルチフロー通信
 <ul>
-<li>ナビゲーション メニュー &gt; [Storage] に移動</li>
-<li>[バケットを作成] をクリックし、[バケットに名前を付ける] には「qwiklabs-gcp-03-b799ccdd7f75-bucket」</li>
-<li>[デフォルトのストレージ クラスを選択する] で、まだ選択されていない場合は [Multi-Regional] をクリック</li>
-<li>[場所] で最も近いもの（ asia ）を選択し、[作成] をクリック</li>
-</ul>
-<p>Cloud Dataflow パイプラインを設定する。<br>
-ここでは、Pub/Sub からセンサーデータを読み取り、一定の期間の最高気温を計算し、これを BigQuery に書き込むストリーミング データ パイプラインを設定する。</p>
-<ul>
-<li>ナビゲーション メニュー &gt; [Dataflow] に移動</li>
-<li>上部のメニューバーの [テンプレートからジョブを作成] をクリック</li>
-<li>ジョブ作成ダイアログの [ジョブ名] に「iotlabflow」と入力</li>
-<li>[リージョン エンドポイント] では、リージョンに [us-central1] を選択</li>
-<li>[Dataflow テンプレート] には、[Pub/Sub Topic to BigQuery] を選択
-<ul>
-<li>このテンプレートを選択すると、フォームが更新され、下に新しいフィールドが表示される</li>
+<li>各インスタンスタイプが持つ通信帯域の最大</li>
 </ul>
 </li>
-<li>[Pub/Sub input topic] には、<code>projects/qwiklabs-gcp-03-b799ccdd7f75/topics/iotlab</code></li>
-<li>[BigQuery output table] には、 <code>qwiklabs-gcp-03-b799ccdd7f75:iotlabdataset.sensordata</code></li>
-<li>[一時的なロケーション] には、<code>gs://qwiklabs-gcp-03-b799ccdd7f75-bucket/tmp/</code></li>
-<li>[オプション パラメータ] をクリックして以下を設定
+</ul>
+<p>EC2 間で 5 Gbps 以降の帯域幅を実現するには、通信の多重化とマルチコアへの分散を意識する必要がる。（ RPS/RFS の設定など）</p>
+<h2 ref="インスタンスの設定プレイスメントグループ" >インスタンスの設定；プレイスメントグループ</h2><a class="anchor" id="インスタンスの設定プレイスメントグループ"></a>
+<p><strong>プレイスメントグループ</strong> は、EC2 インスタンスの物理的な配置戦略オプション。<a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/placement-groups.html">参考</a></p>
 <ul>
-<li>[最大ワーカー数] に「2」と入力</li>
-<li>[マシンタイプ] に「n1-standard-1」と入力</li>
+<li>Cluster
+<ul>
+<li>EC2 インスタンスを密な場所に配置し、ネットワークパフォーマンスを最適化</li>
+<li>単一 AZ に閉じる</li>
 </ul>
 </li>
-<li>[ジョブを実行] をクリック</li>
-</ul>
-<p>Compute Engine VM を準備する。<br>
-事前にプロビジョニング済みの iot-device-simulator という VM インスタンスを使用して、MQTT 接続された IoT デバイスをエミュレートする Python スクリプトのインスタンスを実行する。<br>
-また、デバイスをエミュレートする前に、この VM インスタンスを使用して Cloud IoT Core デバイス レジストリにデータを入力する。</p>
+<li>Spread
 <ul>
-<li>ナビゲーション メニュー &gt; [Compute Engine] &gt; [VM インスタンス] に移動し、 <code>iot-device-simulator</code> の[SSH] プルダウン矢印をクリックして、[ブラウザ ウィンドウで開く] を選択</li>
-<li>以下を実行</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo pip install virtualenv
-$ virtualenv -p python3 venv
-$ source venv/bin/activate
-$ sudo apt-get remove google-cloud-sdk -y
-$ curl https://sdk.cloud.google.com | bash
-$ exit
-
-$ source venv/bin/activate
-$ gcloud init
-<span style="color:#75715e"># [1] 982998799090-compute@developer.gserviceaccount.com</span>
-<span style="color:#75715e"># [2] Log in with a new account</span>
-<span style="color:#75715e"># と出た場合は 2 を選択</span>
-https://accounts.google.com/o/oauth2/auth?response_type<span style="color:#f92672">=</span>code&amp;client_id<span style="color:#f92672">=</span>32555940559.apps.googleusercontent.com&amp;r
-edirect_uri<span style="color:#f92672">=</span>urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&amp;scope<span style="color:#f92672">=</span>openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.ema
-il+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.adm
-in+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&amp;stat
-e<span style="color:#f92672">=</span>AQXJKoqhVh09dIRVOaK1xeMqEeZQ1l&amp;access_type<span style="color:#f92672">=</span>offline&amp;code_challenge_method<span style="color:#f92672">=</span>S256&amp;prompt<span style="color:#f92672">=</span>consent&amp;code_challenge<span style="color:#f92672">=</span>356k-
-gg6lJMSpeXG7G6X3Ey8l_YzI_Sdiqkhpc23Bco
-</code></pre></div><ul>
-<li>表示された URL をクリックすると、新しいブラウザ ウィンドウが開き、確認コードが表示される（ログインを求められた場合はログインする）
-<ul>
-<li>4/1AY0e-g7q-H3BMTQfsIZ3k79YIs6016W_NSH0wsQQsO-0FNzK8a_PS62Jw5U</li>
+<li>EC2 インスタンスを別々のハードウェアに分散して配置、物理サーバ障害時に複数のインスタンスが影響を受ける確率を低減</li>
+<li>同一 AZ にクラスタを展開している際などに有効</li>
+<li>AZ 跨ぎで定義することが可能で、 1 AZ あたり実行中のインスタンスは最大 7</li>
 </ul>
 </li>
-<li>[Enter verification code:] プロンプトに対して確認コードを貼り付けて、Enter キーを押す</li>
-<li>[Pick cloud project to use] へのレスポンスで、Qwiklabs によって作成されたプロジェクトを選択</li>
-<li>次のコマンド（ <code>gcloud components update</code> ）を入力して、SDK のコンポーネントが最新であることを確認</li>
-<li>次のコマンド（ <code>gcloud components install beta</code> ）を入力して、ベータ コンポーネントをインストール</li>
-<li>次のコマンド（ <code>sudo apt-get update</code> ）を入力して、Debian Linux パッケージ リポジトリに関するシステムの情報を更新</li>
-<li>次のコマンド（ <code>sudo apt-get install python-pip openssl git -y</code> ）を入力して、必要な各種ソフトウェア パッケージがインストールされていることを確認</li>
-<li>pip を使用して必要な Python コンポーネントを追加（ <code>pip install pyjwt paho-mqtt cryptography</code> ）</li>
-<li>次のコマンド（ <code>git clone http://github.com/GoogleCloudPlatform/training-data-analyst</code> ）を入力して、このラボで分析するデータを追加</li>
+<li>partition</li>
 </ul>
-<p>IoT デバイスのレジストリを作成する。<br>
-iot-device-simulator VM インスタンスの SSH セッションで、次のコマンドを実行する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export PROJECT_ID<span style="color:#f92672">=</span>qwiklabs-gcp-03-b799ccdd7f75
-$ export MY_REGION<span style="color:#f92672">=</span>asia-east1
-$ gcloud beta iot registries create iotlab-registry <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --project<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --event-notification-config<span style="color:#f92672">=</span>topic<span style="color:#f92672">=</span>projects/$PROJECT_ID/topics/iotlab
-</code></pre></div><p>暗号鍵ペアを作成する。<br>
-IoT デバイスが Cloud IoT Core に安全に接続できるようにするには、暗号鍵ペアを作成する必要がある。<br>
-iot-device-simulator VM インスタンスの SSH セッションで、次のコマンドを入力して適切なディレクトリに鍵ペアを作成。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd $HOME/training-data-analyst/quests/iotlab/
-$ openssl req -x509 -newkey rsa:2048 -keyout rsa_private.pem <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -nodes -out rsa_cert.pem -subj <span style="color:#e6db74">&#34;/CN=unused&#34;</span>
-</code></pre></div><p>この openssl コマンドにより、RSA 暗号鍵ペアが作成され、rsa_private.pem というファイルに書き込まれる。<br>
-次にシミュレートされたデバイスをレジストリに追加する。<br>
-iot-device-simulator VM インスタンスの SSH セッションで、次のコマンドを入力して temp-sensor-buenos-aires というデバイスを作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud beta iot devices create temp-sensor-buenos-aires <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --project<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --registry<span style="color:#f92672">=</span>iotlab-registry <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --public-key path<span style="color:#f92672">=</span>rsa_cert.pem,type<span style="color:#f92672">=</span>rs256
-$ gcloud beta iot devices create temp-sensor-istanbul <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --project<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --registry<span style="color:#f92672">=</span>iotlab-registry <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --public-key path<span style="color:#f92672">=</span>rsa_cert.pem,type<span style="color:#f92672">=</span>rs256
-</code></pre></div><p>シミュレートされたデバイスを実行する。<br>
-iot-device-simulator VM インスタンスの SSH セッションで、以下のコマンドを入力して、pki.google.com から CA ルート証明書を適切なディレクトリにダウンロード。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd $HOME/training-data-analyst/quests/iotlab/
-$ wget https://pki.google.com/roots.pem
-</code></pre></div><p>以下のコマンドを入力して、シミュレートされた 1 つ目のデバイスを実行。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ python cloudiot_mqtt_example_json.py <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --project_id<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --cloud_region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --registry_id<span style="color:#f92672">=</span>iotlab-registry <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --device_id<span style="color:#f92672">=</span>temp-sensor-buenos-aires <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --private_key_file<span style="color:#f92672">=</span>rsa_private.pem <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --message_type<span style="color:#f92672">=</span>event <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --algorithm<span style="color:#f92672">=</span>RS256 &gt; buenos-aires-log.txt 2&gt;&amp;<span style="color:#ae81ff">1</span> &amp;
-</code></pre></div><p>以下のコマンドを入力して、シミュレートされた 2 つ目のデバイスを実行。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ python cloudiot_mqtt_example_json.py <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --project_id<span style="color:#f92672">=</span>$PROJECT_ID <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --cloud_region<span style="color:#f92672">=</span>$MY_REGION <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --registry_id<span style="color:#f92672">=</span>iotlab-registry <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --device_id<span style="color:#f92672">=</span>temp-sensor-istanbul <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --private_key_file<span style="color:#f92672">=</span>rsa_private.pem <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --message_type<span style="color:#f92672">=</span>event <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --algorithm<span style="color:#f92672">=</span>RS256
-</code></pre></div><p>テレメトリー データは、シミュレートされたデバイスから Cloud IoT Core を経由して Cloud Pub/Sub トピックに流れる。<br>
-データフロー ジョブは Pub/Sub トピックからメッセージを読み取り、その内容を BigQuery テーブルに書き込む。</p>
-<p>次に、BigQuery を使用してセンサーデータを分析する。</p>
+<h2 ref="ストレージの設定" >ストレージの設定</h2><a class="anchor" id="ストレージの設定"></a>
+<p>EC2 のストレージには、ルートボリューム以外に以下を追加で設定することができる。</p>
 <ul>
-<li>Cloud Console でナビゲーション メニューを開き、[BigQuery] を選択</li>
-<li>クエリエディタに次のクエリを入力し、[実行] をクリック</li>
+<li>インスタンスストア
+<ul>
+<li>EC2 インスタンスが起動するホストコンピュータに内臓されたディスク</li>
+<li>EC2 インスタンスと分割不可能</li>
+<li>stop/terminate するとクリアされる</li>
+<li>インスタンスタイプにより利用に制限がある（そもそも利用できるか否か、個数、サイズ）</li>
+<li>追加費用無し</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">timestamp</span>, device, temperature <span style="color:#66d9ef">from</span> iotlabdataset.sensordata
-<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">timestamp</span> <span style="color:#66d9ef">DESC</span>
-<span style="color:#66d9ef">LIMIT</span> <span style="color:#ae81ff">100</span>
-</code></pre></div><h3 ref="dataflow-と-bigquery-を使用した-google-cloud-での-etl-処理" >Dataflow と BigQuery を使用した Google Cloud での ETL 処理</h3><a class="anchor" id="dataflow-と-bigquery-を使用した-google-cloud-での-etl-処理"></a>
+</li>
+<li>Amazon Elastic Block Store (EBS)
+<ul>
+<li>ネットワークで接続</li>
+<li>EC2 インスタンスとは独立して管理</li>
+<li>stop/terminate してもクリアされない</li>
+<li>Volume ごとに性能・容量を設定可能</li>
+<li>別途費用発生</li>
+<li>Snapshot を取得して S3 に保存可能</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h3 ref="ebs-最適化オプション" >EBS 最適化オプション</h3><a class="anchor" id="ebs-最適化オプション"></a>
+<p>通常のネットワークとは別に EBS 専用帯域を確保するオプション。</p>
+<ul>
+<li>起動時に有効/無効を洗濯可能</li>
+<li>帯域はインスタンスサイズによって異なる</li>
+<li>インスタンスタイプによっていはデフォルトで有効</li>
+</ul>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/EBSOptimized.html">参考</a></p>
+</blockquote>
+<h2 ref="その他" >その他</h2><a class="anchor" id="その他"></a>
+<h3 ref="key-pair" >Key Pair</h3><a class="anchor" id="key-pair"></a>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Key Pair</a> は、 EC2 インスタンス上の OS に対する安全な認証を提供する。<br>
+Key Pair を作成すると秘密鍵をダウンロードでき、 EC2 起動時に公開鍵が EC2 に自動的に付与される。<br>
+EC2 ログイン時に Key Pair （秘密鍵と公開鍵のペア）が照合され、ログイン可能に。</p>
+<ul>
+<li>認証鍵は、ユーザ名・パスワードの認証よりも安全な認証方式</li>
+<li>AWS では公開鍵のみ保持し、起動時に公開鍵を EC2 にコピーする</li>
+<li>秘密鍵は、ユーザにて適切に管理・保管する必要がある</li>
+</ul>
+<h1 ref="amazon-ec2-auto-scaling" >Amazon EC2 Auto Scaling</h1><a class="anchor" id="amazon-ec2-auto-scaling"></a>
+<p><a href="https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">Amazon EC2 Auto Scaling</a> について記載する。<br>
+Amazon EC2 Auto Scaling は <a href="https://docs.aws.amazon.com/ja_jp/autoscaling/plans/userguide/what-is-aws-auto-scaling.html">AWS Auto Scaling</a> の一部で他には以下がある。</p>
+<ul>
+<li>Amazon EC2 スポットフリートリクエスト
+<ul>
+<li>スポットフリートリクエストからインスタンスを起動または削除します。または、料金や容量の問題で中断されたインスタンスを自動的に置き換えます。</li>
+</ul>
+</li>
+<li>Amazon ECS
+<ul>
+<li>負荷の変化に応じて ECS サービスの必要数の増減を調整します。</li>
+</ul>
+</li>
+<li>Amazon DynamoDB
+<ul>
+<li>DynamoDB テーブルまたはグローバルセカンダリインデックスを有効にして、プロビジョニングされた読み取りおよび書き込みキャパシティを増減させ、スロットリングなしでトラフィックの増加を処理します。</li>
+</ul>
+</li>
+<li>Amazon Aurora
+<ul>
+<li>Aurora DB クラスターにプロビジョニングされた Aurora リードレプリカの数を動的に調整して、アクティブな接続やワークロードの変化を処理します。</li>
+</ul>
+</li>
+</ul>
+<p>Amazon EC2 Auto Scaling には以下の設定が必要。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/LaunchTemplates.html">起動テンプレート</a>
+<ul>
+<li>スケール時に起動される EC2 インスタンスの AMI ID、インスタンスタイプ、キーペア、セキュリティグループ、ブロックデバイスマッピングなどを指定</li>
+</ul>
+</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/AutoScalingGroup.html">Auto Scaling グループ</a>
+<ul>
+<li>EC2 インスタンスの最小数、最大数、希望する数などを設定</li>
+</ul>
+</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/scaling_plan.html#scaling_typesof">スケーリングのオプション</a>
+<ul>
+<li>スケールする特定の条件を設定</li>
+</ul>
+</li>
+</ul>
+<p>また、以下の点に注意が必要。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/healthcheck.html">ヘルスチェック</a>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/as-add-elb-healthcheck.html">Auto Scaling グループへの Elastic Load Balancing ヘルスチェックの追加</a></li>
+</ul>
+</li>
+</ul>
+<h2 ref="起動テンプレート" >起動テンプレート</h2><a class="anchor" id="起動テンプレート"></a>
+<h2 ref="auto-scaling-グループ" >Auto Scaling グループ</h2><a class="anchor" id="auto-scaling-グループ"></a>
+<h2 ref="スケーリングのオプション" >スケーリングのオプション</h2><a class="anchor" id="スケーリングのオプション"></a>
 		</div>
 
 
