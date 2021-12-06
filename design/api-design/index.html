@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-12-06T21:39:30 JST">
+<meta name="revised" content="2021-12-06T22:16:33 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1343,57 +1343,163 @@ if (!doNotTrack) {
 <li>REST API</li>
 </ol>
 <h2 ref="1-rest-api" >1. REST API</h2><a class="anchor" id="1-rest-api"></a>
-<p>Restfulな設計を個人的にまとめる。<br>
-天下の Google さんのデザインガイドは <a href="https://cloud.google.com/apis/design/">Cloud APIs API 設計ガイド</a> をご参考。</p>
+<p>個人的に REST API の設計をまとめる。</p>
 <h3 ref="基本方針" >基本方針</h3><a class="anchor" id="基本方針"></a>
-<p>Restful APIの設計は基本的に以下。</p>
 <table>
 <thead>
 <tr>
 <th style="text-align:left">処理の内容</th>
 <th style="text-align:left">HTTPメソッド</th>
 <th style="text-align:left">URL</th>
+<th style="text-align:left">プログラムメソッド</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">リソースデータを全て取得する</td>
 <td style="text-align:left">GET</td>
-<td style="text-align:left"><code>~/api/resources</code></td>
+<td style="text-align:left"><code>~/resources</code></td>
+<td style="text-align:left"><code>ListResources</code></td>
 </tr>
 <tr>
 <td style="text-align:left">idと一致するリソースを一件取得する</td>
 <td style="text-align:left">GET</td>
-<td style="text-align:left"><code>~/api/resources/{id}</code></td>
+<td style="text-align:left"><code>~/resources/{id}</code></td>
+<td style="text-align:left"><code>GetResource</code></td>
 </tr>
 <tr>
 <td style="text-align:left">リソースを一件登録する</td>
 <td style="text-align:left">POST</td>
-<td style="text-align:left"><code>~/api/resources</code></td>
+<td style="text-align:left"><code>~/resources</code></td>
+<td style="text-align:left"><code>CreateResource</code></td>
 </tr>
 <tr>
 <td style="text-align:left">idと一致するリソースを一件更新する</td>
 <td style="text-align:left">PUT</td>
-<td style="text-align:left"><code>~/api/resources/{id}</code></td>
+<td style="text-align:left"><code>~/resources/{id}</code></td>
+<td style="text-align:left"><code>UpdateResource</code></td>
 </tr>
 <tr>
-<td style="text-align:left">idと一致するリソースを一件更新する、ただし提供されたフィールドのみ</td>
+<td style="text-align:left">idと一致するリソースを一件更新する(ただし提供されたフィールドのみ)</td>
 <td style="text-align:left">PATCH</td>
-<td style="text-align:left"><code>~/api/resources/{id}</code></td>
+<td style="text-align:left"><code>~/resources/{id}</code></td>
+<td style="text-align:left"><code>UpdateResource</code></td>
 </tr>
 <tr>
 <td style="text-align:left">idと一致するリソースを一件削除する</td>
 <td style="text-align:left">DELETE</td>
-<td style="text-align:left"><code>~/api/resources/{id}</code></td>
+<td style="text-align:left"><code>~/resources/{id}</code></td>
+<td style="text-align:left"><code>DeleteResource</code></td>
 </tr>
 <tr>
 <td style="text-align:left">リソースの利用可能なメソッドとパラメータを返す</td>
 <td style="text-align:left">OPTIONS</td>
-<td style="text-align:left"><code>~/api/resources</code></td>
+<td style="text-align:left"><code>~/resources</code></td>
+<td style="text-align:left">-</td>
 </tr>
 </tbody>
 </table>
-<p>URL中の <code>resources</code> はリソースを表し、 <strong>名詞の複数形</strong> にする。（（例）users、customers、等）</p>
+<ul>
+<li>URL は <strong>ケバブケース</strong>
+<ul>
+<li>NG : <code>/systemOrders</code> 、 <code>/system_orders</code></li>
+<li>OK : <code>/system-orders</code></li>
+</ul>
+</li>
+<li>クエリパラメータは <strong>キャメルケース</strong> 、JSON のプロパティにも <strong>キャメルケース</strong>
+<ul>
+<li>NG : <code>/system-orders/{order_id}</code> 、 <code>/system-orders/{OrderId}</code></li>
+<li>OK : <code>/system-orders/{orderId}</code></li>
+</ul>
+</li>
+<li>URL中の <code>resources</code> はリソースを表し、コレクションつまり <strong>複数形の名詞</strong> で表現
+<ul>
+<li>NG : <code>GET /user</code> 、 <code>GET /User</code></li>
+<li>OK : <code>GET /users</code></li>
+</ul>
+</li>
+<li>URL はコレクションで始まり、識別子で終わる
+<ul>
+<li>NG : <code>GET /shops/:shopId/category/:categoryId/price</code></li>
+<li>OK : <code>GET /shops/:shopId/</code> 、 <code>GET /category/:categoryId</code></li>
+</ul>
+</li>
+<li>リソース URL に動詞を使わない
+<ul>
+<li>NG : <code>POST /updateuser/{userId}</code> 、 <code>GET /getusers</code></li>
+<li>OK : <code>PUT /user/{userId}</code></li>
+</ul>
+</li>
+<li>非リソース URL は動詞を使う
+<ul>
+<li>OK : <code>POST /alerts/245743/resend</code></li>
+<li>リソースへの CRUD ではなく、特定のビジネスロジックを実行する場合</li>
+</ul>
+</li>
+<li><code>/health</code> 、 <code>/version</code> 、 <code>/metrics</code> の各 API エンドポイントを実装する
+<ul>
+<li><code>/health</code> : ヘルスチェック</li>
+<li><code>/version</code> : バージョン番号</li>
+<li><code>/metrics</code> : 平均応答時間などのさまざまなmetricsを提供</li>
+<li><code>/debug</code> と <code>/status</code> もおすすめ</li>
+</ul>
+</li>
+<li>リソース名にテーブル名を使わない
+<ul>
+<li>NG : <code>product_order</code></li>
+<li>OK : <code>product-orders</code></li>
+</ul>
+</li>
+<li>レスポンスにリソースの総数を含める</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">{
+    <span style="color:#a6e22e">users</span><span style="color:#f92672">:</span> [
+        ...
+    ],
+    <span style="color:#a6e22e">total</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">34</span> <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">これ</span>
+}
+</code></pre></div><ul>
+<li>ゴールデンルール
+<ul>
+<li>フラットはネストより良い</li>
+<li>単純は複雑より良い</li>
+<li>文字列は数字より良い</li>
+<li>一貫性はカスタマイズより良い</li>
+</ul>
+</li>
+</ul>
+<h3 ref="クエリパラメータの使用" >クエリパラメータの使用</h3><a class="anchor" id="クエリパラメータの使用"></a>
+<ul>
+<li>検索条件を指定したい場合にしようする
+<ul>
+<li>SELECT文のWHERE句のように使用する</li>
+<li>例）<code>~/dogs?age=3</code>
+<ul>
+<li>3歳の犬だけを取得する</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ある1つのリソースの一部の項目だけを取得したい場合（Partial response）
+<ul>
+<li>「 <strong>fields</strong> 」にカンマ区切りで指定</li>
+<li>例） <code>~/dogs/1234?field=name,color,location</code></li>
+</ul>
+</li>
+<li>あるリソースから件数を指定して取得したい場合（Pagination）
+<ul>
+<li>「 <strong>limit</strong> 」と「 <strong>offset</strong> 」で指定する</li>
+<li>「offset」番目から「limit」件取得する</li>
+<li>例）<code>~/dogs?offset=25&amp;limit=50</code></li>
+<li>全レコード件数を「metadata」としてレスポンスに含める</li>
+</ul>
+</li>
+</ul>
+<h3 ref="リソース操作" >リソース操作</h3><a class="anchor" id="リソース操作"></a>
+<p>計算・翻訳・変換など、リソースへのCRUD以外の操作も存在し得る。<br>
+その場合は名詞ではな <strong>動詞</strong> を使用する。（（例）~/convert?from=EUR&amp;to=CNY&amp;amount=100）<br>
+このAPIはあくまで特殊なケースであることを明記・認識する必要がある。<br>
+また、このAPIで取得できるデータはデータベースの値を直接返すのではなく、ロジックで計算して得た結果であるということもまた明記・認識する必要がある。</p>
 <h3 ref="コンテンツネゴシエーション" >コンテンツネゴシエーション</h3><a class="anchor" id="コンテンツネゴシエーション"></a>
 <p>Restful APIにおいてクライアントからサーバへレスポンスのフォーマットを要求することをコンテンツネゴシエーションという。<br>
 クライアントからサーバへコンテンツのフォーマットを要求する方法として以下の３つがある。</p>
@@ -1402,12 +1508,12 @@ if (!doNotTrack) {
 <ul>
 <li>例）HTML形式の要求
 <ul>
-<li>http://myserver/myapp/accounts/list<!-- raw HTML omitted -->.html<!-- raw HTML omitted --></li>
+<li><code>https://myserver/myapp/accounts/list.html</code></li>
 </ul>
 </li>
 <li>例）spreadsheet形式の要求
 <ul>
-<li>http://myserver/myapp/accounts/list<!-- raw HTML omitted -->.xls<!-- raw HTML omitted --></li>
+<li><code>https://myserver/myapp/accounts/list.xls</code></li>
 </ul>
 </li>
 </ul>
@@ -1416,8 +1522,8 @@ if (!doNotTrack) {
 <ul>
 <li>例）spreadsheet形式の要求
 <ul>
-<li>http://myserver/myapp/accounts/list<!-- raw HTML omitted -->?format=xls<!-- raw HTML omitted --></li>
-<li>http://myserver/myapp/accounts/list<!-- raw HTML omitted -->?mediaType=xls<!-- raw HTML omitted --></li>
+<li><code>https://myserver/myapp/accounts/list?format=xls</code></li>
+<li><code>https://myserver/myapp/accounts/list?mediaType=xls</code></li>
 </ul>
 </li>
 </ul>
@@ -1432,8 +1538,8 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<p>個人的には「Acceptヘッダ」推奨。<br>
-「Accept-Language」「Accept-Encoding」もあるから使えばいいじゃん。</p>
+<p>個人的には <strong>Accept ヘッダ</strong> 推奨。<br>
+「Accept-Language」「Accept-Encoding」も併せて利用する。</p>
 <h3 ref="設計ステップ" >設計ステップ</h3><a class="anchor" id="設計ステップ"></a>
 <ol>
 <li>対象となるデータを洗い出す</li>
@@ -1459,8 +1565,8 @@ if (!doNotTrack) {
 <li>URLが右に行くほど自然な階層構造・サブセットになっているか</li>
 <li>例）オーナー5678が飼っている犬を表す場合
 <ul>
-<li><code>~/api/owners/5678/dogs</code></li>
-<li><code>~/api/resources/{id}/resources/{id}</code> 以上に階層を深くしない</li>
+<li><code>~/owners/5678/dogs</code></li>
+<li><code>~/resources/{id}/resources/{id}</code> 以上に階層を深くしない</li>
 <li>これ以上複雑にしたい場合はクエリパラメータを使用する</li>
 </ul>
 </li>
@@ -1676,40 +1782,6 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p>「v有」「整数」（ <code>http://example.com/api/v2/</code> ）が多いようだ。</p>
-<h3 ref="拡張" >拡張</h3><a class="anchor" id="拡張"></a>
-<p>基本方針だけでは不十分な場合に拡張するときの考え方。</p>
-<h4 ref="クエリパラメータの使用" >クエリパラメータの使用</h4><a class="anchor" id="クエリパラメータの使用"></a>
-<ul>
-<li>検索条件を指定したい場合にしようする
-<ul>
-<li>SELECT文のWHERE句のように使用する</li>
-<li>例）<code>~/api/dogs?age=3</code>
-<ul>
-<li>3歳の犬だけを取得する</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>ある1つのリソースの一部の項目だけを取得したい場合（Partial response）
-<ul>
-<li>「 <strong>fields</strong> 」にカンマ区切りで指定</li>
-<li>例） <code>~/api/dogs/1234?field=name,color,location</code></li>
-</ul>
-</li>
-<li>あるリソースから件数を指定して取得したい場合（Pagination）
-<ul>
-<li>「 <strong>limit</strong> 」と「 <strong>offset</strong> 」で指定する</li>
-<li>「offset」番目から「limit」件取得する</li>
-<li>例）<code>~/api/dogs?offset=25&amp;limit=50</code></li>
-<li>全レコード件数を「metadata」としてレスポンスに含める</li>
-</ul>
-</li>
-</ul>
-<h4 ref="リソース操作" >リソース操作</h4><a class="anchor" id="リソース操作"></a>
-<p>計算・翻訳・変換など、リソースへのCRUD以外の操作も存在し得る。<br>
-その場合は名詞ではな <strong>動詞</strong> を使用する。（（例）~/api/convert?from=EUR&amp;to=CNY&amp;amount=100）<br>
-このAPIはあくまで特殊なケースであることを明記・認識する必要がある。<br>
-また、このAPIで取得できるデータはデータベースの値を直接返すのではなく、ロジックで計算して得た結果であるということもまた明記・認識する必要がある。</p>
 <h3 ref="その他決める際に困りそうなこと" >その他、決める際に困りそうなこと</h3><a class="anchor" id="その他決める際に困りそうなこと"></a>
 <p>答えは出てないがメモっとく。</p>
 <ul>
@@ -1773,76 +1845,6 @@ if (!doNotTrack) {
 </tbody>
 </table>
 <p>Railsっぽい。</p>
-<h3 ref="その他プラクティス" >その他プラクティス</h3><a class="anchor" id="その他プラクティス"></a>
-<ul>
-<li>URL は <strong>ケバブケース</strong>
-<ul>
-<li>NG : <code>/systemOrders</code> 、 <code>/system_orders</code></li>
-<li>OK : <code>/system-orders</code></li>
-</ul>
-</li>
-<li>クエリパラメータは <strong>キャメルケース</strong> 、JSON のプロパティにも <strong>キャメルケース</strong>
-<ul>
-<li>NG : <code>/system-orders/{order_id}</code> 、 <code>/system-orders/{OrderId}</code></li>
-<li>OK : <code>/system-orders/{orderId}</code></li>
-</ul>
-</li>
-<li>コレクションは <strong>複数形の名詞</strong>
-<ul>
-<li>NG : <code>GET /user</code> 、 <code>GET /User</code></li>
-<li>OK : <code>GET /users</code></li>
-</ul>
-</li>
-<li>URL はコレクションで始まり、識別子で終わる
-<ul>
-<li>NG : <code>GET /shops/:shopId/category/:categoryId/price</code></li>
-<li>OK : <code>GET /shops/:shopId/</code> 、 <code>GET /category/:categoryId</code></li>
-</ul>
-</li>
-<li>リソース URL に動詞を使わない
-<ul>
-<li>NG : <code>POST /updateuser/{userId}</code> 、 <code>GET /getusers</code></li>
-<li>OK : <code>PUT /user/{userId}</code></li>
-</ul>
-</li>
-<li>非リソース URL は動詞を使う
-<ul>
-<li>OK : <code>POST /alerts/245743/resend</code></li>
-<li>リソースへの CRUD ではなく、特定のビジネスロジックを実行する場合</li>
-</ul>
-</li>
-<li><code>/health</code> 、 <code>/version</code> 、 <code>/metrics</code> の各 API エンドポイントを実装する
-<ul>
-<li><code>/health</code> : ヘルスチェック</li>
-<li><code>/version</code> : バージョン番号</li>
-<li><code>/metrics</code> : 平均応答時間などのさまざまなmetricsを提供</li>
-<li><code>/debug</code> と <code>/status</code> もおすすめ</li>
-</ul>
-</li>
-<li>リソース名にテーブル名を使わない
-<ul>
-<li>NG : <code>product_order</code></li>
-<li>OK : <code>product-orders</code></li>
-</ul>
-</li>
-<li>
-<h2 ref="レスポンスにリソースの総数を含める" >レスポンスにリソースの総数を含める</h2><a class="anchor" id="レスポンスにリソースの総数を含める"></a>
-<pre tabindex="0"><code>{
-  users: [
-      ...
-  ],
-  total: 34
-}
-</code></pre></li>
-<li>ゴールデンルール
-<ul>
-<li>フラットはネストより良い</li>
-<li>単純は複雑より良い</li>
-<li>文字列は数字より良い</li>
-<li>一貫性はカスタマイズより良い</li>
-</ul>
-</li>
-</ul>
 <h3 ref="参考" >参考</h3><a class="anchor" id="参考"></a>
 <ul>
 <li><a href="https://cloud.google.com/apis/design/">Cloud APIs API 設計ガイド</a></li>
