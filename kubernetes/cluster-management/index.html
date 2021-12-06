@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-22T15:00:31 JST">
+<meta name="revised" content="2021-12-06T21:39:31 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -147,6 +147,21 @@ if (!doNotTrack) {
           <a href="/design/">設計</a>
       
         <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/design/api-design/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/design/api-design/">API設計</a>
+      
+        
+      
+    </li>
               
 
     <li data-nav-id="https://tanakakns.github.io/design/architecture/" class="dd-item
@@ -1409,14 +1424,14 @@ $ ETCDCTL_API<span style="color:#f92672">=</span><span style="color:#ae81ff">3</
 </code></pre></div><p>参考： <a href="https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster">Backing up an etcd cluster</a></p>
 <h2 ref="4-storage" >4. Storage</h2><a class="anchor" id="4-storage"></a>
 <p>Docker の場合、以下のコマンドを実行することによってコンテナ内にホストのディレクトリをマウントできる。</p>
-<pre><code>$ docker run mysql -v data_volume:/var/lib/mysql
+<pre tabindex="0"><code>$ docker run mysql -v data_volume:/var/lib/mysql
 </code></pre><ul>
 <li>ホストコンピュータの Docker インストールディレクトリに <code>volumes</code> というディレクトリがある</li>
 <li><code>volumes</code> ディレクトリ内に <code>data_volume</code> というディレクトリが作成され、コンテナに関係なく永続化される</li>
 <li>ホストの <code>data_volume</code> ディレクトリが、 コンテナの <code>/var/lib/mysql</code> ディレクトリにマウントされる</li>
 </ul>
 <p>といった動きになる。</p>
-<pre><code>$ docker run mysql -v /data/mysql:/var/lib/mysql
+<pre tabindex="0"><code>$ docker run mysql -v /data/mysql:/var/lib/mysql
 </code></pre><ul>
 <li>上記のように実行した場合は、ホストの <code>/data/mysql</code> ディレクトリが、コンテナの <code>/var/lib/mysql</code> ディレクトリにマウントされる</li>
 </ul>
@@ -1441,7 +1456,7 @@ Storage Driver は Docker プロセスがイメージやコンテナに加えら
 </li>
 </ul>
 <p>Docker で Volume Drivers を利用する方法は以下のようになる。</p>
-<pre><code>$ docker run mysql -it \
+<pre tabindex="0"><code>$ docker run mysql -it \
     --name mysql \
     --volume-driver rexray/ebs |
     --mount src=ebs-vol,target=/var/lib/mysql

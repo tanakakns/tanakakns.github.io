@@ -32,6 +32,9 @@
     <loc>https://tanakakns.github.io/design/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/design/api-design/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/gcp/databases/bigquery/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
@@ -54,9 +57,6 @@
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/networking/vpc/</loc>
-    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
-  </url><url>
-    <loc>https://tanakakns.github.io/design/architecture/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/docker/basic/</loc>
@@ -93,6 +93,9 @@
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/design/architecture/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/tools/</loc>

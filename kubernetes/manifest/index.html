@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-22T15:00:31 JST">
+<meta name="revised" content="2021-12-06T21:39:31 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -147,6 +147,21 @@ if (!doNotTrack) {
           <a href="/design/">設計</a>
       
         <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/design/api-design/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/design/api-design/">API設計</a>
+      
+        
+      
+    </li>
               
 
     <li data-nav-id="https://tanakakns.github.io/design/architecture/" class="dd-item
@@ -1922,7 +1937,7 @@ $ kubectl create configmap app-config --from-literal<span style="color:#f92672">
 <span style="color:#75715e"># マニフェストファイルを利用する場合</span>
 <span style="color:#75715e"># USAGE: kubectl create configmap &lt;config-name&gt; --from-file=&lt;file-name&gt;</span>
 $ kubectl create configmap app-config --from-file<span style="color:#f92672">=</span>app_config.properties
-</code></pre></div><pre><code class="language-txt:app_config.properties" data-lang="txt:app_config.properties">APP_COLOR: blue
+</code></pre></div><pre tabindex="0"><code class="language-txt:app_config.properties" data-lang="txt:app_config.properties">APP_COLOR: blue
 APP_MOD: prod
 </code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:app-config.yaml" data-lang="yaml:app-config.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
@@ -2044,7 +2059,7 @@ $ kubectl create secret generic app-secret --from-literal<span style="color:#f92
 <span style="color:#75715e"># マニフェストファイルを利用する場合</span>
 <span style="color:#75715e"># USAGE: kubectl create secret generic &lt;secret-name&gt; --from-file=&lt;file-name&gt;</span>
 $ kubectl create secret generic app-secret --from-file<span style="color:#f92672">=</span>app_secret.properties
-</code></pre></div><pre><code class="language-txt:app_secret.properties" data-lang="txt:app_secret.properties">APP_COLOR: blue
+</code></pre></div><pre tabindex="0"><code class="language-txt:app_secret.properties" data-lang="txt:app_secret.properties">APP_COLOR: blue
 APP_MOD: prod
 </code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:app-secret.yaml" data-lang="yaml:app-secret.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span>
@@ -2195,7 +2210,7 @@ math-add-job-l87pn  0/1    Completed  <span style="color:#ae81ff">0</span>      
 <h3 ref="91-hpahorizontalpodautoscaler" >9.1. HPA（HorizontalPodAutoscaler）</h3><a class="anchor" id="91-hpahorizontalpodautoscaler"></a>
 <p>HPA は pod の負荷に応じて自動的に pod の数を水平スケールさせるリソース。<br>
 Deployment, ReplicaSet, ReplicationController, StatefulSetはscaled resource objectと呼ばれ、これらがauto scalingの対象リソースとなる。</p>
-<pre><code class="language-apiVersion:" data-lang="apiVersion:">kind: HorizontalPodAutoscaler
+<pre tabindex="0"><code class="language-apiVersion:" data-lang="apiVersion:">kind: HorizontalPodAutoscaler
 metadata:
   name: php-hpa
   namespace: default

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-07-22T15:00:31 JST">
+<meta name="revised" content="2021-12-06T21:39:31 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -147,6 +147,21 @@ if (!doNotTrack) {
           <a href="/design/">設計</a>
       
         <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/design/api-design/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/design/api-design/">API設計</a>
+      
+        
+      
+    </li>
               
 
     <li data-nav-id="https://tanakakns.github.io/design/architecture/" class="dd-item
@@ -1380,13 +1395,13 @@ if (!doNotTrack) {
 <h4 ref="411-パスワードトークン認証" >4.1.1. パスワード・トークン認証</h4><a class="anchor" id="411-パスワードトークン認証"></a>
 <p><code>kube-apiserver</code> が 静的ファイルを用いてユーザ認証する方法は以下の通り。<br>
 まず、以下のファイルを準備する。</p>
-<pre><code class="language-csv:user-details.csv" data-lang="csv:user-details.csv"># Password,UserName,UserID
+<pre tabindex="0"><code class="language-csv:user-details.csv" data-lang="csv:user-details.csv"># Password,UserName,UserID
 password123,user1,u0001
 password123,user2,u0002
 password123,user3,u0003
 </code></pre><p>そして、上記のファイルを <code>kube-apiserver.service</code> の起動オプション <code>--basic-auth-file</code> に指定する。<br>
 また、以下のように 4 項目目にグループを指定することもできるし、パスワードではなくトークンでもいい。（トークンファイルの場合は <code>--token-auth-file</code> オプションで指定 ）</p>
-<pre><code class="language-csv:user-token-details.csv" data-lang="csv:user-token-details.csv"># Password,UserName,UserID,GroupID
+<pre tabindex="0"><code class="language-csv:user-token-details.csv" data-lang="csv:user-token-details.csv"># Password,UserName,UserID,GroupID
 token123,user1,u0001,group1
 token123,user2,u0002,group1
 token123,user3,u0003,group2
@@ -1508,7 +1523,7 @@ token123,user3,u0003,group2
 </li>
 </ul>
 <p>なお、<code>kube-apiserver</code> でサーバ証明書を作成する際は <code>openssl.cnf</code> ファイルで以下のように設定しておく必要がある。（ <code>alt_names</code> に注目 ）</p>
-<pre><code class="language-txt:openssl.cnf" data-lang="txt:openssl.cnf">[req]
+<pre tabindex="0"><code class="language-txt:openssl.cnf" data-lang="txt:openssl.cnf">[req]
 req_extensions = v3_req
 [ v3_req ]
 basicConstraints = CA:FALSE
@@ -1592,7 +1607,7 @@ IP.2 = 172.17.0.87 # PriveteIP
 </li>
 <li><code>contexts</code> ： <code>clusters</code> と <code>users</code> の組合せ</li>
 </ul>
-<pre><code class="language-yaml:config" data-lang="yaml:config">apiVersion: v1
+<pre tabindex="0"><code class="language-yaml:config" data-lang="yaml:config">apiVersion: v1
 kind: Config
 current-context: ...
 
@@ -1619,7 +1634,7 @@ users:
 <h3 ref="43-rbac" >4.3. RBAC</h3><a class="anchor" id="43-rbac"></a>
 <h4 ref="431-role-と-rolebinding" >4.3.1. Role と RoleBinding</h4><a class="anchor" id="431-role-と-rolebinding"></a>
 <p>以下のマニフェストで <code>Role</code> を作成できる。（ <code>kubectl apply -f developer-role.yaml</code> ）</p>
-<pre><code class="language-yaml:" data-lang="yaml:">apiVersion: rbac.authorization.k8s.io/v1
+<pre tabindex="0"><code class="language-yaml:" data-lang="yaml:">apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: developer
