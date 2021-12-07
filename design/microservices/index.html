@@ -1,0 +1,2402 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+	マイクロサービス :: テックまとめ
+</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="revised" content="2021-12-07T19:28:23 JST">
+<meta name="description" content="備忘録用メモサイト">
+
+
+
+<title>マイクロサービス :: テックまとめ</title>
+
+<link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+
+<script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel="stylesheet">
+
+
+
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/layout.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.main.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/css/style.menu.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/notice.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/tabs.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/panel.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/columns.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/children.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/attachments.css'>
+<link rel="stylesheet" type="text/css" href='https://tanakakns.github.io/sass/shortcodes/alert.css'>
+<link rel="stylesheet" type="text/css" href='/css/docport.css'>
+
+<script src='/js/docport.js'></script>
+<script type="text/javascript">
+      var baseurl = "https:\/\/tanakakns.github.io\/";
+</script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-42388425-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+  </head>
+
+  <body data-url="/design/microservices/"
+
+  class="hidetoc hidenextpage ">
+
+<style type="text/css">
+  #debug{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    line-height: 3.5rem;
+    margin-bottom: .35rem;
+    padding: 0 2rem;
+    position: fixed;
+    left: 0;      right: 0;     top: 0;
+   
+    top:0px;
+    
+    min-height: 150px;
+
+    background-color: white;
+    border: 3px solid red;
+    z-index: 10000 ;
+    word-wrap: all;
+    overflow: auto;
+  }
+</style>
+ 
+
+
+    
+    
+    <header style="">
+        <div>
+    
+    <div class="burger ">
+        <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">&#9776;</a>
+    </div>
+    
+
+    <div>
+
+		
+	
+			
+		
+	    	<a class='baselink' href='https://tanakakns.github.io/'>テックまとめ</a>
+	  	
+	</div>
+
+</div>
+    </header>
+    
+
+    <article>
+      
+      <aside class="">
+        
+
+		
+	
+			
+		
+	    	
+	  	
+	<div id="close_menu">
+  <a href="javascript:void(0);" style="font-size:15px;" onclick="$('article > aside').toggleClass('responsive')">
+      <i class="fa fa-lg fa-times"></i>
+  </a>
+</div>
+
+<ul class="menu">
+
+    <li data-nav-id="https://tanakakns.github.io/design/" class="dd-item parent haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <i class="fas fa-chevron-down ddexp"></i>
+        
+      
+          <a href="/design/">設計</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/design/principle-practice/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/design/principle-practice/">原理原則・ベストプラクティス</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/design/api-design/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/design/api-design/">API設計</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/design/microservices/" class="dd-item parent active
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/design/microservices/">マイクロサービス</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/design/architecture/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/design/architecture/">アーキテクチャ</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/mac/">Mac開発環境</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/os-settings/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/os-settings/">OSの設定</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/homebrew/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/homebrew/">Homebrew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/mac/asdf/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/mac/asdf/">asdf</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/git/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/git/">Git</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/git/initial-setting/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/git/initial-setting/">初期設定</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/go/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/go/">Go言語</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/initial-setting/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/initial-setting/">初期設定</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/grammar/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/grammar/">文法</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/naming/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/naming/">命名規則</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/pattern/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/pattern/">パターン</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/database/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/database/">Database</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/database/rdb/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/database/rdb/">RDB</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/aws/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/aws/">AWS</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/well-architected-framework/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/well-architected-framework/">AWS Well-Architected フレームワーク</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/computing/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/computing/">コンピューティング</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/computing/ec2/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/computing/ec2/">EC2</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/container/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/container/">コンテナ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/storage/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/storage/">ストレージ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/migration/">移行と転送</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/networking/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/networking/">ネットワーキングとコンテンツ配信</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/networking/vpc/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/networking/vpc/">VPC</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/dev-tools/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/dev-tools/">開発者用ツール</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/">セキュリティ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/security/iam/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/security/iam/">IAM</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/gcp/">GCP</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/gcp-aws/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/gcp-aws/">GCP と AWS の比較</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/monitoring/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/monitoring/">監視</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/tools/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/tools/">ツール</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/tools/management-tools/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/tools/management-tools/">管理ツール</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/tools/dev-tools/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/tools/dev-tools/">開発ツール</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/access-control-and-security/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/access-control-and-security/">アクセス制御とセキュリティ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/">コンピューティングとホスティング</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/compute-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/compute-engine/">Compute Engine</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/kubernetes-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/kubernetes-engine/">Google Kubernetes Engine</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/app-engine/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/app-engine/">App Engine</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/computing-hosting/cloud-functions/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/computing-hosting/cloud-functions/">Cloud Functions</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/storage/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/storage/">ストレージ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/">データベース</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/bigquery/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/bigquery/">BigQuery</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/sql/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/sql/">Cloud SQL</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/memorystore/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/memorystore/">Memorystore</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/spanner/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/databases/spanner/">Cloud Spanner</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/">ネットワーキング</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/vpc/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/vpc/">VPC</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/load-balancing/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/load-balancing/">Cloud Load Balancing</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/iap/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/iap/">Identity-Aware Proxy</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/networking/interconnect/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/networking/interconnect/">Cloud Interconnect</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/big-data/">ビッグデータ</a>
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/pubsub/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/big-data/pubsub/">Cloud Pub/Sub</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/big-data/dataflow/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/big-data/dataflow/">Dataflow</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/gcp/machine-learning/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/gcp/machine-learning/">機械学習</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/terraform/">Terraform</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/docker/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/docker/">Docker</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/docker/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/docker/basic/">入門</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/kubernetes/">Kubernetes</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/concept/">概念整理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/architecture/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/architecture/">アーキテクチャ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/kubectl-plugin/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/kubectl-plugin/">kubectl plugin と Krew</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/command/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/command/">コマンド</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/manifest/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/manifest/">マニフェスト</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/application-management/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/application-management/">アプリケーション管理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/cluster-management/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/cluster-management/">クラスタ管理</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/kubernetes/security/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/kubernetes/security/">セキュリティ</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+    <li data-nav-id="https://tanakakns.github.io/istio/" class="dd-item haschildren
+        item_level_$level
+        ">
+
+      
+      
+      
+      <i class="fas fa-chevron-right ddexp"></i>
+        
+      
+          <a href="/istio/">Istio</a>
+      
+        <ul>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/basic/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/basic/">入門</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/istio/concept/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/istio/concept/">概念整理</a>
+      
+        
+      
+    </li>
+        </ul>
+    </li>
+    
+
+
+
+</ul>
+
+		
+	
+			
+		
+	    	
+	  	
+	
+      </aside>
+      
+
+      <section class="page ">
+      
+	
+		
+    
+    
+    <nav id="ariane" aria-label="breadcrumb">
+      <ol class="ariane">
+        
+  
+  	
+		
+  
+  	
+	<li >
+      <a class="text-link" href="https://tanakakns.github.io/">
+        
+      </a>
+    </li>
+	
+  
+    <li class="">
+      <a class="text-link" href="/design/">
+        設計
+      </a>
+    </li>
+	
+  	
+  
+    <li class="active">
+      
+        マイクロサービス
+      
+    </li>
+
+      </ol>
+    </nav>
+    
+    
+
+    
+		
+        
+		
+		
+		
+		
+		
+		
+		
+
+		
+			<h1>マイクロサービス</h1>
+        
+
+		
+										
+		
+
+		
+	
+
+	
+	
+	
+
+
+
+
+
+
+	<div class="content">
+	    <p>今更だがマイクロサービス（ Microservices ）についてまとめる。<br>
+自分の仮説込みなので参考にしていただいてよいが鵜呑みにしないでね。</p>
+<ul>
+<li>1.モノリスの限界</li>
+<li>2.マイクロサービスとは</li>
+<li>3.マイクロサービスの分割</li>
+<li>4.マイクロサービスのデメリットへの対応（マイクロサービスエコシステム）</li>
+<li>（マイクロサービスの構成）</li>
+</ul>
+<h2 ref="1モノリスの限界" >1.モノリスの限界</h2><a class="anchor" id="1モノリスの限界"></a>
+<p>総じて言うとアジリティが低い。</p>
+<ul>
+<li>小さな変更でもモノリス全体のビルド・リリース
+<ul>
+<li>リリース・デプロイの調整、コミュニケーション問題</li>
+</ul>
+</li>
+<li>リソースを必要とする部分だけでなく、アプリケーション全体のスケールアウトが必要</li>
+<li>小さなリリース、大胆な意思決定が難しい</li>
+<li>オーナーシップ問題があり、自律的なプロダクト開発ができない、イノベーション阻害</li>
+</ul>
+<p>システム開発のアジリティを向上するためのアプローチの 1 つに <strong>マイクロサービスアーキテクチャ</strong> がある。</p>
+<h2 ref="2マイクロサービスアーキテクチャとは" >2.マイクロサービスアーキテクチャとは</h2><a class="anchor" id="2マイクロサービスアーキテクチャとは"></a>
+<p><strong>それぞれ独自のプロセス内で動作する小さなサービス（マイクロサービス）の集合体としてシステムを構成し、マイクロサービス間では軽量のプロトコルを使用して通信を行うアーキテクチャー手法</strong> を指す。また、 1 つのマイクローサービスはアプリケーションおよびそれと対のなる DB で構成される実行単位を指す。<br>
+ThoughtWorks 社の James Lewis が 2012 年 3 月に発表した<a href="http://2012.33degree.org/talk/show/67">Micro services - Java, the Unix Way</a>が初出で、James Lewis/Martin Fowler が 2014 年に公開した <a href="https://martinfowler.com/articles/microservices.html">Microservices</a>（<a href="http://kimitok.hateblo.jp/entry/2014/11/09/211820">日本語</a>）でバズったとされる。<br>
+どのような手法にも言えることだが、 マイクロサービスアーキテクチャも全てのシステムに適している訳ではなく、メリット・デメリットがあり、トレードオフの関係になっている。<br>
+マイクロサービスの適用を検討するシステムの特徴は以下が挙げられる。</p>
+<ul>
+<li>システム規模が大きい
+<ul>
+<li>（例）初期構築に数百人月を要する</li>
+</ul>
+</li>
+<li>アジリティを求める
+<ul>
+<li>（例）初期構築以降も継続的に機能追加・改善を行う、改修頻度は低いものの今後他システムとの連携が想定される、意思決定からシステム反映までの速さを重視する</li>
+</ul>
+</li>
+<li>様々なドメイン・サブドメインを含むシステム
+<ul>
+<li>（例）社内の複数組織が関係するシステム</li>
+</ul>
+</li>
+</ul>
+<p>MSA は導入コストが高い。上記を満たすようなシステムでないのであれば導入はおすすめしない。恩恵を受けられないからだ。<br>
+大きすぎるモノリスであるがために、運用コストが高い、開発生産性が低い、意思決定と実行が遅いといった問題が発生することが見込める・現に発生しているのであれば導入検討をおすすめする。</p>
+<h3 ref="21メリット" >2.1.メリット</h3><a class="anchor" id="21メリット"></a>
+<ul>
+<li>開発チームがサービスごとに分かれ、それぞれ得意な最適な技術（言語など）を選択できる</li>
+<li>システム全体に影響を与えず、各マイクロサービスごとに変更・リリースできる
+<ul>
+<li>小さなチームへの <strong>責任と権限の委譲</strong> 、頻繁なトライアンドエラー、高速且つ高精度な意思決定</li>
+<li>データスキーマ、メッセージスキーマ、シグネチャ、ライブラリやフレームワークのバージョン、共有コンポーネントの依存が起こらず、マイクロサービス単位で頻繁な更新をかけることが可能</li>
+</ul>
+</li>
+<li>リリースサイクルの短縮
+<ul>
+<li>ビルドやテストの期間が短くなり開発効率が上がる</li>
+<li>2014年の時点で年間5000万回のデプロイ(Amazon)</li>
+</ul>
+</li>
+<li>コンピュータリソースを効率的に利用
+<ul>
+<li>サービスごとに性能をスケールできる（水平スケーリング・スケールアウト）</li>
+</ul>
+</li>
+<li>再利用性
+<ul>
+<li>1 つのマイクロサービスの機能を複数のマイクロサービスが利用できる</li>
+</ul>
+</li>
+<li>障害の分離
+<ul>
+<li>1つの機能がダウンしてもほかの機能に影響しない、呼び出し先のサービスがダウンしても呼び出し元のサービスはダウンしない</li>
+<li>モノリシックなシステムだと何か障害が起きたときに、どこがおかしいのかルート構造をたどるのに時間がかかるが、原因の突き止めが比較的容易</li>
+</ul>
+</li>
+</ul>
+<p>つまり、用途・目的ごとに小さくサービスを作っておくことで、 <strong>変化に強くて柔軟性の高い</strong> アプリケーション開発、 <strong>ビジネス変化への迅速な追従</strong> が可能となる。</p>
+<h3 ref="22デメリット" >2.2.デメリット</h3><a class="anchor" id="22デメリット"></a>
+<ul>
+<li>マイクロサービスへの分割が難しい
+<ul>
+<li>ドメインの境界やどれくらいの大きさがいいか？など</li>
+</ul>
+</li>
+<li>個々のサービスはシンプルになるが、システム全体は複雑化
+<ul>
+<li>サービス間通信が複雑化し、サービス同士を繋げるのが難しい（service discovery の問題）</li>
+</ul>
+</li>
+<li>サービス間でデータの一貫性を保つのが難しくなる
+<ul>
+<li>各サービスが独自のデータベースを持つので</li>
+</ul>
+</li>
+<li>個々のサービス開発は楽になるが、全体の運用は極度に難化
+<ul>
+<li>成熟した DevOps カルチャが必要</li>
+<li>バージョン管理</li>
+</ul>
+</li>
+<li>全般的に冗長なシステムになりオーバーヘッドが多い</li>
+<li>全体を見渡しにくく障害の影響を予想しにくい</li>
+<li>全体のテストやデバッグがしにくい</li>
+<li>テクノロジーの標準を定めにくい</li>
+<li>サービスをまたぐトランザクションや整合性を保つしくみが必要</li>
+<li>アジャイル開発、DevOps、インフラ運用の自動化などが前提で新しいITスキルが必要</li>
+</ul>
+<p>マイクロサービスの適用においては、メリットを享受しつつ上記のデメリットを最小化することによってその効用を得ることがポイントとなる。</p>
+<h3 ref="23マイクロサービス導入で注意すること" >2.3.マイクロサービス導入で注意すること</h3><a class="anchor" id="23マイクロサービス導入で注意すること"></a>
+<ul>
+<li>「独立した」サービスという意味を詳細に決めておく
+<ul>
+<li>「独立した」というのは、それが「単一でデプロイ、実行可能である」という性質を満たす必要がある</li>
+</ul>
+</li>
+<li>変化を許容するような計画・プロセスであるべき
+<ul>
+<li>例えば Agile</li>
+</ul>
+</li>
+<li>ボックス間で起こっていることについて心配し、ボックス内で起こっていることには寛大になる</li>
+<li><strong>コンウェイの法則</strong> ： システムのアーキテクチャは、コミュニケーションと企業の組織構造によって決まる
+<ul>
+<li><strong>逆コンウェイの法則</strong> ： 組織構造は、システムのアーキテクチャによって決まる
+<ul>
+<li>組織の <strong>サイロ化</strong> をまねき、個別最適、組織間に壁ができる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://www.reactivemanifesto.org">The Reactive Manifesto</a>（<a href="https://www.reactivemanifesto.org/ja">日本語</a>）</li>
+<li>全てのサービス間連携はサービスインターフェイスを通じて行われるべきである
+<ul>
+<li>Amazonではこれを破ると解雇される</li>
+</ul>
+</li>
+</ul>
+<h3 ref="24マイクロサービスで起こる問題" >2.4.マイクロサービスで起こる問題</h3><a class="anchor" id="24マイクロサービスで起こる問題"></a>
+<p>デメリットとやや重複するが、ではそのデメリットがどのような形で体現するのか。</p>
+<ul>
+<li>Observability（可観測性）への対応
+<ul>
+<li>Twitter 社のエンジニア発の概念</li>
+<li>分散システムをうまく運用するためにシステムの繋がり部分の挙動に注目して可視化・監視する必要がある</li>
+<li>取得すべき値や集約・ストレージの設計などがスコープ</li>
+</ul>
+</li>
+<li>サービス境界の問題 -&gt; Service Mesh
+<ul>
+<li>サービス境界で何が起こっているのか？
+<ul>
+<li>RPS、status、リトライ、タイムアウト、サーキットブレーカ、バルクヘッド、補正トランザクション</li>
+</ul>
+</li>
+<li>分散トレーシング
+<ul>
+<li>あるリクエストを処理したサービスはどれで、その処理結果がどうだったのか</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>サービス単体の可用性の確保
+<ul>
+<li>SPOFがないか -&gt; 冗長化</li>
+<li>障害耐性/回復性は十分か -&gt; 障害を想定した前提にした設計 -&gt; <strong>Design for Failure</strong>
+<ul>
+<li><a href="https://www.slideshare.net/yusuke/jug2015#23">品質特性</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>効率的にシステム障害を解決したり、キャパシティプランニング</li>
+<li>新規参入開発者が全体像を早期に把握
+<ul>
+<li>組織の急速な成長</li>
+</ul>
+</li>
+<li>オーナーシップ問題
+<ul>
+<li>責任の分離
+<ul>
+<li>プロダクト開発社は基本的に自分たちのプロダクト・サービシに責任を持てる</li>
+</ul>
+</li>
+<li>SRE
+<ul>
+<li>しかしシステム全体は協調して動作させる必要があるので組織横断的なチームは必要</li>
+</ul>
+</li>
+<li>横断的なチームがアプリケーションの細部を把握しなくてもシステム全体の動作を理解できる必要がある（中央で管理する必要性）</li>
+</ul>
+</li>
+</ul>
+<h2 ref="3マイクロサービスの分割" >3.マイクロサービスの分割</h2><a class="anchor" id="3マイクロサービスの分割"></a>
+<p>まず最初に重要なことは、 <strong>小さなシステムにマイクロサービスアーキテクチャを適用することは避ける</strong> ことだ。マイクロサービスのデメリットを上回るメリットを享受できない。モノリスから始め、サービスが軌道に乗る見込みがたった段階でマイクロサービスへの移行を検討するとよい。<br>
+その上で分割する際の観点は以下の通り。</p>
+<ul>
+<li>3.1.ドメイン観点</li>
+<li>3.2.アーキテクチャ観点</li>
+<li>3.3.チーム観点</li>
+</ul>
+<h3 ref="31ドメイン観点" >3.1.ドメイン観点</h3><a class="anchor" id="31ドメイン観点"></a>
+<p>まずドメインを分割する際はシステム特性で <strong>バイモーダル</strong> に考える必要がある。</p>
+<ul>
+<li><strong>SoR</strong> ( System of Record )</li>
+<li><strong>SoE</strong> ( System of Engagement )</li>
+<li>SoI ( System of Insight ) という考え方もあるがここでは割愛。</li>
+</ul>
+<p>つまり、SoR と SoE でドメイン分割する際のアプローチが異なる。</p>
+<blockquote>
+<p>そもそも SoR にマイクロサービスを適用するのか？という議論があるが、SoR はその名の通り記録のシステムであり、データを保有することが役割である。
+そのデータは SoE と適切に連携され、 SoI へのデータソースとなる。
+つまり、 API エコノミーを形成するため、データ連携に対してアジリティ（柔軟性）が求められるのだ。
+そのアジリティ獲得の方法の 1 つとして、マイクロサービスは一考の価値があるのではないか。</p>
+</blockquote>
+<p>結論から書くと、SoR は DOA ( Data Oriented Approach ) 、 SoE は POA ( Process Oriented Approach ) 、そしてそれぞれ OOA (Object Oriented Approach ) の併用が適しているのではないか。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">バイモーダル</th>
+<th style="text-align:left">設計アプローチ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">SoR</td>
+<td style="text-align:left">DOA -&gt; OOA</td>
+</tr>
+<tr>
+<td style="text-align:left">SoE</td>
+<td style="text-align:left">POA -&gt; OOA</td>
+</tr>
+</tbody>
+</table>
+<p>マイクロサービスへの移行や新規構築では「十分に小さく、ちょうどいい大きさ」にする訳なのだが、以下に 4 原則を定める。</p>
+<ol>
+<li>すべてが分散されており、</li>
+<li>ビジネスドメインを起点に
+<ul>
+<li>SoR の場合：データモデリングされており、</li>
+<li>SoE の場合：UX デザインされており、</li>
+</ul>
+</li>
+<li>各サービスが独立してデプロイでき、
+<ul>
+<li>OOA、後述の「アーキテクチャ観点」の分割</li>
+</ul>
+</li>
+<li>サービス間でデータを共有していない
+<ul>
+<li>OOA、後述の「アーキテクチャ観点」の分割</li>
+</ul>
+</li>
+</ol>
+<p>上記の 4 原則、さらにバイモーダルの考えに沿って、以下の観点で分割方法を記載する。</p>
+<ul>
+<li>3.1.1.SoRの分割（データモデリング）</li>
+<li>3.1.2.SoEの分割（UXデザイン）</li>
+<li>3.1.3.OOAの手法（ドメイン駆動設計）</li>
+</ul>
+<p>（以降、未整理）</p>
+<h4 ref="311sorの分割データモデリング" >3.1.1.SoRの分割（データモデリング）</h4><a class="anchor" id="311sorの分割データモデリング"></a>
+<p>ERD</p>
+<h4 ref="312soeの分割uxデザイン" >3.1.2.SoEの分割（UXデザイン）</h4><a class="anchor" id="312soeの分割uxデザイン"></a>
+<p>イベントストーミング</p>
+<h4 ref="313ooaの手法ドメイン駆動設計" >3.1.3.OOAの手法（ドメイン駆動設計）</h4><a class="anchor" id="313ooaの手法ドメイン駆動設計"></a>
+<ul>
+<li>1 つのマイクロサービスで、 1 つのビジネスファンクションが完結すること
+<ul>
+<li>サービスの境界をビジネスの境界に合わせる</li>
+<li>変更する理由が同じものは集める、変更する理由が違うものは分ける</li>
+<li>サービス間は疎結合</li>
+</ul>
+</li>
+</ul>
+<p>マイクロサービスの境界をうまく決める設計手法に <strong>ドメイン駆動設計</strong> （ <strong>DDD : Domain Driven Design</strong> ）がある。</p>
+<p>「不完全な状況の中で、抽象的な設計原則を、現実のソフトウェアに適用するための助言」。<br>
+「ドメインモデルをソフトウェア開発の中心にすえ、コードやコミュニケーションを常にドメインモデルと一体化させながら、ドメインモデルを反復的に深化させることでより価値の高いアプリケーションを生み出していこうとする考え方」。<br>
+オブジェクト指向コミュニティの間で長年培われてきたドメインモデリングのノウハウやベストプラクティスを集大成した、1つの設計思想／哲学でアジャイルなプロセスを前提としている。</p>
+<ul>
+<li><a href="https://www.ogis-ri.co.jp/otc/hiroba/technical/DDDEssence/">DDD難民に捧げる Domain-Driven Designのエッセンス</a></li>
+<li><a href="https://qiita.com/kondei/items/41c28674c1bfd4156186">持続可能な開発を目指す ~ ドメイン・ユースケース駆動（クリーンアーキテクチャ） + 単方向に制限した処理 + FRP</a></li>
+<li><a href="https://qiita.com/kohei789/items/9d229634991dfac38b0f">ドメイン駆動設計＋クリーンアーキテクチャ解説【DDD編】</a>
+<ul>
+<li>これの次の記事読むべき</li>
+</ul>
+</li>
+</ul>
+<p>以下は用語。</p>
+<ul>
+<li>ドメイン（ Domain ）
+<ul>
+<li>アプリケーションが対象とする業務領域</li>
+<li>「知識、影響力、活動の一領域」</li>
+<li>ユーザーがプログラムを適用する対象エリアは、ソフトウェアのドメイン</li>
+</ul>
+</li>
+<li>境界付けられたコンテキスト（Bounded Context）
+<ul>
+<li>特定のモデルが定義され適用される境界（通常、サブシステム、または特定のチームの作業）の説明</li>
+<li>会社全体で？プロダクト全体？もっと狭めてチームぐらいかな、という形に「この言語をこの意味で使う範囲はここまで」という風に決めましょうという概念</li>
+</ul>
+</li>
+<li>ユビキタス言語（ Ubiquitous Language ）
+<ul>
+<li>ドメインモデルを中心に構造化された言語</li>
+<li>チームのすべてのアクティビティをソフトウェアと結びつけるために、境界付けられたコンテキスト内のすべてのチームメンバーが使用する</li>
+<li>「チームで使う共通言語」ぐらいの和訳でとらえておくのがわかりやすい</li>
+</ul>
+</li>
+<li>ドメインモデル（ Domain Model ）
+<ul>
+<li>ユビキタス言語で定義された、ドメインに必要なデータとそれに対するメソッドのセット</li>
+<li>以下の 3 つから構成される
+<ol>
+<li>エンティティ（ Entities ）
+<ul>
+<li>同一性・連続性があるもの</li>
+<li>例）ユーザの年齢や身長などの属性は変化するが、ユーザ自身であることは変わらない</li>
+<li>データストアの構成には依存しない</li>
+</ul>
+</li>
+<li>値オブジェクト（ Value Objects ）
+<ul>
+<li>同一性を持たないもの</li>
+</ul>
+</li>
+<li>サービス（ Services ）
+<ul>
+<li>状態をもたない（statelessな）機能や処理</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ここで住所について考察しましょう。メッセージアプリにおけるユーザにとって、住所は同一性はなく値オブジェクトとして扱うことができます。しかしユーザが配送先をWEB上で決め、それを元に集荷、配送を送るようなアプリケーションを考えてみましょう。この時送り先としての住所は管理され、同一性を持ちます。Aさんが送り先を指定し、その後変更した場合送り先としての住所には同一性があります。このようなケースではエンティティとして管理する必要があります。</p>
+</blockquote>
+<h4 ref="314ドメイン観点での分割手順" >3.1.4.ドメイン観点での分割手順</h4><a class="anchor" id="314ドメイン観点での分割手順"></a>
+<p>一口にMSA分割手順といっても様々な状況がある。
+状況に応じて以下の手順でビジネスドメインへ分割する。</p>
+<ul>
+<li>既存システムの場合
+<ul>
+<li>新規に構築する部分からマイクロサービス化</li>
+<li>その他は<a href="https://docs.microsoft.com/ja-jp/azure/architecture/patterns/strangler">ストラングラーパターン</a></li>
+</ul>
+</li>
+<li>新規システムの場合
+<ul>
+<li>SoRの場合：DOA -&gt; OOA</li>
+<li>SoEの場合：POA -&gt; OOA</li>
+</ul>
+</li>
+</ul>
+<p>これまでの「アーキテクチャ観点での分割」「ビジネスドメイン観点での分割」を加味して、マイクロサービス分割手順を示す。</p>
+<ul>
+<li><code>http://ascii.jp/elem/000/001/659/1659834/</code></li>
+</ul>
+<ol>
+<li>マイクロサービスの設計は、ビジネスドメインをラフスケッチし、ドメインモデルを描くことからスタートする。</li>
+<li>ビジネスドメインとは、ドローン配送サービスの例では、「在庫管理」「オーダー管理」といった単位になる。「その領域内で同一の言語を話す単位（Bounded Context）。
+<ul>
+<li>例えば、顧客管理において“顧客”が意味するものが同一である必要がある。</li>
+<li>“顧客”の意味が違う領域にサービスがまたがる場合は、Bounded Contextを分離する（別のマイクロサービスにする）ように」</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>オブジェクト志向</li>
+<li>エクストリームプログラミング</li>
+</ul>
+<h3 ref="32アーキテクチャ観点" >3.2.アーキテクチャ観点</h3><a class="anchor" id="32アーキテクチャ観点"></a>
+<p>マイクロサービスもまたレイヤーでその役割を分けて考えることができる。<br>
+ドメイン観点で分割されたドメインモデルに対して以下のコンポーネントを加味したアーキテクチャを設計する。</p>
+<ul>
+<li>プレゼンテーション層(UI/API)
+<ul>
+<li>ネイティブアプリ・SPAなどのビュー、 API エコノミーを形成するための API Gateway</li>
+</ul>
+</li>
+<li>アプリケーションビジネスロジック層（ BFF : Backend for Frontend ）
+<ul>
+<li>複数のマイクロサービスへアクセスし、プレゼンテーション層向けのビジネスロジックを実行する層</li>
+<li>複数のドメインロジックを横断して利用し、サービスのロジックを実現する層</li>
+</ul>
+</li>
+<li>ドメインビジエンスロジック層（API）
+<ul>
+<li>データソース層を API でラッピングし、ドメインロジックを保有・実行する層</li>
+</ul>
+</li>
+<li>データソース層
+<ul>
+<li>RDBMS や NoSQL</li>
+<li>ドメイン分割されたマイクロサービスが個々に独立したデータベースを持つ</li>
+</ul>
+</li>
+</ul>
+<p>「アプリケーションビジネスロジック層」「ドメインビジネスロジック層＋データソース層」が 1 つのマイクロサービスとなる。</p>
+<blockquote>
+<p>ちなみに以下のようなアーキテクチャが巷に転がっているが、これらは DDD （後述）文脈でアプリケーションを作る際のソフトウェアアーキテクチャを指しており、マイクロサービスアーキテクチャでいうと 1 つのマイクロサービスを実装する際に参考にするとよい。</p>
+<ol>
+<li>レイヤードアーキテクチャ</li>
+<li>ヘキサゴナルアーキテクチャ</li>
+<li>オニオンアーキテクチャ</li>
+<li>クリーンアーキテクチャ</li>
+</ol>
+</blockquote>
+<h3 ref="33チーム-観点" >3.3.チーム 観点</h3><a class="anchor" id="33チーム-観点"></a>
+<p>基本的にはドメイン観点、アーキテクチャ観点で分割されたマイクロサービスに対して開発者をアサインしていくのだが、チームについては以下の観点を加味する。</p>
+<ul>
+<li>1 マイクロサービスで 10 人未満の 1 チーム
+<ul>
+<li>Two-pizza teams(Amazon)</li>
+<li>UI担当、ミドルウェア担当、DBA のような職能でチーム分割せず、クロスファンクショナルなチームを構成</li>
+<li>2週間で書き直せるサービス（できない場合はサービスを分割する）</li>
+</ul>
+</li>
+<li>サービスがチーム構造と一致していること（ <strong>コンウェイの法則</strong> ↔︎ <strong>逆コンウェイの法則</strong> ）
+<ul>
+<li>購買管理チーム、在庫管理チーム、会計チーム、など</li>
+</ul>
+</li>
+</ul>
+<h2 ref="4マイクロサービスのデメリットへの対応マイクロサービスエコシステム" >4.マイクロサービスのデメリットへの対応（マイクロサービスエコシステム）</h2><a class="anchor" id="4マイクロサービスのデメリットへの対応マイクロサービスエコシステム"></a>
+<p>ここでは、マイクロサービスのメリットを享受しつつ、 <strong>デメリットを最小化</strong> するためのノウハウについて記載する。<br>
+以下のようにレイヤを分けて考える。</p>
+<ul>
+<li>レイヤ４：マイクロサービス</li>
+<li>レイヤ３：アプリケーションプラットフォーム</li>
+<li>レイヤ２：通信</li>
+<li>レイヤ１：ハードウェア</li>
+</ul>
+<p>レイヤ３以下を抽象化できる構造にすることによって初めてマイクロサービスを開発・運用することができる。</p>
+<h3 ref="service-mesh" >Service Mesh</h3><a class="anchor" id="service-mesh"></a>
+<p>分散アーキテクチャの運用を楽に。</p>
+<ul>
+<li>Envoy ( Envoy proxy )
+<ul>
+<li>プロキシソフトウェア</li>
+<li>Data Plane</li>
+</ul>
+</li>
+<li>Istio
+<ul>
+<li>Envoy を統合管理するソフトウェア</li>
+<li>Control Plane</li>
+</ul>
+</li>
+</ul>
+<h4 ref="構成" >構成</h4><a class="anchor" id="構成"></a>
+<p>アプリケーションの代わりにネットワーク層の仕事をする。<br>
+メトリクス取得/送信、リトライ等の実行、分散トレーシング用のログの送信、service discovery、load balancing なども行う。<br>
+以下の2つのコンポーネントで構成される。</p>
+<ul>
+<li>Data Plane
+<ul>
+<li>proxy として上記タスクを実行</li>
+</ul>
+</li>
+<li>Control Plane
+<ul>
+<li>各 proxy の管理を行う</li>
+</ul>
+</li>
+</ul>
+<p><code>https://speakerdeck.com/taiki45/observability-service-mesh-and-microservices?slide=38</code></p>
+<h3 ref="課題への対応" >課題への対応</h3><a class="anchor" id="課題への対応"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">対応したい障害</th>
+<th style="text-align:left">対処法</th>
+<th style="text-align:left">対処法の実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">サービス間の一時的な障害</td>
+<td style="text-align:left">リトライ</td>
+<td style="text-align:left">サービス呼び出し失敗時に再試行</td>
+</tr>
+<tr>
+<td style="text-align:left">障害が発生しているサービスにリクエストを繰り返しリソースを消費</td>
+<td style="text-align:left">サーキットブレーカー</td>
+<td style="text-align:left">障害が発生しているサービスへのリクエストに対して早期にエラーレスポンスを返却してリソースの無駄な消費を防止</td>
+</tr>
+<tr>
+<td style="text-align:left">障害がサービス機能全体に影響することを防止</td>
+<td style="text-align:left">バルクヘッド</td>
+<td style="text-align:left">アプリケーションの構成要素をプールに分離し、1つ失敗しても他が引き続き機能できるようにする</td>
+</tr>
+<tr>
+<td style="text-align:left">複数サービスにまたがるデータ更新において結果整合性を保証</td>
+<td style="text-align:left">補正トランザクション</td>
+<td style="text-align:left">各サービスのデータ更新において、更新前の状態へ復元するための情報を残しておく。ロールバックにおいてその情報を使用</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="通信方式" >通信方式</h3><a class="anchor" id="通信方式"></a>
+<p>同期と非同期</p>
+<ul>
+<li>
+<p>同期</p>
+<ul>
+<li>リクエスト・レスポンス方式</li>
+</ul>
+</li>
+<li>
+<p>非同期</p>
+<ul>
+<li>パブリッシュ・サブスクライブ方式（ PubSub ）</li>
+<li>イベントベース</li>
+<li>ビジネスロジックが中央に集中されず、代わりに様々なコラボレータに均等に割り振られる</li>
+</ul>
+</li>
+<li>
+<p>オーケストレーションとコレオグラフィ</p>
+<ul>
+<li>Web APIたちを呼び、受け取ったデータでHTMLをレンダリングするというオーケストレーション方式
+<ul>
+<li>呼び出されるサービス側がドメインモデル貧血症になりがちで、呼び出す側にロジックが集まっていくことになる</li>
+</ul>
+</li>
+<li>イベントをサブスクライブしていて、新規会員登録イベントが発生したら、それを受け取り、それぞれ処理を行うコレオグラフィ方式</li>
+</ul>
+</li>
+<li>
+<p>RX (Ractive Extensions)</p>
+</li>
+<li>
+<p>冪等性</p>
+</li>
+</ul>
+<h3 ref="プラクティス" >プラクティス</h3><a class="anchor" id="プラクティス"></a>
+<ul>
+<li>DRY (Don&rsquo;t Repeat Yourself)
+<ul>
+<li>1 つのマイクロサービス内では DRY を破らないけれど、すべてのサービスにわたる DRY の違反には寛大に対処する</li>
+<li>ロギングライブラリなどはサービス横断で共通化してもかまわない</li>
+<li>クライアントライブラリは API 開発者が提供しない（クライアントとサーバを密結合にしない）</li>
+</ul>
+</li>
+<li>バージョニング
+<ul>
+<li><a href="http://semver.org/"><strong>セマンティックバージョニング</strong></a>
+<ul>
+<li>MAJOR.MINOR.PATCH
+<ul>
+<li>MAJOR：後方互換性のない変更</li>
+<li>MINOR：後方互換性のある追加機能</li>
+<li>PATCH：既存機能のバグFIX</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>異なるエンドポイントの共存
+<ul>
+<li>v1,v2,v3,,,</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Backend for Frontend（ BFF ）</li>
+<li>トランザクション
+<ul>
+<li>結果整合性
+<ul>
+<li>ACID ではなく BASE な考え方
+<ul>
+<li>ACID
+<ul>
+<li>A：Atomicity、アトミック性</li>
+<li>C：Consistency、一貫性・整合性</li>
+<li>I：Isolation、独立性、トランザクション中に行われる操作は他のトランザクションに影響を与えない事を保証</li>
+<li>D：Drability、トランザクション処理結果は永続的</li>
+</ul>
+</li>
+<li>BASE
+<ul>
+<li>BA：Basically Available、高可用性</li>
+<li>S：Soft-State、あるノードの状態は自律的ではなく外部からの情報により変化する、復元可能</li>
+<li>E：Eventually Consistent、 <strong>結果整合性</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>操作全体の中止
+<ul>
+<li>サーキットブレーカー</li>
+</ul>
+</li>
+<li>分散トランザクション</li>
+<li>データポンプ</li>
+</ul>
+</li>
+<li>デプロイ
+<ul>
+<li>ビルドパイプライン
+<ul>
+<li>コンパイルと高速テスト -&gt; 低速テスト -&gt; UAT(User Acceptance Testing) -&gt; 性能テスト -&gt; 本番環境</li>
+</ul>
+</li>
+<li>イミュータブルサーバ</li>
+<li>カナリアリリース</li>
+<li>ブルーグリーンデプロイメント</li>
+</ul>
+</li>
+<li>テスト
+<ul>
+<li>単体テスト</li>
+<li>サービステスト</li>
+<li>エンドツーエンドテスト</li>
+</ul>
+</li>
+<li>監視
+<ul>
+<li>相関ID</li>
+</ul>
+</li>
+<li>セキュリティ
+<ul>
+<li>シングルサインオンゲートウェイ</li>
+</ul>
+</li>
+</ul>
+<h3 ref="istio-が有する機能" >Istio が有する機能</h3><a class="anchor" id="istio-が有する機能"></a>
+<ul>
+<li>ネットワーク制御</li>
+<li>デプロイメント方法（カナリア、 Blue-Green など）</li>
+<li>リトライ／タイムアウト</li>
+<li>負荷分散</li>
+<li>サーキットブレーカー
+<ul>
+<li>サービス呼び出しに対する応答に異常を発見すると、それ以降の呼び出しを遮断する仕組み</li>
+</ul>
+</li>
+<li>バルクヘッド
+<ul>
+<li>アプリケーションの要素をプールに分離し、1 つの要素が失敗しても、他の要素が引き続き機能できるようにする</li>
+</ul>
+</li>
+<li>流量制御
+<ul>
+<li>トラフィックオーバーしたら Sorry 流し？</li>
+</ul>
+</li>
+<li>障害検知</li>
+<li>監視</li>
+<li>ログ出力</li>
+</ul>
+<h3 ref="参考" >参考</h3><a class="anchor" id="参考"></a>
+<ul>
+<li><a href="https://docs.microsoft.com/ja-jp/azure/architecture/patterns/">Azure クラウド設計パターン</a></li>
+<li><code>https://www.slideshare.net/oracle4engineer/developers-summit-2018-kubernetes</code></li>
+<li><a href="https://microservices.io/patterns/">A pattern language for microservices ,Chris Richardson</a></li>
+<li><a href="https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/">Service Discovery in a Microservices Architecture, Chris Richardson of Eventuate, Inc.</a></li>
+<li><a href="http://enterprisegeeks.hatenablog.com/entry/2015/11/02/000000">Spring特別勉強会レポート(後編),エンタープライズギークス (Enterprise Geeks)</a></li>
+<li><a href="https://docs.microsoft.com/ja-jp/azure/architecture/guide/architecture-styles/microservices">マイクロサービス アーキテクチャ スタイル</a></li>
+<li><a href="https://www.slideshare.net/nobusue/light-and-shadow-of-microservices">Light and shadow of microservices</a></li>
+</ul>
+<h2 ref="処理方式" >処理方式</h2><a class="anchor" id="処理方式"></a>
+<ul>
+<li>同期・非同期
+<ul>
+<li>同期</li>
+<li>非同期
+<ul>
+<li>ポーリング方式：初回実行依頼をしてから、定期的に実行が終わったか確認しにいく</li>
+<li>コールバック方式：初回実行を依頼してから、通知が来るまで待つ</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>逐次・並列・並行
+<ul>
+<li>逐次：シーケンシャル処理。前から順番に実施。</li>
+<li>並列：複数タスクを同時に処理する。</li>
+<li>並行：逐次・並列より抽象度が高い。「どんな順番で実行してもよいタスク」に分解して実行。逐次も並列も含む。</li>
+</ul>
+</li>
+<li>オンライン・バッチ
+<ul>
+<li>オンライン</li>
+<li>バッチ：1つのバッチ処理はジョブという。順序制御、リラン制御が大事。
+<ul>
+<li>オフラインバッチ</li>
+<li>オンラインバッチ</li>
+<li>ディレードオンラインバッチ：キューとか挟んでやる。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>メッセージング</li>
+</ul>
+<h2 ref="デザインパターン" >デザインパターン</h2><a class="anchor" id="デザインパターン"></a>
+<h3 ref="可用性-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategoryavailability" >可用性 <a href="https://docs.microsoft.com/ja-jp/azure/architecture/patterns/category/availability">※参考</a></h3><a class="anchor" id="可用性-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategoryavailability"></a>
+<ul>
+<li>エンドポイントヘルスチェックモニタリング（Endpoint Health Check Monitoring）
+<ul>
+<li>勝手に名前つけた</li>
+<li>公開している API や Web サイトのサービスが正常に動作しているかモニタリングする</li>
+<li><code>/health</code> のような API を公開し、そのサービスが正常かどうかチェックし 200 を返す仕組みを作り、外から叩いて監視する</li>
+</ul>
+</li>
+<li>キューベースの負荷平準化
+<ul>
+<li>大量のリクエストを捌く必要があり、且つ、リアルタイムで処理結果を返却する必要が無い場合はタスクをキューに詰めて後から処理をする</li>
+</ul>
+</li>
+<li>スロットリング
+<ul>
+<li>システムリソースへの負荷が予め設定していた値に到達した場合、設定値を超える処理を受け付けなくする</li>
+<li>システムが落ちることを防ぐが、ユーザから見て利用制限がかかる</li>
+</ul>
+</li>
+</ul>
+<h3 ref="データ管理-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategorydata-management" >データ管理 <a href="https://docs.microsoft.com/ja-jp/azure/architecture/patterns/category/data-management">※参考</a></h3><a class="anchor" id="データ管理-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategorydata-management"></a>
+<ul>
+<li>キャッシュ</li>
+<li>CQRS（Command and Query Responsibility Segregation：コマンド・クエリ責務分離）
+<ul>
+<li>更新（ Command ）と参照（ Query ）のアクセスとデータストアを分離する</li>
+<li>いわゆるリードレプリカを作成する</li>
+</ul>
+</li>
+<li>イベントソーシングパターン
+<ul>
+<li>ちょっとわからん</li>
+<li>キューで PubSub するのと違いは？</li>
+</ul>
+</li>
+<li>インデックステーブルパターン
+<ul>
+<li>DB でセカンダリインデックスがサポートされていない場合に利用</li>
+<li>主キーへのアクセスではなく、条件検索の場合インデックスが効かない</li>
+<li>頻繁に使う条件の場合は、この条件で指定する値をキーとしたインデックステーブルを作成する</li>
+</ul>
+</li>
+<li>ビューバターン
+<ul>
+<li>うーん</li>
+</ul>
+</li>
+<li>シャーディング
+<ul>
+<li>データ ストアを水平方向のパーティションまたはシャードのセットに分割</li>
+<li>主にデータ量への対応</li>
+</ul>
+</li>
+<li>CDN</li>
+<li>バレットキーパターン
+<ul>
+<li>AP サーバを経由してデータのダウンロード・アップロードを行うのではなく、直接ストレージに行う</li>
+<li>トークンを払い出して行う</li>
+</ul>
+</li>
+</ul>
+<h3 ref="設計と実装-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategorydesign-implementation" >設計と実装 <a href="https://docs.microsoft.com/ja-jp/azure/architecture/patterns/category/design-implementation">※参考</a></h3><a class="anchor" id="設計と実装-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategorydesign-implementation"></a>
+<ul>
+<li>アンバサダーパターン
+<ul>
+<li>アプリケーションと外部サービス間のプロキシとして機能する外部プロセスに配置（サイドカー、Data Plane）</li>
+<li>リトライ、サーキットブレイク、計測と監視、ログ記録、ルーティング、セキュリティ（TLSなど）、接続・認証</li>
+</ul>
+</li>
+<li>破損対応レイヤ
+<ul>
+<li>サブシステム間にアダプターレイヤーを実装する</li>
+<li>最新アプリケーションに組み込まない古いインフラストラクチャ、プロトコル、データ モデル、API、またはその他の機能をサポート</li>
+</ul>
+</li>
+<li>BFF</li>
+<li>CQRS
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>コンピューティング リソース統合パターン
+<ul>
+<li>あんまり</li>
+</ul>
+</li>
+<li>外部構成ストア（External Configuration Store）
+<ul>
+<li>アプリケーション実行時のパラメータを外部構成ストアに保存</li>
+<li>アプリケーションには外部構成ストアへのアクセス権限だけ付与しておく</li>
+</ul>
+</li>
+<li>ゲートウェイ集約パターン / gateway aggregation
+<ul>
+<li>ほぼ BFF</li>
+<li>複数ドメインバックエンドへの処理を集約する役割に言及している点でf BFF と若干異なる</li>
+</ul>
+</li>
+<li>ゲートウェイ オフロード パターン / gateway offloading（ API Gateway ）
+<ul>
+<li>一部の機能は複数のサービスでよく使用される（認証など）</li>
+<li>認証、承認、ログ、監視、スロットリング、SSL 終端</li>
+</ul>
+</li>
+<li>ゲートウェイ ルーティング パターン / gateway routing （ API Gateway ）
+<ul>
+<li>単一のエンドポイントを使用して複数のサービスに要求をルーティング</li>
+<li>クライアントが複数のサービスを使用する必要がある場合、サービスごとに個別のエンドポイントを設定し、クライアントが各エンドポイントを管理するのは難しい</li>
+</ul>
+</li>
+<li>リーダー選定パターン
+<ul>
+<li>ピンとこん</li>
+</ul>
+</li>
+<li>パイプとフィルターのパターン
+<ul>
+<li>ジョブネット的なやーつ</li>
+</ul>
+</li>
+<li>サイドカー
+<ul>
+<li>アプリケーションのコンポーネントを別のプロセスまたはコンテナーにデプロイして、分離性とカプセル化を実現</li>
+<li>監視、ログ記録、構成、ネットワーク サービスなどの関連する機能</li>
+</ul>
+</li>
+<li>CDN
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>ストラングラー・パターン
+<ul>
+<li>機能の特定の部分を新しいアプリケーションやサービスに徐々に置き換えることで、レガシ システムを段階的に移行</li>
+</ul>
+</li>
+</ul>
+<h3 ref="メッセージング-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategorymessaging" >メッセージング <a href="https://docs.microsoft.com/ja-jp/azure/architecture/patterns/category/messaging">※参考</a></h3><a class="anchor" id="メッセージング-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategorymessaging"></a>
+<ul>
+<li>競合コンシューマー パターン
+<ul>
+<li>「イベントソーシングパターン」と何がちゃうねん</li>
+</ul>
+</li>
+<li>パイプとフィルターのパターン
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>優先順位キュー（ Priority Queue ）パターン
+<ul>
+<li>読んで字のごとく</li>
+<li>並び替えできる（割り込みできる）キューを使うか、優先順位ごとにキューを分けるか</li>
+</ul>
+</li>
+<li>パブリッシャーとサブスクライバーのパターン（ PubSub ）
+<ul>
+<li>「イベントソーシングパターン」「競合コンシューマー パターン」と分けて理解する（後々</li>
+</ul>
+</li>
+<li>キュー ベースの負荷平準化パターン
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>Scheduler エージェント スーパーバイザー（Scheduler Agent Supervisor パターン）
+<ul>
+<li>Scheduler ：実行されるタスクを構成する手順を準備し、その操作を調整</li>
+<li>Agent ：リモート サービスの呼び出し、またはタスク内の手順によって参照されるリモート リソースへのアクセスをカプセル化するロジックが含まれ</li>
+<li>Supervisor ： Scheduler によって実行されているタスク内の手順の状態を監視</li>
+</ul>
+</li>
+</ul>
+<h3 ref="管理と監視-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategorymanagement-monitoring" >管理と監視 <a href="https://docs.microsoft.com/ja-jp/azure/architecture/patterns/category/management-monitoring">※参考</a></h3><a class="anchor" id="管理と監視-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategorymanagement-monitoring"></a>
+<ul>
+<li>アンバサダーパターン
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>破損対応レイヤ
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>外部構成ストア（External Configuration Store）
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>ゲートウェイ集約パターン / gateway aggregation
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>ゲートウェイ オフロード パターン / gateway offloading（ API Gateway ）
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>ゲートウェイ ルーティング パターン / gateway routing （ API Gateway ）
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>エンドポイントヘルスチェックモニタリング（Endpoint Health Check Monitoring）
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>サイドカー
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>ストラングラー・パターン
+<ul>
+<li>重複</li>
+</ul>
+</li>
+</ul>
+<h3 ref="パフォーマンスと拡張性-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategoryperformance-scalability" >パフォーマンスと拡張性 <a href="https://docs.microsoft.com/ja-jp/azure/architecture/patterns/category/performance-scalability">※参考</a></h3><a class="anchor" id="パフォーマンスと拡張性-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategoryperformance-scalability"></a>
+<p>全部重複、、、</p>
+<h3 ref="回復性-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategoryresiliency" >回復性 <a href="https://docs.microsoft.com/ja-jp/azure/architecture/patterns/category/resiliency">※参考</a></h3><a class="anchor" id="回復性-参考httpsdocsmicrosoftcomja-jpazurearchitecturepatternscategoryresiliency"></a>
+<ul>
+<li>バルクヘッド
+<ul>
+<li>アプリケーションの要素をプールに分離し、1 つの要素が失敗しても、他の要素が引き続き機能できるようにする</li>
+<li>コンシューマーの負荷と可用性の要件に基づいて、サービス インスタンスを別々のグループに分割</li>
+<li>DB とか HTTP コネクションプールとかかな</li>
+</ul>
+</li>
+<li>サーキットブレーカー
+<ul>
+<li>リモート サービスまたはリソースとの接続時に、復旧に要する時間が一定しないエラーを処理</li>
+<li>リモートサービスの反応が無いときに切る子</li>
+</ul>
+</li>
+<li>補正トランザクション
+<ul>
+<li>最終的に整合性がある操作を定義する一連のステップの中で、1 つ以上のステップが失敗した場合に、実行された作業を元に戻す</li>
+</ul>
+</li>
+<li>エンドポイントヘルスチェックモニタリング（Endpoint Health Check Monitoring）
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>リーダー選定パターン
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>キュー ベースの負荷平準化パターン
+<ul>
+<li>重複</li>
+</ul>
+</li>
+<li>リトライ
+<ul>
+<li>キャンセルする、再試行する、時間をおいて再試行する</li>
+</ul>
+</li>
+<li>Scheduler エージェント スーパーバイザー（Scheduler Agent Supervisor パターン）
+<ul>
+<li>重複</li>
+</ul>
+</li>
+</ul>
+<h3 ref="セキュリティ" >セキュリティ</h3><a class="anchor" id="セキュリティ"></a>
+<ul>
+<li>フェデレーション ID
+<ul>
+<li>外部の ID プロバイダーに認証を委任する</li>
+<li>認証とトークン発行</li>
+</ul>
+</li>
+<li>ゲートキーパー
+<ul>
+<li>専用のホスト インスタンスを使用して、アプリケーションとサービスを保護</li>
+<li>クライアントと、アプリケーションまたはサービスとの間でブローカーとして機能し、要求を検証して不適切な部分を除去</li>
+</ul>
+</li>
+<li>バレットキーパターン
+<ul>
+<li>重複</li>
+</ul>
+</li>
+</ul>
+<h2 ref="aws" >AWS</h2><a class="anchor" id="aws"></a>
+<ul>
+<li><a href="http://aws.clouddesignpattern.org/index.php/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8">http://aws.clouddesignpattern.org/index.php/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</a></li>
+</ul>
+		</div>
+
+
+
+
+
+
+	
+	
+
+      </section>
+
+      
+      
+    </article>
+    
+    
+    <footer>
+      
+
+		
+	
+			
+		
+	    	
+	  	
+	
+    </footer>
+    
+
+
+
+  </body>
+</html>
