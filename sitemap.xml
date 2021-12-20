@@ -152,7 +152,7 @@
     <loc>https://tanakakns.github.io/gcp/databases/spanner/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/design/architecture/</loc>
+    <loc>https://tanakakns.github.io/design/clean-architecture/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/</loc>
@@ -165,6 +165,9 @@
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/cloud-functions/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/design/architecture/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/storage/</loc>
