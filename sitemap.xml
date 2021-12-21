@@ -71,10 +71,10 @@
     <loc>https://tanakakns.github.io/gcp/tools/management-tools/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/mac/homebrew/</loc>
+    <loc>https://tanakakns.github.io/go/go-modules/</loc>
     <lastmod>2021-02-09T22:14:00+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/go/grammar/</loc>
+    <loc>https://tanakakns.github.io/mac/homebrew/</loc>
     <lastmod>2021-02-09T22:14:00+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/architecture/</loc>
@@ -107,7 +107,7 @@
     <loc>https://tanakakns.github.io/mac/asdf/</loc>
     <lastmod>2021-02-09T22:14:00+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/go/naming/</loc>
+    <loc>https://tanakakns.github.io/go/grammar/</loc>
     <lastmod>2021-02-09T22:14:00+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/kubectl-plugin/</loc>
@@ -131,7 +131,7 @@
     <loc>https://tanakakns.github.io/design/microservices/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/go/pattern/</loc>
+    <loc>https://tanakakns.github.io/go/naming/</loc>
     <lastmod>2021-02-09T22:14:00+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/command/</loc>
@@ -157,6 +157,9 @@
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/go/pattern/</loc>
+    <lastmod>2021-02-09T22:14:00+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/manifest/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>

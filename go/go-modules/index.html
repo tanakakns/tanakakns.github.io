@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	asdf :: テックまとめ
+	Go Modules :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>asdf :: テックまとめ</title>
+<title>Go Modules :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/mac/asdf/"
+  <body data-url="/go/go-modules/"
 
   class="hidetoc hidenextpage ">
 
@@ -226,15 +226,14 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/mac/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/mac/">Mac開発環境</a>
@@ -272,7 +271,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/mac/asdf/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/mac/asdf/" class="dd-item
         item_level_$level
         ">
 
@@ -321,14 +320,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/go/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/go/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/go/">Go言語</a>
@@ -351,7 +351,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/go/go-modules/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/go/go-modules/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -1349,8 +1349,8 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/mac/">
-        Mac開発環境
+      <a class="text-link" href="/go/">
+        Go言語
       </a>
     </li>
 	
@@ -1358,7 +1358,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        asdf
+        Go Modules
       
     </li>
 
@@ -1379,7 +1379,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>asdf</h1>
+			<h1>Go Modules</h1>
         
 
 		
@@ -1399,96 +1399,70 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p><a href="https://asdf-vm.com/#/">asdf</a>は、プログラミング言語やコマンドラインツールのバージョン管理をツール。（2020/12/09時点ではanyenvより対応が多い）</p>
-<ol>
-<li>インストール・アップデート・アンインストール</li>
-<li>使い方</li>
-</ol>
-<h2 ref="1-インストールアップデートアンインストール" >1. インストール・アップデート・アンインストール</h2><a class="anchor" id="1-インストールアップデートアンインストール"></a>
-<p>基本は<a href="https://asdf-vm.com/#/core-manage-asdf">公式</a>を見て欲しいが、ここでは本ブログ作成日におけるMac環境へのインストールについて記載する。</p>
-<h3 ref="11-インストール" >1.1. インストール</h3><a class="anchor" id="11-インストール"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew install coreutils curl git
-% brew install asdf
-% echo -e <span style="color:#e6db74">&#34;\n. </span><span style="color:#66d9ef">$(</span>brew --prefix asdf<span style="color:#66d9ef">)</span><span style="color:#e6db74">/asdf.sh&#34;</span> &gt;&gt; ~/.zshenv
-</code></pre></div><h3 ref="12-アップデート" >1.2. アップデート</h3><a class="anchor" id="12-アップデート"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew upgrade asdf
-</code></pre></div><h3 ref="13-アンインストール" >1.3. アンインストール</h3><a class="anchor" id="13-アンインストール"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% rm -rf <span style="color:#e6db74">${</span>ASDF_DATA_DIR<span style="color:#66d9ef">:-</span>$HOME/.asdf<span style="color:#e6db74">}</span> ~/.tool-versions
-</code></pre></div><p>プロファイルに設定した asdf へのパス削除を忘れずに。</p>
-<h2 ref="2-使い方" >2. 使い方</h2><a class="anchor" id="2-使い方"></a>
-<h3 ref="21-プラグインツールのインストール" >2.1. プラグイン・ツールのインストール</h3><a class="anchor" id="21-プラグインツールのインストール"></a>
-<ol>
-<li>使いたいプログラミング言語・ツールに対応したプラグインを探す
+	    <p>Go 1.16 以降。</p>
+<h2 ref="gomod-の作成" >go.mod の作成</h2><a class="anchor" id="gomod-の作成"></a>
+<p><code>go mod init</code> を使用して、作性するプロジェクトのリポジトリを指定する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">go mod init github.com/pepese/golang-gin-sample
+</code></pre></div><h2 ref="gomodgosum-の更新" >go.mod/go.sum の更新</h2><a class="anchor" id="gomodgosum-の更新"></a>
+<p>Go 1.15 までは <code>go build</code> や <code>go test</code> などのコマンドで go.mod/go.sum の内容が勝手に更新されていたが， 1.16 からは自動では更新されなくなった。<br>
+なので，コード上の import で新しい外部パッケージを追加しても go.mod/go.sum に追加されない。<br>
+さらに利用のないパッケージなどが残ったりした場合なども含めて、go.mod/go.sum を最適化するのは以下のコマンド。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ go mod tidy
+</code></pre></div><p>なお、上記ではパッケージバージョンの最新化などが実施されないため、 <code>go get</code> を使って go.mod/go.sum の記述を変更する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ go install golang.org/x/tools/gopls@v0.6.5
+</code></pre></div><p>バージョン番号サフィックスが有効になっており、 <code>@latest</code> なども利用できる。</p>
+<h2 ref="go-installget" >go install/get</h2><a class="anchor" id="go-installget"></a>
+<p>go install/get の違いは以下の通り。</p>
 <ul>
-<li><code>asdf plugin list all</code></li>
+<li>バイナリのビルドとインストールのための go install</li>
+<li>go.mod 編集のための go get</li>
 </ul>
-</li>
-<li>使いたいプログラミング言語・ツールに対応したプラグインを追加する
-<ul>
-<li><code>asdf plugin add &lt;name&gt;</code></li>
-<li><code>asdf plugin add &lt;name&gt; &lt;git-url&gt;</code> # asdf で管理されていないプラグインの場合</li>
-</ul>
-</li>
-<li>プラグインが追加されたか確認する
-<ul>
-<li><code>asdf plugin list</code></li>
-</ul>
-</li>
-<li>使いたいプログラミング言語・ツールのバージョンを探す
-<ul>
-<li><code>asdf list-all &lt;name&gt;</code></li>
-</ul>
-</li>
-<li>使いたいプログラミング言語・ツールのバージョンを指定してインストールする
-<ul>
-<li><code>asdf install &lt;name&gt; &lt;version&gt;</code></li>
-</ul>
-</li>
-<li>global/local/shell のいずれかでプログラミング言語・ツールのバージョンを設定する
-<ul>
-<li><code>asdf global &lt;name&gt; &lt;version&gt;</code></li>
-</ul>
-</li>
-<li>現在のバージョンを確認する
-<ul>
-<li><code>asdf current</code></li>
-<li><code>asdf current &lt;name&gt;</code></li>
-</ul>
-</li>
-</ol>
-<p>helm で一連の流れをやってみる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf plugin list all | grep helm
-helm                          https://github.com/Antiarchitect/asdf-helm.git
-helm-cr                       https://github.com/Antiarchitect/asdf-helm-cr.git
-helm-ct                       https://github.com/tablexi/asdf-helm-ct.git
-helm-docs                     https://github.com/sudermanjr/asdf-helm-docs.git
-helmfile                      https://github.com/feniix/asdf-helmfile.git
-
-% asdf plugin add helm
-
-% asdf plugin list
-helm
-
-% asdf list-all helm
-3.4.1
-
-% asdf install helm 3.4.1
-
-% asdf global helm 3.4.1
-
-% asdf current helm
-helm            3.4.1           /Users/xxxx/.tool-versions
-
-% helm version
-version.BuildInfo<span style="color:#f92672">{</span>Version:<span style="color:#e6db74">&#34;v3.4.1&#34;</span>, GitCommit:<span style="color:#e6db74">&#34;c4e74854886b2efe3321e185578e6db9be0a6e29&#34;</span>, GitTreeState:<span style="color:#e6db74">&#34;clean&#34;</span>, GoVersion:<span style="color:#e6db74">&#34;go1.14.11&#34;</span><span style="color:#f92672">}</span>
-</code></pre></div><h3 ref="22-プラグインのアップデート" >2.2. プラグインのアップデート</h3><a class="anchor" id="22-プラグインのアップデート"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf plugin update --all
-</code></pre></div><h3 ref="23-ツールのアンインストール" >2.3. ツールのアンインストール</h3><a class="anchor" id="23-ツールのアンインストール"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf uninstall &lt;name&gt; &lt;version&gt;
-</code></pre></div><h3 ref="24-プラグインのアンインストール" >2.4. プラグインのアンインストール</h3><a class="anchor" id="24-プラグインのアンインストール"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf plugin remove &lt;name&gt;
-</code></pre></div><h3 ref="25-困ったときは" >2.5. 困ったときは</h3><a class="anchor" id="25-困ったときは"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf help
+<p>ツールの導入は <code>go install</code> 、go.mod の編集は <code>go get</code> を使おう。</p>
+<h2 ref="gomod" >go.mod</h2><a class="anchor" id="gomod"></a>
+<p>go.mod では以下のディレクティブが使用される。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">ディレクティブ</th>
+<th style="text-align:left">例</th>
+<th style="text-align:left">説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">module</td>
+<td style="text-align:left">module github.com/pepese/golang-gin-sample</td>
+<td style="text-align:left">モジュール名、 <code>go mod init</code> で指定したやつ</td>
+</tr>
+<tr>
+<td style="text-align:left">go</td>
+<td style="text-align:left">go 1.17</td>
+<td style="text-align:left">有効な Go バージョン</td>
+</tr>
+<tr>
+<td style="text-align:left">require</td>
+<td style="text-align:left">require other/thing v1.0.2</td>
+<td style="text-align:left">インポート・パッケージ</td>
+</tr>
+<tr>
+<td style="text-align:left">exclude</td>
+<td style="text-align:left">exclude old/thing v1.2.3</td>
+<td style="text-align:left">除外モジュール</td>
+</tr>
+<tr>
+<td style="text-align:left">replace</td>
+<td style="text-align:left">replace bad/thing v1.4.5 =&gt; good/thing v1.4.5</td>
+<td style="text-align:left">モジュールの置換</td>
+</tr>
+<tr>
+<td style="text-align:left">retract</td>
+<td style="text-align:left">retract v1.0.5</td>
+<td style="text-align:left">撤回バージョン</td>
+</tr>
+</tbody>
+</table>
+<h3 ref="go-ディレクティブの更新" >go ディレクティブの更新</h3><a class="anchor" id="go-ディレクティブの更新"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ go mod tidy -go<span style="color:#f92672">=</span>1.17
 </code></pre></div>
 		</div>
 

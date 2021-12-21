@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2021-12-20T20:06:06 JST">
+<meta name="revised" content="2021-12-21T20:28:25 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -345,6 +345,21 @@ if (!doNotTrack) {
       
       
           <a href="/go/initial-setting/">初期設定</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/go/go-modules/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/go/go-modules/">Go Modules</a>
       
         
       
@@ -1397,14 +1412,14 @@ if (!doNotTrack) {
 <ul>
 <li><code>GOROOT</code>
 <ul>
-<li>go のバイナリのホームまでのパス</li>
+<li>go のバイナリのホームまでのパス</li>
 <li><code>go env GOROOT</code> で値確認</li>
 </ul>
 </li>
 <li><code>GOPATH</code>
 <ul>
 <li><code>go env GOPATH</code> で値確認</li>
-<li>go の各種資材が配置パスであってプロジェクトのパスでないことに注意</li>
+<li>go の各種資材が配置パスであってプロジェクトのパスでないことに注意</li>
 <li>プロジェクトのパスは <code>$GOPATH/src/github.com/&lt;Githubアカウント名&gt;/&lt;プロジェクト名&gt;</code>
 <ul>
 <li>ただし、後述する <strong>GOPATH mode</strong> の場合</li>
@@ -1423,7 +1438,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<p><code>.zshenv</code> （ bash の場合は <code>.bash_profile</code> ）に以下を追記。</p>
+<p><code>.zshenv</code> （ bash の場合は <code>.bash_profile</code> ）に以下を追記。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">export GOROOT<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>go env GOROOT<span style="color:#e6db74">`</span>
 export GOPATH<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>go env GOPATH<span style="color:#e6db74">`</span>
 export PATH<span style="color:#f92672">=</span>$GOPATH/bin:$PATH
