@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-18T20:48:44 JST">
+<meta name="revised" content="2022-02-18T22:48:36 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1452,6 +1452,7 @@ if (!doNotTrack) {
 <li><a href="#2-%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">アノテーション</a></li>
 <li><a href="#3-Bean%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97">Beanスコープ</a></li>
 <li><a href="#4-%E8%A8%AD%E5%AE%9A">設定</a></li>
+<li><a href="#5-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%A7%8B%E6%88%90">プロジェクト構成</a></li>
 </ol>
 <h2 ref="1-プロジェクト作成" >1. プロジェクト作成</h2><a class="anchor" id="1-プロジェクト作成"></a>
 <p><a href="https://start.spring.io/">spring initialzr</a> で SpringBoot プロジェクトを作成するのがよい。<br>
@@ -1759,6 +1760,21 @@ if (!doNotTrack) {
 <ul>
 <li><code>@Configuration</code> 、 <code>@EnableRedisHttpSession</code> アノテーションを付与</li>
 <li>ConnectionFactory などを生成するメソッドを実装して利用</li>
+</ul>
+</li>
+</ul>
+<h2 ref="5-プロジェクト構成" >5. プロジェクト構成</h2><a class="anchor" id="5-プロジェクト構成"></a>
+<p>CleanArchitecture 風なプロジェクト構成。</p>
+<ul>
+<li><code>src/main/java/com/pepese/sample/Application.java</code> ： SpringBoot 起動クラス</li>
+<li><code>src/main/java/com/pepese/sample/config/</code> ： Java Based Configuration クラス</li>
+<li><code>src/main/java/com/pepese/sample/adapter/</code> ： コントローラとか</li>
+<li><code>src/main/java/com/pepese/sample/domain/</code> ： ドメインとなる Bean クラス</li>
+<li><code>src/main/java/com/pepese/sample/infrastructure/</code> ： リポジトリとか</li>
+<li><code>src/main/java/com/pepese/sample/usecase/</code> ： ユースケースとなる Service クラス</li>
+<li>残りメモ
+<ul>
+<li>ロガーは？</li>
 </ul>
 </li>
 </ul>
