@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	BigQuery :: テックまとめ
+	Spring Framework :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>BigQuery :: テックまとめ</title>
+<title>Spring Framework :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -62,7 +62,7 @@ if (!doNotTrack) {
     
   </head>
 
-  <body data-url="/gcp/databases/bigquery/"
+  <body data-url="/java/springframework/"
 
   class="hidetoc hidenextpage ">
 
@@ -320,14 +320,15 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/java/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/java/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/java/">Java</a>
@@ -350,7 +351,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/java/springframework/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/java/springframework/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -694,15 +695,14 @@ if (!doNotTrack) {
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/gcp/">GCP</a>
@@ -894,7 +894,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/" class="dd-item haschildren
         item_level_$level
         ">
 
@@ -903,14 +903,13 @@ if (!doNotTrack) {
       
       
           <a href="/gcp/databases/">データベース</a>
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
         <ul>
               
 
-    <li data-nav-id="https://tanakakns.github.io/gcp/databases/bigquery/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/gcp/databases/bigquery/" class="dd-item
         item_level_$level
         ">
 
@@ -1389,9 +1388,6 @@ if (!doNotTrack) {
 		
   
   	
-		
-  
-  	
 	<li >
       <a class="text-link" href="https://tanakakns.github.io/">
         
@@ -1400,16 +1396,8 @@ if (!doNotTrack) {
 	
   
     <li class="">
-      <a class="text-link" href="/gcp/">
-        GCP
-      </a>
-    </li>
-	
-  	
-  
-    <li class="">
-      <a class="text-link" href="/gcp/databases/">
-        データベース
+      <a class="text-link" href="/java/">
+        Java
       </a>
     </li>
 	
@@ -1417,7 +1405,7 @@ if (!doNotTrack) {
   
     <li class="active">
       
-        BigQuery
+        Spring Framework
       
     </li>
 
@@ -1438,7 +1426,7 @@ if (!doNotTrack) {
 		
 
 		
-			<h1>BigQuery</h1>
+			<h1>Spring Framework</h1>
         
 
 		
@@ -1458,361 +1446,323 @@ if (!doNotTrack) {
 
 
 	<div class="content">
-	    <p><a href="https://cloud.google.com/bigquery/docs">BigQuery</a> は Google Cloud Platform 上で動作する、ペタバイト規模のフルマネージド データ ウェアハウス。<br>
-データ アナリストやデータ サイエンティストは、サーバーを設定、管理することなく、大規模なデータセットに対するクエリ（ SQL ）やフィルタの実行、結果の集計、複雑な操作の実行が可能。<br>
-コマンドライン ツール（ <code>bq</code> ）またはウェブ コンソールを使用して、GCP プロジェクトに格納されているデータを管理、照会できる。</p>
+	    <p>Spring Framework もといほぼ SpringBoot ベースのメモ。</p>
 <ol>
-<li>アクセスコントロール</li>
-<li>パーティション分割と有効期限</li>
-<li>外部データソースに対するクエリ</li>
-<li>BigQuery へのデータの読み込み</li>
-<li>BiGQuery へのクエリ</li>
-<li>テーブルスキーマの変更</li>
-<li>コスト</li>
+<li><a href="#1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E4%BD%9C%E6%88%90">プロジェクト作成</a></li>
+<li><a href="#2-%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">アノテーション</a></li>
+<li><a href="#3-Bean%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97">Beanスコープ</a></li>
+<li><a href="#4-%E8%A8%AD%E5%AE%9A">設定</a></li>
 </ol>
-<h2 ref="1-アクセスコントロール" >1. アクセスコントロール</h2><a class="anchor" id="1-アクセスコントロール"></a>
-<p><a href="https://cloud.google.com/bigquery/docs/access-control#bigquery">BigQuery の IAM 事前定義ロール</a></p>
+<h2 ref="1-プロジェクト作成" >1. プロジェクト作成</h2><a class="anchor" id="1-プロジェクト作成"></a>
+<p><a href="https://start.spring.io/">spring initialzr</a> で SpringBoot プロジェクトを作成するのがよい。<br>
+以下のような依存を追加する。</p>
 <ul>
-<li>BigQuery 管理者 <code>roles/bigquery.admin</code>
-<ul>
-<li>全権限</li>
+<li>ToDo</li>
 </ul>
-</li>
-<li>BigQuery データ編集者 <code>roles/bigquery.dataEditor</code>
-<ul>
-<li>テーブル・ビュー・データ・データセットの CRUD</li>
-<li>ジョブに関する権限は無い</li>
-</ul>
-</li>
-<li>BigQuery データオーナー <code>roles/bigquery.dataOwner</code>
-<ul>
-<li>BigQuery データ編集者 <code>roles/bigquery.dataEditor</code> の上位互換？</li>
-<li>ジョブに関する権限は無い</li>
-</ul>
-</li>
-<li>BigQuery データ閲覧者 <code>roles/bigquery.dataViewer</code>
-<ul>
-<li>テーブル・ビュー・データ・データセットの Read のみ</li>
-<li>ジョブに関する権限は無い</li>
-</ul>
-</li>
-<li>BigQuery ジョブユーザー <code>roles/bigquery.jobUser</code>
-<ul>
-<li>ジョブの作成・実行権限</li>
-<li>ジョブを通じてのみデータへアクセスできる（直接データを閲覧sうる権限は無い）</li>
-</ul>
-</li>
-<li>BigQuery メタデータ閲覧者 <code>roles/bigquery.metadataViewer</code>
-<ul>
-<li>メタデータ（テーブル・ビュー・データセット） の Read のみ</li>
-</ul>
-</li>
-</ul>
+<h2 ref="2-アノテーション" >2. アノテーション</h2><a class="anchor" id="2-アノテーション"></a>
+<p>すぐ忘れるのでメモ。分類はざっくり。</p>
+<h2 ref="21-core系" >2.1. Core系</h2><a class="anchor" id="21-core系"></a>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Capability</th>
-<th style="text-align:center"><strong>dataViewer</strong></th>
-<th style="text-align:center"><strong>dataEditor</strong></th>
-<th style="text-align:center"><strong>dataOwner</strong></th>
-<th style="text-align:center"><strong>metadataViewer</strong></th>
-<th style="text-align:center"><strong>user</strong></th>
-<th style="text-align:center"><strong>jobUser</strong></th>
-<th style="text-align:center"><strong>admin</strong></th>
+<th style="text-align:left">アノテーション</th>
+<th style="text-align:left">付与箇所</th>
+<th style="text-align:left">説明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">List/Get projects</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
+<td style="text-align:left">@Configuration</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">Java Based Configurationクラスとなる。Bean 定義クラスとして@Bean メソッドなどを宣言。</td>
 </tr>
 <tr>
-<td style="text-align:left">List tables</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
+<td style="text-align:left">@ComponentScan</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">@Configuration 付与されたJava Based Configurationクラスに付与し、コンポーネントスキャンを有効化。</td>
 </tr>
 <tr>
-<td style="text-align:left">Get table metadata</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
+<td style="text-align:left">@Bean</td>
+<td style="text-align:left"></td>
+<td></td>
 </tr>
 <tr>
-<td style="text-align:left">Get table data</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
+<td style="text-align:left">@Value</td>
+<td style="text-align:left"></td>
+<td></td>
 </tr>
 <tr>
-<td style="text-align:left">Create tables</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
+<td style="text-align:left">@Component</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">DIコンテナにbeanとして登録するクラスへ付与。</td>
 </tr>
 <tr>
-<td style="text-align:left">Modify/Delete tables</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
+<td style="text-align:left">@Service</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">@Component と同じだが、明確にService層示す際に利用。</td>
 </tr>
 <tr>
-<td style="text-align:left">Get dataset metadata</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
+<td style="text-align:left">@Repository</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">@Component と同じだが、明確にPersistence層（DAO等のDBアクセスを行うクラス）示す際に利用。</td>
 </tr>
 <tr>
-<td style="text-align:left">Create new datasets</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
+<td style="text-align:left">@Controller</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">@Component と同じだが、明確にSpringMVCでControllerの役割となるクラスに利用。</td>
 </tr>
 <tr>
-<td style="text-align:left">Modify/Delete datasets</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">Self</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
+<td style="text-align:left">@Scope</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">beanのスコープを設定。</td>
 </tr>
 <tr>
-<td style="text-align:left">Create jobs/queries</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
-<td style="text-align:center">o</td>
+<td style="text-align:left">@Transactional</td>
+<td style="text-align:left">クラス、メソッド</td>
+<td style="text-align:left">トランザクション境界を設定。</td>
 </tr>
 <tr>
-<td style="text-align:left">Get jobs</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">Self</td>
-<td style="text-align:center">Any</td>
+<td style="text-align:left">@Autowired</td>
+<td style="text-align:left">メソッド、フィールド</td>
+<td style="text-align:left">フィールドの型（インターフェース）の実装クラスのbeanを自動的にインジェクション。</td>
 </tr>
 <tr>
-<td style="text-align:left">List jobs</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">Any</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">Any</td>
+<td style="text-align:left">@Qualifier</td>
+<td style="text-align:left">メソッド、フィールド</td>
+<td style="text-align:left">@Autowiredと併用し、bean名を指定したい場合に使用。</td>
+</tr>
+<tr>
+<td style="text-align:left">@Value</td>
+<td style="text-align:left">フィールド</td>
+<td style="text-align:left">application.yamlなどで指定した値を代入。</td>
+</tr>
+<tr>
+<td style="text-align:left">@Required</td>
+<td style="text-align:left">メソッド</td>
+<td style="text-align:left">Setterメソッドに付与し、インジェクションが必須であることを示す。</td>
 </tr>
 </tbody>
 </table>
-<p>なお、リソースに対する権限コントロールの最小は <strong>データセット</strong> となる。テーブル・ビュー・行・列単位の権限コントロールはできない。</p>
-<h2 ref="2-パーティション分割と有効期限" >2. パーティション分割と有効期限</h2><a class="anchor" id="2-パーティション分割と有効期限"></a>
-<p>BigQuery では以下のようにデータのパーティション分割と有効期限を設定できる。</p>
+<h2 ref="22-springmvc系" >2.2. SpringMVC系</h2><a class="anchor" id="22-springmvc系"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">アノテーション</th>
+<th style="text-align:left">付与箇所</th>
+<th style="text-align:left">説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">@Controller</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">MVCコントローラ。</td>
+</tr>
+<tr>
+<td style="text-align:left">@RestController</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">REST用コントローラ。@Controller + @ResponseBodyと同じ。</td>
+</tr>
+<tr>
+<td style="text-align:left">@RequestMapping</td>
+<td style="text-align:left">クラス、メソッド</td>
+<td style="text-align:left">URI（value）、HTTPメソッド（method）、HTTPヘッダ（headers）、リクエストパラメータ（params）などでコントローラへのルーティングを設定。</td>
+</tr>
+<tr>
+<td style="text-align:left">@RequestParam</td>
+<td style="text-align:left">メソッド</td>
+<td style="text-align:left">URLのクエリパラメータをメソッド引数に注入。</td>
+</tr>
+<tr>
+<td style="text-align:left">@PathVariable</td>
+<td style="text-align:left">メソッド</td>
+<td style="text-align:left">URLのパスパラメータをメソッド引数に注入。</td>
+</tr>
+<tr>
+<td style="text-align:left">@RequestHeader</td>
+<td style="text-align:left">メソッド</td>
+<td style="text-align:left">リクエストヘッダをメソッド引数に注入。</td>
+</tr>
+<tr>
+<td style="text-align:left">@RequestBody</td>
+<td style="text-align:left">メソッド</td>
+<td style="text-align:left">リクエストボディをメソッド引数に注入。</td>
+</tr>
+<tr>
+<td style="text-align:left">@ResponseBody</td>
+<td style="text-align:left">メソッド</td>
+<td style="text-align:left">return するオブジェクトをHTTPレスポンスボディに変換。</td>
+</tr>
+<tr>
+<td style="text-align:left">@ResponseStatus</td>
+<td style="text-align:left">メソッド</td>
+<td style="text-align:left">HTTPレスポンスステータスを指定。</td>
+</tr>
+<tr>
+<td style="text-align:left">@ExceptionHandler</td>
+<td style="text-align:left">メソッド</td>
+<td style="text-align:left">クラス内で発生した例外を処理するメソッドに付与。</td>
+</tr>
+<tr>
+<td style="text-align:left">@CookieValue</td>
+<td style="text-align:left">メソッド</td>
+<td style="text-align:left">特定の Cookie を処理するメソッドに付与。</td>
+</tr>
+<tr>
+<td style="text-align:left">@InitBinder</td>
+<td style="text-align:left"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">@ModelAttribute</td>
+<td style="text-align:left"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 ref="23-springboot系" >2.3. SpringBoot系</h2><a class="anchor" id="23-springboot系"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">アノテーション</th>
+<th style="text-align:left">付与箇所</th>
+<th style="text-align:left">説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">@SpringBootApplication</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">@Configuration 、 @EnableAutoConfiguration 、 @ComponentScan をまとめたもの。SpringBootアプリケーション起動クラスに付与する。</td>
+</tr>
+<tr>
+<td style="text-align:left">@EnableAutoConfiguration</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">SpringBoot の自動構成メカニズムを有効化。</td>
+</tr>
+</tbody>
+</table>
+<h2 ref="24-test系" >2.4. Test系</h2><a class="anchor" id="24-test系"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">アノテーション</th>
+<th style="text-align:left">付与箇所</th>
+<th style="text-align:left">説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">@RunWith(SpringRunner.class)</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">Spring BootでJUnitテストするときはコレをつける。</td>
+</tr>
+<tr>
+<td style="text-align:left">@SpringBootTest</td>
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">SpringのJava/XML Based Configurationなどの設定を読み込んでくれる。</td>
+</tr>
+<tr>
+<td style="text-align:left">@AutoConfigureMockMvc</td>
+<td style="text-align:left">?</td>
+<td style="text-align:left">コントローラ層のモック（ MockMvc ）を作成でき、これでコントローラのJUnitテストが可能になる。</td>
+</tr>
+<tr>
+<td style="text-align:left">@WebMvcTest(HelloController.class)</td>
+<td style="text-align:left">?</td>
+<td style="text-align:left">上記に加えてコントローラクラスを指定することもできる。</td>
+</tr>
+<tr>
+<td style="text-align:left">@MockBean</td>
+<td style="text-align:left">?</td>
+<td style="text-align:left">コントローラ内でDIされるモジュールのモック（Mockito）を作成できる。</td>
+</tr>
+</tbody>
+</table>
+<h2 ref="3-beanスコープ" >3. Beanスコープ</h2><a class="anchor" id="3-beanスコープ"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">スコープ</th>
+<th style="text-align:left">説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">singleton</td>
+<td style="text-align:left">(Default) ApplicationContext に 1 つインスタンス化。</td>
+</tr>
+<tr>
+<td style="text-align:left">prototype</td>
+<td style="text-align:left">Bean 取得毎にインスタンス化。スレッドアンセーフの場合に利用。</td>
+</tr>
+<tr>
+<td style="text-align:left">request</td>
+<td style="text-align:left">HTTP リクエスト毎にインスタンス化。</td>
+</tr>
+<tr>
+<td style="text-align:left">session</td>
+<td style="text-align:left">HTTPセッション単位でインスタンス化。</td>
+</tr>
+<tr>
+<td style="text-align:left">application</td>
+<td style="text-align:left">サーブレットのコンテキスト単位でインスタンス化。warの単位なイメージ。</td>
+</tr>
+<tr>
+<td style="text-align:left">websocket</td>
+<td style="text-align:left">WebSocketのライフサイクル単位でインスタンス化。</td>
+</tr>
+<tr>
+<td style="text-align:left">custom</td>
+<td style="text-align:left">上記以外の独自カスタムスコープ。</td>
+</tr>
+</tbody>
+</table>
+<h2 ref="4-設定" >4. 設定</h2><a class="anchor" id="4-設定"></a>
+<p>Spring の設定には</p>
 <ul>
-<li><a href="https://cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time">パーティション分割</a>
+<li>Java Based Configuration</li>
+<li>XML Based Configuration</li>
+</ul>
+<p>の 2 種類あるが、もはや前者しか使わないと思われるため前者に限定して記載する。</p>
 <ul>
-<li>取り込み時間パーティション分割テーブル</li>
-<li>日付、タイムスタンプ、日時パーティション分割テーブル</li>
+<li>Spring設定クラス（ <code>src/main/java/com/pepese/sample/config/AppConfig.java</code> などに配置）
+<ul>
+<li>DIやAOPなどの設定</li>
+<li><code>@Configuration</code> アノテーションを付与</li>
 </ul>
 </li>
-<li><a href="http://cloud.google.com/bigquery/docs/best-practices-storage#use_the_expiration_settings_to_remove_unneeded_tables_and_partitions">有効期限</a>
+<li>SpringMVC設定クラス（ <code>src/main/java/com/pepese/sample/config/WebMvcConfig.java</code> などに配置）
 <ul>
-<li>パーティションやテーブルデータの有効期限を設定できる</li>
+<li>コンテンツネゴシエーションなどSpring MVCのDispatcherServletに関する設定</li>
+<li><code>WebMvcConfigurer</code> を継承
+<ul>
+<li>Spring4 -&gt; 5、SpringBoot1 -&gt; 2 にかけて <code>WebMvcConfigurerAdapter</code> が非推奨となった</li>
 </ul>
 </li>
-</ul>
-<p><a href="https://cloud.google.com/bigquery/docs/querying-partitioned-tables?hl=ja">パーティション分割テーブルのクエリ</a> を実行したい場合、 疑似列 <code>_PARTITIONTIME</code> / <code>_PARTITIONDATE</code> が使用でき、適切にパーティションに対してクエリできる。<br>
-さらに、 「From <code>bigquery-public-data.noaa_gsod.gsod*</code>」 のようなワイルドカードを利用したテーブルに対しては、 疑似列 <code>_TABLE_SUFFIX</code> を利用することでその範囲を指定できる。</p>
-<h2 ref="3-外部データソースに対するクエリ" >3. 外部データソースに対するクエリ</h2><a class="anchor" id="3-外部データソースに対するクエリ"></a>
-<p>BigQuery は <a href="https://cloud.google.com/bigquery/external-data-sources">外部データソース</a> に対してクエリを発行できる。</p>
+<li><code>@Configuration</code> アノテーションを付与すること
 <ul>
-<li>Cloud SQL</li>
-<li>Bigtable</li>
-<li>Cloud Storage</li>
-<li>Google ドライブ</li>
-</ul>
-<p>ただし、データの整合性が取れないなどの制約はある。<br>
-外部データソースにクエリする場合でも、 <a href="https://cloud.google.com/bigquery/external-table-definition">外部データソースに対するテーブル定義ファイルの作成</a> は必要。</p>
-<h2 ref="4-bigquery-へのデータの読み込み" >4. BigQuery へのデータの読み込み</h2><a class="anchor" id="4-bigquery-へのデータの読み込み"></a>
-<p><a href="https://cloud.google.com/bigquery/docs/loading-data">読み込み</a> には以下の選択肢がある。</p>
-<ul>
-<li>バッチ読み込み
-<ul>
-<li>単一のバッチオペレーションでソースデータ（CSV ファイル、外部データベース、ログファイルなど）を BigQuery テーブルに読み込む</li>
-<li>従来の抽出、変換、読み込み（ETL）ジョブはこのカテゴリに分類される</li>
-<li>バッチ読み込みは、一回限りまたは定期的なスケジュールで行える
-<ul>
-<li>BigQuery Data Transfer Service の転送はスケジュールに基づいて実行</li>
-<li>Cloud Composer などのオーケストレーション サービスを使用して、読み込みジョブをスケジュール</li>
-<li>cron ジョブを使用して、スケジュールに従ってデータを読み込み</li>
+<li>SpringBootの場合、 <code>@EnableWebMvc</code> を付与する必要はない</li>
+<li>SpringBootを利用しないSpring MVCアプリケーションを作成する場合には付与する</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>ストリーミング
+<li>SpringSecurity設定クラス（ <code>src/main/java/com/pepese/sample/config/WebSecurityConfig.java</code> などに配置）
 <ul>
-<li>データを一度に 1 つずつ、または一括して送信し、ストリーミング API を直接呼び出すコードを記述できる</li>
-<li>あるいは、Dataflow を Apache Beam SDK で使用してストリーミング パイプラインを設定することもできる</li>
-<li>ストリーミングはデータサイズによって別途 <strong>追加料金が発生</strong> することに注意（ <a href="https://cloud.google.com/bigquery/pricing#data_ingestion_pricing">参考</a> ）</li>
+<li><code>@Configuration</code> 、 <code>@EnableWebSecurity</code> アノテーションを付与</li>
+<li><code>WebSecurityConfigurerAdapter</code> を継承</li>
+<li><code>configure</code> メソッドなどをオーバーライドして利用</li>
 </ul>
 </li>
-<li>クエリ結果のテーブル追加・上書き
+<li>SpringSession設定クラス（ <code>src/main/java/com/pepese/sample/config/SessionConfig.java</code> などに配置）
 <ul>
-<li>データ操作言語（DML）ステートメントを使用して、既存のテーブルへの一括挿入や、新しいテーブルでのクエリの結果の保存ができる</li>
-</ul>
-</li>
-<li>サードパーティアプリケーションやサービスの利用
-<ul>
-<li>一部のサードパーティ アプリケーションやサービスでは、データを BigQuery に取り込むためのコネクタが提供されている</li>
-<li><a href="https://cloud.google.com/bigquery-transfer/docs/transfer-service-overview">BigQuery Data Transfer Service</a> を利用すれば Google Analytics などの Google のサービスや一部のクラウド/SaaS のストレージ/DWHからデータをインポートできる</li>
+<li><code>@Configuration</code> 、 <code>@EnableRedisHttpSession</code> アノテーションを付与</li>
+<li>ConnectionFactory などを生成するメソッドを実装して利用</li>
 </ul>
 </li>
 </ul>
-<p>なお、CSV ファイルなどからデータを読み込む際、形式などに不正がありインポートに失敗するレコードが含まれる場合、BigQueryの機能で自動でどうこうすることはできない。<br>
-Dataflow などで行のバリデーションを実施した上でインポートするしかない。</p>
-<h2 ref="5-bigquery-へのクエリ" >5. BigQuery へのクエリ</h2><a class="anchor" id="5-bigquery-へのクエリ"></a>
-<h3 ref="51-クエリの種類" >5.1. クエリの種類</h3><a class="anchor" id="51-クエリの種類"></a>
-<p>BigQuery には次のようなクエリ・ジョブがある。</p>
-<ul>
-<li>インタラクティブ クエリ
-<ul>
-<li>すぐに実行されるクエリ（デフォルト）</li>
-</ul>
-</li>
-<li>バッチ クエリ
-<ul>
-<li>BigQuery はユーザーに代わって各バッチクエリをキューに格納し、アイドル状態のリソースが使用可能になると直ちに（通常は数分以内に）クエリを開始する</li>
-</ul>
-</li>
-<li>クエリジョブ
-<ul>
-<li>データの読み込み、データのエクスポート、データのクエリ、データのコピーなど、BigQuery がユーザーに代わって実行するアクションのこと</li>
-</ul>
-</li>
-</ul>
-<h3 ref="52-クエリの結果" >5.2. クエリの結果</h3><a class="anchor" id="52-クエリの結果"></a>
-<p>すべてのクエリ結果は <strong>永続テーブル</strong> または <strong>一時テーブル</strong> に保存される。</p>
-<ul>
-<li>永続テーブル
-<ul>
-<li>ユーザーがアクセス可能なデータセットに含まれる新規または既存のテーブル</li>
-</ul>
-</li>
-<li>一時テーブル
-<ul>
-<li>永続的なテーブルに書き込まれていない一時テーブルを使用してクエリ結果をキャッシュに保存する（通常 24 時間）</li>
-<li><code>CURRENT_TIMESTAMP()</code> や <code>NOW()</code> といった日時関数や <code>SESSION_USER()</code> 関数など、また、ワイルドカードを利用する場合はキャッシュは機能しない</li>
-<li>また、 <strong>ジョブ</strong> 構成、GCPコンソール、従来のWeb UI、コマンドライン、またはAPIで宛先テーブルが指定されている場合もクエリ結果はキャッシュされない</li>
-</ul>
-</li>
-</ul>
-<h2 ref="6-テーブルスキーマの変更" >6. テーブルスキーマの変更</h2><a class="anchor" id="6-テーブルスキーマの変更"></a>
-<p><a href="https://cloud.google.com/bigquery/docs/managing-table-schemas">テーブルスキーマの変更</a> を行う際、以下の場合その変更はネイティブにサポートされている。</p>
-<ul>
-<li>スキーマ定義への列の追加</li>
-<li>スキーマ定義からの列の削除またはドロップ</li>
-<li>列のモードの REQUIRED から NULLABLE への緩和</li>
-</ul>
-<p>しかし以下の場合、新しいテーブルを作成して、 SELECT-INSERT してデータ移行する必要がある。</p>
-<ul>
-<li>列の名前の変更</li>
-<li>列のデータ型の変更</li>
-<li>列のモードの変更（REQUIRED 列を NULLABLE に緩和することを除く）</li>
-</ul>
-<h2 ref="7-承認済みのビュー" >7. 承認済みのビュー</h2><a class="anchor" id="7-承認済みのビュー"></a>
-<p>データセットに表示アクセス権を設定する場合、BigQuery では <a href="https://cloud.google.com/bigquery/docs/authorized-views">承認済みのビュー</a> を作成する。<br>
-承認済みビューを使用すると、元のソースデータへのアクセス権がないユーザーでも、クエリの結果を特定のユーザーやグループと共有できる。</p>
-<h2 ref="7-コスト" >7. コスト</h2><a class="anchor" id="7-コスト"></a>
-<p>BigQuery のコストは大きく以下の 2 つある。</p>
-<ul>
-<li>分析料金
-<ul>
-<li>クエリの処理にかかる費用</li>
-<li>SQL クエリ、ユーザー定義関数、スクリプト、テーブルをスキャンする特定のデータ操作言語（DML）とデータ定義言語（DDL）のステートメントなど</li>
-</ul>
-</li>
-<li>ストレージ料金
-<ul>
-<li>BigQuery に読み込むデータを保存する費用</li>
-</ul>
-</li>
-</ul>
-<p>分析料金はさらに以下に分かれる。</p>
-<ul>
-<li>オンデマンド料金
-<ul>
-<li>各クエリによって処理されたバイト数に基づいて課金</li>
-<li>処理されるクエリデータは毎月 1 TB まで無料</li>
-<li>クエリの見積もりは <code>bq query --dry_run</code> で読み取られるバイト数を見積もり、Google Cloud 料金計算ツール（<a href="https://cloud.google.com/products/calculator/">Google Cloud Pricing Calculator</a>）で料金を見積もる</li>
-</ul>
-</li>
-<li>定額料金
-<ul>
-<li>仮想 CPU であるスロットを購入（スロットを購入すると、クエリの実行に使用できる専用の処理容量を購入したことになる）</li>
-<li>スロットは以下のコミットメント プランで使用できる
-<ul>
-<li>Flex Slots: 最初の 60 秒分のコミットメントを購入</li>
-<li>月間: 最初の 30 日分のコミットメントを購入</li>
-<li>年間: 365 日分のコミットメントを購入</li>
-</ul>
-</li>
-<li>月間プランと年間プランでは、長期的な容量コミットメントと引き換えに割引が適用される</li>
-</ul>
-</li>
-</ul>
-<p>ストレージ料金はさらに以下に分かれる。</p>
-<ul>
-<li>アクティブ
-<ul>
-<li>テーブルで、過去 90 日間で変更されたデータに対する月額料金</li>
-</ul>
-</li>
-<li>長期
-<ul>
-<li>テーブルまたはパーティションで、過去 90 日間変更されていないデータに対する月額料金</li>
-</ul>
-</li>
-</ul>
-<p>また、 <a href="https://cloud.google.com/bigquery/docs/custom-quotas#controlling_query_costs_using_bigquery_custom_quotas">カスタムコスト管理</a> を利用することにより、1 日に処理されるクエリデータの量に対する上限を指定することができる。</p>
+
 		</div>
 
 
