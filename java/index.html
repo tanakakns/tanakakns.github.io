@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-18T22:48:36 JST">
+<meta name="revised" content="2022-02-20T16:31:01 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1452,7 +1452,7 @@ if (!doNotTrack) {
 <span><li>
 		<a href="/java/springframework/" >Spring Framework</a></li>
 <p>Spring Framework もといほぼ SpringBoot ベースのメモ。
- プロジェクト作成 アノテーション Beanスコープ 設定 プロジェクト構成  1. プロジェクト作成 spring initialzr で SpringBoot プロジェクトを作成するのがよい。
+ プロジェクト作成 アノテーション Beanスコープ 設定 ロガー プロジェクト構成  1. プロジェクト作成 spring initialzr で SpringBoot プロジェクトを作成するのがよい。
 以下のような依存を追加する。
  ToDo  2. アノテーション すぐ忘れるのでメモ。分類はざっくり。
 2.1. Core系    アノテーション 付与箇所 説明     @Configuration クラス Java Based Configurationクラスとなる。Bean 定義クラスとして@Bean メソッドなどを宣言。   @ComponentScan クラス @Configuration 付与されたJava Based Configurationクラスに付与し、コンポーネントスキャンを有効化。   @Bean     @Value     @Component クラス DIコンテナにbeanとして登録するクラスへ付与。   @Service クラス @Component と同じだが、明確にService層示す際に利用。   @Repository クラス @Component と同じだが、明確にPersistence層（DAO等のDBアクセスを行うクラス）示す際に利用。   @Controller クラス @Component と同じだが、明確にSpringMVCでControllerの役割となるクラスに利用。   @Scope クラス beanのスコープを設定。   @Transactional クラス、メソッド トランザクション境界を設定。   @Autowired メソッド、フィールド フィールドの型（インターフェース）の実装クラスのbeanを自動的にインジェクション。   @Qualifier メソッド、フィールド @Autowiredと併用し、bean名を指定したい場合に使用。   @Value フィールド application.</p>

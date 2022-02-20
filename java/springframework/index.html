@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-18T22:48:36 JST">
+<meta name="revised" content="2022-02-20T16:31:01 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -1452,7 +1452,8 @@ if (!doNotTrack) {
 <li><a href="#2-%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">アノテーション</a></li>
 <li><a href="#3-Bean%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97">Beanスコープ</a></li>
 <li><a href="#4-%E8%A8%AD%E5%AE%9A">設定</a></li>
-<li><a href="#5-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%A7%8B%E6%88%90">プロジェクト構成</a></li>
+<li><a href="#5-%E3%83%AD%E3%82%AC%E3%83%BC">ロガー</a></li>
+<li><a href="#6-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%A7%8B%E6%88%90">プロジェクト構成</a></li>
 </ol>
 <h2 ref="1-プロジェクト作成" >1. プロジェクト作成</h2><a class="anchor" id="1-プロジェクト作成"></a>
 <p><a href="https://start.spring.io/">spring initialzr</a> で SpringBoot プロジェクトを作成するのがよい。<br>
@@ -1763,7 +1764,59 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 ref="5-プロジェクト構成" >5. プロジェクト構成</h2><a class="anchor" id="5-プロジェクト構成"></a>
+<h2 ref="5-ロガー" >5. ロガー</h2><a class="anchor" id="5-ロガー"></a>
+<p>インターフェースにSLF4J、実装にLogbackを利用する。<br>
+SpringBootの場合は依存に含まれているため、特に POM への追加は不要。<br>
+LoggerFactoryに「クラス」or「名前」を指定することで取得できるが、基本は「クラス」。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> org.slf4j.Logger<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.slf4j.LoggerFactory<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoggertTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// クラス
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Logger log <span style="color:#f92672">=</span> LoggerFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getLogger</span><span style="color:#f92672">(</span>LoggerTest<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> org.slf4j.Logger<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.slf4j.LoggerFactory<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoggertTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// 名前
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Logger log <span style="color:#f92672">=</span> LoggerFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getLogger</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;MyLogger.test&#34;</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>毎回書くのはダルいので Lombok の <code>@slf4j</code> アノテーションをクラスに付与すれば <code>log</code> というフィールドで利用可能になる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> lombok.extern.slf4j.Slf4j<span style="color:#f92672">;</span>
+
+<span style="color:#a6e22e">@slf4j</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoggertTest</span> <span style="color:#f92672">{</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>ログメッセージに <code>{}</code> を記述すると <strong>プレースフォルダー</strong> として利用できる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">int</span> num1 <span style="color:#f92672">=</span> 1234<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">int</span> num2 <span style="color:#f92672">=</span> 5678<span style="color:#f92672">;</span>
+log<span style="color:#f92672">.</span><span style="color:#a6e22e">debug</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;この数値は{}と{}です。&#34;</span><span style="color:#f92672">,</span> num1<span style="color:#f92672">,</span> num2<span style="color:#f92672">);</span>
+<span style="color:#75715e">// 20:00:33 DEBUG - この数値は1234と5678です。
+</span></code></pre></div><p>Filter などで MDC に項目を追加できる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> org.slf4j.MDC<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.springframework.web.filter.OncePerRequestFilter<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> lombok.extern.slf4j.Slf4j<span style="color:#f92672">;</span>
+
+<span style="color:#a6e22e">@Slf4j</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoggingFilter</span> <span style="color:#66d9ef">extends</span> OncePerRequestFilter <span style="color:#f92672">{</span>
+    
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">LoggingFilter</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">super</span><span style="color:#f92672">();</span>
+  <span style="color:#f92672">}</span>
+
+  <span style="color:#a6e22e">@Override</span>
+  <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doFilterInternal</span><span style="color:#f92672">(</span>HttpServletRequest request<span style="color:#f92672">,</span> HttpServletResponse response<span style="color:#f92672">,</span> FilterChain filterChain<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> ServletException<span style="color:#f92672">,</span> IOException <span style="color:#f92672">{</span>
+    String httpmethod <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span><span style="color:#a6e22e">getMethod</span><span style="color:#f92672">();</span>
+    MDC<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;httpMethod&#34;</span><span style="color:#f92672">,</span> httpmethod<span style="color:#f92672">);</span> <span style="color:#75715e">// HTTPメソッドをログに追加
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+      filterChain<span style="color:#f92672">.</span><span style="color:#a6e22e">doFilter</span><span style="color:#f92672">(</span>request<span style="color:#f92672">,</span> response<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Logback の設定ファイルは <code>src/main/resources/logback.xml</code></p>
+<h2 ref="6-プロジェクト構成" >6. プロジェクト構成</h2><a class="anchor" id="6-プロジェクト構成"></a>
 <p>CleanArchitecture 風なプロジェクト構成。</p>
 <ul>
 <li><code>src/main/java/com/pepese/sample/Application.java</code> ： SpringBoot 起動クラス</li>
@@ -1772,11 +1825,7 @@ if (!doNotTrack) {
 <li><code>src/main/java/com/pepese/sample/domain/</code> ： ドメインとなる Bean クラス</li>
 <li><code>src/main/java/com/pepese/sample/infrastructure/</code> ： リポジトリとか</li>
 <li><code>src/main/java/com/pepese/sample/usecase/</code> ： ユースケースとなる Service クラス</li>
-<li>残りメモ
-<ul>
-<li>ロガーは？</li>
-</ul>
-</li>
+<li><code>src/main/resources/logback.xml</code> ： ログ設定ファイル</li>
 </ul>
 
 		</div>
