@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -583,6 +583,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -677,7 +692,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -685,7 +700,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1139,6 +1154,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1464,33 +1494,33 @@ if (!doNotTrack) {
 </ul>
 <h2 ref="1-マニフェストの雛形" >1. マニフェストの雛形</h2><a class="anchor" id="1-マニフェストの雛形"></a>
 <p>ドライラン（ <code>kubectl run/create --dry-run=client</code> ）と yaml 表示（ <code>-o yaml</code> or <code>--output=yaml</code> を）組み合わせるとマニフェストの雛形を標準出力できる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">$ kubectl run sample --image=nginx --dry-run=client -o yaml</span>
-
-<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">creationTimestamp</span>: <span style="color:#66d9ef">null</span>
-  <span style="color:#f92672">labels</span>:
-    <span style="color:#f92672">run</span>: <span style="color:#ae81ff">sample</span>
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#f92672">selector</span>:
-    <span style="color:#f92672">matchLabels</span>:
-      <span style="color:#f92672">run</span>: <span style="color:#ae81ff">sample</span>
-  <span style="color:#f92672">strategy</span>: {}
-  <span style="color:#f92672">template</span>:
-    <span style="color:#f92672">metadata</span>:
-      <span style="color:#f92672">creationTimestamp</span>: <span style="color:#66d9ef">null</span>
-      <span style="color:#f92672">labels</span>:
-        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">sample</span>
-    <span style="color:#f92672">spec</span>:
-      <span style="color:#f92672">containers</span>:
-      - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">nginx</span>
-        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample</span>
-        <span style="color:#f92672">resources</span>: {}
-<span style="color:#f92672">status</span>: {}
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ae81ff">$ kubectl run sample --image=nginx --dry-run=client -o yaml</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">creationTimestamp</span>: <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">run</span>: <span style="color:#ae81ff">sample</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">run</span>: <span style="color:#ae81ff">sample</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">strategy</span>: {}
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">creationTimestamp</span>: <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">sample</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">resources</span>: {}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">status</span>: {}
+</span></span></code></pre></div><ul>
 <li>pod
 <ul>
 <li><code>kubectl run mypod --image=nginx --labels=app=mypod --dry-run=client -o yaml</code>
@@ -1571,26 +1601,26 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p>なお、マニフェストの項目についてコマンドで調べたい場合は <code>kubectl explain</code> コマンドを利用するとよい。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pod マニフェストの概要</span>
-$ kubectl explain pods
-
-<span style="color:#75715e"># Pod マニフェストの詳細（いっぱい出過ぎる）</span>
-$ kubectl explain pods --recursive
-
-<span style="color:#75715e"># grep で絞るとよい（ -A 3 はヒット行から 3 行取得の意）</span>
-$ kubectl explain pods --recursive | grep image -A <span style="color:#ae81ff">3</span>
-</code></pre></div><h2 ref="2-共通事項" >2. 共通事項</h2><a class="anchor" id="2-共通事項"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:sample-pod.yml" data-lang="yaml:sample-pod.yml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample-pod</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
-      <span style="color:#f92672">imege</span>: <span style="color:#ae81ff">nginx:1.7.9</span>
-      <span style="color:#f92672">ports</span>:
-        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
-</code></pre></div><p>全てのマニフェストには以下の項目が含まれる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pod マニフェストの概要</span>
+</span></span><span style="display:flex;"><span>$ kubectl explain pods
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pod マニフェストの詳細（いっぱい出過ぎる）</span>
+</span></span><span style="display:flex;"><span>$ kubectl explain pods --recursive
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># grep で絞るとよい（ -A 3 はヒット行から 3 行取得の意）</span>
+</span></span><span style="display:flex;"><span>$ kubectl explain pods --recursive | grep image -A <span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><h2 ref="2-共通事項" >2. 共通事項</h2><a class="anchor" id="2-共通事項"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml:sample-pod.yml" data-lang="yaml:sample-pod.yml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample-pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">imege</span>: <span style="color:#ae81ff">nginx:1.7.9</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+</span></span></code></pre></div><p>全てのマニフェストには以下の項目が含まれる。</p>
 <ul>
 <li>apiVersion
 <ul>
@@ -1609,43 +1639,43 @@ $ kubectl explain pods --recursive | grep image -A <span style="color:#ae81ff">3
 </li>
 </ul>
 <p>Pod の場合は <code>spec</code> 以下に Pod の内容を定義する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f sample-pod.yaml
-pod <span style="color:#e6db74">&#34;sample-pod&#34;</span> created
-
-$ kubectl apply -f sample-pod.yaml
-pod <span style="color:#e6db74">&#34;sample-pod&#34;</span> configured
-
-$ kubectl delete -f sample-pod.yaml
-pod <span style="color:#e6db74">&#34;sample-pod&#34;</span> deleted
-</code></pre></div><p><code>kubectl apply</code> は <strong>マニフェストに変更がある場合のみ変更処理を行う</strong> 。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl create -f sample-pod.yaml
+</span></span><span style="display:flex;"><span>pod <span style="color:#e6db74">&#34;sample-pod&#34;</span> created
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ kubectl apply -f sample-pod.yaml
+</span></span><span style="display:flex;"><span>pod <span style="color:#e6db74">&#34;sample-pod&#34;</span> configured
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ kubectl delete -f sample-pod.yaml
+</span></span><span style="display:flex;"><span>pod <span style="color:#e6db74">&#34;sample-pod&#34;</span> deleted
+</span></span></code></pre></div><p><code>kubectl apply</code> は <strong>マニフェストに変更がある場合のみ変更処理を行う</strong> 。<br>
 削除済みのマニフェストに対しても差分を検出するため、新規作成でも <code>apply</code> を使用するほうがよい。<br>
 また、マニフェストには複数のリソースを同時に記述することができ、 <strong><code>---</code></strong> で区切る。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:sample-pod.yml" data-lang="yaml:sample-pod.yml">---
-<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample-pod</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
-      <span style="color:#f92672">imege</span>: <span style="color:#ae81ff">nginx:1.7.9</span>
-      <span style="color:#f92672">ports</span>:
-        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
----
-<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
-<span style="color:#75715e"># LBの追加など</span>
-</code></pre></div><p>また、複数のマニフェストファイルを一気に適用したい場合は、ディレクトリにまとめ <code>-f</code> で指定して実行することができる。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml:sample-pod.yml" data-lang="yaml:sample-pod.yml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sample-pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">imege</span>: <span style="color:#ae81ff">nginx:1.7.9</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># LBの追加など</span>
+</span></span></code></pre></div><p>また、複数のマニフェストファイルを一気に適用したい場合は、ディレクトリにまとめ <code>-f</code> で指定して実行することができる。<br>
 その際、ファイル名辞書順で実行されることに注意。</p>
 <h3 ref="21-metadata" >2.1. metadata</h3><a class="anchor" id="21-metadata"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">metadata</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#objectmeta-v1-meta</span>
-  <span style="color:#f92672">annotations</span>:  <span style="color:#75715e"># 任意のメタデータを保存および取得する。外部ツールなどによって設定・変更・保存される箇所でもある。</span>
-    <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
-  <span style="color:#f92672">labels</span>:       <span style="color:#75715e"># ReplicaSet、Service の selector で利用。</span>
-    <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
-  <span style="color:#f92672">name</span>:         <span style="color:#75715e"># namespace 内で一意なオブジェクトの名前。</span>
-  <span style="color:#f92672">namespace</span>:    <span style="color:#75715e"># 名前空間名。空は default と同じ。 DNS_LABEL である必要があり、変更できない。</span>
-</code></pre></div><p>Label と Annotation は key-value 形式（ <code>key: value</code> ）でデータを保持する仕組みであるが、用途が異なる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">metadata</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#objectmeta-v1-meta</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:  <span style="color:#75715e"># 任意のメタデータを保存および取得する。外部ツールなどによって設定・変更・保存される箇所でもある。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:       <span style="color:#75715e"># ReplicaSet、Service の selector で利用。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>:         <span style="color:#75715e"># namespace 内で一意なオブジェクトの名前。</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>:    <span style="color:#75715e"># 名前空間名。空は default と同じ。 DNS_LABEL である必要があり、変更できない。</span>
+</span></span></code></pre></div><p>Label と Annotation は key-value 形式（ <code>key: value</code> ）でデータを保持する仕組みであるが、用途が異なる。</p>
 <h3 ref="22-label" >2.2. Label</h3><a class="anchor" id="22-label"></a>
 <ul>
 <li>各リソースの <code>metadata</code> で設定する</li>
@@ -1675,58 +1705,58 @@ namespace リソース（ <code>kind: Namespace</code> ）を作成し、各リ�
 <h2 ref="3-deployment" >3. Deployment</h2><a class="anchor" id="3-deployment"></a>
 <p>リソースには色々あるが、理解すべきリソースは少ない。そのうちの一つ。<br>
 （その他は、Service、DaemonSet、CronJobくらい？）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">app/v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
-<span style="color:#f92672">metadata</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#objectmeta-v1-meta</span>
-  <span style="color:#f92672">annotations</span>:  <span style="color:#75715e"># 任意のメタデータを保存および取得する。外部ツールなどによって設定・変更・保存される箇所でもある。</span>
-    <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
-  <span style="color:#f92672">labels</span>:       <span style="color:#75715e"># ReplicaSet、Service の selector で利用。</span>
-    <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
-  <span style="color:#f92672">name</span>:         <span style="color:#75715e"># namespace 内で一意なオブジェクトの名前。</span>
-  <span style="color:#f92672">namespace</span>:    <span style="color:#75715e"># 名前空間名。空は default と同じ。 DNS_LABEL である必要があり、変更できない。</span>
-<span style="color:#f92672">spec</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#deploymentspec-v1-apps</span>
-  <span style="color:#f92672">replicas</span>: <span style="color:#75715e"># Pod のリプリケーション数。</span>
-  <span style="color:#f92672">selector</span>: <span style="color:#75715e"># ReplicaSet が Pod を選択するための Label Selector 。</span>
-    <span style="color:#f92672">matchLabels</span>:
-      <span style="color:#f92672">&lt;key1&gt;</span>: <span style="color:#ae81ff">&lt;value1&gt;  </span> <span style="color:#75715e"># ReplicaSet の対象セレクタ。Pod 定義 の metadata.labels に一致させる。</span>
-    <span style="color:#f92672">matchExpressions</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#labelselectorrequirement-v1-meta</span>
-                      <span style="color:#75715e"># Label Selector のリスト。 AND で評価される。</span>
-    <span style="color:#f92672">matchLabels</span>:      <span style="color:#75715e"># key-value 形式の Label Selector のリスト。 AND で評価される。matchExpressions の方が複雑な表現が可能。</span>
-  <span style="color:#f92672">strategy</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#deploymentstrategy-v1-apps</span>
-            <span style="color:#75715e"># 新しいポッドに置き換えるため展開戦略。現状は単純な再配置とローリングアップデートのみ。</span>
-    <span style="color:#f92672">rollingUpdate</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#rollingupdatedeployment-v1-apps</span>
-      <span style="color:#f92672">maxSurge</span>:       <span style="color:#75715e"># Pod のレプリケーション数を超えて作成できるコンテナの最大数。数か割合で表現。</span>
-      <span style="color:#f92672">maxUnavailable</span>: <span style="color:#75715e"># Pod のレプリケーション数を下回って利用できなくする最大数。数か割合で表現。</span>
-    <span style="color:#f92672">type</span>: <span style="color:#75715e"># Recreate か RollingUpdate 。デフォルト RollingUpdate 。</span>
-  <span style="color:#f92672">template</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#podtemplatespec-v1-core</span>
-            <span style="color:#75715e"># 作成する Pod の定義</span>
-    <span style="color:#f92672">metadata</span>: <span style="color:#75715e"># 先の metadata に同じ。</span>
-    <span style="color:#f92672">spec</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#podspec-v1-core</span>
-      <span style="color:#f92672">affinity</span>:   <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#affinity-v1-core</span>
-      <span style="color:#f92672">containers</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#container-v1-core</span>
-        <span style="color:#f92672">command</span>:                  <span style="color:#75715e"># ENTRYPOINT 配列。</span>
-        <span style="color:#f92672">env</span>:                      <span style="color:#75715e"># 環境変数のリスト。</span>
-        <span style="color:#f92672">envFrom</span>:                  <span style="color:#75715e"># 環境変数を設定するソースのリスト。</span>
-        <span style="color:#f92672">image</span>:                    <span style="color:#75715e"># Docker イメージ名。</span>
-        <span style="color:#f92672">imagePullPolicy</span>:          <span style="color:#75715e"># Docker イメージの pull ポリシー。 Always（常にpull）, Never（ローカルのみ）, IfNotPresent（ローカルに無ければpull）。</span>
-        <span style="color:#f92672">livenessProbe</span>:            <span style="color:#75715e"># コンテナ死活の定期的な調査。</span>
-        <span style="color:#f92672">name</span>:                     <span style="color:#75715e"># コンテナ名。DNS_LABEL となる。</span>
-        <span style="color:#f92672">ports</span>:                    <span style="color:#75715e"># コンテナの公開ポートのリスト。</span>
-        <span style="color:#f92672">readinessProbe</span>:           <span style="color:#75715e"># コンテナサービスの準備状況の定期的な調査。</span>
-        <span style="color:#f92672">securityContext</span>:          <span style="color:#75715e"># Pod を実行するセキュリティオプション。</span>
-        <span style="color:#f92672">volumeMounts</span>:             <span style="color:#75715e"># コンテナのファイルシステムにマウントするポッドボリューム。</span>
-      <span style="color:#f92672">initContainers</span>:     <span style="color:#75715e"># Pod に属する初期化コンテナのリスト。コンテナが開始される前に順番に実行される。</span>
-      <span style="color:#f92672">nodeName</span>:           <span style="color:#75715e"># Pod を特定のノードへスケジューリング場合、明示的に指定する。</span>
-      <span style="color:#f92672">nodeSelector</span>:       <span style="color:#75715e"># Pod を配置するノードのセレクタ。</span>
-      <span style="color:#f92672">schedulerName</span>:      <span style="color:#75715e"># Pod を管理する kube-scheduler を明示的に指定する場合に設定。</span>
-      <span style="color:#f92672">securityContext</span>:    <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#podsecuritycontext-v1-core</span>
-                          <span style="color:#75715e"># Pod レベルのセキュリティ属性。</span>
-      <span style="color:#f92672">serviceAccountName</span>: <span style="color:#75715e"># Pod の実行に使用する ServiceAccount 名。</span>
-      <span style="color:#f92672">tolerations</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#toleration-v1-core</span>
-                   <span style="color:#75715e"># Pod を特定のノードに配置する際に利用。 nodeSelector の方が古い。</span>
-      <span style="color:#f92672">volumes</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#volume-v1-core</span>
-               <span style="color:#75715e"># マウントできるボリュームのリスト。</span>
-</code></pre></div><p>ケースによっては追加で以下を意識する必要がある。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">app/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#objectmeta-v1-meta</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:  <span style="color:#75715e"># 任意のメタデータを保存および取得する。外部ツールなどによって設定・変更・保存される箇所でもある。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:       <span style="color:#75715e"># ReplicaSet、Service の selector で利用。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">key</span>: <span style="color:#ae81ff">value</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>:         <span style="color:#75715e"># namespace 内で一意なオブジェクトの名前。</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>:    <span style="color:#75715e"># 名前空間名。空は default と同じ。 DNS_LABEL である必要があり、変更できない。</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#deploymentspec-v1-apps</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#75715e"># Pod のリプリケーション数。</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>: <span style="color:#75715e"># ReplicaSet が Pod を選択するための Label Selector 。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;key1&gt;</span>: <span style="color:#ae81ff">&lt;value1&gt;  </span> <span style="color:#75715e"># ReplicaSet の対象セレクタ。Pod 定義 の metadata.labels に一致させる。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchExpressions</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#labelselectorrequirement-v1-meta</span>
+</span></span><span style="display:flex;"><span>                      <span style="color:#75715e"># Label Selector のリスト。 AND で評価される。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:      <span style="color:#75715e"># key-value 形式の Label Selector のリスト。 AND で評価される。matchExpressions の方が複雑な表現が可能。</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">strategy</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#deploymentstrategy-v1-apps</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 新しいポッドに置き換えるため展開戦略。現状は単純な再配置とローリングアップデートのみ。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">rollingUpdate</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#rollingupdatedeployment-v1-apps</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">maxSurge</span>:       <span style="color:#75715e"># Pod のレプリケーション数を超えて作成できるコンテナの最大数。数か割合で表現。</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">maxUnavailable</span>: <span style="color:#75715e"># Pod のレプリケーション数を下回って利用できなくする最大数。数か割合で表現。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">type</span>: <span style="color:#75715e"># Recreate か RollingUpdate 。デフォルト RollingUpdate 。</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#podtemplatespec-v1-core</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 作成する Pod の定義</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>: <span style="color:#75715e"># 先の metadata に同じ。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#podspec-v1-core</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">affinity</span>:   <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#affinity-v1-core</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#container-v1-core</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">command</span>:                  <span style="color:#75715e"># ENTRYPOINT 配列。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">env</span>:                      <span style="color:#75715e"># 環境変数のリスト。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">envFrom</span>:                  <span style="color:#75715e"># 環境変数を設定するソースのリスト。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">image</span>:                    <span style="color:#75715e"># Docker イメージ名。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">imagePullPolicy</span>:          <span style="color:#75715e"># Docker イメージの pull ポリシー。 Always（常にpull）, Never（ローカルのみ）, IfNotPresent（ローカルに無ければpull）。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">livenessProbe</span>:            <span style="color:#75715e"># コンテナ死活の定期的な調査。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>:                     <span style="color:#75715e"># コンテナ名。DNS_LABEL となる。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ports</span>:                    <span style="color:#75715e"># コンテナの公開ポートのリスト。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">readinessProbe</span>:           <span style="color:#75715e"># コンテナサービスの準備状況の定期的な調査。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">securityContext</span>:          <span style="color:#75715e"># Pod を実行するセキュリティオプション。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">volumeMounts</span>:             <span style="color:#75715e"># コンテナのファイルシステムにマウントするポッドボリューム。</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">initContainers</span>:     <span style="color:#75715e"># Pod に属する初期化コンテナのリスト。コンテナが開始される前に順番に実行される。</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">nodeName</span>:           <span style="color:#75715e"># Pod を特定のノードへスケジューリング場合、明示的に指定する。</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">nodeSelector</span>:       <span style="color:#75715e"># Pod を配置するノードのセレクタ。</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">schedulerName</span>:      <span style="color:#75715e"># Pod を管理する kube-scheduler を明示的に指定する場合に設定。</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">securityContext</span>:    <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#podsecuritycontext-v1-core</span>
+</span></span><span style="display:flex;"><span>                          <span style="color:#75715e"># Pod レベルのセキュリティ属性。</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">serviceAccountName</span>: <span style="color:#75715e"># Pod の実行に使用する ServiceAccount 名。</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">tolerations</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#toleration-v1-core</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#75715e"># Pod を特定のノードに配置する際に利用。 nodeSelector の方が古い。</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumes</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#volume-v1-core</span>
+</span></span><span style="display:flex;"><span>               <span style="color:#75715e"># マウントできるボリュームのリスト。</span>
+</span></span></code></pre></div><p>ケースによっては追加で以下を意識する必要がある。</p>
 <ul>
 <li>spec.strategy</li>
 <li>spec.template.spec.affinity : <a href="https://qiita.com/sheepland/items/ed12b3dc4a8f1df7c4ec">参考</a></li>
@@ -1734,19 +1764,19 @@ namespace リソース（ <code>kind: Namespace</code> ）を作成し、各リ�
 <p><code>livenessProbe</code>、<code>readinessProbe</code> については <a href="https://kubernetes.io/ja/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">こちら</a> 。</p>
 <p>また、 Pod の <code>spec.nodeName</code> を指定することで、スケジューラに任せず手動で Pod の配置ノードを指定することができる。</p>
 <h2 ref="4-pod" >4. Pod</h2><a class="anchor" id="4-pod"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">core/v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>: <span style="color:#75715e"># 先の metadata に同じ。</span>
-<span style="color:#f92672">spec</span>:     <span style="color:#75715e"># 先の Deployment の spec.template.spec に同じ。</span>
-</code></pre></div><p>pod のマニフェストに以下を足したものが ReplicaSet 。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">&lt;integer&gt;</span>
-  <span style="color:#f92672">selector</span>:
-    <span style="color:#f92672">matchLabels</span>:
-      <span style="color:#f92672">&lt;key1&gt;</span>: <span style="color:#ae81ff">&lt;value1&gt;</span>
-  <span style="color:#f92672">template</span>:
-      <span style="color:#ae81ff">&lt;podの定義に同じ&gt;</span>
-</code></pre></div><p>なお、 ReplicaSet はマニフェスト上はほぼ Deployment に同じ。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">core/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>: <span style="color:#75715e"># 先の metadata に同じ。</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:     <span style="color:#75715e"># 先の Deployment の spec.template.spec に同じ。</span>
+</span></span></code></pre></div><p>pod のマニフェストに以下を足したものが ReplicaSet 。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">&lt;integer&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;key1&gt;</span>: <span style="color:#ae81ff">&lt;value1&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">&lt;podの定義に同じ&gt;</span>
+</span></span></code></pre></div><p>なお、 ReplicaSet はマニフェスト上はほぼ Deployment に同じ。</p>
 <h3 ref="41-taints-tolerations" >4.1. Taints, Tolerations</h3><a class="anchor" id="41-taints-tolerations"></a>
 <p>Taints / Tolerations は Node Affinity と逆の機能。<br>
 <strong>Taints</strong> は「汚れ」、 <strong>Tolerations</strong> は「寛容」といった意味になる。<br>
@@ -1773,40 +1803,40 @@ Taints / Tolerations は以下の項目で設定できる。</p>
 </li>
 </ul>
 <p>Node に Taints を付与する場合は以下のコマンドを実行する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl taint nodes node1 key1<span style="color:#f92672">=</span>value1:NoSchedule
-
-<span style="color:#75715e"># ちなみに最後に（ - ）をつけるとその taint を削除できる</span>
-$ kubectl taint nodes node1 key1<span style="color:#f92672">=</span>value1:NoSchedule-
-</code></pre></div><p>Pod に Tolerations を付与する場合はマニフェストの <code>spec.tolerations</code> に以下を記述する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">tolerations</span>:
-- <span style="color:#f92672">key</span>: <span style="color:#e6db74">&#34;key1&#34;</span>
-  <span style="color:#f92672">operator</span>: <span style="color:#e6db74">&#34;Equal&#34;</span>
-  <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;value1&#34;</span>
-  <span style="color:#f92672">effect</span>: <span style="color:#e6db74">&#34;NoSchedule&#34;</span>
-</code></pre></div><h3 ref="42-node-selectors" >4.2. Node Selectors</h3><a class="anchor" id="42-node-selectors"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl taint nodes node1 key1<span style="color:#f92672">=</span>value1:NoSchedule
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ちなみに最後に（ - ）をつけるとその taint を削除できる</span>
+</span></span><span style="display:flex;"><span>$ kubectl taint nodes node1 key1<span style="color:#f92672">=</span>value1:NoSchedule-
+</span></span></code></pre></div><p>Pod に Tolerations を付与する場合はマニフェストの <code>spec.tolerations</code> に以下を記述する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">tolerations</span>:
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">key</span>: <span style="color:#e6db74">&#34;key1&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">operator</span>: <span style="color:#e6db74">&#34;Equal&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;value1&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">effect</span>: <span style="color:#e6db74">&#34;NoSchedule&#34;</span>
+</span></span></code></pre></div><h3 ref="42-node-selectors" >4.2. Node Selectors</h3><a class="anchor" id="42-node-selectors"></a>
 <p>Pod を特定の Node にスケジュールしたい場合 <strong>Node Selectors</strong> を利用する。<br>
 Node に Labels を付与し、 Pod の <code>nodeSelector</code> にその Labels を付与することで設定できる。<br>
 Node に Labels を付与するコマンドは以下の通り。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># USAGE: kubectl label nodes &lt;node-name&gt; &lt;label-key&gt;=&lt;label-value&gt;</span>
-$ kubectl label nodes node-1 size<span style="color:#f92672">=</span>Large
-</code></pre></div><p>また、 Pod のマニフェストの <code>spec.nodeSelector</code> に以下を設定する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">nodeSelector</span>:
-  <span style="color:#f92672">size</span>: <span style="color:#ae81ff">Large</span>
-</code></pre></div><p>Node Selectors は <code>size=Large</code> もしくは <code>size=Middle</code> のどちらか、といった柔軟性のあるスケジュールはできない。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># USAGE: kubectl label nodes &lt;node-name&gt; &lt;label-key&gt;=&lt;label-value&gt;</span>
+</span></span><span style="display:flex;"><span>$ kubectl label nodes node-1 size<span style="color:#f92672">=</span>Large
+</span></span></code></pre></div><p>また、 Pod のマニフェストの <code>spec.nodeSelector</code> に以下を設定する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">nodeSelector</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">size</span>: <span style="color:#ae81ff">Large</span>
+</span></span></code></pre></div><p>Node Selectors は <code>size=Large</code> もしくは <code>size=Middle</code> のどちらか、といった柔軟性のあるスケジュールはできない。<br>
 こういう場合は Node Affinity を使う。</p>
 <h3 ref="43-node-affinity" >4.3. Node Affinity</h3><a class="anchor" id="43-node-affinity"></a>
 <p><strong>Node Affinity</strong> は Pod に対して設定し、 Node Selector と同様 Node に付与された Labels を見る。<br>
 Pod のマニフェストの <code>spec.affinity</code> に以下の設定をする。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">affinity</span>:
-  <span style="color:#f92672">nodeAffinity</span>:
-    <span style="color:#f92672">requiredDuringSchedulingIgnoredDuringExecution</span>:
-      <span style="color:#f92672">nodeSelectorTerms</span>:
-      - <span style="color:#f92672">matchExpressions</span>:
-        - <span style="color:#f92672">key</span>: <span style="color:#ae81ff">size</span>
-          <span style="color:#f92672">operator</span>: <span style="color:#ae81ff">In</span>
-          <span style="color:#f92672">values</span>:
-          - <span style="color:#ae81ff">Large</span>
-</code></pre></div><p>3 行目の長ったらしいのは <strong>NodeAffinityType</strong>。以下の種類がある。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">affinity</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">nodeAffinity</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">requiredDuringSchedulingIgnoredDuringExecution</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">nodeSelectorTerms</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">matchExpressions</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">key</span>: <span style="color:#ae81ff">size</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">operator</span>: <span style="color:#ae81ff">In</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">values</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#ae81ff">Large</span>
+</span></span></code></pre></div><p>3 行目の長ったらしいのは <strong>NodeAffinityType</strong>。以下の種類がある。<br>
 （ <code>DuringScheduling</code> と <code>DuringExecution</code> に <code>required</code> / <code>preferred</code> / <code>Ignored</code> が修飾されていることに注目。）</p>
 <ul>
 <li>requiredDuringSchedulingIgnoredDuringExecution
@@ -1827,14 +1857,14 @@ Pod のマニフェストの <code>spec.affinity</code> に以下の設定をす
 </ul>
 <h3 ref="44-resource-requirements" >4.4. Resource Requirements</h3><a class="anchor" id="44-resource-requirements"></a>
 <p><code>spec.containers.resources</code> を設定することで、 Pod に割り当てるリソース（ CPU/Mem/Disk ）の要求について記載することができる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">resources</span>:
-  <span style="color:#f92672">requests</span>:
-    <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">100m</span>
-    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">64Mi</span>
-  <span style="color:#f92672">limits</span>:
-    <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">2</span>
-    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">1Gi</span>
-</code></pre></div><p><code>resuests</code> は下限、 <code>limits</code> は上限と理解すればいい。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">100m</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">64Mi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">1Gi</span>
+</span></span></code></pre></div><p><code>resuests</code> は下限、 <code>limits</code> は上限と理解すればいい。<br>
 なお、デフォルトでは、 <code>requests</code> は <code>CPU=0.5</code> / <code>Mem=256Mi</code> 、 <code>limits</code> は <code>CPU=1</code> / <code>Mem=512Mi</code> となる。
 <code>CPU=1</code> は 1 vCPU や 1 core や 1 Hyperthread を意味し、 <code>CPU=1=1000m</code> となる。<br>
 また、 Mem については以下の通り。</p>
@@ -1868,16 +1898,16 @@ Master Nodes が機能している・いないにかかわらず、 Static Pod �
 <p><code>kube-scheduler</code> は複数起動することができる。<br>
 複数のスケジューラがある場合、 Pod のマニフェストにて <code>spec.schedulerName</code> でスケジューラ名を指定することにより目的のスケジューラによって処理させることができる。<br>
 スケジューラを起動する際、以下のオプションを指定することで、スケジューラに命名およびリーダーの選出が可能になる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">    <span style="color:#f92672">spec</span>:
-      <span style="color:#f92672">containers</span>:
-      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kube-second-scheduler</span>
-        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">gcr.io/my-gcp-project/my-kube-scheduler:1.0</span>
-        <span style="color:#f92672">command</span>:
-        - <span style="color:#ae81ff">/usr/local/bin/kube-scheduler</span>
-        - --<span style="color:#ae81ff">address=0.0.0.0</span>
-        - --<span style="color:#ae81ff">leader-elect=false         </span> <span style="color:#75715e"># リーダー選出対象外</span>
-        - --<span style="color:#ae81ff">scheduler-name=my-scheduler</span> <span style="color:#75715e"># スケジューラの命名</span>
-</code></pre></div><h3 ref="47-lifecycle--lifecycle-events--lifecycle-handler" >4.7. Lifecycle / Lifecycle Events / Lifecycle Handler</h3><a class="anchor" id="47-lifecycle--lifecycle-events--lifecycle-handler"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kube-second-scheduler</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">gcr.io/my-gcp-project/my-kube-scheduler:1.0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">command</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">/usr/local/bin/kube-scheduler</span>
+</span></span><span style="display:flex;"><span>        - --<span style="color:#ae81ff">address=0.0.0.0</span>
+</span></span><span style="display:flex;"><span>        - --<span style="color:#ae81ff">leader-elect=false         </span> <span style="color:#75715e"># リーダー選出対象外</span>
+</span></span><span style="display:flex;"><span>        - --<span style="color:#ae81ff">scheduler-name=my-scheduler</span> <span style="color:#75715e"># スケジューラの命名</span>
+</span></span></code></pre></div><h3 ref="47-lifecycle--lifecycle-events--lifecycle-handler" >4.7. Lifecycle / Lifecycle Events / Lifecycle Handler</h3><a class="anchor" id="47-lifecycle--lifecycle-events--lifecycle-handler"></a>
 <p>Pod には <a href="https://kubernetes.io/ja/docs/concepts/workloads/pods/pod-lifecycle/">のライフサイクル</a> がり、 <code>status.phase</code> は Pod のライフサイクルにおけるフェーズを表しており、 Pod の状態を確認する上で重要となる。</p>
 <table>
 <thead>
@@ -1934,40 +1964,40 @@ Liveness/Readiness Probe の双方で以下の 3 種類のヘルスチェック�
 <li>コマンドを実行し、終了コードが 0 でなければ失敗</li>
 <li>例</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">readinessProbe</span>:
-  <span style="color:#f92672">exec</span>:
-    <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;ls&#34;</span>, <span style="color:#e6db74">&#34;/usr/sbin/nginx&#34;</span>]
-  <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">10</span> <span style="color:#75715e"># 初回チェックの Delay</span>
-  <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">5</span>        <span style="color:#75715e"># チェック間隔</span>
-  <span style="color:#f92672">failureThreshold</span>: <span style="color:#ae81ff">8</span>     <span style="color:#75715e"># チェック NG の場合のリトライ回数</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">readinessProbe</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">exec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;ls&#34;</span>, <span style="color:#e6db74">&#34;/usr/sbin/nginx&#34;</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">10</span> <span style="color:#75715e"># 初回チェックの Delay</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">5</span>        <span style="color:#75715e"># チェック間隔</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">failureThreshold</span>: <span style="color:#ae81ff">8</span>     <span style="color:#75715e"># チェック NG の場合のリトライ回数</span>
+</span></span></code></pre></div></li>
 <li>httpGet
 <ul>
 <li>HTTP GET リクエストを実行し、 Status Code が 200 〜 300 でなければ失敗</li>
 <li>例</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">libenessProbe</span>:
-  <span style="color:#f92672">httpGet</span>:
-    <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/health</span>
-    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
-    <span style="color:#f92672">scheme</span>: <span style="color:#ae81ff">HTTP</span>
-    <span style="color:#f92672">host</span>: <span style="color:#ae81ff">web.example.com</span>
-    <span style="color:#f92672">httpHeaders</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Authorization</span>
-      <span style="color:#f92672">value</span>: <span style="color:#ae81ff">Bearer TOKEN</span>
-  <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">10</span> <span style="color:#75715e"># 初回チェックの Delay</span>
-  <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">5</span>        <span style="color:#75715e"># チェック間隔</span>
-  <span style="color:#f92672">failureThreshold</span>: <span style="color:#ae81ff">8</span>     <span style="color:#75715e"># チェック NG の場合のリトライ回数</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">libenessProbe</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">httpGet</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/health</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">scheme</span>: <span style="color:#ae81ff">HTTP</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">host</span>: <span style="color:#ae81ff">web.example.com</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">httpHeaders</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Authorization</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">value</span>: <span style="color:#ae81ff">Bearer TOKEN</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">10</span> <span style="color:#75715e"># 初回チェックの Delay</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">5</span>        <span style="color:#75715e"># チェック間隔</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">failureThreshold</span>: <span style="color:#ae81ff">8</span>     <span style="color:#75715e"># チェック NG の場合のリトライ回数</span>
+</span></span></code></pre></div></li>
 <li>tcpSocket
 <ul>
 <li>TCP セッションが確立できなければ失敗</li>
 <li>例</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">linenessProbe</span>:
-  <span style="color:#f92672">tcpSocket</span>:
-    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">linenessProbe</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tcpSocket</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+</span></span></code></pre></div></li>
 </ul>
 <p>また、コンテナが開始された際とPodが削除される際にHookして任意の処理を実行することが出来る以下の Lifecycle Events がある。</p>
 <ul>
@@ -1991,41 +2021,41 @@ Liveness/Readiness Probe の双方で以下の 3 種類のヘルスチェック�
 </ul>
 <p>先の probe と同様だ。</p>
 <h2 ref="5-service" >5. Service</h2><a class="anchor" id="5-service"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
-<span style="color:#f92672">metadata</span>: <span style="color:#75715e"># 先の metadata に同じ。</span>
-<span style="color:#f92672">spec</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#servicespec-v1-core</span>
-  <span style="color:#f92672">clusterIP</span>:
-  <span style="color:#f92672">externalIPs</span>:
-  <span style="color:#f92672">externalName</span>:
-  <span style="color:#f92672">externalTrafficPolicy</span>:
-  <span style="color:#f92672">healthCheckNodePort</span>:
-  <span style="color:#f92672">loadBalancerIP</span>:
-  <span style="color:#f92672">loadBalancerSourceRanges</span>:
-  <span style="color:#f92672">ports</span>:
-  <span style="color:#f92672">publishNotReadyAddresses</span>:
-  <span style="color:#f92672">selector</span>:
-  <span style="color:#f92672">sessionAffinity</span>:
-  <span style="color:#f92672">sessionAffinityConfig</span>:
-  <span style="color:#f92672">type</span>: <span style="color:#75715e"># ExternalName 、 ClusterIP （デフォルト）、 NodePort 、および LoadBalancer 。</span>
-</code></pre></div><p>色々設定があるが、 ClusterIP の場合は以下くらいでいい。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">annotations</span>:
-    <span style="color:#f92672">&lt;key&gt;</span>: <span style="color:#ae81ff">&lt;value&gt;</span>
-  <span style="color:#f92672">labels</span>:             <span style="color:#75715e"># Service の Label</span>
-    <span style="color:#f92672">&lt;key&gt;</span>: <span style="color:#ae81ff">&lt;value&gt;</span>
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">&lt;string&gt;     </span> <span style="color:#75715e"># Service 名</span>
-  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">&lt;string&gt;</span> <span style="color:#75715e"># Service の namespace</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">selector</span>:
-    <span style="color:#f92672">&lt;key&gt;</span>: <span style="color:#ae81ff">&lt;value&gt;   </span> <span style="color:#75715e"># 通信を流す Pod の Label をセレクタで指定</span>
-  <span style="color:#f92672">ports</span>:
-  - <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP    </span> <span style="color:#75715e"># Service が受信するプロトコルとポートマッピング</span>
-    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>          <span style="color:#75715e"># Service が受信 Port</span>
-    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">9376</span>  <span style="color:#75715e"># Pod の Port</span>
-</code></pre></div><p>Service の <code>selector</code> の設定が正しく Pod を捉えているかどうかは <code>kubectl get pods --selector=&quot;app=monolith,secure=enabled&quot;</code> などのコマンドで対象の Pod を取得できるか、で検査できる。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>: <span style="color:#75715e"># 先の metadata に同じ。</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>: <span style="color:#75715e"># https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#servicespec-v1-core</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">clusterIP</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">externalIPs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">externalName</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">externalTrafficPolicy</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">healthCheckNodePort</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">loadBalancerIP</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">loadBalancerSourceRanges</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">publishNotReadyAddresses</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">sessionAffinity</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">sessionAffinityConfig</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#75715e"># ExternalName 、 ClusterIP （デフォルト）、 NodePort 、および LoadBalancer 。</span>
+</span></span></code></pre></div><p>色々設定があるが、 ClusterIP の場合は以下くらいでいい。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>: <span style="color:#ae81ff">&lt;value&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:             <span style="color:#75715e"># Service の Label</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>: <span style="color:#ae81ff">&lt;value&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">&lt;string&gt;     </span> <span style="color:#75715e"># Service 名</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">&lt;string&gt;</span> <span style="color:#75715e"># Service の namespace</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>: <span style="color:#ae81ff">&lt;value&gt;   </span> <span style="color:#75715e"># 通信を流す Pod の Label をセレクタで指定</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP    </span> <span style="color:#75715e"># Service が受信するプロトコルとポートマッピング</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>          <span style="color:#75715e"># Service が受信 Port</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">9376</span>  <span style="color:#75715e"># Pod の Port</span>
+</span></span></code></pre></div><p>Service の <code>selector</code> の設定が正しく Pod を捉えているかどうかは <code>kubectl get pods --selector=&quot;app=monolith,secure=enabled&quot;</code> などのコマンドで対象の Pod を取得できるか、で検査できる。<br>
 さらに、ネットワーク疎通する場合は <code>nc -v &lt;host/IP&gt; &lt;port&gt;</code> コマンドで確認するのがよい。（ <code>curl</code> は busybox に default で入ってない、、、）<br>
 <code>curl</code> が利用できる環境の場合は <code>curl &lt;endpoint:port&gt; -I</code> でヘッダ情報（ HTTP Status など）のみ確認できる。</p>
 <h2 ref="6-daemonset" >6. DaemonSet</h2><a class="anchor" id="6-daemonset"></a>
@@ -2033,207 +2063,207 @@ Liveness/Readiness Probe の双方で以下の 3 種類のヘルスチェック�
 Monitoring/Logging Agent などを仕込むのに最適。（ <code>kube-proxy</code> は DaemonSet で配置されているものもある）<br>
 DaemonSet のマニフェストは ReplicaSet のそれに酷似している。<br>
 なお、 DaemonSet や ReplicaSet は <code>kubectl create</code> コマンドでは作成できないので、下記のような Deployment 作成コマンドでマニフェストの雛形を作成し、その後 <code>kind</code> を修正するなどして DaemonSet のマニフェストを作成してから apply するとよい。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create deployment elasticsearch --image<span style="color:#f92672">=</span>k8s.gcr.io/fluentd-elasticsearch:1.20 --namespace<span style="color:#f92672">=</span>kube-system --dry-run<span style="color:#f92672">=</span>client -o yaml &gt; fluent.yaml
-</code></pre></div><h2 ref="7-configmap--secret" >7. ConfigMap / Secret</h2><a class="anchor" id="7-configmap--secret"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl create deployment elasticsearch --image<span style="color:#f92672">=</span>k8s.gcr.io/fluentd-elasticsearch:1.20 --namespace<span style="color:#f92672">=</span>kube-system --dry-run<span style="color:#f92672">=</span>client -o yaml &gt; fluent.yaml
+</span></span></code></pre></div><h2 ref="7-configmap--secret" >7. ConfigMap / Secret</h2><a class="anchor" id="7-configmap--secret"></a>
 <h3 ref="71-configmap" >7.1. ConfigMap</h3><a class="anchor" id="71-configmap"></a>
 <p>ConfigMap は以下の通りコマンドで作成するか、マニフェストを作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># コマンドのみで作成</span>
-<span style="color:#75715e"># USAGE: kubectl create configmap &lt;config-name&gt; --from-literal=&lt;key&gt;=&lt;value&gt;</span>
-$ kubectl create configmap app-config --from-literal<span style="color:#f92672">=</span>APP_COLOR<span style="color:#f92672">=</span>blue --from-literal<span style="color:#f92672">=</span>APP_MOD<span style="color:#f92672">=</span>prod
-
-<span style="color:#75715e"># マニフェストファイルを利用する場合</span>
-<span style="color:#75715e"># USAGE: kubectl create configmap &lt;config-name&gt; --from-file=&lt;file-name&gt;</span>
-$ kubectl create configmap app-config --from-file<span style="color:#f92672">=</span>app_config.properties
-</code></pre></div><pre tabindex="0"><code class="language-txt:app_config.properties" data-lang="txt:app_config.properties">APP_COLOR: blue
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># コマンドのみで作成</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># USAGE: kubectl create configmap &lt;config-name&gt; --from-literal=&lt;key&gt;=&lt;value&gt;</span>
+</span></span><span style="display:flex;"><span>$ kubectl create configmap app-config --from-literal<span style="color:#f92672">=</span>APP_COLOR<span style="color:#f92672">=</span>blue --from-literal<span style="color:#f92672">=</span>APP_MOD<span style="color:#f92672">=</span>prod
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># マニフェストファイルを利用する場合</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># USAGE: kubectl create configmap &lt;config-name&gt; --from-file=&lt;file-name&gt;</span>
+</span></span><span style="display:flex;"><span>$ kubectl create configmap app-config --from-file<span style="color:#f92672">=</span>app_config.properties
+</span></span></code></pre></div><pre tabindex="0"><code class="language-txt:app_config.properties" data-lang="txt:app_config.properties">APP_COLOR: blue
 APP_MOD: prod
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:app-config.yaml" data-lang="yaml:app-config.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-config</span>
-<span style="color:#f92672">data</span>:
-  <span style="color:#f92672">APP_COLOR</span>: <span style="color:#ae81ff">blue</span>
-  <span style="color:#f92672">APP_MOD</span>: <span style="color:#ae81ff">prod</span>
-</code></pre></div><p>Pod のマニフェストからは以下のように参照する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hoge</span>
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">hoge</span>
-    <span style="color:#f92672">envFrom</span>:
-    - <span style="color:#f92672">configMapRef</span>:
-        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-config</span>
-</code></pre></div><p>なお、 Pod から ConfigMap を参照する方法は大きく 3 パターンある。</p>
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml:app-config.yaml" data-lang="yaml:app-config.yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-config</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">data</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">APP_COLOR</span>: <span style="color:#ae81ff">blue</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">APP_MOD</span>: <span style="color:#ae81ff">prod</span>
+</span></span></code></pre></div><p>Pod のマニフェストからは以下のように参照する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hoge</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">hoge</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">envFrom</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">configMapRef</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-config</span>
+</span></span></code></pre></div><p>なお、 Pod から ConfigMap を参照する方法は大きく 3 パターンある。</p>
 <ul>
 <li>ConfigMap の内容の一部を環境変数へ
 <ul>
 <li>例
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">test-pod</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">test-container</span>
-      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">k8s.gcr.io/busybox</span>
-      <span style="color:#f92672">command</span>: [ <span style="color:#e6db74">&#34;/bin/sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;echo $(SPECIAL_LEVEL_KEY)&#34;</span> ] <span style="color:#75715e"># コマンドで使用する場合は「 $() 」</span>
-      <span style="color:#f92672">env</span>:
-        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">SPECIAL_LEVEL_KEY</span> <span style="color:#75715e"># 環境変数</span>
-          <span style="color:#f92672">valueFrom</span>:
-            <span style="color:#f92672">configMapKeyRef</span>:
-              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">special-config</span> <span style="color:#75715e"># 参照する ConfigMap 名</span>
-              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">special.how    </span> <span style="color:#75715e"># ConfigMap 内の key</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">test-pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">test-container</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">k8s.gcr.io/busybox</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">command</span>: [ <span style="color:#e6db74">&#34;/bin/sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;echo $(SPECIAL_LEVEL_KEY)&#34;</span> ] <span style="color:#75715e"># コマンドで使用する場合は「 $() 」</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">SPECIAL_LEVEL_KEY</span> <span style="color:#75715e"># 環境変数</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">valueFrom</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">configMapKeyRef</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">special-config</span> <span style="color:#75715e"># 参照する ConfigMap 名</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">special.how    </span> <span style="color:#75715e"># ConfigMap 内の key</span>
+</span></span></code></pre></div></li>
 </ul>
 </li>
 <li>ConfigMap の内容を全て直接環境変数へ
 <ul>
 <li>例
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">test-pod</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">test-container</span>
-      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">k8s.gcr.io/busybox</span>
-      <span style="color:#f92672">command</span>: [ <span style="color:#e6db74">&#34;/bin/sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;env&#34;</span> ]
-      <span style="color:#f92672">envFrom</span>: <span style="color:#75715e"># ここ</span>
-      - <span style="color:#f92672">configMapRef</span>:
-          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">special-config</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">test-pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">test-container</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">k8s.gcr.io/busybox</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">command</span>: [ <span style="color:#e6db74">&#34;/bin/sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;env&#34;</span> ]
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">envFrom</span>: <span style="color:#75715e"># ここ</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">configMapRef</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">special-config</span>
+</span></span></code></pre></div></li>
 </ul>
 </li>
 <li>Volume に追加する
 <ul>
 <li>例
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">dapi-test-pod</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">test-container</span>
-      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">k8s.gcr.io/busybox</span>
-      <span style="color:#f92672">command</span>: [ <span style="color:#e6db74">&#34;/bin/sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;ls /etc/config/&#34;</span> ]
-      <span style="color:#f92672">volumeMounts</span>:
-      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config-volume</span>
-        <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/etc/config</span>
-  <span style="color:#f92672">volumes</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config-volume</span>
-      <span style="color:#f92672">configMap</span>:
-        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">special-config</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">dapi-test-pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">test-container</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">k8s.gcr.io/busybox</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">command</span>: [ <span style="color:#e6db74">&#34;/bin/sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;ls /etc/config/&#34;</span> ]
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config-volume</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/etc/config</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config-volume</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">configMap</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">special-config</span>
+</span></span></code></pre></div></li>
 </ul>
 </li>
 </ul>
 <p>3 つ目の Volume に追加するパターンが少しややこしい。<br>
 上記の <code>special-config</code> が <code>kubectl create cm special-config --from-literal=id=hoge --from-literal=password=hogehoge</code> のように作られた場合、コンテナ内の <code>/etc/config</code> ディレクトリ内には、 <code>hoge</code> と記載された 名前が <code>id</code> のファイルが 1 つ、 <code>hogehoge</code> と記載された名前が <code>password</code> のファイルが 1 つ作成される。<br>
 これだと具合が悪いので、ファイルとして配置する ConfigMap の記載方法がある。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:nginx-file.yaml" data-lang="yaml:nginx-file.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx-file</span>
-<span style="color:#f92672">data</span>:
-  <span style="color:#f92672">envfile</span>: |-<span style="color:#e6db74">
-</span><span style="color:#e6db74">    id=hoge
-</span><span style="color:#e6db74">    password=hogehoge</span>    
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-  - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">nginx</span>
-    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
-    <span style="color:#f92672">volumeMounts</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config-volume</span>
-      <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/etc/config</span>
-  <span style="color:#f92672">volumes</span>:
-  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config-volume</span>
-    <span style="color:#f92672">configMap</span>:
-      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx-file</span>
-      <span style="color:#f92672">items</span>:
-        - <span style="color:#f92672">key</span>: <span style="color:#ae81ff">envfile</span>
-          <span style="color:#f92672">path</span>: <span style="color:#ae81ff">envfile.txt</span>
-</code></pre></div><p>上記で作成した Nginx の <code>/etc/config</code> ディレクトリには <code>envfile.txt</code> が作成されており、その中身は以下の通りだ。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text:envfile.txt" data-lang="text:envfile.txt">id=hoge
-password=hogehoge
-</code></pre></div><h3 ref="72-secret" >7.2. Secret</h3><a class="anchor" id="72-secret"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml:nginx-file.yaml" data-lang="yaml:nginx-file.yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx-file</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">data</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">envfile</span>: |-<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    id=hoge
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    password=hogehoge</span>    
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config-volume</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/etc/config</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config-volume</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">configMap</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx-file</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">items</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">key</span>: <span style="color:#ae81ff">envfile</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: <span style="color:#ae81ff">envfile.txt</span>
+</span></span></code></pre></div><p>上記で作成した Nginx の <code>/etc/config</code> ディレクトリには <code>envfile.txt</code> が作成されており、その中身は以下の通りだ。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text:envfile.txt" data-lang="text:envfile.txt"><span style="display:flex;"><span>id=hoge
+</span></span><span style="display:flex;"><span>password=hogehoge
+</span></span></code></pre></div><h3 ref="72-secret" >7.2. Secret</h3><a class="anchor" id="72-secret"></a>
 <p>Secret は以下の通りコマンドで作成するか、マニフェストを作成する。（ <code>generic</code> が付くのに注意）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># コマンドのみで作成</span>
-<span style="color:#75715e"># USAGE: kubectl create secret generic &lt;secret-name&gt; --from-literal=&lt;key&gt;=&lt;value&gt;</span>
-$ kubectl create secret generic app-secret --from-literal<span style="color:#f92672">=</span>APP_COLOR<span style="color:#f92672">=</span>blue --from-literal<span style="color:#f92672">=</span>APP_MOD<span style="color:#f92672">=</span>prod
-
-<span style="color:#75715e"># マニフェストファイルを利用する場合</span>
-<span style="color:#75715e"># USAGE: kubectl create secret generic &lt;secret-name&gt; --from-file=&lt;file-name&gt;</span>
-$ kubectl create secret generic app-secret --from-file<span style="color:#f92672">=</span>app_secret.properties
-</code></pre></div><pre tabindex="0"><code class="language-txt:app_secret.properties" data-lang="txt:app_secret.properties">APP_COLOR: blue
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># コマンドのみで作成</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># USAGE: kubectl create secret generic &lt;secret-name&gt; --from-literal=&lt;key&gt;=&lt;value&gt;</span>
+</span></span><span style="display:flex;"><span>$ kubectl create secret generic app-secret --from-literal<span style="color:#f92672">=</span>APP_COLOR<span style="color:#f92672">=</span>blue --from-literal<span style="color:#f92672">=</span>APP_MOD<span style="color:#f92672">=</span>prod
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># マニフェストファイルを利用する場合</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># USAGE: kubectl create secret generic &lt;secret-name&gt; --from-file=&lt;file-name&gt;</span>
+</span></span><span style="display:flex;"><span>$ kubectl create secret generic app-secret --from-file<span style="color:#f92672">=</span>app_secret.properties
+</span></span></code></pre></div><pre tabindex="0"><code class="language-txt:app_secret.properties" data-lang="txt:app_secret.properties">APP_COLOR: blue
 APP_MOD: prod
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:app-secret.yaml" data-lang="yaml:app-secret.yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-secret</span>
-<span style="color:#f92672">data</span>:
-  <span style="color:#f92672">APP_COLOR</span>: <span style="color:#ae81ff">blue</span>
-  <span style="color:#f92672">APP_MOD</span>: <span style="color:#ae81ff">prod</span>
-</code></pre></div><p>ただし、マニフェストファイルに環境変数を記載する際は、 value 値を <code>base64</code> コマンドなどで Base64 化する必要がある。（デコードは <code>base64 --decode</code> ）<br>
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml:app-secret.yaml" data-lang="yaml:app-secret.yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-secret</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">data</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">APP_COLOR</span>: <span style="color:#ae81ff">blue</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">APP_MOD</span>: <span style="color:#ae81ff">prod</span>
+</span></span></code></pre></div><p>ただし、マニフェストファイルに環境変数を記載する際は、 value 値を <code>base64</code> コマンドなどで Base64 化する必要がある。（デコードは <code>base64 --decode</code> ）<br>
 Pod のマニフェストからは以下のように参照する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hoge</span>
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">hoge</span>
-    <span style="color:#f92672">envFrom</span>:
-    - <span style="color:#f92672">secretRef</span>:
-        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-secret</span>
-</code></pre></div><h2 ref="8-job--cronjob" >8. Job / CronJob</h2><a class="anchor" id="8-job--cronjob"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hoge</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">hoge</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">envFrom</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">secretRef</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-secret</span>
+</span></span></code></pre></div><h2 ref="8-job--cronjob" >8. Job / CronJob</h2><a class="anchor" id="8-job--cronjob"></a>
 <h3 ref="81-job" >8.1. Job</h3><a class="anchor" id="81-job"></a>
 <p>Job を利用しなくても Pod で <code>restartPolicy: Always</code> を設定すれば似たようなことができる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-pod</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-add</span>
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ubuntu</span>
-    <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#39;expr&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;+&#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>]
-  <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Always</span>
-</code></pre></div><p><code>restartPolicy</code> で小細工をせず、 ReplicaSet と同じレイヤで Pod をコントロールするのが <strong>Job</strong> だ。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-add</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ubuntu</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#39;expr&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;+&#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Always</span>
+</span></span></code></pre></div><p><code>restartPolicy</code> で小細工をせず、 ReplicaSet と同じレイヤで Pod をコントロールするのが <strong>Job</strong> だ。<br>
 Job のマニフェストは <code>spec</code> の下に <code>template</code> を挟む以外は Pod とほぼ同じだ。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Job</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-pod-job</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">template</span>:
-    <span style="color:#f92672">containers</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-add</span>
-      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ubuntu</span>
-      <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#39;expr&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;+&#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>]
-    <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Never</span>
-</code></pre></div><p>Job は <code>kubectl get jobs</code> で取得でき、Job が実行した Pod は通常通り <code>kubectl get pods</code> で取得できる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get jobs
-NAME          DESIRED  SUCCESSFUL  AGE
-math-add-job  <span style="color:#ae81ff">1</span>        <span style="color:#ae81ff">1</span>           38s
-
-$ kubectl get pods
-NAME                READY  STATUS     RESTARTS  AGE
-math-add-job-l87pn  0/1    Completed  <span style="color:#ae81ff">0</span>         2m
-</code></pre></div><p>なお、 Job は ReplicaSet とは違い、バッチ処理などに有効な機能がある。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Job</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-pod-job</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">completions</span>: <span style="color:#ae81ff">3</span>
-  <span style="color:#f92672">parallelism</span>: <span style="color:#ae81ff">3</span>
-  <span style="color:#f92672">backoffLimit</span>: <span style="color:#ae81ff">6</span>
-  <span style="color:#f92672">template</span>:
-    <span style="color:#f92672">containers</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-add</span>
-      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ubuntu</span>
-      <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#39;expr&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;+&#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>]
-    <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Never</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Job</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-pod-job</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-add</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ubuntu</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#39;expr&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;+&#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Never</span>
+</span></span></code></pre></div><p>Job は <code>kubectl get jobs</code> で取得でき、Job が実行した Pod は通常通り <code>kubectl get pods</code> で取得できる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl get jobs
+</span></span><span style="display:flex;"><span>NAME          DESIRED  SUCCESSFUL  AGE
+</span></span><span style="display:flex;"><span>math-add-job  <span style="color:#ae81ff">1</span>        <span style="color:#ae81ff">1</span>           38s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ kubectl get pods
+</span></span><span style="display:flex;"><span>NAME                READY  STATUS     RESTARTS  AGE
+</span></span><span style="display:flex;"><span>math-add-job-l87pn  0/1    Completed  <span style="color:#ae81ff">0</span>         2m
+</span></span></code></pre></div><p>なお、 Job は ReplicaSet とは違い、バッチ処理などに有効な機能がある。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Job</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-pod-job</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">completions</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">parallelism</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">backoffLimit</span>: <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-add</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ubuntu</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#39;expr&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;+&#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Never</span>
+</span></span></code></pre></div><ul>
 <li><code>spec.completions</code>
 <ul>
 <li>指定した回数 Job から起動した Pod の処理が成功（ <code>Completed</code> ）するまで Pod をシーケンシャルに起動する</li>
@@ -2253,32 +2283,32 @@ math-add-job-l87pn  0/1    Completed  <span style="color:#ae81ff">0</span>      
 <h3 ref="82-cronjob" >8.2. CronJob</h3><a class="anchor" id="82-cronjob"></a>
 <p>Job に crontab の機能をつけたものが <strong>CronJob</strong> 。<br>
 マニフェストは <code>spec.jobTemplate</code> 配下に Job の <code>spec</code> をもってくればよい。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">CronJob</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">reporting-cron-job</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">schedule</span>: <span style="color:#e6db74">&#34;*/1 * * * *&#34;</span>
-  <span style="color:#f92672">jobTemplate</span>:
-    <span style="color:#f92672">spec</span>:
-      <span style="color:#f92672">completions</span>: <span style="color:#ae81ff">3</span>
-      <span style="color:#f92672">parallelism</span>: <span style="color:#ae81ff">3</span>
-      <span style="color:#f92672">template</span>:
-        <span style="color:#f92672">containers</span>:
-        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-add</span>
-          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ubuntu</span>
-          <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#39;expr&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;+&#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>]
-        <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Never</span>
-</code></pre></div><p>なお、 <code>spec.schedule</code> に記載する crontab の指定方法は以下の通り。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># （行頭の # マークはコメント行を示す）
-# +------------ 分 (0 - 59)
-# | +---------- 時 (0 - 23)
-# | | +-------- 日 (1 - 31)
-# | | | +------ 月 (1 - 12)
-# | | | | +---- 曜日 (0 - 6) (日曜日=0)
-# | | | | |
-# * * * * * 実行されるコマンド
-</code></pre></div><table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">CronJob</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">reporting-cron-job</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">schedule</span>: <span style="color:#e6db74">&#34;*/1 * * * *&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">jobTemplate</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">completions</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">parallelism</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">math-add</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ubuntu</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#39;expr&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;+&#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Never</span>
+</span></span></code></pre></div><p>なお、 <code>spec.schedule</code> に記載する crontab の指定方法は以下の通り。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span># （行頭の # マークはコメント行を示す）
+</span></span><span style="display:flex;"><span># +------------ 分 (0 - 59)
+</span></span><span style="display:flex;"><span># | +---------- 時 (0 - 23)
+</span></span><span style="display:flex;"><span># | | +-------- 日 (1 - 31)
+</span></span><span style="display:flex;"><span># | | | +------ 月 (1 - 12)
+</span></span><span style="display:flex;"><span># | | | | +---- 曜日 (0 - 6) (日曜日=0)
+</span></span><span style="display:flex;"><span># | | | | |
+</span></span><span style="display:flex;"><span># * * * * * 実行されるコマンド
+</span></span></code></pre></div><table>
 <thead>
 <tr>
 <th style="text-align:left">例</th>
@@ -2344,16 +2374,16 @@ spec:
 <li>注意点として上記だけでは対象 Node 上で起動している Pod は一度に evicted され、一度に退去させられる可能性がある。例えば ReplicaSet 2 で drain 対象の Node に 2つの Pod が起動していた場合、両方の Pod に対して evicted され、一つも Pod が起動していない時間帯がある可能性が出来てしまう</li>
 <li>PodDisruptionBudget(PDB)を定義することで上記を防ぐことが出来る</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">policy/v1beta1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PodDisruptionBudget</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">myapp</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">maxUnavailable</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#f92672">selector</span>:
-    <span style="color:#f92672">matchLabels</span>:
-<span style="color:#f92672">run</span>: <span style="color:#ae81ff">myapp</span>
-</code></pre></div><p><a href="https://qiita.com/toshihirock/items/5adaece0206127121551">参考</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">policy/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PodDisruptionBudget</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">myapp</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">maxUnavailable</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span><span style="color:#f92672">run</span>: <span style="color:#ae81ff">myapp</span>
+</span></span></code></pre></div><p><a href="https://qiita.com/toshihirock/items/5adaece0206127121551">参考</a></p>
 <h2 ref="参考" >参考</h2><a class="anchor" id="参考"></a>
 <ul>
 <li><a href="https://qiita.com/tkusumi/items/4f63cea4c4d910b368c4">Kubernetes Tips: kubectl でマニフェストの雛形を作る</a></li>

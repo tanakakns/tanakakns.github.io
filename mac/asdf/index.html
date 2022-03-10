@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -584,6 +584,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -678,7 +693,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -686,7 +701,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1140,6 +1155,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1454,14 +1484,14 @@ if (!doNotTrack) {
 <h2 ref="1-インストールアップデートアンインストール" >1. インストール・アップデート・アンインストール</h2><a class="anchor" id="1-インストールアップデートアンインストール"></a>
 <p>基本は<a href="https://asdf-vm.com/#/core-manage-asdf">公式</a>を見て欲しいが、ここでは本ブログ作成日におけるMac環境へのインストールについて記載する。</p>
 <h3 ref="11-インストール" >1.1. インストール</h3><a class="anchor" id="11-インストール"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew install coreutils curl git
-% brew install asdf
-% echo -e <span style="color:#e6db74">&#34;\n. </span><span style="color:#66d9ef">$(</span>brew --prefix asdf<span style="color:#66d9ef">)</span><span style="color:#e6db74">/asdf.sh&#34;</span> &gt;&gt; ~/.zshenv
-</code></pre></div><h3 ref="12-アップデート" >1.2. アップデート</h3><a class="anchor" id="12-アップデート"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% brew upgrade asdf
-</code></pre></div><h3 ref="13-アンインストール" >1.3. アンインストール</h3><a class="anchor" id="13-アンインストール"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% rm -rf <span style="color:#e6db74">${</span>ASDF_DATA_DIR<span style="color:#66d9ef">:-</span>$HOME/.asdf<span style="color:#e6db74">}</span> ~/.tool-versions
-</code></pre></div><p>プロファイルに設定した asdf へのパス削除を忘れずに。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% brew install coreutils curl git
+</span></span><span style="display:flex;"><span>% brew install asdf
+</span></span><span style="display:flex;"><span>% echo -e <span style="color:#e6db74">&#34;\n. </span><span style="color:#66d9ef">$(</span>brew --prefix asdf<span style="color:#66d9ef">)</span><span style="color:#e6db74">/asdf.sh&#34;</span> &gt;&gt; ~/.zshenv
+</span></span></code></pre></div><h3 ref="12-アップデート" >1.2. アップデート</h3><a class="anchor" id="12-アップデート"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% brew upgrade asdf
+</span></span></code></pre></div><h3 ref="13-アンインストール" >1.3. アンインストール</h3><a class="anchor" id="13-アンインストール"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% rm -rf <span style="color:#e6db74">${</span>ASDF_DATA_DIR<span style="color:#66d9ef">:-</span>$HOME/.asdf<span style="color:#e6db74">}</span> ~/.tool-versions
+</span></span></code></pre></div><p>プロファイルに設定した asdf へのパス削除を忘れずに。</p>
 <h2 ref="2-使い方" >2. 使い方</h2><a class="anchor" id="2-使い方"></a>
 <h3 ref="21-プラグインツールのインストール" >2.1. プラグイン・ツールのインストール</h3><a class="anchor" id="21-プラグインツールのインストール"></a>
 <ol>
@@ -1504,39 +1534,39 @@ if (!doNotTrack) {
 </li>
 </ol>
 <p>helm で一連の流れをやってみる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf plugin list all | grep helm
-helm                          https://github.com/Antiarchitect/asdf-helm.git
-helm-cr                       https://github.com/Antiarchitect/asdf-helm-cr.git
-helm-ct                       https://github.com/tablexi/asdf-helm-ct.git
-helm-docs                     https://github.com/sudermanjr/asdf-helm-docs.git
-helmfile                      https://github.com/feniix/asdf-helmfile.git
-
-% asdf plugin add helm
-
-% asdf plugin list
-helm
-
-% asdf list-all helm
-3.4.1
-
-% asdf install helm 3.4.1
-
-% asdf global helm 3.4.1
-
-% asdf current helm
-helm            3.4.1           /Users/xxxx/.tool-versions
-
-% helm version
-version.BuildInfo<span style="color:#f92672">{</span>Version:<span style="color:#e6db74">&#34;v3.4.1&#34;</span>, GitCommit:<span style="color:#e6db74">&#34;c4e74854886b2efe3321e185578e6db9be0a6e29&#34;</span>, GitTreeState:<span style="color:#e6db74">&#34;clean&#34;</span>, GoVersion:<span style="color:#e6db74">&#34;go1.14.11&#34;</span><span style="color:#f92672">}</span>
-</code></pre></div><h3 ref="22-プラグインのアップデート" >2.2. プラグインのアップデート</h3><a class="anchor" id="22-プラグインのアップデート"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf plugin update --all
-</code></pre></div><h3 ref="23-ツールのアンインストール" >2.3. ツールのアンインストール</h3><a class="anchor" id="23-ツールのアンインストール"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf uninstall &lt;name&gt; &lt;version&gt;
-</code></pre></div><h3 ref="24-プラグインのアンインストール" >2.4. プラグインのアンインストール</h3><a class="anchor" id="24-プラグインのアンインストール"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf plugin remove &lt;name&gt;
-</code></pre></div><h3 ref="25-困ったときは" >2.5. 困ったときは</h3><a class="anchor" id="25-困ったときは"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% asdf help
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% asdf plugin list all | grep helm
+</span></span><span style="display:flex;"><span>helm                          https://github.com/Antiarchitect/asdf-helm.git
+</span></span><span style="display:flex;"><span>helm-cr                       https://github.com/Antiarchitect/asdf-helm-cr.git
+</span></span><span style="display:flex;"><span>helm-ct                       https://github.com/tablexi/asdf-helm-ct.git
+</span></span><span style="display:flex;"><span>helm-docs                     https://github.com/sudermanjr/asdf-helm-docs.git
+</span></span><span style="display:flex;"><span>helmfile                      https://github.com/feniix/asdf-helmfile.git
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>% asdf plugin add helm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>% asdf plugin list
+</span></span><span style="display:flex;"><span>helm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>% asdf list-all helm
+</span></span><span style="display:flex;"><span>3.4.1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>% asdf install helm 3.4.1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>% asdf global helm 3.4.1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>% asdf current helm
+</span></span><span style="display:flex;"><span>helm            3.4.1           /Users/xxxx/.tool-versions
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>% helm version
+</span></span><span style="display:flex;"><span>version.BuildInfo<span style="color:#f92672">{</span>Version:<span style="color:#e6db74">&#34;v3.4.1&#34;</span>, GitCommit:<span style="color:#e6db74">&#34;c4e74854886b2efe3321e185578e6db9be0a6e29&#34;</span>, GitTreeState:<span style="color:#e6db74">&#34;clean&#34;</span>, GoVersion:<span style="color:#e6db74">&#34;go1.14.11&#34;</span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 ref="22-プラグインのアップデート" >2.2. プラグインのアップデート</h3><a class="anchor" id="22-プラグインのアップデート"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% asdf plugin update --all
+</span></span></code></pre></div><h3 ref="23-ツールのアンインストール" >2.3. ツールのアンインストール</h3><a class="anchor" id="23-ツールのアンインストール"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% asdf uninstall &lt;name&gt; &lt;version&gt;
+</span></span></code></pre></div><h3 ref="24-プラグインのアンインストール" >2.4. プラグインのアンインストール</h3><a class="anchor" id="24-プラグインのアンインストール"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% asdf plugin remove &lt;name&gt;
+</span></span></code></pre></div><h3 ref="25-困ったときは" >2.5. 困ったときは</h3><a class="anchor" id="25-困ったときは"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% asdf help
+</span></span></code></pre></div>
 		</div>
 
 

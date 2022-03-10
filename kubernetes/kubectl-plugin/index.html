@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -583,6 +583,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -677,7 +692,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -685,7 +700,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1139,6 +1154,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1455,118 +1485,118 @@ if (!doNotTrack) {
 <p><strong>kubectl plugin</strong> は kubectl のプラグイン機構で、kubectl に任意のサブコマンドを追加する機能である。<br>
 このプラグイン機構は、 <code>PATH</code> の通ったディレクトリに配置された実行ファイルの名前が特定のプレフィックスで開始しているものを呼び出すというもので、kubectl plugin の場合はプレフィックスが <code>kubectl-</code> 。<br>
 例えば <code>kubectl-foo</code> という実行ファイルを作成し、 <code>PATH</code> の通ったディレクトリに配置すると、 <code>kubectl foo</code> コマンドとして実行できる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% echo <span style="color:#e6db74">&#39;#!/bin/bash\n\necho &#34;foo&#34;&#39;</span> &gt; /usr/local/bin/kubectl-foo
-% chmod +x /usr/local/bin/kubectl-foo
-% /usr/local/bin/kubectl-foo
-foo
-% kubectl foo
-foo
-</code></pre></div><p><code>kubectl plugin list</code> コマンドで利用可能なプラグインの一覧を取得できる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% echo <span style="color:#e6db74">&#39;#!/bin/bash\n\necho &#34;foo&#34;&#39;</span> &gt; /usr/local/bin/kubectl-foo
+</span></span><span style="display:flex;"><span>% chmod +x /usr/local/bin/kubectl-foo
+</span></span><span style="display:flex;"><span>% /usr/local/bin/kubectl-foo
+</span></span><span style="display:flex;"><span>foo
+</span></span><span style="display:flex;"><span>% kubectl foo
+</span></span><span style="display:flex;"><span>foo
+</span></span></code></pre></div><p><code>kubectl plugin list</code> コマンドで利用可能なプラグインの一覧を取得できる。</p>
 <p>公式：<a href="https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/">Extend kubectl with plugins</a></p>
 <h2 ref="2-krew" >2. Krew</h2><a class="anchor" id="2-krew"></a>
 <p><a href="https://github.com/kubernetes-sigs/krew">Krew</a> は、 kubectl plugin をパッケージマネージャ Homebrew 風に管理できるツール。</p>
 <h3 ref="21-インストール" >2.1. インストール</h3><a class="anchor" id="21-インストール"></a>
 <p><a href="https://krew.sigs.k8s.io/docs/user-guide/setup/install/">公式</a> を参照するのが望ましいが、ここでは実際にやった手順を残しておく。</p>
 <p><code>git</code> がインストールされていることを確認した後、以下を実行する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% <span style="color:#f92672">(</span>
-  set -x; cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>mktemp -d<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
-  OS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>uname | tr <span style="color:#e6db74">&#39;[:upper:]&#39;</span> <span style="color:#e6db74">&#39;[:lower:]&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
-  ARCH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>uname -m | sed -e <span style="color:#e6db74">&#39;s/x86_64/amd64/&#39;</span> -e <span style="color:#e6db74">&#39;s/\(arm\)\(64\)\?.*/\1\2/&#39;</span> -e <span style="color:#e6db74">&#39;s/aarch64$/arm64/&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
-  curl -fsSLO <span style="color:#e6db74">&#34;https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
-  tar zxvf krew.tar.gz <span style="color:#f92672">&amp;&amp;</span>
-  KREW<span style="color:#f92672">=</span>./krew-<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>OS<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">${</span>ARCH<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
-  <span style="color:#e6db74">&#34;</span>$KREW<span style="color:#e6db74">&#34;</span> install krew
-<span style="color:#f92672">)</span>
-
-（中略）
-
-<span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> | Use this plugin:
- |      kubectl krew
- | Documentation:
- |      https://krew.sigs.k8s.io/
- | Caveats:
- | <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> |  | krew is now installed! To start using kubectl plugins, you need to add
- |  | krew<span style="color:#960050;background-color:#1e0010">&#39;</span>s installation directory to your PATH:
- |  | 
- |  |   * macOS/Linux:
- |  |     - Add the following to your ~/.bashrc or ~/.zshrc:
- |  |         export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>KREW_ROOT<span style="color:#66d9ef">:-</span>$HOME/.krew<span style="color:#e6db74">}</span><span style="color:#e6db74">/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
- |  |     - Restart your shell.
- |  | 
- |  |   * Windows: Add %USERPROFILE%<span style="color:#ae81ff">\.</span>krew<span style="color:#ae81ff">\b</span>in to your PATH environment variable
- |  | 
- |  | To list krew commands and to get help, run:
- |  |   $ kubectl krew
- |  | For a full list of available plugins, run:
- |  |   $ kubectl krew search
- |  | 
- |  | You can find documentation at
- |  |   https://krew.sigs.k8s.io/docs/user-guide/quickstart/.
- | /
-/
-</code></pre></div><p><code>$HOME/.krew/bin</code> ディレクトリを作成し、パスを通す。（もちろん、プロファイルに記載する）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>KREW_ROOT<span style="color:#66d9ef">:-</span>$HOME/.krew<span style="color:#e6db74">}</span><span style="color:#e6db74">/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
-</code></pre></div><p><code>kubectl krew</code> コマンドを実行し、 Usage が表示されてば完了。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% <span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>  set -x; cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>mktemp -d<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>  OS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>uname | tr <span style="color:#e6db74">&#39;[:upper:]&#39;</span> <span style="color:#e6db74">&#39;[:lower:]&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>  ARCH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>uname -m | sed -e <span style="color:#e6db74">&#39;s/x86_64/amd64/&#39;</span> -e <span style="color:#e6db74">&#39;s/\(arm\)\(64\)\?.*/\1\2/&#39;</span> -e <span style="color:#e6db74">&#39;s/aarch64$/arm64/&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>  curl -fsSLO <span style="color:#e6db74">&#34;https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>  tar zxvf krew.tar.gz <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>  KREW<span style="color:#f92672">=</span>./krew-<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>OS<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">${</span>ARCH<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;</span>$KREW<span style="color:#e6db74">&#34;</span> install krew
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>（中略）
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> | Use this plugin:
+</span></span><span style="display:flex;"><span> |      kubectl krew
+</span></span><span style="display:flex;"><span> | Documentation:
+</span></span><span style="display:flex;"><span> |      https://krew.sigs.k8s.io/
+</span></span><span style="display:flex;"><span> | Caveats:
+</span></span><span style="display:flex;"><span> | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> |  | krew is now installed! To start using kubectl plugins, you need to add
+</span></span><span style="display:flex;"><span> |  | krew<span style="color:#960050;background-color:#1e0010">&#39;</span>s installation directory to your PATH:
+</span></span><span style="display:flex;"><span> |  | 
+</span></span><span style="display:flex;"><span> |  |   * macOS/Linux:
+</span></span><span style="display:flex;"><span> |  |     - Add the following to your ~/.bashrc or ~/.zshrc:
+</span></span><span style="display:flex;"><span> |  |         export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>KREW_ROOT<span style="color:#66d9ef">:-</span>$HOME/.krew<span style="color:#e6db74">}</span><span style="color:#e6db74">/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span> |  |     - Restart your shell.
+</span></span><span style="display:flex;"><span> |  | 
+</span></span><span style="display:flex;"><span> |  |   * Windows: Add %USERPROFILE%<span style="color:#ae81ff">\.</span>krew<span style="color:#ae81ff">\b</span>in to your PATH environment variable
+</span></span><span style="display:flex;"><span> |  | 
+</span></span><span style="display:flex;"><span> |  | To list krew commands and to get help, run:
+</span></span><span style="display:flex;"><span> |  |   $ kubectl krew
+</span></span><span style="display:flex;"><span> |  | For a full list of available plugins, run:
+</span></span><span style="display:flex;"><span> |  |   $ kubectl krew search
+</span></span><span style="display:flex;"><span> |  | 
+</span></span><span style="display:flex;"><span> |  | You can find documentation at
+</span></span><span style="display:flex;"><span> |  |   https://krew.sigs.k8s.io/docs/user-guide/quickstart/.
+</span></span><span style="display:flex;"><span> | /
+</span></span><span style="display:flex;"><span>/
+</span></span></code></pre></div><p><code>$HOME/.krew/bin</code> ディレクトリを作成し、パスを通す。（もちろん、プロファイルに記載する）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>KREW_ROOT<span style="color:#66d9ef">:-</span>$HOME/.krew<span style="color:#e6db74">}</span><span style="color:#e6db74">/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p><code>kubectl krew</code> コマンドを実行し、 Usage が表示されてば完了。<br>
 また、 Krew 自身も kubectl plugin なので、 <code>kubectl plugin list</code> で表示される。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% kubectl plugin list
-The following compatible plugins are available:
-
-/Users/pepese/.krew/bin/kubectl-krew
-</code></pre></div><p>アンインストールしたい場合は、 <code>rm -rf -- ~/.krew</code> 実行と、環境変数を設定したプロファイルを削除すればいい。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% kubectl plugin list
+</span></span><span style="display:flex;"><span>The following compatible plugins are available:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/Users/pepese/.krew/bin/kubectl-krew
+</span></span></code></pre></div><p>アンインストールしたい場合は、 <code>rm -rf -- ~/.krew</code> 実行と、環境変数を設定したプロファイルを削除すればいい。</p>
 <h3 ref="22-クイックスタート" >2.2. クイックスタート</h3><a class="anchor" id="22-クイックスタート"></a>
 <p>先に同じく <a href="https://krew.sigs.k8s.io/docs/user-guide/quickstart/">公式</a> を参照するのが、望ましいがここでは実際にやった手順を残しておく。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh"><span style="color:#75715e"># プラグインリストの更新</span>
-% kubectl krew update
-
-<span style="color:#75715e"># プラグインの検索</span>
-% kubectl krew search
-（いっぱい出る）
-
-<span style="color:#75715e"># プラグイン検索（キーワード指定）</span>
-% kubectl krew search ctx
-NAME           DESCRIPTION                                      INSTALLED
-access-matrix  Show an RBAC access matrix <span style="color:#66d9ef">for</span> server resources  no
-allctx         Run commands on contexts in your kubeconfig      no
-ctx            Switch between contexts in your kubeconfig       no
-
-<span style="color:#75715e"># プラグインのインストール</span>
-% kubectl krew install ctx
-Updated the local copy of plugin index.
-Installing plugin: ctx
-Installed plugin: ctx
-<span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> | Use this plugin:
- |      kubectl ctx
- | Documentation:
- |      https://github.com/ahmetb/kubectx
- | Caveats:
- | <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> |  | If fzf is installed on your machine, you can interactively choose
- |  | between the entries using the arrow keys, or by fuzzy searching
- |  | as you type.
- |  | See https://github.com/ahmetb/kubectx <span style="color:#66d9ef">for</span> customization and details.
- | /
-/
-WARNING: You installed plugin <span style="color:#e6db74">&#34;ctx&#34;</span> from the krew-index plugin repository.
-   These plugins are not audited <span style="color:#66d9ef">for</span> security by the Krew maintainers.
-   Run them at your own risk.
-
-<span style="color:#75715e"># プラグインの実行</span>
-% kubectl ctx
-
-<span style="color:#75715e"># プラグインの更新</span>
-% kubectl krew upgrade
-Updated the local copy of plugin index.
-Upgrading plugin: ctx
-Skipping plugin ctx, it is already on the newest version
-Upgrading plugin: krew
-Skipping plugin krew, it is already on the newest version
-
-<span style="color:#75715e"># プラグインのアンインストール</span>
-% kubectl krew uninstall ctx
-</code></pre></div><h2 ref="参考" >参考</h2><a class="anchor" id="参考"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span><span style="color:#75715e"># プラグインリストの更新</span>
+</span></span><span style="display:flex;"><span>% kubectl krew update
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># プラグインの検索</span>
+</span></span><span style="display:flex;"><span>% kubectl krew search
+</span></span><span style="display:flex;"><span>（いっぱい出る）
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># プラグイン検索（キーワード指定）</span>
+</span></span><span style="display:flex;"><span>% kubectl krew search ctx
+</span></span><span style="display:flex;"><span>NAME           DESCRIPTION                                      INSTALLED
+</span></span><span style="display:flex;"><span>access-matrix  Show an RBAC access matrix <span style="color:#66d9ef">for</span> server resources  no
+</span></span><span style="display:flex;"><span>allctx         Run commands on contexts in your kubeconfig      no
+</span></span><span style="display:flex;"><span>ctx            Switch between contexts in your kubeconfig       no
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># プラグインのインストール</span>
+</span></span><span style="display:flex;"><span>% kubectl krew install ctx
+</span></span><span style="display:flex;"><span>Updated the local copy of plugin index.
+</span></span><span style="display:flex;"><span>Installing plugin: ctx
+</span></span><span style="display:flex;"><span>Installed plugin: ctx
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> | Use this plugin:
+</span></span><span style="display:flex;"><span> |      kubectl ctx
+</span></span><span style="display:flex;"><span> | Documentation:
+</span></span><span style="display:flex;"><span> |      https://github.com/ahmetb/kubectx
+</span></span><span style="display:flex;"><span> | Caveats:
+</span></span><span style="display:flex;"><span> | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> |  | If fzf is installed on your machine, you can interactively choose
+</span></span><span style="display:flex;"><span> |  | between the entries using the arrow keys, or by fuzzy searching
+</span></span><span style="display:flex;"><span> |  | as you type.
+</span></span><span style="display:flex;"><span> |  | See https://github.com/ahmetb/kubectx <span style="color:#66d9ef">for</span> customization and details.
+</span></span><span style="display:flex;"><span> | /
+</span></span><span style="display:flex;"><span>/
+</span></span><span style="display:flex;"><span>WARNING: You installed plugin <span style="color:#e6db74">&#34;ctx&#34;</span> from the krew-index plugin repository.
+</span></span><span style="display:flex;"><span>   These plugins are not audited <span style="color:#66d9ef">for</span> security by the Krew maintainers.
+</span></span><span style="display:flex;"><span>   Run them at your own risk.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># プラグインの実行</span>
+</span></span><span style="display:flex;"><span>% kubectl ctx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># プラグインの更新</span>
+</span></span><span style="display:flex;"><span>% kubectl krew upgrade
+</span></span><span style="display:flex;"><span>Updated the local copy of plugin index.
+</span></span><span style="display:flex;"><span>Upgrading plugin: ctx
+</span></span><span style="display:flex;"><span>Skipping plugin ctx, it is already on the newest version
+</span></span><span style="display:flex;"><span>Upgrading plugin: krew
+</span></span><span style="display:flex;"><span>Skipping plugin krew, it is already on the newest version
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># プラグインのアンインストール</span>
+</span></span><span style="display:flex;"><span>% kubectl krew uninstall ctx
+</span></span></code></pre></div><h2 ref="参考" >参考</h2><a class="anchor" id="参考"></a>
 <ul>
 <li><a href="https://krew.sigs.k8s.io/docs/">公式ドキュメント</a></li>
 <li><a href="https://qiita.com/superbrothers/items/b4a0aab0575ca6d65739">kubectl のプラグイン機能 kubectl plugin を使おう！</a></li>

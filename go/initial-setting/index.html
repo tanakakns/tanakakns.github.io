@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -584,6 +584,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -678,7 +693,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -686,7 +701,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1140,6 +1155,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1486,44 +1516,44 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p><code>.zshenv</code> （ bash の場合は <code>.bash_profile</code> ）に以下を追記。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">export GOROOT<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>go env GOROOT<span style="color:#e6db74">`</span>
-export GOPATH<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>go env GOPATH<span style="color:#e6db74">`</span>
-export PATH<span style="color:#f92672">=</span>$GOPATH/bin:$PATH
-<span style="color:#75715e"># export PATH=$GOROOT/bin:$GOPATH/bin:$PATH</span>
-export GO111MODULE<span style="color:#f92672">=</span>on
-</code></pre></div><p>反映。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% exec $SHELL -l
-</code></pre></div><p>また、 <code>$GOPATH</code> 以下のディレクトリ構造は以下のようになる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">$GOPATH
-├─bin/ <span style="color:#75715e"># Goツール類の実行ファイルが格納されるディレクトリ</span>
-├─pkg/ <span style="color:#75715e"># ビルドしたパッケージオブジェクトが格納されるディレクトリ</span>
-│  ├─darwin_amd64/
-│  │ ├─github.com/
-│  │ │  └─GitHubアカウント名
-│  │ │    ├─<span style="color:#e6db74">`</span>*.a<span style="color:#e6db74">`</span>ファイル<span style="color:#f92672">[</span>^1<span style="color:#f92672">]</span>
-│  │ │    └─GitHubレポジトリ名/<span style="color:#e6db74">`</span>*.a<span style="color:#e6db74">`</span>ファイル<span style="color:#f92672">[</span>^2<span style="color:#f92672">]</span>
-│  │ └─pkg.in/
-│  │   ├─パッケージ名/
-│  │   └─<span style="color:#e6db74">`</span>*.a<span style="color:#e6db74">`</span>ファイル
-│  └─mod/ <span style="color:#75715e"># Go Modules で取得したモジュール類が格納されるディレクトリ</span>
-│    ├─cache/ <span style="color:#75715e"># download したモジュール類のメタ情報や実態のzipなどのキャッシュ</span>
-│    ├─github.com/ <span style="color:#75715e"># リポジトリから取得したモジュール</span>
-│    └─gopkg.in/ <span style="color:#75715e"># リポジトリから取得したモジュール</span>
-└─src/ <span style="color:#75715e"># パッケージごとのソースコードを配置するディレクトリ</span>
-  ├─gopkg.in/
-  │  └─パッケージ名/
-  │    └─LICENSEとか<span style="color:#e6db74">`</span>*.go<span style="color:#e6db74">`</span>とかREADMEとか
-  └─github.com/
-    ├─GitHubアカウント名
-    │  └─GitHubレポジトリ名/
-    │    └─LICENSEとか<span style="color:#e6db74">`</span>*.go<span style="color:#e6db74">`</span>とかREADMEとか
-    └─&lt;あなたのGitHubユーザ名&gt; <span style="color:#75715e"># Go Modules OFF の場合</span>
-      └─GitHubレポジトリ名/ <span style="color:#75715e"># プロジェクトディレクトリ（複数）</span>
-        ├─go.mod
-        ├─go.sum
-        ├─main.go
-        └─その他、あなたが開発中のソフトウェアのコード
-</code></pre></div><h2 ref="2-go-modules" >2. Go Modules</h2><a class="anchor" id="2-go-modules"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>export GOROOT<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>go env GOROOT<span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>export GOPATH<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>go env GOPATH<span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>$GOPATH/bin:$PATH
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># export PATH=$GOROOT/bin:$GOPATH/bin:$PATH</span>
+</span></span><span style="display:flex;"><span>export GO111MODULE<span style="color:#f92672">=</span>on
+</span></span></code></pre></div><p>反映。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% exec $SHELL -l
+</span></span></code></pre></div><p>また、 <code>$GOPATH</code> 以下のディレクトリ構造は以下のようになる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>$GOPATH
+</span></span><span style="display:flex;"><span>├─bin/ <span style="color:#75715e"># Goツール類の実行ファイルが格納されるディレクトリ</span>
+</span></span><span style="display:flex;"><span>├─pkg/ <span style="color:#75715e"># ビルドしたパッケージオブジェクトが格納されるディレクトリ</span>
+</span></span><span style="display:flex;"><span>│  ├─darwin_amd64/
+</span></span><span style="display:flex;"><span>│  │ ├─github.com/
+</span></span><span style="display:flex;"><span>│  │ │  └─GitHubアカウント名
+</span></span><span style="display:flex;"><span>│  │ │    ├─<span style="color:#e6db74">`</span>*.a<span style="color:#e6db74">`</span>ファイル<span style="color:#f92672">[</span>^1<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>│  │ │    └─GitHubレポジトリ名/<span style="color:#e6db74">`</span>*.a<span style="color:#e6db74">`</span>ファイル<span style="color:#f92672">[</span>^2<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>│  │ └─pkg.in/
+</span></span><span style="display:flex;"><span>│  │   ├─パッケージ名/
+</span></span><span style="display:flex;"><span>│  │   └─<span style="color:#e6db74">`</span>*.a<span style="color:#e6db74">`</span>ファイル
+</span></span><span style="display:flex;"><span>│  └─mod/ <span style="color:#75715e"># Go Modules で取得したモジュール類が格納されるディレクトリ</span>
+</span></span><span style="display:flex;"><span>│    ├─cache/ <span style="color:#75715e"># download したモジュール類のメタ情報や実態のzipなどのキャッシュ</span>
+</span></span><span style="display:flex;"><span>│    ├─github.com/ <span style="color:#75715e"># リポジトリから取得したモジュール</span>
+</span></span><span style="display:flex;"><span>│    └─gopkg.in/ <span style="color:#75715e"># リポジトリから取得したモジュール</span>
+</span></span><span style="display:flex;"><span>└─src/ <span style="color:#75715e"># パッケージごとのソースコードを配置するディレクトリ</span>
+</span></span><span style="display:flex;"><span>  ├─gopkg.in/
+</span></span><span style="display:flex;"><span>  │  └─パッケージ名/
+</span></span><span style="display:flex;"><span>  │    └─LICENSEとか<span style="color:#e6db74">`</span>*.go<span style="color:#e6db74">`</span>とかREADMEとか
+</span></span><span style="display:flex;"><span>  └─github.com/
+</span></span><span style="display:flex;"><span>    ├─GitHubアカウント名
+</span></span><span style="display:flex;"><span>    │  └─GitHubレポジトリ名/
+</span></span><span style="display:flex;"><span>    │    └─LICENSEとか<span style="color:#e6db74">`</span>*.go<span style="color:#e6db74">`</span>とかREADMEとか
+</span></span><span style="display:flex;"><span>    └─&lt;あなたのGitHubユーザ名&gt; <span style="color:#75715e"># Go Modules OFF の場合</span>
+</span></span><span style="display:flex;"><span>      └─GitHubレポジトリ名/ <span style="color:#75715e"># プロジェクトディレクトリ（複数）</span>
+</span></span><span style="display:flex;"><span>        ├─go.mod
+</span></span><span style="display:flex;"><span>        ├─go.sum
+</span></span><span style="display:flex;"><span>        ├─main.go
+</span></span><span style="display:flex;"><span>        └─その他、あなたが開発中のソフトウェアのコード
+</span></span></code></pre></div><h2 ref="2-go-modules" >2. Go Modules</h2><a class="anchor" id="2-go-modules"></a>
 <p>Go v1.11 から導入 Go v1.12 から正式リリースされている依存関係管理ツール <strong>Go Modules</strong> （旧名 vgo）の概要について記載する。</p>
 <ul>
 <li>Minimal Version Selection
@@ -1565,21 +1595,21 @@ export GO111MODULE<span style="color:#f92672">=</span>on
 また、 <code>$GOPATH</code> 配下以外でプロジェクトを作成する場合であっても module-aware mode を利用すれば <code>$GOPATH/pkg/mod</code> 配下で依存モジュールが管理される。</p>
 <h2 ref="3-プロジェクトの作成" >3. プロジェクトの作成</h2><a class="anchor" id="3-プロジェクトの作成"></a>
 <p><code>$GOPATH</code> 配下で github および Go Modules を利用したプロジェクトの初回作成は以下のような感じ。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% mkdir -p $GOPATH/src/github.com/&lt;あなたのGithubアカウント名&gt;
-% cd $GOPATH/src/github.com/&lt;あなたのGithubアカウント名&gt;
-% mkdir &lt;golangプロジェクト&gt; <span style="color:#75715e"># プロジェクトディレクトリの作成</span>
-% cd &lt;golangプロジェクト&gt;
-% export GO111MODULE<span style="color:#f92672">=</span>on
-% go mod init              <span style="color:#75715e"># `GO111MODULE=on go mod init` のように一行でも</span>
-go: creating new go.mod: module github.com/&lt;あなたのGithubアカウント名&gt;/&lt;golangプロジェクト&gt;
-% ls
-go.mod
-% touch main.go             <span style="color:#75715e"># 依存ライブラリ含め好きなコード書く</span>
-% go mod tidy              <span style="color:#75715e"># 依存ライブラリの解決</span>
-% go run main.go            <span style="color:#75715e"># ビルド+実行</span>
-% go build main.go          <span style="color:#75715e"># ビルド</span>
-% ./main
-</code></pre></div><p>基本的にはどこのディレクトリで開発しようとも <strong>module-aware mode</strong> で開発することになると思う。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% mkdir -p $GOPATH/src/github.com/&lt;あなたのGithubアカウント名&gt;
+</span></span><span style="display:flex;"><span>% cd $GOPATH/src/github.com/&lt;あなたのGithubアカウント名&gt;
+</span></span><span style="display:flex;"><span>% mkdir &lt;golangプロジェクト&gt; <span style="color:#75715e"># プロジェクトディレクトリの作成</span>
+</span></span><span style="display:flex;"><span>% cd &lt;golangプロジェクト&gt;
+</span></span><span style="display:flex;"><span>% export GO111MODULE<span style="color:#f92672">=</span>on
+</span></span><span style="display:flex;"><span>% go mod init              <span style="color:#75715e"># `GO111MODULE=on go mod init` のように一行でも</span>
+</span></span><span style="display:flex;"><span>go: creating new go.mod: module github.com/&lt;あなたのGithubアカウント名&gt;/&lt;golangプロジェクト&gt;
+</span></span><span style="display:flex;"><span>% ls
+</span></span><span style="display:flex;"><span>go.mod
+</span></span><span style="display:flex;"><span>% touch main.go             <span style="color:#75715e"># 依存ライブラリ含め好きなコード書く</span>
+</span></span><span style="display:flex;"><span>% go mod tidy              <span style="color:#75715e"># 依存ライブラリの解決</span>
+</span></span><span style="display:flex;"><span>% go run main.go            <span style="color:#75715e"># ビルド+実行</span>
+</span></span><span style="display:flex;"><span>% go build main.go          <span style="color:#75715e"># ビルド</span>
+</span></span><span style="display:flex;"><span>% ./main
+</span></span></code></pre></div><p>基本的にはどこのディレクトリで開発しようとも <strong>module-aware mode</strong> で開発することになると思う。</p>
 <h2 ref="4-vs-code" >4. VS Code</h2><a class="anchor" id="4-vs-code"></a>
 <h3 ref="41-拡張機能" >4.1. 拡張機能</h3><a class="anchor" id="41-拡張機能"></a>
 <p>VS Code には Go の各種ツールと連携する拡張機能があり、 VS Code 内ターミナルから以下のようにコマンドラインツールを導入することにより自動で拡張機能インストールの案内をしてくれる。<br>
@@ -1677,21 +1707,21 @@ Go の拡張機能をインストールしてから、VSCode でコマンドパ�
 </ul>
 <h3 ref="42-editorconfig" >4.2. .editorconfig</h3><a class="anchor" id="42-editorconfig"></a>
 <p>VS Code に <code>EditorConfig for VS Code</code> をインストールして、プロジェクトルートに以下の <code>.editorconfig</code> を配置する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">root = true
-
-[*]
-end_of_line = lf
-insert_final_newline = true
-trim_trailing_whitespace = false
-charset = utf-8
-indent_style = space
-indent_size = 2
-
-[{Makefile,go.mod,go.sum,*.go}]
-indent_style = tab
-indent_size = 4
-trim_trailing_whitespace = true
-</code></pre></div><p>Go のインデントは <strong>ハードタブ</strong> が推奨される。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>root = true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[*]
+</span></span><span style="display:flex;"><span>end_of_line = lf
+</span></span><span style="display:flex;"><span>insert_final_newline = true
+</span></span><span style="display:flex;"><span>trim_trailing_whitespace = false
+</span></span><span style="display:flex;"><span>charset = utf-8
+</span></span><span style="display:flex;"><span>indent_style = space
+</span></span><span style="display:flex;"><span>indent_size = 2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[{Makefile,go.mod,go.sum,*.go}]
+</span></span><span style="display:flex;"><span>indent_style = tab
+</span></span><span style="display:flex;"><span>indent_size = 4
+</span></span><span style="display:flex;"><span>trim_trailing_whitespace = true
+</span></span></code></pre></div><p>Go のインデントは <strong>ハードタブ</strong> が推奨される。</p>
 <h3 ref="43-デバッグ実行" >4.3. デバッグ実行</h3><a class="anchor" id="43-デバッグ実行"></a>
 <p>デバッガとして <strong>Delve</strong> を導入する。</p>
 <ul>
@@ -1745,21 +1775,21 @@ trim_trailing_whitespace = true
 今回はデバッガのステップインでコードを掘っていったが、カーソルがあたっている位置の関数で <code>Go to Definition</code> （ <code>F12</code> ）しても関数の定義に飛ぶ。<br>
 また、カーソルがあたっている位置の関数や変数で <code>Find All Reference</code> （ <code>Shift+F12</code> ） すれば、使われている位置がリストされる。</p>
 <h2 ref="5-docker-によるマルチステージビルド" >5. docker によるマルチステージビルド</h2><a class="anchor" id="5-docker-によるマルチステージビルド"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> golang:1.13.3-alpine3.10 as build</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /build</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> go.mod .<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> go.sum .<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> go mod download<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> . .<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> CGO_ENABLED<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> GOOS<span style="color:#f92672">=</span>linux GOARCH<span style="color:#f92672">=</span>amd64 go build main.go<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> alpine:3.10</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apk add --no-cache tzdata<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> TZ Asia/Tokyo<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>build /build/main /usr/local/bin/main<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8080</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;/usr/local/bin/main&#34;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> golang:1.13.3-alpine3.10 as build</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /build</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> go.mod .<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> go.sum .<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> go mod download<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> . .<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> CGO_ENABLED<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> GOOS<span style="color:#f92672">=</span>linux GOARCH<span style="color:#f92672">=</span>amd64 go build main.go<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> alpine:3.10</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apk add --no-cache tzdata<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> TZ Asia/Tokyo<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>build /build/main /usr/local/bin/main<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8080</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;/usr/local/bin/main&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div>
 		</div>
 
 

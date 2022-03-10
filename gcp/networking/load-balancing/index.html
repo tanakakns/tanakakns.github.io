@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -583,6 +583,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -677,7 +692,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -685,7 +700,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1137,6 +1152,21 @@ if (!doNotTrack) {
       
       
           <a href="/terraform/basic/">入門</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
       
         
       
@@ -1620,126 +1650,126 @@ if (!doNotTrack) {
 </ul>
 <h3 ref="22-ネットワークロードバランサの作成" >2.2. ネットワークロードバランサの作成</h3><a class="anchor" id="22-ネットワークロードバランサの作成"></a>
 <p>デフォルトのリージョンとゾーンを設定する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud config set compute/zone us-central1-a
-$ gcloud config set compute/region us-central1
-</code></pre></div><p>3 つの Web サーバを構築する。（インスタンス名のみ異なり、それぞれ metadata の startup-script で apache をインストール・起動している。）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances create www1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --image-family debian-9 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --image-project debian-cloud <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --zone us-central1-a <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --tags network-lb-tag <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --metadata startup-script<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#! /bin/bash
-</span><span style="color:#e6db74">    sudo apt-get update
-</span><span style="color:#e6db74">    sudo apt-get install apache2 -y
-</span><span style="color:#e6db74">    sudo service apache2 restart
-</span><span style="color:#e6db74">    echo &#39;&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www1&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#39; | tee /var/www/html/index.html&#34;</span>
-
-$ gcloud compute instances create www2 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --image-family debian-9 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --image-project debian-cloud <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --zone us-central1-a <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --tags network-lb-tag <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --metadata startup-script<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#! /bin/bash
-</span><span style="color:#e6db74">    sudo apt-get update
-</span><span style="color:#e6db74">    sudo apt-get install apache2 -y
-</span><span style="color:#e6db74">    sudo service apache2 restart
-</span><span style="color:#e6db74">    echo &#39;&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www2&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#39; | tee /var/www/html/index.html&#34;</span>
-
-$ gcloud compute instances create www3 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --image-family debian-9 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --image-project debian-cloud <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --zone us-central1-a <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --tags network-lb-tag <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --metadata startup-script<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#! /bin/bash
-</span><span style="color:#e6db74">    sudo apt-get update
-</span><span style="color:#e6db74">    sudo apt-get install apache2 -y
-</span><span style="color:#e6db74">    sudo service apache2 restart
-</span><span style="color:#e6db74">    echo &#39;&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www3&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#39; | tee /var/www/html/index.html&#34;</span>
-</code></pre></div><p>上記のインスタンスに適用するファイアウォール（ <code>network-lb-tag</code> がついたインスタンスに対して <code>80</code> ポートアクセスを許可）を作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules create www-firewall-network-lb <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-tags network-lb-tag --allow tcp:80
-
-Creating firewall...⠹Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/firewalls/www-firewall-network-lb<span style="color:#f92672">]</span>.
-Creating firewall...done.
-NAME                     NETWORK  DIRECTION  PRIORITY  ALLOW   DENY  DISABLED
-www-firewall-network-lb  default  INGRESS    <span style="color:#ae81ff">1000</span>      tcp:80        False
-</code></pre></div><p>インスタンス一覧から「 EXTERNAL_IP 」を確認して、それぞれ <code>curl</code> で疎通する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instances list
-NAME  ZONE           MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
-www1  us-central1-a  n1-standard-1               10.128.0.2   35.238.246.91   RUNNING
-www2  us-central1-a  n1-standard-1               10.128.0.3   35.232.249.208  RUNNING
-www3  us-central1-a  n1-standard-1               10.128.0.4   34.123.247.106  RUNNING
-
-$ curl http://35.238.246.91
-!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www1&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;
-
-$ curl http://35.232.249.208
-!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www2&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;
-
-$ curl http://34.123.247.106
-!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www3&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;
-</code></pre></div><p>ここまでが、負荷分散対象となる Web サーバ群の作成。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud config set compute/zone us-central1-a
+</span></span><span style="display:flex;"><span>$ gcloud config set compute/region us-central1
+</span></span></code></pre></div><p>3 つの Web サーバを構築する。（インスタンス名のみ異なり、それぞれ metadata の startup-script で apache をインストール・起動している。）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute instances create www1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --image-family debian-9 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --image-project debian-cloud <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --zone us-central1-a <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --tags network-lb-tag <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --metadata startup-script<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#! /bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo apt-get update
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo apt-get install apache2 -y
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo service apache2 restart
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    echo &#39;&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www1&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#39; | tee /var/www/html/index.html&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instances create www2 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --image-family debian-9 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --image-project debian-cloud <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --zone us-central1-a <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --tags network-lb-tag <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --metadata startup-script<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#! /bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo apt-get update
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo apt-get install apache2 -y
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo service apache2 restart
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    echo &#39;&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www2&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#39; | tee /var/www/html/index.html&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instances create www3 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --image-family debian-9 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --image-project debian-cloud <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --zone us-central1-a <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --tags network-lb-tag <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --metadata startup-script<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#! /bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo apt-get update
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo apt-get install apache2 -y
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo service apache2 restart
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    echo &#39;&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www3&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#39; | tee /var/www/html/index.html&#34;</span>
+</span></span></code></pre></div><p>上記のインスタンスに適用するファイアウォール（ <code>network-lb-tag</code> がついたインスタンスに対して <code>80</code> ポートアクセスを許可）を作成する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute firewall-rules create www-firewall-network-lb <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-tags network-lb-tag --allow tcp:80
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Creating firewall...⠹Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/firewalls/www-firewall-network-lb<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>Creating firewall...done.
+</span></span><span style="display:flex;"><span>NAME                     NETWORK  DIRECTION  PRIORITY  ALLOW   DENY  DISABLED
+</span></span><span style="display:flex;"><span>www-firewall-network-lb  default  INGRESS    <span style="color:#ae81ff">1000</span>      tcp:80        False
+</span></span></code></pre></div><p>インスタンス一覧から「 EXTERNAL_IP 」を確認して、それぞれ <code>curl</code> で疎通する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute instances list
+</span></span><span style="display:flex;"><span>NAME  ZONE           MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
+</span></span><span style="display:flex;"><span>www1  us-central1-a  n1-standard-1               10.128.0.2   35.238.246.91   RUNNING
+</span></span><span style="display:flex;"><span>www2  us-central1-a  n1-standard-1               10.128.0.3   35.232.249.208  RUNNING
+</span></span><span style="display:flex;"><span>www3  us-central1-a  n1-standard-1               10.128.0.4   34.123.247.106  RUNNING
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ curl http://35.238.246.91
+</span></span><span style="display:flex;"><span>!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www1&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ curl http://35.232.249.208
+</span></span><span style="display:flex;"><span>!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www2&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ curl http://34.123.247.106
+</span></span><span style="display:flex;"><span>!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;www3&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;
+</span></span></code></pre></div><p>ここまでが、負荷分散対象となる Web サーバ群の作成。</p>
 <p>ターゲット プールベースのネットワーク ロードバランサを作成して上記 3 つの Web サーバを適用する。<br>
 まずは、静的外部 IP アドレスを作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute addresses create network-lb-ip-1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> --region us-central1
-
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/addresses/network-lb-ip-1<span style="color:#f92672">]</span>.
-</code></pre></div><p>次に、レガシー HTTP ヘルスチェック リソースを作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute http-health-checks create basic-check
-
-NAME         HOST  PORT  REQUEST_PATH
-basic-check        <span style="color:#ae81ff">80</span>    /
-</code></pre></div><p>次に、インスタンスと同じリージョンに <strong>ターゲットプール</strong> を追加する。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute addresses create network-lb-ip-1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --region us-central1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/addresses/network-lb-ip-1<span style="color:#f92672">]</span>.
+</span></span></code></pre></div><p>次に、レガシー HTTP ヘルスチェック リソースを作成する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute http-health-checks create basic-check
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NAME         HOST  PORT  REQUEST_PATH
+</span></span><span style="display:flex;"><span>basic-check        <span style="color:#ae81ff">80</span>    /
+</span></span></code></pre></div><p>次に、インスタンスと同じリージョンに <strong>ターゲットプール</strong> を追加する。<br>
 ターゲットプールが機能するにはヘルスチェックが必要なため、先ほど作成した HTTP ヘルスチェックリソースを適用して作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ 
-gcloud compute target-pools create www-pool <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region us-central1 --http-health-check basic-check
-
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/targetPools/www-pool<span style="color:#f92672">]</span>.
-NAME      REGION       SESSION_AFFINITY  BACKUP  HEALTH_CHECKS
-www-pool  us-central1  NONE                      basic-check
-</code></pre></div><p>ターゲットプールに 3 つの Web サーバインスタンスを追加する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute target-pools add-instances www-pool <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --instances www1,www2,www3
-
-Updated <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/targetPools/www-pool<span style="color:#f92672">]</span>.
-</code></pre></div><p>静的外部 IP アドレスに来たトラフィックを ターゲットプールに転送する <strong>転送ルール</strong> を作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute forwarding-rules create www-rule <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region us-central1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ports <span style="color:#ae81ff">80</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --address network-lb-ip-1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-pool www-pool
-
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/forwardingRules/www-rule<span style="color:#f92672">]</span>.
-</code></pre></div><p>これで、静的外部 IP にアクセスすれば、 3 つの Web サーバに負荷分散される。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute addresses list
-NAME             ADDRESS/RANGE  TYPE      PURPOSE  NETWORK  REGION       SUBNET  STATUS
-network-lb-ip-1  35.232.6.132   EXTERNAL                    us-central1          IN_USE <span style="color:#75715e"># IP 確認</span>
-
-$ gcloud compute forwarding-rules describe www-rule --region us-central1
-IPAddress: 35.232.6.132 <span style="color:#75715e"># IP 確認</span>
-IPProtocol: TCP
-creationTimestamp: <span style="color:#e6db74">&#39;2021-04-07T05:45:21.364-07:00&#39;</span>
-description: <span style="color:#e6db74">&#39;&#39;</span>
-fingerprint: NinUJkv44qA<span style="color:#f92672">=</span>
-id: <span style="color:#e6db74">&#39;3582287157978470286&#39;</span>
-kind: compute#forwardingRule
-labelFingerprint: 42WmSpB8rSM<span style="color:#f92672">=</span>
-loadBalancingScheme: EXTERNAL
-name: www-rule
-networkTier: PREMIUM
-portRange: 80-80
-region: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1
-selfLink: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/forwardingRules/www-rule
-target: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/targetPools/www-pool
-
-$ curl http://35.232.6.132
-
-<span style="color:#75715e"># 連続で負荷分散の様子を確認</span>
-$ <span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do</span> curl -m1 35.232.6.132; <span style="color:#66d9ef">done</span>
-<span style="color:#75715e"># www1/2/3 が不規則に出る</span>
-</code></pre></div><h3 ref="23-https-ロードバランサのコンセプト" >2.3. HTTP(S) ロードバランサのコンセプト</h3><a class="anchor" id="23-https-ロードバランサのコンセプト"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ 
+</span></span><span style="display:flex;"><span>gcloud compute target-pools create www-pool <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region us-central1 --http-health-check basic-check
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/targetPools/www-pool<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>NAME      REGION       SESSION_AFFINITY  BACKUP  HEALTH_CHECKS
+</span></span><span style="display:flex;"><span>www-pool  us-central1  NONE                      basic-check
+</span></span></code></pre></div><p>ターゲットプールに 3 つの Web サーバインスタンスを追加する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute target-pools add-instances www-pool <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --instances www1,www2,www3
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Updated <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/targetPools/www-pool<span style="color:#f92672">]</span>.
+</span></span></code></pre></div><p>静的外部 IP アドレスに来たトラフィックを ターゲットプールに転送する <strong>転送ルール</strong> を作成する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute forwarding-rules create www-rule <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region us-central1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --ports <span style="color:#ae81ff">80</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --address network-lb-ip-1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-pool www-pool
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/forwardingRules/www-rule<span style="color:#f92672">]</span>.
+</span></span></code></pre></div><p>これで、静的外部 IP にアクセスすれば、 3 つの Web サーバに負荷分散される。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute addresses list
+</span></span><span style="display:flex;"><span>NAME             ADDRESS/RANGE  TYPE      PURPOSE  NETWORK  REGION       SUBNET  STATUS
+</span></span><span style="display:flex;"><span>network-lb-ip-1  35.232.6.132   EXTERNAL                    us-central1          IN_USE <span style="color:#75715e"># IP 確認</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ gcloud compute forwarding-rules describe www-rule --region us-central1
+</span></span><span style="display:flex;"><span>IPAddress: 35.232.6.132 <span style="color:#75715e"># IP 確認</span>
+</span></span><span style="display:flex;"><span>IPProtocol: TCP
+</span></span><span style="display:flex;"><span>creationTimestamp: <span style="color:#e6db74">&#39;2021-04-07T05:45:21.364-07:00&#39;</span>
+</span></span><span style="display:flex;"><span>description: <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>fingerprint: NinUJkv44qA<span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>id: <span style="color:#e6db74">&#39;3582287157978470286&#39;</span>
+</span></span><span style="display:flex;"><span>kind: compute#forwardingRule
+</span></span><span style="display:flex;"><span>labelFingerprint: 42WmSpB8rSM<span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>loadBalancingScheme: EXTERNAL
+</span></span><span style="display:flex;"><span>name: www-rule
+</span></span><span style="display:flex;"><span>networkTier: PREMIUM
+</span></span><span style="display:flex;"><span>portRange: 80-80
+</span></span><span style="display:flex;"><span>region: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1
+</span></span><span style="display:flex;"><span>selfLink: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/forwardingRules/www-rule
+</span></span><span style="display:flex;"><span>target: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/regions/us-central1/targetPools/www-pool
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ curl http://35.232.6.132
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 連続で負荷分散の様子を確認</span>
+</span></span><span style="display:flex;"><span>$ <span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do</span> curl -m1 35.232.6.132; <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># www1/2/3 が不規則に出る</span>
+</span></span></code></pre></div><h3 ref="23-https-ロードバランサのコンセプト" >2.3. HTTP(S) ロードバランサのコンセプト</h3><a class="anchor" id="23-https-ロードバランサのコンセプト"></a>
 <ul>
 <li>インスタンステンプレート
 <ul>
@@ -1784,450 +1814,450 @@ $ <span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do<
 </li>
 </ul>
 <p>負荷分散ターゲットの基となる インスタンステーンプレート　を作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instance-templates create lb-backend-template <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>allow-health-check <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --image-family<span style="color:#f92672">=</span>debian-9 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --image-project<span style="color:#f92672">=</span>debian-cloud <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --metadata<span style="color:#f92672">=</span>startup-script<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;#! /bin/bash
-</span><span style="color:#e6db74">     apt-get update
-</span><span style="color:#e6db74">     apt-get install apache2 -y
-</span><span style="color:#e6db74">     a2ensite default-ssl
-</span><span style="color:#e6db74">     a2enmod ssl
-</span><span style="color:#e6db74">     vm_hostname=&#34;$(curl -H &#34;Metadata-Flavor:Google&#34; \
-</span><span style="color:#e6db74">     http://169.254.169.254/computeMetadata/v1/instance/name)&#34;
-</span><span style="color:#e6db74">     echo &#34;Page served from: $vm_hostname&#34; | \
-</span><span style="color:#e6db74">     tee /var/www/html/index.html
-</span><span style="color:#e6db74">     systemctl restart apache2&#39;</span>
-
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/instanceTemplates/lb-backend-template<span style="color:#f92672">]</span>.
-NAME                 MACHINE_TYPE   PREEMPTIBLE  CREATION_TIMESTAMP
-lb-backend-template  n1-standard-1               2021-04-07T06:01:46.131-07:00
-</code></pre></div><p>作成したテンプレートに基づいて、マネージドインスタンスグループ（ MIG ）を作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute instance-groups managed create lb-backend-group <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --template<span style="color:#f92672">=</span>lb-backend-template --size<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> --zone<span style="color:#f92672">=</span>us-central1-a
-
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/zones/us-central1-a/instanceGroupManagers/lb-backend-group<span style="color:#f92672">]</span>.
-NAME              LOCATION       SCOPE  BASE_INSTANCE_NAME  SIZE  TARGET_SIZE  INSTANCE_TEMPLATE    AUTOSCALED
-lb-backend-group  us-central1-a  zone   lb-backend-group    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">2</span>            lb-backend-template  no
-</code></pre></div><p><code>fw-allow-health-check</code> ファイアウォール ルールを作成する。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute instance-templates create lb-backend-template <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>allow-health-check <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --image-family<span style="color:#f92672">=</span>debian-9 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --image-project<span style="color:#f92672">=</span>debian-cloud <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --metadata<span style="color:#f92672">=</span>startup-script<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;#! /bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     apt-get update
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     apt-get install apache2 -y
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     a2ensite default-ssl
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     a2enmod ssl
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     vm_hostname=&#34;$(curl -H &#34;Metadata-Flavor:Google&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     http://169.254.169.254/computeMetadata/v1/instance/name)&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     echo &#34;Page served from: $vm_hostname&#34; | \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     tee /var/www/html/index.html
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     systemctl restart apache2&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/instanceTemplates/lb-backend-template<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>NAME                 MACHINE_TYPE   PREEMPTIBLE  CREATION_TIMESTAMP
+</span></span><span style="display:flex;"><span>lb-backend-template  n1-standard-1               2021-04-07T06:01:46.131-07:00
+</span></span></code></pre></div><p>作成したテンプレートに基づいて、マネージドインスタンスグループ（ MIG ）を作成する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute instance-groups managed create lb-backend-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --template<span style="color:#f92672">=</span>lb-backend-template --size<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> --zone<span style="color:#f92672">=</span>us-central1-a
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/zones/us-central1-a/instanceGroupManagers/lb-backend-group<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>NAME              LOCATION       SCOPE  BASE_INSTANCE_NAME  SIZE  TARGET_SIZE  INSTANCE_TEMPLATE    AUTOSCALED
+</span></span><span style="display:flex;"><span>lb-backend-group  us-central1-a  zone   lb-backend-group    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">2</span>            lb-backend-template  no
+</span></span></code></pre></div><p><code>fw-allow-health-check</code> ファイアウォール ルールを作成する。<br>
 これは、Google Cloud ヘルスチェック システム（130.211.0.0/22 と 35.191.0.0/16）からのトラフィックを許可する上り（内向き）ルール。（ <a href="https://cloud.google.com/load-balancing/docs/health-check-concepts?hl=ja#ip-ranges">プローブ IP 範囲とファイアウォール ルール</a> ）<br>
 ターゲットタグ <code>allow-health-check</code> を使用して VM が識別される。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute firewall-rules create fw-allow-health-check <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --network<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --direction<span style="color:#f92672">=</span>ingress <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --source-ranges<span style="color:#f92672">=</span>130.211.0.0/22,35.191.0.0/16 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-tags<span style="color:#f92672">=</span>allow-health-check <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --rules<span style="color:#f92672">=</span>tcp:80
-
-Creating firewall...⠹Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/firewalls/fw-allow-health-check<span style="color:#f92672">]</span>.
-Creating firewall...done.
-NAME                   NETWORK  DIRECTION  PRIORITY  ALLOW   DENY  DISABLED
-fw-allow-health-check  default  INGRESS    <span style="color:#ae81ff">1000</span>      tcp:80        False
-</code></pre></div><p>ロードバランサにユーザーが接続する際に使用するグローバル静的外部 IP アドレスを作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute addresses create lb-ipv4-1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ip-version<span style="color:#f92672">=</span>IPV4 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global
-
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/addresses/lb-ipv4-1<span style="color:#f92672">]</span>.    
-
-<span style="color:#75715e"># 作成した IP のアドレスを確認</span>
-$ gcloud compute addresses describe lb-ipv4-1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;get(address)&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global
-34.120.128.63
-</code></pre></div><p>ロードバランサのヘルスチェックを作成。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute health-checks create http http-basic-check --port <span style="color:#ae81ff">80</span>
-
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/healthChecks/http-basic-check<span style="color:#f92672">]</span>.
-NAME              PROTOCOL
-http-basic-check  HTTP
-</code></pre></div><p>ヘルスチェックを適用した <strong>バックエンドサービス</strong> を作成。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute backend-services create web-backend-service <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --protocol<span style="color:#f92672">=</span>HTTP <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --port-name<span style="color:#f92672">=</span>http <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --health-checks<span style="color:#f92672">=</span>http-basic-check <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global
-
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/backendServices/web-backend-service<span style="color:#f92672">]</span>.
-NAME                 BACKENDS  PROTOCOL
-web-backend-service            HTTP
-</code></pre></div><p>MIG をバックエンドとしてバックエンドサービスに追加。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute backend-services add-backend web-backend-service <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>lb-backend-group <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --instance-group-zone<span style="color:#f92672">=</span>us-central1-a <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global
-
-Updated <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/backendServices/web-backend-service<span style="color:#f92672">]</span>.
-</code></pre></div><p>デフォルトの バックエンドサービス に受信リクエストをルーティングする URL マップを作成。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute url-maps create web-map-http <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --default-service web-backend-service
-
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/urlMaps/web-map-http<span style="color:#f92672">]</span>.
-NAME          DEFAULT_SERVICE
-web-map-http  backendServices/web-backend-service
-</code></pre></div><p>作成した URL マップにリクエストをルーティングするターゲット HTTP プロキシを作成。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute target-http-proxies create http-lb-proxy <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --url-map web-map-http
-
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/targetHttpProxies/http-lb-proxy<span style="color:#f92672">]</span>.
-NAME           URL_MAP
-http-lb-proxy  web-map-http
-</code></pre></div><p>受信リクエストをプロキシにルーティングするグローバル転送ルールを作成。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute forwarding-rules create http-content-rule <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --address<span style="color:#f92672">=</span>lb-ipv4-1<span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-http-proxy<span style="color:#f92672">=</span>http-lb-proxy <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ports<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
-
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/forwardingRules/http-content-rule<span style="color:#f92672">]</span>.
-</code></pre></div><p>Cloud Console のナビゲーション メニューで、[ネットワーク サービス] &gt; [Cloud Load Balancing] に移動して、作成したロードバランサ（web-map-http）をクリック。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute firewall-rules create fw-allow-health-check <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --network<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --direction<span style="color:#f92672">=</span>ingress <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --source-ranges<span style="color:#f92672">=</span>130.211.0.0/22,35.191.0.0/16 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-tags<span style="color:#f92672">=</span>allow-health-check <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --rules<span style="color:#f92672">=</span>tcp:80
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Creating firewall...⠹Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/firewalls/fw-allow-health-check<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>Creating firewall...done.
+</span></span><span style="display:flex;"><span>NAME                   NETWORK  DIRECTION  PRIORITY  ALLOW   DENY  DISABLED
+</span></span><span style="display:flex;"><span>fw-allow-health-check  default  INGRESS    <span style="color:#ae81ff">1000</span>      tcp:80        False
+</span></span></code></pre></div><p>ロードバランサにユーザーが接続する際に使用するグローバル静的外部 IP アドレスを作成する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute addresses create lb-ipv4-1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --ip-version<span style="color:#f92672">=</span>IPV4 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/addresses/lb-ipv4-1<span style="color:#f92672">]</span>.    
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 作成した IP のアドレスを確認</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute addresses describe lb-ipv4-1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;get(address)&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global
+</span></span><span style="display:flex;"><span>34.120.128.63
+</span></span></code></pre></div><p>ロードバランサのヘルスチェックを作成。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute health-checks create http http-basic-check --port <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/healthChecks/http-basic-check<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>NAME              PROTOCOL
+</span></span><span style="display:flex;"><span>http-basic-check  HTTP
+</span></span></code></pre></div><p>ヘルスチェックを適用した <strong>バックエンドサービス</strong> を作成。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute backend-services create web-backend-service <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --protocol<span style="color:#f92672">=</span>HTTP <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --port-name<span style="color:#f92672">=</span>http <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --health-checks<span style="color:#f92672">=</span>http-basic-check <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/backendServices/web-backend-service<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>NAME                 BACKENDS  PROTOCOL
+</span></span><span style="display:flex;"><span>web-backend-service            HTTP
+</span></span></code></pre></div><p>MIG をバックエンドとしてバックエンドサービスに追加。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute backend-services add-backend web-backend-service <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>lb-backend-group <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --instance-group-zone<span style="color:#f92672">=</span>us-central1-a <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Updated <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/backendServices/web-backend-service<span style="color:#f92672">]</span>.
+</span></span></code></pre></div><p>デフォルトの バックエンドサービス に受信リクエストをルーティングする URL マップを作成。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute url-maps create web-map-http <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --default-service web-backend-service
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/urlMaps/web-map-http<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>NAME          DEFAULT_SERVICE
+</span></span><span style="display:flex;"><span>web-map-http  backendServices/web-backend-service
+</span></span></code></pre></div><p>作成した URL マップにリクエストをルーティングするターゲット HTTP プロキシを作成。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute target-http-proxies create http-lb-proxy <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --url-map web-map-http
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/targetHttpProxies/http-lb-proxy<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>NAME           URL_MAP
+</span></span><span style="display:flex;"><span>http-lb-proxy  web-map-http
+</span></span></code></pre></div><p>受信リクエストをプロキシにルーティングするグローバル転送ルールを作成。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute forwarding-rules create http-content-rule <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --address<span style="color:#f92672">=</span>lb-ipv4-1<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-http-proxy<span style="color:#f92672">=</span>http-lb-proxy <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --ports<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-aa3df922e690/global/forwardingRules/http-content-rule<span style="color:#f92672">]</span>.
+</span></span></code></pre></div><p>Cloud Console のナビゲーション メニューで、[ネットワーク サービス] &gt; [Cloud Load Balancing] に移動して、作成したロードバランサ（web-map-http）をクリック。<br>
 [バックエンド] セクションでバックエンドの名前をクリックして、VM が正常であることを確認。<br>
 ブラウザで「http://34.120.128.63」にアクセスして動確（リロードしまくり）。「lb-backend-group-xxxx」の「xxxx」が変わることで、 MIG 内の別インスタンスに負荷分散されていることがわかる。</p>
 <h2 ref="3-ユースケース" >3. ユースケース</h2><a class="anchor" id="3-ユースケース"></a>
 <h3 ref="31-cloud-armor" >3.1. Cloud Armor</h3><a class="anchor" id="31-cloud-armor"></a>
 <p>外部 HTTP ロードバランサを作成し、　Cloud Armor を使用して DoS 対策を行う。<br>
 まず、HTTP とヘルスチェックのファイアウォール ルールを構成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># HTTP ファイアウォールルール default-allow-http を作成</span>
-$ gcloud compute firewall-rules create default-allow-http <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --direction<span style="color:#f92672">=</span>ingress <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --source-ranges<span style="color:#f92672">=</span>0.0.0.0/0 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-tags<span style="color:#f92672">=</span>http-server <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --rules<span style="color:#f92672">=</span>tcp:80
-
-<span style="color:#75715e"># ヘルスチェックのファイアウォールルール default-allow-health-check を作成</span>
-$ gcloud compute firewall-rules create default-allow-health-check <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --direction<span style="color:#f92672">=</span>ingress <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --source-ranges<span style="color:#f92672">=</span>130.211.0.0/22,35.191.0.0/16 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-tags<span style="color:#f92672">=</span>http-server <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --rules<span style="color:#f92672">=</span>tcp
-</code></pre></div><p>インスタンス テンプレートを構成し、インスタンス グループを作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#####</span>
-<span style="color:#75715e"># us-east1</span>
-<span style="color:#75715e">#####</span>
-<span style="color:#75715e"># インスタンス テンプレート us-east1-template を作成</span>
-$ gcloud compute instance-templates create us-east1-template <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>us-east1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>http-server <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --scopes default <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --metadata startup-script-url<span style="color:#f92672">=</span>gs://cloud-training/gcpnet/httplb/startup.sh
-
-<span style="color:#75715e"># インスタンス テンプレート us-east1-template から MIG us-east1-mig を作成</span>
-$ gcloud compute instance-groups managed create us-east1-mig <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-east1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --template<span style="color:#f92672">=</span>us-east1-template <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-
-<span style="color:#75715e"># MIG us-east1-mig に CPU 使用率に基づくスケーリングを設定</span>
-$ gcloud compute instance-groups managed set-autoscaling us-east1-mig <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-east1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-cpu-utilization 0.80 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --min-num-replicas <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --max-num-replicas <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --cool-down-period <span style="color:#ae81ff">45</span>
-
-<span style="color:#75715e">#####</span>
-<span style="color:#75715e"># europe-west1</span>
-<span style="color:#75715e">#####</span>
-
-<span style="color:#75715e"># インスタンス テンプレート europe-west1-template を作成</span>
-$ gcloud compute instance-templates create europe-west1-template <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>europe-west1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>http-server <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --scopes default <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --metadata startup-script-url<span style="color:#f92672">=</span>gs://cloud-training/gcpnet/httplb/startup.sh
-
-<span style="color:#75715e"># インスタンス テンプレート europe-west1-template から MIG europe-west1-mig を作成</span>
-$ gcloud compute instance-groups managed create europe-west1-mig <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>europe-west1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --template<span style="color:#f92672">=</span>europe-west1-template <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-
-<span style="color:#75715e"># MIG europe-west1-mig に CPU 使用率に基づくスケーリングを設定</span>
-$ gcloud compute instance-groups managed set-autoscaling europe-west1-mig <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>europe-west1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-cpu-utilization 0.80 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --min-num-replicas <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --max-num-replicas <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --cool-down-period <span style="color:#ae81ff">45</span>
-</code></pre></div><p>HTTP ロードバランサを構成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ヘルスチェックを作成</span>
-$ gcloud compute health-checks create http http-health-check <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --port <span style="color:#ae81ff">80</span>
-
-<span style="color:#75715e"># ヘルスチェックを構成したバックエンドサービスを作成（ロギングを有効化し、サンプリングレート1.0）</span>
-$ gcloud compute backend-services create http-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --protocol<span style="color:#f92672">=</span>HTTP <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --port-name<span style="color:#f92672">=</span>http <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --health-checks<span style="color:#f92672">=</span>http-health-check <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --enable-logging <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --logging-sample-rate<span style="color:#f92672">=</span>1.0 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global
-
-<span style="color:#75715e"># MIG をバックエンドに追加</span>
-$ gcloud compute backend-services add-backend http-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>us-east1-mig <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --instance-group-region<span style="color:#f92672">=</span>us-east1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --balancing-mode<span style="color:#f92672">=</span>RATE <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --max-rate<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --capacity-scaler<span style="color:#f92672">=</span>1.0 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global
-$ gcloud compute backend-services add-backend http-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>europe-west1-mig <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --instance-group-region<span style="color:#f92672">=</span>europe-west1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --balancing-mode<span style="color:#f92672">=</span>UTILIZATION <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --max-utilization<span style="color:#f92672">=</span>0.80 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --capacity-scaler<span style="color:#f92672">=</span>1.0 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global
-
-<span style="color:#75715e"># フロントエンドを構成</span>
-<span style="color:#75715e"># IP アドレスを作成</span>
-$ gcloud compute addresses create http-lb-ipv4 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ip-version<span style="color:#f92672">=</span>IPV4 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global
-$ gcloud compute addresses create http-lb-ipv6 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ip-version<span style="color:#f92672">=</span>IPV6 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global
-
-<span style="color:#75715e"># URL マップを作成（ URL マップが ロードバランサの名前に該当する、ここでは http-lb ）</span>
-$ gcloud compute url-maps create http-lb <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --default-service http-backend <span style="color:#75715e"># バックエンドサービスは http-backend</span>
-
-<span style="color:#75715e"># URL マップにリクエストをルーティングするターゲット HTTP プロキシを作成</span>
-$ gcloud compute target-http-proxies create http-lb-proxy <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --url-map http-lb
-
-<span style="color:#75715e"># 受信リクエストをプロキシにルーティングするグローバル転送ルールを作成</span>
-$ gcloud compute forwarding-rules create http-ipv4-rule <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --address<span style="color:#f92672">=</span>http-lb-ipv4 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-http-proxy<span style="color:#f92672">=</span>http-lb-proxy <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ports<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
-$ gcloud compute forwarding-rules create http-ipv6-rule <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --address<span style="color:#f92672">=</span>http-lb-ipv6 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-http-proxy<span style="color:#f92672">=</span>http-lb-proxy <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ports<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
-</code></pre></div><p>HTTP ロードバランサをテストする。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># HTTP ファイアウォールルール default-allow-http を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute firewall-rules create default-allow-http <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --direction<span style="color:#f92672">=</span>ingress <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --source-ranges<span style="color:#f92672">=</span>0.0.0.0/0 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-tags<span style="color:#f92672">=</span>http-server <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --rules<span style="color:#f92672">=</span>tcp:80
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ヘルスチェックのファイアウォールルール default-allow-health-check を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute firewall-rules create default-allow-health-check <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --direction<span style="color:#f92672">=</span>ingress <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --source-ranges<span style="color:#f92672">=</span>130.211.0.0/22,35.191.0.0/16 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-tags<span style="color:#f92672">=</span>http-server <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --rules<span style="color:#f92672">=</span>tcp
+</span></span></code></pre></div><p>インスタンス テンプレートを構成し、インスタンス グループを作成する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#####</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># us-east1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#####</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># インスタンス テンプレート us-east1-template を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-templates create us-east1-template <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>us-east1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>http-server <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --scopes default <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --metadata startup-script-url<span style="color:#f92672">=</span>gs://cloud-training/gcpnet/httplb/startup.sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># インスタンス テンプレート us-east1-template から MIG us-east1-mig を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-groups managed create us-east1-mig <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-east1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --template<span style="color:#f92672">=</span>us-east1-template <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># MIG us-east1-mig に CPU 使用率に基づくスケーリングを設定</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-groups managed set-autoscaling us-east1-mig <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-east1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-cpu-utilization 0.80 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --min-num-replicas <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --max-num-replicas <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --cool-down-period <span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#####</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># europe-west1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#####</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># インスタンス テンプレート europe-west1-template を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-templates create europe-west1-template <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>europe-west1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>http-server <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --scopes default <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --metadata startup-script-url<span style="color:#f92672">=</span>gs://cloud-training/gcpnet/httplb/startup.sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># インスタンス テンプレート europe-west1-template から MIG europe-west1-mig を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-groups managed create europe-west1-mig <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>europe-west1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --template<span style="color:#f92672">=</span>europe-west1-template <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># MIG europe-west1-mig に CPU 使用率に基づくスケーリングを設定</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-groups managed set-autoscaling europe-west1-mig <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>europe-west1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-cpu-utilization 0.80 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --min-num-replicas <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --max-num-replicas <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --cool-down-period <span style="color:#ae81ff">45</span>
+</span></span></code></pre></div><p>HTTP ロードバランサを構成する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># ヘルスチェックを作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute health-checks create http http-health-check <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --port <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ヘルスチェックを構成したバックエンドサービスを作成（ロギングを有効化し、サンプリングレート1.0）</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute backend-services create http-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --protocol<span style="color:#f92672">=</span>HTTP <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --port-name<span style="color:#f92672">=</span>http <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --health-checks<span style="color:#f92672">=</span>http-health-check <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --enable-logging <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --logging-sample-rate<span style="color:#f92672">=</span>1.0 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># MIG をバックエンドに追加</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute backend-services add-backend http-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>us-east1-mig <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --instance-group-region<span style="color:#f92672">=</span>us-east1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --balancing-mode<span style="color:#f92672">=</span>RATE <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --max-rate<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --capacity-scaler<span style="color:#f92672">=</span>1.0 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global
+</span></span><span style="display:flex;"><span>$ gcloud compute backend-services add-backend http-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>europe-west1-mig <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --instance-group-region<span style="color:#f92672">=</span>europe-west1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --balancing-mode<span style="color:#f92672">=</span>UTILIZATION <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --max-utilization<span style="color:#f92672">=</span>0.80 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --capacity-scaler<span style="color:#f92672">=</span>1.0 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># フロントエンドを構成</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># IP アドレスを作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute addresses create http-lb-ipv4 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --ip-version<span style="color:#f92672">=</span>IPV4 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global
+</span></span><span style="display:flex;"><span>$ gcloud compute addresses create http-lb-ipv6 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --ip-version<span style="color:#f92672">=</span>IPV6 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># URL マップを作成（ URL マップが ロードバランサの名前に該当する、ここでは http-lb ）</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute url-maps create http-lb <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --default-service http-backend <span style="color:#75715e"># バックエンドサービスは http-backend</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># URL マップにリクエストをルーティングするターゲット HTTP プロキシを作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute target-http-proxies create http-lb-proxy <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --url-map http-lb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 受信リクエストをプロキシにルーティングするグローバル転送ルールを作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute forwarding-rules create http-ipv4-rule <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --address<span style="color:#f92672">=</span>http-lb-ipv4 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-http-proxy<span style="color:#f92672">=</span>http-lb-proxy <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --ports<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute forwarding-rules create http-ipv6-rule <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --address<span style="color:#f92672">=</span>http-lb-ipv6 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-http-proxy<span style="color:#f92672">=</span>http-lb-proxy <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --ports<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
+</span></span></code></pre></div><p>HTTP ロードバランサをテストする。</p>
 <ul>
 <li>ブラウザで <code>http://[LB_IP_v4]</code> にアクセス</li>
 </ul>
 <p>HTTP ロードバランサのストレステストを実施する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ストレステスト用の VM インスタンス を作成</span>
-$ gcloud compute instances create siege-vm --zone<span style="color:#f92672">=</span>us-west1-c
-Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-04-c77142eb9067/zones/us-west1-c/instances/siege-vm<span style="color:#f92672">]</span>.
-NAME      ZONE        MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP    STATUS
-siege-vm  us-west1-c  n1-standard-1               10.138.0.2   34.105.25.106  RUNNING
-
-<span style="color:#75715e"># siege-vm に SSH して設定</span>
-$ gcloud compute ssh siege-vm --zone<span style="color:#f92672">=</span>us-west1-c
-$ sudo apt-get -y install siege
-$ export LB_IP<span style="color:#f92672">=</span>34.98.93.118 <span style="color:#75715e"># LB の IPV4</span>
-$ siege -c <span style="color:#ae81ff">250</span> http://$LB_IP
-$ exit
-</code></pre></div><p>siege-vm をブラックリストに登録する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># siege-vm の外部 IP を確認</span>
-$ gcloud compute instances describe siege-vm
-</code></pre></div><p>Google Cloud Armor を構成し、 VM インスタンス siege-vm からのリクエストを遮断する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Google Cloud Armor セキュリティ ポリシーを作成</span>
-$ gcloud compute security-policies create denylist-siege
-
-<span style="color:#75715e"># セキュリティ ポリシーに対するデフォルトのルールを更新し、トラフィックを許可</span>
-$ gcloud compute security-policies rules create <span style="color:#ae81ff">2147483647</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --src-ip-ranges<span style="color:#f92672">=</span><span style="color:#ae81ff">\*</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --security-policy<span style="color:#f92672">=</span>denylist-siege
-
-<span style="color:#75715e"># セキュリティ ポリシーにルールを追加し、siege-vm からのリクエストを拒否</span>
-$ gcloud compute security-policies rules create <span style="color:#ae81ff">1000</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>deny<span style="color:#ae81ff">\(</span>403<span style="color:#ae81ff">\)</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --src-ip-ranges<span style="color:#f92672">=</span>34.105.25.106 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --security-policy<span style="color:#f92672">=</span>denylist-siege
-
-<span style="color:#75715e"># セキュリティ ポリシーをバックエンド サービスに接続</span>
-$ gcloud compute backend-services update http-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --security-policy<span style="color:#f92672">=</span>denylist-siege
-</code></pre></div><p>VM インスタンス siege-vm に SSH して接続が拒否されるのを確認する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud compute ssh siege-vm --zone<span style="color:#f92672">=</span>us-west1-c
-$ export LB_IP<span style="color:#f92672">=</span>34.98.93.118 <span style="color:#75715e"># LB の IPV4</span>
-$ curl http://$LB_IP
-&lt;!doctype html&gt;&lt;meta charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>&gt;&lt;meta name<span style="color:#f92672">=</span>viewport content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1&#34;</span>&gt;&lt;title&gt;403&lt;/title&gt;403 Forbidden
-</code></pre></div><h3 ref="32-内部ロードバランサの作成" >3.2. 内部ロードバランサの作成</h3><a class="anchor" id="32-内部ロードバランサの作成"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># ストレステスト用の VM インスタンス を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instances create siege-vm --zone<span style="color:#f92672">=</span>us-west1-c
+</span></span><span style="display:flex;"><span>Created <span style="color:#f92672">[</span>https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-04-c77142eb9067/zones/us-west1-c/instances/siege-vm<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>NAME      ZONE        MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP    STATUS
+</span></span><span style="display:flex;"><span>siege-vm  us-west1-c  n1-standard-1               10.138.0.2   34.105.25.106  RUNNING
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># siege-vm に SSH して設定</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute ssh siege-vm --zone<span style="color:#f92672">=</span>us-west1-c
+</span></span><span style="display:flex;"><span>$ sudo apt-get -y install siege
+</span></span><span style="display:flex;"><span>$ export LB_IP<span style="color:#f92672">=</span>34.98.93.118 <span style="color:#75715e"># LB の IPV4</span>
+</span></span><span style="display:flex;"><span>$ siege -c <span style="color:#ae81ff">250</span> http://$LB_IP
+</span></span><span style="display:flex;"><span>$ exit
+</span></span></code></pre></div><p>siege-vm をブラックリストに登録する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># siege-vm の外部 IP を確認</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instances describe siege-vm
+</span></span></code></pre></div><p>Google Cloud Armor を構成し、 VM インスタンス siege-vm からのリクエストを遮断する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Google Cloud Armor セキュリティ ポリシーを作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute security-policies create denylist-siege
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># セキュリティ ポリシーに対するデフォルトのルールを更新し、トラフィックを許可</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute security-policies rules create <span style="color:#ae81ff">2147483647</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --src-ip-ranges<span style="color:#f92672">=</span><span style="color:#ae81ff">\*</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --security-policy<span style="color:#f92672">=</span>denylist-siege
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># セキュリティ ポリシーにルールを追加し、siege-vm からのリクエストを拒否</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute security-policies rules create <span style="color:#ae81ff">1000</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>deny<span style="color:#ae81ff">\(</span>403<span style="color:#ae81ff">\)</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --src-ip-ranges<span style="color:#f92672">=</span>34.105.25.106 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --security-policy<span style="color:#f92672">=</span>denylist-siege
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># セキュリティ ポリシーをバックエンド サービスに接続</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute backend-services update http-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --security-policy<span style="color:#f92672">=</span>denylist-siege
+</span></span></code></pre></div><p>VM インスタンス siege-vm に SSH して接続が拒否されるのを確認する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud compute ssh siege-vm --zone<span style="color:#f92672">=</span>us-west1-c
+</span></span><span style="display:flex;"><span>$ export LB_IP<span style="color:#f92672">=</span>34.98.93.118 <span style="color:#75715e"># LB の IPV4</span>
+</span></span><span style="display:flex;"><span>$ curl http://$LB_IP
+</span></span><span style="display:flex;"><span>&lt;!doctype html&gt;&lt;meta charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>&gt;&lt;meta name<span style="color:#f92672">=</span>viewport content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1&#34;</span>&gt;&lt;title&gt;403&lt;/title&gt;403 Forbidden
+</span></span></code></pre></div><h3 ref="32-内部ロードバランサの作成" >3.2. 内部ロードバランサの作成</h3><a class="anchor" id="32-内部ロードバランサの作成"></a>
 <p>TCP/UDP トラフィックの内部負荷分散機能を作成する。<br>
 内部負荷分散により、内部仮想（VM）マシンのインスタンスのみにアクセス可能なプライベート負荷分散 IP アドレスの背後でサービスを実行、スケーリングする。<br>
 まず、HTTP とヘルスチェックのファイアウォール ルールを構成する。<br>
 なお、<code>us-central1</code> リージョン内に <code>subnet-a</code> と <code>subnet-b</code> を備えたネットワーク <code>my-internal-app</code> があらかじめ構成されている。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># HTTP ファイアウォールルール app-allow-http を作成</span>
-$ gcloud compute firewall-rules create app-allow-http <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --network<span style="color:#f92672">=</span>my-internal-app <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --direction<span style="color:#f92672">=</span>ingress <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --source-ranges<span style="color:#f92672">=</span>0.0.0.0/0 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-tags<span style="color:#f92672">=</span>lb-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --rules<span style="color:#f92672">=</span>tcp:80
-
-<span style="color:#75715e"># ヘルスチェックのファイアウォールルール app-allow-health-check を作成</span>
-$ gcloud compute firewall-rules create app-allow-health-check <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --direction<span style="color:#f92672">=</span>ingress <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --source-ranges<span style="color:#f92672">=</span>130.211.0.0/22,35.191.0.0/16 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-tags<span style="color:#f92672">=</span>lb-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --rules<span style="color:#f92672">=</span>tcp
-</code></pre></div><p>上記のファイアウォールはネットワークタグによって確実に適用される。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># HTTP ファイアウォールルール app-allow-http を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute firewall-rules create app-allow-http <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --network<span style="color:#f92672">=</span>my-internal-app <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --direction<span style="color:#f92672">=</span>ingress <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --source-ranges<span style="color:#f92672">=</span>0.0.0.0/0 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-tags<span style="color:#f92672">=</span>lb-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --rules<span style="color:#f92672">=</span>tcp:80
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ヘルスチェックのファイアウォールルール app-allow-health-check を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute firewall-rules create app-allow-health-check <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --action<span style="color:#f92672">=</span>allow <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --direction<span style="color:#f92672">=</span>ingress <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --source-ranges<span style="color:#f92672">=</span>130.211.0.0/22,35.191.0.0/16 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-tags<span style="color:#f92672">=</span>lb-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --rules<span style="color:#f92672">=</span>tcp
+</span></span></code></pre></div><p>上記のファイアウォールはネットワークタグによって確実に適用される。<br>
 インスタンス テンプレートを構成し、インスタンス グループを作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#####</span>
-<span style="color:#75715e"># subnet-a</span>
-<span style="color:#75715e">#####</span>
-<span style="color:#75715e"># インスタンス テンプレート instance-template-1 を作成</span>
-$ gcloud compute instance-templates create instance-template-1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>my-internal-app <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>subnet-a <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>lb-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --scopes<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --metadata<span style="color:#f92672">=</span>startup-script-url<span style="color:#f92672">=</span>gs://cloud-training/gcpnet/ilb/startup.sh
-
-<span style="color:#75715e"># インスタンス テンプレート instance-template-1 から MIG instance-group-1 を作成</span>
-$ gcloud compute instance-groups managed create instance-group-1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-a <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --template<span style="color:#f92672">=</span>instance-template-1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-
-<span style="color:#75715e"># MIG instance-group-1 に CPU 使用率に基づくスケーリングを設定</span>
-$ gcloud compute instance-groups managed set-autoscaling instance-group-1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-a <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-cpu-utilization 0.80 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --min-num-replicas <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --max-num-replicas <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --cool-down-period <span style="color:#ae81ff">45</span>
-
-<span style="color:#75715e">#####</span>
-<span style="color:#75715e"># subnet-b</span>
-<span style="color:#75715e">#####</span>
-
-<span style="color:#75715e"># インスタンス テンプレート instance-template-2 を作成</span>
-$ gcloud compute instance-templates create instance-template-2 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>my-internal-app <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>subnet-b <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>lb-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --scopes<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --metadata<span style="color:#f92672">=</span>startup-script-url<span style="color:#f92672">=</span>gs://cloud-training/gcpnet/ilb/startup.sh
-
-<span style="color:#75715e"># インスタンス テンプレート instance-template-2 から MIG instance-group-2 を作成</span>
-$ gcloud compute instance-groups managed create instance-group-2 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-b <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --template<span style="color:#f92672">=</span>instance-template-2 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-
-<span style="color:#75715e"># MIG instance-group-2 に CPU 使用率に基づくスケーリングを設定</span>
-$ gcloud compute instance-groups managed set-autoscaling instance-group-2 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-b <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-cpu-utilization 0.80 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --min-num-replicas <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --max-num-replicas <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --cool-down-period <span style="color:#ae81ff">45</span>
-</code></pre></div><p>疎通用の VM インスタンス <code>utility-vm</code> を作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 疎通用 VM インスタンス作成</span>
-$ gcloud compute instances create utility-vm <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-f <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --machine-type<span style="color:#f92672">=</span>f1-micro <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --network-interface<span style="color:#f92672">=</span>network<span style="color:#f92672">=</span>my-internal-app,subnet<span style="color:#f92672">=</span>subnet-a,private-network-ip<span style="color:#f92672">=</span>10.10.20.50,no-address
-
-<span style="color:#75715e"># SSH</span>
-$ gcloud compute ssh utility-vm --zone<span style="color:#f92672">=</span>us-central1-f
-<span style="color:#75715e"># instance-group-1-xxxx のスタートページを確認</span>
-$ curl 10.10.20.2
-&lt;h1&gt;Internal Load Balancing Lab&lt;/h1&gt;&lt;h2&gt;Client IP&lt;/h2&gt;Your IP address : 10.10.20.50&lt;h2&gt;Hostname&lt;/h2&gt;Server Hostname: instance-group-1-zx46&lt;h2&gt;Server Location&lt;/h2&gt;Region and Zone: us-central1-a
-<span style="color:#75715e"># instance-group-2-xxxx のスタートページを確認</span>
-$ curl 10.10.30.2
-&lt;h1&gt;Internal Load Balancing Lab&lt;/h1&gt;&lt;h2&gt;Client IP&lt;/h2&gt;Your IP address : 10.10.20.50&lt;h2&gt;Hostname&lt;/h2&gt;Server Hostname: instance-group-2-095r&lt;h2&gt;Server Location&lt;/h2&gt;Region and Zone: us-central1-b
-$ exit
-</code></pre></div><p>疎通する。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#####</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># subnet-a</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#####</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># インスタンス テンプレート instance-template-1 を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-templates create instance-template-1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>my-internal-app <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>subnet-a <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>lb-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --scopes<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --metadata<span style="color:#f92672">=</span>startup-script-url<span style="color:#f92672">=</span>gs://cloud-training/gcpnet/ilb/startup.sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># インスタンス テンプレート instance-template-1 から MIG instance-group-1 を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-groups managed create instance-group-1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-a <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --template<span style="color:#f92672">=</span>instance-template-1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># MIG instance-group-1 に CPU 使用率に基づくスケーリングを設定</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-groups managed set-autoscaling instance-group-1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-a <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-cpu-utilization 0.80 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --min-num-replicas <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --max-num-replicas <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --cool-down-period <span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#####</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># subnet-b</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#####</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># インスタンス テンプレート instance-template-2 を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-templates create instance-template-2 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --network<span style="color:#f92672">=</span>my-internal-app <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --subnet<span style="color:#f92672">=</span>subnet-b <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --tags<span style="color:#f92672">=</span>lb-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --scopes<span style="color:#f92672">=</span>default <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --metadata<span style="color:#f92672">=</span>startup-script-url<span style="color:#f92672">=</span>gs://cloud-training/gcpnet/ilb/startup.sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># インスタンス テンプレート instance-template-2 から MIG instance-group-2 を作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-groups managed create instance-group-2 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-b <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --template<span style="color:#f92672">=</span>instance-template-2 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># MIG instance-group-2 に CPU 使用率に基づくスケーリングを設定</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instance-groups managed set-autoscaling instance-group-2 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-b <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-cpu-utilization 0.80 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --min-num-replicas <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --max-num-replicas <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --cool-down-period <span style="color:#ae81ff">45</span>
+</span></span></code></pre></div><p>疎通用の VM インスタンス <code>utility-vm</code> を作成する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 疎通用 VM インスタンス作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute instances create utility-vm <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --zone<span style="color:#f92672">=</span>us-central1-f <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --machine-type<span style="color:#f92672">=</span>f1-micro <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --network-interface<span style="color:#f92672">=</span>network<span style="color:#f92672">=</span>my-internal-app,subnet<span style="color:#f92672">=</span>subnet-a,private-network-ip<span style="color:#f92672">=</span>10.10.20.50,no-address
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># SSH</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute ssh utility-vm --zone<span style="color:#f92672">=</span>us-central1-f
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># instance-group-1-xxxx のスタートページを確認</span>
+</span></span><span style="display:flex;"><span>$ curl 10.10.20.2
+</span></span><span style="display:flex;"><span>&lt;h1&gt;Internal Load Balancing Lab&lt;/h1&gt;&lt;h2&gt;Client IP&lt;/h2&gt;Your IP address : 10.10.20.50&lt;h2&gt;Hostname&lt;/h2&gt;Server Hostname: instance-group-1-zx46&lt;h2&gt;Server Location&lt;/h2&gt;Region and Zone: us-central1-a
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># instance-group-2-xxxx のスタートページを確認</span>
+</span></span><span style="display:flex;"><span>$ curl 10.10.30.2
+</span></span><span style="display:flex;"><span>&lt;h1&gt;Internal Load Balancing Lab&lt;/h1&gt;&lt;h2&gt;Client IP&lt;/h2&gt;Your IP address : 10.10.20.50&lt;h2&gt;Hostname&lt;/h2&gt;Server Hostname: instance-group-2-095r&lt;h2&gt;Server Location&lt;/h2&gt;Region and Zone: us-central1-b
+</span></span><span style="display:flex;"><span>$ exit
+</span></span></code></pre></div><p>疎通する。<br>
 リージョン バックエンド サービスを構成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ヘルスチェックを作成</span>
-$ gcloud compute health-checks create http my-ilb-health-check <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --port <span style="color:#ae81ff">80</span>
-
-<span style="color:#75715e"># ヘルスチェックを構成したバックエンドサービスを作成</span>
-$ gcloud compute backend-services create http-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --load-balancing-scheme<span style="color:#f92672">=</span>internal <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --protocol<span style="color:#f92672">=</span>tcp <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --health-checks<span style="color:#f92672">=</span>my-ilb-health-check <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --health-checks-region<span style="color:#f92672">=</span>us-central1
-
-<span style="color:#75715e"># MIG をバックエンドに追加</span>
-$ gcloud compute backend-services add-backend http-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>instance-group-1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --instance-group-zone<span style="color:#f92672">=</span>us-central1-a
-$ gcloud compute backend-services add-backend http-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>instance-group-2 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --instance-group-zone<span style="color:#f92672">=</span>us-central1-b
-
-<span style="color:#75715e"># フロントエンドを構成（内部 LB の場合、 URL マップ・プロキシは不要で、 IP アドレス・転送ルール のみでよい）</span>
-<span style="color:#75715e"># IP アドレスを作成</span>
-$ gcloud compute addresses create my-ilb-ip <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --subnet<span style="color:#f92672">=</span>subnet-b <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --addresses<span style="color:#f92672">=</span>10.10.30.5
-
-<span style="color:#75715e"># 転送ルール（内部の場合、これが LB 名？）</span>
-$ gcloud compute forwarding-rules create my-ilb <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --load-balancing-scheme<span style="color:#f92672">=</span>internal <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --network<span style="color:#f92672">=</span>my-internal-app <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --subnet<span style="color:#f92672">=</span>subnet-b <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --address<span style="color:#f92672">=</span>my-ilb-ip <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ip-protocol<span style="color:#f92672">=</span>TCP <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ports<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --backend-service<span style="color:#f92672">=</span>http-backend <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --backend-service-region<span style="color:#f92672">=</span>us-central1
-
-
-
-
-
-
-
-
-<span style="color:#75715e"># IP アドレスを作成：いらん</span>
-$ gcloud compute addresses create http-lb-ipv4 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ip-version<span style="color:#f92672">=</span>IPV4
-
-<span style="color:#75715e"># URL マップを作成（ URL マップが ロードバランサの名前に該当する、ここでは http-lb ）：いらん</span>
-$ gcloud compute url-maps create http-lb <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --default-service http-backend <span style="color:#75715e"># バックエンドサービスは http-backend</span>
-
-<span style="color:#75715e"># URL マップにリクエストをルーティングするターゲット HTTP プロキシを作成：いらん</span>
-$ gcloud compute target-http-proxies create http-lb-proxy <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --url-map http-lb
-
-<span style="color:#75715e"># 受信リクエストをプロキシにルーティングするグローバル転送ルールを作成：内部の場合、これが LB 名？</span>
-$ gcloud compute forwarding-rules create http-ipv4-rule <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --address<span style="color:#f92672">=</span>http-lb-ipv4 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --global <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --target-http-proxy<span style="color:#f92672">=</span>http-lb-proxy <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ports<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
-</code></pre></div><p>疎通用 VM インスタンスに SSH して何回か curl を叩いて、 instance-group-1も2も反応するかテストする。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># SSH</span>
-$ gcloud compute ssh utility-vm --zone<span style="color:#f92672">=</span>us-central1-f
-
-<span style="color:#75715e"># テスト</span>
-$ curl 10.10.30.5
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># ヘルスチェックを作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute health-checks create http my-ilb-health-check <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --port <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ヘルスチェックを構成したバックエンドサービスを作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute backend-services create http-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --load-balancing-scheme<span style="color:#f92672">=</span>internal <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --protocol<span style="color:#f92672">=</span>tcp <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --health-checks<span style="color:#f92672">=</span>my-ilb-health-check <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --health-checks-region<span style="color:#f92672">=</span>us-central1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># MIG をバックエンドに追加</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute backend-services add-backend http-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>instance-group-1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --instance-group-zone<span style="color:#f92672">=</span>us-central1-a
+</span></span><span style="display:flex;"><span>$ gcloud compute backend-services add-backend http-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --instance-group<span style="color:#f92672">=</span>instance-group-2 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --instance-group-zone<span style="color:#f92672">=</span>us-central1-b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># フロントエンドを構成（内部 LB の場合、 URL マップ・プロキシは不要で、 IP アドレス・転送ルール のみでよい）</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># IP アドレスを作成</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute addresses create my-ilb-ip <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --subnet<span style="color:#f92672">=</span>subnet-b <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --addresses<span style="color:#f92672">=</span>10.10.30.5
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 転送ルール（内部の場合、これが LB 名？）</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute forwarding-rules create my-ilb <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --region<span style="color:#f92672">=</span>us-central1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --load-balancing-scheme<span style="color:#f92672">=</span>internal <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --network<span style="color:#f92672">=</span>my-internal-app <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --subnet<span style="color:#f92672">=</span>subnet-b <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --address<span style="color:#f92672">=</span>my-ilb-ip <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --ip-protocol<span style="color:#f92672">=</span>TCP <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --ports<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --backend-service<span style="color:#f92672">=</span>http-backend <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --backend-service-region<span style="color:#f92672">=</span>us-central1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># IP アドレスを作成：いらん</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute addresses create http-lb-ipv4 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --ip-version<span style="color:#f92672">=</span>IPV4
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># URL マップを作成（ URL マップが ロードバランサの名前に該当する、ここでは http-lb ）：いらん</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute url-maps create http-lb <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --default-service http-backend <span style="color:#75715e"># バックエンドサービスは http-backend</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># URL マップにリクエストをルーティングするターゲット HTTP プロキシを作成：いらん</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute target-http-proxies create http-lb-proxy <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --url-map http-lb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 受信リクエストをプロキシにルーティングするグローバル転送ルールを作成：内部の場合、これが LB 名？</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute forwarding-rules create http-ipv4-rule <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --address<span style="color:#f92672">=</span>http-lb-ipv4 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --global <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --target-http-proxy<span style="color:#f92672">=</span>http-lb-proxy <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --ports<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
+</span></span></code></pre></div><p>疎通用 VM インスタンスに SSH して何回か curl を叩いて、 instance-group-1も2も反応するかテストする。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># SSH</span>
+</span></span><span style="display:flex;"><span>$ gcloud compute ssh utility-vm --zone<span style="color:#f92672">=</span>us-central1-f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># テスト</span>
+</span></span><span style="display:flex;"><span>$ curl 10.10.30.5
+</span></span></code></pre></div>
 		</div>
 
 

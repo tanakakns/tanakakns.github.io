@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -583,6 +583,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -677,7 +692,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -685,7 +700,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1139,6 +1154,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1506,82 +1536,82 @@ Istio はマイクロサービスにサイドカープロキシを構成する�
 </ul>
 <h1 ref="ローカル環境構築" >ローカル環境構築</h1><a class="anchor" id="ローカル環境構築"></a>
 <p>Homebrew で構築できるものは以下。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew install awscli
-$ brew install terraform
-$ brew install kubernetes-cli
-$ brew install kubernetes-helm
-$ brew install helmfile
-$ helm plugin install https://github.com/databus23/helm-diff --version master
-</code></pre></div><p>Istio のコマンドライン資材の設定は以下。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd
-$ curl -L https://git.io/getLatestIstio | ISTIO_VERSION<span style="color:#f92672">=</span>1.3.1 sh -
-$ cd istio-1.3.1
-$ export PATH<span style="color:#f92672">=</span>$PWD/bin:$PATH
-$ istioctl verify-install
-</code></pre></div><h1 ref="k8s-環境構築" >k8s 環境構築</h1><a class="anchor" id="k8s-環境構築"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ brew install awscli
+</span></span><span style="display:flex;"><span>$ brew install terraform
+</span></span><span style="display:flex;"><span>$ brew install kubernetes-cli
+</span></span><span style="display:flex;"><span>$ brew install kubernetes-helm
+</span></span><span style="display:flex;"><span>$ brew install helmfile
+</span></span><span style="display:flex;"><span>$ helm plugin install https://github.com/databus23/helm-diff --version master
+</span></span></code></pre></div><p>Istio のコマンドライン資材の設定は以下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd
+</span></span><span style="display:flex;"><span>$ curl -L https://git.io/getLatestIstio | ISTIO_VERSION<span style="color:#f92672">=</span>1.3.1 sh -
+</span></span><span style="display:flex;"><span>$ cd istio-1.3.1
+</span></span><span style="display:flex;"><span>$ export PATH<span style="color:#f92672">=</span>$PWD/bin:$PATH
+</span></span><span style="display:flex;"><span>$ istioctl verify-install
+</span></span></code></pre></div><h1 ref="k8s-環境構築" >k8s 環境構築</h1><a class="anchor" id="k8s-環境構築"></a>
 <p>k8s クラスタは構築されている前提。</p>
 <h2 ref="tiller-構築" >Tiller 構築</h2><a class="anchor" id="tiller-構築"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f ~/istio-1.3.1/install/kubernetes/helm/helm-service-account.yaml <span style="color:#75715e"># tiller の Service Account 作成</span>
-$ helm init --history-max <span style="color:#ae81ff">200</span> --service-account tiller                             <span style="color:#75715e"># tiller の作成</span>
-$ kubectl get all --all-namespaces -o wide | grep tiller | wc -l                   <span style="color:#75715e"># tiller の構築を確認</span>
-       <span style="color:#ae81ff">4</span>
-</code></pre></div><h2 ref="istio-init" >istio-init</h2><a class="anchor" id="istio-init"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ helm install ~/istio-1.3.1/install/kubernetes/helm/istio-init --name istio-init --namespace istio-system
-$ kubectl get crds | grep <span style="color:#e6db74">&#39;istio.io&#39;</span> | wc -l
-      <span style="color:#ae81ff">23</span>
-$ helm ls --all                              <span style="color:#75715e"># 確認２</span>
-NAME      	REVISION	UPDATED                 	STATUS  	CHART           	APP VERSION	NAMESPACE
-istio-init	<span style="color:#ae81ff">1</span>       	Thu Oct  <span style="color:#ae81ff">3</span> 21:02:53 2019	DEPLOYED	istio-init-1.3.1	1.3.1      	istio-system
-</code></pre></div><h2 ref="istio-の構築デモ版" >Istio の構築（デモ版）</h2><a class="anchor" id="istio-の構築デモ版"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ helm install ~/istio-1.3.1/install/kubernetes/helm/istio --name istio --namespace istio-system <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>      --values ~/istio-1.3.1/install/kubernetes/helm/istio/values-istio-demo.yaml <span style="color:#75715e"># Istio 構築</span>
-$ helm install ~/istio-1.3.1/install/kubernetes/helm/istio --name istio --namespace istio-system <span style="color:#75715e"># Istio 構築</span>
-$ kubectl label namespace default istio-injection<span style="color:#f92672">=</span>enabled                         <span style="color:#75715e"># サイドカーを自動でつける設定</span>
-$ kubectl get namespace -L istio-injection                                        <span style="color:#75715e"># 確認</span>
-$ kubectl apply -f &lt;your-application&gt;.yaml                                        <span style="color:#75715e"># アプリのデプロイ</span>
-</code></pre></div><p>上記では default namespace に <code>istio-injection=enabled</code> ラベルを付与して自動でサイドカー（ envoy ）インジェクションするように設定している。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl apply -f ~/istio-1.3.1/install/kubernetes/helm/helm-service-account.yaml <span style="color:#75715e"># tiller の Service Account 作成</span>
+</span></span><span style="display:flex;"><span>$ helm init --history-max <span style="color:#ae81ff">200</span> --service-account tiller                             <span style="color:#75715e"># tiller の作成</span>
+</span></span><span style="display:flex;"><span>$ kubectl get all --all-namespaces -o wide | grep tiller | wc -l                   <span style="color:#75715e"># tiller の構築を確認</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#ae81ff">4</span>
+</span></span></code></pre></div><h2 ref="istio-init" >istio-init</h2><a class="anchor" id="istio-init"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ helm install ~/istio-1.3.1/install/kubernetes/helm/istio-init --name istio-init --namespace istio-system
+</span></span><span style="display:flex;"><span>$ kubectl get crds | grep <span style="color:#e6db74">&#39;istio.io&#39;</span> | wc -l
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>$ helm ls --all                              <span style="color:#75715e"># 確認２</span>
+</span></span><span style="display:flex;"><span>NAME      	REVISION	UPDATED                 	STATUS  	CHART           	APP VERSION	NAMESPACE
+</span></span><span style="display:flex;"><span>istio-init	<span style="color:#ae81ff">1</span>       	Thu Oct  <span style="color:#ae81ff">3</span> 21:02:53 2019	DEPLOYED	istio-init-1.3.1	1.3.1      	istio-system
+</span></span></code></pre></div><h2 ref="istio-の構築デモ版" >Istio の構築（デモ版）</h2><a class="anchor" id="istio-の構築デモ版"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ helm install ~/istio-1.3.1/install/kubernetes/helm/istio --name istio --namespace istio-system <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      --values ~/istio-1.3.1/install/kubernetes/helm/istio/values-istio-demo.yaml <span style="color:#75715e"># Istio 構築</span>
+</span></span><span style="display:flex;"><span>$ helm install ~/istio-1.3.1/install/kubernetes/helm/istio --name istio --namespace istio-system <span style="color:#75715e"># Istio 構築</span>
+</span></span><span style="display:flex;"><span>$ kubectl label namespace default istio-injection<span style="color:#f92672">=</span>enabled                         <span style="color:#75715e"># サイドカーを自動でつける設定</span>
+</span></span><span style="display:flex;"><span>$ kubectl get namespace -L istio-injection                                        <span style="color:#75715e"># 確認</span>
+</span></span><span style="display:flex;"><span>$ kubectl apply -f &lt;your-application&gt;.yaml                                        <span style="color:#75715e"># アプリのデプロイ</span>
+</span></span></code></pre></div><p>上記では default namespace に <code>istio-injection=enabled</code> ラベルを付与して自動でサイドカー（ envoy ）インジェクションするように設定している。<br>
 サイドカーインジェクションを有効にしたいネームスペースには <code>istio-injection=enabled</code> ラベルを付与すべし。<br>
 なお、自動でサイドカーインジェクションされるための条件は <a href="https://istio.io/docs/ops/setup/injection-concepts/">ここ</a> 。</p>
 <p>以降、helm で構築された Istio 以外の主要コンポーネントについて確認していく。<br>
 なお、管理画面へのアクセスは <code>port-forward</code> を利用する。<br>
 セキュリティが気になる人は <a href="https://github.com/int128/kauthproxy">kauthproxy</a> のようなものを利用してもいいかもしれない。</p>
 <h3 ref="prometheus" >Prometheus</h3><a class="anchor" id="prometheus"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl -n istio-system get pod -l app<span style="color:#f92672">=</span>prometheus                          <span style="color:#75715e"># Pod 名を確認</span>
-NAME                          READY   STATUS    RESTARTS   AGE
-prometheus-776fdf7479-zhqbc   1/1     Running   <span style="color:#ae81ff">0</span>          7m15s
-$ kubectl -n istio-system get svc -l app<span style="color:#f92672">=</span>prometheus                          <span style="color:#75715e"># ポートを確認</span>
-NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>    AGE
-prometheus   ClusterIP   172.20.55.63   &lt;none&gt;        9090/TCP   12m
-$ kubectl -n istio-system port-forward prometheus-776fdf7479-zhqbc 9090:9090 <span style="color:#75715e"># port forward</span>
-$ curl http://localhost:9090                                                 <span style="color:#75715e"># ブラウザでアクセス</span>
-</code></pre></div><p>一撃だと <code>$ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}') 9090:9090</code> 。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl -n istio-system get pod -l app<span style="color:#f92672">=</span>prometheus                          <span style="color:#75715e"># Pod 名を確認</span>
+</span></span><span style="display:flex;"><span>NAME                          READY   STATUS    RESTARTS   AGE
+</span></span><span style="display:flex;"><span>prometheus-776fdf7479-zhqbc   1/1     Running   <span style="color:#ae81ff">0</span>          7m15s
+</span></span><span style="display:flex;"><span>$ kubectl -n istio-system get svc -l app<span style="color:#f92672">=</span>prometheus                          <span style="color:#75715e"># ポートを確認</span>
+</span></span><span style="display:flex;"><span>NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>    AGE
+</span></span><span style="display:flex;"><span>prometheus   ClusterIP   172.20.55.63   &lt;none&gt;        9090/TCP   12m
+</span></span><span style="display:flex;"><span>$ kubectl -n istio-system port-forward prometheus-776fdf7479-zhqbc 9090:9090 <span style="color:#75715e"># port forward</span>
+</span></span><span style="display:flex;"><span>$ curl http://localhost:9090                                                 <span style="color:#75715e"># ブラウザでアクセス</span>
+</span></span></code></pre></div><p>一撃だと <code>$ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}') 9090:9090</code> 。</p>
 <h3 ref="grafana" >Grafana</h3><a class="anchor" id="grafana"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl -n istio-system port-forward <span style="color:#66d9ef">$(</span>kubectl -n istio-system get pod -l app<span style="color:#f92672">=</span>grafana -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.items[0].metadata.name}&#39;</span><span style="color:#66d9ef">)</span> 3000:3000 <span style="color:#75715e"># port forward</span>
-$ curl http://localhost:3000/dashboard/db/istio-mesh-dashboard
-</code></pre></div><h3 ref="kiali" >Kiali</h3><a class="anchor" id="kiali"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl -n istio-system port-forward <span style="color:#66d9ef">$(</span>kubectl -n istio-system get pod -l app<span style="color:#f92672">=</span>grafana -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.items[0].metadata.name}&#39;</span><span style="color:#66d9ef">)</span> 3000:3000 <span style="color:#75715e"># port forward</span>
+</span></span><span style="display:flex;"><span>$ curl http://localhost:3000/dashboard/db/istio-mesh-dashboard
+</span></span></code></pre></div><h3 ref="kiali" >Kiali</h3><a class="anchor" id="kiali"></a>
 <p>まずはユーザ/パスワードを作成して secret を適用する。<br>
 （<code>createDemoSecret: true</code> に設定した場合、 ID/Pass は admin/admin ）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ KIALI_USERNAME<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>read -p <span style="color:#e6db74">&#39;Kiali Username: &#39;</span> uval <span style="color:#f92672">&amp;&amp;</span> echo -n $uval | base64<span style="color:#66d9ef">)</span>
-Kiali Username: <span style="color:#75715e"># ユーザ名を入力する</span>
-$ KIALI_PASSPHRASE<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>read -p <span style="color:#e6db74">&#39;Kiali Passphrase: &#39;</span> pval <span style="color:#f92672">&amp;&amp;</span> echo -n $pval | base64<span style="color:#66d9ef">)</span>
-Kiali Passphrase: <span style="color:#75715e"># パスワードを入力する</span>
-$ cat <span style="color:#e6db74">&lt;&lt;EOF | kubectl apply -f -
-</span><span style="color:#e6db74">apiVersion: v1
-</span><span style="color:#e6db74">kind: Secret
-</span><span style="color:#e6db74">metadata:
-</span><span style="color:#e6db74">  name: kiali
-</span><span style="color:#e6db74">  namespace: istio-system
-</span><span style="color:#e6db74">  labels:
-</span><span style="color:#e6db74">    app: kiali
-</span><span style="color:#e6db74">type: Opaque
-</span><span style="color:#e6db74">data:
-</span><span style="color:#e6db74">  username: $KIALI_USERNAME
-</span><span style="color:#e6db74">  passphrase: $KIALI_PASSPHRASE
-</span><span style="color:#e6db74">EOF</span>
-</code></pre></div><p>以下でアクセスして、上記で作成したユーザ/パスワードを利用する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl -n istio-system port-forward <span style="color:#66d9ef">$(</span>kubectl -n istio-system get pod -l app<span style="color:#f92672">=</span>kiali -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.items[0].metadata.name}&#39;</span><span style="color:#66d9ef">)</span> 20001:20001 <span style="color:#75715e"># port forward</span>
-$ curl http://localhost:20001/kiali/console
-</code></pre></div><h3 ref="istio-ingress-gateway" >Istio Ingress Gateway</h3><a class="anchor" id="istio-ingress-gateway"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ KIALI_USERNAME<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>read -p <span style="color:#e6db74">&#39;Kiali Username: &#39;</span> uval <span style="color:#f92672">&amp;&amp;</span> echo -n $uval | base64<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>Kiali Username: <span style="color:#75715e"># ユーザ名を入力する</span>
+</span></span><span style="display:flex;"><span>$ KIALI_PASSPHRASE<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>read -p <span style="color:#e6db74">&#39;Kiali Passphrase: &#39;</span> pval <span style="color:#f92672">&amp;&amp;</span> echo -n $pval | base64<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>Kiali Passphrase: <span style="color:#75715e"># パスワードを入力する</span>
+</span></span><span style="display:flex;"><span>$ cat <span style="color:#e6db74">&lt;&lt;EOF | kubectl apply -f -
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">apiVersion: v1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">kind: Secret
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">metadata:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  name: kiali
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  namespace: istio-system
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  labels:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    app: kiali
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">type: Opaque
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">data:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  username: $KIALI_USERNAME
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  passphrase: $KIALI_PASSPHRASE
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span></code></pre></div><p>以下でアクセスして、上記で作成したユーザ/パスワードを利用する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl -n istio-system port-forward <span style="color:#66d9ef">$(</span>kubectl -n istio-system get pod -l app<span style="color:#f92672">=</span>kiali -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.items[0].metadata.name}&#39;</span><span style="color:#66d9ef">)</span> 20001:20001 <span style="color:#75715e"># port forward</span>
+</span></span><span style="display:flex;"><span>$ curl http://localhost:20001/kiali/console
+</span></span></code></pre></div><h3 ref="istio-ingress-gateway" >Istio Ingress Gateway</h3><a class="anchor" id="istio-ingress-gateway"></a>
 <p>従来、Kubernetes は外部からクラスタに入るトラフィックを処理するために <strong>Ingress Controller</strong> 使用していた。Istioを使用する場合、これはもはや当てはまない。<br>
 Istio は、使い慣れた Ingress リソースを新しい Gateway および VirtualServices リソースに置き換えた。<br>
 これらは連携して動作し、トラフィックをメッシュにルーティングする。<br>
@@ -1701,68 +1731,68 @@ Istio は、使い慣れた Ingress リソースを新しい Gateway および V
 <p>設定については <a href="https://istio.io/docs/reference/config/installation-options/">ここ</a> を参照。</p>
 <!-- raw HTML omitted -->
 <h2 ref="ちょっと設定見てみる" >ちょっと設定見てみる</h2><a class="anchor" id="ちょっと設定見てみる"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">.
-├── README.md
-├── helmfile.yaml
-└── istio-values.yaml
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:helmfile.yaml" data-lang="yaml:helmfile.yaml"><span style="color:#f92672">repositories</span>: <span style="color:#75715e"># 利用する helm リポジトリ</span>
-  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elastic</span>
-    <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://helm.elastic.co</span>
-  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kiwigrid</span>
-    <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://kiwigrid.github.io</span>
-  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">codecentric</span>
-    <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://codecentric.github.io/helm-charts</span>
-
-<span style="color:#f92672">releases</span>: <span style="color:#75715e"># 利用する helm chart 単位で name をつけて設定する</span>
-          <span style="color:#75715e"># values.yaml ファイルにて設定を外出しできるので環境毎に作成できる</span>
-  <span style="color:#75715e"># 前提として、istio-init が完了している必要がある</span>
-  <span style="color:#75715e"># https://github.com/istio/istio/tree/master/install/kubernetes/helm/istio</span>
-  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">istio</span>
-    <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">istio-system</span>
-    <span style="color:#f92672">chart</span>: <span style="color:#ae81ff">istio.io/istio</span>
-    <span style="color:#f92672">values</span>:
-    - <span style="color:#ae81ff">istio-values.yaml</span>
-</code></pre></div><p>以下 Istio の valies.yaml ファイルの例。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml:istio-value.yaml" data-lang="yaml:istio-value.yaml"><span style="color:#f92672">gateways</span>:
-  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
-  <span style="color:#f92672">istio-ingressgateway</span>:
-    <span style="color:#f92672">type</span>: <span style="color:#ae81ff">NodePort</span>
-
-<span style="color:#f92672">global</span>:
-  <span style="color:#f92672">proxy</span>:
-    <span style="color:#f92672">autoInject</span>: <span style="color:#ae81ff">disabled</span>
-
-<span style="color:#f92672">grafana</span>:
-  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
-  <span style="color:#f92672">ingress</span>:
-    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
-    <span style="color:#f92672">hosts</span>:
-      - <span style="color:#ae81ff">istio-grafana.sample.com</span>
-  <span style="color:#f92672">contextPath</span>: <span style="color:#ae81ff">/</span>
-  <span style="color:#f92672">security</span>:
-    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
-
-<span style="color:#f92672">kiali</span>:
-  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
-  <span style="color:#f92672">ingress</span>:
-    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
-    <span style="color:#f92672">hosts</span>:
-      - <span style="color:#ae81ff">istio-kiali.sample.com</span>
-  <span style="color:#f92672">dashboard</span>:
-    <span style="color:#f92672">jaegerURL</span>: <span style="color:#ae81ff">https://istio-jaeger.sample.com</span>
-  <span style="color:#f92672">createDemoSecret</span>: <span style="color:#66d9ef">true</span>
-
-<span style="color:#f92672">tracing</span>:
-  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
-  <span style="color:#f92672">ingress</span>:
-    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
-    <span style="color:#f92672">hosts</span>:
-      - <span style="color:#ae81ff">istio-jaeger.sample.com</span>
-  <span style="color:#f92672">contextPath</span>: <span style="color:#ae81ff">/</span>
-  <span style="color:#f92672">jaeger</span>:
-    <span style="color:#f92672">persist</span>: <span style="color:#66d9ef">true</span>
-    <span style="color:#f92672">accessMode</span>: <span style="color:#ae81ff">ReadWriteOnce</span>
-</code></pre></div><h1 ref="参考" >参考</h1><a class="anchor" id="参考"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>.
+</span></span><span style="display:flex;"><span>├── README.md
+</span></span><span style="display:flex;"><span>├── helmfile.yaml
+</span></span><span style="display:flex;"><span>└── istio-values.yaml
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml:helmfile.yaml" data-lang="yaml:helmfile.yaml"><span style="display:flex;"><span><span style="color:#f92672">repositories</span>: <span style="color:#75715e"># 利用する helm リポジトリ</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elastic</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://helm.elastic.co</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kiwigrid</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://kiwigrid.github.io</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">codecentric</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://codecentric.github.io/helm-charts</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">releases</span>: <span style="color:#75715e"># 利用する helm chart 単位で name をつけて設定する</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e"># values.yaml ファイルにて設定を外出しできるので環境毎に作成できる</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 前提として、istio-init が完了している必要がある</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># https://github.com/istio/istio/tree/master/install/kubernetes/helm/istio</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">istio</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">istio-system</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">chart</span>: <span style="color:#ae81ff">istio.io/istio</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">values</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">istio-values.yaml</span>
+</span></span></code></pre></div><p>以下 Istio の valies.yaml ファイルの例。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml:istio-value.yaml" data-lang="yaml:istio-value.yaml"><span style="display:flex;"><span><span style="color:#f92672">gateways</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">istio-ingressgateway</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">type</span>: <span style="color:#ae81ff">NodePort</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">global</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">proxy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">autoInject</span>: <span style="color:#ae81ff">disabled</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">grafana</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ingress</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hosts</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">istio-grafana.sample.com</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">contextPath</span>: <span style="color:#ae81ff">/</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">security</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kiali</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ingress</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hosts</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">istio-kiali.sample.com</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dashboard</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">jaegerURL</span>: <span style="color:#ae81ff">https://istio-jaeger.sample.com</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">createDemoSecret</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tracing</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ingress</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hosts</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">istio-jaeger.sample.com</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">contextPath</span>: <span style="color:#ae81ff">/</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">jaeger</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">persist</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">accessMode</span>: <span style="color:#ae81ff">ReadWriteOnce</span>
+</span></span></code></pre></div><h1 ref="参考" >参考</h1><a class="anchor" id="参考"></a>
 <ul>
 <li>Istio 公式
 <ul>

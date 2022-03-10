@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -583,6 +583,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -677,7 +692,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -685,7 +700,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1139,6 +1154,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1475,80 +1505,80 @@ IngressGateway 事態の設定は <strong>Gateway</strong> にて行う。<br>
 <a href="https://qiita.com/J_Shell/items/296cd00569b0c7692be7">参考</a></p>
 <h4 ref="111-virtualservice" >1.1.1 VirtualService</h4><a class="anchor" id="111-virtualservice"></a>
 <p>Gateway の <code>spec.servers.hosts</code> 項目で設定したものを Service に流す設定を VirtualService で行う。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.istio.io/v1alpha3</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">VirtualService</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">bookinfo-rule</span>
-  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">bookinfo-namespace</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">hosts</span>:                                   <span style="color:#75715e"># 対象となる Service 名を指定する</span>
-  - <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span>
-  - <span style="color:#ae81ff">uk.bookinfo.com</span>
-  - <span style="color:#ae81ff">eu.bookinfo.com</span>
-  <span style="color:#f92672">gateways</span>:
-  - <span style="color:#ae81ff">some-config-namespace/sample-gateway  </span> <span style="color:#75715e"># Gateway 名を指定すると、Gateway の VirtualServiceとして機能する。</span>
-  - <span style="color:#ae81ff">mesh                                  </span> <span style="color:#75715e"># 「mesh」を指定すると Internal 通信として機能する。</span>
-  <span style="color:#f92672">http</span>:
-  - <span style="color:#f92672">match</span>:                                 <span style="color:#75715e"># 合致するリクエストの条件を記載する。</span>
-    - <span style="color:#f92672">headers</span>:
-        <span style="color:#f92672">cookie</span>:
-          <span style="color:#f92672">exact</span>: <span style="color:#e6db74">&#34;user=dev-123&#34;</span>
-    <span style="color:#f92672">route</span>:
-    - <span style="color:#f92672">destination</span>:                         <span style="color:#75715e"># トラフィックの流し先を指定。</span>
-        <span style="color:#f92672">port</span>:                              <span style="color:#75715e"># 対象となる Service の Port。</span>
-          <span style="color:#f92672">number</span>: <span style="color:#ae81ff">7777</span>
-        <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.qa.svc.cluster.local</span> <span style="color:#75715e"># 対象となる Service 名を指定する。Service が ClusterIP の場合、&lt;service&gt;.&lt;namespace&gt;.svc.cluster.local でもよい。</span>
-  - <span style="color:#f92672">match</span>:
-    - <span style="color:#f92672">uri</span>:
-        <span style="color:#f92672">prefix</span>: <span style="color:#ae81ff">/reviews/</span>
-    <span style="color:#f92672">route</span>:
-    - <span style="color:#f92672">destination</span>:
-        <span style="color:#f92672">port</span>:
-          <span style="color:#f92672">number</span>: <span style="color:#ae81ff">9080</span> <span style="color:#75715e"># can be omitted if it&#39;s the only port for reviews</span>
-        <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span>
-      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">80</span>
-    - <span style="color:#f92672">destination</span>:
-        <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.qa.svc.cluster.local</span>
-      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">20</span>
-</code></pre></div><h3 ref="12-internal" >1.2 Internal</h3><a class="anchor" id="12-internal"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.istio.io/v1alpha3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">VirtualService</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">bookinfo-rule</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">bookinfo-namespace</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">hosts</span>:                                   <span style="color:#75715e"># 対象となる Service 名を指定する</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">uk.bookinfo.com</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">eu.bookinfo.com</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">gateways</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">some-config-namespace/sample-gateway  </span> <span style="color:#75715e"># Gateway 名を指定すると、Gateway の VirtualServiceとして機能する。</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">mesh                                  </span> <span style="color:#75715e"># 「mesh」を指定すると Internal 通信として機能する。</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">http</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">match</span>:                                 <span style="color:#75715e"># 合致するリクエストの条件を記載する。</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">headers</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">cookie</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">exact</span>: <span style="color:#e6db74">&#34;user=dev-123&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">route</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">destination</span>:                         <span style="color:#75715e"># トラフィックの流し先を指定。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">port</span>:                              <span style="color:#75715e"># 対象となる Service の Port。</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">number</span>: <span style="color:#ae81ff">7777</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.qa.svc.cluster.local</span> <span style="color:#75715e"># 対象となる Service 名を指定する。Service が ClusterIP の場合、&lt;service&gt;.&lt;namespace&gt;.svc.cluster.local でもよい。</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">match</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">uri</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">prefix</span>: <span style="color:#ae81ff">/reviews/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">route</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">destination</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">port</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">number</span>: <span style="color:#ae81ff">9080</span> <span style="color:#75715e"># can be omitted if it&#39;s the only port for reviews</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">destination</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.qa.svc.cluster.local</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">20</span>
+</span></span></code></pre></div><h3 ref="12-internal" >1.2 Internal</h3><a class="anchor" id="12-internal"></a>
 <p>Istio クラスタ内の通信について整理する。<br>
 <strong>DestinationRule</strong> は対象となる Service 内に仮想敵にサブネットを定義し、 <strong>VirturlService</strong> にてどのサブネットにどの程度の流量を流すか設定する。<br>
 <a href="https://blog.1q77.com/2020/03/istio-part3/">参考</a></p>
 <h4 ref="121-destinationrule" >1.2.1 DestinationRule</h4><a class="anchor" id="121-destinationrule"></a>
 <p>以下は reviews.prod.svc.cluster.local という Service 内に <code>version: v1</code> <code>version: v2</code> という Label を持つ異なる 2 種類の Pod があり、それぞれを異なるサブネットに仮想的に分割する設定。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.istio.io/v1beta1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">DestinationRule</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">reviews-destination-rule      </span> <span style="color:#75715e"># DestinationRule 名</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span> <span style="color:#75715e"># 対象の Service 名</span>
-  <span style="color:#f92672">subsets</span>:
-  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">v1                          </span> <span style="color:#75715e"># サブネット名</span>
-    <span style="color:#f92672">labels</span>:
-      <span style="color:#f92672">version</span>: <span style="color:#ae81ff">v1                     </span> <span style="color:#75715e"># サブネットに含める Pod を選択するセレクタ</span>
-  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">v2</span>
-    <span style="color:#f92672">labels</span>:
-      <span style="color:#f92672">version</span>: <span style="color:#ae81ff">v2</span>
-</code></pre></div><h4 ref="122-virtualservice" >1.2.2 VirtualService</h4><a class="anchor" id="122-virtualservice"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.istio.io/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">DestinationRule</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">reviews-destination-rule      </span> <span style="color:#75715e"># DestinationRule 名</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span> <span style="color:#75715e"># 対象の Service 名</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">subsets</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">v1                          </span> <span style="color:#75715e"># サブネット名</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">version</span>: <span style="color:#ae81ff">v1                     </span> <span style="color:#75715e"># サブネットに含める Pod を選択するセレクタ</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">v2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">version</span>: <span style="color:#ae81ff">v2</span>
+</span></span></code></pre></div><h4 ref="122-virtualservice" >1.2.2 VirtualService</h4><a class="anchor" id="122-virtualservice"></a>
 <p>以下は先の DestinationRule で定義されたサブネットに対して 50:50 で流量を制御する VirturlService。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.istio.io/v1beta1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">VirtualService</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">reviews-virtual-service</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">hosts</span>:
-  - <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span>
-  <span style="color:#f92672">http</span>:
-  - <span style="color:#f92672">route</span>:
-    - <span style="color:#f92672">destination</span>:
-        <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span> <span style="color:#75715e"># 対象の Service 名</span>
-        <span style="color:#f92672">subset</span>: <span style="color:#ae81ff">v1                          </span> <span style="color:#75715e"># 対象のサブネット名</span>
-      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">50</span>                             <span style="color:#75715e"># 全量を 100 とした流量の割合</span>
-    - <span style="color:#f92672">destination</span>:
-        <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span>
-        <span style="color:#f92672">subset</span>: <span style="color:#ae81ff">v2</span>
-      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">50</span>
-</code></pre></div><h3 ref="13-outbound" >1.3 Outbound</h3><a class="anchor" id="13-outbound"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.istio.io/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">VirtualService</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">reviews-virtual-service</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">hosts</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">http</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">route</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">destination</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span> <span style="color:#75715e"># 対象の Service 名</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">subset</span>: <span style="color:#ae81ff">v1                          </span> <span style="color:#75715e"># 対象のサブネット名</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">50</span>                             <span style="color:#75715e"># 全量を 100 とした流量の割合</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">destination</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">host</span>: <span style="color:#ae81ff">reviews.prod.svc.cluster.local</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">subset</span>: <span style="color:#ae81ff">v2</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">50</span>
+</span></span></code></pre></div><h3 ref="13-outbound" >1.3 Outbound</h3><a class="anchor" id="13-outbound"></a>
 <p>Istio クラスタ外への通信について整理する。</p>
 <h2 ref="参考" >参考</h2><a class="anchor" id="参考"></a>
 <ul>

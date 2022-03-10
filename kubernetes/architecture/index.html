@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -583,6 +583,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -677,7 +692,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -685,7 +700,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1135,6 +1150,21 @@ if (!doNotTrack) {
       
       
           <a href="/terraform/basic/">入門</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
       
         
       
@@ -1718,10 +1748,10 @@ Controller は自作可能であるが、デフォルトで以下のような Co
 <code>kube-dns</code> の後継として <a href="https://kubernetes.io/ja/docs/tasks/administer-cluster/coredns/">CoreDNS</a> がある。<br>
 2 冗長の DaemonSet として構成される。（ことが多い？）</p>
 <h3 ref="metrics-server" >metrics-server</h3><a class="anchor" id="metrics-server"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
-$ cd kubernetes-metrics-server/
-$ kubectl apply -f .
-</code></pre></div><p>なお、 <code>metrics-server</code> をインストールすることによって、 <code>kubectl top node</code> や <code>kubectl top pod</code> コマンドなどでメトリクス情報を確認できるようになる。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
+</span></span><span style="display:flex;"><span>$ cd kubernetes-metrics-server/
+</span></span><span style="display:flex;"><span>$ kubectl apply -f .
+</span></span></code></pre></div><p>なお、 <code>metrics-server</code> をインストールすることによって、 <code>kubectl top node</code> や <code>kubectl top pod</code> コマンドなどでメトリクス情報を確認できるようになる。<br>
 <code>metrics-server</code> はオンメモリにのみメトリクス情報を保持するので、恒久的なモニタリングには他のソリューションが必要となる。</p>
 		</div>
 

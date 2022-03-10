@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -584,6 +584,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -678,7 +693,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -686,7 +701,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1140,6 +1155,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1457,46 +1487,46 @@ if (!doNotTrack) {
 <h2 ref="1-javaのインストール" >1. Javaのインストール</h2><a class="anchor" id="1-javaのインストール"></a>
 <p>asdf でインストールする。<br>
 ここでは Amazon ディストリビューションである Corretto を利用する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ asdf plugin add java
-$ asdf install java corretto-17.0.2.8.1
-$ asdf global java corretto-17.0.2.8.1
-</code></pre></div><p>asdf でインストールした場合、 <code>JAVA_HOME</code> の設定には専用のスクリプトが用意されている。（参考： <a href="https://github.com/halcyon/asdf-java#java_home">JAVA_HOME</a> ）<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ asdf plugin add java
+</span></span><span style="display:flex;"><span>$ asdf install java corretto-17.0.2.8.1
+</span></span><span style="display:flex;"><span>$ asdf global java corretto-17.0.2.8.1
+</span></span></code></pre></div><p>asdf でインストールした場合、 <code>JAVA_HOME</code> の設定には専用のスクリプトが用意されている。（参考： <a href="https://github.com/halcyon/asdf-java#java_home">JAVA_HOME</a> ）<br>
 シェルの種類に合わせて <code>.zshenv</code> などに以下を追記する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># To set JAVA_HOME in your shell&#39;s initialization add the following:</span>
-. ~/.asdf/plugins/java/set-java-home.bash
-
-<span style="color:#75715e"># For zsh shell, instead use:</span>
-. ~/.asdf/plugins/java/set-java-home.zsh
-
-<span style="color:#75715e"># For fish shell, instead use:</span>
-. ~/.asdf/plugins/java/set-java-home.fish
-
-<span style="color:#75715e"># For xonsh shell, instead use:</span>
-source ~/.asdf/plugins/java/set-java-home.xsh
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ exec $SHELL -l
-$ java --version
-openjdk 17.0.2 2022-01-18 LTS
-OpenJDK Runtime Environment Corretto-17.0.2.8.1 <span style="color:#f92672">(</span>build 17.0.2+8-LTS<span style="color:#f92672">)</span>
-</code></pre></div><h2 ref="2-mavenのインストール" >2. Mavenのインストール</h2><a class="anchor" id="2-mavenのインストール"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># To set JAVA_HOME in your shell&#39;s initialization add the following:</span>
+</span></span><span style="display:flex;"><span>. ~/.asdf/plugins/java/set-java-home.bash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># For zsh shell, instead use:</span>
+</span></span><span style="display:flex;"><span>. ~/.asdf/plugins/java/set-java-home.zsh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># For fish shell, instead use:</span>
+</span></span><span style="display:flex;"><span>. ~/.asdf/plugins/java/set-java-home.fish
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># For xonsh shell, instead use:</span>
+</span></span><span style="display:flex;"><span>source ~/.asdf/plugins/java/set-java-home.xsh
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ exec $SHELL -l
+</span></span><span style="display:flex;"><span>$ java --version
+</span></span><span style="display:flex;"><span>openjdk 17.0.2 2022-01-18 LTS
+</span></span><span style="display:flex;"><span>OpenJDK Runtime Environment Corretto-17.0.2.8.1 <span style="color:#f92672">(</span>build 17.0.2+8-LTS<span style="color:#f92672">)</span>
+</span></span></code></pre></div><h2 ref="2-mavenのインストール" >2. Mavenのインストール</h2><a class="anchor" id="2-mavenのインストール"></a>
 <p>同じく asdf を利用する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ asdf plugin add maven
-$ asdf install maven 3.8.4
-$ asdf global maven 3.8.4
-$ mvn -v
-Apache Maven 3.8.4 <span style="color:#f92672">(</span>9b656c72d54e5bacbed989b64718c159fe39b537<span style="color:#f92672">)</span>
-Maven home: /Users/tanakakns/.asdf/installs/maven/3.8.4
-Java version: 17.0.2, vendor: Amazon.com Inc., runtime: /Users/tanakakns/.asdf/installs/java/corretto-17.0.2.8.1
-Default locale: ja_JP, platform encoding: UTF-8
-OS name: <span style="color:#e6db74">&#34;mac os x&#34;</span>, version: <span style="color:#e6db74">&#34;12.1&#34;</span>, arch: <span style="color:#e6db74">&#34;x86_64&#34;</span>, family: <span style="color:#e6db74">&#34;mac&#34;</span>
-</code></pre></div><h2 ref="3-プロジェクトの作成" >3. プロジェクトの作成</h2><a class="anchor" id="3-プロジェクトの作成"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ asdf plugin add maven
+</span></span><span style="display:flex;"><span>$ asdf install maven 3.8.4
+</span></span><span style="display:flex;"><span>$ asdf global maven 3.8.4
+</span></span><span style="display:flex;"><span>$ mvn -v
+</span></span><span style="display:flex;"><span>Apache Maven 3.8.4 <span style="color:#f92672">(</span>9b656c72d54e5bacbed989b64718c159fe39b537<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Maven home: /Users/tanakakns/.asdf/installs/maven/3.8.4
+</span></span><span style="display:flex;"><span>Java version: 17.0.2, vendor: Amazon.com Inc., runtime: /Users/tanakakns/.asdf/installs/java/corretto-17.0.2.8.1
+</span></span><span style="display:flex;"><span>Default locale: ja_JP, platform encoding: UTF-8
+</span></span><span style="display:flex;"><span>OS name: <span style="color:#e6db74">&#34;mac os x&#34;</span>, version: <span style="color:#e6db74">&#34;12.1&#34;</span>, arch: <span style="color:#e6db74">&#34;x86_64&#34;</span>, family: <span style="color:#e6db74">&#34;mac&#34;</span>
+</span></span></code></pre></div><h2 ref="3-プロジェクトの作成" >3. プロジェクトの作成</h2><a class="anchor" id="3-プロジェクトの作成"></a>
 <p>通常の Java プロジェクトを作成する場合は以下のコマンドで作成する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn archetype:create -DgroupId<span style="color:#f92672">=</span>com.example -DartifactId<span style="color:#f92672">=</span>sample
-</code></pre></div><p>SpringBoot のプロジェクトを作成する場合は <a href="https://start.spring.io/">spring initialzr</a> を使用すると便利。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mvn archetype:create -DgroupId<span style="color:#f92672">=</span>com.example -DartifactId<span style="color:#f92672">=</span>sample
+</span></span></code></pre></div><p>SpringBoot のプロジェクトを作成する場合は <a href="https://start.spring.io/">spring initialzr</a> を使用すると便利。<br>
 各種設定を入力した後に GENERATE すると SpringBoot の雛形プロジェクトをダウンロードできる。<br>
 最低限 Spring Web を Dependencies として追加しておけば REST API アプリケーションを作成できる。<br>
 実行は以下。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mvn spring-boot:run
-</code></pre></div><h2 ref="4-vs-code" >4. VS Code</h2><a class="anchor" id="4-vs-code"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mvn spring-boot:run
+</span></span></code></pre></div><h2 ref="4-vs-code" >4. VS Code</h2><a class="anchor" id="4-vs-code"></a>
 <p>ToDo<br>
 以下の拡張機能を入れる。</p>
 <ul>
@@ -1512,29 +1542,29 @@ OS name: <span style="color:#e6db74">&#34;mac os x&#34;</span>, version: <span s
 <li>参照先へ飛ぶ：（該当箇所を選択してから） Shift + F12</li>
 </ul>
 <h2 ref="5-docker-によるマルチステージビルド" >5. docker によるマルチステージビルド</h2><a class="anchor" id="5-docker-によるマルチステージビルド"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#75715e">###############################################</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Build Source Code</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">###############################################</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> maven:3.8.4-amazoncorretto-17 as BUILD</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /build</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> . .<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> --mount<span style="color:#f92672">=</span>type<span style="color:#f92672">=</span>cache,target<span style="color:#f92672">=</span>/root/.m2 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>     mvn clean package<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">###############################################</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Create Final Image</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">###############################################</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> amazoncorretto:17.0.2-alpine3.15</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apk add --no-cache tzdata<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> TZ Asia/Tokyo<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>BUILD /build/<span style="color:#f92672">[</span>Project Dir<span style="color:#f92672">]</span>/target/<span style="color:#f92672">[</span>builded<span style="color:#f92672">]</span>.jar /home/java/app.jar<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;java&#34;</span>, <span style="color:#e6db74">&#34;-jar&#34;</span>, <span style="color:#e6db74">&#34;/home/java/app.jar&#34;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#75715e">###############################################</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Build Source Code</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">###############################################</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> maven:3.8.4-amazoncorretto-17 as BUILD</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> /build</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> . .<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> --mount<span style="color:#f92672">=</span>type<span style="color:#f92672">=</span>cache,target<span style="color:#f92672">=</span>/root/.m2 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>     mvn clean package<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">###############################################</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Create Final Image</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">###############################################</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> amazoncorretto:17.0.2-alpine3.15</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apk add --no-cache tzdata<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> TZ Asia/Tokyo<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>BUILD /build/<span style="color:#f92672">[</span>Project Dir<span style="color:#f92672">]</span>/target/<span style="color:#f92672">[</span>builded<span style="color:#f92672">]</span>.jar /home/java/app.jar<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;java&#34;</span>, <span style="color:#e6db74">&#34;-jar&#34;</span>, <span style="color:#e6db74">&#34;/home/java/app.jar&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div>
 		</div>
 
 

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -584,6 +584,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -678,7 +693,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -686,7 +701,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1140,6 +1155,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1458,22 +1488,22 @@ if (!doNotTrack) {
 <h3 ref="11-グローバル" >1.1. グローバル</h3><a class="anchor" id="11-グローバル"></a>
 <p>git コマンドに対するグローバルな設定。<br>
 なお、ローカル設定がある場合はそちらが優先される。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% git config --global user.name &lt;githubアカウント&gt;
-% git config --global user.email &lt;メアド&gt;
-% git config --global http.sslverify false
-
-<span style="color:#75715e"># 確認</span>
-% git config --global --list
-</code></pre></div><h3 ref="12-ローカル" >1.2. ローカル</h3><a class="anchor" id="12-ローカル"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% git config --global user.name &lt;githubアカウント&gt;
+</span></span><span style="display:flex;"><span>% git config --global user.email &lt;メアド&gt;
+</span></span><span style="display:flex;"><span>% git config --global http.sslverify false
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 確認</span>
+</span></span><span style="display:flex;"><span>% git config --global --list
+</span></span></code></pre></div><h3 ref="12-ローカル" >1.2. ローカル</h3><a class="anchor" id="12-ローカル"></a>
 <p><code>git clone</code> した単位で有効な設定。<br>
 設定されていない項目はグローバルもしくはデフォルトが有効になる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% git config --local user.name &lt;githubアカウント&gt;
-% git config --local user.email &lt;メアド&gt;
-% git config --local http.sslverify false
-
-<span style="color:#75715e"># 確認</span>
-% git config --local --list
-</code></pre></div><h2 ref="2-認証" >2. 認証</h2><a class="anchor" id="2-認証"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% git config --local user.name &lt;githubアカウント&gt;
+</span></span><span style="display:flex;"><span>% git config --local user.email &lt;メアド&gt;
+</span></span><span style="display:flex;"><span>% git config --local http.sslverify false
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 確認</span>
+</span></span><span style="display:flex;"><span>% git config --local --list
+</span></span></code></pre></div><h2 ref="2-認証" >2. 認証</h2><a class="anchor" id="2-認証"></a>
 <p>git コマンドを打つ度に認証情報を聞かれるのは煩わしい。<br>
 ここでは認証情報の設定方法について記載する。<br>
 なお、 ssh ではなく https 前提とする。</p>
@@ -1483,34 +1513,34 @@ if (!doNotTrack) {
 <h3 ref="21-osxkeychain" >2.1. osxkeychain</h3><a class="anchor" id="21-osxkeychain"></a>
 <p><code>credential helper</code> の <code>osxkeychain helper</code> を利用する方法。<br>
 <code>git credential-osxkeychain</code> コマンドで使えるかを確認できる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% git credential-osxkeychain
-usage: git credential-osxkeychain &lt;get|store|erase&gt;
-</code></pre></div><p>上記のように表示されれば利用できる。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% git credential-osxkeychain
+</span></span><span style="display:flex;"><span>usage: git credential-osxkeychain &lt;get|store|erase&gt;
+</span></span></code></pre></div><p>上記のように表示されれば利用できる。<br>
 以下でヘルパーの設定を行う。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% git config --global credential.helper osxkeychain
-</code></pre></div><p>上記は <code>git clone</code> するときの <code>https://&lt;username&gt;@&lt;domain&gt;/~</code> 単位で認証情報を記憶してくれるため、 <code>git clone</code> する際は以下のようにアカウント情報を付与すること。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% https://&lt;username&gt;@&lt;domain&gt;/&lt;repository-username&gt;/&lt;repository-name&gt;.git
-</code></pre></div><p>Mac では認証情報は「キーチェーンアクセス」に保存される。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% git config --global credential.helper osxkeychain
+</span></span></code></pre></div><p>上記は <code>git clone</code> するときの <code>https://&lt;username&gt;@&lt;domain&gt;/~</code> 単位で認証情報を記憶してくれるため、 <code>git clone</code> する際は以下のようにアカウント情報を付与すること。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% https://&lt;username&gt;@&lt;domain&gt;/&lt;repository-username&gt;/&lt;repository-name&gt;.git
+</span></span></code></pre></div><p>Mac では認証情報は「キーチェーンアクセス」に保存される。</p>
 <h3 ref="22-git-credential-manager-for-windows" >2.2. Git-Credential-Manager-for-Windows</h3><a class="anchor" id="22-git-credential-manager-for-windows"></a>
 <p>Windows の場合は <code>Git-Credential-Manager-for-Windows</code> を利用する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">&gt; choco install git-credential-manager-for-windows
-</code></pre></div><p>また、自動で設定できるという噂もあるが、以下の設定を確認・実施する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"># 確認
-&gt; git config --global --list
-# credential.helper=manager っていうのがあればよい、なければ以下実施
-
-# 設定
-&gt; git config --global credential.helper manager
-</code></pre></div><p>初回パスワード入力時に Internet Explorer などと同じ場所にアクセストークンが保存され、以後はパスワード入力が不要になる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>&gt; choco install git-credential-manager-for-windows
+</span></span></code></pre></div><p>また、自動で設定できるという噂もあるが、以下の設定を確認・実施する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span># 確認
+</span></span><span style="display:flex;"><span>&gt; git config --global --list
+</span></span><span style="display:flex;"><span># credential.helper=manager っていうのがあればよい、なければ以下実施
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># 設定
+</span></span><span style="display:flex;"><span>&gt; git config --global credential.helper manager
+</span></span></code></pre></div><p>初回パスワード入力時に Internet Explorer などと同じ場所にアクセストークンが保存され、以後はパスワード入力が不要になる。</p>
 <h3 ref="23-netrc" >2.3. .netrc</h3><a class="anchor" id="23-netrc"></a>
 <p>パスワードを素で記述するためアレだが、一応書いておく。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">% cat &gt;&gt; ~/.netrc <span style="color:#e6db74">&lt;&lt;EOF
-</span><span style="color:#e6db74">machine github.com
-</span><span style="color:#e6db74">login &lt;githubアカウント&gt;
-</span><span style="color:#e6db74">password &lt;パスワード&gt;
-</span><span style="color:#e6db74">EOF</span>
-% chmod <span style="color:#ae81ff">600</span> ~/.netrc
-</code></pre></div><h2 ref="3-github-の認証" >3. Github の認証</h2><a class="anchor" id="3-github-の認証"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>% cat &gt;&gt; ~/.netrc <span style="color:#e6db74">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">machine github.com
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">login &lt;githubアカウント&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">password &lt;パスワード&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>% chmod <span style="color:#ae81ff">600</span> ~/.netrc
+</span></span></code></pre></div><h2 ref="3-github-の認証" >3. Github の認証</h2><a class="anchor" id="3-github-の認証"></a>
 <p>Github は 2021 年 8 月 13 日より Basic 認証による Git アクセスが廃止となる。（ <a href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">参考</a> ）<br>
 そのため、個人アクセストークンの設定が必要となる。（ <a href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">参考</a> ）</p>
 <h3 ref="31-個人アクセストークン" >3.1. 個人アクセストークン</h3><a class="anchor" id="31-個人アクセストークン"></a>

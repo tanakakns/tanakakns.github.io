@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -584,6 +584,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -678,7 +693,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -686,7 +701,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1140,6 +1155,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1530,32 +1560,32 @@ if (!doNotTrack) {
 <li><strong>public</strong> ： css とか js とか</li>
 </ul>
 <p>例えば Hello Go は以下のようになる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hello-project
-│
-├── domain
-│   ├── hello_logic.go <span style="color:#75715e"># hello ドメインロジック</span>
-│   └── model
-│       └── hello.go   <span style="color:#75715e"># hello ドメインモデル</span>
-│
-├── usecase
-│   └── hello_usecase.go <span style="color:#75715e"># hello ユースケース</span>
-│
-├── adapter
-│   ├── controller
-│   │   └── router.go           <span style="color:#75715e"># ユースケースへの処理の振り分け、データ変換</span>
-│   ├── gateway
-│   │   └── hello_repository.go <span style="color:#75715e"># 永続化層処理の呼び出し、データ変換</span>
-│   └── presenter
-│       └── hello_view.go       <span style="color:#75715e"># ユースケース処理後データのビュー変換</span>
-│
-├── infrastructure
-│   ├── server
-│   │   └── httpserver.go      <span style="color:#75715e"># router.go 、 hello_view.go の実装</span>
-│   └── datastore
-│       └── hello_datastore.go <span style="color:#75715e"># hello_repository.go の実装</span>
-│
-└── main.go
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hello-project
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── domain
+</span></span><span style="display:flex;"><span>│   ├── hello_logic.go <span style="color:#75715e"># hello ドメインロジック</span>
+</span></span><span style="display:flex;"><span>│   └── model
+</span></span><span style="display:flex;"><span>│       └── hello.go   <span style="color:#75715e"># hello ドメインモデル</span>
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── usecase
+</span></span><span style="display:flex;"><span>│   └── hello_usecase.go <span style="color:#75715e"># hello ユースケース</span>
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── adapter
+</span></span><span style="display:flex;"><span>│   ├── controller
+</span></span><span style="display:flex;"><span>│   │   └── router.go           <span style="color:#75715e"># ユースケースへの処理の振り分け、データ変換</span>
+</span></span><span style="display:flex;"><span>│   ├── gateway
+</span></span><span style="display:flex;"><span>│   │   └── hello_repository.go <span style="color:#75715e"># 永続化層処理の呼び出し、データ変換</span>
+</span></span><span style="display:flex;"><span>│   └── presenter
+</span></span><span style="display:flex;"><span>│       └── hello_view.go       <span style="color:#75715e"># ユースケース処理後データのビュー変換</span>
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── infrastructure
+</span></span><span style="display:flex;"><span>│   ├── server
+</span></span><span style="display:flex;"><span>│   │   └── httpserver.go      <span style="color:#75715e"># router.go 、 hello_view.go の実装</span>
+</span></span><span style="display:flex;"><span>│   └── datastore
+</span></span><span style="display:flex;"><span>│       └── hello_datastore.go <span style="color:#75715e"># hello_repository.go の実装</span>
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>└── main.go
+</span></span></code></pre></div>
 		</div>
 
 

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -584,6 +584,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -678,7 +693,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -686,7 +701,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1140,6 +1155,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1449,15 +1479,15 @@ if (!doNotTrack) {
 	    <p>Go 1.16 以降。</p>
 <h2 ref="gomod-の作成" >go.mod の作成</h2><a class="anchor" id="gomod-の作成"></a>
 <p><code>go mod init</code> を使用して、作性するプロジェクトのリポジトリを指定する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">go mod init github.com/pepese/golang-gin-sample
-</code></pre></div><h2 ref="gomodgosum-の更新" >go.mod/go.sum の更新</h2><a class="anchor" id="gomodgosum-の更新"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go mod init github.com/pepese/golang-gin-sample
+</span></span></code></pre></div><h2 ref="gomodgosum-の更新" >go.mod/go.sum の更新</h2><a class="anchor" id="gomodgosum-の更新"></a>
 <p>Go 1.15 までは <code>go build</code> や <code>go test</code> などのコマンドで go.mod/go.sum の内容が勝手に更新されていたが， 1.16 からは自動では更新されなくなった。<br>
 なので，コード上の import で新しい外部パッケージを追加しても go.mod/go.sum に追加されない。<br>
 さらに利用のないパッケージなどが残ったりした場合なども含めて、go.mod/go.sum を最適化するのは以下のコマンド。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ go mod tidy
-</code></pre></div><p>なお、上記ではパッケージバージョンの最新化などが実施されないため、 <code>go get</code> を使って go.mod/go.sum の記述を変更する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ go install golang.org/x/tools/gopls@v0.6.5
-</code></pre></div><p>バージョン番号サフィックスが有効になっており、 <code>@latest</code> なども利用できる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ go mod tidy
+</span></span></code></pre></div><p>なお、上記ではパッケージバージョンの最新化などが実施されないため、 <code>go get</code> を使って go.mod/go.sum の記述を変更する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ go install golang.org/x/tools/gopls@v0.6.5
+</span></span></code></pre></div><p>バージョン番号サフィックスが有効になっており、 <code>@latest</code> なども利用できる。</p>
 <h2 ref="go-installget" >go install/get</h2><a class="anchor" id="go-installget"></a>
 <p>go install/get の違いは以下の通り。</p>
 <ul>
@@ -1509,8 +1539,8 @@ if (!doNotTrack) {
 </tbody>
 </table>
 <h3 ref="go-ディレクティブの更新" >go ディレクティブの更新</h3><a class="anchor" id="go-ディレクティブの更新"></a>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ go mod tidy -go<span style="color:#f92672">=</span>1.17
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ go mod tidy -go<span style="color:#f92672">=</span>1.17
+</span></span></code></pre></div>
 		</div>
 
 

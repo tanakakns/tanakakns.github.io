@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -583,6 +583,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -677,7 +692,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -685,7 +700,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1141,6 +1156,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1505,44 +1535,44 @@ Cloud Build や Cloud Build コミュニティで提供されているビルド�
 <h3 ref="22-ビルド構成ファイル" >2.2. ビルド構成ファイル</h3><a class="anchor" id="22-ビルド構成ファイル"></a>
 <p><a href="https://cloud.google.com/build/docs/build-config?hl=ja">ビルド構成</a> ファイルは YAML または JSON 構文で記述する。<br>
 curl などのサードパーティの http ツールを使用してビルド リクエストを送信する場合は、JSON 構文を使用する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">steps</span>:
-- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
-  <span style="color:#f92672">args</span>: [<span style="color:#ae81ff">string, string, ...]</span>
-  <span style="color:#f92672">env</span>: [<span style="color:#ae81ff">string, string, ...]</span>
-  <span style="color:#f92672">dir</span>: <span style="color:#ae81ff">string</span>
-  <span style="color:#f92672">id</span>: <span style="color:#ae81ff">string</span>
-  <span style="color:#f92672">waitFor</span>: [<span style="color:#ae81ff">string, string, ...]</span>
-  <span style="color:#f92672">entrypoint</span>: <span style="color:#ae81ff">string</span>
-  <span style="color:#f92672">secretEnv</span>: <span style="color:#ae81ff">string</span>
-  <span style="color:#f92672">volumes</span>: <span style="color:#ae81ff">object(Volume)</span>
-  <span style="color:#f92672">timeout</span>: <span style="color:#ae81ff">string (Duration format)</span>
-- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
-  <span style="color:#ae81ff">...</span>
-- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
-  <span style="color:#ae81ff">...</span>
-<span style="color:#f92672">timeout</span>: <span style="color:#ae81ff">string (Duration format)</span>
-<span style="color:#f92672">queueTtl</span>: <span style="color:#ae81ff">string (Duration format)</span>
-<span style="color:#f92672">logsBucket</span>: <span style="color:#ae81ff">string</span>
-<span style="color:#f92672">options</span>:
- <span style="color:#f92672">env</span>: [<span style="color:#ae81ff">string, string, ...]</span>
- <span style="color:#f92672">secretEnv</span>: <span style="color:#ae81ff">string</span>
- <span style="color:#f92672">volumes</span>: <span style="color:#ae81ff">object(Volume)</span>
- <span style="color:#f92672">sourceProvenanceHash</span>: <span style="color:#ae81ff">enum(HashType)</span>
- <span style="color:#f92672">machineType</span>: <span style="color:#ae81ff">enum(MachineType)</span>
- <span style="color:#f92672">diskSizeGb</span>: <span style="color:#ae81ff">string (int64 format)</span>
- <span style="color:#f92672">substitutionOption</span>: <span style="color:#ae81ff">enum(SubstitutionOption)</span>
- <span style="color:#f92672">dynamicSubstitutions</span>: <span style="color:#ae81ff">boolean</span>
- <span style="color:#f92672">logStreamingOption</span>: <span style="color:#ae81ff">enum(LogStreamingOption)</span>
- <span style="color:#f92672">logging</span>: <span style="color:#ae81ff">enum(LoggingMode)</span>
-<span style="color:#f92672">substitutions: map (key: string, value</span>: <span style="color:#ae81ff">string)</span>
-<span style="color:#f92672">tags</span>: [<span style="color:#ae81ff">string, string, ...]</span>
-<span style="color:#f92672">serviceAccount</span>: <span style="color:#ae81ff">string</span>
-<span style="color:#f92672">secrets</span>: <span style="color:#ae81ff">object(Secret)</span>
-<span style="color:#f92672">availableSecrets</span>: <span style="color:#ae81ff">object(Secrets)</span>
-<span style="color:#f92672">artifacts</span>: <span style="color:#ae81ff">object (Artifacts)</span>
-<span style="color:#f92672">images</span>:
-- [<span style="color:#ae81ff">string, string, ...]</span>
-</code></pre></div><h2 ref="3-cloud-tasks" >3. Cloud Tasks</h2><a class="anchor" id="3-cloud-tasks"></a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">args</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">env</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dir</span>: <span style="color:#ae81ff">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">id</span>: <span style="color:#ae81ff">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">waitFor</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">entrypoint</span>: <span style="color:#ae81ff">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">secretEnv</span>: <span style="color:#ae81ff">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">volumes</span>: <span style="color:#ae81ff">object(Volume)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">timeout</span>: <span style="color:#ae81ff">string (Duration format)</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">...</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">...</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">timeout</span>: <span style="color:#ae81ff">string (Duration format)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">queueTtl</span>: <span style="color:#ae81ff">string (Duration format)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">logsBucket</span>: <span style="color:#ae81ff">string</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">options</span>:
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">env</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">secretEnv</span>: <span style="color:#ae81ff">string</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">volumes</span>: <span style="color:#ae81ff">object(Volume)</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">sourceProvenanceHash</span>: <span style="color:#ae81ff">enum(HashType)</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">machineType</span>: <span style="color:#ae81ff">enum(MachineType)</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">diskSizeGb</span>: <span style="color:#ae81ff">string (int64 format)</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">substitutionOption</span>: <span style="color:#ae81ff">enum(SubstitutionOption)</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">dynamicSubstitutions</span>: <span style="color:#ae81ff">boolean</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">logStreamingOption</span>: <span style="color:#ae81ff">enum(LogStreamingOption)</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">logging</span>: <span style="color:#ae81ff">enum(LoggingMode)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">substitutions: map (key: string, value</span>: <span style="color:#ae81ff">string)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#ae81ff">string, string, ...]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">serviceAccount</span>: <span style="color:#ae81ff">string</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">secrets</span>: <span style="color:#ae81ff">object(Secret)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">availableSecrets</span>: <span style="color:#ae81ff">object(Secrets)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">artifacts</span>: <span style="color:#ae81ff">object (Artifacts)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">images</span>:
+</span></span><span style="display:flex;"><span>- [<span style="color:#ae81ff">string, string, ...]</span>
+</span></span></code></pre></div><h2 ref="3-cloud-tasks" >3. Cloud Tasks</h2><a class="anchor" id="3-cloud-tasks"></a>
 <p><a href="https://cloud.google.com/tasks/docs/concepts?hl=ja">docs</a></p>
 <p>Cloud Tasks と Cloud Pub/Sub は類似しているように思える。<br>
 しかし、最大の違いは Cloud Tasks は Publisher が <strong>明示的に</strong> タスクをコントロールできることにある。<br>

@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2022-02-20T16:31:01 JST">
+<meta name="revised" content="2022-03-10T22:45:39 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -583,6 +583,21 @@ if (!doNotTrack) {
     </li>
               
 
+    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/">データベース</a>
+      
+        
+      
+    </li>
+              
+
     <li data-nav-id="https://tanakakns.github.io/aws/migration/" class="dd-item
         item_level_$level
         ">
@@ -677,7 +692,7 @@ if (!doNotTrack) {
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/database/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/aws/aws-cli/" class="dd-item
         item_level_$level
         ">
 
@@ -685,7 +700,7 @@ if (!doNotTrack) {
       
       
       
-          <a href="/aws/database/">データベース</a>
+          <a href="/aws/aws-cli/">AWS CLI</a>
       
         
       
@@ -1141,6 +1156,21 @@ if (!doNotTrack) {
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/terraform/google-cloud/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/terraform/google-cloud/">Google Cloud</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
     
@@ -1497,50 +1527,50 @@ if (!doNotTrack) {
 <h2 ref="ユースケース-1" >ユースケース</h2><a class="anchor" id="ユースケース-1"></a>
 <p>Cloud Pub/Sub トピックに関する Cloud Functions のイベントを扱う。（ <a href="https://cloud.google.com/pubsub/architecture">Google Cloud Pub/Sub: Google 規模のメッセージ サービス</a> ）<br>
 イベント パラメータとコールバック パラメータについて詳しくは、 <a href="https://cloud.google.com/functions/docs/writing/background">バックグラウンド関数</a> を確認。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 関数コード用のディレクトリを作成</span>
-$ mkdir gcf_hello_world
-$ cd gcf_hello_world
-
-<span style="color:#75715e"># index.js を作成し、編集</span>
-/**
-* Pub/Sub でトリガーされるバックグラウンド Cloud Function 関数。
-* この関数は index.js によってエクスポートされ、トリガー トピックが
-* メッセージを受信すると実行されます。
-*
-* @param <span style="color:#f92672">{</span>object<span style="color:#f92672">}</span> data The event payload.
-* @param <span style="color:#f92672">{</span>object<span style="color:#f92672">}</span> context The event metadata.
-*/
-exports.helloWorld <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>data, context<span style="color:#f92672">)</span> <span style="color:#f92672">=</span>&gt; <span style="color:#f92672">{</span>
-const pubSubMessage <span style="color:#f92672">=</span> data;
-const name <span style="color:#f92672">=</span> pubSubMessage.data
-    ? Buffer.from<span style="color:#f92672">(</span>pubSubMessage.data, <span style="color:#e6db74">&#39;base64&#39;</span><span style="color:#f92672">)</span>.toString<span style="color:#f92672">()</span> : <span style="color:#e6db74">&#34;Hello World&#34;</span>;
-
-console.log<span style="color:#f92672">(</span><span style="color:#e6db74">`</span>My Cloud Function: <span style="color:#e6db74">${</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span><span style="color:#f92672">)</span>;
-<span style="color:#f92672">}</span>;
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Cloud Storage バケット作成</span>
-$ gsutil mb -p <span style="color:#f92672">[</span>PROJECT_ID<span style="color:#f92672">]</span> gs://<span style="color:#f92672">[</span>BUCKET_NAME<span style="color:#f92672">]</span>
-<span style="color:#75715e"># gsutil mb -p qwiklabs-gcp-02-5fcdb48e7b6e gs://qwiklab-sample1234</span>
-</code></pre></div><p>次に新しい関数をデプロイするのだが、 <code>--trigger-topic</code> 、 <code>--trigger-bucket</code> 、 <code>--trigger-http</code> のいずれかを指定する必要がある。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 関数コード用のディレクトリを作成</span>
+</span></span><span style="display:flex;"><span>$ mkdir gcf_hello_world
+</span></span><span style="display:flex;"><span>$ cd gcf_hello_world
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># index.js を作成し、編集</span>
+</span></span><span style="display:flex;"><span>/**
+</span></span><span style="display:flex;"><span>* Pub/Sub でトリガーされるバックグラウンド Cloud Function 関数。
+</span></span><span style="display:flex;"><span>* この関数は index.js によってエクスポートされ、トリガー トピックが
+</span></span><span style="display:flex;"><span>* メッセージを受信すると実行されます。
+</span></span><span style="display:flex;"><span>*
+</span></span><span style="display:flex;"><span>* @param <span style="color:#f92672">{</span>object<span style="color:#f92672">}</span> data The event payload.
+</span></span><span style="display:flex;"><span>* @param <span style="color:#f92672">{</span>object<span style="color:#f92672">}</span> context The event metadata.
+</span></span><span style="display:flex;"><span>*/
+</span></span><span style="display:flex;"><span>exports.helloWorld <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>data, context<span style="color:#f92672">)</span> <span style="color:#f92672">=</span>&gt; <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>const pubSubMessage <span style="color:#f92672">=</span> data;
+</span></span><span style="display:flex;"><span>const name <span style="color:#f92672">=</span> pubSubMessage.data
+</span></span><span style="display:flex;"><span>    ? Buffer.from<span style="color:#f92672">(</span>pubSubMessage.data, <span style="color:#e6db74">&#39;base64&#39;</span><span style="color:#f92672">)</span>.toString<span style="color:#f92672">()</span> : <span style="color:#e6db74">&#34;Hello World&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>console.log<span style="color:#f92672">(</span><span style="color:#e6db74">`</span>My Cloud Function: <span style="color:#e6db74">${</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span><span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Cloud Storage バケット作成</span>
+</span></span><span style="display:flex;"><span>$ gsutil mb -p <span style="color:#f92672">[</span>PROJECT_ID<span style="color:#f92672">]</span> gs://<span style="color:#f92672">[</span>BUCKET_NAME<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># gsutil mb -p qwiklabs-gcp-02-5fcdb48e7b6e gs://qwiklab-sample1234</span>
+</span></span></code></pre></div><p>次に新しい関数をデプロイするのだが、 <code>--trigger-topic</code> 、 <code>--trigger-bucket</code> 、 <code>--trigger-http</code> のいずれかを指定する必要がある。<br>
 ここでは、 <code>--trigger-topic</code> に <code>hello_world</code> を指定する。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud functions deploy helloWorld <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --stage-bucket qwiklab-sample1234 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --trigger-topic hello_world <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  --runtime nodejs8
-
-<span style="color:#75715e"># ステータスの確認</span>
-$ gcloud functions describe helloWorld
-</code></pre></div><p>関数をデプロイしてそれがアクティブになっていることを確認したら、関数がイベントを検出してメッセージをクラウド ログに書き込むかどうかをテストする。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 関数のメッセージテストを実行</span>
-$ DATA<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>printf <span style="color:#e6db74">&#39;Hello World!&#39;</span>|base64<span style="color:#66d9ef">)</span> <span style="color:#f92672">&amp;&amp;</span> gcloud functions call helloWorld --data <span style="color:#e6db74">&#39;{&#34;data&#34;:&#34;&#39;</span>$DATA<span style="color:#e6db74">&#39;&#34;}&#39;</span>
-executionId: u4h75ec5oy6m
-
-<span style="color:#75715e"># ログを確認</span>
-$ gcloud functions logs read helloWorld
-LEVEL  NAME        EXECUTION_ID  TIME_UTC                 LOG
-D      helloWorld  u4h75ec5oy6m  2021-05-06 12:37:28.571  Function execution took <span style="color:#ae81ff">219</span> ms, finished with status: <span style="color:#e6db74">&#39;ok&#39;</span>
-I      helloWorld  u4h75ec5oy6m  2021-05-06 12:37:28.546  My Cloud Function: Hello World!
-D      helloWorld  u4h75ec5oy6m  2021-05-06 12:37:28.352  Function execution started
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ gcloud functions deploy helloWorld <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --stage-bucket qwiklab-sample1234 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --trigger-topic hello_world <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --runtime nodejs8
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ステータスの確認</span>
+</span></span><span style="display:flex;"><span>$ gcloud functions describe helloWorld
+</span></span></code></pre></div><p>関数をデプロイしてそれがアクティブになっていることを確認したら、関数がイベントを検出してメッセージをクラウド ログに書き込むかどうかをテストする。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 関数のメッセージテストを実行</span>
+</span></span><span style="display:flex;"><span>$ DATA<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>printf <span style="color:#e6db74">&#39;Hello World!&#39;</span>|base64<span style="color:#66d9ef">)</span> <span style="color:#f92672">&amp;&amp;</span> gcloud functions call helloWorld --data <span style="color:#e6db74">&#39;{&#34;data&#34;:&#34;&#39;</span>$DATA<span style="color:#e6db74">&#39;&#34;}&#39;</span>
+</span></span><span style="display:flex;"><span>executionId: u4h75ec5oy6m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ログを確認</span>
+</span></span><span style="display:flex;"><span>$ gcloud functions logs read helloWorld
+</span></span><span style="display:flex;"><span>LEVEL  NAME        EXECUTION_ID  TIME_UTC                 LOG
+</span></span><span style="display:flex;"><span>D      helloWorld  u4h75ec5oy6m  2021-05-06 12:37:28.571  Function execution took <span style="color:#ae81ff">219</span> ms, finished with status: <span style="color:#e6db74">&#39;ok&#39;</span>
+</span></span><span style="display:flex;"><span>I      helloWorld  u4h75ec5oy6m  2021-05-06 12:37:28.546  My Cloud Function: Hello World!
+</span></span><span style="display:flex;"><span>D      helloWorld  u4h75ec5oy6m  2021-05-06 12:37:28.352  Function execution started
+</span></span></code></pre></div>
 		</div>
 
 
