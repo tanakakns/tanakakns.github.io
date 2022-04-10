@@ -2,9 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://tanakakns.github.io/terraform/basic/</loc>
-    <lastmod>2021-02-09T22:14:00+09:00</lastmod>
-  </url><url>
     <loc>https://tanakakns.github.io/kubernetes/concept/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
@@ -64,9 +61,6 @@
   </url><url>
     <loc>https://tanakakns.github.io/gcp/tools/management-tools/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
-  </url><url>
-    <loc>https://tanakakns.github.io/terraform/google-cloud/</loc>
-    <lastmod>2021-02-09T22:14:00+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/java/springframework/</loc>
     <lastmod>2021-02-09T22:14:00+09:00</lastmod>
@@ -183,9 +177,6 @@
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/aws/dev-tools/</loc>
-    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
-  </url><url>
-    <loc>https://tanakakns.github.io/terraform/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/aws/security/</loc>
