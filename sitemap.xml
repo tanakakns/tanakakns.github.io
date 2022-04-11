@@ -14,9 +14,6 @@
     <loc>https://tanakakns.github.io/aws/computing/ec2/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/aws/security/iam/</loc>
-    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
-  </url><url>
     <loc>https://tanakakns.github.io/design/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
@@ -83,9 +80,6 @@
     <loc>https://tanakakns.github.io/kubernetes/kubectl-plugin/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/aws/container/</loc>
-    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
-  </url><url>
     <loc>https://tanakakns.github.io/gcp/networking/iap/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
@@ -100,9 +94,6 @@
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/command/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
-  </url><url>
-    <loc>https://tanakakns.github.io/aws/storage/</loc>
-    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/app-engine/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
@@ -128,9 +119,6 @@
     <loc>https://tanakakns.github.io/gcp/computing-hosting/cloud-functions/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/design/architecture/</loc>
-    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
-  </url><url>
     <loc>https://tanakakns.github.io/gcp/storage/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
@@ -138,9 +126,6 @@
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/database/</loc>
-    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
-  </url><url>
-    <loc>https://tanakakns.github.io/aws/migration/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/databases/</loc>
@@ -159,12 +144,6 @@
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/</loc>
-    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
-  </url><url>
-    <loc>https://tanakakns.github.io/aws/dev-tools/</loc>
-    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
-  </url><url>
-    <loc>https://tanakakns.github.io/aws/security/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/big-data/</loc>
