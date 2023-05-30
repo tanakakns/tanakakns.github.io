@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://tanakakns.github.io/aws/analytics/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/kubernetes/concept/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/aws/database/aurora/</loc>
-    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
-  </url><url>
-    <loc>https://tanakakns.github.io/aws/well-architected-framework/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/design/</loc>
@@ -35,17 +35,20 @@
     <loc>https://tanakakns.github.io/gcp/networking/vpc/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/istio/basic/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/design/principle-practice/</loc>
+    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/gcp/monitoring/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/tools/management-tools/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
-    <loc>https://tanakakns.github.io/design/principle-practice/</loc>
-    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
-  </url><url>
-    <loc>https://tanakakns.github.io/istio/basic/</loc>
-    <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+    <loc>https://tanakakns.github.io/aws/application-integration/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/architecture/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
@@ -65,6 +68,9 @@
     <loc>https://tanakakns.github.io/gcp/tools/dev-tools/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/blockchain/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/kubernetes/kubectl-plugin/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
@@ -79,6 +85,9 @@
   </url><url>
     <loc>https://tanakakns.github.io/design/microservices/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/business-applications/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/command/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
@@ -98,11 +107,11 @@
     <loc>https://tanakakns.github.io/gcp/computing-hosting/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/cloud-financial-management/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/kubernetes/manifest/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
-  </url><url>
-    <loc>https://tanakakns.github.io/aws/database/</loc>
-    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/cloud-functions/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
@@ -110,11 +119,17 @@
     <loc>https://tanakakns.github.io/gcp/storage/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/compute/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/kubernetes/application-management/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/databases/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/containers/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/kubernetes/cluster-management/</loc>
     <lastmod>2021-01-30T18:52:48+09:00</lastmod>
@@ -131,16 +146,64 @@
     <loc>https://tanakakns.github.io/gcp/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/database/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/developer-tools/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/gcp/big-data/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/end-user-computing/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/gcp/machine-learning/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/front-end-web-and-mobile/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/kubernetes/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/iot/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/istio/</loc>
+    <lastmod>2021-01-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/machine-learning/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/management-and-governance/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/media-services/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/migration-and-transfer/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/networking-and-content-delivery/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/quantum-technologies/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/robotics/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/satellite/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/security-identity-and-compliance/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/storage/</loc>
+    <lastmod>2023-05-30T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/well-architected-framework/</loc>
     <lastmod>2021-01-30T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/</loc>
