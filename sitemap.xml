@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://tanakakns.github.io/aws/management-and-governance/organizations/</loc>
+    <lastmod>2023-06-09T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/aws/analytics/</loc>
     <lastmod>2023-05-30T18:49:21+09:00</lastmod>
   </url><url>
@@ -47,6 +50,9 @@
     <loc>https://tanakakns.github.io/gcp/tools/management-tools/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/management-and-governance/config/</loc>
+    <lastmod>2023-06-09T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/aws/application-integration/</loc>
     <lastmod>2023-05-30T18:49:21+09:00</lastmod>
   </url><url>
@@ -68,6 +74,9 @@
     <loc>https://tanakakns.github.io/gcp/tools/dev-tools/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
   </url><url>
+    <loc>https://tanakakns.github.io/aws/management-and-governance/control-tower/</loc>
+    <lastmod>2023-06-09T18:49:21+09:00</lastmod>
+  </url><url>
     <loc>https://tanakakns.github.io/aws/blockchain/</loc>
     <lastmod>2023-05-30T18:49:21+09:00</lastmod>
   </url><url>
@@ -85,6 +94,21 @@
   </url><url>
     <loc>https://tanakakns.github.io/design/microservices/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/database/rds-proxy/</loc>
+    <lastmod>2023-06-09T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/management-and-governance/iam-identity-center/</loc>
+    <lastmod>2023-06-09T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/storage/snow-family/</loc>
+    <lastmod>2023-06-09T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/migration-and-transfer/transfer-family/</loc>
+    <lastmod>2023-06-09T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/networking-and-content-delivery/transit-gateway/</loc>
+    <lastmod>2023-06-09T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/aws/business-applications/</loc>
     <lastmod>2023-05-30T18:49:21+09:00</lastmod>
@@ -106,6 +130,12 @@
   </url><url>
     <loc>https://tanakakns.github.io/gcp/computing-hosting/</loc>
     <lastmod>2021-01-30T15:26:01+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/networking-and-content-delivery/api-gateway/</loc>
+    <lastmod>2023-06-13T18:49:21+09:00</lastmod>
+  </url><url>
+    <loc>https://tanakakns.github.io/aws/compute/outposts/</loc>
+    <lastmod>2023-06-09T18:49:21+09:00</lastmod>
   </url><url>
     <loc>https://tanakakns.github.io/aws/cloud-financial-management/</loc>
     <lastmod>2023-05-30T18:49:21+09:00</lastmod>
