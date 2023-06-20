@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2023-06-13T22:42:24 JST">
+<meta name="revised" content="2023-06-20T22:22:54 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -176,6 +176,21 @@
       
       
           <a href="/design/clean-architecture/">クリーンアーキテクチャ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/design/observability/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/design/observability/">Observability（O11y：可観測性）</a>
       
         
       
@@ -365,6 +380,21 @@
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/database/dynamodb/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/dynamodb/">DynamoDB</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
               
@@ -537,7 +567,7 @@
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/migration-and-transfer/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/aws/migration-and-transfer/" class="dd-item
         item_level_$level
         ">
 
@@ -546,26 +576,9 @@
       
       
           <a href="/aws/migration-and-transfer/">移行と転送</a>
-      <i class="fas fa-chevron-right ddexp"></i>
-        
-      
-        <ul>
-              
-
-    <li data-nav-id="https://tanakakns.github.io/aws/migration-and-transfer/transfer-family/" class="dd-item
-        item_level_$level
-        ">
-
-      
-      
-      
-      
-          <a href="/aws/migration-and-transfer/transfer-family/">AWS Transfer Family</a>
       
         
       
-    </li>
-        </ul>
     </li>
               
 
@@ -1470,6 +1483,19 @@
 <li>AWS Resource Access Manager( <strong>AWS RAM</strong> ) を用いて、AWSアカウント間やOU間でリソースの共有を行える</li>
 </ul>
 <p>参考：https://www.ashisuto.co.jp/db_blog/article/aws-organizations.html</p>
+<h2 ref="3-scpを使用した戦略" >3. SCPを使用した戦略</h2><a class="anchor" id="3-scpを使用した戦略"></a>
+<ul>
+<li>拒否リスト戦略
+<ul>
+<li>アクションはデフォルトで許可され、禁止するサービスとアクションを指定する</li>
+</ul>
+</li>
+<li>許可リスト戦略
+<ul>
+<li>アクションはデフォルトで禁止され、許可するサービスとアクションを指定する</li>
+</ul>
+</li>
+</ul>
 		</div>
 
 

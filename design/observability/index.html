@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>
-	メディアサービス :: テックまとめ
+	Observability（O11y：可観測性） :: テックまとめ
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 
 
-<title>メディアサービス :: テックまとめ</title>
+<title>Observability（O11y：可観測性） :: テックまとめ</title>
 
 <link rel="shortcut icon" href='/images/favicon.png' type="image/x-icon" />
 
@@ -50,7 +50,7 @@
     
   </head>
 
-  <body data-url="/aws/media-services/"
+  <body data-url="/design/observability/"
 
   class="hidetoc hidenextpage ">
 
@@ -122,14 +122,15 @@
 
 <ul class="menu">
 
-    <li data-nav-id="https://tanakakns.github.io/design/" class="dd-item haschildren
+    <li data-nav-id="https://tanakakns.github.io/design/" class="dd-item parent haschildren
         item_level_$level
         ">
 
       
       
       
-      <i class="fas fa-chevron-right ddexp"></i>
+      
+          <i class="fas fa-chevron-down ddexp"></i>
         
       
           <a href="/design/">設計</a>
@@ -182,7 +183,7 @@
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/design/observability/" class="dd-item
+    <li data-nav-id="https://tanakakns.github.io/design/observability/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -199,15 +200,14 @@
     </li>
     
 
-    <li data-nav-id="https://tanakakns.github.io/aws/" class="dd-item parent haschildren
+    <li data-nav-id="https://tanakakns.github.io/aws/" class="dd-item haschildren
         item_level_$level
         ">
 
       
       
       
-      
-          <i class="fas fa-chevron-down ddexp"></i>
+      <i class="fas fa-chevron-right ddexp"></i>
         
       
           <a href="/aws/">AWS</a>
@@ -551,7 +551,7 @@
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/media-services/" class="dd-item parent active
+    <li data-nav-id="https://tanakakns.github.io/aws/media-services/" class="dd-item
         item_level_$level
         ">
 
@@ -1374,8 +1374,8 @@
 	
   
     <li class="">
-      <a class="text-link" href="/aws/">
-        AWS
+      <a class="text-link" href="/design/">
+        設計
       </a>
     </li>
 	
@@ -1383,7 +1383,7 @@
   
     <li class="active">
       
-        メディアサービス
+        Observability（O11y：可観測性）
       
     </li>
 
@@ -1404,7 +1404,7 @@
 		
 
 		
-			<h1>メディアサービス</h1>
+			<h1>Observability（O11y：可観測性）</h1>
         
 
 		
@@ -1424,8 +1424,189 @@
 
 
 	<div class="content">
-	    <p>ToDo</p>
-<ul class="children children-li">
+	    <p>Observability（O11y：可観測性）についてまとめる。</p>
+<h2 ref="observabilityとは" >Observabilityとは？</h2><a class="anchor" id="observabilityとは"></a>
+<p><strong>Observability</strong> （ <strong>O11y</strong> : <strong>可観測性</strong> ）とは「Observe（観察する）」と「ability（能力）」を組み合わせて、観察する能力を意味する造語。<br>
+つまり『 <strong>いつ、どこで、何が、なぜ起こっているのかを観測可能に保つ</strong> 』考え方。</p>
+<h2 ref="observability可観測性とmonitoring監視の違い" >Observability（可観測性）とMonitoring（監視）の違い</h2><a class="anchor" id="observability可観測性とmonitoring監視の違い"></a>
+<p>一言でいうと、監視はシステムのオブザーバビリティを向上させるために行う活動のこと。</p>
+<p>これまでのMonitoring（監視）は主に基盤的な観点が中心で、プロセス監視やメトリック監視（CPUやメモリ）、閾値で監視を行い、アラートがあがり、問題があったあとに対応を行う。<br>
+つまり、何らかの問題が発生してから対応することになります。</p>
+<p>基盤以外のアプリケーションレイヤにまで踏み込んだものが <strong>APM</strong> （ <strong>Application Performance Management</strong> ）。<br>
+アプリケーションのゴールデンシグナル（スループット、エラー発生率、応答性能など）を中心に、サービスの提供状況を理解するアプローチ。</p>
+<p>Observabilityは、これらMonitoringやAPMのアプローチをベースとして、システムの複数層のデータをリアルタイムで解析し、複雑化したシステムにおいて 問題点を「積極的に」理解し、問題状況の把握をおこなうアプローチだと言える。<br>
+Monitoringの「問題が起きた後に調べれば分かる」に対して、『 <strong>いま起きていることをデータに基づいて説明できる、改善できる</strong> 』状況に持っていくものが Observability だと言える。</p>
+<h2 ref="observabilityの構成要素" >Observabilityの構成要素</h2><a class="anchor" id="observabilityの構成要素"></a>
+<ul>
+<li><strong>メトリクス</strong> : 何が起きているのか
+<ul>
+<li>特定の時間間隔で測定して統計したもの</li>
+<li>CPU使用率などのリソース状況や、レイテンシなどのサービス状況といった、定量的な指標となる数値データ</li>
+</ul>
+</li>
+<li><strong>ログ</strong> : 何が起きたのか
+<ul>
+<li>発生したイベントをタイムスタンプで記録したもの</li>
+<li>OSやミドルウェア、アプリケーションなどが出力する、個別のイベント情報</li>
+</ul>
+</li>
+<li><strong>トレース</strong> : どこで起きたのか
+<ul>
+<li>依存関係のある一連のリクエストフローを始まりから終わりまで変換したもの</li>
+<li>アプリケーション処理で発生するリクエスト構造や、呼び出される各コンポーネントでの処理時間などを可視化したもの</li>
+</ul>
+</li>
+</ul>
+<p>上記は Observability で収集する <strong>テレメトリーデータの「3本柱」</strong> と言われている。<br>
+他には以下がある。</p>
+<ul>
+<li><strong>プロファイラ</strong>
+<ul>
+<li>アプリケーション稼働時に、アプリケーションがどのように実行され、リソースがどこでどの程度割り当てられていたのかを示す情報</li>
+<li>CPUプロファイラ、メモリ割当プロファイラ、ヒーププロファイラなどがある</li>
+</ul>
+</li>
+<li><strong>ダンプファイル（コアダンプ）</strong>
+<ul>
+<li>システムがクラッシュした際に出力されるメモリイメージ</li>
+</ul>
+</li>
+</ul>
+<h3 ref="メトリクス" >メトリクス</h3><a class="anchor" id="メトリクス"></a>
+<p>収集メトリクスには以下のようなものがある。</p>
+<ol>
+<li><strong>USE</strong> ：リソースをベースとしたメトリクス収集</li>
+</ol>
+<ul>
+<li><strong>U</strong> tilization：リソースの単位時間あたりの使用率（CPU、メモリ使用率、など）</li>
+<li><strong>S</strong> aturation：リソースの飽和状態（キューの長さ、など）</li>
+<li><strong>E</strong> rror：エラーイベントのカウント（Network,Disk I/O エラー、など）</li>
+</ul>
+<ol start="2">
+<li>RED：サービスをベースとしたメトリクス収集</li>
+</ol>
+<ul>
+<li><strong>R</strong> ate（Request）：秒間のリクエスト数</li>
+<li><strong>E</strong> rror：失敗しているリクエスト数</li>
+<li><strong>D</strong> uration：リクエスト処理に要した時間</li>
+</ul>
+<ol start="3">
+<li><strong>The Four Golden Signals</strong></li>
+</ol>
+<ul>
+<li><strong>Latency</strong> ：リクエストを処理するのに要した時間</li>
+<li><strong>Traffic</strong> ：システムに対するリクエスト量（リクエスト数、Network I/O数、セッション数、など）</li>
+<li><strong>Error</strong> ：処理の失敗</li>
+<li><strong>Saturation</strong> ：サービスが手一杯になった状態（CPU、メモリ、ディスク、Network I/O、など）</li>
+</ul>
+<h3 ref="ログ" >ログ</h3><a class="anchor" id="ログ"></a>
+<p>ログには以下のようなものがある。</p>
+<ul>
+<li><strong>アプリケーションログ</strong>
+<ul>
+<li>アプリケーションが出力するログ</li>
+</ul>
+</li>
+<li><strong>システムログ</strong>
+<ul>
+<li>OS、ミドルウェア、システムコンポーネントが出力するログ</li>
+</ul>
+</li>
+<li><strong>監査ログ</strong>
+<ul>
+<li>AWS APIなどのシステム変更管理用のAPI、RDBへのアクセスなど、何らかの権限を有した操作のログ</li>
+</ul>
+</li>
+</ul>
+<h3 ref="トレース" >トレース</h3><a class="anchor" id="トレース"></a>
+<p>トレース対象としては以下のようなものがある。</p>
+<ul>
+<li>分散トレーシング
+<ul>
+<li>マイクロサービスやコンポーネントをまたがるリクエストの追跡</li>
+</ul>
+</li>
+<li>スパン
+<ul>
+<li>リクエストの開始〜終了までに１サービス、あるいは複数サービスで実行された処理の単位（スパン）で監視する</li>
+</ul>
+</li>
+<li>エンドユーザ監視
+<ul>
+<li>エンドユーザのパフォーマンスを監視する</li>
+</ul>
+</li>
+<li>合成モニタリング
+<ul>
+<li>サービスの死活監視をする、外形監視という場合もある</li>
+</ul>
+</li>
+</ul>
+<h2 ref="observabilityを実現するテクノロジ" >Observabilityを実現するテクノロジ</h2><a class="anchor" id="observabilityを実現するテクノロジ"></a>
+<p>OSS、AWSでは以下のような感じ。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">＼</th>
+<th style="text-align:left">OSS</th>
+<th style="text-align:left">AWS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">メトリクス</td>
+<td style="text-align:left">Prometheus &amp; Grafana</td>
+<td style="text-align:left">CloudWatch Metrics、Amazon Managed Grafana &amp; Amazon Managed Service for Prometheus</td>
+</tr>
+<tr>
+<td style="text-align:left">ログ</td>
+<td style="text-align:left">EFK(ElasticSearch,Fluentd,Kibana)</td>
+<td style="text-align:left">CloudWatch Logs</td>
+</tr>
+<tr>
+<td style="text-align:left">トレース</td>
+<td style="text-align:left">Jaeger、Kiali、OpenTelemetry</td>
+<td style="text-align:left">X-Ray</td>
+</tr>
+</tbody>
+</table>
+<p>OpenTelemetryは現状はアプリケーションのオブザーバビリティのためのライブラリ群で、現状はトレースとメトリクスに関するライブラリを提供している。（<a href="https://ymotongpoo.hatenablog.com/entry/2020/06/01/164221">参考</a>、<a href="https://zenn.dev/yuta28/articles/what-is-opentelemetry">参考2</a>）<br>
+OpenMetrics は Prometheus が利用しているフォーマットを仕様として抽出したもの。</p>
+<p>上記のOSSやパブリッククラウドの機能だけでは APM レイヤがカバーしきれていない。（ Elastic APM というのもあるにはあるが、、、）<br>
+そのため、 APM/Observability の製品を検討する必要がある。</p>
+<ul>
+<li>
+<p>Datadog</p>
+<ul>
+<li>Gartner Magic Quadrant for APM and Observability で 1 or 2番手のリーダー（ <a href="https://www.dynatrace.com/ja/gartner-magic-quadrant-for-application-performance-monitoring-observability/">参考</a> ）</li>
+<li>CNCF End User Technology Radar の Observability, September 2020 で ADOPT （ <a href="https://radar.cncf.io/2020-09-observability">参考</a> ）</li>
+</ul>
+</li>
+<li>
+<p>Dynatrace</p>
+<ul>
+<li>Gartner Magic Quadrant for APM and Observability で 1 or 2番手のリーダー（ <a href="https://www.dynatrace.com/ja/gartner-magic-quadrant-for-application-performance-monitoring-observability/">参考</a> ）</li>
+</ul>
+</li>
+<li>
+<p>NewRelic</p>
+<ul>
+<li>Gartner Magic Quadrant for APM and Observability で 3番手のリーダー（ <a href="https://www.dynatrace.com/ja/gartner-magic-quadrant-for-application-performance-monitoring-observability/">参考</a> ）</li>
+</ul>
+</li>
+<li>
+<p>Elastic</p>
+<ul>
+<li>Gartner Magic Quadrant for APM and Observability で 7番手くらいのビジョナリー（ <a href="https://www.dynatrace.com/ja/gartner-magic-quadrant-for-application-performance-monitoring-observability/">参考</a> ）</li>
+<li>CNCF End User Technology Radar の Observability, September 2020 で ADOPT （ <a href="https://radar.cncf.io/2020-09-observability">参考</a> ）</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.peerspot.com/products/comparisons/datadog_vs_dynatrace_vs_new-relic">Datadog vs Dynatrace vs New Relic comparison</a></p>
+</li>
+<li>
+<p><a href="https://crozdesk.com/compare/new-relic-vs-dynatrace-vs-datadog">Compare New Relic vs Dynatrace vs Datadog</a></p>
+</li>
 </ul>
 		</div>
 

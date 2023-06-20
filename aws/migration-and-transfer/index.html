@@ -8,7 +8,7 @@
 </title>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="revised" content="2023-06-13T22:42:24 JST">
+<meta name="revised" content="2023-06-20T22:22:54 JST">
 <meta name="description" content="備忘録用メモサイト">
 
 
@@ -176,6 +176,21 @@
       
       
           <a href="/design/clean-architecture/">クリーンアーキテクチャ</a>
+      
+        
+      
+    </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/design/observability/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/design/observability/">Observability（O11y：可観測性）</a>
       
         
       
@@ -365,6 +380,21 @@
         
       
     </li>
+              
+
+    <li data-nav-id="https://tanakakns.github.io/aws/database/dynamodb/" class="dd-item
+        item_level_$level
+        ">
+
+      
+      
+      
+      
+          <a href="/aws/database/dynamodb/">DynamoDB</a>
+      
+        
+      
+    </li>
         </ul>
     </li>
               
@@ -536,7 +566,7 @@
     </li>
               
 
-    <li data-nav-id="https://tanakakns.github.io/aws/migration-and-transfer/" class="dd-item parent active haschildren
+    <li data-nav-id="https://tanakakns.github.io/aws/migration-and-transfer/" class="dd-item parent active
         item_level_$level
         ">
 
@@ -546,26 +576,8 @@
       
           <a href="/aws/migration-and-transfer/">移行と転送</a>
       
-          <i class="fas fa-chevron-down ddexp"></i>
         
       
-        <ul>
-              
-
-    <li data-nav-id="https://tanakakns.github.io/aws/migration-and-transfer/transfer-family/" class="dd-item
-        item_level_$level
-        ">
-
-      
-      
-      
-      
-          <a href="/aws/migration-and-transfer/transfer-family/">AWS Transfer Family</a>
-      
-        
-      
-    </li>
-        </ul>
     </li>
               
 
@@ -1412,14 +1424,32 @@
 
 
 	<div class="content">
-	    <p>AWS Transfer Family</p>
-<ul class="children children-li">
-
-<span><li>
-		<a href="/aws/migration-and-transfer/transfer-family/" >AWS Transfer Family</a></li>
-<p></p>
-</span>
+	    <ul>
+<li><strong>AWS Schema Conversion Tool(AWS SCT)</strong>
+<ul>
+<li>異なるデータベースエンジン間で既存のデータベーススキーマを移行先のデータベーススキーマに変更することができるツール（サービスではない）</li>
+<li>変換のみを行うため、実際のデータ移行を行えるわけではない</li>
+<li>同じデータベースエンジン間でのデータ移行には <strong>AWS DataMigration Service(AWS DMS)</strong> を利用する</li>
+<li>AWS SCTとAWS DMSを組み合わせることで、異なるデータベースエンジン間でのスキーマ変換とデータ移行を行うことができる</li>
 </ul>
+</li>
+<li><strong>AWS Transfer Family</strong>
+<ul>
+<li>AWSのストレージ（S3、EFS）にSFTP、FTPS、FTP、AS2 プロトコルを利用してファイル転送を可能にするサービス</li>
+</ul>
+</li>
+<li><strong>AWS DataSync</strong>
+<ul>
+<li>NFS、SMB、HDFS、Amazon S3、Amazon EFS、Amazon FSx間で一度のデータ移行を行う際に利用できる</li>
+</ul>
+</li>
+<li><strong>AWS Storage Gateway</strong>
+<ul>
+<li>オンプレミスのソフトウェアアプライアンスをクラウドベースのストレージと接続し、オンプレミスの IT 環境と AWS のストレージインフラストラクチャとの間にデータセキュリティ機能を備えたシームレスな統合を実現するサービス</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
 		</div>
 
 
